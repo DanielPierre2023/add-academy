@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import {
   Menu,
@@ -8,7 +9,6 @@ import {
   Globe,
   Sun,
   Moon,
-  GraduationCap,
   MessageCircle,
   User,
 } from 'lucide-react';
@@ -50,18 +50,19 @@ export function Header() {
     <header
       className={cn(
         'sticky top-0 z-50 w-full',
-        'border-b border-border/40',
-        'bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60'
+        'border-b border-primary/20',
+        'bg-primary text-primary-foreground'
       )}
     >
       <div className="flex h-14 items-center gap-2 px-4">
         {/* Left: Hamburger + Logo */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setSidebarOpen(!sidebarOpen)}
             aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
+            className="text-primary-foreground hover:bg-white/10"
           >
             {sidebarOpen ? (
               <X className="h-5 w-5" />
@@ -72,11 +73,13 @@ export function Header() {
 
           <Link
             href="/"
-            className="flex items-center gap-2 font-semibold tracking-tight hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2.5 font-semibold tracking-tight hover:opacity-90 transition-opacity"
           >
-            <GraduationCap className="h-6 w-6 text-primary" />
-            <span className="hidden sm:inline-block text-lg">
-              ADD Academy
+            <span className="text-xl font-heading font-bold tracking-wide text-secondary">
+              ADD
+            </span>
+            <span className="hidden sm:inline-block text-lg text-primary-foreground/90">
+              Academy
             </span>
           </Link>
         </div>
@@ -87,8 +90,8 @@ export function Header() {
             <TooltipTrigger
               render={<div className="flex items-center gap-2 w-[200px]" />}
             >
-              <Progress value={completion} className="h-2" />
-              <span className="text-xs text-muted-foreground whitespace-nowrap">
+              <Progress value={completion} className="h-2 bg-white/20" />
+              <span className="text-xs text-primary-foreground/70 whitespace-nowrap">
                 {Math.round(completion)}%
               </span>
             </TooltipTrigger>
@@ -109,10 +112,16 @@ export function Header() {
           {/* Language switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger
-              render={<Button variant="ghost" size="icon" className="relative" />}
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative text-primary-foreground hover:bg-white/10"
+                />
+              }
             >
               <Globe className="h-4 w-4" />
-              <span className="absolute -bottom-0.5 -right-0.5 text-[10px] font-bold uppercase leading-none">
+              <span className="absolute -bottom-0.5 -right-0.5 text-[10px] font-bold uppercase leading-none text-secondary">
                 {language}
               </span>
               <span className="sr-only">
@@ -127,7 +136,7 @@ export function Header() {
                     onClick={() => setLanguage(code)}
                     className={cn(
                       'cursor-pointer',
-                      language === code && 'font-semibold bg-accent'
+                      language === code && 'font-semibold bg-accent/20'
                     )}
                   >
                     <span className="uppercase text-xs font-mono mr-2">
@@ -146,6 +155,7 @@ export function Header() {
             size="icon"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             aria-label="Toggle theme"
+            className="text-primary-foreground hover:bg-white/10"
           >
             <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -156,11 +166,14 @@ export function Header() {
             <TooltipTrigger
               render={
                 <Button
-                  variant={tutorOpen ? 'default' : 'ghost'}
+                  variant={tutorOpen ? 'secondary' : 'ghost'}
                   size="icon"
                   onClick={() => setTutorOpen(!tutorOpen)}
                   aria-label={t('nav_ai_tutor', language)}
-                  className="hidden sm:inline-flex"
+                  className={cn(
+                    'hidden sm:inline-flex',
+                    !tutorOpen && 'text-primary-foreground hover:bg-white/10'
+                  )}
                 />
               }
             >
@@ -178,7 +191,10 @@ export function Header() {
                 <Link
                   href="/login"
                   aria-label={t('nav_login', language)}
-                  className={buttonVariants({ variant: 'ghost', size: 'icon' })}
+                  className={cn(
+                    buttonVariants({ variant: 'ghost', size: 'icon' }),
+                    'text-primary-foreground hover:bg-white/10'
+                  )}
                 />
               }
             >
