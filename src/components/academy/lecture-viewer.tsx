@@ -57,6 +57,15 @@ interface LectureViewerProps {
   hasQuiz: boolean;
 }
 
+// Packages that Pyodide bundles and we can load with loadPackage
+const PYODIDE_PACKAGES = new Set([
+  'numpy', 'scipy', 'matplotlib', 'pandas', 'scikit-learn',
+  'sympy', 'networkx', 'pillow', 'regex',
+]);
+
+// Track which packages have already been loaded this session
+const loadedPackages = new Set<string>();
+
 /** Load Pyodide runtime (shared singleton) */
 async function ensurePyodide(): Promise<any> {
   if (window.pyodide) return window.pyodide;
@@ -76,15 +85,43 @@ async function ensurePyodide(): Promise<any> {
     indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/',
   });
 
-  // Pre-install numpy (used heavily across lectures)
-  await window.pyodide.loadPackage('numpy');
+  // Always pre-install numpy — used in nearly every lecture
+  try {
+    await window.pyodide.loadPackage('numpy');
+    loadedPackages.add('numpy');
+  } catch (e) {
+    console.warn('Failed to pre-load numpy:', e);
+  }
 
   return window.pyodide;
+}
+
+/** Scan code for import statements and load any needed Pyodide packages */
+async function ensurePackages(pyodide: any, code: string): Promise<void> {
+  // Match "import X" and "from X import ..."
+  const importRegex = /(?:^|\n)\s*(?:import|from)\s+(\w+)/g;
+  let match;
+  const needed: string[] = [];
+
+  while ((match = importRegex.exec(code)) !== null) {
+    const pkg = match[1];
+    if (PYODIDE_PACKAGES.has(pkg) && !loadedPackages.has(pkg)) {
+      needed.push(pkg);
+    }
+  }
+
+  if (needed.length > 0) {
+    await pyodide.loadPackage(needed);
+    needed.forEach((p) => loadedPackages.add(p));
+  }
 }
 
 /** Run a Python code string via Pyodide and return stdout/stderr */
 async function runPythonCode(code: string): Promise<{ stdout: string; stderr: string }> {
   const pyodide = await ensurePyodide();
+
+  // Auto-install any packages the code imports
+  await ensurePackages(pyodide, code);
 
   pyodide.runPython(`
 import sys
