@@ -65,7 +65,7 @@ async function ensurePyodide(): Promise<any> {
   if (!window.loadPyodide) {
     await new Promise<void>((resolve, reject) => {
       const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js';
+      script.src = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js';
       script.onload = () => resolve();
       script.onerror = () => reject(new Error('Failed to load Pyodide'));
       document.head.appendChild(script);
@@ -73,8 +73,11 @@ async function ensurePyodide(): Promise<any> {
   }
 
   window.pyodide = await window.loadPyodide({
-    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/',
+    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/',
   });
+
+  // Pre-install numpy (used heavily across lectures)
+  await window.pyodide.loadPackage('numpy');
 
   return window.pyodide;
 }
@@ -90,10 +93,12 @@ sys.stdout = StringIO()
 sys.stderr = StringIO()
 `);
 
+  let caughtError = '';
   try {
     await pyodide.runPythonAsync(code);
   } catch (err: any) {
-    // Error will be in stderr
+    // Capture the Python traceback from the JS error
+    caughtError = err.message || String(err);
   }
 
   const stdout = pyodide.runPython('sys.stdout.getvalue()');
@@ -104,7 +109,10 @@ sys.stdout = sys.__stdout__
 sys.stderr = sys.__stderr__
 `);
 
-  return { stdout, stderr };
+  // Use caught error if stderr is empty but an exception was thrown
+  const finalStderr = stderr || caughtError;
+
+  return { stdout, stderr: finalStderr };
 }
 
 export function LectureViewer({
@@ -189,7 +197,7 @@ export function LectureViewer({
         e.stopPropagation();
 
         const button = btn as HTMLButtonElement;
-        const wrapper = button.closest('.code-block-wrapper');
+        const wrapper = button.closest('.code-block');
         if (!wrapper) return;
 
         // Find the code content
@@ -223,7 +231,10 @@ export function LectureViewer({
           }
 
           // Award XP for running code (use getState to avoid stale closures)
-          const blockId = wrapper.getAttribute('data-block-id') || `block-${Date.now()}`;
+          // Use block index as stable ID (data-block-id may not exist on server-rendered HTML)
+          const allBlocks = container.querySelectorAll('.code-block');
+          const blockIndex = Array.from(allBlocks).indexOf(wrapper as Element);
+          const blockId = wrapper.getAttribute('data-block-id') || `block-${blockIndex}`;
           const latestProgress = useAcademyStore.getState().progress;
           const currentBlocks = latestProgress[lectureId]?.codeBlocksRun || [];
           if (!currentBlocks.includes(blockId)) {
