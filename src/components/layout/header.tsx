@@ -1,10 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, LogOut, UserCircle, School } from 'lucide-react';
 
 import { useAcademyStore } from '@/lib/store/academy-store';
+import { useAuth } from '@/components/auth/auth-provider';
+import { t } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import type { Language } from '@/types';
 
@@ -14,6 +17,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { XPBar } from '@/components/gamification/xp-bar';
 
 const LANGUAGES: { code: Language; label: string }[] = [
   { code: 'en', label: 'EN' },
@@ -24,7 +28,15 @@ const LANGUAGES: { code: Language; label: string }[] = [
 export function Header() {
   const { language, setLanguage, getCompletionPercentage } = useAcademyStore();
   const { theme, setTheme } = useTheme();
+  const { user, loading, signOut } = useAuth();
+  const router = useRouter();
   const completion = getCompletionPercentage();
+
+  async function handleSignOut() {
+    await signOut();
+    router.push('/');
+    router.refresh();
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-primary text-primary-foreground">
@@ -42,13 +54,80 @@ export function Header() {
           </span>
         </Link>
 
-        {/* Center: completion % */}
-        <div className="hidden md:block text-xs text-primary-foreground/60 tabular-nums">
-          {Math.round(completion)}%
+        {/* Center: XP bar + completion % */}
+        <div className="hidden md:flex items-center gap-3">
+          <XPBar />
+          <span className="text-xs text-primary-foreground/60 tabular-nums">
+            {Math.round(completion)}%
+          </span>
         </div>
 
-        {/* Right: Theme + Language pills */}
+        {/* Right: Auth + Theme + Language pills */}
         <div className="flex items-center gap-3">
+          {/* Auth section */}
+          {!loading && (
+            <>
+              {user ? (
+                <div className="flex items-center gap-2">
+                  {user.isSchoolContact && (
+                    <Link
+                      href="/school/dashboard"
+                      className="hidden sm:flex items-center gap-1.5 text-xs text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                    >
+                      <School className="h-4 w-4" />
+                      <span>{t('school_dashboard', language as Language)}</span>
+                    </Link>
+                  )}
+                  <Link
+                    href="/dashboard"
+                    className="hidden sm:flex items-center gap-1.5 text-xs text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  >
+                    <UserCircle className="h-4 w-4" />
+                    <span className="max-w-[120px] truncate">
+                      {user.name || user.email}
+                    </span>
+                  </Link>
+                  <Tooltip>
+                    <TooltipTrigger
+                      render={
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={handleSignOut}
+                          aria-label={t('auth_sign_out', language as Language)}
+                          className="h-8 w-8 text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground"
+                        />
+                      }
+                    >
+                      <LogOut className="h-4 w-4" />
+                    </TooltipTrigger>
+                    <TooltipContent>{t('auth_sign_out', language as Language)}</TooltipContent>
+                  </Tooltip>
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <Link href="/login">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-xs text-primary-foreground/80 hover:bg-white/10 hover:text-primary-foreground"
+                    >
+                      {t('auth_login', language as Language)}
+                    </Button>
+                  </Link>
+                  <Link href="/register">
+                    <Button
+                      size="sm"
+                      className="h-7 text-xs bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                    >
+                      {t('auth_register', language as Language)}
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </>
+          )}
+
           {/* Theme toggle */}
           <Tooltip>
             <TooltipTrigger

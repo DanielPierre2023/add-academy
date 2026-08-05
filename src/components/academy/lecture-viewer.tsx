@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import Link from 'next/link';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { t } from '@/lib/i18n';
@@ -16,6 +16,9 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { QuizEngine } from '@/components/academy/quiz-engine';
+import { Confetti } from '@/components/gamification/confetti';
+import { showXPToast } from '@/components/gamification/xp-toast';
+import { XP_VALUES } from '@/types';
 
 declare global {
   interface Window {
@@ -121,20 +124,34 @@ export function LectureViewer({
     scrolledToBottom,
     setScrolledToBottom,
     quizScores,
+    awardXP,
+    checkStreak,
   } = useAcademyStore();
+
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const contentRef = useRef<HTMLDivElement>(null);
   const timeRef = useRef<number>(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Check/update streak on lecture view
+  useEffect(() => {
+    checkStreak();
+  }, [checkStreak]);
 
   const isCompleted = progress[lectureId]?.completed ?? false;
   const quizCompleted = quizScores[lectureId] !== undefined;
 
   const lang = language as Language;
   const lectureHtml = content.content[lang] || content.content['en'] || '';
-  const quizQuestions = quiz
+  // Fall back to EN if translated quiz questions have empty text
+  const rawQuizQuestions = quiz
     ? (quiz[lang]?.questions ?? quiz['en']?.questions ?? [])
     : [];
+  const quizQuestions =
+    rawQuizQuestions.length > 0 && !rawQuizQuestions[0]?.text
+      ? (quiz?.['en']?.questions ?? [])
+      : rawQuizQuestions;
 
   // Set current lecture on mount
   useEffect(() => {
@@ -204,6 +221,23 @@ export function LectureViewer({
             outputDiv.classList.remove('error');
             outputDiv.textContent = stdout || '(no output)';
           }
+
+          // Award XP for running code (use getState to avoid stale closures)
+          const blockId = wrapper.getAttribute('data-block-id') || `block-${Date.now()}`;
+          const latestProgress = useAcademyStore.getState().progress;
+          const currentBlocks = latestProgress[lectureId]?.codeBlocksRun || [];
+          if (!currentBlocks.includes(blockId)) {
+            useAcademyStore.getState().updateProgress(lectureId, {
+              codeBlocksRun: [...currentBlocks, blockId],
+            });
+            const result = useAcademyStore.getState().awardXP('code', XP_VALUES.CODE_BLOCK_RUN, lectureId);
+            showXPToast({
+              amount: XP_VALUES.CODE_BLOCK_RUN,
+              type: 'code',
+              achievements: result.newAchievements,
+              levelUp: result.leveledUp ? result.newLevel : undefined,
+            });
+          }
         } catch (err: any) {
           outputDiv.classList.add('error');
           outputDiv.textContent = err.message || 'Error running code';
@@ -238,13 +272,25 @@ export function LectureViewer({
   }, [scrolledToBottom, setScrolledToBottom]);
 
   const handleMarkComplete = () => {
-    markCompleted(lectureId);
+    if (!isCompleted) {
+      markCompleted(lectureId);
+      const result = awardXP('lecture', XP_VALUES.LECTURE_COMPLETE, lectureId);
+      showXPToast({
+        amount: XP_VALUES.LECTURE_COMPLETE,
+        type: 'lecture',
+        achievements: result.newAchievements,
+        levelUp: result.leveledUp ? result.newLevel : undefined,
+      });
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 100);
+    }
   };
 
   const showCompleteButton = scrolledToBottom || quizCompleted || isCompleted;
 
   return (
     <div className="flex flex-col h-full max-w-4xl mx-auto">
+      <Confetti active={showConfetti} />
       {/* Content Area */}
       <div
         ref={contentRef}

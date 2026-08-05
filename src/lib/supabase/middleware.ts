@@ -34,7 +34,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   // Protected routes require auth
-  const protectedPaths = ['/dashboard', '/certificate'];
+  const protectedPaths = ['/dashboard', '/certificate', '/school/dashboard'];
   const isProtected = protectedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path)
   );

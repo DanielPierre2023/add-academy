@@ -5,10 +5,13 @@ import { useAcademyStore } from '@/lib/store/academy-store';
 import { t } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import type { Language } from '@/types';
-import { CheckCircle2, RotateCcw } from 'lucide-react';
+import { CheckCircle2, RotateCcw, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Confetti } from '@/components/gamification/confetti';
+import { showXPToast } from '@/components/gamification/xp-toast';
+import { XP_VALUES } from '@/types';
 
 interface Question {
   index: number;
@@ -25,7 +28,7 @@ interface QuizEngineProps {
 }
 
 export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
-  const { language, quizScores, setQuizScore, updateProgress } =
+  const { language, quizScores, setQuizScore, updateProgress, awardXP } =
     useAcademyStore();
   const lang = language as Language;
 
@@ -34,6 +37,8 @@ export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
   >({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState<number | null>(null);
+  const [xpEarned, setXpEarned] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const existingScore = quizScores[lectureId];
 
@@ -88,13 +93,45 @@ export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
     setScore(calculatedScore);
     setSubmitted(true);
     setQuizScore(lectureId, calculatedScore);
-    updateProgress(lectureId, { quizScore: calculatedScore });
+    updateProgress(lectureId, { quizScore: calculatedScore, quizAttempted: true });
+
+    // Award XP
+    const baseXP = XP_VALUES.QUIZ_BASE;
+    const scoreXP = Math.round(calculatedScore * XP_VALUES.QUIZ_SCORE_MULTIPLIER);
+    let totalXP = baseXP + scoreXP;
+
+    const result = awardXP('quiz', totalXP, lectureId);
+
+    // Perfect score bonus
+    if (calculatedScore === 100) {
+      const bonusResult = awardXP('quiz_perfect', XP_VALUES.QUIZ_PERFECT_BONUS, lectureId);
+      totalXP += XP_VALUES.QUIZ_PERFECT_BONUS;
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 100);
+
+      showXPToast({
+        amount: totalXP,
+        type: 'quiz_perfect',
+        achievements: [...result.newAchievements, ...bonusResult.newAchievements],
+        levelUp: bonusResult.leveledUp ? bonusResult.newLevel : result.leveledUp ? result.newLevel : undefined,
+      });
+    } else {
+      showXPToast({
+        amount: totalXP,
+        type: 'quiz',
+        achievements: result.newAchievements,
+        levelUp: result.leveledUp ? result.newLevel : undefined,
+      });
+    }
+
+    setXpEarned(totalXP);
   }, [
     quiz.questions,
     selectedAnswers,
     lectureId,
     setQuizScore,
     updateProgress,
+    awardXP,
   ]);
 
   const handleReset = useCallback(() => {
@@ -249,7 +286,7 @@ export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
       {submitted && score !== null && (
         <Card className="border-primary/30 bg-primary/5">
           <CardContent className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <div
                 className={cn(
                   'text-3xl font-bold',
@@ -258,8 +295,16 @@ export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
               >
                 {score}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                {t('quiz_score', lang)}
+              <div>
+                <div className="text-sm text-muted-foreground">
+                  {t('quiz_score', lang)}
+                </div>
+                {xpEarned > 0 && (
+                  <div className="flex items-center gap-1 text-xs text-secondary font-bold mt-0.5">
+                    <Zap className="h-3 w-3" />
+                    +{xpEarned} XP
+                  </div>
+                )}
               </div>
             </div>
             <Button variant="outline" onClick={handleReset} className="gap-2">
@@ -269,6 +314,9 @@ export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
           </CardContent>
         </Card>
       )}
+
+      {/* Confetti for perfect score */}
+      <Confetti active={showConfetti} />
 
       {/* Submit Button */}
       {!submitted && (

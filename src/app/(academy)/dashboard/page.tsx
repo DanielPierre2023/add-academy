@@ -3,7 +3,7 @@
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { t } from '@/lib/i18n';
 import { getLectureIndex, getLecturesByStage, getLectureTitle } from '@/lib/lectures';
-import { STAGES } from '@/types';
+import { STAGES, ACHIEVEMENTS, xpForLevel } from '@/types';
 import { cn } from '@/lib/utils';
 import { formatTime } from '@/lib/utils';
 import {
@@ -13,21 +13,28 @@ import {
   Flame,
   CheckCircle2,
   ChevronRight,
+  Zap,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import type { Language } from '@/types';
 
 export default function DashboardPage() {
-  const language = useAcademyStore((s) => s.language);
+  const language = useAcademyStore((s) => s.language) as Language;
   const getCompletionPercentage = useAcademyStore((s) => s.getCompletionPercentage);
   const progress = useAcademyStore((s) => s.progress);
   const quizScores = useAcademyStore((s) => s.quizScores);
+  const getGamificationStats = useAcademyStore((s) => s.getGamificationStats);
+  const getXPProgress = useAcademyStore((s) => s.getXPProgress);
+  const unlockedAchievements = useAcademyStore((s) => s.unlockedAchievements);
   const index = getLectureIndex();
 
   const completionPct = getCompletionPercentage();
+  const stats = getGamificationStats();
+  const xpProgress = getXPProgress();
 
   // Total study time
   const totalTime = Object.values(progress).reduce(
@@ -80,7 +87,7 @@ export default function DashboardPage() {
     {
       icon: Flame,
       label: t('dash_streak', language),
-      value: '0 days',
+      value: `${stats.streak} ${language === 'ro' ? 'zile' : language === 'el' ? 'μέρες' : 'days'}`,
       color: 'text-red-500',
       bg: 'bg-red-500/10',
     },
@@ -90,6 +97,39 @@ export default function DashboardPage() {
     <div className="space-y-8 pb-16">
       {/* Title */}
       <h1 className="text-3xl font-bold">{t('dash_title', language)}</h1>
+
+      {/* XP & Level Card */}
+      <Card className="border-secondary/30 bg-gradient-to-r from-primary/5 to-secondary/5">
+        <CardContent className="py-6">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-secondary-foreground font-bold text-lg">
+              {stats.level}
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-sm font-medium flex items-center gap-1.5">
+                  <Zap className="h-4 w-4 text-secondary" />
+                  Level {stats.level}
+                </span>
+                <span className="text-xs text-muted-foreground tabular-nums">
+                  {stats.xp} / {xpForLevel(stats.level + 1)} XP
+                </span>
+              </div>
+              <div className="h-3 w-full overflow-hidden rounded-full bg-muted">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-secondary to-secondary/80 transition-all duration-500"
+                  style={{ width: `${xpProgress.percentage}%` }}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-6 text-xs text-muted-foreground">
+            <span>{stats.lecturesCompleted} lectures completed</span>
+            <span>{stats.codeBlocksRun} code blocks run</span>
+            <span>{stats.quizzesAttempted} quizzes attempted</span>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Stat Cards */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -115,6 +155,46 @@ export default function DashboardPage() {
           </Card>
         ))}
       </div>
+
+      {/* Achievements */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            🏅 {t('dash_achievements', language)}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {ACHIEVEMENTS.map((achievement) => {
+              const unlocked = unlockedAchievements.includes(achievement.id);
+              return (
+                <div
+                  key={achievement.id}
+                  className={cn(
+                    'flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-all',
+                    unlocked
+                      ? 'border-secondary/40 bg-secondary/5'
+                      : 'border-border opacity-40 grayscale'
+                  )}
+                >
+                  <span className="text-2xl">{achievement.icon}</span>
+                  <span className="text-xs font-medium leading-tight">
+                    {achievement.name[language]}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground leading-tight">
+                    {achievement.description[language]}
+                  </span>
+                  {unlocked && (
+                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
+                      ✓
+                    </Badge>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Stage Progress */}
       <Card>
@@ -208,7 +288,7 @@ export default function DashboardPage() {
                         <p className="text-xs text-muted-foreground">
                           {formatTime(item.timeSpent)} spent
                           {item.completedAt &&
-                            ` -- completed ${new Date(item.completedAt).toLocaleDateString()}`}
+                            ` — completed ${new Date(item.completedAt).toLocaleDateString()}`}
                         </p>
                       </div>
                       <ChevronRight className="h-4 w-4 text-muted-foreground" />

@@ -9,6 +9,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
+import { showXPToast } from '@/components/gamification/xp-toast';
+import { XP_VALUES } from '@/types';
 import {
   X,
   Send,
@@ -20,6 +22,7 @@ import {
   Wrench,
   Loader2,
   Sparkles,
+  AlertTriangle,
 } from 'lucide-react';
 import type { AIMessage } from '@/types';
 
@@ -40,12 +43,24 @@ export function AITutor() {
     clearTutorMessages,
     tutorMode,
     setTutorMode,
+    awardXP,
   } = useAcademyStore();
 
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const [rateLimited, setRateLimited] = useState(false);
+  const [rateLimitInfo, setRateLimitInfo] = useState<{ limit?: number; used?: number } | null>(null);
+  const [tutorQuestionsAsked, setTutorQuestionsAsked] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Reset conversation ID when switching lectures
+  useEffect(() => {
+    setConversationId(null);
+    setRateLimited(false);
+    setRateLimitInfo(null);
+  }, [currentLecture]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -59,7 +74,7 @@ export function AITutor() {
 
   const handleSend = async () => {
     const message = input.trim();
-    if (!message || isLoading) return;
+    if (!message || isLoading || rateLimited) return;
 
     const userMessage: AIMessage = {
       role: 'user',
@@ -81,18 +96,59 @@ export function AITutor() {
           lectureId: currentLecture,
           language,
           history: tutorMessages.slice(-10),
+          conversationId,
         }),
       });
+
+      if (response.status === 429) {
+        const data = await response.json();
+        setRateLimited(true);
+        setRateLimitInfo({ limit: data.limit, used: data.used });
+        addTutorMessage({
+          role: 'assistant',
+          content: t('tutor_rate_limit', language),
+          timestamp: new Date().toISOString(),
+        });
+        return;
+      }
+
+      if (response.status === 401) {
+        addTutorMessage({
+          role: 'assistant',
+          content: t('tutor_login_required', language),
+          timestamp: new Date().toISOString(),
+        });
+        return;
+      }
 
       if (!response.ok) throw new Error('Failed to get response');
 
       const data = await response.json();
+
+      // Track conversation ID for persistence
+      if (data.conversationId) {
+        setConversationId(data.conversationId);
+      }
+
       const assistantMessage: AIMessage = {
         role: 'assistant',
         content: data.response || 'Sorry, I could not generate a response.',
         timestamp: new Date().toISOString(),
       };
       addTutorMessage(assistantMessage);
+
+      // Award XP for first tutor question per lecture
+      const newCount = tutorQuestionsAsked + 1;
+      setTutorQuestionsAsked(newCount);
+      if (newCount === 1) {
+        const result = awardXP('tutor', XP_VALUES.TUTOR_FIRST_QUESTION, currentLecture);
+        showXPToast({
+          amount: XP_VALUES.TUTOR_FIRST_QUESTION,
+          type: 'tutor',
+          achievements: result.newAchievements,
+          levelUp: result.leveledUp ? result.newLevel : undefined,
+        });
+      }
     } catch {
       addTutorMessage({
         role: 'assistant',
@@ -109,6 +165,14 @@ export function AITutor() {
       e.preventDefault();
       handleSend();
     }
+  };
+
+  const handleClear = () => {
+    clearTutorMessages();
+    setConversationId(null);
+    setTutorQuestionsAsked(0);
+    setRateLimited(false);
+    setRateLimitInfo(null);
   };
 
   if (!tutorOpen) return null;
@@ -129,7 +193,7 @@ export function AITutor() {
           </div>
         </div>
         <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={clearTutorMessages}>
+          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleClear}>
             <Trash2 className="h-4 w-4" />
           </Button>
           <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setTutorOpen(false)}>
@@ -157,6 +221,16 @@ export function AITutor() {
           );
         })}
       </div>
+
+      {/* Rate limit warning */}
+      {rateLimited && rateLimitInfo && (
+        <div className="flex items-center gap-2 border-b bg-amber-50 px-4 py-2 dark:bg-amber-950/30">
+          <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0" />
+          <p className="text-xs text-amber-700 dark:text-amber-300">
+            Daily limit reached ({rateLimitInfo.used}/{rateLimitInfo.limit})
+          </p>
+        </div>
+      )}
 
       {/* Messages */}
       <ScrollArea className="flex-1 px-4">
@@ -256,14 +330,15 @@ export function AITutor() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={t('tutor_placeholder', language)}
+            placeholder={rateLimited ? t('tutor_rate_limit', language) : t('tutor_placeholder', language)}
             className="min-h-[44px] max-h-32 resize-none text-sm"
             rows={1}
+            disabled={rateLimited}
           />
           <Button
             size="icon"
             onClick={handleSend}
-            disabled={!input.trim() || isLoading}
+            disabled={!input.trim() || isLoading || rateLimited}
             className="shrink-0"
           >
             <Send className="h-4 w-4" />
