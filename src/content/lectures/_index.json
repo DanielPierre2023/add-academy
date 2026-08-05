@@ -19,8 +19,8 @@
     {
       "id": "1",
       "number": 1,
-      "stage": 0,
-      "stageName": "Foundations",
+      "stage": 1,
+      "stageName": "LLM Fundamentals",
       "isGenAI": false,
       "title": {
         "en": "Building LLMs from Scratch: Series Introduction",
@@ -35,8 +35,8 @@
     {
       "id": "2",
       "number": 2,
-      "stage": 0,
-      "stageName": "Foundations",
+      "stage": 1,
+      "stageName": "LLM Fundamentals",
       "isGenAI": false,
       "title": {
         "en": "Lecture 2: Large Language Models (LLM) Basics",
@@ -52,7 +52,7 @@
       "id": "0",
       "number": 0,
       "stage": 0,
-      "stageName": "Foundations",
+      "stageName": "Getting Started",
       "isGenAI": false,
       "title": {
         "en": "Your AI Development Environment",
@@ -67,8 +67,8 @@
     {
       "id": "3",
       "number": 3,
-      "stage": 0,
-      "stageName": "Foundations",
+      "stage": 1,
+      "stageName": "LLM Fundamentals",
       "isGenAI": false,
       "title": {
         "en": "Pretraining LLMs vs Finetuning LLMs",
@@ -83,8 +83,8 @@
     {
       "id": "4",
       "number": 4,
-      "stage": 0,
-      "stageName": "Foundations",
+      "stage": 1,
+      "stageName": "LLM Fundamentals",
       "isGenAI": false,
       "title": {
         "en": "What Are Transformers?",
@@ -99,8 +99,8 @@
     {
       "id": "5",
       "number": 5,
-      "stage": 0,
-      "stageName": "Foundations",
+      "stage": 1,
+      "stageName": "LLM Fundamentals",
       "isGenAI": false,
       "title": {
         "en": "How Does GPT-3 Really Work?",
@@ -115,8 +115,8 @@
     {
       "id": "6",
       "number": 6,
-      "stage": 0,
-      "stageName": "Foundations",
+      "stage": 1,
+      "stageName": "LLM Fundamentals",
       "isGenAI": false,
       "title": {
         "en": "Stages of Building an LLM from Scratch",
@@ -131,7 +131,7 @@
     {
       "id": "7",
       "number": 7,
-      "stage": 1,
+      "stage": 2,
       "stageName": "Tokenization",
       "isGenAI": false,
       "title": {
@@ -147,7 +147,7 @@
     {
       "id": "8",
       "number": 8,
-      "stage": 1,
+      "stage": 2,
       "stageName": "Tokenization",
       "isGenAI": false,
       "title": {
@@ -163,7 +163,7 @@
     {
       "id": "9",
       "number": 9,
-      "stage": 1,
+      "stage": 2,
       "stageName": "Tokenization",
       "isGenAI": false,
       "title": {
@@ -179,7 +179,7 @@
     {
       "id": "10",
       "number": 10,
-      "stage": 1,
+      "stage": 2,
       "stageName": "Tokenization",
       "isGenAI": false,
       "title": {
@@ -195,7 +195,7 @@
     {
       "id": "11",
       "number": 11,
-      "stage": 1,
+      "stage": 2,
       "stageName": "Tokenization",
       "isGenAI": false,
       "title": {
@@ -211,7 +211,7 @@
     {
       "id": "12",
       "number": 12,
-      "stage": 1,
+      "stage": 2,
       "stageName": "Tokenization",
       "isGenAI": false,
       "title": {
@@ -227,7 +227,7 @@
     {
       "id": "13",
       "number": 13,
-      "stage": 2,
+      "stage": 3,
       "stageName": "Attention",
       "isGenAI": false,
       "title": {
@@ -243,7 +243,7 @@
     {
       "id": "14",
       "number": 14,
-      "stage": 2,
+      "stage": 3,
       "stageName": "Attention",
       "isGenAI": false,
       "title": {
@@ -259,7 +259,7 @@
     {
       "id": "15",
       "number": 15,
-      "stage": 2,
+      "stage": 3,
       "stageName": "Attention",
       "isGenAI": false,
       "title": {
@@ -275,7 +275,7 @@
     {
       "id": "16",
       "number": 16,
-      "stage": 2,
+      "stage": 3,
       "stageName": "Attention",
       "isGenAI": false,
       "title": {
@@ -291,7 +291,7 @@
     {
       "id": "17",
       "number": 17,
-      "stage": 2,
+      "stage": 3,
       "stageName": "Attention",
       "isGenAI": false,
       "title": {
@@ -307,7 +307,7 @@
     {
       "id": "18",
       "number": 18,
-      "stage": 2,
+      "stage": 3,
       "stageName": "Attention",
       "isGenAI": false,
       "title": {
@@ -323,7 +323,7 @@
     {
       "id": "19",
       "number": 19,
-      "stage": 3,
+      "stage": 4,
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
@@ -331,15 +331,15 @@
         "ro": "Lecția 19: Activarea GELU și rețelele Feed-Forward",
         "el": "Διάλεξη 19: Ενεργοποίηση GELU και δίκτυα πρόσθιας τροφοδότησης"
       },
-      "prev": null,
-      "next": null,
+      "prev": "18",
+      "next": "20",
       "codeBlockCount": 4,
       "hasQuiz": true
     },
     {
       "id": "20",
       "number": 20,
-      "stage": 3,
+      "stage": 4,
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
@@ -347,15 +347,15 @@
         "ro": "Lecția 20: Normalizarea pe straturi",
         "el": "Διάλεξη 20: Κανονικοποίηση στρώματος"
       },
-      "prev": null,
-      "next": null,
+      "prev": "19",
+      "next": "21",
       "codeBlockCount": 4,
       "hasQuiz": true
     },
     {
       "id": "21",
       "number": 21,
-      "stage": 3,
+      "stage": 4,
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
@@ -363,15 +363,15 @@
         "ro": "Lecția 21: Conexiuni Reziduale (Shortcut)",
         "el": "Διάλεξη 21: Συνδέσεις Συντόμευσης (Residual)"
       },
-      "prev": null,
-      "next": null,
+      "prev": "20",
+      "next": "22",
       "codeBlockCount": 4,
       "hasQuiz": true
     },
     {
       "id": "22",
       "number": 22,
-      "stage": 3,
+      "stage": 4,
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
@@ -379,15 +379,15 @@
         "ro": "Lecția 22: Blocul Transformer",
         "el": "Διάλεξη 22: Το Μπλοκ Transformer"
       },
-      "prev": null,
-      "next": null,
+      "prev": "21",
+      "next": "23",
       "codeBlockCount": 3,
       "hasQuiz": true
     },
     {
       "id": "23",
       "number": 23,
-      "stage": 3,
+      "stage": 4,
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
@@ -395,15 +395,15 @@
         "ro": "Lecția 23: Asamblarea arhitecturii GPT",
         "el": "Διάλεξη 23: Συναρμολόγηση της αρχιτεκτονικής GPT"
       },
-      "prev": null,
-      "next": null,
+      "prev": "22",
+      "next": "24",
       "codeBlockCount": 4,
       "hasQuiz": true
     },
     {
       "id": "24",
       "number": 24,
-      "stage": 3,
+      "stage": 4,
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
@@ -411,15 +411,15 @@
         "ro": "Lecția 24: Capstone Etapa 4 — Mini GPT-2 de la zero",
         "el": "Διάλεξη 24: Capstone Σταδίου 4 — Mini GPT-2 από την αρχή"
       },
-      "prev": null,
-      "next": null,
+      "prev": "23",
+      "next": "25",
       "codeBlockCount": 3,
       "hasQuiz": true
     },
     {
       "id": "25",
       "number": 25,
-      "stage": 4,
+      "stage": 5,
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
@@ -435,7 +435,7 @@
     {
       "id": "26",
       "number": 26,
-      "stage": 4,
+      "stage": 5,
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
@@ -451,7 +451,7 @@
     {
       "id": "27",
       "number": 27,
-      "stage": 4,
+      "stage": 5,
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
@@ -467,7 +467,7 @@
     {
       "id": "28",
       "number": 28,
-      "stage": 4,
+      "stage": 5,
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
@@ -483,7 +483,7 @@
     {
       "id": "29",
       "number": 29,
-      "stage": 4,
+      "stage": 5,
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
@@ -499,7 +499,7 @@
     {
       "id": "30",
       "number": 30,
-      "stage": 4,
+      "stage": 5,
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
@@ -516,7 +516,7 @@
       "id": "31",
       "number": 31,
       "stage": 5,
-      "stageName": "Fine-tuning",
+      "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
         "en": "Lecture 31: Putting It All Together — Pretraining Mini GPT-2",
@@ -532,7 +532,7 @@
       "id": "32",
       "number": 32,
       "stage": 5,
-      "stageName": "Fine-tuning",
+      "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
         "en": "Lecture 32: Stage 5 Capstone — Pretrained Text Generator",
@@ -547,7 +547,7 @@
     {
       "id": "33",
       "number": 33,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -563,7 +563,7 @@
     {
       "id": "34",
       "number": 34,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -579,7 +579,7 @@
     {
       "id": "35",
       "number": 35,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -595,7 +595,7 @@
     {
       "id": "36",
       "number": 36,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -611,7 +611,7 @@
     {
       "id": "37",
       "number": 37,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -627,7 +627,7 @@
     {
       "id": "38",
       "number": 38,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -643,7 +643,7 @@
     {
       "id": "39",
       "number": 39,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -659,7 +659,7 @@
     {
       "id": "40",
       "number": 40,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -675,7 +675,7 @@
     {
       "id": "41",
       "number": 41,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -691,7 +691,7 @@
     {
       "id": "42",
       "number": 42,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -707,7 +707,7 @@
     {
       "id": "43",
       "number": 43,
-      "stage": 5,
+      "stage": 6,
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
@@ -723,7 +723,7 @@
     {
       "id": "genai-1",
       "number": 101,
-      "stage": 6,
+      "stage": 7,
       "stageName": "GenAI SaaS",
       "isGenAI": true,
       "title": {
@@ -739,7 +739,7 @@
     {
       "id": "genai-2",
       "number": 102,
-      "stage": 6,
+      "stage": 7,
       "stageName": "GenAI SaaS",
       "isGenAI": true,
       "title": {
@@ -755,7 +755,7 @@
     {
       "id": "genai-3",
       "number": 103,
-      "stage": 6,
+      "stage": 7,
       "stageName": "GenAI SaaS",
       "isGenAI": true,
       "title": {
@@ -771,7 +771,7 @@
     {
       "id": "genai-4",
       "number": 104,
-      "stage": 6,
+      "stage": 7,
       "stageName": "GenAI SaaS",
       "isGenAI": true,
       "title": {
@@ -787,7 +787,7 @@
     {
       "id": "genai-5",
       "number": 105,
-      "stage": 6,
+      "stage": 7,
       "stageName": "GenAI SaaS",
       "isGenAI": true,
       "title": {
