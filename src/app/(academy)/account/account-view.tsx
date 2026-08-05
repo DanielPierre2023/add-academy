@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/auth-provider';
 import { useAcademyStore } from '@/lib/store/academy-store';
-import { t } from '@/lib/i18n';
 import type { Language } from '@/types';
+import { STAGES } from '@/types';
 import {
   User,
   Mail,
@@ -21,125 +21,176 @@ import {
   Check,
   Star,
   Sparkles,
-  GraduationCap,
   Clock,
   ArrowRight,
   CreditCard,
   FileText,
   Settings,
   LogOut,
+  Lock,
+  Package,
+  ShoppingCart,
+  Gift,
+  Tag,
+  ImageIcon,
+  Video,
+  FileEdit,
+  ScanSearch,
+  FileSearch,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
-/* ─────────────────────────────────────────────
-   Mock pricing data — will be replaced by Stripe
-   ───────────────────────────────────────────── */
-const PLANS = [
+/* ═══════════════════════════════════════════════════════════
+   Pricing data — mock until Stripe integration
+   All prices in EUR. 3-month access window.
+   ═══════════════════════════════════════════════════════════ */
+
+interface StageProduct {
+  id: string;
+  stageNumber: number;
+  name: Record<string, string>;
+  lectures: number;
+  price: number; // EUR
+  features: string[];
+  icon: string;
+  color: string;
+}
+
+interface GenAIProduct {
+  id: string;
+  name: Record<string, string>;
+  description: Record<string, string>;
+  price: number;
+  icon: React.ElementType;
+  comingSoon: boolean;
+}
+
+const STAGE_PRODUCTS: StageProduct[] = [
   {
-    id: 'free',
-    name: 'Explorer',
-    price: 0,
-    period: '',
-    description: 'Get started with the fundamentals',
-    badge: null,
-    features: [
-      'First 7 lectures (Getting Started)',
-      'Basic Python sandbox',
-      'Community quizzes',
-      'Progress tracking & XP',
-    ],
-    limitations: [
-      'No AI Tutor access',
-      'No advanced stages',
-      'No certificate',
-    ],
-    cta: 'Current Plan',
-    ctaVariant: 'outline' as const,
-    highlighted: false,
-    ribbon: null,
-  },
-  {
-    id: 'pro',
-    name: 'Pro Learner',
+    id: 'stage-2',
+    stageNumber: 2,
+    name: { en: 'Tokenization & Data', ro: 'Date & Tokenizare', el: 'Tokenization & Δεδομένα' },
+    lectures: 6,
     price: 19,
-    period: '/mo',
-    annualPrice: 14,
-    annualSaving: 60,
-    description: 'Full access to master LLMs end-to-end',
-    badge: 'MOST POPULAR',
-    features: [
-      'All 49 interactive lectures',
-      'Full Python sandbox with NumPy, SciPy',
-      'AI Tutor — unlimited questions',
-      'All quizzes & capstone projects',
-      'Completion certificate',
-      'Priority email support',
-    ],
-    limitations: [],
-    cta: 'Upgrade to Pro',
-    ctaVariant: 'default' as const,
-    highlighted: true,
-    ribbon: 'Best Value',
+    features: ['6 interactive lectures', 'BPE Tokenizer from scratch', 'DataLoader & Embeddings', 'Code sandbox access'],
+    icon: '🔤',
+    color: '#8b5cf6',
   },
   {
-    id: 'team',
-    name: 'Team',
-    price: 49,
-    period: '/mo',
-    annualPrice: 39,
-    annualSaving: 120,
-    description: 'For teams & organizations learning together',
-    badge: null,
-    features: [
-      'Everything in Pro',
-      'Up to 10 team seats',
-      'Team progress dashboard',
-      'Admin controls & analytics',
-      'Bulk certificate generation',
-      'Dedicated support channel',
-      'Custom onboarding session',
-    ],
-    limitations: [],
-    cta: 'Contact Sales',
-    ctaVariant: 'outline' as const,
-    highlighted: false,
-    ribbon: null,
+    id: 'stage-3',
+    stageNumber: 3,
+    name: { en: 'Attention Mechanism', ro: 'Mecanismul Atenției', el: 'Μηχανισμός Προσοχής' },
+    lectures: 6,
+    price: 29,
+    features: ['6 interactive lectures', 'Self-Attention from scratch', 'Multi-Head Attention', 'Capstone project'],
+    icon: '🎯',
+    color: '#ec4899',
+  },
+  {
+    id: 'stage-4',
+    stageNumber: 4,
+    name: { en: 'LLM Architecture', ro: 'Arhitectura LLM', el: 'Αρχιτεκτονική LLM' },
+    lectures: 6,
+    price: 29,
+    features: ['6 interactive lectures', 'GELU, LayerNorm, Residuals', 'Transformer Block assembly', 'Code GPT-2 (124M)'],
+    icon: '🧱',
+    color: '#f59e0b',
+  },
+  {
+    id: 'stage-5',
+    stageNumber: 5,
+    name: { en: 'Pretraining', ro: 'Pre-antrenare', el: 'Προεκπαίδευση' },
+    lectures: 8,
+    price: 39,
+    features: ['8 interactive lectures', 'Training loop & optimization', 'Temperature & Top-k sampling', 'Load GPT-2 weights'],
+    icon: '⚡',
+    color: '#10b981',
+  },
+  {
+    id: 'stage-6',
+    stageNumber: 6,
+    name: { en: 'Fine-tuning', ro: 'Ajustare Fină', el: 'Μικρορύθμιση' },
+    lectures: 11,
+    price: 39,
+    features: ['11 interactive lectures', 'LoRA, RLHF, DPO', 'RAG & Chatbot building', 'Domain-specific LLMs'],
+    icon: '🎓',
+    color: '#ef4444',
   },
 ];
 
-/* Mock invoices */
+const GENAI_PRODUCTS: GenAIProduct[] = [
+  {
+    id: 'genai-1',
+    name: { en: 'Image Generation SaaS', ro: 'SaaS Generare Imagini', el: 'SaaS Δημιουργίας Εικόνων' },
+    description: { en: 'Build a production image generation app', ro: 'Construiește o aplicație de generare de imagini', el: 'Κατασκευή εφαρμογής δημιουργίας εικόνων' },
+    price: 19,
+    icon: ImageIcon,
+    comingSoon: true,
+  },
+  {
+    id: 'genai-2',
+    name: { en: 'Video Generation SaaS', ro: 'SaaS Generare Video', el: 'SaaS Δημιουργίας Βίντεο' },
+    description: { en: 'Build a video generation pipeline', ro: 'Construiește un pipeline de generare video', el: 'Κατασκευή pipeline δημιουργίας βίντεο' },
+    price: 19,
+    icon: Video,
+    comingSoon: true,
+  },
+  {
+    id: 'genai-3',
+    name: { en: 'Text Composition & Rewriting', ro: 'Compunere & Rescriere Text', el: 'Σύνθεση & Αναδιατύπωση Κειμένου' },
+    description: { en: 'Build an AI writing assistant SaaS', ro: 'Construiește un SaaS de asistență la scriere', el: 'Κατασκευή SaaS βοηθού γραφής' },
+    price: 19,
+    icon: FileEdit,
+    comingSoon: true,
+  },
+  {
+    id: 'genai-4',
+    name: { en: 'Plagiarism & AI Detection', ro: 'Detecție Plagiat & IA', el: 'Ανίχνευση Λογοκλοπής & AI' },
+    description: { en: 'Build a plagiarism & AI text detector', ro: 'Construiește un detector de plagiat', el: 'Κατασκευή ανιχνευτή λογοκλοπής' },
+    price: 19,
+    icon: ScanSearch,
+    comingSoon: true,
+  },
+  {
+    id: 'genai-5',
+    name: { en: 'OCR & Document Intelligence', ro: 'OCR & Inteligență Documente', el: 'OCR & Νοημοσύνη Εγγράφων' },
+    description: { en: 'Build an OCR & document analysis SaaS', ro: 'Construiește un SaaS de analiză documente', el: 'Κατασκευή SaaS ανάλυσης εγγράφων' },
+    price: 19,
+    icon: FileSearch,
+    comingSoon: true,
+  },
+];
+
+const INDIVIDUAL_STAGES_TOTAL = STAGE_PRODUCTS.reduce((s, p) => s + p.price, 0); // €155
+const COURSE_BUNDLE_PRICE = 89;
+const COURSE_BUNDLE_SAVING = Math.round((1 - COURSE_BUNDLE_PRICE / INDIVIDUAL_STAGES_TOTAL) * 100);
+
+const INDIVIDUAL_GENAI_TOTAL = GENAI_PRODUCTS.reduce((s, p) => s + p.price, 0); // €95
+const GENAI_BUNDLE_PRICE = 49;
+const GENAI_BUNDLE_SAVING = Math.round((1 - GENAI_BUNDLE_PRICE / INDIVIDUAL_GENAI_TOTAL) * 100);
+
+const EVERYTHING_INDIVIDUAL_TOTAL = INDIVIDUAL_STAGES_TOTAL + INDIVIDUAL_GENAI_TOTAL; // €250
+const EVERYTHING_BUNDLE_PRICE = 119;
+const EVERYTHING_BUNDLE_SAVING = Math.round((1 - EVERYTHING_BUNDLE_PRICE / EVERYTHING_INDIVIDUAL_TOTAL) * 100);
+
+/* Mock purchased stages — will come from Supabase/Stripe */
+const MOCK_PURCHASED: string[] = []; // e.g. ['stage-2', 'genai-1']
 const MOCK_INVOICES: any[] = [];
 
-function tierLabel(tier: string) {
-  switch (tier) {
-    case 'pro': return 'Pro Learner';
-    case 'team': return 'Team';
-    case 'enterprise': return 'Enterprise';
-    case 'school': return 'School';
-    default: return 'Explorer (Free)';
-  }
-}
-
-function tierColor(tier: string) {
-  switch (tier) {
-    case 'pro': return 'bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)]';
-    case 'team': return 'bg-primary text-primary-foreground';
-    case 'school': return 'bg-green-600 text-white';
-    default: return 'bg-muted text-muted-foreground';
-  }
-}
+/* ═══════════════════════════════════════════════════════════ */
 
 export default function AccountView() {
   const { user, signOut, loading } = useAuth();
   const { language, getCompletionPercentage, progress, quizScores, xp, streak, totalCodeBlocksRun } = useAcademyStore();
   const router = useRouter();
-  const lang = language as Language;
+  const lang = language as string;
 
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('annual');
-  const [activeTab, setActiveTab] = useState<'overview' | 'subscription' | 'invoices'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'courses' | 'invoices'>('overview');
+  const [cart, setCart] = useState<string[]>([]);
 
   if (loading) {
     return (
@@ -167,25 +218,41 @@ export default function AccountView() {
   const totalTime = Object.values(progress).reduce((sum, p) => sum + (p.timeSpent || 0), 0);
   const hoursSpent = Math.floor(totalTime / 3600);
   const minutesSpent = Math.floor((totalTime % 3600) / 60);
-  const currentTier = user.tier || 'free';
+
+  const isPurchased = (id: string) => MOCK_PURCHASED.includes(id);
+  const isInCart = (id: string) => cart.includes(id);
+  const toggleCart = (id: string) => {
+    setCart(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  };
+
+  const cartTotal = cart.reduce((sum, id) => {
+    const stage = STAGE_PRODUCTS.find(s => s.id === id);
+    if (stage) return sum + stage.price;
+    const genai = GENAI_PRODUCTS.find(g => g.id === id);
+    if (genai) return sum + genai.price;
+    if (id === 'bundle-course') return sum + COURSE_BUNDLE_PRICE;
+    if (id === 'bundle-genai') return sum + GENAI_BUNDLE_PRICE;
+    if (id === 'bundle-everything') return sum + EVERYTHING_BUNDLE_PRICE;
+    return sum;
+  }, 0);
 
   return (
     <div className="space-y-8 pb-12">
-      {/* ── Page header ── */}
+      {/* Page header */}
       <div>
         <h1 className="text-3xl font-bold" style={{ fontFamily: 'var(--font-heading)' }}>
           My Account
         </h1>
         <p className="mt-1 text-muted-foreground">
-          Manage your profile, subscription, and learning progress.
+          Manage your profile, courses, and learning progress.
         </p>
       </div>
 
-      {/* ── Tab navigation ── */}
+      {/* Tab navigation */}
       <div className="flex gap-1 rounded-lg bg-muted p-1">
         {[
           { id: 'overview' as const, label: 'Overview', icon: User },
-          { id: 'subscription' as const, label: 'Subscription', icon: CreditCard },
+          { id: 'courses' as const, label: 'Courses & Pricing', icon: ShoppingCart },
           { id: 'invoices' as const, label: 'Invoices', icon: FileText },
         ].map(tab => (
           <button
@@ -225,20 +292,14 @@ export default function AccountView() {
                     <Mail className="h-3.5 w-3.5" />
                     {user.email}
                   </p>
-                  <div className="mt-2">
-                    <Badge className={tierColor(currentTier)}>
-                      {currentTier === 'pro' && <Crown className="mr-1 h-3 w-3" />}
-                      {tierLabel(currentTier)}
+                  <div className="mt-2 flex items-center gap-2">
+                    <Badge className="bg-primary/10 text-primary border-primary/20">
+                      <BookOpen className="mr-1 h-3 w-3" />
+                      {MOCK_PURCHASED.length === 0 ? 'Free Tier' : `${MOCK_PURCHASED.length} course${MOCK_PURCHASED.length > 1 ? 's' : ''} active`}
                     </Badge>
                   </div>
                 </div>
               </div>
-              <Link href="/account/settings">
-                <Button variant="outline" size="sm" className="gap-1.5">
-                  <Settings className="h-3.5 w-3.5" />
-                  Edit Profile
-                </Button>
-              </Link>
             </div>
           </div>
 
@@ -276,10 +337,7 @@ export default function AccountView() {
                   <span>{Math.round(completion)}%</span>
                 </div>
                 <div className="h-2.5 rounded-full bg-muted overflow-hidden">
-                  <div
-                    className="h-full rounded-full bg-primary transition-all"
-                    style={{ width: `${completion}%` }}
-                  />
+                  <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${completion}%` }} />
                 </div>
               </div>
               <div>
@@ -288,54 +346,85 @@ export default function AccountView() {
                   <span>{hoursSpent}h {minutesSpent}m</span>
                 </div>
                 <div className="h-2.5 rounded-full bg-muted overflow-hidden">
-                  <div
-                    className="h-full rounded-full bg-[hsl(38_80%_55%)] transition-all"
-                    style={{ width: `${Math.min(100, (totalTime / (50 * 3600)) * 100)}%` }}
-                  />
+                  <div className="h-full rounded-full bg-[hsl(38_80%_55%)] transition-all" style={{ width: `${Math.min(100, (totalTime / (50 * 3600)) * 100)}%` }} />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Upgrade CTA for free users */}
-          {currentTier === 'free' && (
-            <div className="relative overflow-hidden rounded-xl border-2 border-[hsl(38_80%_55%)] bg-gradient-to-br from-[hsl(240_95%_10%)] to-[hsl(240_60%_18%)] p-6 text-white">
-              <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-[hsl(38_80%_55%/0.1)] blur-2xl" />
-              <div className="relative">
-                <div className="flex items-center gap-2 mb-2">
-                  <Sparkles className="h-5 w-5 text-[hsl(38_80%_55%)]" />
-                  <span className="text-sm font-semibold text-[hsl(38_80%_55%)]">UNLOCK FULL ACCESS</span>
-                </div>
-                <h3 className="text-xl font-bold mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
-                  You&apos;re on the free Explorer plan
-                </h3>
-                <p className="text-sm text-white/70 mb-4">
-                  Upgrade to Pro to access all 49 lectures, the AI Tutor, capstone projects, and earn your certificate. Join 2,400+ learners building LLMs from scratch.
-                </p>
+          {/* Purchased stages overview */}
+          <div className="rounded-xl border bg-card p-6">
+            <h3 className="font-semibold mb-4 flex items-center gap-2">
+              <Package className="h-4 w-4" />
+              My Courses
+            </h3>
+            <div className="space-y-2">
+              {/* Free stages always shown */}
+              <div className="flex items-center justify-between rounded-lg bg-green-500/10 p-3">
                 <div className="flex items-center gap-3">
-                  <Button
-                    onClick={() => setActiveTab('subscription')}
-                    className="bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold shadow-lg"
-                  >
-                    View Plans <ArrowRight className="ml-1.5 h-4 w-4" />
-                  </Button>
-                  <span className="text-xs text-white/50">Starting at $14/mo billed annually</span>
+                  <span className="text-lg">🏗️</span>
+                  <div>
+                    <p className="text-sm font-medium">Getting Started + LLM Fundamentals</p>
+                    <p className="text-xs text-muted-foreground">7 lectures — Free forever</p>
+                  </div>
                 </div>
+                <Badge className="bg-green-500/20 text-green-700 dark:text-green-400 border-0">
+                  <Check className="mr-1 h-3 w-3" /> Active
+                </Badge>
               </div>
+
+              {/* Paid stages */}
+              {STAGE_PRODUCTS.map(stage => {
+                const purchased = isPurchased(stage.id);
+                return (
+                  <div key={stage.id} className={cn(
+                    'flex items-center justify-between rounded-lg p-3',
+                    purchased ? 'bg-green-500/10' : 'bg-muted/50'
+                  )}>
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg">{stage.icon}</span>
+                      <div>
+                        <p className="text-sm font-medium">Stage {stage.stageNumber}: {stage.name[lang] || stage.name.en}</p>
+                        <p className="text-xs text-muted-foreground">{stage.lectures} lectures</p>
+                      </div>
+                    </div>
+                    {purchased ? (
+                      <Badge className="bg-green-500/20 text-green-700 dark:text-green-400 border-0">
+                        <Check className="mr-1 h-3 w-3" /> Active
+                      </Badge>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Lock className="h-3.5 w-3.5 text-muted-foreground" />
+                        <span className="text-xs text-muted-foreground">€{stage.price}</span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          )}
+
+            {MOCK_PURCHASED.length === 0 && (
+              <Button
+                className="mt-4 w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold"
+                onClick={() => setActiveTab('courses')}
+              >
+                <Sparkles className="mr-2 h-4 w-4" />
+                Browse Courses & Pricing
+              </Button>
+            )}
+          </div>
 
           {/* Quick actions */}
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <button
-              onClick={() => setActiveTab('subscription')}
+              onClick={() => setActiveTab('courses')}
               className="flex items-center justify-between rounded-lg border p-4 text-left transition-colors hover:bg-accent/50"
             >
               <div className="flex items-center gap-3">
-                <CreditCard className="h-5 w-5 text-muted-foreground" />
+                <ShoppingCart className="h-5 w-5 text-muted-foreground" />
                 <div>
-                  <p className="text-sm font-medium">Manage Subscription</p>
-                  <p className="text-xs text-muted-foreground">View plans, upgrade, or cancel</p>
+                  <p className="text-sm font-medium">Courses & Pricing</p>
+                  <p className="text-xs text-muted-foreground">Buy individual stages or bundles</p>
                 </div>
               </div>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
@@ -358,200 +447,333 @@ export default function AccountView() {
       )}
 
       {/* ═══════════════════════════════════════════════
-          TAB: Subscription / Pricing
+          TAB: Courses & Pricing
           ═══════════════════════════════════════════════ */}
-      {activeTab === 'subscription' && (
-        <div className="space-y-6">
-          {/* Current plan summary */}
-          <div className="rounded-xl border bg-card p-5 flex items-center justify-between">
-            <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Current Plan</p>
-              <div className="flex items-center gap-2">
-                <span className="text-lg font-bold">{tierLabel(currentTier)}</span>
-                <Badge className={tierColor(currentTier)}>Active</Badge>
-              </div>
+      {activeTab === 'courses' && (
+        <div className="space-y-8">
+
+          {/* ── Free tier info ── */}
+          <div className="rounded-xl border-2 border-green-500/30 bg-green-500/5 p-5">
+            <div className="flex items-center gap-3 mb-2">
+              <Gift className="h-5 w-5 text-green-600 dark:text-green-400" />
+              <h3 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
+                Free — Getting Started + Stage 1
+              </h3>
             </div>
-            {currentTier !== 'free' && (
-              <div className="text-right">
-                <p className="text-xs text-muted-foreground">Next billing date</p>
-                <p className="text-sm font-medium">—</p>
-              </div>
-            )}
+            <p className="text-sm text-muted-foreground mb-3">
+              7 lectures covering LLM fundamentals, Transformers, GPT architecture overview, and your Python sandbox setup. Free forever, no credit card needed.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {['Setup & Tools', 'LLM Basics', 'Transformers', 'GPT-3 Deep Dive', 'Progress Tracking', 'Quizzes & XP'].map(f => (
+                <span key={f} className="inline-flex items-center gap-1 rounded-full bg-green-500/10 px-2.5 py-1 text-xs font-medium text-green-700 dark:text-green-400">
+                  <Check className="h-3 w-3" /> {f}
+                </span>
+              ))}
+            </div>
           </div>
 
-          {/* Billing toggle */}
-          <div className="flex items-center justify-center gap-3">
-            <span className={`text-sm ${billingCycle === 'monthly' ? 'font-semibold text-foreground' : 'text-muted-foreground'}`}>
-              Monthly
-            </span>
-            <button
-              onClick={() => setBillingCycle(b => b === 'monthly' ? 'annual' : 'monthly')}
-              className={`relative h-7 w-14 rounded-full transition-colors ${
-                billingCycle === 'annual' ? 'bg-[hsl(38_80%_55%)]' : 'bg-muted'
-              }`}
-            >
-              <div className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform ${
-                billingCycle === 'annual' ? 'translate-x-7' : 'translate-x-0.5'
-              }`} />
-            </button>
-            <span className={`text-sm ${billingCycle === 'annual' ? 'font-semibold text-foreground' : 'text-muted-foreground'}`}>
-              Annual
-            </span>
-            {billingCycle === 'annual' && (
-              <Badge variant="secondary" className="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-xs">
-                Save up to 26%
-              </Badge>
-            )}
-          </div>
+          {/* ── BUNDLES — the anchoring section ── */}
+          <div>
+            <h3 className="text-xl font-bold mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
+              Bundles — Best Value
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              3-month access from purchase date. One-time payment, no subscription.
+            </p>
 
-          {/* Pricing cards */}
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {PLANS.map(plan => {
-              const isCurrentPlan = plan.id === currentTier;
-              const displayPrice = billingCycle === 'annual' && plan.annualPrice
-                ? plan.annualPrice
-                : plan.price;
-
-              return (
-                <div
-                  key={plan.id}
-                  className={`relative rounded-xl border-2 p-6 transition-all ${
-                    plan.highlighted
-                      ? 'border-[hsl(38_80%_55%)] shadow-lg shadow-[hsl(38_80%_55%/0.1)] scale-[1.02]'
-                      : 'border-border hover:border-primary/30'
-                  }`}
-                >
-                  {/* Popular badge */}
-                  {plan.badge && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <Badge className="bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] font-bold text-xs px-3 shadow-md">
-                        <Star className="mr-1 h-3 w-3" />
-                        {plan.badge}
-                      </Badge>
-                    </div>
-                  )}
-
-                  {/* Plan header */}
-                  <div className="mb-4">
-                    <h3 className="text-lg font-bold" style={{ fontFamily: 'var(--font-heading)' }}>
-                      {plan.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      {plan.description}
-                    </p>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {/* Course Bundle */}
+              <div className="relative rounded-xl border-2 border-[hsl(38_80%_55%)] bg-card p-6 shadow-lg shadow-[hsl(38_80%_55%/0.08)]">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <Badge className="bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] font-bold text-xs px-3 shadow-md">
+                    <Star className="mr-1 h-3 w-3" /> MOST POPULAR
+                  </Badge>
+                </div>
+                <div className="pt-2">
+                  <h4 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
+                    Full Course Bundle
+                  </h4>
+                  <p className="text-xs text-muted-foreground mt-0.5 mb-4">
+                    Stages 2–6: Tokenization through Fine-tuning
+                  </p>
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span className="text-sm text-muted-foreground line-through">€{INDIVIDUAL_STAGES_TOTAL}</span>
+                    <span className="text-4xl font-bold tabular-nums">€{COURSE_BUNDLE_PRICE}</span>
                   </div>
-
-                  {/* Price */}
-                  <div className="mb-5">
-                    <div className="flex items-baseline gap-1">
-                      {plan.price > 0 && billingCycle === 'annual' && plan.annualPrice && (
-                        <span className="text-sm text-muted-foreground line-through mr-1">
-                          ${plan.price}
-                        </span>
-                      )}
-                      <span className="text-4xl font-bold tabular-nums">
-                        {displayPrice === 0 ? 'Free' : `$${displayPrice}`}
-                      </span>
-                      {plan.period && (
-                        <span className="text-sm text-muted-foreground">{plan.period}</span>
-                      )}
-                    </div>
-                    {billingCycle === 'annual' && plan.annualSaving && (
-                      <p className="mt-1 text-xs text-green-600 dark:text-green-400 font-medium">
-                        Save ${plan.annualSaving}/year
-                      </p>
-                    )}
-                  </div>
-
-                  {/* CTA button */}
-                  <Button
-                    className={`w-full mb-5 ${
-                      plan.highlighted && !isCurrentPlan
-                        ? 'bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold shadow-md'
-                        : ''
-                    }`}
-                    variant={isCurrentPlan ? 'outline' : plan.ctaVariant}
-                    disabled={isCurrentPlan}
-                  >
-                    {isCurrentPlan ? (
-                      <span className="flex items-center gap-1.5">
-                        <Check className="h-4 w-4" /> Current Plan
-                      </span>
-                    ) : (
-                      <span className="flex items-center gap-1.5">
-                        {plan.cta} <ArrowRight className="h-4 w-4" />
-                      </span>
-                    )}
-                  </Button>
-
-                  {/* Features */}
-                  <ul className="space-y-2.5">
-                    {plan.features.map(feature => (
-                      <li key={feature} className="flex items-start gap-2 text-sm">
-                        <Check className="h-4 w-4 mt-0.5 shrink-0 text-green-500" />
-                        {feature}
-                      </li>
-                    ))}
-                    {plan.limitations.map(limitation => (
-                      <li key={limitation} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="mt-0.5 shrink-0 text-xs">✕</span>
-                        {limitation}
+                  <p className="text-xs text-green-600 dark:text-green-400 font-semibold mb-4">
+                    Save {COURSE_BUNDLE_SAVING}% — you save €{INDIVIDUAL_STAGES_TOTAL - COURSE_BUNDLE_PRICE}
+                  </p>
+                  <ul className="space-y-1.5 mb-5">
+                    {['37 interactive lectures', 'All code sandboxes', 'All quizzes & capstones', 'AI Tutor access', 'Completion certificate', '3-month access'].map(f => (
+                      <li key={f} className="flex items-center gap-2 text-sm">
+                        <Check className="h-3.5 w-3.5 shrink-0 text-green-500" /> {f}
                       </li>
                     ))}
                   </ul>
+                  <Button
+                    className="w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold shadow-md"
+                    onClick={() => {/* Stripe checkout */}}
+                  >
+                    Get Full Course <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </Button>
                 </div>
-              );
-            })}
-          </div>
+              </div>
 
-          {/* Social proof / trust */}
-          <div className="text-center space-y-2 py-4">
-            <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1"><Shield className="h-3.5 w-3.5" /> Cancel anytime</span>
-              <span className="flex items-center gap-1"><CreditCard className="h-3.5 w-3.5" /> Secure payment</span>
-              <span className="flex items-center gap-1"><Zap className="h-3.5 w-3.5" /> Instant access</span>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              30-day money-back guarantee. No questions asked.
-            </p>
-          </div>
+              {/* GenAI Bundle */}
+              <div className="rounded-xl border-2 border-border bg-card p-6 hover:border-primary/30 transition-colors">
+                <h4 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
+                  GenAI Bundle
+                </h4>
+                <p className="text-xs text-muted-foreground mt-0.5 mb-4">
+                  All 5 GenAI SaaS product courses
+                </p>
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="text-sm text-muted-foreground line-through">€{INDIVIDUAL_GENAI_TOTAL}</span>
+                  <span className="text-4xl font-bold tabular-nums">€{GENAI_BUNDLE_PRICE}</span>
+                </div>
+                <p className="text-xs text-green-600 dark:text-green-400 font-semibold mb-4">
+                  Save {GENAI_BUNDLE_SAVING}% — you save €{INDIVIDUAL_GENAI_TOTAL - GENAI_BUNDLE_PRICE}
+                </p>
+                <ul className="space-y-1.5 mb-5">
+                  {['5 SaaS product courses', 'Image, Video, Text, OCR, AI Detection', 'Production-ready code', '3-month access'].map(f => (
+                    <li key={f} className="flex items-center gap-2 text-sm">
+                      <Check className="h-3.5 w-3.5 shrink-0 text-green-500" /> {f}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  variant="outline"
+                  className="w-full font-semibold"
+                  onClick={() => {/* Stripe checkout */}}
+                >
+                  Get GenAI Bundle <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Button>
+              </div>
 
-          {/* Comparison highlight for free users */}
-          {currentTier === 'free' && (
-            <div className="rounded-xl bg-gradient-to-r from-primary/5 to-[hsl(38_80%_55%/0.05)] border p-5">
-              <h4 className="font-semibold mb-3 flex items-center gap-2">
-                <Sparkles className="h-4 w-4 text-[hsl(38_80%_55%)]" />
-                Why learners upgrade to Pro
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-                <div>
-                  <p className="font-medium mb-0.5">42 more lectures</p>
-                  <p className="text-xs text-muted-foreground">Go from fundamentals through full GPT-2 training & deployment</p>
+              {/* Everything Bundle */}
+              <div className="relative rounded-xl border-2 border-primary/40 bg-gradient-to-br from-[hsl(240_95%_10%)] to-[hsl(240_60%_18%)] p-6 text-white">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <Badge className="bg-primary text-primary-foreground font-bold text-xs px-3 shadow-md">
+                    <Crown className="mr-1 h-3 w-3" /> BEST VALUE
+                  </Badge>
                 </div>
-                <div>
-                  <p className="font-medium mb-0.5">AI Tutor access</p>
-                  <p className="text-xs text-muted-foreground">Get instant, personalized help when you&apos;re stuck on any concept</p>
-                </div>
-                <div>
-                  <p className="font-medium mb-0.5">Completion certificate</p>
-                  <p className="text-xs text-muted-foreground">Shareable credential proving your LLM engineering skills</p>
+                <div className="pt-2">
+                  <h4 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
+                    Everything Bundle
+                  </h4>
+                  <p className="text-xs text-white/60 mt-0.5 mb-4">
+                    Full Course + All GenAI Products
+                  </p>
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span className="text-sm text-white/40 line-through">€{EVERYTHING_INDIVIDUAL_TOTAL}</span>
+                    <span className="text-4xl font-bold tabular-nums">€{EVERYTHING_BUNDLE_PRICE}</span>
+                  </div>
+                  <p className="text-xs text-green-400 font-semibold mb-4">
+                    Save {EVERYTHING_BUNDLE_SAVING}% — you save €{EVERYTHING_INDIVIDUAL_TOTAL - EVERYTHING_BUNDLE_PRICE}
+                  </p>
+                  <ul className="space-y-1.5 mb-5">
+                    {['Everything in Course Bundle', 'All 5 GenAI SaaS products', 'AI Tutor + Certificate', 'Only €30 more than Course alone', '3-month access'].map(f => (
+                      <li key={f} className="flex items-center gap-2 text-sm text-white/90">
+                        <Check className="h-3.5 w-3.5 shrink-0 text-[hsl(38_80%_55%)]" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    className="w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold shadow-lg"
+                    onClick={() => {/* Stripe checkout */}}
+                  >
+                    Get Everything <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </div>
-          )}
+          </div>
 
-          {/* Cancel / downgrade for paid users */}
-          {currentTier !== 'free' && (
-            <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-4 text-sm">
-              <p className="font-medium text-destructive mb-1">Cancel Subscription</p>
-              <p className="text-muted-foreground mb-3">
-                You&apos;ll keep access until the end of your current billing period. Your progress and XP are saved permanently.
-              </p>
-              <Button variant="outline" size="sm" className="border-destructive/30 text-destructive hover:bg-destructive/10">
-                Cancel Subscription
-              </Button>
+          {/* ── Individual Stages ── */}
+          <div>
+            <h3 className="text-xl font-bold mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
+              Individual Stages
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Buy only what you need. Each stage includes 3-month access.
+            </p>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {STAGE_PRODUCTS.map(stage => {
+                const purchased = isPurchased(stage.id);
+                return (
+                  <div
+                    key={stage.id}
+                    className={cn(
+                      'rounded-xl border bg-card p-5 transition-all',
+                      purchased && 'border-green-500/30 bg-green-500/5'
+                    )}
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">{stage.icon}</span>
+                        <div>
+                          <p className="text-xs text-muted-foreground font-medium">Stage {stage.stageNumber}</p>
+                          <h4 className="font-semibold text-sm">{stage.name[lang] || stage.name.en}</h4>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-xl font-bold tabular-nums">€{stage.price}</span>
+                      </div>
+                    </div>
+
+                    <ul className="space-y-1 mb-4">
+                      {stage.features.map(f => (
+                        <li key={f} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                          <Check className="h-3 w-3 shrink-0 text-green-500" /> {f}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="flex items-center gap-2 text-[10px] text-muted-foreground mb-3">
+                      <Clock className="h-3 w-3" /> 3-month access
+                    </div>
+
+                    {purchased ? (
+                      <Button variant="outline" size="sm" className="w-full" disabled>
+                        <Check className="mr-1.5 h-3.5 w-3.5" /> Purchased
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full font-medium"
+                        onClick={() => {/* Stripe checkout */}}
+                      >
+                        Buy Stage {stage.stageNumber} <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                      </Button>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          )}
+
+            {/* Savings hint */}
+            <div className="mt-3 rounded-lg bg-[hsl(38_80%_55%/0.08)] border border-[hsl(38_80%_55%/0.2)] p-3 flex items-center gap-3">
+              <Tag className="h-5 w-5 text-[hsl(38_80%_55%)] shrink-0" />
+              <p className="text-sm">
+                <span className="font-semibold">Save {COURSE_BUNDLE_SAVING}%</span> — buy all 5 stages as the{' '}
+                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-primary underline underline-offset-2 font-medium">
+                  Full Course Bundle for €{COURSE_BUNDLE_PRICE}
+                </button>{' '}
+                instead of €{INDIVIDUAL_STAGES_TOTAL} individually.
+              </p>
+            </div>
+          </div>
+
+          {/* ── GenAI Products ── */}
+          <div>
+            <h3 className="text-xl font-bold mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
+              GenAI SaaS Products
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Build production-ready AI SaaS applications. Each product is a standalone course.
+            </p>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {GENAI_PRODUCTS.map(product => {
+                const purchased = isPurchased(product.id);
+                const ProductIcon = product.icon;
+                return (
+                  <div
+                    key={product.id}
+                    className={cn(
+                      'rounded-xl border bg-card p-5 transition-all',
+                      purchased && 'border-green-500/30 bg-green-500/5'
+                    )}
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                        <ProductIcon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-sm">{product.name[lang] || product.name.en}</h4>
+                        <p className="text-xs text-muted-foreground">{product.description[lang] || product.description.en}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xl font-bold tabular-nums">€{product.price}</span>
+                      <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
+                        <Clock className="h-3 w-3" /> 3-month access
+                      </div>
+                    </div>
+
+                    {product.comingSoon ? (
+                      <Button variant="outline" size="sm" className="w-full" disabled>
+                        Coming Soon
+                      </Button>
+                    ) : purchased ? (
+                      <Button variant="outline" size="sm" className="w-full" disabled>
+                        <Check className="mr-1.5 h-3.5 w-3.5" /> Purchased
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full font-medium"
+                        onClick={() => {/* Stripe checkout */}}
+                      >
+                        Buy Course <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                      </Button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* GenAI savings hint */}
+            <div className="mt-3 rounded-lg bg-[hsl(38_80%_55%/0.08)] border border-[hsl(38_80%_55%/0.2)] p-3 flex items-center gap-3">
+              <Tag className="h-5 w-5 text-[hsl(38_80%_55%)] shrink-0" />
+              <p className="text-sm">
+                <span className="font-semibold">Save {GENAI_BUNDLE_SAVING}%</span> — get all 5 GenAI products as a{' '}
+                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-primary underline underline-offset-2 font-medium">
+                  bundle for €{GENAI_BUNDLE_PRICE}
+                </button>{' '}
+                instead of €{INDIVIDUAL_GENAI_TOTAL} individually.
+              </p>
+            </div>
+          </div>
+
+          {/* ── Trust signals ── */}
+          <div className="text-center space-y-2 py-4">
+            <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1"><Shield className="h-3.5 w-3.5" /> Secure payment via Stripe</span>
+              <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> 3-month access</span>
+              <span className="flex items-center gap-1"><Zap className="h-3.5 w-3.5" /> Instant access</span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              One-time payment. No recurring charges. No auto-renewal.
+            </p>
+          </div>
+
+          {/* ── FAQ-style clarification ── */}
+          <div className="rounded-xl border bg-card p-6">
+            <h4 className="font-semibold mb-3">How it works</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div>
+                <p className="font-medium mb-0.5">One-time payment</p>
+                <p className="text-xs text-muted-foreground">No subscriptions, no auto-renewal. Pay once, learn at your pace within 3 months.</p>
+              </div>
+              <div>
+                <p className="font-medium mb-0.5">3-month access window</p>
+                <p className="text-xs text-muted-foreground">Your access starts the moment you purchase. Complete the content within 3 months.</p>
+              </div>
+              <div>
+                <p className="font-medium mb-0.5">Keep your progress forever</p>
+                <p className="text-xs text-muted-foreground">Your XP, badges, quiz scores, and completion certificate never expire.</p>
+              </div>
+              <div>
+                <p className="font-medium mb-0.5">Future courses separate</p>
+                <p className="text-xs text-muted-foreground">New courses we release are priced independently. You only pay for what you want.</p>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
@@ -571,21 +793,16 @@ export default function AccountView() {
                 <FileText className="h-10 w-10 text-muted-foreground/30 mb-3" />
                 <p className="font-medium text-muted-foreground">No invoices yet</p>
                 <p className="text-sm text-muted-foreground/60 mt-1">
-                  {currentTier === 'free'
-                    ? 'Invoices will appear here once you upgrade to a paid plan.'
-                    : 'Your first invoice will appear after your next billing date.'
-                  }
+                  Invoices will appear here once you purchase a course or bundle.
                 </p>
-                {currentTier === 'free' && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="mt-4"
-                    onClick={() => setActiveTab('subscription')}
-                  >
-                    View Plans
-                  </Button>
-                )}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="mt-4"
+                  onClick={() => setActiveTab('courses')}
+                >
+                  Browse Courses
+                </Button>
               </div>
             ) : (
               <table className="w-full text-sm">
@@ -603,7 +820,7 @@ export default function AccountView() {
                     <tr key={inv.id} className="border-b last:border-0">
                       <td className="py-3">{inv.date}</td>
                       <td className="py-3">{inv.description}</td>
-                      <td className="py-3 text-right tabular-nums">${inv.amount}</td>
+                      <td className="py-3 text-right tabular-nums">€{inv.amount}</td>
                       <td className="py-3 text-right">
                         <Badge variant="secondary" className="text-xs">{inv.status}</Badge>
                       </td>
@@ -623,29 +840,14 @@ export default function AccountView() {
               <CreditCard className="h-4 w-4" />
               Payment Method
             </h3>
-            {currentTier === 'free' ? (
-              <p className="text-sm text-muted-foreground">
-                No payment method on file. Add one when you upgrade to a paid plan.
-              </p>
-            ) : (
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-16 rounded border bg-muted flex items-center justify-center text-xs font-mono text-muted-foreground">
-                    VISA
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">•••• •••• •••• 4242</p>
-                    <p className="text-xs text-muted-foreground">Expires 12/2027</p>
-                  </div>
-                </div>
-                <Button variant="outline" size="sm">Update</Button>
-              </div>
-            )}
+            <p className="text-sm text-muted-foreground">
+              Payments are processed securely via Stripe. No payment details are stored on our servers.
+            </p>
           </div>
         </div>
       )}
 
-      {/* ── Danger zone ── */}
+      {/* ── Sign out ── */}
       <Separator />
       <div className="flex items-center justify-between">
         <div>
