@@ -1,0 +1,807 @@
+{
+  "lectures": [
+    {
+      "id": "home",
+      "number": -1,
+      "stage": -1,
+      "stageName": "Home",
+      "isGenAI": false,
+      "title": {
+        "en": "${t('home_title')}",
+        "ro": "${t('home_title')}",
+        "el": "${t('home_title')}"
+      },
+      "prev": null,
+      "next": null,
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "1",
+      "number": 1,
+      "stage": 0,
+      "stageName": "Foundations",
+      "isGenAI": false,
+      "title": {
+        "en": "Building LLMs from Scratch: Series Introduction",
+        "ro": "Construiește LLM-uri de la Zero: Introducere în Serie",
+        "el": "Κατασκευή LLMs από το Μηδέν: Εισαγωγή στη Σειρά"
+      },
+      "prev": null,
+      "next": "2",
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "stage": 0,
+      "stageName": "Foundations",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 2: Large Language Models (LLM) Basics",
+        "ro": "Bazele Modelelor de Limbaj de Mari Dimensiuni (LLM)",
+        "el": "Βασικά στοιχεία Μεγάλων Γλωσσικών Μοντέλων (LLM)"
+      },
+      "prev": "1",
+      "next": "3",
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "0",
+      "number": 0,
+      "stage": 0,
+      "stageName": "Foundations",
+      "isGenAI": false,
+      "title": {
+        "en": "Your AI Development Environment",
+        "ro": "Mediul tău de dezvoltare AI",
+        "el": "Το περιβάλλον ανάπτυξης AI σου"
+      },
+      "prev": "home",
+      "next": "1",
+      "codeBlockCount": 6,
+      "hasQuiz": true
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "stage": 0,
+      "stageName": "Foundations",
+      "isGenAI": false,
+      "title": {
+        "en": "Pretraining LLMs vs Finetuning LLMs",
+        "ro": "Etapele Construirii unui LLM",
+        "el": "Στάδια Κατασκευής ενός LLM"
+      },
+      "prev": "2",
+      "next": "4",
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "stage": 0,
+      "stageName": "Foundations",
+      "isGenAI": false,
+      "title": {
+        "en": "What Are Transformers?",
+        "ro": "Ce Sunt Transformerele?",
+        "el": "Τι Είναι τα Transformers;"
+      },
+      "prev": "3",
+      "next": "5",
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "stage": 0,
+      "stageName": "Foundations",
+      "isGenAI": false,
+      "title": {
+        "en": "How Does GPT-3 Really Work?",
+        "ro": "Cum Funcționează De Fapt GPT-3?",
+        "el": "Πώς Λειτουργεί Πραγματικά το GPT-3;"
+      },
+      "prev": "4",
+      "next": "6",
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "stage": 0,
+      "stageName": "Foundations",
+      "isGenAI": false,
+      "title": {
+        "en": "Stages of Building an LLM from Scratch",
+        "ro": "Etapele Construirii unui LLM de la Zero",
+        "el": "Στάδια Κατασκευής ενός LLM από το Μηδέν"
+      },
+      "prev": "5",
+      "next": "7",
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "stage": 1,
+      "stageName": "Tokenization",
+      "isGenAI": false,
+      "title": {
+        "en": "Code a Tokenizer from Scratch",
+        "ro": "Codifică un tokenizer de la zero",
+        "el": "Γράψε έναν tokenizer από την αρχή"
+      },
+      "prev": "6",
+      "next": "8",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "8",
+      "number": 8,
+      "stage": 1,
+      "stageName": "Tokenization",
+      "isGenAI": false,
+      "title": {
+        "en": "BPE Tokenizer",
+        "ro": "Tokenizer BPE",
+        "el": "Tokenizer BPE"
+      },
+      "prev": "7",
+      "next": "9",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "9",
+      "number": 9,
+      "stage": 1,
+      "stageName": "Tokenization",
+      "isGenAI": false,
+      "title": {
+        "en": "Input-Target Pairs & DataLoader",
+        "ro": "Perechi intrare-țintă & DataLoader",
+        "el": "Ζεύγη εισόδου-στόχου & DataLoader"
+      },
+      "prev": "8",
+      "next": "10",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "10",
+      "number": 10,
+      "stage": 1,
+      "stageName": "Tokenization",
+      "isGenAI": false,
+      "title": {
+        "en": "Token Embeddings",
+        "ro": "Embedding-uri de Token-uri",
+        "el": "Token Embeddings"
+      },
+      "prev": "9",
+      "next": "11",
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "11",
+      "number": 11,
+      "stage": 1,
+      "stageName": "Tokenization",
+      "isGenAI": false,
+      "title": {
+        "en": "Positional Embeddings",
+        "ro": "Embedding-uri poziționale",
+        "el": "Positional Embeddings"
+      },
+      "prev": "10",
+      "next": "12",
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "12",
+      "number": 12,
+      "stage": 1,
+      "stageName": "Tokenization",
+      "isGenAI": false,
+      "title": {
+        "en": "Data Preprocessing Pipeline",
+        "ro": "Pipeline-ul de preprocesare a datelor",
+        "el": "Αγωγος Προεπεξεργασιας Δεδομενων"
+      },
+      "prev": "11",
+      "next": "13",
+      "codeBlockCount": 0,
+      "hasQuiz": false
+    },
+    {
+      "id": "13",
+      "number": 13,
+      "stage": 2,
+      "stageName": "Attention",
+      "isGenAI": false,
+      "title": {
+        "en": "Attention Intuition & Dot-Product Scoring",
+        "ro": "Intuiția atenției & Scorarea prin produs scalar",
+        "el": "Διαισθηση Προσοχης & Βαθμολογηση Εσωτερικου Γινομενου"
+      },
+      "prev": "12",
+      "next": "14",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "14",
+      "number": 14,
+      "stage": 2,
+      "stageName": "Attention",
+      "isGenAI": false,
+      "title": {
+        "en": "Self-Attention Mechanism",
+        "ro": "Mecanismul de atenție proprie (Self-Attention)",
+        "el": "Μηχανισμος Self-Attention"
+      },
+      "prev": "13",
+      "next": "15",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "15",
+      "number": 15,
+      "stage": 2,
+      "stageName": "Attention",
+      "isGenAI": false,
+      "title": {
+        "en": "Causal (Masked) Self-Attention",
+        "ro": "Atenția proprie cauzală (mascată)",
+        "el": "Αιτιακη (Μασκαρισμενη) Self-Attention"
+      },
+      "prev": "14",
+      "next": "16",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "16",
+      "number": 16,
+      "stage": 2,
+      "stageName": "Attention",
+      "isGenAI": false,
+      "title": {
+        "en": "Multi-Head Attention",
+        "ro": "Atenție Multi-Head",
+        "el": "Πολυκεφαλη Προσοχη (Multi-Head Attention)"
+      },
+      "prev": "15",
+      "next": "17",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "17",
+      "number": 17,
+      "stage": 2,
+      "stageName": "Attention",
+      "isGenAI": false,
+      "title": {
+        "en": "Attention Variants & Optimizations",
+        "ro": "Variante și optimizări ale atenției",
+        "el": "Παραλλαγες & Βελτιστοποιησεις Attention"
+      },
+      "prev": "16",
+      "next": "18",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "18",
+      "number": 18,
+      "stage": 2,
+      "stageName": "Attention",
+      "isGenAI": false,
+      "title": {
+        "en": "Stage 3 Capstone: Complete Attention Module",
+        "ro": "Proiectul final al Etapei 3: Modulul complet de Attention",
+        "el": "Ολοκληρωτικό έργο Σταδίου 3: Πλήρης μονάδα Attention"
+      },
+      "prev": "17",
+      "next": "19",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "19",
+      "number": 19,
+      "stage": 3,
+      "stageName": "Architecture",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 19: GELU Activation & Feed-Forward Networks",
+        "ro": "Lecția 19: Activarea GELU și rețelele Feed-Forward",
+        "el": "Διάλεξη 19: Ενεργοποίηση GELU και δίκτυα πρόσθιας τροφοδότησης"
+      },
+      "prev": null,
+      "next": null,
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "20",
+      "number": 20,
+      "stage": 3,
+      "stageName": "Architecture",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 20: Layer Normalization",
+        "ro": "Lecția 20: Normalizarea pe straturi",
+        "el": "Διάλεξη 20: Κανονικοποίηση στρώματος"
+      },
+      "prev": null,
+      "next": null,
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "21",
+      "number": 21,
+      "stage": 3,
+      "stageName": "Architecture",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 21: Shortcut (Residual) Connections",
+        "ro": "Lecția 21: Conexiuni Reziduale (Shortcut)",
+        "el": "Διάλεξη 21: Συνδέσεις Συντόμευσης (Residual)"
+      },
+      "prev": null,
+      "next": null,
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "22",
+      "number": 22,
+      "stage": 3,
+      "stageName": "Architecture",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 22: The Transformer Block",
+        "ro": "Lecția 22: Blocul Transformer",
+        "el": "Διάλεξη 22: Το Μπλοκ Transformer"
+      },
+      "prev": null,
+      "next": null,
+      "codeBlockCount": 3,
+      "hasQuiz": true
+    },
+    {
+      "id": "23",
+      "number": 23,
+      "stage": 3,
+      "stageName": "Architecture",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 23: GPT Architecture Assembly",
+        "ro": "Lecția 23: Asamblarea arhitecturii GPT",
+        "el": "Διάλεξη 23: Συναρμολόγηση της αρχιτεκτονικής GPT"
+      },
+      "prev": null,
+      "next": null,
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "24",
+      "number": 24,
+      "stage": 3,
+      "stageName": "Architecture",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 24: Stage 4 Capstone — Mini GPT-2 from Scratch",
+        "ro": "Lecția 24: Capstone Etapa 4 — Mini GPT-2 de la zero",
+        "el": "Διάλεξη 24: Capstone Σταδίου 4 — Mini GPT-2 από την αρχή"
+      },
+      "prev": null,
+      "next": null,
+      "codeBlockCount": 3,
+      "hasQuiz": true
+    },
+    {
+      "id": "25",
+      "number": 25,
+      "stage": 4,
+      "stageName": "Pretraining",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 25: Evaluating Generative Text Models",
+        "ro": "Lecția 25: Evaluarea modelelor generative de text",
+        "el": "Διάλεξη 25: Αξιολόγηση γεννητικών μοντέλων κειμένου"
+      },
+      "prev": "24",
+      "next": "26",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "26",
+      "number": 26,
+      "stage": 4,
+      "stageName": "Pretraining",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 26: The Pretraining Loop",
+        "ro": "Lecția 26: Bucla de preantrenament",
+        "el": "Διάλεξη 26: Ο βρόχος προεκπαίδευσης"
+      },
+      "prev": "25",
+      "next": "27",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "27",
+      "number": 27,
+      "stage": 4,
+      "stageName": "Pretraining",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 27: Learning Rate Scheduling & Optimization",
+        "ro": "Lecția 27: Programarea ratei de învățare și optimizare",
+        "el": "Διάλεξη 27: Προγραμματισμός ρυθμού μάθησης & Βελτιστοποίηση"
+      },
+      "prev": "26",
+      "next": "28",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "28",
+      "number": 28,
+      "stage": 4,
+      "stageName": "Pretraining",
+      "isGenAI": false,
+      "title": {
+        "en": "Training at Scale: Gradient Accumulation & Mixed Precision",
+        "ro": "Antrenarea la Scară: Acumularea Gradienților și Precizie Mixtă",
+        "el": "Εκπαίδευση σε Κλίμακα: Συσσώρευση Κλίσεων & Μικτή Ακρίβεια"
+      },
+      "prev": "27",
+      "next": "29",
+      "codeBlockCount": 5,
+      "hasQuiz": true
+    },
+    {
+      "id": "29",
+      "number": 29,
+      "stage": 4,
+      "stageName": "Pretraining",
+      "isGenAI": false,
+      "title": {
+        "en": "Monitoring & Debugging Training",
+        "ro": "Monitorizarea și Depanarea Antrenării",
+        "el": "Παρακολούθηση & Αποσφαλμάτωση Εκπαίδευσης"
+      },
+      "prev": "28",
+      "next": "30",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "30",
+      "number": 30,
+      "stage": 4,
+      "stageName": "Pretraining",
+      "isGenAI": false,
+      "title": {
+        "en": "Text Generation Strategies",
+        "ro": "Strategii de Generare a Textului",
+        "el": "Στρατηγικές Δημιουργίας Κειμένου"
+      },
+      "prev": "29",
+      "next": "31",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "31",
+      "number": 31,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 31: Putting It All Together — Pretraining Mini GPT-2",
+        "ro": "Lecția 31: Punând Totul Cap la Cap — Preantrenarea Mini GPT-2",
+        "el": "Διάλεξη 31: Συνδυάζοντας τα Πάντα — Προεκπαίδευση Mini GPT-2"
+      },
+      "prev": "30",
+      "next": "32",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "32",
+      "number": 32,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 32: Stage 5 Capstone — Pretrained Text Generator",
+        "ro": "Lecția 32: Proiectul Final al Etapei 5 — Generator de Text Preantrenat",
+        "el": "Διάλεξη 32: Τελικό Έργο Σταδίου 5 — Γεννήτρια Κειμένου με Προεκπαίδευση"
+      },
+      "prev": "31",
+      "next": "33",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "33",
+      "number": 33,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 33: Instruction Fine-tuning — Teaching Models to Follow Instructions",
+        "ro": "Lecția 33: Instruction Fine-tuning — Învățarea Modelelor să Urmeze Instrucțiuni",
+        "el": "Διάλεξη 33: Instruction Fine-tuning — Διδάσκοντας τα Μοντέλα να Ακολουθούν Οδηγίες"
+      },
+      "prev": "32",
+      "next": "34",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "34",
+      "number": 34,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 34: Classification Fine-tuning",
+        "ro": "Lecția 34: Fine-tuning pentru Clasificare",
+        "el": "Διάλεξη 34: Fine-tuning για Ταξινόμηση"
+      },
+      "prev": "33",
+      "next": "35",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "35",
+      "number": 35,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 35: LoRA — Low-Rank Adaptation",
+        "ro": "Lecția 35: LoRA — Adaptare de Rang Scăzut",
+        "el": "Διάλεξη 35: LoRA — Προσαρμογή Χαμηλής Τάξης"
+      },
+      "prev": "34",
+      "next": "36",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "36",
+      "number": 36,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 36: RLHF — Reinforcement Learning from Human Feedback",
+        "ro": "Lecția 36: RLHF — Învățare prin Întărire din Feedback Uman",
+        "el": "Διάλεξη 36: RLHF — Ενισχυτική Μάθηση από Ανθρώπινη Ανατροφοδότηση"
+      },
+      "prev": "35",
+      "next": "37",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "37",
+      "number": 37,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 37: DPO — Direct Preference Optimization",
+        "ro": "Lecția 37: DPO — Optimizare Directă a Preferințelor",
+        "el": "Διάλεξη 37: DPO — Άμεση Βελτιστοποίηση Προτιμήσεων"
+      },
+      "prev": "36",
+      "next": "38",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "38",
+      "number": 38,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 38: Evaluating Fine-tuned Models",
+        "ro": "Lecția 38: Evaluarea Modelelor Fine-tuned",
+        "el": "Διάλεξη 38: Αξιολόγηση Μοντέλων Fine-tuned"
+      },
+      "prev": "37",
+      "next": "39",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "39",
+      "number": 39,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 39: Model Quantization & Efficient Deployment",
+        "ro": "Lecția 39: Cuantizarea Modelelor & Deployment Eficient",
+        "el": "Διάλεξη 39: Κβαντοποίηση Μοντέλων & Αποδοτικό Deployment"
+      },
+      "prev": "38",
+      "next": "40",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "40",
+      "number": 40,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 40: Retrieval-Augmented Generation (RAG)",
+        "ro": "Lecția 40: Generare augmentată prin recuperare (RAG)",
+        "el": "Διάλεξη 40: Ανάκτηση-Ενισχυμένη Παραγωγή (RAG)"
+      },
+      "prev": "39",
+      "next": "41",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "41",
+      "number": 41,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 41: Building a RAG Chatbot",
+        "ro": "Lecția 41: Construirea unui chatbot RAG",
+        "el": "Διάλεξη 41: Κατασκευή ενός chatbot RAG"
+      },
+      "prev": "40",
+      "next": "42",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "42",
+      "number": 42,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 42: Fine-tuned Specialist — Domain-Specific LLMs",
+        "ro": "Lecția 42: Specialist ajustat fin — LLM-uri specifice domeniului",
+        "el": "Διάλεξη 42: Μικρορυθμισμένος ειδικός — LLM ειδικά για τομέα"
+      },
+      "prev": "41",
+      "next": "43",
+      "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "43",
+      "number": 43,
+      "stage": 5,
+      "stageName": "Fine-tuning",
+      "isGenAI": false,
+      "title": {
+        "en": "Lecture 43: Stage 6 Capstone — Complete Fine-tuned LLM System",
+        "ro": "Lecția 43: Capstone Etapa 6 — Sistem LLM complet ajustat fin",
+        "el": "Διάλεξη 43: Capstone Σταδίου 6 — Πλήρες μικρορυθμισμένο σύστημα LLM"
+      },
+      "prev": "42",
+      "next": "genai-1",
+      "codeBlockCount": 6,
+      "hasQuiz": true
+    },
+    {
+      "id": "genai-1",
+      "number": 101,
+      "stage": 6,
+      "stageName": "GenAI SaaS",
+      "isGenAI": true,
+      "title": {
+        "en": "GenAI-1: Build an Image Generation SaaS",
+        "ro": "Lecția GenAI 1: Construiește un SaaS de Generare de Imagini",
+        "el": "Διάλεξη GenAI 1: Κατασκευή ενός SaaS Δημιουργίας Εικόνων"
+      },
+      "prev": "43",
+      "next": "genai-2",
+      "codeBlockCount": 15,
+      "hasQuiz": false
+    },
+    {
+      "id": "genai-2",
+      "number": 102,
+      "stage": 6,
+      "stageName": "GenAI SaaS",
+      "isGenAI": true,
+      "title": {
+        "en": "GenAI-2: Build a Video Generation SaaS",
+        "ro": "Lecția GenAI 2: Construiește un SaaS de Generare Video",
+        "el": "Διάλεξη GenAI 2: Κατασκευή ενός SaaS Δημιουργίας Βίντεο"
+      },
+      "prev": "genai-1",
+      "next": "genai-3",
+      "codeBlockCount": 14,
+      "hasQuiz": false
+    },
+    {
+      "id": "genai-3",
+      "number": 103,
+      "stage": 6,
+      "stageName": "GenAI SaaS",
+      "isGenAI": true,
+      "title": {
+        "en": "GenAI-3: Build a Text Composition & Rewriting SaaS",
+        "ro": "Lecția GenAI 3: Construiește un SaaS de Compunere & Rescriere a Textelor",
+        "el": "Διάλεξη GenAI 3: Κατασκευή ενός SaaS Σύνθεσης & Αναδιατύπωσης Κειμένου"
+      },
+      "prev": "genai-2",
+      "next": "genai-4",
+      "codeBlockCount": 13,
+      "hasQuiz": false
+    },
+    {
+      "id": "genai-4",
+      "number": 104,
+      "stage": 6,
+      "stageName": "GenAI SaaS",
+      "isGenAI": true,
+      "title": {
+        "en": "GenAI-4: Build a Plagiarism & AI Detection SaaS",
+        "ro": "Lecția GenAI 4: Construiește un SaaS de Detecție a Plagiatului & a Textului AI",
+        "el": "Διάλεξη GenAI 4: Κατασκευή ενός SaaS Ανίχνευσης Λογοκλοπής & AI"
+      },
+      "prev": "genai-3",
+      "next": "genai-5",
+      "codeBlockCount": 13,
+      "hasQuiz": false
+    },
+    {
+      "id": "genai-5",
+      "number": 105,
+      "stage": 6,
+      "stageName": "GenAI SaaS",
+      "isGenAI": true,
+      "title": {
+        "en": "GenAI-5: Build an OCR & Document Intelligence SaaS",
+        "ro": "Lecția GenAI 5: Construiește un SaaS de OCR și Inteligență Documentară",
+        "el": "Διάλεξη GenAI 5: Κατασκευή ενός SaaS OCR & Νοημοσύνης Εγγράφων"
+      },
+      "prev": "genai-4",
+      "next": "home",
+      "codeBlockCount": 14,
+      "hasQuiz": false
+    }
+  ],
+  "totalLectures": 50,
+  "totalCodeBlocks": 176,
+  "totalQuizzes": 35
+}
