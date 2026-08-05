@@ -1,0 +1,168 @@
+{
+  "lectureId": "17",
+  "en": {
+    "id": "quiz-17-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "",
+        "options": [],
+        "correct": [
+          0
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "",
+        "options": [],
+        "correct": [
+          1
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "",
+        "options": [],
+        "correct": [
+          0
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-17-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "",
+        "options": [],
+        "correct": [
+          0
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "",
+        "options": [],
+        "correct": [
+          1
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "",
+        "options": [],
+        "correct": [
+          0
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-17-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "",
+        "options": [],
+        "correct": [
+          0
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "",
+        "options": [],
+        "correct": [
+          1
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "",
+        "options": [],
+        "correct": [
+          0
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      }
+    ]
+  }
+}

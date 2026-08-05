@@ -1,0 +1,174 @@
+{
+  "lectureId": "0",
+  "en": {
+    "id": "quiz-0-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "",
+        "options": [],
+        "correct": [
+          1
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "",
+        "options": [],
+        "correct": [
+          3
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "",
+        "options": [],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-0-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "",
+        "options": [],
+        "correct": [
+          1
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "",
+        "options": [],
+        "correct": [
+          3
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "",
+        "options": [],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-0-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "",
+        "options": [],
+        "correct": [
+          1
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "",
+        "options": [],
+        "correct": [
+          3
+        ],
+        "explanation": "",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "",
+        "options": [],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "",
+        "options": [],
+        "correct": [
+          2
+        ],
+        "explanation": "",
+        "isMulti": false
+      }
+    ]
+  }
+}
