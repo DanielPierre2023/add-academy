@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the main limitation of greedy decoding for text generation?",
+        "options": [
+          "It requires too much memory",
+          "It cannot process long sequences",
+          "It always picks the highest-probability token, producing repetitive and predictable text",
+          "It requires a special tokenizer"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Greedy decoding selects the argmax token at every step. This deterministic approach often falls into repetitive loops and misses globally better sequences that start with a lower-probability token.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "How does the temperature parameter affect the softmax distribution during generation?",
+        "options": [
+          "Higher temperature makes the distribution sharper (more confident)",
+          "Higher temperature flattens the distribution, increasing randomness and diversity",
+          "Temperature only affects the first token in a sequence",
+          "Temperature controls the maximum sequence length"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Temperature T divides logits before softmax: softmax(z/T). Higher T flattens the distribution (more uniform, more random), while lower T sharpens it (approaching greedy as T→0).",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What does top-p (nucleus) sampling do differently from top-k sampling?",
+        "options": [
+          "Top-p always selects exactly p tokens",
+          "Top-p ignores the probability distribution entirely",
+          "Top-p uses a fixed number of candidates regardless of distribution shape",
+          "Top-p dynamically adjusts the candidate set size based on cumulative probability, adapting to distribution shape"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Top-p selects the smallest set of tokens whose cumulative probability exceeds p. When the model is confident (peaked distribution), fewer tokens are included; when uncertain, more tokens are considered. This adapts to context unlike fixed top-k.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which strategies can help reduce repetition in generated text?Select all that apply",
+        "options": [
+          "Repetition penalty that reduces the probability of previously generated tokens",
+          "Setting temperature to 0",
+          "Using only greedy decoding",
+          "Increasing temperature or using nucleus sampling to introduce diversity"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "Repetition penalty explicitly penalizes tokens that already appeared in the output. Increasing temperature or using nucleus sampling introduces stochasticity. Setting temperature to 0 or using greedy decoding actually increases repetition.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "In beam search with beam width B, how many candidate sequences are maintained at each step?",
+        "options": [
+          "B sequences, keeping the top-B by cumulative log-probability",
+          "B² sequences, squaring the beam width each step",
+          "All possible sequences are kept and pruned at the end",
+          "Only 1 sequence, but B tokens are sampled per step"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Beam search maintains exactly B candidate hypotheses. At each step, each beam is extended by all vocabulary tokens, then only the top-B expansions (by cumulative log-probability) are kept. This explores multiple paths without exhaustive search.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

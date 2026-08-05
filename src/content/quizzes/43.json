@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "In an end-to-end fine-tuned LLM system, what is the correct order of the pipeline stages?",
+        "options": [
+          "Deployment → Fine-tuning → Data collection → Evaluation",
+          "Data collection → Preprocessing → Fine-tuning → Evaluation → Deployment",
+          "Fine-tuning → Data collection → Deployment → Preprocessing",
+          "Evaluation → Deployment → Fine-tuning → Data collection"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "A proper pipeline starts with gathering and cleaning data, then fine-tuning the model, evaluating its quality, and finally deploying it for inference.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why is evaluation on a held-out test set critical before deploying a fine-tuned model?",
+        "options": [
+          "It reduces the model’s parameter count",
+          "It speeds up inference at deployment time",
+          "It automatically fixes any bugs in the model",
+          "It reveals whether the model generalizes beyond the training data and catches overfitting"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "A held-out test set was never seen during training, so performance on it indicates real-world generalization. Poor test performance signals overfitting or data issues that must be addressed before deployment.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What role does data preprocessing play in a fine-tuning pipeline?",
+        "options": [
+          "It cleans, formats, and structures raw data into the format the model expects for training",
+          "It replaces the model’s tokenizer with a new one",
+          "It increases the model’s context window automatically",
+          "It deploys the model to a production server"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Preprocessing transforms raw collected data into clean, properly formatted training examples (e.g., instruction-response pairs, chat format) that the fine-tuning script expects.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which components are typically part of a complete fine-tuned LLM deployment?Select all that apply",
+        "options": [
+          "A dedicated pretraining cluster running 24/7",
+          "An inference server with the fine-tuned model loaded and an API endpoint",
+          "Monitoring and logging to track model performance in production",
+          "A manual copy-paste workflow for each user request"
+        ],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "A production deployment needs an inference server exposing an API, plus monitoring and logging to detect quality regressions, latency issues, or unexpected inputs. Pretraining clusters are not part of deployment.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What is the benefit of combining fine-tuning with RAG in a capstone system?",
+        "options": [
+          "It eliminates the need for any training data",
+          "It makes the model smaller and faster to load",
+          "Fine-tuning adapts the model’s style and domain knowledge, while RAG provides access to current external information",
+          "It removes the need for a context window"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Fine-tuning bakes domain expertise and output style into the model weights, while RAG dynamically retrieves up-to-date facts at query time. Together they produce a system that is both domain-expert and factually grounded.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

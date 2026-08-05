@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is conversational memory in a RAG chatbot?",
+        "options": [
+          "The total number of parameters in the model",
+          "A separate database that stores user passwords",
+          "The GPU memory used during inference",
+          "A mechanism that retains prior turns of dialogue so the model can reference earlier context"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Conversational memory stores the history of user and assistant messages, allowing the chatbot to maintain coherent multi-turn dialogue by referencing what was said before.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why is query rewriting important in a conversational RAG system?",
+        "options": [
+          "It translates all queries into English before retrieval",
+          "It reformulates ambiguous follow-up questions into self-contained queries for better retrieval",
+          "It removes all stop words from the query",
+          "It shortens queries to save API costs"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Follow-up messages like “Tell me more about that” are incomplete without prior context. Query rewriting expands them into standalone questions so the retriever can find relevant documents.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What happens when conversation history exceeds the LLM’s context window?",
+        "options": [
+          "Older messages must be truncated or summarized to fit within the token limit",
+          "The model automatically expands its context window",
+          "The model starts a new training run to accommodate more tokens",
+          "Nothing happens; all models have unlimited context"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "LLMs have a fixed context window. When history grows beyond it, strategies such as truncating old turns, summarizing them, or using a sliding window are needed to stay within the token budget.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which techniques help manage long conversation histories?Select all that apply",
+        "options": [
+          "Doubling the model’s parameter count",
+          "Summarizing older turns into a condensed paragraph",
+          "Using a sliding window that keeps only the most recent N turns",
+          "Removing the system prompt"
+        ],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "Summarizing older turns preserves key information compactly, and a sliding window keeps recent context fresh. Both fit long conversations within the token budget without losing critical information.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "In a RAG chatbot, when should retrieved documents be injected into the prompt?",
+        "options": [
+          "Only during the initial system prompt, never again",
+          "After the model generates its answer, as a post-processing step",
+          "Before each generation step, with fresh retrieval results based on the current query",
+          "Documents should never be included in the prompt"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Each user turn may address a different topic, so retrieval should be performed per query and the results injected before generation so the model has current, relevant context.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

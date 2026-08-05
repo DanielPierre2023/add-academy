@@ -5,54 +5,79 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the minimum GPU VRAM needed to fine-tune a 7B parameter model with LoRA?",
+        "options": [
+          "4 GB",
+          "6 GB",
+          "8 GB",
+          "40 GB"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "LoRA fine-tuning a 7B model requires approximately 8 GB VRAM due to efficient parameter freezing. Full fine-tuning would need 40+ GB.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why does this course use both a browser sandbox AND real Python environments?",
+        "options": [
+          "The browser sandbox is faster than local Python",
+          "Browser sandbox teaches concepts quickly; real environments are needed for GPU training and deployment",
+          "Local Python cannot run numpy",
+          "The browser sandbox supports PyTorch natively"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Pyodide (browser Python) is perfect for quick numpy experiments and concept visualization, but cannot run PyTorch, access GPUs, or deploy real services.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Which command creates a Python virtual environment?",
+        "options": [
+          "pip install venv",
+          "conda create env",
+          "virtualenv --create llm-env",
+          "python -m venv llm-env"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "python -m venv is the standard library way to create virtual environments. It creates an isolated Python installation in the llm-env directory.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which files should be in your .gitignore for an ML project?Select all that apply",
+        "options": [
+          ".env (API keys)",
+          "requirements.txt",
+          "checkpoints/*.pt (model weights)",
+          "data/ (large training datasets)"
+        ],
         "correct": [
           0,
           2,
           3
         ],
-        "explanation": "",
+        "explanation": ".env contains secrets, model checkpoints are large binary files, and training data is too big for Git. requirements.txt should be committed so others can reproduce your environment.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What are the 5 SaaS products you will build by the end of this course?",
+        "options": [
+          "Social media bot, image generator, speech-to-text, video editor, game AI",
+          "Database manager, file converter, web scraper, email client, calculator",
+          "AI Writing Assistant, Code Reviewer, RAG Chatbot, Content Moderator, Translation API",
+          "Search engine, recommendation system, fraud detector, sentiment analyzer, spam filter"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "These 5 products cover the most important LLM use cases: generation, code understanding, retrieval-augmented generation, safety, and multilingual capabilities.",
         "isMulti": false
       }
     ]
@@ -62,54 +87,79 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the minimum GPU VRAM needed to fine-tune a 7B parameter model with LoRA?",
+        "options": [
+          "4 GB",
+          "6 GB",
+          "8 GB",
+          "40 GB"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "LoRA fine-tuning a 7B model requires approximately 8 GB VRAM due to efficient parameter freezing. Full fine-tuning would need 40+ GB.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why does this course use both a browser sandbox AND real Python environments?",
+        "options": [
+          "The browser sandbox is faster than local Python",
+          "Browser sandbox teaches concepts quickly; real environments are needed for GPU training and deployment",
+          "Local Python cannot run numpy",
+          "The browser sandbox supports PyTorch natively"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Pyodide (browser Python) is perfect for quick numpy experiments and concept visualization, but cannot run PyTorch, access GPUs, or deploy real services.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Which command creates a Python virtual environment?",
+        "options": [
+          "pip install venv",
+          "conda create env",
+          "virtualenv --create llm-env",
+          "python -m venv llm-env"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "python -m venv is the standard library way to create virtual environments. It creates an isolated Python installation in the llm-env directory.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which files should be in your .gitignore for an ML project?Select all that apply",
+        "options": [
+          ".env (API keys)",
+          "requirements.txt",
+          "checkpoints/*.pt (model weights)",
+          "data/ (large training datasets)"
+        ],
         "correct": [
           0,
           2,
           3
         ],
-        "explanation": "",
+        "explanation": ".env contains secrets, model checkpoints are large binary files, and training data is too big for Git. requirements.txt should be committed so others can reproduce your environment.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What are the 5 SaaS products you will build by the end of this course?",
+        "options": [
+          "Social media bot, image generator, speech-to-text, video editor, game AI",
+          "Database manager, file converter, web scraper, email client, calculator",
+          "AI Writing Assistant, Code Reviewer, RAG Chatbot, Content Moderator, Translation API",
+          "Search engine, recommendation system, fraud detector, sentiment analyzer, spam filter"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "These 5 products cover the most important LLM use cases: generation, code understanding, retrieval-augmented generation, safety, and multilingual capabilities.",
         "isMulti": false
       }
     ]
@@ -119,54 +169,79 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the minimum GPU VRAM needed to fine-tune a 7B parameter model with LoRA?",
+        "options": [
+          "4 GB",
+          "6 GB",
+          "8 GB",
+          "40 GB"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "LoRA fine-tuning a 7B model requires approximately 8 GB VRAM due to efficient parameter freezing. Full fine-tuning would need 40+ GB.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why does this course use both a browser sandbox AND real Python environments?",
+        "options": [
+          "The browser sandbox is faster than local Python",
+          "Browser sandbox teaches concepts quickly; real environments are needed for GPU training and deployment",
+          "Local Python cannot run numpy",
+          "The browser sandbox supports PyTorch natively"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Pyodide (browser Python) is perfect for quick numpy experiments and concept visualization, but cannot run PyTorch, access GPUs, or deploy real services.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Which command creates a Python virtual environment?",
+        "options": [
+          "pip install venv",
+          "conda create env",
+          "virtualenv --create llm-env",
+          "python -m venv llm-env"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "python -m venv is the standard library way to create virtual environments. It creates an isolated Python installation in the llm-env directory.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which files should be in your .gitignore for an ML project?Select all that apply",
+        "options": [
+          ".env (API keys)",
+          "requirements.txt",
+          "checkpoints/*.pt (model weights)",
+          "data/ (large training datasets)"
+        ],
         "correct": [
           0,
           2,
           3
         ],
-        "explanation": "",
+        "explanation": ".env contains secrets, model checkpoints are large binary files, and training data is too big for Git. requirements.txt should be committed so others can reproduce your environment.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What are the 5 SaaS products you will build by the end of this course?",
+        "options": [
+          "Social media bot, image generator, speech-to-text, video editor, game AI",
+          "Database manager, file converter, web scraper, email client, calculator",
+          "AI Writing Assistant, Code Reviewer, RAG Chatbot, Content Moderator, Translation API",
+          "Search engine, recommendation system, fraud detector, sentiment analyzer, spam filter"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "These 5 products cover the most important LLM use cases: generation, code understanding, retrieval-augmented generation, safety, and multilingual capabilities.",
         "isMulti": false
       }
     ]

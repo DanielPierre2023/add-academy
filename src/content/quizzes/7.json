@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the primary purpose of tokenization in an LLM pipeline?",
+        "options": [
+          "Compressing text to save memory",
+          "Converting text into integer IDs that neural networks can process",
+          "Removing stop words from the input",
+          "Splitting text into sentences for parallel processing"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Tokenization converts raw text into integer token IDs because neural networks operate on numbers, not characters. It is the bridge between text and math.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "In a character-level tokenizer, what determines the vocabulary?",
+        "options": [
+          "The most frequent words in the corpus",
+          "A predefined dictionary of English words",
+          "Every unique character found in the training text",
+          "The ASCII character set (128 characters)"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "A character-level tokenizer builds its vocabulary from the set of unique characters in the text. This means the vocab size equals the number of distinct characters (typically 50-100 for English text).",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What is the main disadvantage of character-level tokenization compared to subword methods?",
+        "options": [
+          "Sequences become very long (4-5x longer), making training slower and harder",
+          "It cannot handle punctuation marks",
+          "It requires a GPU to run",
+          "The vocabulary is too large to fit in memory"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Each character becomes one token, so the word \"transformer\" uses 11 tokens instead of 1-2 with subword tokenization. This makes sequences much longer and harder for the model to learn long-range dependencies.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "What are special tokens used for in tokenization?Select all that apply",
+        "options": [
+          "Marking the end of a text sequence so the model knows where to stop",
+          "Increasing the vocabulary size for better performance",
+          "Handling unknown or out-of-vocabulary characters gracefully",
+          "Compressing common words into single tokens"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "Special tokens like mark sequence boundaries and handles unknown characters. They provide structural information that the model needs beyond the raw text content.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What does the decode() method of a tokenizer do?",
+        "options": [
+          "Splits raw text into individual characters",
+          "Builds the vocabulary from a corpus",
+          "Applies byte pair encoding merges",
+          "Converts a list of token IDs back into human-readable text"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "decode() reverses the encode() process: it maps integer IDs back to their corresponding tokens and joins them into readable text. encode() and decode() should be perfect inverses.",
         "isMulti": false
       }
     ]
@@ -61,53 +86,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Care este scopul principal al tokenizării în pipeline-ul unui LLM?",
+        "options": [
+          "Comprimarea textului pentru a economisi memorie",
+          "Conversia textului în ID-uri întregi pe care rețelele neuronale le pot procesa",
+          "Eliminarea cuvintelor de legătură din input",
+          "Împărțirea textului în propoziții pentru procesare paralelă"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Tokenizarea convertește textul brut în ID-uri de token întregi deoarece rețelele neuronale operează cu numere, nu cu caractere. Este podul dintre text și matematică.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Într-un tokenizer la nivel de caracter, ce determină vocabularul?",
+        "options": [
+          "Cele mai frecvente cuvinte din corpus",
+          "Un dicționar predefinit de cuvinte englezești",
+          "Fiecare caracter unic găsit în textul de antrenare",
+          "Setul de caractere ASCII (128 caractere)"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Un tokenizer la nivel de caracter își construiește vocabularul din setul de caractere unice din text. Aceasta înseamnă că dimensiunea vocabularului egalează numărul de caractere distincte (de obicei 50-100 pentru text englezesc).",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Care este principalul dezavantaj al tokenizării la nivel de caracter comparativ cu metodele subword?",
+        "options": [
+          "Secvențele devin foarte lungi (de 4-5 ori), făcând antrenarea mai lentă și dificilă",
+          "Nu poate gestiona semnele de punctuație",
+          "Necesită un GPU pentru a rula",
+          "Vocabularul este prea mare pentru a încăpea în memorie"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Fiecare caracter devine un token, deci cuvântul „transformer\" folosește 11 tokeni în loc de 1-2 cu tokenizare subword. Aceasta face secvențele mult mai lungi.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "La ce sunt folosite tokenurile speciale?Selectați toate variantele corecte",
+        "options": [
+          "Marcarea sfârșitului unei secvențe de text",
+          "Creșterea dimensiunii vocabularului pentru performanță mai bună",
+          "Gestionarea caracterelor necunoscute sau din afara vocabularului",
+          "Comprimarea cuvintelor comune în tokeni unici"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Tokenurile speciale precum marchează limitele secvențelor și gestionează caracterele necunoscute.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Ce face metoda decode() a unui tokenizer?",
+        "options": [
+          "Împarte textul brut în caractere individuale",
+          "Construiește vocabularul dintr-un corpus",
+          "Aplică îmbinări byte pair encoding",
+          "Convertește o listă de ID-uri de token înapoi în text lizibil"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: decode() inversează procesul encode(): mapează ID-urile întregi înapoi la tokenurile corespunzătoare și le unește în text lizibil.",
         "isMulti": false
       }
     ]
@@ -117,53 +167,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Ποιος είναι ο κύριος σκοπός της tokenization σε ένα LLM pipeline;",
+        "options": [
+          "Συμπίεση κειμένου για εξοικονόμηση μνήμης",
+          "Μετατροπή κειμένου σε ακέραια IDs που μπορούν να επεξεργαστούν τα νευρωνικά δίκτυα",
+          "Αφαίρεση λέξεων-κλειδιών από την είσοδο",
+          "Διαχωρισμός κειμένου σε προτάσεις για παράλληλη επεξεργασία"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Η tokenization μετατρέπει ακατέργαστο κείμενο σε ακέραια token IDs γιατί τα νευρωνικά δίκτυα λειτουργούν με αριθμούς, όχι χαρακτήρες.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Σε έναν tokenizer επιπέδου χαρακτήρων, τι καθορίζει το λεξιλόγιο;",
+        "options": [
+          "Οι πιο συχνές λέξεις στο corpus",
+          "Ένα προκαθορισμένο λεξικό αγγλικών λέξεων",
+          "Κάθε μοναδικός χαρακτήρας που βρίσκεται στο κείμενο εκπαίδευσης",
+          "Το σύνολο χαρακτήρων ASCII (128 χαρακτήρες)"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Ο tokenizer επιπέδου χαρακτήρων χτίζει το λεξιλόγιό του από το σύνολο μοναδικών χαρακτήρων στο κείμενο.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Ποιο είναι το κύριο μειονέκτημα της tokenization επιπέδου χαρακτήρων;",
+        "options": [
+          "Οι ακολουθίες γίνονται πολύ μακριές (4-5 φορές), κάνοντας την εκπαίδευση πιο αργή",
+          "Δεν μπορεί να χειριστεί σημεία στίξης",
+          "Απαιτεί GPU για εκτέλεση",
+          "Το λεξιλόγιο είναι πολύ μεγάλο για τη μνήμη"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Κάθε χαρακτήρας γίνεται ένα token, οπότε η λέξη «transformer» χρησιμοποιεί 11 tokens αντί για 1-2 με subword tokenization.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Σε τι χρησιμεύουν τα ειδικά tokens;Επιλέξτε όλα όσα ισχύουν",
+        "options": [
+          "Σημείωση του τέλους μιας ακολουθίας κειμένου",
+          "Αύξηση μεγέθους λεξιλογίου για καλύτερη απόδοση",
+          "Χειρισμός άγνωστων χαρακτήρων εκτός λεξιλογίου",
+          "Συμπίεση κοινών λέξεων σε μεμονωμένα tokens"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Ειδικά tokens όπως σημειώνουν όρια ακολουθιών και χειρίζεται άγνωστους χαρακτήρες.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Τι κάνει η μέθοδος decode() ενός tokenizer;",
+        "options": [
+          "Χωρίζει ακατέργαστο κείμενο σε χαρακτήρες",
+          "Χτίζει το λεξιλόγιο από ένα corpus",
+          "Εφαρμόζει συγχωνεύσεις byte pair encoding",
+          "Μετατρέπει λίστα ακέραιων IDs πίσω σε αναγνώσιμο κείμενο"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Η decode() αντιστρέφει τη διαδικασία encode(): αντιστοιχίζει IDs πίσω σε tokens και τα ενώνει σε αναγνώσιμο κείμενο.",
         "isMulti": false
       }
     ]

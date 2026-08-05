@@ -1,0 +1,63 @@
+{
+  "lectureId": "genai-2",
+  "en": {
+    "id": "quiz-genai-2-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Why does a video generation SaaS require an asynchronous job queue instead of a simple request-response pattern?",
+        "options": [
+          "Because video files are too large to transmit over HTTP",
+          "Because video generation takes 30 seconds to 5 minutes, which exceeds typical HTTP timeout limits",
+          "Because browsers cannot display video content directly",
+          "Because video APIs only accept WebSocket connections"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Video generation is a long-running process (30s–5min). HTTP connections would time out, so you return a job ID immediately and let clients poll for progress or receive webhook callbacks when done.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "What is the primary purpose of limiting concurrent video generation jobs in a SaaS?",
+        "options": [
+          "To make the queue appear busy and create artificial demand",
+          "To improve video quality by dedicating more GPU resources per job",
+          "To control API costs and prevent runaway spending on expensive GPU-based generation",
+          "To simplify the codebase by avoiding multithreading"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Each video generation call costs $0.10–$1.00 in API fees. Without concurrency limits, a traffic spike could launch hundreds of simultaneous jobs and drain your budget within minutes. The queue enforces a controllable spend rate.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which are valid strategies for handling failed video generation jobs?",
+        "options": [
+          "Automatic retry with a maximum retry count",
+          "Silently discard the job and refund the user without notification",
+          "Notify the user via webhook or polling status that the job failed",
+          "Re-queue the job with the same parameters for another attempt"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "A, C, D. Failed jobs should be retried automatically (up to a limit), re-queued for another attempt, and the user should be notified of the failure via their chosen notification method. Silently discarding jobs (B) is poor UX and erodes trust.",
+        "isMulti": true
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-genai-2-ro",
+    "questions": []
+  },
+  "el": {
+    "id": "quiz-genai-2-el",
+    "questions": []
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "lectureId": "5",
+  "en": {
+    "id": "quiz-5-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "GPT-3 demonstrates 'in-context learning' (few-shot prompting). What happens during this process?",
+        "options": [
+          "The model's weights are updated via gradient steps on the provided examples",
+          "The model conditions on the prompt examples to infer the task pattern, without any weight updates",
+          "The model retrieves similar examples from its training data and fine-tunes on them at inference",
+          "The examples select a specialized sub-network within GPT-3 pre-trained for that specific task"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "In-context learning works through forward passes with frozen weights. GPT-3 uses the examples as context to recognize patterns — no gradient updates, no retrieval, no sub-network selection.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "GPT-3 uses a decoder-only architecture. What does this mean in practice?",
+        "options": [
+          "It has no attention mechanism — it relies solely on feed-forward layers",
+          "It processes input bidirectionally but generates output left-to-right",
+          "It uses only masked (causal) self-attention, where each token can only attend to itself and previous tokens",
+          "It has both encoder and decoder, but the encoder is frozen during inference"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Decoder-only means causal (masked) self-attention throughout: each position can only attend to earlier positions. No separate encoder. Not bidirectional (that's BERT). Attention IS the core mechanism.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "What role does the softmax layer play at the output of GPT-3?",
+        "options": [
+          "It selects the single most probable next token deterministically",
+          "It converts the model's raw logits into a probability distribution over the entire vocabulary",
+          "It normalizes the attention weights within each transformer layer",
+          "It reduces the vocabulary size by pruning low-probability tokens before generation"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "The final softmax transforms raw logits into a valid probability distribution summing to 1 over all vocabulary tokens. Token selection is done by the sampling strategy (greedy, top-k), not softmax itself.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "The 'scaling hypothesis' as demonstrated by GPT-3 suggests that:",
+        "options": [
+          "Performance improves predictably with increases in parameters, data, and compute, often without architectural changes",
+          "Smaller models always outperform larger ones if trained longer on better data",
+          "Scaling only works up to about 10 billion parameters, after which performance plateaus",
+          "Scaling model size is effective only with task-specific architectural modifications"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "The scaling hypothesis: increasing model size, data, and compute leads to smooth, predictable improvements — often without new architectures. GPT-3's 175B parameters demonstrated capabilities absent in smaller models.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Which statements about GPT-3's Byte Pair Encoding (BPE) tokenization are correct?Select all that apply",
+        "options": [
+          "BPE starts with individual characters and iteratively merges the most frequent adjacent pairs",
+          "BPE guarantees that every English word maps to exactly one token",
+          "BPE can handle out-of-vocabulary words by breaking them into subword units",
+          "The same word may be tokenized differently depending on surrounding words"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "BPE starts with characters and merges frequent pairs. It handles any input by decomposing rare words into subword pieces. But it does NOT guarantee one token per word, and standard BPE is deterministic (same word = same tokenization regardless of context).",
+        "isMulti": true
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-5-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "GPT-3 demonstrează 'învățare în context' (few-shot). Ce se întâmplă în acest proces?",
+        "options": [
+          "Ponderile modelului sunt actualizate prin pași de gradient pe exemplele furnizate",
+          "Modelul condiționează pe exemplele din prompt pentru a deduce tiparul sarcinii, fără actualizări de ponderi",
+          "Modelul recuperează exemple similare din datele de antrenament și se ajustează fin la inferență",
+          "Exemplele selectează o sub-rețea specializată din GPT-3 pre-antrenată pentru acea sarcină"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Învățarea în context funcționează prin treceri înainte cu ponderi înghețate. GPT-3 folosește exemplele ca context pentru a recunoaște tipare — fără actualizări de gradient.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "GPT-3 folosește o arhitectură doar-decoder. Ce înseamnă aceasta în practică?",
+        "options": [
+          "Nu are mecanism de atenție — se bazează exclusiv pe straturi feed-forward",
+          "Procesează inputul bidirecțional dar generează output de la stânga la dreapta",
+          "Folosește doar self-attention mascată (cauzală), unde fiecare token participă doar la sine și tokenii anteriori",
+          "Are atât encoder cât și decoder, dar encoder-ul este înghețat în timpul inferenței"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Doar-decoder înseamnă self-attention cauzală (mascată): fiecare poziție participă doar la poziții anterioare. Nu există encoder separat. Nu procesează bidirecțional (aceasta e abordarea BERT).",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ce rol joacă stratul softmax la ieșirea GPT-3?",
+        "options": [
+          "Selectează cel mai probabil token următor în mod determinist",
+          "Convertește logit-urile brute ale modelului într-o distribuție de probabilitate peste întreg vocabularul",
+          "Normalizează ponderile atenției din fiecare strat transformer",
+          "Reduce dimensiunea vocabularului eliminând tokenii cu probabilitate scăzută"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Softmax-ul final transformă logit-urile brute într-o distribuție de probabilitate validă care se însumează la 1 peste toți tokenii vocabularului. Selecția tokenului e făcută de strategia de eșantionare.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Ipoteza scalării demonstrată de GPT-3 sugerează că:",
+        "options": [
+          "Performanța se îmbunătățește predictibil cu creșterea parametrilor, datelor și calculului, adesea fără modificări arhitecturale",
+          "Modelele mai mici depășesc întotdeauna modelele mai mari dacă sunt antrenate mai mult pe date mai bune",
+          "Scalarea funcționează doar până la aproximativ 10 miliarde de parametri",
+          "Scalarea este eficientă doar cu modificări arhitecturale specifice sarcinii"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Ipoteza scalării: creșterea dimensiunii modelului, datelor și calculului duce la îmbunătățiri liniare și predictibile — adesea fără arhitecturi noi.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Care afirmații despre tokenizarea BPE a GPT-3 sunt corecte?Selectați toate care se aplică",
+        "options": [
+          "BPE începe cu caractere individuale și îmbină iterativ cele mai frecvente perechi adiacente",
+          "BPE garantează că fiecare cuvânt englezesc corespunde exact unui token",
+          "BPE poate gestiona cuvinte noi descompunându-le în unități sub-cuvânt",
+          "Același cuvânt poate fi tokenizat diferit în funcție de cuvintele înconjurătoare"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "BPE începe cu caractere și îmbină perechi frecvente. Poate gestiona orice input descompunând cuvintele rare. NU garantează un token per cuvânt, iar BPE standard este deterministic.",
+        "isMulti": true
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-5-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Το GPT-3 επιδεικνύει 'μάθηση εντός πλαισίου' (few-shot). Τι συμβαίνει κατά τη διαδικασία;",
+        "options": [
+          "Τα βάρη ενημερώνονται μέσω βημάτων gradient στα παρεχόμενα παραδείγματα",
+          "Το μοντέλο χρησιμοποιεί τα παραδείγματα στο prompt για να συμπεράνει το μοτίβο, χωρίς ενημέρωση βαρών",
+          "Ανακτά παρόμοια παραδείγματα από τα δεδομένα εκπαίδευσης και κάνει μικρο-ρύθμιση",
+          "Τα παραδείγματα επιλέγουν ένα εξειδικευμένο υπο-δίκτυο εντός GPT-3"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Η μάθηση εντός πλαισίου λειτουργεί μέσω forward passes με παγωμένα βάρη. Το GPT-3 χρησιμοποιεί τα παραδείγματα ως πλαίσιο για αναγνώριση μοτίβων.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Το GPT-3 χρησιμοποιεί αρχιτεκτονική μόνο-decoder. Τι σημαίνει αυτό πρακτικά;",
+        "options": [
+          "Δεν έχει μηχανισμό attention — βασίζεται αποκλειστικά σε feed-forward layers",
+          "Επεξεργάζεται είσοδο αμφίδρομα αλλά παράγει έξοδο αριστερά-προς-δεξιά",
+          "Χρησιμοποιεί μόνο masked (αιτιακή) self-attention, όπου κάθε token βλέπει μόνο εαυτό και προηγούμενα tokens",
+          "Έχει encoder και decoder, αλλά ο encoder είναι παγωμένος κατά τη χρήση"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Μόνο-decoder σημαίνει αιτιακή (masked) self-attention: κάθε θέση βλέπει μόνο προηγούμενες θέσεις. Κανένας ξεχωριστός encoder.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Τι ρόλο παίζει το softmax layer στην έξοδο του GPT-3;",
+        "options": [
+          "Επιλέγει ντετερμινιστικά το πιο πιθανό επόμενο token",
+          "Μετατρέπει τα logits σε κατανομή πιθανοτήτων πάνω σε ολόκληρο το λεξιλόγιο",
+          "Κανονικοποιεί τα βάρη attention εντός κάθε transformer layer",
+          "Μειώνει το μέγεθος λεξιλογίου αφαιρώντας tokens χαμηλής πιθανότητας"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Το τελικό softmax μετατρέπει τα logits σε έγκυρη κατανομή πιθανοτήτων. Η επιλογή token γίνεται από τη στρατηγική δειγματοληψίας, όχι από το softmax.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Η υπόθεση κλιμάκωσης του GPT-3 υποδηλώνει ότι:",
+        "options": [
+          "Η απόδοση βελτιώνεται προβλέψιμα με αύξηση παραμέτρων, δεδομένων και υπολογισμού, χωρίς αρχιτεκτονικές αλλαγές",
+          "Μικρότερα μοντέλα ξεπερνούν πάντα μεγαλύτερα αν εκπαιδευτούν περισσότερο σε καλύτερα δεδομένα",
+          "Η κλιμάκωση λειτουργεί μόνο μέχρι ~10 δισεκατομμύρια παραμέτρους",
+          "Η κλιμάκωση αποδίδει μόνο με αρχιτεκτονικές τροποποιήσεις ανά εργασία"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Η υπόθεση κλιμάκωσης: αύξηση μεγέθους μοντέλου, δεδομένων και υπολογισμού οδηγεί σε ομαλές, προβλέψιμες βελτιώσεις — χωρίς νέες αρχιτεκτονικές.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Ποιες δηλώσεις για το BPE tokenization του GPT-3 είναι σωστές;Επιλέξτε όλα όσα ισχύουν",
+        "options": [
+          "Το BPE ξεκινά με μεμονωμένους χαρακτήρες και συγχωνεύει τα πιο συχνά ζεύγη",
+          "Το BPE εγγυάται ότι κάθε αγγλική λέξη αντιστοιχεί σε ακριβώς ένα token",
+          "Το BPE μπορεί να χειριστεί άγνωστες λέξεις αναλύοντάς τες σε μονάδες υπολέξεων",
+          "Η ίδια λέξη μπορεί να tokenοποιηθεί διαφορετικά ανάλογα με τις γειτονικές λέξεις"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "Το BPE ξεκινά με χαρακτήρες και συγχωνεύει συχνά ζεύγη. Μπορεί να χειριστεί οποιαδήποτε είσοδο. ΔΕΝ εγγυάται ένα token ανά λέξη, και είναι ντετερμινιστικό.",
+        "isMulti": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "lectureId": "1",
+  "en": {
+    "id": "quiz-1-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "When an LLM generates a response to your question, what is it fundamentally doing?",
+        "options": [
+          "Searching a database of pre-written answers and selecting the best match",
+          "Predicting the most likely next token repeatedly based on learned statistical patterns",
+          "Following a complex decision tree of hand-coded rules created by engineers",
+          "Retrieving and combining relevant paragraphs from its training documents"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "LLMs are next-token predictors. They don\\'t store or retrieve documents, and they don\\'t follow hand-written rules. They generate text by repeatedly predicting what token is most likely to come next.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "What does 'Large' in Large Language Model primarily refer to?",
+        "options": [
+          "The physical size of the servers required to run the model",
+          "The number of languages the model can understand",
+          "The number of parameters in the model and the scale of training data",
+          "The length of text the model can generate in a single response"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "'Large' refers to billions of parameters and trillions of training tokens. It does not refer to server size, language count, or output length.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "How does an LLM's behavior differ from traditional rule-based software?",
+        "options": [
+          "Traditional software learns from data, while LLMs follow fixed instructions",
+          "LLMs execute deterministic algorithms, while traditional software uses probability",
+          "LLM behavior emerges from patterns learned during training rather than from explicitly programmed rules",
+          "Traditional software cannot process text, while LLMs are limited to text only"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "The key difference is that LLM behavior emerges from training on data, not from hand-written rules. Traditional software follows explicit instructions — it is the LLM that learns from data.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "What are 'parameters' in the context of an LLM?",
+        "options": [
+          "The configuration settings an engineer manually adjusts before each query",
+          "The input prompts and instructions given to the model by users",
+          "Numerical values learned from data during training that determine the model's behavior",
+          "The hardware specifications of the GPU cluster used for inference"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Parameters are adjustable numerical values (weights) learned automatically from data during training. They are not manually set, not user inputs, and not hardware specs.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Which of the following statements about the Transformer architecture are correct?Select all that apply",
+        "options": [
+          "It was introduced in 2017 and forms the architectural foundation of modern LLMs",
+          "It replaced all previous neural network architectures because they could not process language at all",
+          "Its key innovation — the attention mechanism — allows the model to weigh relationships between all tokens in a sequence",
+          "It requires training data to be manually labeled with grammar rules before training can begin"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "The Transformer (2017) is indeed the foundation of modern LLMs, and attention is its core innovation. Previous architectures (RNNs, LSTMs) could process language but less effectively at scale. No manual grammar labeling is required.",
+        "isMulti": true
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-1-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Când un LLM generează un răspuns la întrebarea ta, ce face de fapt la nivel fundamental?",
+        "options": [
+          "Caută într-o bază de date de răspunsuri pre-scrise și selectează cea mai bună potrivire",
+          "Prezice cel mai probabil token următor în mod repetat pe baza tiparelor statistice învățate",
+          "Urmează un arbore decizional complex de reguli codificate manual de ingineri",
+          "Recuperează și combină paragrafe relevante din documentele sale de antrenament"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "LLM-urile sunt predictori de token-uri. Nu stochează și nu recuperează documente, și nu urmează reguli scrise manual. Generează text prezicând repetat ce token este cel mai probabil să urmeze.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "La ce se referă în principal cuvântul 'Large' din Large Language Model?",
+        "options": [
+          "Dimensiunea fizică a serverelor necesare rulării modelului",
+          "Numărul de limbi pe care modelul le poate înțelege",
+          "Numărul de parametri ai modelului și scara datelor de antrenament",
+          "Lungimea textului pe care modelul îl poate genera într-un singur răspuns"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "'Large' se referă la miliarde de parametri și trilioane de token-uri de antrenament. Nu se referă la dimensiunea serverelor, numărul de limbi sau lungimea output-ului.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Cum diferă comportamentul unui LLM de cel al software-ului tradițional bazat pe reguli?",
+        "options": [
+          "Software-ul tradițional învață din date, în timp ce LLM-urile urmează instrucțiuni fixe",
+          "LLM-urile execută algoritmi deterministici, în timp ce software-ul tradițional folosește probabilități",
+          "Comportamentul LLM apare din tipare învățate în timpul antrenamentului, nu din reguli programate explicit",
+          "Software-ul tradițional nu poate procesa text, în timp ce LLM-urile sunt limitate doar la text"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Diferența cheie este că comportamentul LLM apare din antrenament pe date, nu din reguli scrise manual. Software-ul tradițional urmează instrucțiuni explicite — LLM-ul este cel care învață din date.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Ce sunt 'parametrii' în contextul unui LLM?",
+        "options": [
+          "Setările de configurare pe care un inginer le ajustează manual înainte de fiecare interogare",
+          "Prompt-urile de input și instrucțiunile date modelului de utilizatori",
+          "Valori numerice învățate din date în timpul antrenamentului care determină comportamentul modelului",
+          "Specificațiile hardware ale clusterului GPU folosit pentru inferență"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Parametrii sunt valori numerice ajustabile (ponderi) învățate automat din date în timpul procesului de antrenament. Nu sunt setați manual, nu sunt inputuri ale utilizatorilor și nu sunt specificații hardware.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Care dintre următoarele afirmații despre arhitectura Transformer sunt corecte?Selectați toate care se aplică",
+        "options": [
+          "A fost introdusă în 2017 și formează fundația arhitecturală a LLM-urilor moderne",
+          "A înlocuit toate arhitecturile anterioare de rețele neuronale deoarece acestea nu puteau procesa limbajul deloc",
+          "Inovația sa cheie — mecanismul de atenție — permite modelului să evalueze relațiile între toți tokenii dintr-o secvență",
+          "Necesită ca datele de antrenament să fie etichetate manual cu reguli gramaticale înainte de antrenament"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "Transformer-ul (2017) este fundația LLM-urilor moderne, iar atenția este inovația sa principală. Arhitecturile anterioare (RNN, LSTM) puteau procesa limbajul, dar mai puțin eficient la scară mare.",
+        "isMulti": true
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-1-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Όταν ένα LLM παράγει μια απάντηση στην ερώτησή σας, τι κάνει ουσιαστικά;",
+        "options": [
+          "Ψάχνει σε βάση δεδομένων προ-γραμμένων απαντήσεων και επιλέγει την καλύτερη",
+          "Προβλέπει επαναληπτικά το πιο πιθανό επόμενο token βάσει στατιστικών μοτίβων",
+          "Ακολουθεί ένα πολύπλοκο δέντρο αποφάσεων κανόνων κωδικοποιημένων από μηχανικούς",
+          "Ανακτά και συνδυάζει σχετικές παραγράφους από τα έγγραφα εκπαίδευσής του"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Τα LLM είναι προβλεπτικά μοντέλα token. Δεν αποθηκεύουν, δεν ανακτούν έγγραφα και δεν ακολουθούν κανόνες γραμμένους χειροκίνητα. Παράγουν κείμενο προβλέποντας ποιο token είναι πιο πιθανό.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Σε τι αναφέρεται κυρίως το 'Large' στο Large Language Model;",
+        "options": [
+          "Στο φυσικό μέγεθος των servers που απαιτούνται",
+          "Στον αριθμό γλωσσών που καταλαβαίνει το μοντέλο",
+          "Στον αριθμό παραμέτρων του μοντέλου και στην κλίμακα δεδομένων εκπαίδευσης",
+          "Στο μήκος κειμένου που μπορεί να παράγει σε μία απάντηση"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "'Large' αναφέρεται σε δισεκατομμύρια παραμέτρους και τρισεκατομμύρια tokens εκπαίδευσης. Δεν αφορά μέγεθος servers, αριθμό γλωσσών ή μήκος εξόδου.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Πώς διαφέρει η συμπεριφορά ενός LLM από παραδοσιακό λογισμικό βασισμένο σε κανόνες;",
+        "options": [
+          "Το παραδοσιακό λογισμικό μαθαίνει από δεδομένα, ενώ τα LLM ακολουθούν σταθερές οδηγίες",
+          "Τα LLM εκτελούν ντετερμινιστικούς αλγορίθμους, ενώ το παραδοσιακό λογισμικό χρησιμοποιεί πιθανότητες",
+          "Η συμπεριφορά LLM προκύπτει από μοτίβα που μαθαίνονται κατά την εκπαίδευση, όχι από ρητά προγραμματισμένους κανόνες",
+          "Το παραδοσιακό λογισμικό δεν μπορεί να επεξεργαστεί κείμενο, ενώ τα LLM περιορίζονται μόνο σε κείμενο"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Η βασική διαφορά είναι ότι η συμπεριφορά LLM προκύπτει από εκπαίδευση σε δεδομένα, όχι από χειρόγραφους κανόνες.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Τι είναι οι 'παράμετροι' στο πλαίσιο ενός LLM;",
+        "options": [
+          "Ρυθμίσεις διαμόρφωσης που ένας μηχανικός προσαρμόζει χειροκίνητα πριν κάθε ερώτηση",
+          "Τα prompts εισόδου και οι οδηγίες που δίνουν οι χρήστες στο μοντέλο",
+          "Αριθμητικές τιμές που μαθαίνονται από δεδομένα κατά την εκπαίδευση και καθορίζουν τη συμπεριφορά του μοντέλου",
+          "Οι προδιαγραφές υλικού του cluster GPU που χρησιμοποιείται για εξαγωγή συμπερασμάτων"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Οι παράμετροι είναι ρυθμιζόμενες αριθμητικές τιμές (βάρη) που μαθαίνονται αυτόματα από δεδομένα κατά τη διαδικασία εκπαίδευσης.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Ποιες από τις ακόλουθες δηλώσεις για την αρχιτεκτονική Transformer είναι σωστές;Επιλέξτε όλα όσα ισχύουν",
+        "options": [
+          "Εισήχθη το 2017 και αποτελεί τη βάση των σύγχρονων LLM",
+          "Αντικατέστησε όλες τις προηγούμενες αρχιτεκτονικές επειδή δεν μπορούσαν καθόλου να επεξεργαστούν γλώσσα",
+          "Η καινοτομία του — ο μηχανισμός προσοχής — επιτρέπει στο μοντέλο να αξιολογεί σχέσεις μεταξύ tokens",
+          "Απαιτεί τα δεδομένα εκπαίδευσης να επισημανθούν χειροκίνητα με γραμματικούς κανόνες"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "Ο Transformer (2017) είναι η βάση των σύγχρονων LLM και η προσοχή είναι η κεντρική καινοτομία. Προηγούμενες αρχιτεκτονικές (RNN, LSTM) μπορούσαν να επεξεργαστούν γλώσσα αλλά λιγότερο αποτελεσματικά.",
+        "isMulti": true
+      }
+    ]
+  }
+}

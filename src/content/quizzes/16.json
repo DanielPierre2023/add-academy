@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Why do transformers use multiple attention heads instead of one?",
+        "options": [
+          "To increase the vocabulary size",
+          "Each head can learn different relationship patterns — syntactic, semantic, positional",
+          "Multiple heads reduce total computation",
+          "A single head cannot process batches"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Multiple heads let the model simultaneously attend to different types of relationships. One head might capture syntax, another coreference, another semantic similarity.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "If d_model=512 and num_heads=8, what is d_k (the dimension per head)?",
+        "options": [
+          "64 (512 / 8)",
+          "512",
+          "4096 (512 * 8)",
+          "8"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "In multi-head attention, d_k = d_model / num_heads = 512/8 = 64. Each head operates on a smaller subspace, and results are concatenated back to d_model.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What happens after all heads compute their attention outputs?",
+        "options": [
+          "They are averaged element-wise",
+          "Only the best head's output is used",
+          "They are concatenated and projected through a learned output matrix W_o",
+          "They are summed and divided by num_heads"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Head outputs (each d_k-dimensional) are concatenated back to d_model dimensions, then projected through W_o to produce the final output.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Does multi-head attention have more parameters than single-head attention with the same d_model?",
+        "options": [
+          "Yes, significantly more due to separate W_q, W_k, W_v per head",
+          "Approximately the same — the split across heads keeps total parameters similar, plus W_o",
+          "Fewer parameters",
+          "It depends on the activation function"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Each head uses d_model x d_k weights (where d_k = d_model/h). With h heads, total Q/K/V params = h * 3 * d_model * d_k = 3 * d_model^2, same as single-head. W_o adds d_model^2 more.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What benefits does multi-head attention provide over single-head?Select all that apply",
+        "options": [
+          "Captures different relationship types simultaneously",
+          "Reduces the quadratic complexity of attention",
+          "Eliminates the need for positional encodings",
+          "More stable training through ensemble-like behavior"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "Multiple heads capture different relationship types and provide ensemble-like benefits for stability. They do not reduce O(n^2) complexity or replace positional encodings.",
         "isMulti": true
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,7 +111,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -96,18 +121,18 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,7 +167,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -152,18 +177,18 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       }
     ]

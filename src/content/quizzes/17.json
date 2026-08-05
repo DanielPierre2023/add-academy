@@ -5,52 +5,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the computational complexity of standard self-attention with respect to sequence length n?",
+        "options": [
+          "O(n^2) — quadratic in sequence length",
+          "O(n) — linear in sequence length",
+          "O(n log n)",
+          "O(1) — constant time"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "The attention matrix is n x n, requiring O(n^2) computation and memory. This is why long sequences are expensive for standard transformers.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What is the key insight behind Flash Attention?",
+        "options": [
+          "It reduces the number of attention heads",
+          "It approximates attention with random sampling",
+          "It computes exact attention in tiles/blocks to minimize memory I/O between GPU SRAM and HBM",
+          "It replaces softmax with a linear function"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Flash Attention computes exact (not approximate) attention by tiling the computation to minimize expensive memory transfers between GPU SRAM and high-bandwidth memory.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "How does Grouped-Query Attention (GQA) reduce computation?",
+        "options": [
+          "By removing the Value projection entirely",
+          "By sharing Key and Value heads across groups of Query heads, reducing KV parameters",
+          "By using only one attention head total",
+          "By reducing the embedding dimension"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "GQA (used in Llama 2/3) groups query heads and shares a single KV head per group. This reduces KV cache memory and computation while maintaining most of multi-head quality.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "What does the KV-Cache optimize during inference?",
+        "options": [
+          "It stores previously computed K and V tensors so they are not recomputed for each new token",
+          "It caches the model weights on disk",
+          "It pre-computes all possible attention patterns",
+          "It reduces the vocabulary size during generation"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "During autoregressive generation, each new token only needs its own Q. The K and V from all previous tokens can be cached and reused, avoiding O(n) recomputation per step.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What is the main advantage of sliding window attention (as used in Mistral)?",
+        "options": [
+          "It produces better attention patterns than full attention",
+          "It eliminates the need for causal masking",
+          "It limits each token to attend only to a fixed window of nearby tokens, reducing memory from O(n^2) to O(n*w)",
+          "It doubles the effective context length"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Sliding window limits attention to w nearby positions. Memory drops from O(n^2) to O(n*w). Information still propagates to distant tokens through stacked layers.",
         "isMulti": false
       }
     ]
@@ -65,7 +90,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -75,7 +100,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -85,7 +110,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -95,7 +120,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -105,7 +130,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -120,7 +145,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -130,7 +155,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -140,7 +165,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -150,7 +175,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -160,7 +185,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

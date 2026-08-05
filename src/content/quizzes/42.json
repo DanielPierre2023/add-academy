@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is domain-specific fine-tuning?",
+        "options": [
+          "Training a model from scratch on general web data",
+          "Removing layers from a pretrained model to make it smaller",
+          "Continuing training of a pretrained model on specialized data from a particular field",
+          "Translating the model interface into a specific language"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Domain-specific fine-tuning adapts a pretrained foundation model by training it further on data from a specialized domain (e.g., medical, legal, financial), improving its performance on domain tasks.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What is curriculum learning in the context of fine-tuning?",
+        "options": [
+          "Randomly shuffling training data at every epoch",
+          "Ordering training data from simpler to more complex examples to improve learning",
+          "Using only the hardest examples for training",
+          "A syllabus for a university course on machine learning"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Curriculum learning presents training examples in order of increasing difficulty, mimicking how humans learn. This can lead to faster convergence and better generalization.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "How does LoRA (Low-Rank Adaptation) reduce fine-tuning cost?",
+        "options": [
+          "It freezes the original weights and trains small low-rank matrices injected into each layer",
+          "It deletes half of the model’s layers before training",
+          "It uses FP64 precision for all calculations",
+          "It trains only the embedding layer and freezes everything else"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "LoRA keeps the original pretrained weights frozen and adds small trainable low-rank decomposition matrices (A and B) to attention layers, dramatically reducing the number of trainable parameters.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "What are advantages of LoRA adapter composition?Select all that apply",
+        "options": [
+          "Multiple task-specific adapters can be swapped or merged without retraining the base model",
+          "It eliminates the need for any training data",
+          "It guarantees zero loss in quality compared to full fine-tuning",
+          "Adapters are small files that can be stored and deployed independently from the base model"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "LoRA adapters are tiny (often megabytes) compared to the full model (gigabytes). Multiple adapters for different tasks can be hot-swapped or combined at inference time without touching the base weights.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What risk does domain-specific fine-tuning introduce if the dataset is too narrow?",
+        "options": [
+          "The model becomes faster at inference",
+          "The model’s vocabulary automatically expands",
+          "The model improves on all general benchmarks",
+          "Catastrophic forgetting, where the model loses general capabilities it had before fine-tuning"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Fine-tuning on a narrow dataset can cause catastrophic forgetting, where the model overwrites its broad pretrained knowledge and loses the ability to handle tasks outside the narrow domain.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

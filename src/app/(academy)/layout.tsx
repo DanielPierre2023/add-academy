@@ -1,6 +1,7 @@
 'use client';
 
 import { Header } from '@/components/layout/header';
+import { Footer } from '@/components/layout/footer';
 import { CourseSidebar } from '@/components/layout/course-sidebar';
 import { AITutor } from '@/components/academy/ai-tutor';
 import { useAcademyStore } from '@/lib/store/academy-store';
@@ -31,6 +32,7 @@ export default function AcademyLayout({
           <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
             {children}
           </div>
+          <Footer />
         </main>
 
         {/* AI Tutor sliding panel */}

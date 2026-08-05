@@ -5,52 +5,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What does BPE stand for, and what is its core idea?",
+        "options": [
+          "Binary Pair Extraction — extracting pairs of binary digits",
+          "Byte Pair Encoding — iteratively merging the most frequent adjacent pairs",
+          "Block Partition Embedding — partitioning text into fixed-size blocks",
+          "Bidirectional Pattern Encoding — encoding patterns in both directions"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "BPE stands for Byte Pair Encoding. It starts with individual characters (or bytes) and iteratively merges the most frequently co-occurring adjacent pairs to build subword tokens.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why is BPE preferred over word-level tokenization for LLMs?",
+        "options": [
+          "BPE produces shorter sequences than word-level tokenization",
+          "BPE requires no training data to build the vocabulary",
+          "BPE handles unknown words by decomposing them into known subword units",
+          "BPE always produces one token per word, making it deterministic"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Word-level tokenization fails on any word not in its vocabulary. BPE can break unseen words into known subword pieces, so it never produces an token.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "In BPE training, when do you stop merging pairs?",
+        "options": [
+          "When the vocabulary reaches a predefined target size",
+          "When no more pairs exist in the corpus",
+          "When the compression ratio exceeds 90%",
+          "When training loss converges"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "BPE merging stops when the vocabulary reaches the desired size (e.g., 50,000 tokens). Each merge adds one new token, so you do (target - base_vocab_size) merges.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "What is tiktoken in the context of GPT models?",
+        "options": [
+          "A neural network architecture for tokenization",
+          "OpenAI's fast BPE tokenizer library used by GPT-3.5/GPT-4",
+          "A token counting API for billing purposes",
+          "A visualization tool for token embeddings"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "tiktoken is OpenAI's open-source, high-performance BPE tokenizer library. It uses the same merge rules as GPT models and is written in Rust for speed.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "How many BPE merges are needed to go from 256 base bytes to a 50,000-token vocabulary?",
+        "options": [
+          "50,000",
+          "256",
+          "~49,744 (50,000 minus 256 base tokens)",
+          "It depends on the corpus size"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Starting with 256 byte-level tokens, each merge adds exactly one new token. So 50,000 - 256 = 49,744 merges are needed.",
         "isMulti": false
       }
     ]
@@ -60,52 +85,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Ce înseamnă BPE și care este ideea de bază?",
+        "options": [
+          "Binary Pair Extraction — extragerea perechilor de cifre binare",
+          "Byte Pair Encoding — îmbinarea iterativă a celor mai frecvente perechi adiacente",
+          "Block Partition Embedding — partiționarea textului în blocuri de dimensiune fixă",
+          "Bidirectional Pattern Encoding — codificarea tiparelor în ambele direcții"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: BPE înseamnă Byte Pair Encoding. Începe cu caractere individuale și îmbină iterativ perechile adiacente cele mai frecvente.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "De ce se preferă BPE față de tokenizarea la nivel de cuvânt?",
+        "options": [
+          "BPE produce secvențe mai scurte",
+          "BPE nu necesită date de antrenare",
+          "BPE gestionează cuvinte necunoscute descompunându-le în unități subword cunoscute",
+          "BPE produce întotdeauna un token per cuvânt"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Tokenizarea la nivel de cuvânt eșuează pe orice cuvânt absent din vocabular. BPE poate descompune cuvinte noi în piese subword cunoscute.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Când se oprește procesul de îmbinare BPE?",
+        "options": [
+          "Când vocabularul atinge dimensiunea țintă predefinită",
+          "Când nu mai există perechi în corpus",
+          "Când raportul de compresie depășește 90%",
+          "Când pierderea de antrenare convergează"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Îmbinarea BPE se oprește când vocabularul atinge dimensiunea dorită. Fiecare îmbinare adaugă un token nou.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Ce este tiktoken în contextul modelelor GPT?",
+        "options": [
+          "O arhitectură de rețea neuronală pentru tokenizare",
+          "Biblioteca de tokenizare BPE rapidă a OpenAI, folosită de GPT-3.5/GPT-4",
+          "Un API de numărare token pentru facturare",
+          "Un instrument de vizualizare pentru embeddings"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: tiktoken este biblioteca open-source BPE de înaltă performanță a OpenAI, scrisă în Rust.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Câte îmbinări BPE sunt necesare de la 256 de octeți de bază la un vocabular de 50.000 de tokeni?",
+        "options": [
+          "50.000",
+          "256",
+          "~49.744 (50.000 minus 256 tokeni de bază)",
+          "Depinde de dimensiunea corpus-ului"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Pornind de la 256 tokeni la nivel de octet, fiecare îmbinare adaugă exact un token nou. Deci 50.000 - 256 = 49.744 îmbinări.",
         "isMulti": false
       }
     ]
@@ -115,52 +165,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Τι σημαίνει BPE και ποια είναι η βασική ιδέα;",
+        "options": [
+          "Binary Pair Extraction — εξαγωγή ζευγών δυαδικών ψηφίων",
+          "Byte Pair Encoding — επαναληπτική συγχώνευση πιο συχνών γειτονικών ζευγών",
+          "Block Partition Embedding — διαίρεση κειμένου σε μπλοκ σταθερού μεγέθους",
+          "Bidirectional Pattern Encoding — κωδικοποίηση μοτίβων προς δύο κατευθύνσεις"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: BPE σημαίνει Byte Pair Encoding. Ξεκινά με μεμονωμένους χαρακτήρες και συγχωνεύει επαναληπτικά τα πιο συχνά ζεύγη.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Γιατί προτιμάται το BPE από tokenization σε επίπεδο λέξης;",
+        "options": [
+          "Το BPE παράγει πιο σύντομες ακολουθίες",
+          "Το BPE δεν χρειάζεται δεδομένα εκπαίδευσης",
+          "Το BPE χειρίζεται άγνωστες λέξεις αποσυνθέτοντάς τες σε γνωστές subword μονάδες",
+          "Το BPE παράγει πάντα ένα token ανά λέξη"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Η tokenization σε επίπεδο λέξης αποτυγχάνει σε λέξεις εκτός λεξιλογίου. Το BPE μπορεί να τις σπάσει σε γνωστά κομμάτια.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Πότε σταματά η διαδικασία συγχώνευσης BPE;",
+        "options": [
+          "Όταν το λεξιλόγιο φτάσει το προκαθορισμένο μέγεθος-στόχο",
+          "Όταν δεν υπάρχουν άλλα ζεύγη στο corpus",
+          "Όταν ο λόγος συμπίεσης ξεπεράσει 90%",
+          "Όταν συγκλίνει η απώλεια εκπαίδευσης"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Η συγχώνευση BPE σταματά όταν το λεξιλόγιο φτάσει το επιθυμητό μέγεθος. Κάθε συγχώνευση προσθέτει ένα νέο token.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Τι είναι το tiktoken στο πλαίσιο μοντέλων GPT;",
+        "options": [
+          "Αρχιτεκτονική νευρωνικού δικτύου για tokenization",
+          "Η γρήγορη βιβλιοθήκη BPE tokenizer της OpenAI για GPT-3.5/GPT-4",
+          "API μέτρησης tokens για χρέωση",
+          "Εργαλείο οπτικοποίησης embeddings"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Το tiktoken είναι η open-source βιβλιοθήκη BPE υψηλής απόδοσης της OpenAI, γραμμένη σε Rust.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Πόσες συγχωνεύσεις BPE χρειάζονται από 256 bytes βάσης σε λεξιλόγιο 50.000 tokens;",
+        "options": [
+          "50.000",
+          "256",
+          "~49.744 (50.000 μείον 256 tokens βάσης)",
+          "Εξαρτάται από το μέγεθος του corpus"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Ξεκινώντας με 256 tokens, κάθε συγχώνευση προσθέτει ακριβώς ένα νέο token. 50.000 - 256 = 49.744 συγχωνεύσεις.",
         "isMulti": false
       }
     ]

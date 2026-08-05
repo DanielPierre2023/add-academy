@@ -1,0 +1,63 @@
+{
+  "lectureId": "genai-3",
+  "en": {
+    "id": "quiz-genai-3-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Why does ProseAI include a rule-based text transformation pipeline alongside LLM-based rewriting?",
+        "options": [
+          "Rule-based transforms always produce better results than LLMs",
+          "They provide zero-cost fallback processing, work offline, and handle simple transformations without API calls",
+          "LLMs cannot perform text simplification",
+          "Rules are needed to train the LLM"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Rule-based transforms like vocabulary simplification and filler removal cost nothing to run, work without an internet connection, and serve as fallbacks when LLM APIs are unavailable.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "What is the primary benefit of streaming rewritten text to the frontend via Server-Sent Events?",
+        "options": [
+          "It reduces the total processing time of the LLM",
+          "It allows the server to handle more concurrent requests",
+          "Users see the first words in under 200ms instead of waiting for the full response, improving perceived latency",
+          "It compresses the response to use less bandwidth"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Streaming does not make the LLM faster, but it drastically improves perceived latency. Users see text appear word-by-word immediately, rather than staring at a loading spinner for several seconds.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which are effective strategies in a prompt template system for text rewriting?",
+        "options": [
+          "Separate system prompt (role/persona) from user instruction (specific task)",
+          "Use the same generic prompt for all rewriting modes",
+          "Include specific constraints like target reading level or sentence length limits",
+          "Allow user-configurable parameters (summary length, grade level) that inject into the template"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "A, C, D. Effective prompt templates separate system-level persona from task instructions (A), include concrete constraints like reading level (C), and support configurable parameters for flexibility (D). A single generic prompt for everything (B) produces inconsistent results.",
+        "isMulti": true
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-genai-3-ro",
+    "questions": []
+  },
+  "el": {
+    "id": "quiz-genai-3-el",
+    "questions": []
+  }
+}

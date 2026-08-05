@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Why is Layer Normalization preferred over Batch Normalization in transformers?",
+        "options": [
+          "Layer Norm uses fewer parameters",
+          "Layer Norm normalizes across features within a single sample, independent of batch size",
+          "Layer Norm is faster to compute",
+          "Layer Norm does not require any learnable parameters"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Layer Norm normalizes across the feature dimension per sample, making it independent of batch size. This is crucial for variable-length sequences and autoregressive generation where batch size can be 1.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What are the learnable parameters in Layer Normalization?",
+        "options": [
+          "Gamma (γ) for scaling and Beta (β) for shifting",
+          "Mean (μ) and variance (σ²)",
+          "Query, Key, and Value matrices",
+          "Learning rate and epsilon"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "After normalizing to zero mean and unit variance, gamma and beta allow the network to learn the optimal scale and shift for each feature dimension.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What is the difference between pre-norm and post-norm in transformers?",
+        "options": [
+          "Pre-norm applies normalization after the sublayer",
+          "Post-norm applies normalization before the sublayer",
+          "Pre-norm: x + Sublayer(LayerNorm(x)); Post-norm: LayerNorm(x + Sublayer(x))",
+          "They are identical in practice"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Pre-norm normalizes before the sublayer (used in GPT-2 and most modern LLMs), while post-norm normalizes after (original transformer). Pre-norm provides more stable gradient flow.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are true about RMSNorm?Select all that apply",
+        "options": [
+          "It requires computing both mean and variance",
+          "It only normalizes by the root mean square, skipping mean centering",
+          "It is slower than Layer Norm",
+          "It is used in LLaMA and other modern architectures"
+        ],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "RMSNorm simplifies Layer Norm by removing mean centering, only dividing by the RMS. It is computationally cheaper and used in LLaMA, Gemma, and other modern architectures.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What does the epsilon (ε) value in Layer Norm prevent?",
+        "options": [
+          "Division by zero when variance is very small",
+          "Overflow in the mean calculation",
+          "Negative values in the output",
+          "Gradients from becoming too large"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Epsilon is a small constant (typically 1e-5) added to the variance before taking the square root, preventing division by zero when features are nearly identical.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

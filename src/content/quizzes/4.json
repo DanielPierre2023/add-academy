@@ -1,0 +1,249 @@
+{
+  "lectureId": "4",
+  "en": {
+    "id": "quiz-4-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Why do transformers require positional encoding, unlike RNNs?",
+        "options": [
+          "Transformers process tokens in parallel with no inherent notion of sequence order",
+          "Transformers use convolutional layers that are position-invariant",
+          "Positional encoding replaces the need for an embedding layer",
+          "RNNs use positional encoding internally, but transformers must add it explicitly"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Transformers process all tokens simultaneously via self-attention, treating input as a set, not a sequence. Without positional encoding, 'cat sat mat' = 'mat sat cat'. RNNs encode order naturally by processing tokens sequentially.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "What is the primary advantage of multi-head attention over single-head attention?",
+        "options": [
+          "It reduces the total number of parameters in the model",
+          "It allows the model to jointly attend to information from different representation subspaces",
+          "It eliminates the need for residual connections",
+          "It forces each head to attend to a fixed window of neighboring tokens"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Multi-head attention splits representation into subspaces, letting different heads capture different relationship types (syntactic vs. semantic). It doesn't reduce parameters or constrain heads to local windows.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which are true about the original 'Attention Is All You Need' architecture?Select all that apply",
+        "options": [
+          "It uses an encoder-decoder structure for machine translation",
+          "It relies on recurrence in the encoder to capture long-range dependencies",
+          "It uses residual connections and layer normalization to stabilize training",
+          "The decoder uses masked self-attention to prevent attending to future positions"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "The original transformer uses encoder-decoder for translation, residual connections + layer norm, and masked self-attention in the decoder. It does NOT use recurrence — eliminating recurrence is the paper's central contribution.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Why did transformers largely replace RNNs and LSTMs for sequence modeling?",
+        "options": [
+          "Transformers use less memory than RNNs for the same sequence length",
+          "RNNs cannot model any long-range dependencies, while transformers can",
+          "Transformers allow full parallelization during training, whereas RNNs must process tokens sequentially",
+          "Transformers do not require backpropagation, unlike RNNs"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "The key advantage is parallelization: RNNs process sequentially (slow). Transformers compute attention over all positions simultaneously. RNNs CAN model long-range dependencies in theory. Transformers actually use MORE memory (quadratic). Both use backpropagation.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "In self-attention, what do Query (Q), Key (K), and Value (V) represent conceptually?",
+        "options": [
+          "Q = what a token is looking for, K = what a token offers to match, V = actual content to aggregate",
+          "Q = the token's position, K = the token's embedding, V = the attention weight",
+          "Q, K, V are three identical copies of the input with no distinct roles",
+          "Q determines output length, K determines input length, V stores positional encoding"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Q (Query) = what info a token seeks. K (Key) = what a token advertises. Their dot product determines attention weights. V (Value) carries the content that gets weighted and summed.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-4-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "De ce au nevoie transformer-ele de codificare pozițională, spre deosebire de RNN-uri?",
+        "options": [
+          "Transformer-ele procesează token-urile în paralel, fără noțiune inerentă de ordine secvențială",
+          "Transformer-ele folosesc straturi convoluționale care sunt invariante la poziție",
+          "Codificarea pozițională înlocuiește nevoia de strat de embedding",
+          "RNN-urile folosesc codificare pozițională intern, dar transformer-ele trebuie să o adauge explicit"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Transformer-ele procesează toți tokenii simultan prin self-attention, tratând input-ul ca mulțime, nu secvență. Fără codificare pozițională, ordinea cuvintelor s-ar pierde.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Care este avantajul principal al atenției multi-cap față de atenția cu un singur cap?",
+        "options": [
+          "Reduce numărul total de parametri din model",
+          "Permite modelului să participe simultan la informații din subspații de reprezentare diferite",
+          "Elimină nevoia de conexiuni reziduale",
+          "Forțează fiecare cap să participe la o fereastră fixă de tokeni vecini"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Atenția multi-cap împarte reprezentarea în subspații, permițând diferitelor capete să surprindă diferite tipuri de relații (sintactice vs. semantice).",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Care sunt adevărate despre arhitectura originală 'Attention Is All You Need'?Selectați toate care se aplică",
+        "options": [
+          "Folosește o structură encoder-decoder pentru traducere automată",
+          "Se bazează pe recurență în encoder pentru a surprinde dependențe la distanță mare",
+          "Folosește conexiuni reziduale și normalizare de strat pentru stabilizarea antrenamentului",
+          "Decoder-ul folosește self-attention mascată pentru a preveni participarea la poziții viitoare"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "Transformer-ul original folosește encoder-decoder, conexiuni reziduale + normalizare, și self-attention mascată în decoder. NU folosește recurență — eliminarea recurenței este contribuția centrală.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "De ce au înlocuit transformer-ele în mare parte RNN-urile și LSTM-urile?",
+        "options": [
+          "Transformer-ele folosesc mai puțină memorie decât RNN-urile pentru aceeași lungime de secvență",
+          "RNN-urile nu pot modela nicio dependență pe termen lung",
+          "Transformer-ele permit paralelizare completă în timpul antrenamentului, în timp ce RNN-urile procesează secvențial",
+          "Transformer-ele nu necesită retropropagare, spre deosebire de RNN-uri"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Avantajul cheie: paralelizarea. RNN-urile procesează secvențial (lent). Transformer-ele calculează atenția pe toate pozițiile simultan. RNN-urile POT modela dependențe pe termen lung. Transformer-ele folosesc de fapt MAI MULTĂ memorie.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "În self-attention, ce reprezintă conceptual Query (Q), Key (K) și Value (V)?",
+        "options": [
+          "Q = ce caută un token, K = ce oferă un token pentru potrivire, V = conținutul real de agregat",
+          "Q = poziția tokenului, K = embedding-ul tokenului, V = ponderea atenției",
+          "Q, K, V sunt trei copii identice ale inputului fără roluri distincte",
+          "Q determină lungimea output-ului, K determină lungimea inputului, V stochează codificarea pozițională"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Q (Query) = ce informație caută un token. K (Key) = ce oferă un token. Produsul lor scalar determină ponderile atenției. V (Value) poartă conținutul care este ponderat și sumat.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-4-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Γιατί οι transformers χρειάζονται κωδικοποίηση θέσης, σε αντίθεση με τα RNN;",
+        "options": [
+          "Οι transformers επεξεργάζονται tokens παράλληλα χωρίς εγγενή έννοια σειράς",
+          "Οι transformers χρησιμοποιούν convolutional layers αδιάφορα θέσης",
+          "Η κωδικοποίηση θέσης αντικαθιστά την ανάγκη για embedding layer",
+          "Τα RNN χρησιμοποιούν κωδικοποίηση θέσης εσωτερικά, αλλά οι transformers πρέπει να την προσθέσουν ρητά"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Οι transformers επεξεργάζονται όλα τα tokens ταυτόχρονα μέσω self-attention. Χωρίς κωδικοποίηση θέσης, η σειρά λέξεων θα χανόταν.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ποιο είναι το κύριο πλεονέκτημα της multi-head attention έναντι single-head;",
+        "options": [
+          "Μειώνει τον συνολικό αριθμό παραμέτρων",
+          "Επιτρέπει στο μοντέλο να παρακολουθεί ταυτόχρονα πληροφορίες από διαφορετικούς υποχώρους αναπαράστασης",
+          "Εξαλείφει την ανάγκη για residual connections",
+          "Αναγκάζει κάθε κεφαλή να παρακολουθεί σταθερό παράθυρο γειτονικών tokens"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Η multi-head attention χωρίζει την αναπαράσταση σε υποχώρους, επιτρέποντας σε διαφορετικές κεφαλές να συλλαμβάνουν διαφορετικούς τύπους σχέσεων.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ποια ισχύουν για την αρχική αρχιτεκτονική 'Attention Is All You Need';Επιλέξτε όλα όσα ισχύουν",
+        "options": [
+          "Χρησιμοποιεί δομή encoder-decoder για μηχανική μετάφραση",
+          "Βασίζεται σε αναδρομή στον encoder για μακροπρόθεσμες εξαρτήσεις",
+          "Χρησιμοποιεί residual connections και layer normalization για σταθεροποίηση",
+          "Ο decoder χρησιμοποιεί masked self-attention για αποτροπή πρόσβασης σε μελλοντικές θέσεις"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "Ο αρχικός transformer χρησιμοποιεί encoder-decoder, residual connections + layer norm, και masked self-attention στον decoder. ΔΕΝ χρησιμοποιεί αναδρομή.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Γιατί οι transformers αντικατέστησαν σε μεγάλο βαθμό τα RNN και LSTM;",
+        "options": [
+          "Οι transformers χρησιμοποιούν λιγότερη μνήμη για το ίδιο μήκος ακολουθίας",
+          "Τα RNN δεν μπορούν να μοντελοποιήσουν καμία μακροπρόθεσμη εξάρτηση",
+          "Οι transformers επιτρέπουν πλήρη παραλληλοποίηση, ενώ τα RNN επεξεργάζονται ακολουθιακά",
+          "Οι transformers δεν χρειάζονται backpropagation"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Βασικό πλεονέκτημα: παραλληλοποίηση. Τα RNN επεξεργάζονται ακολουθιακά (αργά). Οι transformers υπολογίζουν attention σε όλες τις θέσεις ταυτόχρονα.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Στο self-attention, τι αντιπροσωπεύουν εννοιολογικά Query (Q), Key (K) και Value (V);",
+        "options": [
+          "Q = τι ψάχνει ένα token, K = τι προσφέρει για αντιστοίχιση, V = πραγματικό περιεχόμενο προς συνάθροιση",
+          "Q = θέση token, K = embedding token, V = βάρος attention",
+          "Q, K, V είναι τρία πανομοιότυπα αντίγραφα εισόδου χωρίς ξεχωριστούς ρόλους",
+          "Q καθορίζει μήκος εξόδου, K μήκος εισόδου, V αποθηκεύει κωδικοποίηση θέσης"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Q = τι πληροφορία ψάχνει ένα token. K = τι προσφέρει. Το εσωτερικό γινόμενό τους καθορίζει τα βάρη attention. V φέρει το περιεχόμενο που ζυγίζεται.",
+        "isMulti": false
+      }
+    ]
+  }
+}

@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What distinguishes AdamW from the original Adam optimizer?",
+        "options": [
+          "AdamW uses a fixed learning rate instead of adaptive rates",
+          "AdamW removes momentum entirely",
+          "AdamW adds gradient noise for better exploration",
+          "AdamW decouples weight decay from the gradient update, applying it directly to the weights"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "In Adam, L2 regularization is entangled with the adaptive learning rate, making it less effective. AdamW fixes this by applying weight decay directly to the parameters (w = w - lr * wd * w), decoupled from the gradient-based update.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why is learning rate warmup used at the start of training?",
+        "options": [
+          "To increase model size gradually",
+          "To prevent large, unstable updates when the optimizer's moment estimates are unreliable in early steps",
+          "To pre-compute the attention masks",
+          "To reduce the vocabulary size before real training begins"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "In early steps, Adam's running averages (first and second moments) are initialized to zero and are not yet reliable estimates. A small learning rate during warmup prevents these inaccurate moment estimates from causing destructively large updates.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What does cosine annealing do to the learning rate?",
+        "options": [
+          "Keeps it constant throughout training",
+          "Increases it linearly until training ends",
+          "Gradually decreases it following a half-cosine curve from peak to near zero",
+          "Alternates it between high and low values every epoch"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Cosine annealing smoothly decreases the learning rate following a half-cosine curve. It starts slow (flat region near peak), decays faster in the middle, and slows again near the end. This gives the model fine-grained convergence.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are true about weight decay in LLM training?Select all that apply",
+        "options": [
+          "It penalizes large weights to reduce overfitting",
+          "It is typically applied to bias terms and LayerNorm parameters",
+          "It is usually applied only to weight matrices, not biases or normalization parameters",
+          "It completely replaces dropout as a regularization technique"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "Weight decay acts as a regularizer by shrinking large weights, preventing overfitting. Best practice applies it only to weight matrices (not biases or LayerNorm params), since those low-dimensional parameters should remain unconstrained.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What is a typical learning rate schedule for LLM pre-training?",
+        "options": [
+          "Constant high learning rate throughout",
+          "Linear warmup followed by cosine decay",
+          "Exponential increase for the entire training run",
+          "Step decay that halves the rate every epoch"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "The standard LLM schedule is linear warmup (over ~1-5% of total steps) to a peak learning rate, followed by cosine annealing decay. This pattern is used by GPT-3, LLaMA, and most modern LLMs.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

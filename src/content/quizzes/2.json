@@ -1,0 +1,246 @@
+{
+  "lectureId": "2",
+  "en": {
+    "id": "quiz-2-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Why do LLMs use subword tokenization instead of splitting text into whole words?",
+        "options": [
+          "It makes the model run faster because subwords require less memory than whole words",
+          "It allows the model to handle rare, misspelled, or novel words by composing them from known subword pieces",
+          "It is required because LLMs cannot process sequences longer than 100 characters",
+          "It ensures every word in every language is always represented as exactly one token"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Subword tokenization solves the vocabulary problem: rare or unknown words can be broken into familiar subword units. Common words may be one token but rare words get split into multiple.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "What effect does increasing the temperature parameter have during text generation?",
+        "options": [
+          "It makes the model generate longer responses with more detail",
+          "It increases the speed of token generation by simplifying computations",
+          "It flattens the probability distribution over tokens, making the output more random and diverse",
+          "It causes the model to access more of its training data for better accuracy"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Higher temperature flattens the probability distribution, giving less likely tokens a better chance. This increases diversity but may reduce coherence.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "What is the key difference between a base model and an instruction-tuned model?Select all that apply",
+        "options": [
+          "Base models have more parameters and are therefore always more capable",
+          "Instruction-tuned models have been further trained to follow user instructions and produce helpful responses",
+          "Base models can only generate text, while instruction-tuned models can also understand images",
+          "A base model predicts next tokens from raw text and tends to continue text rather than answer questions directly"
+        ],
+        "correct": [
+          1,
+          3
+        ],
+        "explanation": "A base model predicts next tokens; ask it a question and it may continue writing questions. Instruction-tuned models are further trained (SFT/RLHF) to follow instructions helpfully.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "A model's context window is 8,192 tokens. Which statement is true?",
+        "options": [
+          "The model can remember information from its previous 8,192 conversations",
+          "The total of both input and generated output must fit within 8,192 tokens for a single interaction",
+          "The model can only accept inputs of up to 8,192 words",
+          "After 8,192 tokens, the model automatically compresses earlier context to continue"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "The context window is the maximum tokens (input + output combined) for a single interaction. It doesn't span conversations, tokens aren't words, and standard Transformers don't compress context.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "What does 'perplexity' measure when evaluating a language model?",
+        "options": [
+          "How confused human users feel reading the model's outputs",
+          "The number of grammatical errors per 1,000 generated tokens",
+          "How surprised the model is by the actual next token — lower values mean better prediction",
+          "The ratio of correct to incorrect answers on a standardized benchmark"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Perplexity quantifies how well the model predicts the next token. Lower perplexity = higher probability assigned to actual tokens = better language model.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-2-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "De ce folosesc LLM-urile tokenizare sub-cuvânt în loc de împărțirea textului în cuvinte întregi?",
+        "options": [
+          "Face modelul să ruleze mai rapid deoarece sub-cuvintele necesită mai puțină memorie",
+          "Permite modelului să gestioneze cuvinte rare, greșit ortografiate sau noi, compunându-le din piese sub-cuvânt cunoscute",
+          "Este necesar deoarece LLM-urile nu pot procesa secvențe mai lungi de 100 de caractere",
+          "Asigură că fiecare cuvânt din fiecare limbă este reprezentat întotdeauna ca exact un token"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Tokenizarea sub-cuvânt rezolvă problema vocabularului: cuvintele rare pot fi descompuse în unități sub-cuvânt familiare. Cuvintele comune pot fi un singur token, dar cele rare sunt împărțite în mai mulți.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ce efect are creșterea parametrului de temperatură în timpul generării de text?",
+        "options": [
+          "Face modelul să genereze răspunsuri mai lungi cu mai multe detalii",
+          "Crește viteza de generare a token-urilor prin simplificarea calculelor",
+          "Aplatizează distribuția de probabilitate peste token-uri, făcând output-ul mai aleatoriu și divers",
+          "Determină modelul să acceseze mai multe date de antrenament pentru o precizie mai bună"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Temperatura mai mare aplatizează distribuția de probabilitate, dând token-urilor mai puțin probabile o șansă mai bună. Acest lucru crește diversitatea dar poate reduce coerența.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Care este diferența cheie între un model de bază și un model ajustat pe instrucțiuni?Selectați toate care se aplică",
+        "options": [
+          "Modelele de bază au mai mulți parametri și sunt deci întotdeauna mai capabile",
+          "Modelele ajustate pe instrucțiuni au fost antrenate suplimentar pentru a urma instrucțiunile utilizatorului",
+          "Modelele de bază pot genera doar text, în timp ce cele ajustate pot și înțelege imagini",
+          "Un model de bază prezice token-uri din text brut și tinde să continue textul în loc să răspundă direct la întrebări"
+        ],
+        "correct": [
+          1,
+          3
+        ],
+        "explanation": "Un model de bază prezice token-uri; pune-i o întrebare și poate continua să scrie întrebări. Modelele ajustate sunt antrenate suplimentar (SFT/RLHF) pentru a urma instrucțiuni.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Fereastra de context a unui model este de 8.192 token-uri. Care afirmație este adevărată?",
+        "options": [
+          "Modelul poate reține informații din ultimele 8.192 de conversații",
+          "Totalul input-ului și output-ului generat trebuie să se încadreze în 8.192 token-uri pentru o singură interacțiune",
+          "Modelul poate accepta doar inputuri de până la 8.192 de cuvinte",
+          "După 8.192 token-uri, modelul comprimă automat contextul anterior pentru a continua"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Fereastra de context este maximul de token-uri (input + output combinat) pentru o singură interacțiune. Nu se extinde între conversații, token-urile nu sunt cuvinte, iar Transformer-ele standard nu comprimă contextul.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Ce măsoară 'perplexitatea' la evaluarea unui model de limbaj?",
+        "options": [
+          "Cât de confuzi se simt utilizatorii citind output-urile modelului",
+          "Numărul de erori gramaticale la fiecare 1.000 de token-uri generate",
+          "Cât de surprins este modelul de token-ul următor real — valori mai mici înseamnă predicție mai bună",
+          "Raportul răspunsurilor corecte față de cele incorecte pe un benchmark standardizat"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Perplexitatea cuantifică cât de bine prezice modelul token-ul următor. Perplexitate mai mică = probabilitate mai mare atribuită token-urilor reale = model de limbaj mai bun.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-2-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Γιατί τα LLM χρησιμοποιούν tokenization υπολέξεων αντί για διαχωρισμό σε ολόκληρες λέξεις;",
+        "options": [
+          "Κάνει το μοντέλο πιο γρήγορο επειδή οι υπολέξεις χρειάζονται λιγότερη μνήμη",
+          "Επιτρέπει στο μοντέλο να χειρίζεται σπάνιες, λανθασμένες ή νέες λέξεις συνθέτοντάς τες από γνωστά κομμάτια",
+          "Είναι απαραίτητο επειδή τα LLM δεν μπορούν να επεξεργαστούν ακολουθίες μεγαλύτερες από 100 χαρακτήρες",
+          "Εξασφαλίζει ότι κάθε λέξη σε κάθε γλώσσα αντιπροσωπεύεται πάντα ως ακριβώς ένα token"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Το tokenization υπολέξεων λύνει το πρόβλημα λεξιλογίου: σπάνιες λέξεις μπορούν να αναλυθούν σε γνωστές μονάδες υπολέξεων.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Τι επίδραση έχει η αύξηση της θερμοκρασίας κατά τη δημιουργία κειμένου;",
+        "options": [
+          "Κάνει το μοντέλο να παράγει μεγαλύτερες απαντήσεις με περισσότερες λεπτομέρειες",
+          "Αυξάνει την ταχύτητα δημιουργίας tokens απλοποιώντας τους υπολογισμούς",
+          "Ισοπεδώνει την κατανομή πιθανοτήτων, κάνοντας την έξοδο πιο τυχαία και ποικίλη",
+          "Αναγκάζει το μοντέλο να αποκτήσει πρόσβαση σε περισσότερα δεδομένα εκπαίδευσης"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Υψηλότερη θερμοκρασία ισοπεδώνει την κατανομή πιθανοτήτων, δίνοντας στα λιγότερο πιθανά tokens καλύτερη πιθανότητα. Αυξάνει την ποικιλομορφία αλλά μπορεί να μειώσει τη συνοχή.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ποια είναι η βασική διαφορά μεταξύ βασικού μοντέλου και μοντέλου ρυθμισμένου σε οδηγίες;Επιλέξτε όλα όσα ισχύουν",
+        "options": [
+          "Τα βασικά μοντέλα έχουν περισσότερες παραμέτρους και είναι πάντα πιο ικανά",
+          "Τα μοντέλα ρυθμισμένα σε οδηγίες έχουν εκπαιδευτεί επιπλέον για να ακολουθούν οδηγίες χρηστών",
+          "Τα βασικά μοντέλα μπορούν μόνο να παράγουν κείμενο, ενώ τα ρυθμισμένα κατανοούν και εικόνες",
+          "Ένα βασικό μοντέλο προβλέπει tokens από ακατέργαστο κείμενο και τείνει να συνεχίζει αντί να απαντά"
+        ],
+        "correct": [
+          1,
+          3
+        ],
+        "explanation": "Ένα βασικό μοντέλο προβλέπει tokens. Ρωτήστε το κάτι και μπορεί να συνεχίσει να γράφει ερωτήσεις. Τα ρυθμισμένα μοντέλα εκπαιδεύονται επιπλέον (SFT/RLHF) για να ακολουθούν οδηγίες.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Το παράθυρο context ενός μοντέλου είναι 8.192 tokens. Ποια δήλωση ισχύει;",
+        "options": [
+          "Το μοντέλο θυμάται πληροφορίες από τις προηγούμενες 8.192 συνομιλίες του",
+          "Το σύνολο εισόδου και παραγόμενης εξόδου πρέπει να χωρά στα 8.192 tokens ανά αλληλεπίδραση",
+          "Το μοντέλο δέχεται μόνο εισόδους μέχρι 8.192 λέξεις",
+          "Μετά τα 8.192 tokens, το μοντέλο συμπιέζει αυτόματα το προηγούμενο context"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Το παράθυρο context είναι ο μέγιστος αριθμός tokens (είσοδος + έξοδος μαζί) για μία αλληλεπίδραση. Δεν εκτείνεται σε συνομιλίες και τα tokens δεν είναι λέξεις.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Τι μετρά η 'perplexity' κατά την αξιολόγηση ενός γλωσσικού μοντέλου;",
+        "options": [
+          "Πόσο μπερδεμένοι αισθάνονται οι χρήστες διαβάζοντας τις εξόδους",
+          "Τον αριθμό γραμματικών σφαλμάτων ανά 1.000 παραγόμενα tokens",
+          "Πόσο εκπληγμένο είναι το μοντέλο από το πραγματικό επόμενο token — χαμηλότερες τιμές = καλύτερη πρόβλεψη",
+          "Την αναλογία σωστών προς λανθασμένες απαντήσεις σε τυποποιημένο benchmark"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Η perplexity ποσοτικοποιεί πόσο καλά προβλέπει το μοντέλο το επόμενο token. Χαμηλότερη perplexity = υψηλότερη πιθανότητα στα πραγματικά tokens = καλύτερο μοντέλο.",
+        "isMulti": false
+      }
+    ]
+  }
+}

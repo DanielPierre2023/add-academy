@@ -5,52 +5,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What distinguishes self-attention from general attention?",
+        "options": [
+          "Self-attention uses a fixed context vector",
+          "Queries, keys, and values all come from the same input sequence",
+          "Self-attention has no learnable parameters",
+          "Self-attention only works with images"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "In self-attention, Q, K, and V are all derived from the same input sequence (via learned projections), whereas cross-attention derives Q from one sequence and K/V from another.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What are the Q, K, V matrices computed from?",
+        "options": [
+          "Random initialization only — they are not learned",
+          "The output of the previous transformer block only",
+          "Linear projections of the input: Q=XW_q, K=XW_k, V=XW_v with learned weight matrices",
+          "Hard-coded rules based on word frequency"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Q, K, V are produced by multiplying the input X by three separate learned weight matrices W_q, W_k, W_v. These projections allow each to specialize in its role.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What role does the Query vector play?",
+        "options": [
+          "It represents \"what am I looking for?\" — the current token's search criteria",
+          "It stores the actual content to be retrieved",
+          "It serves as the position encoding",
+          "It applies dropout during training"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "The Query encodes what a token is looking for. The Key encodes what a token offers. The dot product Q*K measures compatibility. The Value provides the actual information to retrieve.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "If input X has shape (batch, seq_len, d_model) and W_q has shape (d_model, d_k), what is the shape of Q?",
+        "options": [
+          "(batch, d_k)",
+          "(batch, d_model, d_k)",
+          "(seq_len, d_k)",
+          "(batch, seq_len, d_k)"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Q = X @ W_q, so (batch, seq_len, d_model) @ (d_model, d_k) = (batch, seq_len, d_k). Each token gets a d_k-dimensional query vector.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Why does self-attention use separate projections instead of raw inputs?",
+        "options": [
+          "To reduce sequence length",
+          "Projections let the model learn different representations for searching (Q), being found (K), and information retrieval (V)",
+          "Raw inputs would cause numerical overflow",
+          "Projections are only used for efficiency, not expressiveness"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Separate W_q, W_k, W_v allow the model to learn specialized representations: what to search for, what to advertise, and what content to provide. Using raw inputs would limit expressiveness.",
         "isMulti": false
       }
     ]
@@ -65,7 +90,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -75,7 +100,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -85,7 +110,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -95,7 +120,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -105,7 +130,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -120,7 +145,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -130,7 +155,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -140,7 +165,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -150,7 +175,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -160,7 +185,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

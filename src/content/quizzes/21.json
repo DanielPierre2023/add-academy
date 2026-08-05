@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the core formula for a residual (shortcut) connection?",
+        "options": [
+          "y = f(x)",
+          "y = x · f(x)",
+          "y = x + f(x)",
+          "y = max(x, f(x))"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "The residual connection adds the input directly to the sublayer output: y = x + f(x). This allows the identity function to be learned trivially (set f(x) = 0) and creates a gradient highway.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What problem do residual connections primarily solve?",
+        "options": [
+          "Overfitting in shallow networks",
+          "Vanishing/exploding gradients in deep networks",
+          "Slow inference speed",
+          "High memory usage"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "In deep networks, gradients shrink exponentially as they propagate through layers. Residual connections provide a direct gradient highway, allowing effective training of 100+ layer networks.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What is the \"residual stream\" perspective?",
+        "options": [
+          "Each layer replaces the representation entirely",
+          "Information only flows forward, never backward",
+          "The model uses a streaming data format",
+          "A persistent vector flows through the network; each layer reads from and writes to it additively"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "The residual stream is a modern interpretability concept: think of the hidden state as a persistent vector that each layer adds to, rather than each layer replacing the representation.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Why do residual connections require matching dimensions?Select all that apply",
+        "options": [
+          "The addition x + f(x) requires both tensors to have the same shape",
+          "The model cannot learn if dimensions differ",
+          "This is why the FFN projects back to d_model after expanding to 4×d_model",
+          "Different dimensions would cause gradient explosion"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "Element-wise addition requires same shape. This is exactly why the FFN expands to 4d then projects back to d_model, and why attention output is projected back to d_model.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "In the GPT-2 transformer block, what is the full pattern with residual connections?",
+        "options": [
+          "Attention → LayerNorm → FFN → LayerNorm",
+          "x + Attention(LayerNorm(x)) → then + FFN(LayerNorm(...))",
+          "LayerNorm(Attention(x) + FFN(x))",
+          "FFN → Attention → LayerNorm → residual"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "GPT-2 uses pre-norm with residuals: x1 = x + MultiHeadAttention(LayerNorm(x)), then x2 = x1 + FFN(LayerNorm(x1)). Each sublayer is wrapped: norm first, then add residual.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

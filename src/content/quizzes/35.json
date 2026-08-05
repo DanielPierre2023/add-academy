@@ -5,54 +5,79 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the core idea behind LoRA (Low-Rank Adaptation)?",
+        "options": [
+          "Replacing all weight matrices with smaller random matrices",
+          "Pruning unimportant neurons to reduce model size",
+          "Freezing original weights and learning low-rank update matrices that are added to them",
+          "Training only the embedding layer while keeping all other layers fixed"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "LoRA freezes the original pre-trained weights and introduces trainable low-rank decomposition matrices (A and B) whose product is added to the original weight matrix. This dramatically reduces the number of trainable parameters while maintaining model quality.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "In LoRA, a weight update is represented as W + BA, where B has shape (d x r) and A has shape (r x k). What does the rank r control?",
+        "options": [
+          "The number of attention heads in the model",
+          "The expressiveness and number of trainable parameters in the low-rank update",
+          "The batch size used during training",
+          "The number of layers that are frozen"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "The rank r determines the dimensionality of the low-rank decomposition. A higher rank allows more expressive updates but increases the number of trainable parameters. Typical values range from 4 to 64 depending on the task complexity.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are benefits of using LoRA compared to full fine-tuning? Select all that apply",
+        "options": [
+          "Significantly fewer trainable parameters",
+          "It always outperforms full fine-tuning on every task",
+          "Lower GPU memory requirements during training",
+          "Multiple LoRA adapters can be swapped without reloading the base model"
+        ],
         "correct": [
           0,
           2,
           3
         ],
-        "explanation": "",
+        "explanation": "LoRA trains far fewer parameters (often <1% of the model), requires less GPU memory since optimizer states are only needed for the small adapter matrices, and allows hot-swapping adapters for different tasks on the same base model. It does not always outperform full fine-tuning.",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "What distinguishes QLoRA from standard LoRA?",
+        "options": [
+          "QLoRA uses a higher rank for better performance",
+          "QLoRA applies LoRA only to query projection matrices",
+          "QLoRA replaces the transformer architecture with a quantized variant",
+          "QLoRA quantizes the base model to 4-bit precision and trains LoRA adapters in higher precision on top"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "QLoRA combines 4-bit NormalFloat quantization of the frozen base model with LoRA adapter training in BFloat16/Float16 precision. This enables fine-tuning of very large models on consumer GPUs while maintaining near-full-precision quality.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "If a weight matrix W has dimensions 4096 x 4096 and LoRA uses rank r=16, how many trainable parameters does the LoRA adapter add for that single matrix?",
+        "options": [
+          "65,536",
+          "131,072",
+          "16,777,216",
+          "4,096"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "LoRA adds matrices B (4096 x 16) and A (16 x 4096), totaling 4096 x 16 + 16 x 4096 = 65,536 + 65,536 = 131,072 parameters. Compare this to the original 4096 x 4096 = 16,777,216 parameters -- a 128x reduction.",
         "isMulti": false
       }
     ]
@@ -67,7 +92,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -77,19 +102,19 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           2,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -99,7 +124,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -109,7 +134,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -124,7 +149,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -134,19 +159,19 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           2,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -156,7 +181,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -166,7 +191,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

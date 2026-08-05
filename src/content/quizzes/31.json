@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Why is data deduplication an important step in pretraining data preparation?",
+        "options": [
+          "It increases the total dataset size",
+          "It prevents the model from memorizing repeated passages and improves generalization",
+          "It speeds up the tokenizer",
+          "It reduces the vocabulary size"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Duplicate documents cause the model to see identical text multiple times, leading to memorization rather than learning general patterns. Deduplication ensures each training example contributes unique information, improving generalization and reducing test-set contamination.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What is the purpose of weight initialization strategies like Xavier or Kaiming for transformer models?",
+        "options": [
+          "To ensure all weights start at exactly zero",
+          "To maximize the initial loss value",
+          "To maintain stable activation and gradient magnitudes across layers at the start of training",
+          "To pre-load knowledge from a previous model"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Proper initialization ensures that forward-pass activations and backward-pass gradients neither explode nor vanish through many layers. This is critical for transformers with dozens of layers to begin learning effectively from the first step.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "In a complete pretraining pipeline, what is the role of the learning rate warmup phase?",
+        "options": [
+          "To gradually increase the learning rate from near-zero, allowing the optimizer to adapt before taking large steps",
+          "To immediately set the learning rate to its maximum value",
+          "To reduce the learning rate to zero at the end of training",
+          "To skip the first few batches of data"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Warmup prevents early instability by starting with tiny updates. The optimizer’s adaptive statistics (like Adam’s running mean and variance of gradients) need several steps to become accurate before the full learning rate can be applied safely.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which components must be saved together in a training checkpoint for correct resumption?Select all that apply",
+        "options": [
+          "Model weights and optimizer state (momentum, variance estimates)",
+          "The raw training text files",
+          "Current training step and learning rate scheduler state",
+          "The Python interpreter version"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "Correct resumption requires model weights, the full optimizer state (Adam stores per-parameter momentum and variance), the training step counter, and the LR scheduler state. Without these, the optimizer restarts from scratch, causing a training discontinuity.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Why is shuffling the training data between epochs important for pretraining?",
+        "options": [
+          "It changes the vocabulary used by the tokenizer",
+          "It increases the total number of training tokens",
+          "It makes the model larger",
+          "It prevents the model from learning spurious patterns based on document ordering"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Without shuffling, the model might learn correlations between consecutive documents (e.g., topics that happen to be adjacent in the corpus). Shuffling ensures each mini-batch is a representative sample of the full data distribution.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

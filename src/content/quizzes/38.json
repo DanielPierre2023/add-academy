@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What does MMLU primarily measure in a language model?",
+        "options": [
+          "Text generation speed in tokens per second",
+          "The model’s ability to translate between languages",
+          "Multitask knowledge and reasoning across 57 academic subjects",
+          "The perplexity on a held-out corpus"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "MMLU (Massive Multitask Language Understanding) tests a model across 57 subjects ranging from STEM to humanities, measuring broad knowledge and reasoning ability.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What is benchmark contamination?",
+        "options": [
+          "Running a benchmark on hardware that is too slow",
+          "When benchmark test data appears in the model’s training set, inflating scores",
+          "Using too many benchmarks to evaluate a single model",
+          "Mixing different model architectures in a comparison"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Benchmark contamination occurs when test examples leak into training data, allowing the model to memorize answers rather than genuinely reason, producing artificially high scores.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What does HellaSwag evaluate?",
+        "options": [
+          "Mathematical problem-solving",
+          "Code generation accuracy",
+          "Factual recall from Wikipedia",
+          "Commonsense reasoning via sentence completion"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "HellaSwag tests commonsense natural language inference by asking models to pick the most plausible continuation of a scenario from adversarially crafted options.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are valid evaluation metrics for language models?Select all that apply",
+        "options": [
+          "Perplexity on a held-out test set",
+          "Number of parameters in the model",
+          "Few-shot accuracy on downstream tasks",
+          "Training compute measured in FLOPs"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "Perplexity measures how well the model predicts unseen text, and few-shot accuracy measures task performance with minimal examples. Parameter count and FLOPs describe the model, not its quality.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Why is it risky to compare models using a single benchmark alone?",
+        "options": [
+          "A model may overfit or be optimized for that specific benchmark without generalizing",
+          "Benchmarks always produce identical scores for all models",
+          "Single benchmarks run faster so they are less accurate",
+          "It is impossible to run the same benchmark twice"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "A single benchmark captures only one slice of capability. Models can be tuned to excel on one test while underperforming elsewhere, so multi-benchmark evaluation gives a fuller picture.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

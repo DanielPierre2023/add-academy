@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the key advantage of GELU over ReLU in transformers?",
+        "options": [
+          "GELU is always faster to compute",
+          "GELU uses fewer parameters",
+          "GELU is smooth and differentiable everywhere, avoiding dead neurons",
+          "GELU outputs are always positive"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "GELU provides a smooth, probabilistic gating that avoids the \"dead neuron\" problem of ReLU (where neurons permanently output zero for negative inputs). Its smooth gradient helps training stability.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What is the expansion ratio in a transformer feed-forward network?",
+        "options": [
+          "d_model → 2×d_model → d_model",
+          "d_model → 4×d_model → d_model",
+          "d_model → d_model → d_model",
+          "d_model → 8×d_model → d_model"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "The standard transformer FFN expands to 4× the model dimension in the hidden layer, then projects back down. This expansion gives the network more capacity to learn complex patterns.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What role does the FFN play in a transformer?",
+        "options": [
+          "It computes attention scores between tokens",
+          "It generates positional encodings",
+          "It tokenizes input text",
+          "It processes each token independently, acting as a learned memory that stores knowledge"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "The FFN operates on each position independently (unlike attention which mixes positions). Research shows FFN layers store factual knowledge as key-value pairs in their weight matrices.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are true about the GELU activation function?Select all that apply",
+        "options": [
+          "It can output small negative values for slightly negative inputs",
+          "It has a sharp kink at zero like ReLU",
+          "It can be approximated as x · σ(1.702x)",
+          "It always zeros out negative inputs"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "GELU is smooth (no kink at zero), allows small negative outputs (soft gating), and has a practical sigmoid-based approximation.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Why does the FFN have more parameters than the attention layer in most transformers?",
+        "options": [
+          "Because attention uses no weight matrices",
+          "Because the 4× expansion creates large weight matrices (d×4d + 4d×d)",
+          "Because the FFN processes multiple tokens at once",
+          "Because the FFN has more layers"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "With expansion factor 4, the FFN has two matrices of size d×4d and 4d×d, totaling 8d² parameters, compared to attention's 4d² (Q, K, V, O projections).",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

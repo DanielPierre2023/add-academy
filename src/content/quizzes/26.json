@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the purpose of a sliding window in a text DataLoader for language models?",
+        "options": [
+          "To randomly sample tokens from the corpus",
+          "To compress the vocabulary size",
+          "To create overlapping input-target pairs by shifting one position at a time through the text",
+          "To apply attention masking during inference"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "A sliding window moves through the tokenized text, at each position creating an input chunk and a target chunk shifted by one token. This maximizes the training data extracted from a corpus while maintaining sequential context.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "In next-token prediction, if the input sequence is [A, B, C, D], what is the target sequence?",
+        "options": [
+          "[D, C, B, A]",
+          "[B, C, D, E]",
+          "[A, B, C, D]",
+          "[B, C, D, A]"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "For next-token prediction, the target at each position is the token immediately following it. So input [A, B, C, D] has targets [B, C, D, E] where E is the next token in the original sequence.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What is the primary purpose of gradient clipping during training?",
+        "options": [
+          "To increase the learning rate over time",
+          "To reduce model size by pruning small gradients",
+          "To ensure the loss is always decreasing",
+          "To prevent exploding gradients by capping the gradient norm to a maximum value"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Gradient clipping rescales the gradient vector when its norm exceeds a threshold (commonly 1.0). This prevents catastrophically large parameter updates that can destabilize or crash training.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are essential components of a standard LLM training loop?Select all that apply",
+        "options": [
+          "Applying dropout to the target labels",
+          "Forward pass, loss computation, backward pass, optimizer step",
+          "Recomputing the tokenizer vocabulary each epoch",
+          "Zeroing gradients before each forward pass to avoid accumulation from previous steps"
+        ],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "The core training loop is: zero gradients, forward pass, compute loss, backward pass, optimizer step. Dropout is applied to activations (not labels), and the tokenizer is fixed before training.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Why is a stride smaller than the context length used in the sliding window DataLoader?",
+        "options": [
+          "It creates overlapping windows so every token appears with different amounts of preceding context",
+          "It reduces the total number of training examples",
+          "It speeds up the DataLoader significantly",
+          "It is required by the tokenizer"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "A stride smaller than the context window creates overlap, so each token appears in multiple training examples with varying amounts of context. This provides more diverse training signal and better utilizes the data.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What are the two sublayers inside a GPT-2 transformer block?",
+        "options": [
+          "Embedding layer and output projection",
+          "Multi-head causal self-attention and feed-forward network",
+          "Encoder and decoder",
+          "Tokenizer and detokenizer"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Each transformer block contains (1) multi-head causal self-attention for mixing information between positions, and (2) FFN for processing each position independently.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "In GPT-2's pre-norm style, where does Layer Normalization go?",
+        "options": [
+          "Before each sublayer (attention and FFN)",
+          "After each sublayer",
+          "Only after the final block",
+          "Only before the first block"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "GPT-2 uses pre-norm: LayerNorm is applied before each sublayer, then the residual connection adds the original input. This improves gradient flow.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Why is the transformer block designed to be stackable?",
+        "options": [
+          "To reduce the number of parameters",
+          "To speed up inference",
+          "Each layer builds more abstract representations; depth enables emergent capabilities",
+          "It is required by the attention mechanism"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Stacking identical blocks (12 in GPT-2 small, 96 in GPT-3) allows the model to build increasingly abstract representations. Deeper models exhibit emergent abilities like reasoning.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "What ensures the input and output dimensions of a transformer block are the same?Select all that apply",
+        "options": [
+          "A special reshape operation at the end",
+          "Residual connections require matching dimensions (x + f(x))",
+          "Both attention output projection and FFN project back to d_model",
+          "Layer Normalization ensures matching dimensions"
+        ],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "Residual connections require x and f(x) to have the same shape, so both attention and FFN sublayers project back to d_model. This makes blocks stackable.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "How does information flow through a transformer block?",
+        "options": [
+          "Attention and FFN operate in parallel",
+          "FFN runs first, then attention",
+          "All tokens are processed independently",
+          "Attention mixes information between positions, then FFN processes each position independently"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "The attention sublayer lets tokens communicate (inter-position mixing), then the FFN processes each resulting representation independently (intra-position processing).",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

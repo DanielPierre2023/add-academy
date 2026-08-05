@@ -1,0 +1,63 @@
+{
+  "lectureId": "genai-5",
+  "en": {
+    "id": "quiz-genai-5-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "What does Otsu’s method determine in an OCR pipeline?",
+        "options": [
+          "The font size of characters in the image",
+          "The optimal threshold to separate foreground (text) from background",
+          "The reading order of text blocks on the page",
+          "The language of the document"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Otsu’s method maximises between-class variance to find the single intensity value that best separates dark foreground pixels (text) from lighter background pixels. This binarization step is critical before character segmentation can begin.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Why is document layout analysis performed before information extraction?",
+        "options": [
+          "It reduces the file size of the uploaded document",
+          "It translates the document into English",
+          "It identifies zones (headers, tables, body) so extractors can apply the right rules to each region",
+          "It encrypts sensitive fields for security"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Layout analysis segments the page into headers, body text, tables, and footers. This lets the extraction stage apply specialised rules — for example, table-aware parsing for line items versus free-text parsing for addresses — producing much more accurate structured output.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which techniques does DocMind’s Q&A pipeline use to answer questions about a document?",
+        "options": [
+          "Text chunking with overlap to preserve context at boundaries",
+          "Training a neural network on each uploaded document",
+          "Query keyword expansion using synonym dictionaries",
+          "Scoring chunks by keyword match count and data-presence heuristics"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "A, C, D. The pipeline splits text into overlapping chunks, expands the user’s question with synonyms, then scores each chunk by how many keywords it contains (with bonuses for monetary values and dates). No neural network is trained — the approach is entirely keyword-based, making it fast and dependency-free.",
+        "isMulti": true
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-genai-5-ro",
+    "questions": []
+  },
+  "el": {
+    "id": "quiz-genai-5-el",
+    "questions": []
+  }
+}

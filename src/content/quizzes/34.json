@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is a classification head in the context of fine-tuning a language model for classification?",
+        "options": [
+          "A separate pre-trained model that classifies text independently",
+          "The attention mechanism in the first transformer layer",
+          "A linear layer added on top of the transformer that maps hidden states to class logits",
+          "The tokenizer's embedding layer used for label encoding"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "A classification head is typically a linear (fully connected) layer appended to the transformer's output that projects the hidden representation into the number of target classes, producing logits for classification.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why is layer freezing used during classification fine-tuning?",
+        "options": [
+          "To increase the total number of trainable parameters",
+          "To preserve learned representations in lower layers while only updating upper layers and the classification head",
+          "To make inference faster by removing unnecessary layers",
+          "To convert the model from float32 to int8 precision"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Layer freezing keeps the weights of earlier layers fixed during fine-tuning, preserving the general language representations learned during pre-training. Only the upper layers and the new classification head are updated, reducing overfitting risk and training cost.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "In a causal (decoder-only) language model used for classification, why is the last token's hidden state typically used for prediction?",
+        "options": [
+          "Because the first token has no contextual information",
+          "Because the last token always corresponds to the label",
+          "Because middle tokens contain the most important information",
+          "Because causal attention allows the last token to attend to all previous tokens, aggregating the full sequence context"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "In causal (left-to-right) attention, each token can only attend to itself and preceding tokens. The last token's hidden state therefore contains information from the entire input sequence, making it the most informative position for classification.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are advantages of fine-tuning a pre-trained LLM for classification over training a classifier from scratch? Select all that apply",
+        "options": [
+          "The model already has strong language understanding from pre-training",
+          "It always requires more labeled data than training from scratch",
+          "Pre-trained models cannot overfit on small datasets",
+          "It typically achieves good performance with fewer labeled examples"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "Pre-trained LLMs carry rich language representations that transfer well to downstream tasks, and they can achieve strong classification performance with relatively few labeled examples compared to training from scratch. However, they can still overfit on very small datasets.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "When fine-tuning a decoder-only model like GPT for classification, what loss function is typically applied to the classification head's output?",
+        "options": [
+          "Cross-entropy loss",
+          "Mean squared error",
+          "Contrastive loss",
+          "Hinge loss"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Cross-entropy loss is the standard loss function for classification tasks. It measures the difference between the predicted probability distribution (from softmax over logits) and the true label, providing well-calibrated gradients for training.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

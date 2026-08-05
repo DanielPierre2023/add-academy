@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the primary purpose of a RAG (Retrieval-Augmented Generation) pipeline?",
+        "options": [
+          "To replace the transformer architecture entirely",
+          "To train a new model from scratch on domain data",
+          "To ground LLM responses in external knowledge by retrieving relevant documents at query time",
+          "To compress the model into fewer parameters"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "RAG retrieves relevant documents from an external knowledge base at query time and feeds them to the LLM as context, reducing hallucination and enabling up-to-date responses without retraining.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What are vector embeddings used for in a RAG system?",
+        "options": [
+          "To encrypt document contents for privacy",
+          "To represent text as dense numerical vectors for semantic similarity search",
+          "To tokenize text into subword units",
+          "To compress images into smaller files"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Vector embeddings map text into a high-dimensional space where semantically similar texts are close together, enabling retrieval by meaning rather than exact keyword matching.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Why is chunking important when building a RAG knowledge base?",
+        "options": [
+          "It splits documents into appropriately sized pieces so each chunk fits the embedding model and carries focused context",
+          "It removes all punctuation from the text",
+          "It translates documents into multiple languages automatically",
+          "It merges all documents into a single file"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Chunking breaks large documents into smaller, focused segments that fit within the embedding model’s token limit and ensure each retrieved piece carries relevant, concentrated information.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are common similarity metrics for vector search?Select all that apply",
+        "options": [
+          "Cosine similarity",
+          "Cross-entropy loss",
+          "Perplexity score",
+          "Euclidean distance"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "Cosine similarity measures the angle between vectors (direction), while Euclidean distance measures the straight-line distance. Both are standard metrics in vector databases. Cross-entropy and perplexity are training/evaluation metrics, not retrieval metrics.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What happens if chunks are too large in a RAG pipeline?",
+        "options": [
+          "The embedding model runs faster",
+          "The system automatically splits them further",
+          "The chunks exceed the embedding model’s token limit and retrieval quality drops",
+          "Retrieved chunks mix unrelated topics, diluting the relevant context passed to the LLM"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Overly large chunks tend to cover multiple topics, so the embedding becomes a blurred average and the retrieved text dilutes the relevant information with irrelevant content, hurting answer quality.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

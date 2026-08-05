@@ -1,0 +1,249 @@
+{
+  "lectureId": "6",
+  "en": {
+    "id": "quiz-6-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "In the LLM training pipeline, what is the objective function during pretraining?",
+        "options": [
+          "Predicting masked tokens in random positions (masked language modeling)",
+          "Predicting the next token given all preceding tokens (causal language modeling)",
+          "Classifying whether two sentences follow each other logically (next sentence prediction)",
+          "Minimizing distance between hidden states and human-annotated embeddings"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "GPT-style LLMs use causal (autoregressive) language modeling: predicting the next token given preceding context. Masked LM is BERT. Next sentence prediction was a BERT auxiliary objective.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "During alignment, what is the correct relationship between SFT and RLHF?",
+        "options": [
+          "SFT and RLHF are alternative names for the same process",
+          "SFT fine-tunes on demonstrations first, then RLHF refines using a reward model trained on human preferences",
+          "RLHF is performed first to establish a reward signal, then SFT maximizes that reward",
+          "SFT replaces pretraining entirely, while RLHF replaces evaluation"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Standard pipeline: (1) SFT on instruction-response pairs teaches instruction following, then (2) RLHF with a reward model from human preference rankings further optimizes outputs. SFT first because RLHF works better starting from an instruction-tuned model.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Why is learning rate scheduling (warmup + decay) important during pretraining?",
+        "options": [
+          "Warmup prevents large destabilizing gradient updates early when parameters are random; decay helps convergence later",
+          "Warmup uses maximum learning rate from the start; decay only saves compute",
+          "Learning rate scheduling is optional with no measurable effect on model quality",
+          "Warmup trains embeddings before attention layers activate; decay freezes early layers"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Warmup gradually increases the learning rate, preventing catastrophically large updates from random initialization. Cosine decay then helps the model settle into a good minimum. This is empirically critical, not optional.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Which are valid reasons why data collection and preprocessing (Stage 1) is critical?Select all that apply",
+        "options": [
+          "Training data quality directly determines the model's knowledge, biases, and failure modes",
+          "Deduplication prevents the model from memorizing and regurgitating repeated passages",
+          "Preprocessing is trivial because modern tokenizers handle any raw data without cleaning",
+          "Filtering toxic or personally identifiable content is necessary for safety and legal compliance"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Data quality shapes model behavior. Deduplication improves generalization. Filtering is essential for safety/legal reasons. Preprocessing is NOT trivial — it requires extensive format normalization, language filtering, quality scoring, and content filtering.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Why is AdamW commonly preferred over standard SGD for training LLMs?",
+        "options": [
+          "AdamW uses no memory beyond model parameters, making it more memory-efficient",
+          "AdamW maintains per-parameter adaptive learning rates with properly decoupled weight decay",
+          "AdamW eliminates the need for learning rate scheduling entirely",
+          "AdamW guarantees convergence to the global optimum, whereas SGD only finds local optima"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "AdamW combines adaptive per-parameter learning rates with properly decoupled weight decay. It uses MORE memory than SGD (storing two moment estimates per parameter). Scheduling is still needed. No optimizer guarantees global optimality for non-convex neural networks.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-6-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "În pipeline-ul de antrenament LLM, care este funcția obiectiv în timpul pre-antrenamentului?",
+        "options": [
+          "Prezicerea token-urilor mascate în poziții aleatorii (modelarea limbajului mascat)",
+          "Prezicerea token-ului următor dat fiind toți tokenii precedenți (modelarea limbajului cauzal)",
+          "Clasificarea dacă două propoziții se succed logic (predicția propoziției următoare)",
+          "Minimizarea distanței între stările ascunse ale modelului și embedding-uri adnotate uman"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "LLM-urile stil GPT folosesc modelarea limbajului cauzal: prezicerea token-ului următor dat fiind contextul precedent. Modelarea mascată este BERT. Predicția propoziției următoare a fost un obiectiv auxiliar BERT.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "În aliniere, care este relația corectă între SFT și RLHF?",
+        "options": [
+          "SFT și RLHF sunt denumiri alternative pentru același proces",
+          "SFT ajustează fin pe demonstrații mai întâi, apoi RLHF rafinează folosind un model de recompensă",
+          "RLHF se efectuează primul pentru a stabili un semnal de recompensă, apoi SFT maximizează",
+          "SFT înlocuiește pre-antrenamentul complet, iar RLHF înlocuiește evaluarea"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Pipeline standard: (1) SFT pe perechi instrucțiune-răspuns învață urmarea instrucțiunilor, apoi (2) RLHF cu model de recompensă din preferințe umane optimizează suplimentar.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "De ce este programarea ratei de învățare (warmup + decay) importantă în pre-antrenament?",
+        "options": [
+          "Warmup previne actualizări de gradient mari și destabilizatoare la început; decay ajută convergența ulterior",
+          "Warmup folosește rata maximă de învățare de la început; decay economisește doar calcul",
+          "Programarea ratei de învățare este opțională fără efect măsurabil asupra calității",
+          "Warmup antrenează embedding-urile înainte ca straturile de atenție să se activeze"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Warmup crește gradual rata de învățare, prevenind actualizări catastrofal de mari din inițializarea aleatorie. Decay-ul cosinus ajută modelul să se stabilească într-un minim bun.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Care sunt motive valide pentru care colectarea și preprocesarea datelor (Etapa 1) este critică?Selectați toate care se aplică",
+        "options": [
+          "Calitatea datelor determină direct cunoștințele, prejudecățile și modurile de eșec ale modelului",
+          "Deduplicarea previne modelul să memoreze și să regurgiteze pasaje repetate",
+          "Preprocesarea este trivială deoarece tokenizer-ele moderne gestionează orice date brute",
+          "Filtrarea conținutului toxic sau cu date personale este necesară pentru siguranță și conformitate legală"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Calitatea datelor modelează comportamentul. Deduplicarea îmbunătățește generalizarea. Filtrarea este esențială pentru siguranță/legalitate. Preprocesarea NU este trivială — necesită normalizare, filtrare și scorare extensivă.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "De ce este AdamW preferat în general față de SGD standard pentru antrenarea LLM-urilor?",
+        "options": [
+          "AdamW nu folosește memorie dincolo de parametrii modelului, fiind mai eficient",
+          "AdamW menține rate de învățare adaptive per-parametru cu weight decay corect decuplat",
+          "AdamW elimină complet nevoia de programare a ratei de învățare",
+          "AdamW garantează convergența la optimul global, în timp ce SGD găsește doar optime locale"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "AdamW combină rate de învățare adaptive per-parametru cu weight decay corect decuplat. Folosește MAI MULTĂ memorie decât SGD. Programarea încă e necesară. Niciun optimizator nu garantează optimul global.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-6-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Στο pipeline εκπαίδευσης LLM, ποια είναι η αντικειμενική συνάρτηση κατά την προ-εκπαίδευση;",
+        "options": [
+          "Πρόβλεψη masked tokens σε τυχαίες θέσεις (masked language modeling)",
+          "Πρόβλεψη επόμενου token δεδομένων όλων των προηγούμενων (causal language modeling)",
+          "Ταξινόμηση αν δύο προτάσεις ακολουθούν λογικά (next sentence prediction)",
+          "Ελαχιστοποίηση απόστασης μεταξύ κρυφών καταστάσεων και ανθρώπινα σημειωμένων embeddings"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Τα GPT-style LLM χρησιμοποιούν αιτιακή μοντελοποίηση γλώσσας: πρόβλεψη επόμενου token. Το masked LM είναι BERT. Το next sentence prediction ήταν βοηθητικός στόχος BERT.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Στην ευθυγράμμιση, ποια η σωστή σχέση μεταξύ SFT και RLHF;",
+        "options": [
+          "SFT και RLHF είναι εναλλακτικά ονόματα για την ίδια διαδικασία",
+          "Το SFT ρυθμίζει πρώτα σε επιδείξεις, μετά το RLHF βελτιώνει χρησιμοποιώντας μοντέλο ανταμοιβής",
+          "Το RLHF εκτελείται πρώτο, μετά το SFT μεγιστοποιεί την ανταμοιβή",
+          "Το SFT αντικαθιστά πλήρως την προ-εκπαίδευση"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Τυπικό pipeline: (1) SFT σε ζεύγη οδηγιών-απαντήσεων, στη συνέχεια (2) RLHF με μοντέλο ανταμοιβής από ανθρώπινες προτιμήσεις.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Γιατί ο προγραμματισμός ρυθμού μάθησης (warmup + decay) είναι σημαντικός;",
+        "options": [
+          "Το warmup αποτρέπει μεγάλες αποσταθεροποιητικές ενημερώσεις gradient στην αρχή; το decay βοηθά στη σύγκλιση",
+          "Το warmup χρησιμοποιεί μέγιστο ρυθμό από την αρχή; το decay εξοικονομεί μόνο υπολογισμό",
+          "Ο προγραμματισμός ρυθμού μάθησης είναι προαιρετικός χωρίς μετρήσιμο αποτέλεσμα",
+          "Το warmup εκπαιδεύει τα embeddings πριν ενεργοποιηθούν τα attention layers"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Το warmup αυξάνει σταδιακά τον ρυθμό μάθησης, αποτρέποντας καταστροφικά μεγάλες ενημερώσεις. Το cosine decay βοηθά το μοντέλο να σταθεροποιηθεί σε καλό ελάχιστο.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Ποιοι είναι έγκυροι λόγοι που η συλλογή δεδομένων (Στάδιο 1) είναι κρίσιμη;Επιλέξτε όλα όσα ισχύουν",
+        "options": [
+          "Η ποιότητα δεδομένων καθορίζει άμεσα γνώσεις, προκαταλήψεις και αστοχίες μοντέλου",
+          "Η αποδιπλασιοποίηση αποτρέπει την απομνημόνευση επαναλαμβανόμενων αποσπασμάτων",
+          "Η προεπεξεργασία είναι τετριμμένη γιατί οι tokenizers χειρίζονται οποιαδήποτε ακατέργαστα δεδομένα",
+          "Το φιλτράρισμα τοξικού περιεχομένου είναι απαραίτητο για ασφάλεια και νομική συμμόρφωση"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Η ποιότητα δεδομένων διαμορφώνει τη συμπεριφορά. Η αποδιπλασιοποίηση βελτιώνει τη γενίκευση. Το φιλτράρισμα είναι ουσιώδες. Η προεπεξεργασία ΔΕΝ είναι τετριμμένη.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Γιατί προτιμάται ο AdamW έναντι του τυπικού SGD για εκπαίδευση LLM;",
+        "options": [
+          "Ο AdamW δεν χρησιμοποιεί μνήμη πέρα από τις παραμέτρους, είναι πιο αποδοτικός",
+          "Ο AdamW διατηρεί προσαρμοστικούς ρυθμούς μάθησης ανά παράμετρο με σωστά αποσυνδεδεμένο weight decay",
+          "Ο AdamW εξαλείφει πλήρως την ανάγκη για προγραμματισμό ρυθμού μάθησης",
+          "Ο AdamW εγγυάται σύγκλιση στο ολικό βέλτιστο"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Ο AdamW συνδυάζει προσαρμοστικούς ρυθμούς ανά παράμετρο με σωστά αποσυνδεδεμένο weight decay. Χρησιμοποιεί ΠΕΡΙΣΣΟΤΕΡΗ μνήμη. Ο προγραμματισμός εξακολουθεί να χρειάζεται.",
+        "isMulti": false
+      }
+    ]
+  }
+}

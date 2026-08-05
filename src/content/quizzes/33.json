@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the primary goal of instruction fine-tuning?",
+        "options": [
+          "To increase the vocabulary size of the base model",
+          "To teach a pre-trained model to follow user instructions and produce helpful responses",
+          "To pre-train a model from scratch on labeled data",
+          "To compress the model for deployment on edge devices"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Instruction fine-tuning adapts a pre-trained language model so it can understand and follow natural language instructions, producing responses aligned with user intent.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "In the Alpaca dataset format, which field contains the model's expected output?",
+        "options": [
+          "instruction",
+          "input",
+          "output",
+          "context"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "The Alpaca format uses three fields: \"instruction\" (the task description), \"input\" (optional additional context), and \"output\" (the desired model response).",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are true about the ShareGPT dataset format? Select all that apply",
+        "options": [
+          "It stores conversations as a list of message turns with roles",
+          "It is limited to single-turn instruction-response pairs only",
+          "It naturally supports multi-turn dialogue data",
+          "It requires a separate tokenizer to be trained from scratch"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "ShareGPT format represents conversations as lists of turns (e.g., human/gpt roles), making it ideal for multi-turn dialogue fine-tuning. Unlike Alpaca, it is not limited to single-turn pairs.",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "What is the purpose of a chat template during instruction fine-tuning?",
+        "options": [
+          "To define the model's architecture and layer count",
+          "To control the learning rate schedule during training",
+          "To compress the dataset for faster loading",
+          "To format input messages with special tokens so the model distinguishes between roles"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Chat templates (e.g., ChatML, Llama-style) wrap messages with special tokens that indicate role boundaries (system, user, assistant), enabling the model to correctly parse multi-turn conversations.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What does loss masking achieve during instruction fine-tuning?",
+        "options": [
+          "It prevents the model from generating special tokens",
+          "It excludes prompt/instruction tokens from the loss calculation so the model only learns to generate the response",
+          "It masks out random tokens to create a denoising objective",
+          "It hides the loss value from the training logs"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Loss masking sets the loss to zero for prompt/instruction tokens, ensuring the model is only trained to predict the assistant's response tokens. This prevents the model from wasting capacity learning to reproduce the user's input.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,18 +101,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -97,7 +122,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,18 +157,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -153,7 +178,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

@@ -1,0 +1,243 @@
+{
+  "lectureId": "3",
+  "en": {
+    "id": "quiz-3-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Why is pretraining significantly more expensive than finetuning?",
+        "options": [
+          "Pretraining uses labeled data which is more expensive to acquire than unlabeled data",
+          "Pretraining processes trillions of tokens across the entire model, requiring massive compute over weeks or months",
+          "Finetuning only updates the output layer, while pretraining updates all layers",
+          "Pretraining requires specialized hardware different from what finetuning uses"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Pretraining is expensive due to sheer scale: trillions of tokens, billions of parameters, weeks/months of GPU time. Pretraining actually uses unlabeled data, and finetuning can update all layers.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "What is 'catastrophic forgetting' in the context of finetuning?",
+        "options": [
+          "When a model's weights are accidentally deleted during finetuning",
+          "When the model loses general knowledge because finetuning overwrites important parameters",
+          "When the model forgets its system prompt during a long conversation",
+          "When training data is too large and the model cannot memorize all of it"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Catastrophic forgetting occurs when finetuning overwrites parameter values that encoded general knowledge. The model gains new skills but loses broad capabilities.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "In RLHF, what role do human evaluators play?",
+        "options": [
+          "They manually correct every output the model generates during training",
+          "They write the training data used during pretraining",
+          "They rank or compare model outputs to train a reward model that guides further optimization",
+          "They design the neural network architecture and choose the number of layers"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "In RLHF, humans compare pairs of model outputs to indicate which is better. These preferences train a reward model, which then guides further optimization of the language model.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Which correctly describes the two-stage training pipeline for modern LLMs?",
+        "options": [
+          "Stage 1: Train on labeled examples; Stage 2: Train on unlabeled text for generalization",
+          "Stage 1: Pretrain on massive unlabeled text to learn general language; Stage 2: Finetune on curated data to align the model",
+          "Stage 1: Train a small model; Stage 2: Scale it up by copying parameters into a larger architecture",
+          "Stage 1: Train the tokenizer; Stage 2: Train the model using the tokenizer's vocabulary"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "The standard pipeline: (1) pretrain on vast unlabeled text for general language understanding, then (2) finetune (SFT + RLHF) on curated data for alignment. General knowledge first, then specialization.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "What is 'transfer learning' and why does it matter for LLMs?",
+        "options": [
+          "The ability to transfer a model from one GPU to another without losing performance",
+          "Knowledge learned during pretraining can be applied to new tasks through finetuning — avoiding training from scratch each time",
+          "Copying the architecture of one model to create a new separate model with identical behavior",
+          "Translating a model's capabilities from one programming language to another"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Transfer learning: a pretrained model's general knowledge transfers to specific tasks via finetuning. No need to train from scratch for each new task.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-3-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "De ce este pre-antrenamentul semnificativ mai scump decât ajustarea fină?",
+        "options": [
+          "Pre-antrenamentul folosește date etichetate care sunt mai scumpe de obținut",
+          "Pre-antrenamentul procesează trilioane de token-uri pe întregul model, necesitând calcul masiv pe săptămâni sau luni",
+          "Ajustarea fină actualizează doar stratul de ieșire, în timp ce pre-antrenamentul actualizează toate straturile",
+          "Pre-antrenamentul necesită hardware specializat diferit de cel folosit pentru ajustare"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Pre-antrenamentul este scump din cauza scalei: trilioane de token-uri, miliarde de parametri, săptămâni/luni de GPU. Pre-antrenamentul folosește de fapt date neetichetate, iar ajustarea fină poate actualiza toate straturile.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ce este 'uitarea catastrofală' în contextul ajustării fine?",
+        "options": [
+          "Când ponderile modelului sunt șterse accidental în timpul ajustării",
+          "Când modelul pierde cunoștințe generale deoarece ajustarea suprascrie parametri importanți",
+          "Când modelul uită prompt-ul de sistem în timpul unei conversații lungi",
+          "Când datele de antrenament sunt prea mari și modelul nu le poate memora pe toate"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Uitarea catastrofală apare când ajustarea fină suprascrie valorile parametrilor care codificau cunoștințe generale. Modelul câștigă abilități noi dar pierde capabilități largi.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "În RLHF, ce rol au evaluatorii umani?",
+        "options": [
+          "Corectează manual fiecare output pe care modelul îl generează",
+          "Scriu datele de antrenament folosite în timpul pre-antrenamentului",
+          "Clasează sau compară output-urile modelului pentru a antrena un model de recompensă",
+          "Proiectează arhitectura rețelei neuronale și aleg numărul de straturi"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "În RLHF, oamenii compară perechi de output-uri ale modelului pentru a indica care este mai bun. Aceste preferințe antrenează un model de recompensă care ghidează optimizarea ulterioară.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Care descrie corect pipeline-ul de antrenament în două etape pentru LLM-uri moderne?",
+        "options": [
+          "Etapa 1: Antrenare pe exemple etichetate; Etapa 2: Antrenare pe text neetichetat",
+          "Etapa 1: Pre-antrenare pe text masiv neetichetat; Etapa 2: Ajustare fină pe date curate pentru aliniere",
+          "Etapa 1: Antrenarea unui model mic; Etapa 2: Scalarea prin copierea parametrilor",
+          "Etapa 1: Antrenarea tokenizer-ului; Etapa 2: Antrenarea modelului cu vocabularul tokenizer-ului"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Pipeline-ul standard: (1) pre-antrenare pe text vast neetichetat pentru înțelegerea generală, apoi (2) ajustare fină (SFT + RLHF) pe date curate pentru aliniere.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Ce este 'învățarea prin transfer' și de ce contează pentru LLM-uri?",
+        "options": [
+          "Capacitatea de a transfera un model de pe un GPU pe altul fără pierdere de performanță",
+          "Cunoștințele învățate în pre-antrenare pot fi aplicate la sarcini noi prin ajustare fină — evitând antrenarea de la zero",
+          "Copierea arhitecturii unui model pentru a crea un model separat cu comportament identic",
+          "Traducerea capabilităților unui model dintr-un limbaj de programare în altul"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Învățarea prin transfer: cunoștințele generale ale unui model pre-antrenat se transferă la sarcini specifice prin ajustare fină. Nu e nevoie să antrenezi de la zero pentru fiecare sarcină.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-3-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Γιατί η προ-εκπαίδευση είναι σημαντικά πιο ακριβή από τη μικρο-ρύθμιση;",
+        "options": [
+          "Η προ-εκπαίδευση χρησιμοποιεί επισημασμένα δεδομένα που είναι ακριβότερα",
+          "Η προ-εκπαίδευση επεξεργάζεται τρισεκατομμύρια tokens σε ολόκληρο το μοντέλο, απαιτώντας τεράστιο υπολογισμό",
+          "Η μικρο-ρύθμιση ενημερώνει μόνο το στρώμα εξόδου",
+          "Η προ-εκπαίδευση απαιτεί εξειδικευμένο hardware διαφορετικό από τη μικρο-ρύθμιση"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Η προ-εκπαίδευση είναι ακριβή λόγω κλίμακας: τρισεκατομμύρια tokens, δισεκατομμύρια παράμετροι, εβδομάδες/μήνες χρόνου GPU. Χρησιμοποιεί μη επισημασμένα δεδομένα.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Τι είναι η 'καταστροφική λήθη' στο πλαίσιο της μικρο-ρύθμισης;",
+        "options": [
+          "Όταν τα βάρη του μοντέλου διαγράφονται κατά λάθος",
+          "Όταν το μοντέλο χάνει γενικές γνώσεις επειδή η μικρο-ρύθμιση αντικαθιστά σημαντικές παραμέτρους",
+          "Όταν το μοντέλο ξεχνά το system prompt σε μακρά συνομιλία",
+          "Όταν τα δεδομένα εκπαίδευσης είναι πολύ μεγάλα για απομνημόνευση"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Η καταστροφική λήθη συμβαίνει όταν η μικρο-ρύθμιση αντικαθιστά τιμές παραμέτρων που κωδικοποιούσαν γενικές γνώσεις.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Στο RLHF, τι ρόλο παίζουν οι ανθρώπινοι αξιολογητές;",
+        "options": [
+          "Διορθώνουν χειροκίνητα κάθε έξοδο που παράγει το μοντέλο",
+          "Γράφουν τα δεδομένα εκπαίδευσης για την προ-εκπαίδευση",
+          "Κατατάσσουν ή συγκρίνουν εξόδους του μοντέλου για να εκπαιδεύσουν ένα μοντέλο ανταμοιβής",
+          "Σχεδιάζουν την αρχιτεκτονική του νευρωνικού δικτύου"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Στο RLHF, οι άνθρωποι συγκρίνουν ζεύγη εξόδων για να υποδείξουν ποια είναι καλύτερη. Αυτές οι προτιμήσεις εκπαιδεύουν ένα μοντέλο ανταμοιβής.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Ποια περιγράφει σωστά το pipeline εκπαίδευσης δύο σταδίων για σύγχρονα LLM;",
+        "options": [
+          "Στάδιο 1: Εκπαίδευση σε επισημασμένα παραδείγματα; Στάδιο 2: Εκπαίδευση σε μη επισημασμένο κείμενο",
+          "Στάδιο 1: Προ-εκπαίδευση σε μαζικό μη επισημασμένο κείμενο; Στάδιο 2: Μικρο-ρύθμιση σε επιμελημένα δεδομένα για ευθυγράμμιση",
+          "Στάδιο 1: Εκπαίδευση μικρού μοντέλου; Στάδιο 2: Κλιμάκωση αντιγράφοντας παραμέτρους",
+          "Στάδιο 1: Εκπαίδευση tokenizer; Στάδιο 2: Εκπαίδευση μοντέλου με το λεξιλόγιο του tokenizer"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Τυπικό pipeline: (1) προ-εκπαίδευση σε τεράστιο μη επισημασμένο κείμενο, στη συνέχεια (2) μικρο-ρύθμιση (SFT + RLHF) σε επιμελημένα δεδομένα για ευθυγράμμιση.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Τι είναι η 'μεταφορά μάθησης' και γιατί έχει σημασία για τα LLM;",
+        "options": [
+          "Η δυνατότητα μεταφοράς ενός μοντέλου από μία GPU σε άλλη χωρίς απώλεια απόδοσης",
+          "Οι γνώσεις από την προ-εκπαίδευση μπορούν να εφαρμοστούν σε νέες εργασίες μέσω μικρο-ρύθμισης — αποφεύγοντας την εκπαίδευση από το μηδέν",
+          "Η αντιγραφή αρχιτεκτονικής ενός μοντέλου για δημιουργία νέου με πανομοιότυπη συμπεριφορά",
+          "Η μετάφραση δυνατοτήτων ενός μοντέλου από μία γλώσσα προγραμματισμού σε άλλη"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Μεταφορά μάθησης: οι γενικές γνώσεις ενός προ-εκπαιδευμένου μοντέλου μεταφέρονται σε συγκεκριμένες εργασίες μέσω μικρο-ρύθμισης. Δεν χρειάζεται εκπαίδευση από το μηδέν.",
+        "isMulti": false
+      }
+    ]
+  }
+}

@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What does a sudden spike in training loss typically indicate?",
+        "options": [
+          "The model has converged successfully",
+          "A possible data corruption, learning rate issue, or numerical instability",
+          "The batch size is too large",
+          "The vocabulary size needs to be increased"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Sudden loss spikes usually signal problems such as corrupted data batches, a learning rate that is too high causing divergent updates, or numerical overflow/underflow in gradients or activations.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why is it important to monitor gradient norms during pretraining?",
+        "options": [
+          "To determine the optimal vocabulary size",
+          "To measure how quickly the model generates text",
+          "To detect exploding or vanishing gradients that prevent stable learning",
+          "To choose the number of attention heads"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Gradient norms reveal whether parameter updates are healthy. Exploding gradients (norms growing to infinity) cause divergence, while vanishing gradients (norms shrinking to zero) halt learning. Both require intervention.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What is the primary purpose of saving checkpoints during training?",
+        "options": [
+          "To resume training from a known good state if a failure occurs",
+          "To reduce the model’s memory footprint",
+          "To speed up the forward pass",
+          "To increase the batch size automatically"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Checkpoints save the model weights, optimizer state, and training step so that training can be resumed after crashes, hardware failures, or to roll back to a state before a loss spike.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are signs of anomalous training behavior?Select all that apply",
+        "options": [
+          "Loss decreasing smoothly over epochs",
+          "NaN or Inf values appearing in the loss",
+          "Gradient norms remaining in a stable range",
+          "Loss plateauing at a value near log(vocab_size) for many steps"
+        ],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "NaN/Inf values indicate numerical collapse. A loss stuck near log(vocab_size) means the model is no better than random guessing — it has failed to learn. Smooth loss decrease and stable gradient norms are healthy signs.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "When debugging a training run that diverged, what is the recommended first step?",
+        "options": [
+          "Double the model size to add more capacity",
+          "Remove all dropout layers",
+          "Increase the learning rate to converge faster",
+          "Roll back to the last stable checkpoint and reduce the learning rate"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Rolling back to a known good checkpoint and lowering the learning rate is the standard recovery strategy for divergence. Increasing the learning rate or model size would likely worsen the problem.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

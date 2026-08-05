@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What does perplexity measure in the context of evaluating a pretrained text generator?",
+        "options": [
+          "The number of parameters in the model",
+          "The speed of text generation in tokens per second",
+          "How surprised the model is by held-out text — lower means better prediction",
+          "The diversity of generated text samples"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Perplexity = exp(cross-entropy loss). It represents the effective number of equally likely next tokens the model considers at each position. Lower perplexity means the model assigns higher probability to the actual next token, indicating better language modeling.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Why is it insufficient to evaluate a text generator using only perplexity?",
+        "options": [
+          "Perplexity is too expensive to compute",
+          "Perplexity measures prediction accuracy but not output quality aspects like coherence, diversity, or factual correctness",
+          "Perplexity only works for classification models",
+          "Perplexity requires human evaluators to compute"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Perplexity captures how well the model predicts the training distribution but says nothing about whether generated text is coherent, diverse, factual, or useful. A model can have low perplexity while still producing repetitive or nonsensical outputs.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What does the distinct-n metric measure in generated text?",
+        "options": [
+          "The ratio of unique n-grams to total n-grams, indicating lexical diversity",
+          "The grammatical correctness of generated sentences",
+          "The semantic similarity to a reference text",
+          "The number of distinct topics covered in the output"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Distinct-n computes the proportion of unique n-grams (unigrams, bigrams, etc.) among all n-grams in the generated text. A low distinct-n score reveals repetitive generation, even if perplexity is acceptable.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are valid approaches to evaluating the quality of a pretrained text generator’s output?Select all that apply",
+        "options": [
+          "Only checking if the model’s loss is below 1.0",
+          "Human evaluation of generated samples for coherence and fluency",
+          "Measuring diversity metrics (distinct-n, self-BLEU) alongside perplexity",
+          "Counting the total number of tokens generated"
+        ],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "Comprehensive evaluation combines automatic metrics (perplexity for prediction quality, distinct-n and self-BLEU for diversity) with human evaluation for coherence, fluency, and factual accuracy. Loss thresholds and token counts alone are not meaningful quality measures.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What does a self-BLEU score measure when evaluating generated text diversity?",
+        "options": [
+          "How similar the generated text is to a human reference",
+          "The perplexity of the model on its own outputs",
+          "The accuracy of the tokenizer on generated text",
+          "How similar different generated samples are to each other — lower means more diverse"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Self-BLEU computes BLEU scores between pairs of generated samples. High self-BLEU means the model produces very similar outputs across different prompts or seeds, indicating low diversity. Lower self-BLEU indicates the generator produces more varied text.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

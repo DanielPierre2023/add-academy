@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the purpose of gradient accumulation?",
+        "options": [
+          "To speed up the forward pass by caching intermediate activations",
+          "To reduce the model's total number of parameters",
+          "To simulate a larger effective batch size by summing gradients across multiple micro-batches before updating",
+          "To prevent vanishing gradients in deep networks"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "Gradient accumulation runs multiple forward-backward passes (micro-batches) and sums the gradients before performing a single optimizer step. This achieves the same effect as a larger batch size without requiring the GPU memory to hold the full batch.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "If the micro-batch size is 4 and gradient accumulation steps is 8, what is the effective batch size?",
+        "options": [
+          "4",
+          "32",
+          "12",
+          "2"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Effective batch size = micro-batch size × accumulation steps = 4 × 8 = 32. The optimizer update uses gradients accumulated from all 32 examples, equivalent to processing them in one large batch.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What is the key benefit of FP16/BF16 mixed precision training?",
+        "options": [
+          "It doubles the number of model parameters",
+          "It eliminates the need for gradient clipping",
+          "It improves model accuracy by using more precise calculations",
+          "It reduces memory usage and increases throughput by using 16-bit operations for most computations"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Mixed precision uses 16-bit (half-precision) for forward/backward passes, halving memory for activations and weights. A master copy of weights in FP32 is maintained for the optimizer step to preserve numerical stability.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are valid memory optimization techniques for LLM training?Select all that apply",
+        "options": [
+          "Increasing the context length to use more memory bandwidth",
+          "Activation checkpointing (recomputing activations instead of storing them)",
+          "Gradient accumulation to reduce per-step memory requirements",
+          "Disabling the optimizer state to save memory"
+        ],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "Activation checkpointing trades compute for memory by recomputing activations during the backward pass instead of storing them. Gradient accumulation reduces peak memory by processing smaller micro-batches. Disabling optimizer state would break training.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Why is BF16 often preferred over FP16 for LLM training?",
+        "options": [
+          "BF16 has the same exponent range as FP32, reducing overflow/underflow risks without needing loss scaling",
+          "BF16 uses only 8 bits, halving memory compared to FP16",
+          "BF16 has higher mantissa precision than FP16",
+          "BF16 is supported on all GPUs while FP16 is not"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "BF16 uses 8 exponent bits (same as FP32) vs FP16's 5 exponent bits. This gives BF16 the same dynamic range as FP32, virtually eliminating overflow issues that plague FP16 training, removing the need for loss scaling.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

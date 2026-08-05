@@ -5,52 +5,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the training objective that drives next-token prediction?",
+        "options": [
+          "Maximize the distance between input and output embeddings",
+          "Given a sequence of tokens, predict the next token at each position",
+          "Classify each token as positive or negative",
+          "Reconstruct randomly masked tokens in a sentence"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "GPT-style models are trained with causal language modeling: predict the next token given all previous tokens. This is different from BERT's masked language modeling.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What is the \"sliding window\" technique in data loading?",
+        "options": [
+          "A GUI element for scrolling through text",
+          "Training only on the last N tokens and discarding the rest",
+          "Moving a fixed-size window across the text with a stride to create overlapping input-target pairs",
+          "A type of attention mechanism"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "The sliding window moves a fixed-length chunk across the tokenized text, stepping by a stride value. Each window position creates one input-target pair for training.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "If stride equals context length, what happens to training data?",
+        "options": [
+          "No overlap between consecutive chunks — each token appears in exactly one training example",
+          "Maximum overlap — the model sees every token many times",
+          "The data loader skips every other token",
+          "Training becomes impossible due to data loss"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "When stride = context_length, chunks don't overlap. This is efficient but means each token is only in one context. A smaller stride creates overlapping examples and more training data.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Why do we shuffle training examples across batches?",
+        "options": [
+          "To make the training data smaller",
+          "To reduce correlation between consecutive batches and improve generalization",
+          "To speed up the tokenization process",
+          "To avoid out-of-memory errors"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Shuffling breaks the sequential order of text chunks, preventing the model from learning spurious correlations from consecutive pieces of the same document.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "In an input-target pair with context length 4 and tokens [A, B, C, D, E], what is the target sequence?",
+        "options": [
+          "[A, B, C, D]",
+          "[E]",
+          "[A, B, C, D, E]",
+          "[B, C, D, E]"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Input is [A, B, C, D] and target is [B, C, D, E] — each target token is the next token after the corresponding input position. The model learns to predict one step ahead at every position.",
         "isMulti": false
       }
     ]
@@ -60,52 +85,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Care este obiectivul de antrenare pentru predicția next-token?",
+        "options": [
+          "Maximizarea distanței între embeddings de intrare și ieșire",
+          "Dat fiind o secvență de tokeni, prezice următorul token la fiecare poziție",
+          "Clasificarea fiecărui token ca pozitiv sau negativ",
+          "Reconstrucția tokenilor mascați aleatoriu"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Modelele GPT folosesc modelarea cauzală a limbajului: prezicerea următorului token dat fiind toate tokenele anterioare.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Ce este tehnica „ferestrei glisante\" în încărcarea datelor?",
+        "options": [
+          "Un element GUI pentru derularea textului",
+          "Antrenarea doar pe ultimele N tokeni",
+          "Mutarea unei ferestre de dimensiune fixă peste text cu un pas pentru a crea perechi input-target suprapuse",
+          "Un tip de mecanism de atenție"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Fereastra glisantă mută un fragment de lungime fixă peste textul tokenizat, avansând cu un pas. Fiecare poziție creează o pereche input-target.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Dacă pasul egalează lungimea contextului, ce se întâmplă cu datele de antrenare?",
+        "options": [
+          "Fără suprapunere — fiecare token apare într-un singur exemplu de antrenare",
+          "Suprapunere maximă — modelul vede fiecare token de multe ori",
+          "Încărcătorul de date sare peste fiecare al doilea token",
+          "Antrenarea devine imposibilă"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Când pas = lungimea_contextului, fragmentele nu se suprapun. Aceasta este eficientă dar fiecare token e într-un singur context.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "De ce amestecăm exemplele de antrenare între loturi?",
+        "options": [
+          "Pentru a face datele mai mici",
+          "Pentru a reduce corelația între loturi consecutive și a îmbunătăți generalizarea",
+          "Pentru a accelera tokenizarea",
+          "Pentru a evita erorile de memorie"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Amestecarea rupe ordinea secvențială, prevenind modelul să învețe corelații false din piese consecutive ale aceluiași document.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Într-o pereche input-target cu lungimea contextului 4 și tokeni [A, B, C, D, E], care este secvența target?",
+        "options": [
+          "[A, B, C, D]",
+          "[E]",
+          "[A, B, C, D, E]",
+          "[B, C, D, E]"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație: Input este [A, B, C, D] și target este [B, C, D, E] — fiecare token target este următorul token după poziția input corespunzătoare.",
         "isMulti": false
       }
     ]
@@ -115,52 +165,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Ποιος είναι ο στόχος εκπαίδευσης για πρόβλεψη επόμενου token;",
+        "options": [
+          "Μεγιστοποίηση απόστασης μεταξύ embeddings εισόδου-εξόδου",
+          "Δεδομένης μιας ακολουθίας tokens, πρόβλεψη του επόμενου σε κάθε θέση",
+          "Ταξινόμηση κάθε token ως θετικό ή αρνητικό",
+          "Ανακατασκευή τυχαία μασκαρισμένων tokens"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Τα GPT χρησιμοποιούν αιτιακή μοντελοποίηση: πρόβλεψη επόμενου token βάσει όλων των προηγούμενων.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Τι είναι η τεχνική «συρόμενου παραθύρου» στη φόρτωση δεδομένων;",
+        "options": [
+          "Στοιχείο GUI για κύλιση κειμένου",
+          "Εκπαίδευση μόνο στα τελευταία N tokens",
+          "Μετακίνηση παραθύρου σταθερού μεγέθους πάνω στο κείμενο με βήμα για δημιουργία ζευγών input-target",
+          "Τύπος μηχανισμού attention"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Το συρόμενο παράθυρο μετακινεί τμήμα σταθερού μήκους πάνω στο tokenized κείμενο, δημιουργώντας ζεύγη εκπαίδευσης.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Αν το βήμα ισούται με το μήκος πλαισίου, τι συμβαίνει;",
+        "options": [
+          "Χωρίς επικάλυψη — κάθε token εμφανίζεται σε ένα παράδειγμα",
+          "Μέγιστη επικάλυψη — πολλές εμφανίσεις κάθε token",
+          "Ο φορτωτής παραλείπει κάθε δεύτερο token",
+          "Η εκπαίδευση γίνεται αδύνατη"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Όταν βήμα = μήκος_πλαισίου, τα τμήματα δεν επικαλύπτονται. Αποδοτικό αλλά κάθε token σε ένα πλαίσιο μόνο.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Γιατί ανακατεύουμε τα παραδείγματα εκπαίδευσης;",
+        "options": [
+          "Για μικρότερα δεδομένα",
+          "Για μείωση συσχέτισης μεταξύ διαδοχικών παρτίδων και βελτίωση γενίκευσης",
+          "Για ταχύτερη tokenization",
+          "Για αποφυγή σφαλμάτων μνήμης"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Η ανακάτεμα σπάει τη διαδοχική σειρά, αποτρέποντας ψευδείς συσχετίσεις από συνεχόμενα κομμάτια.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Σε ζεύγος input-target με μήκος 4 και tokens [A, B, C, D, E], ποια η ακολουθία target;",
+        "options": [
+          "[A, B, C, D]",
+          "[E]",
+          "[A, B, C, D, E]",
+          "[B, C, D, E]"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση: Input [A, B, C, D], target [B, C, D, E]. Κάθε target token είναι το επόμενο μετά την αντίστοιχη θέση εισόδου.",
         "isMulti": false
       }
     ]

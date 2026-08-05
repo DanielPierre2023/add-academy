@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the primary purpose of RLHF (Reinforcement Learning from Human Feedback)?",
+        "options": [
+          "To pre-train language models on web-scale data",
+          "To compress models for efficient inference",
+          "To replace supervised fine-tuning entirely",
+          "To align model outputs with human preferences for helpfulness, harmlessness, and honesty"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "RLHF uses human preference feedback to fine-tune models so their outputs better align with what humans consider helpful, safe, and truthful. It is typically applied after supervised fine-tuning as an alignment step.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "In the RLHF pipeline, what is the role of the reward model?",
+        "options": [
+          "To generate training data for pre-training",
+          "To score model outputs based on learned human preferences, providing a reward signal for RL training",
+          "To tokenize the input text before it enters the policy model",
+          "To select which layers to freeze during training"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "The reward model is trained on human comparison data to predict which outputs humans prefer. During RL training, it assigns scalar reward scores to the policy model's outputs, guiding the optimization process.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are key components of the PPO algorithm as used in RLHF? Select all that apply",
+        "options": [
+          "A clipped surrogate objective to prevent large policy updates",
+          "Contrastive learning between positive and negative examples",
+          "A KL divergence penalty to keep the policy close to the reference model",
+          "Dropout regularization applied to the reward model"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "PPO uses a clipped surrogate objective to ensure stable policy updates, and a KL divergence penalty is typically added in RLHF to prevent the policy model from deviating too far from the initial supervised fine-tuned model, which could lead to reward hacking.",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "How is the reward model typically trained in the RLHF pipeline?",
+        "options": [
+          "Using next-token prediction on a large corpus",
+          "Using reinforcement learning with environment rewards",
+          "On human comparison data where annotators rank or choose between model outputs",
+          "By distilling a larger teacher model"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "The reward model is trained on datasets where human annotators compare pairs of model outputs and indicate which one is preferred. The model learns to assign higher scores to preferred outputs using a ranking or Bradley-Terry loss.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What is \"reward hacking\" in the context of RLHF?",
+        "options": [
+          "When the policy model exploits flaws in the reward model to achieve high scores without genuinely improving quality",
+          "When the reward model is trained on too much data",
+          "When human annotators intentionally provide incorrect labels",
+          "When the learning rate is set too high during PPO training"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Reward hacking occurs when the policy model learns to produce outputs that receive high reward scores by exploiting imperfections in the reward model, rather than generating genuinely better content. KL penalties help mitigate this problem.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,18 +101,18 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -97,7 +122,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,18 +157,18 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -153,7 +178,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

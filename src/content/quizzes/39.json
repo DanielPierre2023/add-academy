@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What is the main goal of model quantization?",
+        "options": [
+          "Increase the number of parameters in the model",
+          "Reduce model size and inference cost by using lower-precision number formats",
+          "Add more training data to improve accuracy",
+          "Convert the model from Python to C++"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Quantization maps weights from high-precision formats (FP32/FP16) to lower-precision ones (INT8, INT4), shrinking model size and speeding up inference with minimal quality loss.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What is the key difference between PTQ and QAT?",
+        "options": [
+          "PTQ requires more GPU memory than QAT",
+          "QAT can only be applied to small models",
+          "PTQ trains the model from scratch while QAT does not",
+          "PTQ quantizes after training is complete, while QAT simulates quantization during training"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Post-Training Quantization (PTQ) converts an already-trained model, while Quantization-Aware Training (QAT) injects fake quantization nodes during training so the model learns to compensate for precision loss.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What is the GGUF format primarily used for?",
+        "options": [
+          "Storing training datasets in a compressed format",
+          "Defining model architecture in YAML",
+          "Packaging quantized models for efficient local CPU/GPU inference",
+          "Encrypting model weights for secure deployment"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "GGUF (GPT-Generated Unified Format) is a single-file format used by llama.cpp and similar tools to store quantized model weights with metadata for efficient local inference.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are true about INT4 quantization compared to INT8?Select all that apply",
+        "options": [
+          "INT4 always produces better quality outputs than INT8",
+          "INT4 uses half the bits per weight compared to INT8, yielding smaller models",
+          "INT4 requires no calibration data",
+          "INT4 typically incurs more quality degradation than INT8"
+        ],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "INT4 halves the bits per weight compared to INT8, making models smaller and faster, but the coarser representation typically causes more accuracy loss. Careful calibration helps mitigate this.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What is a common deployment strategy for serving quantized LLMs to many users?",
+        "options": [
+          "Running quantized models behind an API with batched inference on GPU servers",
+          "Emailing the model weights to each user individually",
+          "Running the full FP32 model on a single CPU",
+          "Storing the model exclusively in browser localStorage"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "Quantized models are commonly served through API endpoints that batch requests and use GPU acceleration, providing low latency and cost-efficient inference at scale.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

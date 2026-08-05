@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "In our Mini GPT-2, what is the complete data flow from text input to output tokens?",
+        "options": [
+          "Text → attention → output",
+          "Text → tokenize → token+pos embed → N×(LN+Attn+Residual, LN+FFN+Residual) → LN → linear → argmax",
+          "Text → embed → RNN → softmax",
+          "Text → FFN → attention → decode"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "The complete pipeline: tokenize text, sum token + positional embeddings, pass through N transformer blocks (each: LN→attention+residual, LN→FFN+residual), final LN, linear to vocab, argmax for predicted token.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Which components from earlier stages does the Mini GPT-2 integrate?",
+        "options": [
+          "Only tokenizer and attention",
+          "Only embeddings and transformer blocks",
+          "Tokenizer, embeddings, multi-head causal attention, GELU FFN, LayerNorm, residuals",
+          "Pre-trained GPT-2 weights"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "The capstone integrates every component built across all 4 stages: tokenizer (Stage 2), embeddings (Stage 2), attention (Stage 3), GELU, LayerNorm, residuals, transformer blocks (Stage 4).",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Why does our Mini GPT-2 generate random text?",
+        "options": [
+          "Because all weights are randomly initialized — it has never seen any training data",
+          "Because the architecture is wrong",
+          "Because the context length is too short",
+          "Because we used NumPy instead of PyTorch"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "The architecture is correct, but random weights produce random outputs. Training (Stage 5) adjusts weights using gradient descent on a large text corpus so the model learns language patterns.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "What makes autoregressive generation work?Select all that apply",
+        "options": [
+          "The model sees all tokens including future ones",
+          "Causal masking prevents looking at future tokens",
+          "Each generated token is appended to the input for the next step",
+          "The model generates all tokens simultaneously"
+        ],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "Causal masking ensures each position can only attend to previous positions. Generation is sequential: predict one token, append it, predict the next, and repeat.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What is the next step after building the complete GPT architecture?",
+        "options": [
+          "Deploy to production immediately",
+          "Add more transformer blocks",
+          "Replace NumPy with a different library",
+          "Stage 5: Pretraining — training the model on a large text corpus using next-token prediction"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Stage 5 covers pretraining: feeding massive text data, computing cross-entropy loss on next-token predictions, and updating weights via backpropagation. This is what makes the model actually useful!",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

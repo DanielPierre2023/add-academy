@@ -1,0 +1,63 @@
+{
+  "lectureId": "genai-4",
+  "en": {
+    "id": "quiz-genai-4-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Why does TruthLens use MinHash signatures instead of comparing full shingle sets directly?",
+        "options": [
+          "MinHash produces more accurate similarity scores than exact Jaccard",
+          "MinHash signatures are fixed-size, making comparison O(k) regardless of document length",
+          "MinHash can detect AI-generated text while shingle comparison cannot",
+          "MinHash requires less memory to store the original document text"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "MinHash produces fixed-size signatures (e.g., 200 integers) regardless of document size. Comparing two signatures is O(k), while comparing full shingle sets is O(n). This makes it practical to compare against millions of documents.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Which statistical signal indicates AI-generated text because LLMs produce more uniform output than humans?",
+        "options": [
+          "High perplexity — AI text is harder for language models to predict",
+          "High hapax legomena ratio — AI uses more unique words",
+          "Low burstiness — AI produces sentences of more consistent length",
+          "Low Jaccard similarity — AI text does not match reference documents"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Burstiness measures sentence length variance. Humans alternate between short and long sentences. AI models produce more uniform length, resulting in low burstiness — a strong detection signal.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which are vocabulary richness metrics used in AI text detection?",
+        "options": [
+          "Yule’s K — measures word repetition in a text",
+          "Jaccard index — measures overlap between two shingle sets",
+          "Hapax legomena ratio — fraction of words appearing exactly once",
+          "Type-token ratio — unique words divided by total words"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "A, C, D. Yule’s K, hapax legomena ratio, and type-token ratio are vocabulary richness metrics that analyze word diversity within a document. Jaccard index (B) compares two sets — it is a similarity metric, not a vocabulary richness metric.",
+        "isMulti": true
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-genai-4-ro",
+    "questions": []
+  },
+  "el": {
+    "id": "quiz-genai-4-el",
+    "questions": []
+  }
+}

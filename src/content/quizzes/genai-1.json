@@ -1,0 +1,63 @@
+{
+  "lectureId": "genai-1",
+  "en": {
+    "id": "quiz-genai-1-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "What is the primary advantage of wrapping an image generation API (like DALL-E or Stable Diffusion) in your own SaaS rather than having users call the API directly?",
+        "options": [
+          "Lower API costs through bulk pricing",
+          "Adding business logic: prompt enhancement, billing tiers, caching, and content moderation",
+          "Faster image generation through parallel processing",
+          "Access to better AI models not available publicly"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Your SaaS adds value through prompt engineering, billing, caching, and moderation. The underlying API is the same — your business logic is the differentiator.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Why is response caching important for an image generation SaaS?",
+        "options": [
+          "It improves image quality",
+          "It allows offline operation",
+          "Identical prompts return instantly without paying for another API call",
+          "It reduces server memory usage"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Caching saves 100% of the API cost on repeated requests and delivers results instantly. This directly improves margins and user experience.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which are valid strategies for a freemium image generation SaaS?",
+        "options": [
+          "Limit free tier to fewer images per month",
+          "Add watermarks to free tier images",
+          "Generate lower quality images for free users by using a worse model",
+          "Restrict resolution and available styles for free users"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "A, B, D. Limiting quantity, adding watermarks, and restricting resolution/styles are standard freemium strategies. Using a worse model (C) is usually not practical — you restrict the same model's parameters instead.",
+        "isMulti": true
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-genai-1-ro",
+    "questions": []
+  },
+  "el": {
+    "id": "quiz-genai-1-el",
+    "questions": []
+  }
+}

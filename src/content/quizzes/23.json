@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What are the main components of the complete GPT architecture (top to bottom)?",
+        "options": [
+          "Encoder, decoder, attention, output",
+          "CNN layers, pooling, fully connected",
+          "Token + positional embeddings, N transformer blocks, final layer norm, linear output head",
+          "Word2Vec embeddings, LSTM layers, softmax"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "GPT = token embeddings + positional embeddings (summed) → N identical transformer blocks → final LayerNorm → linear projection to vocabulary size.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "What is weight tying in GPT models?",
+        "options": [
+          "Using the same weights for all transformer blocks",
+          "Sharing the token embedding matrix with the output projection layer",
+          "Tying attention Q and K weights together",
+          "Freezing weights during training"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Weight tying reuses the token embedding matrix as the output projection (lm_head). This saves parameters and improves performance because both layers map between tokens and vectors.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "How many parameters does GPT-2 Small have approximately?",
+        "options": [
+          "12 million",
+          "1.5 billion",
+          "175 billion",
+          "124 million"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "GPT-2 Small has ~124M parameters: 12 layers, 12 heads, d_model=768, vocab=50257, context=1024. The 1.5B version is GPT-2 XL.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which configuration parameters define a GPT model?Select all that apply",
+        "options": [
+          "Number of layers (n_layers) and attention heads (n_heads)",
+          "Learning rate and batch size",
+          "Loss function type",
+          "Model dimension (d_model), vocabulary size, and context length"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "Model architecture is defined by n_layers, n_heads, d_model, vocab_size, and context_length. Learning rate and batch size are training hyperparameters, not architecture.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "What does the output of an untrained GPT model look like?",
+        "options": [
+          "Random tokens because weights are randomly initialized",
+          "Mostly zeros",
+          "Repeated copies of the input",
+          "Simple grammatically correct sentences"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "An untrained model has random weights, so it produces random token sequences. The architecture is correct but produces garbage until trained — that is Stage 5!",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Why is causal masking necessary for autoregressive language models?",
+        "options": [
+          "To reduce memory usage",
+          "To speed up training",
+          "To prevent tokens from attending to future positions — the model must predict without seeing the answer",
+          "To make all attention weights equal"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "In autoregressive models (like GPT), each token should only attend to tokens at earlier positions. Without masking, the model would \"cheat\" by seeing the answer it needs to predict.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "How is the causal mask applied in practice?",
+        "options": [
+          "By setting future positions to 0 in the attention weights",
+          "By adding negative infinity to future positions BEFORE softmax, making their weights effectively zero",
+          "By removing future tokens from the input",
+          "By multiplying future tokens by -1"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "The mask sets future positions to -infinity before softmax. Since exp(-inf) = 0, these positions get zero attention weight, effectively blocking information flow from the future.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What shape is the causal mask for a sequence of length T?",
+        "options": [
+          "A lower-triangular matrix of shape (T, T) with ones below and on the diagonal",
+          "A diagonal matrix of shape (T, T)",
+          "A vector of length T",
+          "An upper-triangular matrix of shape (T, T)"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "The causal mask is a lower-triangular (T x T) matrix. Position i can attend to positions 0..i (the diagonal and below). The upper triangle is masked out.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "What role does dropout play in attention?Select all that apply",
+        "options": [
+          "Regularization — prevents over-reliance on specific attention patterns during training",
+          "It replaces the causal mask during inference",
+          "It is disabled during inference (only active in training)",
+          "It increases the sequence length"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "Dropout randomly zeros attention weights during training as regularization. It is disabled during inference to use full attention capacity.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "In causal self-attention, what can token at position 3 (0-indexed) attend to?",
+        "options": [
+          "Only position 3",
+          "All positions in the sequence",
+          "Positions 0, 1, 2 (not itself)",
+          "Positions 0, 1, 2, 3 (itself and all previous positions)"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "With causal masking, position 3 can attend to positions 0, 1, 2, and itself (3). This is the lower-triangular pattern — the diagonal is included.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

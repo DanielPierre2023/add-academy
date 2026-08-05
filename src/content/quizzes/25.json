@@ -5,53 +5,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "What does cross-entropy loss measure in a language model?",
+        "options": [
+          "The Euclidean distance between predicted and target embeddings",
+          "The negative log-probability assigned by the model to the correct next token",
+          "The mean squared error between logits and one-hot labels",
+          "The cosine similarity between predicted and actual token vectors"
+        ],
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "Cross-entropy loss for language modeling equals −log P(correct token). It measures how much probability mass the model places on the true next token. Lower loss means the model is more confident about the right answer.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "If a language model has a cross-entropy loss of 3.0, what is its perplexity?",
+        "options": [
+          "3.0",
+          "9.0",
+          "8.0",
+          "e³ ≈ 20.09"
+        ],
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "Perplexity = e^(cross-entropy loss). With loss = 3.0, perplexity = e³ ≈ 20.09. This means the model is, on average, as uncertain as if choosing uniformly among ~20 tokens.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "What does it typically indicate when training loss keeps decreasing but validation loss starts increasing?",
+        "options": [
+          "The learning rate is too low",
+          "The model is underfitting",
+          "The model is overfitting to the training data",
+          "The batch size is too large"
+        ],
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "A divergence where training loss falls but validation loss rises is the classic sign of overfitting. The model memorizes training data rather than learning generalizable patterns.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Which of the following are valid evaluation metrics for language models?Select all that apply",
+        "options": [
+          "Perplexity on a held-out test set",
+          "R-squared score on the logits",
+          "F1 score of individual token probabilities",
+          "Downstream task accuracy (e.g., question answering benchmarks)"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "Perplexity (intrinsic metric) and downstream task accuracy (extrinsic metric) are both standard LLM evaluation approaches. R-squared is for regression, and F1 on individual token probabilities is not a standard LM metric.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Why is cross-entropy preferred over mean squared error (MSE) for training language models?",
+        "options": [
+          "Cross-entropy produces stronger gradients for confident wrong predictions, speeding up correction",
+          "MSE cannot be computed on discrete tokens",
+          "Cross-entropy uses fewer floating point operations",
+          "MSE requires labels to be continuous values"
+        ],
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "When the model confidently assigns high probability to the wrong token, cross-entropy loss produces a very large gradient that forces rapid correction. MSE gradients on softmax outputs vanish in this regime, making learning much slower.",
         "isMulti": false
       }
     ]
@@ -66,7 +91,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -76,7 +101,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
@@ -86,18 +111,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Selectați toate răspunsurile corecte",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
@@ -107,7 +132,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -122,7 +147,7 @@
         "correct": [
           1
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -132,7 +157,7 @@
         "correct": [
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
@@ -142,18 +167,18 @@
         "correct": [
           2
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
+        "text": "Επιλέξτε όλες τις σωστές",
         "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
@@ -163,7 +188,7 @@
         "correct": [
           0
         ],
-        "explanation": "",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]
