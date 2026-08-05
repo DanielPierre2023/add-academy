@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { Sun, Moon, LogOut, UserCircle, School } from 'lucide-react';
+import { Sun, Moon, LogOut, UserCircle, School, Bot } from 'lucide-react';
 
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { useAuth } from '@/components/auth/auth-provider';
@@ -26,7 +26,7 @@ const LANGUAGES: { code: Language; label: string }[] = [
 ];
 
 export function Header() {
-  const { language, setLanguage, getCompletionPercentage } = useAcademyStore();
+  const { language, setLanguage, getCompletionPercentage, tutorOpen, setTutorOpen } = useAcademyStore();
   const { theme, setTheme } = useTheme();
   const { user, loading, signOut } = useAuth();
   const router = useRouter();
@@ -79,7 +79,7 @@ export function Header() {
                     </Link>
                   )}
                   <Link
-                    href="/dashboard"
+                    href="/account"
                     className="hidden sm:flex items-center gap-1.5 text-xs text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     <UserCircle className="h-4 w-4" />
@@ -145,6 +145,29 @@ export function Header() {
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </TooltipTrigger>
             <TooltipContent>Toggle theme</TooltipContent>
+          </Tooltip>
+
+          {/* AI Tutor toggle */}
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setTutorOpen(!tutorOpen)}
+                  aria-label="AI Tutor"
+                  className={cn(
+                    'h-8 w-8 transition-colors',
+                    tutorOpen
+                      ? 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
+                      : 'text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground'
+                  )}
+                />
+              }
+            >
+              <Bot className="h-4 w-4" />
+            </TooltipTrigger>
+            <TooltipContent>AI Tutor</TooltipContent>
           </Tooltip>
 
           {/* Language pills */}
