@@ -41,11 +41,11 @@ const STAGE_SECTIONS: Record<number, Record<string, string>> = {
   0: { en: 'GETTING STARTED', ro: 'INTRODUCERE', el: 'ΕΙΣΑΓΩΓΗ' },
   1: { en: 'STAGE 1: LLM FUNDAMENTALS', ro: 'ETAPA 1: FUNDAMENTELE LLM', el: 'ΣΤΑΔΙΟ 1: ΘΕΜΕΛΙΑ LLM' },
   2: { en: 'STAGE 2: TOKENIZATION & DATA', ro: 'ETAPA 2: DATE & TOKENIZARE', el: 'ΣΤΑΔΙΟ 2: TOKENIZATION' },
-  3: { en: 'STAGE 3: ATTENTION MECHANISM', ro: 'ETAPA 3: MECANISMUL DE ATENȚIE', el: 'ΣΤΑΔΙΟ 3: ΜΗΧΑΝΙΣΜΟΣ ΠΡΟΣΟΧΗΣ' },
-  4: { en: 'STAGE 4: TRANSFORMER ARCH.', ro: 'ETAPA 4: ARHITECTURA TRANSFORMER', el: 'ΣΤΑΔΙΟ 4: ΑΡΧΙΤΕΚΤΟΝΙΚΗ' },
-  5: { en: 'STAGE 5: PRETRAINING', ro: 'ETAPA 5: PRE-ANTRENAMENT', el: 'ΣΤΑΔΙΟ 5: ΠΡΟΕΚΠΑΙΔΕΥΣΗ' },
-  6: { en: 'STAGE 6: FINE-TUNING & DEPLOY', ro: 'ETAPA 6: AJUSTARE & DEPLOYMENT', el: 'ΣΤΑΔΙΟ 6: ΜΙΚΡΟΡΥΘΜΙΣΗ' },
-  7: { en: 'STAGE 7: GENAI SAAS', ro: 'ETAPA 7: GENAI SAAS', el: 'ΣΤΑΔΙΟ 7: GENAI SAAS' },
+  3: { en: 'STAGE 3: ATTENTION MECHANISM', ro: 'ETAPA 3: MECANISMUL ATENȚIEI', el: 'ΣΤΑΔΙΟ 3: ΜΗΧΑΝΙΣΜΟΣ ΠΡΟΣΟΧΗΣ' },
+  4: { en: 'STAGE 4: LLM ARCHITECTURE', ro: 'ETAPA 4: ARHITECTURA LLM', el: 'ΣΤΑΔΙΟ 4: ΑΡΧΙΤΕΚΤΟΝΙΚΗ LLM' },
+  5: { en: 'STAGE 5: PRETRAINING', ro: 'ETAPA 5: PRE-ANTRENARE', el: 'ΣΤΑΔΙΟ 5: ΠΡΟΕΚΠΑΙΔΕΥΣΗ' },
+  6: { en: 'STAGE 6: FINE-TUNING', ro: 'ETAPA 6: AJUSTARE FINĂ', el: 'ΣΤΑΔΙΟ 6: ΜΙΚΡΟΡΥΘΜΙΣΗ' },
+  7: { en: 'GENAI COURSE', ro: 'CURS DE IA GENERATIVĂ', el: 'ΜΑΘΗΜΑ GENAI' },
 };
 
 export function CourseSidebar() {
