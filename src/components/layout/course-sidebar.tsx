@@ -10,7 +10,10 @@ import {
   BookOpen,
   Code,
   HelpCircle,
+  Search,
   X,
+  Star,
+  Map,
 } from 'lucide-react';
 import type { Language } from '@/types';
 import { STAGES } from '@/types';
@@ -19,15 +22,12 @@ import { getLectureIndex, type LectureIndexEntry } from '@/lib/lectures';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
 } from '@/components/ui/tooltip';
-import { Progress } from '@/components/ui/progress';
 
 function findStageForLecture(lectureId: string): number {
   for (const stage of STAGES) {
@@ -35,6 +35,18 @@ function findStageForLecture(lectureId: string): number {
   }
   return -1;
 }
+
+/** Stage section label mapping for the sidebar */
+const STAGE_SECTIONS: Record<number, Record<string, string>> = {
+  0: { en: 'GETTING STARTED', ro: 'INTRODUCERE', el: 'ΕΙΣΑΓΩΓΗ' },
+  1: { en: 'STAGE 1: LLM FUNDAMENTALS', ro: 'ETAPA 1: FUNDAMENTELE LLM', el: 'ΣΤΑΔΙΟ 1: ΘΕΜΕΛΙΑ LLM' },
+  2: { en: 'STAGE 2: TOKENIZATION & DATA', ro: 'ETAPA 2: DATE & TOKENIZARE', el: 'ΣΤΑΔΙΟ 2: TOKENIZATION' },
+  3: { en: 'STAGE 3: ATTENTION MECHANISM', ro: 'ETAPA 3: MECANISMUL DE ATENȚIE', el: 'ΣΤΑΔΙΟ 3: ΜΗΧΑΝΙΣΜΟΣ ΠΡΟΣΟΧΗΣ' },
+  4: { en: 'STAGE 4: TRANSFORMER ARCH.', ro: 'ETAPA 4: ARHITECTURA TRANSFORMER', el: 'ΣΤΑΔΙΟ 4: ΑΡΧΙΤΕΚΤΟΝΙΚΗ' },
+  5: { en: 'STAGE 5: PRETRAINING', ro: 'ETAPA 5: PRE-ANTRENAMENT', el: 'ΣΤΑΔΙΟ 5: ΠΡΟΕΚΠΑΙΔΕΥΣΗ' },
+  6: { en: 'STAGE 6: FINE-TUNING & DEPLOY', ro: 'ETAPA 6: AJUSTARE & DEPLOYMENT', el: 'ΣΤΑΔΙΟ 6: ΜΙΚΡΟΡΥΘΜΙΣΗ' },
+  7: { en: 'STAGE 7: GENAI SAAS', ro: 'ETAPA 7: GENAI SAAS', el: 'ΣΤΑΔΙΟ 7: GENAI SAAS' },
+};
 
 export function CourseSidebar() {
   const language = useAcademyStore((s) => s.language);
@@ -44,13 +56,15 @@ export function CourseSidebar() {
   const setSidebarOpen = useAcademyStore((s) => s.setSidebarOpen);
   const progress = useAcademyStore((s) => s.progress);
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [courseMapOpen, setCourseMapOpen] = useState(true);
+
   const lectureIndex = useMemo(() => getLectureIndex(), []);
   const lectureMap = useMemo(() => {
-    const map = new Map<string, LectureIndexEntry>();
-    for (const entry of lectureIndex.lectures) {
-      map.set(entry.id, entry);
-    }
-    return map;
+    const entries: [string, LectureIndexEntry][] = lectureIndex.lectures.map(
+      (entry) => [entry.id, entry] as [string, LectureIndexEntry]
+    );
+    return Object.fromEntries(entries) as Record<string, LectureIndexEntry>;
   }, [lectureIndex]);
 
   const currentStage = findStageForLecture(currentLecture);
@@ -72,26 +86,39 @@ export function CourseSidebar() {
     }));
   }, []);
 
-  const getStageCompletion = useCallback(
-    (stage: (typeof STAGES)[number]) => {
-      let completed = 0;
-      for (const lectureId of stage.lectures) {
-        if (progress[lectureId]?.completed) completed++;
-      }
-      return { completed, total: stage.lectures.length };
-    },
-    [progress]
-  );
-
-  const overallProgress = useMemo(() => {
-    const total = lectureIndex.lectures.length;
-    if (total === 0) return 0;
-    let completed = 0;
-    for (const entry of lectureIndex.lectures) {
-      if (progress[entry.id]?.completed) completed++;
+  // Filter lectures by search
+  const filteredStages = useMemo(() => {
+    if (!searchQuery.trim()) return null;
+    const q = searchQuery.toLowerCase();
+    const result: Record<number, string[]> = {};
+    for (const stage of STAGES) {
+      const matches = stage.lectures.filter((id) => {
+        const entry = lectureMap[id];
+        if (!entry) return false;
+        const title = (entry.title[language] || entry.title.en || '').toLowerCase();
+        return title.includes(q);
+      });
+      if (matches.length > 0) result[stage.number] = matches;
     }
-    return Math.round((completed / total) * 100);
-  }, [lectureIndex, progress]);
+    return result;
+  }, [searchQuery, lectureMap, language]);
+
+  /** Get lecture number within its stage */
+  const getLectureNumber = (lectureId: string): number => {
+    for (const stage of STAGES) {
+      const idx = stage.lectures.indexOf(lectureId);
+      if (idx !== -1) {
+        // Calculate global number from prior stages
+        let offset = 0;
+        for (const s of STAGES) {
+          if (s.number < stage.number) offset += s.lectures.length;
+          else break;
+        }
+        return offset + idx;
+      }
+    }
+    return 0;
+  };
 
   return (
     <TooltipProvider>
@@ -103,175 +130,183 @@ export function CourseSidebar() {
         />
       )}
 
-      {/* Sidebar — dark blue brand theme */}
+      {/* Sidebar */}
       <aside
         className={cn(
-          'fixed top-0 left-0 z-50 flex h-full w-full flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-transform duration-300 ease-in-out lg:z-30 lg:w-80 lg:translate-x-0',
+          'fixed top-0 left-0 z-50 flex h-full w-[260px] flex-col',
+          'bg-sidebar text-sidebar-foreground',
+          'transition-transform duration-300 ease-in-out',
+          'lg:z-30 lg:translate-x-0',
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between border-b border-sidebar-border px-4 py-3">
-          <div className="flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-sidebar-primary" />
-            <h2 className="text-sm font-semibold text-sidebar-foreground">
-              {t('course_map', language)}
-            </h2>
+        {/* Search box */}
+        <div className="px-3 pt-3 pb-2">
+          <div className="relative">
+            <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-sidebar-foreground/40" />
+            <input
+              type="text"
+              placeholder={t('search', language)}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-md border border-sidebar-border bg-sidebar-accent/50 py-1.5 pl-8 pr-3 text-xs text-sidebar-foreground placeholder:text-sidebar-foreground/40 focus:outline-none focus:ring-1 focus:ring-sidebar-ring"
+            />
           </div>
-          <button
-            onClick={() => setSidebarOpen(false)}
-            className="rounded-md p-1 text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground lg:hidden"
-          >
-            <X className="h-5 w-5" />
-          </button>
         </div>
 
-        {/* Stage list */}
-        <ScrollArea className="flex-1 overflow-y-auto">
-          <div className="p-2">
-            {STAGES.map((stage) => {
-              const { completed, total } = getStageCompletion(stage);
-              const isExpanded = expandedStages[stage.number] ?? false;
+        {/* Course Map toggle */}
+        <button
+          onClick={() => setCourseMapOpen(!courseMapOpen)}
+          className="mx-3 mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-sidebar-foreground/80 hover:bg-sidebar-accent transition-colors"
+        >
+          <Map className="h-4 w-4" />
+          <span className="flex-1 text-left text-xs font-medium">
+            {t('course_map', language)}
+          </span>
+          {courseMapOpen ? (
+            <ChevronDown className="h-3.5 w-3.5" />
+          ) : (
+            <ChevronRight className="h-3.5 w-3.5" />
+          )}
+        </button>
 
-              return (
-                <div key={stage.number} className="mb-1">
-                  {/* Stage header */}
-                  <button
-                    onClick={() => toggleStage(stage.number)}
-                    className={cn(
-                      'flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium transition-colors hover:bg-sidebar-accent',
-                      'border-l-[3px]'
-                    )}
-                    style={{ borderLeftColor: stage.color }}
-                  >
-                    {isExpanded ? (
-                      <ChevronDown className="h-4 w-4 shrink-0 text-sidebar-foreground/60" />
-                    ) : (
-                      <ChevronRight className="h-4 w-4 shrink-0 text-sidebar-foreground/60" />
-                    )}
-                    <span className="shrink-0">{stage.icon}</span>
-                    <span className="flex-1 truncate">
-                      {stage.name[language] || stage.name.en}
-                    </span>
-                    <span className="shrink-0 text-xs text-sidebar-foreground/50">
-                      {completed}/{total}
-                    </span>
-                  </button>
+        {/* Mobile close */}
+        <button
+          onClick={() => setSidebarOpen(false)}
+          className="absolute top-3 right-3 rounded-md p-1 text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground lg:hidden"
+        >
+          <X className="h-4 w-4" />
+        </button>
 
-                  {/* Lectures in stage */}
-                  <div
-                    className={cn(
-                      'overflow-hidden transition-all duration-200 ease-in-out',
-                      isExpanded
-                        ? 'max-h-[2000px] opacity-100'
-                        : 'max-h-0 opacity-0'
-                    )}
-                  >
-                    <div className="ml-3 border-l border-sidebar-border pl-2 py-1">
-                      {stage.lectures.map((lectureId) => {
-                        const entry = lectureMap.get(lectureId);
-                        if (!entry) return null;
+        {/* Lecture list */}
+        {courseMapOpen && (
+          <ScrollArea className="flex-1 overflow-y-auto">
+            <div className="px-3 pb-4">
+              {/* Homepage link */}
+              <div className="mb-2">
+                <Link
+                  href="/"
+                  onClick={() => setSidebarOpen(false)}
+                  className={cn(
+                    'flex items-center gap-2 rounded-md px-2 py-1.5 text-xs transition-colors',
+                    currentLecture === ''
+                      ? 'bg-sidebar-primary text-sidebar-primary-foreground'
+                      : 'text-sidebar-foreground/70 hover:bg-sidebar-accent'
+                  )}
+                >
+                  <Star className="h-3.5 w-3.5 text-sidebar-primary" />
+                  <span>
+                    {language === 'ro' ? 'Pagina Cursului' : language === 'el' ? 'Σελίδα Μαθήματος' : 'Course Page'}
+                  </span>
+                </Link>
+              </div>
 
-                        const isActive = currentLecture === lectureId;
-                        const isCompleted =
-                          progress[lectureId]?.completed ?? false;
-                        const title =
-                          entry.title[language] || entry.title.en || lectureId;
+              {STAGES.map((stage) => {
+                const isSearching = filteredStages !== null;
+                const visibleLectures = isSearching
+                  ? (filteredStages[stage.number] || [])
+                  : stage.lectures;
 
-                        return (
-                          <Link
-                            key={lectureId}
-                            href={`/lectures/${entry.id}`}
-                            onClick={() => {
-                              setCurrentLecture(entry.id);
-                              setSidebarOpen(false);
-                            }}
-                            className={cn(
-                              'group flex items-start gap-2 rounded-md px-2 py-1.5 text-sm transition-colors',
-                              isActive
-                                ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-                                : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
-                            )}
-                          >
-                            {/* Completion icon */}
-                            <span className="mt-0.5 shrink-0">
-                              {isCompleted ? (
-                                <CheckCircle2 className="h-4 w-4 text-green-400" />
-                              ) : (
-                                <Circle className="h-4 w-4 text-sidebar-foreground/30" />
+                if (isSearching && visibleLectures.length === 0) return null;
+
+                const isExpanded = isSearching || (expandedStages[stage.number] ?? false);
+
+                // Section label
+                const sectionLabel =
+                  STAGE_SECTIONS[stage.number]?.[language] ||
+                  STAGE_SECTIONS[stage.number]?.en ||
+                  stage.name[language] || stage.name.en;
+
+                return (
+                  <div key={stage.number} className="mb-1">
+                    {/* Stage section label */}
+                    <button
+                      onClick={() => toggleStage(stage.number)}
+                      className="flex w-full items-center gap-1 px-2 pt-3 pb-1"
+                    >
+                      {isExpanded ? (
+                        <ChevronDown className="h-3 w-3 shrink-0 text-sidebar-foreground/40" />
+                      ) : (
+                        <ChevronRight className="h-3 w-3 shrink-0 text-sidebar-foreground/40" />
+                      )}
+                      <span className="flex-1 text-left text-[10px] font-bold uppercase tracking-widest text-secondary">
+                        {sectionLabel}
+                      </span>
+                      <span className="text-[10px] text-sidebar-foreground/40 tabular-nums">
+                        {stage.lectures.filter((id) => progress[id]?.completed).length}/{stage.lectures.length}
+                      </span>
+                    </button>
+
+                    {/* Lecture items */}
+                    {isExpanded && (
+                      <div className="space-y-0.5">
+                        {visibleLectures.map((lectureId) => {
+                          const entry = lectureMap[lectureId];
+                          if (!entry) return null;
+
+                          const isActive = currentLecture === lectureId;
+                          const isCompleted = progress[lectureId]?.completed ?? false;
+                          const title = entry.title[language] || entry.title.en || lectureId;
+                          const lectureNum = getLectureNumber(lectureId);
+
+                          return (
+                            <Link
+                              key={lectureId}
+                              href={`/lectures/${entry.id}`}
+                              onClick={() => {
+                                setCurrentLecture(entry.id);
+                                setSidebarOpen(false);
+                              }}
+                              className={cn(
+                                'group flex items-start gap-2.5 rounded-md px-2 py-1.5 text-xs transition-colors',
+                                isActive
+                                  ? 'bg-sidebar-primary text-sidebar-primary-foreground'
+                                  : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                               )}
-                            </span>
-
-                            {/* Title and badges */}
-                            <span className="flex-1 leading-snug">
-                              <span className="line-clamp-2">{title}</span>
-                              <span className="mt-0.5 flex items-center gap-1">
-                                {entry.codeBlockCount > 0 && (
-                                  <Tooltip>
-                                    <TooltipTrigger
-                                      render={<span />}
-                                      className="inline-flex"
-                                    >
-                                      <Badge
-                                        variant="secondary"
-                                        className="h-4 gap-0.5 px-1 text-[10px]"
-                                      >
-                                        <Code className="h-3 w-3" />
-                                        {entry.codeBlockCount}
-                                      </Badge>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                      {entry.codeBlockCount} code{' '}
-                                      {entry.codeBlockCount === 1
-                                        ? 'block'
-                                        : 'blocks'}
-                                    </TooltipContent>
-                                  </Tooltip>
+                            >
+                              {/* Number circle */}
+                              <span
+                                className={cn(
+                                  'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold',
+                                  isCompleted
+                                    ? 'bg-green-500 text-white'
+                                    : isActive
+                                      ? 'bg-sidebar-primary-foreground text-sidebar-primary'
+                                      : 'bg-secondary/80 text-secondary-foreground'
                                 )}
-                                {entry.hasQuiz && (
-                                  <Tooltip>
-                                    <TooltipTrigger
-                                      render={<span />}
-                                      className="inline-flex"
-                                    >
-                                      <Badge
-                                        variant="secondary"
-                                        className="h-4 gap-0.5 px-1 text-[10px]"
-                                      >
-                                        <HelpCircle className="h-3 w-3" />
-                                      </Badge>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                      {t('course_lecture', language)}{' '}
-                                      quiz
-                                    </TooltipContent>
-                                  </Tooltip>
+                              >
+                                {isCompleted ? '✓' : lectureNum}
+                              </span>
+
+                              {/* Title + badges */}
+                              <span className="flex-1 leading-snug">
+                                <span className="line-clamp-2">{title}</span>
+                                {(entry.codeBlockCount > 0 || entry.hasQuiz) && (
+                                  <span className="mt-0.5 flex items-center gap-1">
+                                    {entry.codeBlockCount > 0 && (
+                                      <span className="inline-flex items-center gap-0.5 rounded bg-blue-500/20 px-1 py-0.5 text-[9px] font-semibold text-blue-300">
+                                        Code
+                                      </span>
+                                    )}
+                                    {entry.hasQuiz && (
+                                      <span className="inline-flex items-center gap-0.5 rounded bg-pink-500/20 px-1 py-0.5 text-[9px] font-semibold text-pink-300">
+                                        Quiz
+                                      </span>
+                                    )}
+                                  </span>
                                 )}
                               </span>
-                            </span>
-                          </Link>
-                        );
-                      })}
-                    </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </ScrollArea>
-
-        {/* Bottom progress section */}
-        <div className="border-t border-sidebar-border p-4">
-          <div className="flex flex-wrap gap-3">
-            <span className="text-xs font-medium text-sidebar-foreground">
-              {t('course_progress', language)}
-            </span>
-            <span className="ml-auto text-xs text-sidebar-foreground/50 tabular-nums">
-              {overallProgress}% {t('course_completed', language)}
-            </span>
-            <Progress value={overallProgress} className="w-full bg-sidebar-accent" />
-          </div>
-        </div>
+                );
+              })}
+            </div>
+          </ScrollArea>
+        )}
       </aside>
     </TooltipProvider>
   );

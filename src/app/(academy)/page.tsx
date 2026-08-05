@@ -11,18 +11,14 @@ import {
   Globe,
   ChevronRight,
   GraduationCap,
-  Sparkles,
   Play,
-  Users,
-  Award,
 } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Separator } from '@/components/ui/separator';
 
 export default function HomePage() {
   const language = useAcademyStore((s) => s.language);
@@ -31,90 +27,118 @@ export default function HomePage() {
   const index = getLectureIndex();
   const completionPct = getCompletionPercentage();
   const hasProgress = Object.keys(progress).length > 0;
-
-  // Find next incomplete lecture
   const nextLecture = index.lectures.find((l) => !progress[l.id]?.completed);
 
   const stats = [
-    {
-      icon: BookOpen,
-      value: '49',
-      label: t('home_stats_lectures', language),
-      color: 'text-blue-500',
-      bg: 'bg-blue-500/10',
-    },
-    {
-      icon: Code2,
-      value: '176',
-      label: t('home_stats_exercises', language),
-      color: 'text-purple-500',
-      bg: 'bg-purple-500/10',
-    },
-    {
-      icon: HelpCircle,
-      value: '35+',
-      label: t('home_stats_quizzes', language),
-      color: 'text-pink-500',
-      bg: 'bg-pink-500/10',
-    },
-    {
-      icon: Globe,
-      value: '3',
-      label: t('home_stats_languages', language),
-      color: 'text-emerald-500',
-      bg: 'bg-emerald-500/10',
-    },
+    { value: '49', label: t('home_stats_lectures', language) },
+    { value: '5', label: 'SaaS Products' },
+    { value: '100+', label: t('home_stats_exercises', language) },
+    { value: '3', label: t('home_stats_languages', language) },
   ];
 
   return (
-    <div className="space-y-12 pb-16">
-      {/* Hero Section */}
-      <section className="relative -mx-4 -mt-8 overflow-hidden px-4 pb-12 pt-16 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10 dark:from-blue-600/20 dark:via-purple-600/20 dark:to-pink-600/20" />
-        <div className="relative mx-auto max-w-3xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-300">
-            <Sparkles className="h-4 w-4" />
-            ADD Academy
-          </div>
-          <h1 className="mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+    <div className="space-y-12 pb-16 -mx-4 -mt-8 sm:-mx-6 lg:-mx-8">
+      {/* ══════════════════════════════════════════════
+          Hero Section — deep blue gradient matching reference
+          ══════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary to-[hsl(240_60%_25%)] px-6 py-20 text-center text-primary-foreground sm:px-12 lg:px-16">
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(255,255,255,0.08),transparent)]" />
+
+        <div className="relative mx-auto max-w-3xl">
+          <h1 className="mb-4 font-heading text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
             {t('home_title', language)}
           </h1>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground sm:text-xl">
+          <p className="mx-auto mb-8 max-w-2xl text-base text-primary-foreground/70 sm:text-lg">
             {t('home_subtitle', language)}
           </p>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link href="/lectures/1" className={cn(buttonVariants({ size: 'lg' }), 'gap-2 text-base')}>
-              <Play className="h-5 w-5" />
-              {t('home_start', language)}
-            </Link>
-            <p className="text-sm text-muted-foreground">
-              {t('home_free', language)}
-            </p>
+
+          {/* Gold CTA button */}
+          <Link
+            href={nextLecture ? `/lectures/${nextLecture.id}` : '/lectures/1'}
+            className="inline-flex items-center gap-2 rounded-lg bg-secondary px-8 py-3 text-base font-bold text-secondary-foreground shadow-lg shadow-secondary/20 transition-all hover:bg-secondary/90 hover:shadow-xl hover:shadow-secondary/30"
+          >
+            {hasProgress ? t('course_continue', language) : t('home_start', language)} →
+          </Link>
+
+          {/* Stats row */}
+          <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <div className="text-3xl font-bold text-secondary tabular-nums">
+                  {stat.value}
+                </div>
+                <div className="mt-1 text-xs text-primary-foreground/60">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Row */}
-      <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {stats.map((stat) => (
-          <Card key={stat.label} className="text-center">
+      {/* ══════════════════════════════════════════════
+          What You'll Learn — 3-column feature cards
+          ══════════════════════════════════════════════ */}
+      <section className="px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-6 text-center text-2xl font-bold font-heading">
+          {language === 'ro' ? 'Ce Vei Învăța' : language === 'el' ? 'Τι Θα Μάθετε' : "What You'll Learn"}
+        </h2>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Card className="text-center">
             <CardContent className="pt-6">
-              <div
-                className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl ${stat.bg}`}
-              >
-                <stat.icon className={`h-6 w-6 ${stat.color}`} />
-              </div>
-              <div className="text-2xl font-bold">{stat.value}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
+              <div className="mx-auto mb-4 text-4xl">🧠</div>
+              <CardTitle className="mb-2 text-base">
+                {language === 'ro' ? 'Teoria LLM' : language === 'el' ? 'Θεωρία LLM' : 'LLM Theory'}
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                {language === 'ro'
+                  ? 'Înțelege transformerele, mecanismele de atenție, embedding-urile și matematica din spatele modelelor de limbaj moderne.'
+                  : language === 'el'
+                    ? 'Κατανοήστε τους transformers, τους μηχανισμούς προσοχής, τα embeddings και τα μαθηματικά πίσω από τα σύγχρονα γλωσσικά μοντέλα.'
+                    : 'Understand transformers, attention mechanisms, embeddings and the math behind modern language models.'}
+              </p>
             </CardContent>
           </Card>
-        ))}
+          <Card className="text-center">
+            <CardContent className="pt-6">
+              <div className="mx-auto mb-4 text-4xl">💻</div>
+              <CardTitle className="mb-2 text-base">
+                {language === 'ro' ? 'Cod Practic' : language === 'el' ? 'Πρακτικός Κώδικας' : 'Hands-On Code'}
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                {language === 'ro'
+                  ? 'Construiește fiecare componentă de la zero în Python — tokenizere, straturi de atenție, blocuri transformer și întreaga arhitectură GPT-2.'
+                  : language === 'el'
+                    ? 'Κατασκευάστε κάθε component από το μηδέν σε Python — tokenizers, στρώματα προσοχής, transformer blocks και ολόκληρη την αρχιτεκτονική GPT-2.'
+                    : 'Build every component from scratch in Python — tokenizers, attention layers, transformer blocks and the full GPT-2 architecture.'}
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="text-center">
+            <CardContent className="pt-6">
+              <div className="mx-auto mb-4 text-4xl">🚀</div>
+              <CardTitle className="mb-2 text-base">
+                {language === 'ro' ? 'Antrenare & Implementare' : language === 'el' ? 'Εκπαίδευση & Ανάπτυξη' : 'Training & Deployment'}
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                {language === 'ro'
+                  ? 'Pre-antrenează pe seturi de date reale, implementează scalarea temperaturii, eșantionarea top-k și încarcă întreaga arhitectură GPT-2.'
+                  : language === 'el'
+                    ? 'Προεκπαιδεύστε σε πραγματικά datasets, υλοποιήστε temperature scaling, top-k sampling και φορτώστε ολόκληρη την αρχιτεκτονική GPT-2.'
+                    : 'Pretrain on real datasets, implement temperature scaling, top-k sampling and load the full GPT-2 architecture.'}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
       </section>
 
-      {/* Continue Learning (if user has progress) */}
+      {/* ══════════════════════════════════════════════
+          Continue Learning (if user has progress)
+          ══════════════════════════════════════════════ */}
       {hasProgress && (
-        <section>
-          <Card className="border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/30">
+        <section className="px-4 sm:px-6 lg:px-8">
+          <Card className="border-secondary/30 bg-secondary/5">
             <CardContent className="flex flex-col items-start gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex-1">
                 <h3 className="mb-1 text-lg font-semibold">
@@ -138,11 +162,13 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* Course Map Overview */}
-      <section>
+      {/* ══════════════════════════════════════════════
+          Course Map Overview
+          ══════════════════════════════════════════════ */}
+      <section className="px-4 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-center gap-3">
-          <GraduationCap className="h-6 w-6 text-primary" />
-          <h2 className="text-2xl font-bold">{t('course_map', language)}</h2>
+          <GraduationCap className="h-6 w-6 text-secondary" />
+          <h2 className="text-2xl font-bold font-heading">{t('course_map', language)}</h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {STAGES.map((stage) => {
@@ -158,7 +184,7 @@ export default function HomePage() {
                 href={firstLecture ? `/lectures/${firstLecture.id}` : '#'}
                 className="group"
               >
-                <Card className="h-full transition-all hover:shadow-md hover:ring-1 hover:ring-primary/20">
+                <Card className="h-full transition-all hover:shadow-md hover:ring-1 hover:ring-secondary/30">
                   <CardHeader className="pb-3">
                     <div className="flex items-center gap-3">
                       <div
