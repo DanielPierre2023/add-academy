@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { t } from '@/lib/i18n';
-import { Mail, Lock, GraduationCap, AlertCircle } from 'lucide-react';
+import { Mail, Lock, GraduationCap, AlertCircle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -15,6 +15,22 @@ import { Separator } from '@/components/ui/separator';
 import type { Language } from '@/types';
 
 export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <Card className="w-full">
+          <CardContent className="flex items-center justify-center py-16">
+            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+          </CardContent>
+        </Card>
+      }
+    >
+      <LoginForm />
+    </Suspense>
+  );
+}
+
+function LoginForm() {
   const language = useAcademyStore((s) => s.language) as Language;
   const router = useRouter();
   const searchParams = useSearchParams();
