@@ -10,19 +10,19 @@ import {
   ChevronLeft,
   ChevronRight,
   CheckCircle2,
-  BookOpen,
-  Code2,
   Trophy,
 } from 'lucide-react';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
-import { Progress } from '@/components/ui/progress';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { Badge } from '@/components/ui/badge';
 import { QuizEngine } from '@/components/academy/quiz-engine';
-import { CodeBlock } from '@/components/academy/code-block';
+
+declare global {
+  interface Window {
+    loadPyodide: any;
+    pyodide: any;
+  }
+}
 
 interface LectureContent {
   id: string;
@@ -54,6 +54,56 @@ interface LectureViewerProps {
   hasQuiz: boolean;
 }
 
+/** Load Pyodide runtime (shared singleton) */
+async function ensurePyodide(): Promise<any> {
+  if (window.pyodide) return window.pyodide;
+
+  // Load the script if not present
+  if (!window.loadPyodide) {
+    await new Promise<void>((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js';
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error('Failed to load Pyodide'));
+      document.head.appendChild(script);
+    });
+  }
+
+  window.pyodide = await window.loadPyodide({
+    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/',
+  });
+
+  return window.pyodide;
+}
+
+/** Run a Python code string via Pyodide and return stdout/stderr */
+async function runPythonCode(code: string): Promise<{ stdout: string; stderr: string }> {
+  const pyodide = await ensurePyodide();
+
+  pyodide.runPython(`
+import sys
+from io import StringIO
+sys.stdout = StringIO()
+sys.stderr = StringIO()
+`);
+
+  try {
+    await pyodide.runPythonAsync(code);
+  } catch (err: any) {
+    // Error will be in stderr
+  }
+
+  const stdout = pyodide.runPython('sys.stdout.getvalue()');
+  const stderr = pyodide.runPython('sys.stderr.getvalue()');
+
+  pyodide.runPython(`
+sys.stdout = sys.__stdout__
+sys.stderr = sys.__stderr__
+`);
+
+  return { stdout, stderr };
+}
+
 export function LectureViewer({
   lectureId,
   content,
@@ -80,6 +130,12 @@ export function LectureViewer({
   const isCompleted = progress[lectureId]?.completed ?? false;
   const quizCompleted = quizScores[lectureId] !== undefined;
 
+  const lang = language as Language;
+  const lectureHtml = content.content[lang] || content.content['en'] || '';
+  const quizQuestions = quiz
+    ? (quiz[lang]?.questions ?? quiz['en']?.questions ?? [])
+    : [];
+
   // Set current lecture on mount
   useEffect(() => {
     setCurrentLecture(lectureId);
@@ -101,6 +157,74 @@ export function LectureViewer({
     };
   }, [lectureId, updateProgress]);
 
+  // Wire up inline Run buttons for Pyodide code blocks
+  useEffect(() => {
+    if (!contentRef.current) return;
+
+    const container = contentRef.current;
+    const runButtons = container.querySelectorAll('.run-btn');
+
+    const handlers: Array<{ btn: Element; handler: (e: Event) => void }> = [];
+
+    runButtons.forEach((btn) => {
+      const handler = async (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const button = btn as HTMLButtonElement;
+        const wrapper = button.closest('.code-block-wrapper');
+        if (!wrapper) return;
+
+        // Find the code content
+        const codeEl = wrapper.querySelector('pre code');
+        if (!codeEl) return;
+        const code = codeEl.textContent || '';
+
+        // Find or create output div
+        let outputDiv = wrapper.querySelector('.output, .code-output') as HTMLDivElement;
+        if (!outputDiv) {
+          outputDiv = document.createElement('div');
+          outputDiv.className = 'output';
+          wrapper.appendChild(outputDiv);
+        }
+
+        // Show loading state
+        button.textContent = '⏳ Running...';
+        button.disabled = true;
+        outputDiv.classList.add('visible');
+        outputDiv.classList.remove('error');
+        outputDiv.textContent = 'Loading Python runtime...';
+
+        try {
+          const { stdout, stderr } = await runPythonCode(code);
+          if (stderr) {
+            outputDiv.classList.add('error');
+            outputDiv.textContent = stderr;
+          } else {
+            outputDiv.classList.remove('error');
+            outputDiv.textContent = stdout || '(no output)';
+          }
+        } catch (err: any) {
+          outputDiv.classList.add('error');
+          outputDiv.textContent = err.message || 'Error running code';
+        }
+
+        button.textContent = '▶ Run';
+        button.disabled = false;
+      };
+
+      btn.addEventListener('click', handler);
+      handlers.push({ btn, handler });
+    });
+
+    // Cleanup
+    return () => {
+      handlers.forEach(({ btn, handler }) => {
+        btn.removeEventListener('click', handler);
+      });
+    };
+  }, [lectureHtml]);
+
   // Scroll tracking
   const handleScroll = useCallback(() => {
     if (!contentRef.current) return;
@@ -119,31 +243,8 @@ export function LectureViewer({
 
   const showCompleteButton = scrolledToBottom || quizCompleted || isCompleted;
 
-  const lang = language as Language;
-  const lectureTitle = content.title[lang] || content.title['en'] || '';
-  const lectureHtml = content.content[lang] || content.content['en'] || '';
-  const quizQuestions = quiz
-    ? (quiz[lang]?.questions ?? quiz['en']?.questions ?? [])
-    : [];
-
   return (
     <div className="flex flex-col h-full max-w-4xl mx-auto">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-4 border-b">
-        <div className="flex items-center gap-3">
-          <BookOpen className="h-6 w-6 text-primary" />
-          <h1 className="text-2xl font-bold">{lectureTitle}</h1>
-        </div>
-        <div className="flex items-center gap-2">
-          {isCompleted && (
-            <Badge variant="default" className="gap-1 bg-green-600">
-              <CheckCircle2 className="h-3 w-3" />
-              {t('completed', lang)}
-            </Badge>
-          )}
-        </div>
-      </div>
-
       {/* Content Area */}
       <div
         ref={contentRef}
@@ -151,46 +252,21 @@ export function LectureViewer({
         className="flex-1 overflow-y-auto"
       >
         <div className="px-4 py-6 space-y-8">
-          {/* Lecture HTML Content */}
-          <div
-            className={cn(
-              'prose prose-slate dark:prose-invert max-w-none',
-              'prose-headings:scroll-mt-20',
-              'prose-h2:text-xl prose-h2:font-semibold prose-h2:mt-8 prose-h2:mb-4',
-              'prose-h3:text-lg prose-h3:font-medium prose-h3:mt-6 prose-h3:mb-3',
-              'prose-p:leading-7 prose-p:mb-4',
-              'prose-li:leading-7',
-              'prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm',
-              'prose-pre:bg-zinc-900 prose-pre:text-zinc-100 prose-pre:rounded-lg',
-              'prose-img:rounded-lg prose-img:shadow-md',
-              'prose-a:text-primary prose-a:underline-offset-4 hover:prose-a:text-primary/80',
-              'prose-table:border-collapse prose-th:bg-muted prose-th:p-2 prose-td:p-2 prose-td:border prose-th:border'
-            )}
-            dangerouslySetInnerHTML={{ __html: lectureHtml }}
-          />
-
-          {/* Code Blocks */}
-          {content.codeBlocks.length > 0 && (
-            <div className="space-y-6">
-              <Separator />
-              <div className="flex items-center gap-2 mb-4">
-                <Code2 className="h-5 w-5 text-primary" />
-                <h2 className="text-xl font-semibold">
-                  {t('code_examples', lang)}
-                </h2>
-              </div>
-              {content.codeBlocks.map((block) => (
-                <CodeBlock
-                  key={block.id}
-                  id={block.id}
-                  title={block.title}
-                  code={block.code}
-                  language={block.language}
-                  runnable={block.runnable}
-                />
-              ))}
+          {/* Completion badge */}
+          {isCompleted && (
+            <div className="flex justify-end">
+              <Badge variant="default" className="gap-1 bg-green-600">
+                <CheckCircle2 className="h-3 w-3" />
+                {t('completed', lang)}
+              </Badge>
             </div>
           )}
+
+          {/* Lecture HTML Content — styled by globals.css lecture classes */}
+          <div
+            className="content"
+            dangerouslySetInnerHTML={{ __html: lectureHtml }}
+          />
 
           {/* Quiz Section */}
           {quiz && quizQuestions.length > 0 && (
