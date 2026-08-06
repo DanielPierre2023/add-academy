@@ -209,7 +209,7 @@ export function AITutor() {
     language === 'ro' ? 'Lecția' : language === 'el' ? 'Μάθημα' : 'Lecture';
 
   return (
-    <div className="fixed right-0 top-0 z-50 flex h-full w-full flex-col border-l bg-background shadow-2xl sm:w-96">
+    <div className="fixed right-0 top-0 z-50 flex h-full w-full flex-col overflow-hidden border-l bg-background shadow-2xl sm:w-96">
       {/* Header */}
       <div className="flex items-center justify-between border-b px-4 py-3 shrink-0">
         <div className="flex items-center gap-2">
@@ -266,7 +266,7 @@ export function AITutor() {
       {/* Messages — plain overflow div instead of ScrollArea for reliable scrolling */}
       <div
         ref={scrollContainerRef}
-        className="flex-1 overflow-y-auto px-4"
+        className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4"
       >
         <div className="space-y-4 py-4">
           {tutorMessages.length === 0 && (
