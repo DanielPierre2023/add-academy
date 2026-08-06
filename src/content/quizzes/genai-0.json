@@ -1,0 +1,213 @@
+{
+  "lectureId": "genai-0",
+  "en": {
+    "id": "quiz-genai-0-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "What is the four-layer architecture that every GenAI SaaS project in this course follows?",
+        "options": [
+          "Database → Cache → API → Mobile App",
+          "Frontend (HTML) → API Layer (FastAPI) → AI Backend (own LLM or commercial) → Storage",
+          "React → Node.js → MongoDB → Redis",
+          "Browser → CDN → Lambda → S3"
+        ],
+        "correct": [1],
+        "explanation": "Every GenAI SaaS project uses: a static HTML frontend served by FastAPI, a FastAPI API layer handling routes and validation, an AI backend (either your own Mini GPT-2 or a commercial API like OpenAI/Gemini/Claude), and a storage layer for persistence.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "How can you switch between your own LLM and a commercial API like OpenAI in the unified provider?",
+        "options": [
+          "Rewrite all the application code",
+          "Change the AI_PROVIDER environment variable in your .env file",
+          "Install a different operating system",
+          "It is not possible to switch providers"
+        ],
+        "correct": [1],
+        "explanation": "The unified AIProvider class reads AI_PROVIDER from environment variables. Setting it to 'own', 'openai', 'gemini', or 'claude' switches the backend without changing any application code. This is the strategy pattern in action.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "What are the 5 steps to customize a GenAI SaaS for your own niche? Select all that apply.",
+        "options": [
+          "Change branding (app name, colors, logo)",
+          "Modify system prompts for your domain",
+          "Rewrite FastAPI from scratch",
+          "Adjust billing tiers and features"
+        ],
+        "correct": [0, 1, 3],
+        "explanation": "Customization involves: changing branding in index.html, modifying prompts to match your niche (e.g., legal, medical), and adjusting billing tiers. You don't need to rewrite FastAPI — the framework stays the same, only the configuration and prompts change.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Which deployment platform is recommended for beginners deploying a FastAPI backend?",
+        "options": [
+          "Self-hosted bare metal server",
+          "Railway (easiest: railway login, railway init, railway up)",
+          "Building your own data center",
+          "FTP upload to shared hosting"
+        ],
+        "correct": [1],
+        "explanation": "Railway is the easiest deployment option: three commands (railway login, railway init, railway up) deploy your FastAPI app with automatic HTTPS, environment variable management, and custom domain support. More advanced options include Render, or Vercel (frontend) + Railway (API) split architecture.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "What are the 5 GenAI SaaS products you will build in this course?",
+        "options": [
+          "Social media bot, speech-to-text, video editor, game AI, email generator",
+          "Database manager, file converter, web scraper, email client, calculator",
+          "Image Generation, Video Generation, Text Composition & Rewriting, Plagiarism & AI Detection, OCR & Document Intelligence",
+          "Search engine, recommendation system, fraud detector, sentiment analyzer, spam filter"
+        ],
+        "correct": [2],
+        "explanation": "The 5 SaaS products cover real market verticals: visual content creation (image & video), text processing (rewriting & plagiarism detection), and document intelligence (OCR). Each can be deployed and offered commercially using either your own LLM or a commercial API.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-genai-0-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Care este arhitectura cu patru straturi pe care o urmeaza fiecare proiect GenAI SaaS din acest curs?",
+        "options": [
+          "Baza de date → Cache → API → Aplicatie mobila",
+          "Frontend (HTML) → Strat API (FastAPI) → Backend AI (LLM propriu sau comercial) → Stocare",
+          "React → Node.js → MongoDB → Redis",
+          "Browser → CDN → Lambda → S3"
+        ],
+        "correct": [1],
+        "explanation": "Fiecare proiect GenAI SaaS foloseste: un frontend HTML static servit de FastAPI, un strat API FastAPI, un backend AI (Mini GPT-2 propriu sau API comercial), si un strat de stocare pentru persistenta.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Cum puteti comuta intre LLM-ul propriu si un API comercial precum OpenAI in furnizorul unificat?",
+        "options": [
+          "Rescrieti tot codul aplicatiei",
+          "Schimbati variabila de mediu AI_PROVIDER in fisierul .env",
+          "Instalati un alt sistem de operare",
+          "Nu este posibil sa comutati furnizorii"
+        ],
+        "correct": [1],
+        "explanation": "Clasa AIProvider unificata citeste AI_PROVIDER din variabilele de mediu. Setarea la 'own', 'openai', 'gemini' sau 'claude' comuta backend-ul fara a modifica codul aplicatiei.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Care sunt pasii pentru a personaliza un GenAI SaaS pentru nisa voastra? Selectati toate variantele corecte.",
+        "options": [
+          "Schimbarea brandingului (nume aplicatie, culori, logo)",
+          "Modificarea prompt-urilor de sistem pentru domeniul vostru",
+          "Rescrierea FastAPI de la zero",
+          "Ajustarea nivelurilor de facturare si a caracteristicilor"
+        ],
+        "correct": [0, 1, 3],
+        "explanation": "Personalizarea implica: schimbarea brandingului in index.html, modificarea prompt-urilor pentru nisa voastra si ajustarea nivelurilor de facturare. Nu trebuie sa rescrieti FastAPI.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Ce platforma de deployment este recomandata pentru incepatori care deploiaza un backend FastAPI?",
+        "options": [
+          "Server bare metal auto-gazduita",
+          "Railway (cel mai usor: railway login, railway init, railway up)",
+          "Construirea propriului centru de date",
+          "Incarcare FTP pe hosting partajat"
+        ],
+        "correct": [1],
+        "explanation": "Railway este cea mai usoara optiune de deployment: trei comenzi (railway login, railway init, railway up) implementeaza aplicatia FastAPI cu HTTPS automat si suport domeniu personalizat.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Care sunt cele 5 produse GenAI SaaS pe care le veti construi in acest curs?",
+        "options": [
+          "Bot social media, speech-to-text, editor video, AI pentru jocuri, generator email",
+          "Manager baza de date, convertor fisiere, web scraper, client email, calculator",
+          "Generare de Imagini, Generare Video, Compunere & Rescriere Text, Detectie Plagiat & AI, OCR & Inteligenta Documentara",
+          "Motor de cautare, sistem de recomandari, detector de frauda, analizor de sentimente, filtru spam"
+        ],
+        "correct": [2],
+        "explanation": "Cele 5 produse SaaS acopera verticale reale de piata: crearea de continut vizual, procesarea textului si inteligenta documentara. Fiecare poate fi implementat folosind LLM-ul propriu sau un API comercial.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-genai-0-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Poia einai i architektoniki tessaron epipedon pou akolouthei kathe ergo GenAI SaaS se ayto to mathima?",
+        "options": [
+          "Vasi Dedomenon → Cache → API → Kinitii Efarrmogi",
+          "Frontend (HTML) → Epipedo API (FastAPI) → AI Backend (idioktito LLM i emporiko) → Apothikeussi",
+          "React → Node.js → MongoDB → Redis",
+          "Browser → CDN → Lambda → S3"
+        ],
+        "correct": [1],
+        "explanation": "Kathe ergo GenAI SaaS chrisimopoyei: ena statiko HTML frontend, ena epipedo API FastAPI, ena AI backend (diko sas Mini GPT-2 i emporiko API), kai ena epipedo apothiikeussis.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Pos mporoite na enallaksete metaxi tou dikou sas LLM kai enos emporikou API opos to OpenAI?",
+        "options": [
+          "Xanagraafete olo ton kodika tis efarmogis",
+          "Allazete ti metavliti perivallontos AI_PROVIDER sto archeio .env",
+          "Egkathisttate diaforetiko leitourgiko systima",
+          "Den einai dynati i enallagi parochon"
+        ],
+        "correct": [1],
+        "explanation": "I eniaia klasi AIProvider diavazei to AI_PROVIDER apo tis metavlites perivallontos. I rithmisi se 'own', 'openai', 'gemini' i 'claude' allazei to backend choris allagi kodika.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Poia einai ta vimata gia na prosarmoosete ena GenAI SaaS gia ti diki sas agora? Epilexte ola osa ischyoun.",
+        "options": [
+          "Allagi branding (onoma efarmogis, chromata, logo)",
+          "Tropopoiiisi ton system prompts gia ton tomea sas",
+          "Xanagraffi tou FastAPI apo tin archi",
+          "Prosarmogi epipedon timologisis kai charaktiristikon"
+        ],
+        "correct": [0, 1, 3],
+        "explanation": "I prosarmogi perilamvanei: allagi branding sto index.html, tropopoiisi ton prompts gia tin agora sas, kai prosarmogi timologisis. Den chreiazzetai na xanagrafete to FastAPI.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Poia platforma deployment synisttatai gia archarious pou kanoun deploy ena FastAPI backend?",
+        "options": [
+          "Aftofiloxenoumenos bare metal server",
+          "Railway (eukolo: railway login, railway init, railway up)",
+          "Kataskeyi dikou sas kentrou dedomenon",
+          "FTP upload se koinochriisto hosting"
+        ],
+        "correct": [1],
+        "explanation": "To Railway einai i pio eukoli epilogi: treis entoles (railway login, railway init, railway up) kanoun deploy tin FastAPI efarmogi me aftomato HTTPS kai ypostirixi custom domain.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Poia einai ta 5 proionta GenAI SaaS pou tha ftiaxete se ayto to mathima?",
+        "options": [
+          "Bot koinonikon diktyon, speech-to-text, epexergastis video, AI paichnidion, genniitria email",
+          "Diacheiristis vasis dedomenon, metatropeas archeion, web scraper, email client, arithmomichani",
+          "Dimiourgia Eikonon, Dimiourgia Video, Synthesi & Anadiatypposi Keimenou, Anichnefsi Logoklopis & AI, OCR & Noimossyni Engrafon",
+          "Michani anaziitisis, systima systaseon, anichneytis apatis, analytiis synaisthimaton, filtro spam"
+        ],
+        "correct": [2],
+        "explanation": "Ta 5 proionta SaaS kalypptoun pragmatikes agores: dimiourgia optikou periechomenou, epexergasia keimenou kai noimossyni engrafon. Kathe ena mporei na anapticchthei chrisimopoiontas to diko sas LLM i emporiko API.",
+        "isMulti": false
+      }
+    ]
+  }
+}

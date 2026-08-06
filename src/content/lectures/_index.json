@@ -556,8 +556,24 @@
         "el": "Τελικό Έργο Σταδίου 5 — Γεννήτρια Κειμένου με Προεκπαίδευση"
       },
       "prev": "31",
-      "next": "33",
+      "next": "32b",
       "codeBlockCount": 4,
+      "hasQuiz": true
+    },
+    {
+      "id": "32b",
+      "number": 32.5,
+      "stage": 5,
+      "stageName": "Pretraining",
+      "isGenAI": false,
+      "title": {
+        "en": "Your LLM in the Real World: Frontend, API & Custom Training",
+        "ro": "LLM-ul Tau in Lumea Reala: Frontend, API si Antrenament Personalizat",
+        "el": "To LLM sou ston Pragmatiko Kosmo: Frontend, API & Prosarmismeni Ekpaideusi"
+      },
+      "prev": "32",
+      "next": "33",
+      "codeBlockCount": 7,
       "hasQuiz": true
     },
     {
@@ -571,7 +587,7 @@
         "ro": "Instruction Fine-tuning — Învățarea Modelelor să Urmeze Instrucțiuni",
         "el": "Instruction Fine-tuning — Διδάσκοντας τα Μοντέλα να Ακολουθούν Οδηγίες"
       },
-      "prev": "32",
+      "prev": "32b",
       "next": "34",
       "codeBlockCount": 4,
       "hasQuiz": true
@@ -732,6 +748,22 @@
         "el": "Capstone Σταδίου 6 — Πλήρες μικρορυθμισμένο σύστημα LLM"
       },
       "prev": "42",
+      "next": "genai-0",
+      "codeBlockCount": 6,
+      "hasQuiz": true
+    },
+    {
+      "id": "genai-0",
+      "number": 100,
+      "stage": 7,
+      "stageName": "GenAI SaaS",
+      "isGenAI": true,
+      "title": {
+        "en": "GenAI SaaS Foundation: APIs, Customization & Deployment",
+        "ro": "Fundatia GenAI SaaS: API-uri, Personalizare si Deployment",
+        "el": "Vaseis GenAI SaaS: APIs, Prosarmogi & Deployment"
+      },
+      "prev": "43",
       "next": "genai-1",
       "codeBlockCount": 6,
       "hasQuiz": true
@@ -747,7 +779,7 @@
         "ro": "Lecția GenAI 1: Construiește un SaaS de Generare de Imagini",
         "el": "Διάλεξη GenAI 1: Κατασκευή ενός SaaS Δημιουργίας Εικόνων"
       },
-      "prev": "43",
+      "prev": "genai-0",
       "next": "genai-2",
       "codeBlockCount": 17,
       "hasQuiz": false
@@ -817,7 +849,7 @@
       "hasQuiz": false
     }
   ],
-  "totalLectures": 51,
-  "totalCodeBlocks": 180,
-  "totalQuizzes": 36
+  "totalLectures": 53,
+  "totalCodeBlocks": 193,
+  "totalQuizzes": 38
 }
