@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { t } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
+import type { Language } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { showXPToast } from '@/components/gamification/xp-toast';
 import { XP_VALUES } from '@/types';
@@ -32,6 +32,25 @@ const MODE_CONFIG = {
   build: { icon: Wrench, color: 'text-blue-500', bg: 'bg-blue-500/10' },
 } as const;
 
+/** Translated preset questions keyed by language */
+const SUGGESTIONS: Record<Language, string[]> = {
+  en: [
+    'What is attention mechanism?',
+    'Help me debug my code',
+    'How do I build a tokenizer?',
+  ],
+  ro: [
+    'Ce este mecanismul de atenție?',
+    'Ajută-mă să depanez codul',
+    'Cum construiesc un tokenizer?',
+  ],
+  el: [
+    'Τι είναι ο μηχανισμός προσοχής;',
+    'Βοήθησέ με να διορθώσω τον κώδικά μου',
+    'Πώς φτιάχνω έναν tokenizer;',
+  ],
+};
+
 export function AITutor() {
   const {
     language,
@@ -53,6 +72,7 @@ export function AITutor() {
   const [rateLimitInfo, setRateLimitInfo] = useState<{ limit?: number; used?: number } | null>(null);
   const [tutorQuestionsAsked, setTutorQuestionsAsked] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Reset conversation ID when switching lectures
@@ -62,9 +82,12 @@ export function AITutor() {
     setRateLimitInfo(null);
   }, [currentLecture]);
 
+  // Auto-scroll to bottom when messages change
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [tutorMessages]);
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [tutorMessages, isLoading]);
 
   useEffect(() => {
     if (tutorOpen && textareaRef.current) {
@@ -72,13 +95,12 @@ export function AITutor() {
     }
   }, [tutorOpen]);
 
-  const handleSend = async () => {
-    const message = input.trim();
-    if (!message || isLoading || rateLimited) return;
+  const sendMessage = useCallback(async (message: string) => {
+    if (!message.trim() || isLoading || rateLimited) return;
 
     const userMessage: AIMessage = {
       role: 'user',
-      content: message,
+      content: message.trim(),
       timestamp: new Date().toISOString(),
       lectureContext: currentLecture,
     };
@@ -91,7 +113,7 @@ export function AITutor() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message,
+          message: message.trim(),
           mode: tutorMode,
           lectureId: currentLecture,
           language,
@@ -125,14 +147,13 @@ export function AITutor() {
 
       const data = await response.json();
 
-      // Track conversation ID for persistence
       if (data.conversationId) {
         setConversationId(data.conversationId);
       }
 
       const assistantMessage: AIMessage = {
         role: 'assistant',
-        content: data.response || 'Sorry, I could not generate a response.',
+        content: data.response || t('tutor_error', language),
         timestamp: new Date().toISOString(),
       };
       addTutorMessage(assistantMessage);
@@ -152,13 +173,15 @@ export function AITutor() {
     } catch {
       addTutorMessage({
         role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.',
+        content: t('tutor_error', language),
         timestamp: new Date().toISOString(),
       });
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [isLoading, rateLimited, currentLecture, tutorMode, language, tutorMessages, conversationId, tutorQuestionsAsked, addTutorMessage, awardXP]);
+
+  const handleSend = () => sendMessage(input);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -175,12 +198,20 @@ export function AITutor() {
     setRateLimitInfo(null);
   };
 
+  /** Click a suggestion → send it immediately */
+  const handleSuggestionClick = (suggestion: string) => {
+    sendMessage(suggestion);
+  };
+
   if (!tutorOpen) return null;
+
+  const lectureLabel =
+    language === 'ro' ? 'Lecția' : language === 'el' ? 'Μάθημα' : 'Lecture';
 
   return (
     <div className="fixed right-0 top-0 z-50 flex h-full w-full flex-col border-l bg-background shadow-2xl sm:w-96">
       {/* Header */}
-      <div className="flex items-center justify-between border-b px-4 py-3">
+      <div className="flex items-center justify-between border-b px-4 py-3 shrink-0">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
             <Bot className="h-4 w-4 text-primary" />
@@ -188,7 +219,7 @@ export function AITutor() {
           <div>
             <h3 className="text-sm font-semibold">{t('tutor_title', language)}</h3>
             <p className="text-xs text-muted-foreground">
-              Lecture: {currentLecture}
+              {lectureLabel}: {currentLecture || '—'}
             </p>
           </div>
         </div>
@@ -203,7 +234,7 @@ export function AITutor() {
       </div>
 
       {/* Mode Selector */}
-      <div className="flex gap-1 border-b px-4 py-2">
+      <div className="flex gap-1 border-b px-4 py-2 shrink-0">
         {(Object.keys(MODE_CONFIG) as Array<keyof typeof MODE_CONFIG>).map((mode) => {
           const config = MODE_CONFIG[mode];
           const Icon = config.icon;
@@ -224,16 +255,19 @@ export function AITutor() {
 
       {/* Rate limit warning */}
       {rateLimited && rateLimitInfo && (
-        <div className="flex items-center gap-2 border-b bg-amber-50 px-4 py-2 dark:bg-amber-950/30">
+        <div className="flex items-center gap-2 border-b bg-amber-50 px-4 py-2 dark:bg-amber-950/30 shrink-0">
           <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0" />
           <p className="text-xs text-amber-700 dark:text-amber-300">
-            Daily limit reached ({rateLimitInfo.used}/{rateLimitInfo.limit})
+            {t('tutor_rate_limit', language)} ({rateLimitInfo.used}/{rateLimitInfo.limit})
           </p>
         </div>
       )}
 
-      {/* Messages */}
-      <ScrollArea className="flex-1 px-4">
+      {/* Messages — plain overflow div instead of ScrollArea for reliable scrolling */}
+      <div
+        ref={scrollContainerRef}
+        className="flex-1 overflow-y-auto px-4"
+      >
         <div className="space-y-4 py-4">
           {tutorMessages.length === 0 && (
             <div className="flex flex-col items-center gap-3 pt-8 text-center">
@@ -245,20 +279,13 @@ export function AITutor() {
               </p>
               <Separator className="my-2" />
               <div className="grid gap-2 w-full">
-                {[
-                  'What is attention mechanism?',
-                  'Help me debug my code',
-                  'How do I build a tokenizer?',
-                ].map((suggestion) => (
+                {(SUGGESTIONS[language as Language] || SUGGESTIONS.en).map((suggestion) => (
                   <Button
                     key={suggestion}
                     variant="outline"
                     size="sm"
-                    className="justify-start text-xs h-auto py-2 px-3"
-                    onClick={() => {
-                      setInput(suggestion);
-                      textareaRef.current?.focus();
-                    }}
+                    className="justify-start text-xs h-auto py-2 px-3 text-left"
+                    onClick={() => handleSuggestionClick(suggestion)}
                   >
                     <Lightbulb className="mr-2 h-3 w-3 shrink-0 text-yellow-500" />
                     {suggestion}
@@ -289,10 +316,10 @@ export function AITutor() {
                     : 'bg-muted'
                 )}
               >
-                <p className="whitespace-pre-wrap">{msg.content}</p>
+                <p className="whitespace-pre-wrap break-words">{msg.content}</p>
                 {msg.lectureContext && msg.role === 'user' && (
                   <Badge variant="secondary" className="mt-1 text-[10px]">
-                    Lecture {msg.lectureContext}
+                    {lectureLabel} {msg.lectureContext}
                   </Badge>
                 )}
               </div>
@@ -320,10 +347,10 @@ export function AITutor() {
 
           <div ref={messagesEndRef} />
         </div>
-      </ScrollArea>
+      </div>
 
       {/* Input */}
-      <div className="border-t p-4">
+      <div className="border-t p-4 shrink-0">
         <div className="flex gap-2">
           <Textarea
             ref={textareaRef}

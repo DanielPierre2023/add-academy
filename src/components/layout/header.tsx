@@ -38,6 +38,11 @@ export function Header() {
     router.refresh();
   }
 
+  const tutorLabel =
+    language === 'ro' ? 'Tutor AI' : language === 'el' ? 'AI Tutor' : 'AI Tutor';
+  const accountLabel =
+    language === 'ro' ? 'Contul Meu' : language === 'el' ? 'Λογαριασμός' : 'My Account';
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-primary text-primary-foreground">
       <div className="flex h-12 items-center justify-between px-4 lg:px-6">
@@ -62,31 +67,59 @@ export function Header() {
           </span>
         </div>
 
-        {/* Right: Auth + Theme + Language pills */}
-        <div className="flex items-center gap-3">
+        {/* Right: Auth + Tutor + Theme + Language pills */}
+        <div className="flex items-center gap-2">
+          {/* AI Tutor button — prominent, labeled */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setTutorOpen(!tutorOpen)}
+            aria-label={tutorLabel}
+            className={cn(
+              'gap-1.5 h-8 px-3 text-xs font-semibold transition-colors',
+              tutorOpen
+                ? 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
+                : 'text-primary-foreground/80 hover:bg-white/10 hover:text-primary-foreground'
+            )}
+          >
+            <Bot className="h-4 w-4" />
+            <span className="hidden sm:inline">{tutorLabel}</span>
+          </Button>
+
           {/* Auth section */}
           {!loading && (
             <>
               {user ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
                   {user.isSchoolContact && (
                     <Link
                       href="/school/dashboard"
-                      className="hidden sm:flex items-center gap-1.5 text-xs text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                      className="hidden sm:flex items-center gap-1.5 text-xs text-primary-foreground/80 hover:text-primary-foreground transition-colors px-2"
                     >
                       <School className="h-4 w-4" />
                       <span>{t('school_dashboard', language as Language)}</span>
                     </Link>
                   )}
-                  <Link
-                    href="/account"
-                    className="hidden sm:flex items-center gap-1.5 text-xs text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  >
-                    <UserCircle className="h-4 w-4" />
-                    <span className="max-w-[120px] truncate">
-                      {user.name || user.email}
-                    </span>
-                  </Link>
+                  {/* Account button — visible icon + label on desktop, icon only on mobile */}
+                  <Tooltip>
+                    <TooltipTrigger
+                      render={
+                        <Link
+                          href="/account"
+                          className={cn(
+                            'flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-medium transition-colors',
+                            'text-primary-foreground/80 hover:bg-white/10 hover:text-primary-foreground'
+                          )}
+                        >
+                          <UserCircle className="h-4 w-4" />
+                          <span className="hidden sm:inline max-w-[100px] truncate">
+                            {accountLabel}
+                          </span>
+                        </Link>
+                      }
+                    />
+                    <TooltipContent>{accountLabel}: {user.name || user.email}</TooltipContent>
+                  </Tooltip>
                   <Tooltip>
                     <TooltipTrigger
                       render={
@@ -145,29 +178,6 @@ export function Header() {
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </TooltipTrigger>
             <TooltipContent>Toggle theme</TooltipContent>
-          </Tooltip>
-
-          {/* AI Tutor toggle */}
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setTutorOpen(!tutorOpen)}
-                  aria-label="AI Tutor"
-                  className={cn(
-                    'h-8 w-8 transition-colors',
-                    tutorOpen
-                      ? 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
-                      : 'text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground'
-                  )}
-                />
-              }
-            >
-              <Bot className="h-4 w-4" />
-            </TooltipTrigger>
-            <TooltipContent>AI Tutor</TooltipContent>
           </Tooltip>
 
           {/* Language pills */}

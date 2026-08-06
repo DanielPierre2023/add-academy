@@ -62,6 +62,7 @@ const translations: Record<Language, Record<string, string>> = {
     tutor_mode_build: 'Build',
     tutor_rate_limit: 'You have reached your daily AI tutor limit. Try again tomorrow!',
     tutor_login_required: 'Please sign in to use the AI tutor.',
+    tutor_error: 'Sorry, I encountered an error. Please try again.',
 
     // Auth
     auth_email: 'Email',
@@ -184,6 +185,7 @@ const translations: Record<Language, Record<string, string>> = {
     tutor_mode_build: 'Construiește',
     tutor_rate_limit: 'Ai atins limita zilnică a tutorului AI. Încearcă din nou mâine!',
     tutor_login_required: 'Te rugăm să te autentifici pentru a folosi tutorul AI.',
+    tutor_error: 'Scuze, am întâmpinat o eroare. Te rog încearcă din nou.',
 
     auth_email: 'Email',
     auth_password: 'Parolă',
@@ -301,6 +303,7 @@ const translations: Record<Language, Record<string, string>> = {
     tutor_mode_build: 'Κατασκευή',
     tutor_rate_limit: 'Φτάσατε το ημερήσιο όριο του AI tutor. Δοκιμάστε ξανά αύριο!',
     tutor_login_required: 'Παρακαλώ συνδεθείτε για να χρησιμοποιήσετε τον AI tutor.',
+    tutor_error: 'Συγγνώμη, παρουσιάστηκε σφάλμα. Δοκιμάστε ξανά.',
 
     auth_email: 'Email',
     auth_password: 'Κωδικός',
