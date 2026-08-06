@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "De ce este deduplicarea datelor un pas important în pregătirea datelor de pre-antrenare?",
-        "options": [
-          "Crește dimensiunea totală a setului de date",
-          "Previne modelul de la memorarea pasajelor repetate și îmbunătățește generalizarea",
-          "Accelerează tokenizer-ul",
-          "Reduce dimensiunea vocabularului"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Documentele duplicate fac ca modelul să vadă text identic de mai multe ori, ducând la memorare în loc de învățarea tiparelor generale. Deduplicarea asigură că fiecare exemplu de antrenare contribuie cu informații unice, îmbunătățind generalizarea și reducând contaminarea setului de test.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Care este scopul strategiilor de inițializare a ponderilor precum Xavier sau Kaiming pentru modelele transformer?",
-        "options": [
-          "Asigurarea că toate ponderile încep exact la zero",
-          "Maximizarea valorii inițiale a pierderii",
-          "Menținerea magnitudinilor stabile ale activărilor și gradienților pe straturi la începutul antrenării",
-          "Pre-încărcarea cunoștințelor de la un model anterior"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Inițializarea corectă asigură că activările din pasul forward și gradienții din pasul backward nici nu explodează nici nu dispar prin multe straturi. Aceasta este critică pentru transformer-e cu zeci de straturi pentru a începe învățarea eficient din primul pas.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Într-un pipeline complet de pre-antrenare, care este rolul fazei de încălzire a ratei de învățare?",
-        "options": [
-          "Creșterea treptată a ratei de învățare de la aproape zero, permițând optimizatorului să se adapteze înainte de a face pași mari",
-          "Setarea imediată a ratei de învățare la valoarea maximă",
-          "Reducerea ratei de învățare la zero la sfârșitul antrenării",
-          "Omiterea primelor câteva loturi de date"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Încălzirea previne instabilitatea timpurie pornind cu actualizări minuscule. Statisticile adaptive ale optimizatorului (precum media mobilă și varianța gradienților lui Adam) necesită câțiva pași pentru a deveni precise înainte ca rata completă de învățare să poată fi aplicată în siguranță.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ce componente trebuie salvate împreună într-un checkpoint de antrenare pentru reluarea corectă? Selectați toate răspunsurile corecte",
-        "options": [
-          "Ponderile modelului și starea optimizatorului (momentum, estimări de varianță)",
-          "Fișierele text brute de antrenare",
-          "Pasul curent de antrenare și starea planificatorului ratei de învățare",
-          "Versiunea interpretorului Python"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Explicație: Reluarea corectă necesită ponderile modelului, starea completă a optimizatorului (Adam stochează momentum și varianță per parametru), contorul pasului de antrenare și starea planificatorului LR. Fără acestea, optimizatorul repornește de la zero, cauzând o discontinuitate în antrenare.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "De ce este importantă amestecarea datelor de antrenare între epoci pentru pre-antrenare?",
-        "options": [
-          "Schimbă vocabularul folosit de tokenizer",
-          "Crește numărul total de token-uri de antrenare",
-          "Mărește modelul",
-          "Previne modelul de la învățarea tiparelor false bazate pe ordinea documentelor"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Fără amestecare, modelul ar putea învăța corelații între documentele consecutive (ex. subiecte care se întâmplă să fie adiacente în corpus). Amestecarea asigură că fiecare mini-lot este un eșantion reprezentativ al distribuției complete a datelor.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Γιατί η αφαίρεση διπλότυπων δεδομένων είναι σημαντικό βήμα στην προετοιμασία δεδομένων προεκπαίδευσης;",
-        "options": [
-          "Αυξάνει το συνολικό μέγεθος dataset",
-          "Αποτρέπει το μοντέλο από την απομνημόνευση επαναλαμβανόμενων αποσπασμάτων και βελτιώνει τη γενίκευση",
-          "Επιταχύνει τον tokenizer",
-          "Μειώνει το μέγεθος λεξιλογίου"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Τα διπλότυπα έγγραφα κάνουν το μοντέλο να βλέπει ταυτόσημο κείμενο πολλαπλές φορές, οδηγώντας σε απομνημόνευση αντί εκμάθησης γενικών μοτίβων. Η αφαίρεση διπλότυπων εξασφαλίζει ότι κάθε παράδειγμα εκπαίδευσης συνεισφέρει μοναδικές πληροφορίες, βελτιώνοντας τη γενίκευση και μειώνοντας τη μόλυνση σετ ελέγχου.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ποιος είναι ο σκοπός στρατηγικών αρχικοποίησης βαρών όπως Xavier ή Kaiming για μοντέλα transformer;",
-        "options": [
-          "Εξασφάλιση ότι όλα τα βάρη ξεκινούν ακριβώς στο μηδέν",
-          "Μεγιστοποίηση αρχικής τιμής απώλειας",
-          "Διατήρηση σταθερών μεγεθών ενεργοποιήσεων και κλίσεων σε επίπεδα στην αρχή της εκπαίδευσης",
-          "Προφόρτωση γνώσης από προηγούμενο μοντέλο"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Η σωστή αρχικοποίηση εξασφαλίζει ότι οι ενεργοποιήσεις forward-pass και οι κλίσεις backward-pass δεν εκρήγνυνται ούτε εξαφανίζονται μέσα από πολλά επίπεδα. Αυτό είναι κρίσιμο για transformers με δεκάδες επίπεδα ώστε να αρχίσουν τη μάθηση αποτελεσματικά από το πρώτο βήμα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Σε μια πλήρη αγωγή προεκπαίδευσης, ποιος είναι ο ρόλος της φάσης θέρμανσης ρυθμού εκμάθησης;",
-        "options": [
-          "Σταδιακή αύξηση ρυθμού εκμάθησης από σχεδόν μηδέν, επιτρέποντας στον βελτιστοποιητή να προσαρμοστεί πριν κάνει μεγάλα βήματα",
-          "Άμεση ρύθμιση ρυθμού εκμάθησης στη μέγιστη τιμή",
-          "Μείωση ρυθμού εκμάθησης σε μηδέν στο τέλος εκπαίδευσης",
-          "Παράλειψη πρώτων παρτίδων δεδομένων"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Η θέρμανση αποτρέπει πρώιμη αστάθεια ξεκινώντας με μικροσκοπικές ενημερώσεις. Τα προσαρμοστικά στατιστικά του βελτιστοποιητή (όπως ο κυλιόμενος μέσος και η διακύμανση κλίσεων του Adam) χρειάζονται αρκετά βήματα για να γίνουν ακριβή πριν εφαρμοστεί ο πλήρης ρυθμός εκμάθησης με ασφάλεια.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποια συστατικά πρέπει να αποθηκευτούν μαζί σε ένα checkpoint εκπαίδευσης για σωστή συνέχιση; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Βάρη μοντέλου και κατάσταση βελτιστοποιητή (ορμή, εκτιμήσεις διακύμανσης)",
-          "Τα ακατέργαστα αρχεία κειμένου εκπαίδευσης",
-          "Τρέχον βήμα εκπαίδευσης και κατάσταση χρονοπρογραμματιστή ρυθμού εκμάθησης",
-          "Η έκδοση του διερμηνέα Python"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Εξήγηση: Η σωστή συνέχιση απαιτεί βάρη μοντέλου, πλήρη κατάσταση βελτιστοποιητή (ο Adam αποθηκεύει ορμή και διακύμανση ανά παράμετρο), μετρητή βημάτων εκπαίδευσης και κατάσταση χρονοπρογραμματιστή LR. Χωρίς αυτά, ο βελτιστοποιητής ξεκινά από την αρχή, προκαλώντας ασυνέχεια εκπαίδευσης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Γιατί η ανακάτεμα δεδομένων εκπαίδευσης μεταξύ εποχών είναι σημαντικό για την προεκπαίδευση;",
-        "options": [
-          "Αλλάζει το λεξιλόγιο που χρησιμοποιεί ο tokenizer",
-          "Αυξάνει τον συνολικό αριθμό tokens εκπαίδευσης",
-          "Κάνει το μοντέλο μεγαλύτερο",
-          "Αποτρέπει το μοντέλο από την εκμάθηση ψευδών μοτίβων βάσει σειράς εγγράφων"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Χωρίς ανακάτεμα, το μοντέλο μπορεί να μάθει συσχετίσεις μεταξύ διαδοχικών εγγράφων (π.χ. θέματα που τυχαίνει να είναι γειτονικά στο σώμα κειμένου). Το ανακάτεμα εξασφαλίζει ότι κάθε μίνι-παρτίδα είναι αντιπροσωπευτικό δείγμα της πλήρους κατανομής δεδομένων.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este scopul unei ferestre glisante într-un DataLoader de text pentru modele de limbaj?",
-        "options": [
-          "Eșantionarea aleatorie a token-urilor din corpus",
-          "Comprimarea dimensiunii vocabularului",
-          "Crearea perechilor suprapuse intrare-țintă prin deplasarea cu o poziție odată prin text",
-          "Aplicarea mascării de attention în timpul inferenței"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: O fereastră glisantă se deplasează prin textul tokenizat, la fiecare poziție creând un fragment de intrare și un fragment țintă deplasat cu un token. Aceasta maximizează datele de antrenare extrase dintr-un corpus, menținând contextul secvențial.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "În predicția token-ului următor, dacă secvența de intrare este [A, B, C, D], care este secvența țintă?",
-        "options": [
-          "[D, C, B, A]",
-          "[B, C, D, E]",
-          "[A, B, C, D]",
-          "[B, C, D, A]"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Pentru predicția token-ului următor, ținta la fiecare poziție este token-ul imediat următor. Deci intrarea [A, B, C, D] are țintele [B, C, D, E] unde E este token-ul următor în secvența originală.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Care este scopul principal al decupării gradienților în timpul antrenării?",
-        "options": [
-          "Creșterea ratei de învățare în timp",
-          "Reducerea dimensiunii modelului prin eliminarea gradienților mici",
-          "Asigurarea că pierderea scade mereu",
-          "Prevenirea exploziei gradienților prin limitarea normei gradientului la o valoare maximă"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Decuparea gradienților rescalează vectorul de gradient când norma sa depășește un prag (de obicei 1.0). Aceasta previne actualizări catastrofal de mari ale parametrilor care pot destabiliza sau bloca antrenarea.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt componente esențiale ale unei bucle standard de antrenare LLM? Selectați toate răspunsurile corecte",
-        "options": [
-          "Aplicarea dropout pe etichetele țintă",
-          "Pasul forward, calculul pierderii, pasul backward, pasul optimizatorului",
-          "Recalcularea vocabularului tokenizer-ului la fiecare epocă",
-          "Resetarea gradienților înainte de fiecare pas forward pentru a evita acumularea din pașii anteriori"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Explicație: Bucla de bază de antrenare este: resetează gradienții, pas forward, calculează pierderea, pas backward, pas optimizator. Dropout se aplică pe activări (nu etichete), iar tokenizer-ul este fixat înainte de antrenare.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "De ce se folosește un pas mai mic decât lungimea contextului în DataLoader-ul cu fereastră glisantă?",
-        "options": [
-          "Creează ferestre suprapuse astfel încât fiecare token apare cu diferite cantități de context precedent",
-          "Reduce numărul total de exemple de antrenare",
-          "Accelerează semnificativ DataLoader-ul",
-          "Este necesar de către tokenizer"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Un pas mai mic decât fereastra de context creează suprapunere, astfel încât fiecare token apare în mai multe exemple de antrenare cu cantități variate de context. Aceasta oferă un semnal de antrenare mai divers și utilizează mai bine datele.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποιος είναι ο σκοπός ενός συρόμενου παραθύρου σε ένα DataLoader κειμένου για γλωσσικά μοντέλα;",
-        "options": [
-          "Τυχαία δειγματοληψία tokens από το σώμα κειμένου",
-          "Συμπίεση του μεγέθους λεξιλογίου",
-          "Δημιουργία αλληλεπικαλυπτόμενων ζευγών εισόδου-στόχου μετακινούμενος μία θέση κάθε φορά μέσα στο κείμενο",
-          "Εφαρμογή μάσκας attention κατά την εξαγωγή συμπερασμάτων"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Ένα συρόμενο παράθυρο κινείται μέσα στο τεκμηριωμένο κείμενο, σε κάθε θέση δημιουργώντας ένα τμήμα εισόδου και ένα τμήμα στόχου μετατοπισμένο κατά ένα token. Αυτό μεγιστοποιεί τα δεδομένα εκπαίδευσης που εξάγονται από ένα σώμα κειμένου διατηρώντας ακολουθιακό πλαίσιο.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Στην πρόβλεψη επόμενου token, αν η ακολουθία εισόδου είναι [A, B, C, D], ποια είναι η ακολουθία στόχος;",
-        "options": [
-          "[D, C, B, A]",
-          "[B, C, D, E]",
-          "[A, B, C, D]",
-          "[B, C, D, A]"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Για πρόβλεψη επόμενου token, ο στόχος σε κάθε θέση είναι το αμέσως επόμενο token. Άρα η είσοδος [A, B, C, D] έχει στόχους [B, C, D, E] όπου E είναι το επόμενο token στην αρχική ακολουθία.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ποιος είναι ο κύριος σκοπός της αποκοπής κλίσεων κατά την εκπαίδευση;",
-        "options": [
-          "Αύξηση του ρυθμού εκμάθησης με τον χρόνο",
-          "Μείωση μεγέθους μοντέλου κλαδεύοντας μικρές κλίσεις",
-          "Εξασφάλιση ότι η απώλεια μειώνεται πάντα",
-          "Αποτροπή εκρηγνυόμενων κλίσεων περιορίζοντας τη νόρμα κλίσης σε μέγιστη τιμή"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Η αποκοπή κλίσεων επανακλιμακώνει το διάνυσμα κλίσης όταν η νόρμα του υπερβαίνει ένα κατώφλι (συνήθως 1.0). Αυτό αποτρέπει καταστροφικά μεγάλες ενημερώσεις παραμέτρων που μπορούν να αποσταθεροποιήσουν ή να κρασάρουν την εκπαίδευση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποια από τα ακόλουθα είναι βασικά συστατικά ενός τυπικού βρόχου εκπαίδευσης LLM; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Εφαρμογή dropout στις ετικέτες στόχου",
-          "Forward pass, υπολογισμός απώλειας, backward pass, βήμα βελτιστοποιητή",
-          "Επαναϋπολογισμός λεξιλογίου tokenizer κάθε εποχή",
-          "Μηδενισμός κλίσεων πριν από κάθε forward pass για αποφυγή συσσώρευσης από προηγούμενα βήματα"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Εξήγηση: Ο βασικός βρόχος εκπαίδευσης είναι: μηδενισμός κλίσεων, forward pass, υπολογισμός απώλειας, backward pass, βήμα βελτιστοποιητή. Το dropout εφαρμόζεται σε ενεργοποιήσεις (όχι ετικέτες) και ο tokenizer είναι σταθερός πριν την εκπαίδευση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Γιατί χρησιμοποιείται βήμα μικρότερο από το μήκος πλαισίου στο DataLoader με συρόμενο παράθυρο;",
-        "options": [
-          "Δημιουργεί αλληλεπικαλυπτόμενα παράθυρα ώστε κάθε token να εμφανίζεται με διαφορετικές ποσότητες προηγούμενου πλαισίου",
-          "Μειώνει τον συνολικό αριθμό παραδειγμάτων εκπαίδευσης",
-          "Επιταχύνει σημαντικά τον DataLoader",
-          "Απαιτείται από τον tokenizer"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Ένα βήμα μικρότερο από το παράθυρο πλαισίου δημιουργεί αλληλεπικάλυψη, ώστε κάθε token να εμφανίζεται σε πολλαπλά παραδείγματα εκπαίδευσης με ποικίλες ποσότητες πλαισίου. Αυτό παρέχει πιο ποικίλο σήμα εκπαίδευσης και αξιοποιεί καλύτερα τα δεδομένα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

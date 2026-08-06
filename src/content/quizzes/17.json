@@ -85,77 +85,52 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este complexitatea computațională a self-attention-ului standard în raport cu lungimea secvenței n?",
-        "options": [
-          "O(n^2) — pătratică în lungimea secvenței",
-          "O(n) — liniară în lungimea secvenței",
-          "O(n log n)",
-          "O(1) — timp constant"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Matricea de attention este n x n, necesitând calcul și memorie O(n^2). De aceea secvențele lungi sunt costisitoare pentru transformer-ele standard.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Care este ideea cheie din spatele Flash Attention?",
-        "options": [
-          "Reduce numărul de capete de attention",
-          "Aproximează attention-ul cu eșantionare aleatorie",
-          "Calculează attention exact în dale/blocuri pentru a minimiza transferul de memorie între SRAM-ul GPU și HBM",
-          "Înlocuiește softmax cu o funcție liniară"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Flash Attention calculează attention exact (nu aproximativ) prin fragmentarea calculului pentru a minimiza transferurile costisitoare de memorie între SRAM-ul GPU și memoria de bandă largă.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Cum reduce Grouped-Query Attention (GQA) calculul?",
-        "options": [
-          "Eliminând complet proiecția Value",
-          "Partajând capetele Key și Value între grupuri de capete Query, reducând parametrii KV",
-          "Folosind doar un singur cap de attention în total",
-          "Reducând dimensiunea embedding-ului"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: GQA (folosit în Llama 2/3) grupează capetele query și partajează un singur cap KV per grup. Aceasta reduce memoria cache-ului KV și calculul, menținând cea mai mare parte din calitatea multi-head.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ce optimizează KV-Cache în timpul inferenței?",
-        "options": [
-          "Stochează tensorii K și V calculați anterior astfel încât să nu fie recalculați pentru fiecare token nou",
-          "Memorează ponderile modelului pe disc",
-          "Pre-calculează toate tiparele posibile de attention",
-          "Reduce dimensiunea vocabularului în timpul generării"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: În timpul generării autoregresive, fiecare token nou are nevoie doar de propriul Q. K și V din toate token-urile anterioare pot fi stocate în cache și reutilizate, evitând recalcularea O(n) per pas.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Care este principalul avantaj al attention-ului cu fereastră glisantă (folosit în Mistral)?",
-        "options": [
-          "Produce tipare de attention mai bune decât attention-ul complet",
-          "Elimină necesitatea mascării cauzale",
-          "Limitează fiecare token să acorde atenție doar unei ferestre fixe de token-uri apropiate, reducând memoria de la O(n^2) la O(n*w)",
-          "Dublează lungimea efectivă a contextului"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Fereastra glisantă limitează attention-ul la w poziții apropiate. Memoria scade de la O(n^2) la O(n*w). Informația se propagă totuși către token-uri îndepărtate prin straturile stivuite.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -165,77 +140,52 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποια είναι η υπολογιστική πολυπλοκότητα του τυπικού self-attention ως προς το μήκος ακολουθίας n;",
-        "options": [
-          "O(n^2) — τετραγωνική ως προς το μήκος ακολουθίας",
-          "O(n) — γραμμική ως προς το μήκος ακολουθίας",
-          "O(n log n)",
-          "O(1) — σταθερός χρόνος"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Ο πίνακας attention είναι n x n, απαιτώντας O(n^2) υπολογισμό και μνήμη. Γι’ αυτό οι μεγάλες ακολουθίες είναι δαπανηρές για τους τυπικούς transformers.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ποια είναι η βασική ιδέα πίσω από το Flash Attention;",
-        "options": [
-          "Μειώνει τον αριθμό κεφαλιών attention",
-          "Προσεγγίζει το attention με τυχαία δειγματοληψία",
-          "Υπολογίζει ακριβές attention σε πλακίδια/μπλοκ για να ελαχιστοποιήσει τη μεταφορά μνήμης μεταξύ SRAM GPU και HBM",
-          "Αντικαθιστά τη softmax με γραμμική συνάρτηση"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το Flash Attention υπολογίζει ακριβές (όχι προσεγγιστικό) attention κατακερματίζοντας τον υπολογισμό για να ελαχιστοποιήσει τις δαπανηρές μεταφορές μνήμης μεταξύ SRAM GPU και μνήμης υψηλού εύρους ζώνης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Πώς μειώνει τον υπολογισμό το Grouped-Query Attention (GQA);",
-        "options": [
-          "Αφαιρώντας εντελώς την προβολή Value",
-          "Μοιράζοντας τα κεφάλια Key και Value μεταξύ ομάδων κεφαλιών Query, μειώνοντας τις παραμέτρους KV",
-          "Χρησιμοποιώντας μόνο ένα κεφάλι attention συνολικά",
-          "Μειώνοντας τη διάσταση embedding"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Το GQA (που χρησιμοποιείται στο Llama 2/3) ομαδοποιεί τα κεφάλια query και μοιράζεται ένα μόνο κεφάλι KV ανά ομάδα. Αυτό μειώνει τη μνήμη KV cache και τον υπολογισμό διατηρώντας το μεγαλύτερο μέρος της ποιότητας multi-head.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Τι βελτιστοποιεί το KV-Cache κατά την εξαγωγή συμπερασμάτων;",
-        "options": [
-          "Αποθηκεύει τους προηγουμένως υπολογισμένους τανυστές K και V ώστε να μην επαναϋπολογίζονται για κάθε νέο token",
-          "Αποθηκεύει τα βάρη του μοντέλου στον δίσκο",
-          "Προϋπολογίζει όλα τα πιθανά μοτίβα attention",
-          "Μειώνει το μέγεθος λεξιλογίου κατά τη δημιουργία"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Κατά την αυτοπαλίνδρομη δημιουργία, κάθε νέο token χρειάζεται μόνο το δικό του Q. Τα K και V από όλα τα προηγούμενα tokens μπορούν να αποθηκευτούν στη μνήμη cache και να επαναχρησιμοποιηθούν, αποφεύγοντας τον O(n) επαναϋπολογισμό ανά βήμα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Ποιο είναι το κύριο πλεονέκτημα του attention συρόμενου παραθύρου (όπως χρησιμοποιείται στο Mistral);",
-        "options": [
-          "Παράγει καλύτερα μοτίβα attention από το πλήρες attention",
-          "Εξαλείφει την ανάγκη αιτιατής μάσκας",
-          "Περιορίζει κάθε token να δίνει προσοχή μόνο σε ένα σταθερό παράθυρο κοντινών tokens, μειώνοντας τη μνήμη από O(n^2) σε O(n*w)",
-          "Διπλασιάζει το αποτελεσματικό μήκος πλαισίου"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το συρόμενο παράθυρο περιορίζει το attention σε w κοντινές θέσεις. Η μνήμη μειώνεται από O(n^2) σε O(n*w). Η πληροφορία εξακολουθεί να διαδίδεται σε απομακρυσμένα tokens μέσω στοιβαγμένων επιπέδων.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

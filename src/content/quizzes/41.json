@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ce este memoria conversațională într-un chatbot RAG?",
-        "options": [
-          "Numărul total de parametri ai modelului",
-          "O bază de date separată care stochează parolele utilizatorilor",
-          "Memoria GPU folosită în timpul inferenței",
-          "Un mecanism care reține turele anterioare de dialog astfel încât modelul să poată face referire la contextul anterior"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Memoria conversațională stochează istoricul mesajelor utilizatorului și asistentului, permițând chatbot-ului să mențină un dialog coerent pe mai multe ture prin referirea la ce s-a spus anterior.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "De ce este importantă rescrierea interogărilor într-un sistem RAG conversațional?",
-        "options": [
-          "Traduce toate interogările în engleză înainte de recuperare",
-          "Reformulează întrebările ambigue de urmărire în interogări autonome pentru o recuperare mai bună",
-          "Elimină toate cuvintele funcționale din interogare",
-          "Scurtează interogările pentru a economisi costurile API"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Mesajele de urmărire precum «Spune-mi mai multe despre asta» sunt incomplete fără context anterior. Rescrierea interogărilor le extinde în întrebări autonome astfel încât recuperatorul să poată găsi documente relevante.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce se întâmplă când istoricul conversației depășește fereastra de context a LLM-ului?",
-        "options": [
-          "Mesajele mai vechi trebuie trunchiate sau rezumate pentru a se încadra în limita de token-uri",
-          "Modelul își extinde automat fereastra de context",
-          "Modelul începe o nouă antrenare pentru a acomoda mai multe token-uri",
-          "Nu se întâmplă nimic; toate modelele au context nelimitat"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: LLM-urile au o fereastră de context fixă. Când istoricul crește dincolo de aceasta, strategii precum trunchierea turelor vechi, rezumarea lor sau folosirea unei ferestre glisante sunt necesare pentru a rămâne în bugetul de token-uri.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ce tehnici ajută la gestionarea istoricelor lungi de conversație? Selectați toate răspunsurile corecte",
-        "options": [
-          "Dublarea numărului de parametri ai modelului",
-          "Rezumarea turelor mai vechi într-un paragraf condensat",
-          "Folosirea unei ferestre glisante care păstrează doar cele mai recente N ture",
-          "Eliminarea promptului de sistem"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Explicație: Rezumarea turelor mai vechi conservă informațiile cheie în mod compact, iar o fereastră glisantă menține contextul recent proaspăt. Ambele permit încadrarea conversațiilor lungi în bugetul de token-uri fără a pierde informații critice.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Într-un chatbot RAG, când ar trebui injectate documentele recuperate în prompt?",
-        "options": [
-          "Doar în timpul promptului inițial de sistem, niciodată din nou",
-          "După ce modelul generează răspunsul, ca pas de post-procesare",
-          "Înainte de fiecare pas de generare, cu rezultate proaspete de recuperare bazate pe interogarea curentă",
-          "Documentele nu ar trebui incluse niciodată în prompt"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Fiecare tură a utilizatorului poate aborda un subiect diferit, așa că recuperarea ar trebui efectuată per interogare iar rezultatele injectate înainte de generare astfel încât modelul să aibă context actual și relevant.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Τι είναι η συνομιλιακή μνήμη σε ένα chatbot RAG;",
-        "options": [
-          "Ο συνολικός αριθμός παραμέτρων μοντέλου",
-          "Ξεχωριστή βάση δεδομένων που αποθηκεύει κωδικούς χρηστών",
-          "Η μνήμη GPU κατά εξαγωγή συμπερασμάτων",
-          "Μηχανισμός που διατηρεί προηγούμενες σειρές διαλόγου ώστε το μοντέλο να αναφέρεται σε προηγούμενο πλαίσιο"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Η συνομιλιακή μνήμη αποθηκεύει ιστορικό μηνυμάτων χρήστη και βοηθού, επιτρέποντας στο chatbot να διατηρεί συνεκτικό πολυσειρακό διάλογο αναφερόμενο σε ό,τι ειπώθηκε πριν.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Γιατί είναι σημαντική η επαναδιατύπωση ερωτημάτων σε συνομιλιακό σύστημα RAG;",
-        "options": [
-          "Μεταφράζει όλα τα ερωτήματα στα αγγλικά πριν ανάκτηση",
-          "Επαναδιατυπώνει ασαφείς ερωτήσεις παρακολούθησης σε αυτοτελή ερωτήματα για καλύτερη ανάκτηση",
-          "Αφαιρεί όλες τις λειτουργικές λέξεις από ερώτημα",
-          "Μικραίνει ερωτήματα για εξοικονόμηση κόστους API"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Μηνύματα παρακολούθησης όπως «Πες μου περισσότερα γι' αυτό» είναι ελλιπή χωρίς προηγούμενο πλαίσιο. Η επαναδιατύπωση τα επεκτείνει σε αυτοτελείς ερωτήσεις ώστε ο ανακτητής να βρει σχετικά έγγραφα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Τι συμβαίνει όταν το ιστορικό συνομιλίας υπερβαίνει το παράθυρο πλαισίου του LLM;",
-        "options": [
-          "Παλαιότερα μηνύματα πρέπει να περικοπούν ή συνοψιστούν για να χωρέσουν στο όριο tokens",
-          "Το μοντέλο επεκτείνει αυτόματα το παράθυρο πλαισίου",
-          "Το μοντέλο ξεκινά νέα εκπαίδευση για περισσότερα tokens",
-          "Τίποτα δεν συμβαίνει· όλα τα μοντέλα έχουν απεριόριστο πλαίσιο"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Τα LLMs έχουν σταθερό παράθυρο πλαισίου. Όταν το ιστορικό αυξάνεται πέρα από αυτό, χρειάζονται στρατηγικές όπως περικοπή παλιών σειρών, σύνοψή τους ή χρήση συρόμενου παραθύρου για παραμονή εντός budget tokens.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποιες τεχνικές βοηθούν στη διαχείριση μακρών ιστορικών συνομιλίας; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Διπλασιασμός αριθμού παραμέτρων μοντέλου",
-          "Σύνοψη παλαιότερων σειρών σε συμπυκνωμένη παράγραφο",
-          "Χρήση συρόμενου παραθύρου που κρατά μόνο τις πιο πρόσφατες N σειρές",
-          "Αφαίρεση system prompt"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Εξήγηση: Η σύνοψη παλαιότερων σειρών διατηρεί βασικές πληροφορίες συμπαγώς, και ένα συρόμενο παράθυρο κρατά πρόσφατο πλαίσιο. Και τα δύο χωρούν μακρές συνομιλίες στο budget tokens χωρίς απώλεια κρίσιμων πληροφοριών.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Σε chatbot RAG, πότε πρέπει τα ανακτημένα έγγραφα να εισαχθούν στο prompt;",
-        "options": [
-          "Μόνο στο αρχικό system prompt, ποτέ ξανά",
-          "Μετά τη δημιουργία απάντησης μοντέλου, ως βήμα μετα-επεξεργασίας",
-          "Πριν κάθε βήμα δημιουργίας, με φρέσκα αποτελέσματα ανάκτησης βάσει τρέχοντος ερωτήματος",
-          "Τα έγγραφα δεν πρέπει ποτέ να συμπεριλαμβάνονται στο prompt"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Κάθε σειρά χρήστη μπορεί να αφορά διαφορετικό θέμα, οπότε η ανάκτηση πρέπει να γίνεται ανά ερώτημα και τα αποτελέσματα να εισάγονται πριν τη δημιουργία ώστε το μοντέλο να έχει τρέχον, σχετικό πλαίσιο.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

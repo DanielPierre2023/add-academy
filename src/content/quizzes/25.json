@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ce măsoară pierderea cross-entropy într-un model de limbaj?",
-        "options": [
-          "Distanța euclidiană între embedding-urile prezise și cele țintă",
-          "Logaritmul negativ al probabilității atribuite de model token-ului corect următor",
-          "Eroarea medie pătratică între logit-uri și etichete one-hot",
-          "Similaritatea cosinus între vectorii de token-uri prezise și reale"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Pierderea cross-entropy pentru modelarea limbajului este egală cu -log P(token corect). Măsoară cât de multă masă de probabilitate plasează modelul pe token-ul următor adevărat. O pierdere mai mică înseamnă că modelul este mai sigur pe răspunsul corect.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Dacă un model de limbaj are o pierdere cross-entropy de 3.0, care este perplexitatea sa?",
-        "options": [
-          "3.0",
-          "9.0",
-          "8.0",
-          "e^3 aprox. 20.09"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Perplexitate = e^(pierdere cross-entropy). Cu pierdere = 3.0, perplexitate = e^3 aprox. 20.09. Aceasta înseamnă că modelul este, în medie, la fel de nesigur ca și cum ar alege uniform dintre aproximativ 20 de token-uri.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce indică de obicei când pierderea de antrenare continuă să scadă dar pierderea de validare începe să crească?",
-        "options": [
-          "Rata de învățare este prea mică",
-          "Modelul este sub-antrenat",
-          "Modelul se supraadaptează la datele de antrenare",
-          "Dimensiunea lotului este prea mare"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: O divergență în care pierderea de antrenare scade dar pierderea de validare crește este semnul clasic al supraadaptării. Modelul memorează datele de antrenare în loc să învețe tipare generalizabile.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt metrici de evaluare valide pentru modelele de limbaj? Selectați toate răspunsurile corecte",
-        "options": [
-          "Perplexitatea pe un set de test reținut",
-          "Scorul R-pătrat pe logit-uri",
-          "Scorul F1 al probabilităților individuale ale token-urilor",
-          "Acuratețea pe sarcini downstream (ex. benchmark-uri de întrebări și răspunsuri)"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Explicație: Perplexitatea (metrică intrinsecă) și acuratețea pe sarcini downstream (metrică extrinsecă) sunt ambele abordări standard de evaluare a LLM-urilor. R-pătrat este pentru regresie, iar F1 pe probabilitățile individuale ale token-urilor nu este o metrică standard pentru modele de limbaj.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "De ce este preferată cross-entropy față de eroarea medie pătratică (MSE) pentru antrenarea modelelor de limbaj?",
-        "options": [
-          "Cross-entropy produce gradienți mai puternici pentru predicțiile greșite cu încredere mare, accelerând corecția",
-          "MSE nu poate fi calculat pe token-uri discrete",
-          "Cross-entropy folosește mai puține operații în virgulă mobilă",
-          "MSE necesită ca etichetele să fie valori continue"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Când modelul atribuie cu încredere probabilitate mare token-ului greșit, pierderea cross-entropy produce un gradient foarte mare care forțează corecția rapidă. Gradienții MSE pe ieșirile softmax dispar în acest regim, făcând învățarea mult mai lentă.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Τι μετρά η απώλεια cross-entropy σε ένα γλωσσικό μοντέλο;",
-        "options": [
-          "Την ευκλείδεια απόσταση μεταξύ προβλεπόμενων και στοχευμένων embeddings",
-          "Τον αρνητικό λογάριθμο πιθανότητας που αποδίδει το μοντέλο στο σωστό επόμενο token",
-          "Το μέσο τετραγωνικό σφάλμα μεταξύ logits και ετικετών one-hot",
-          "Την ομοιότητα συνημιτόνου μεταξύ προβλεπόμενων και πραγματικών διανυσμάτων token"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Η απώλεια cross-entropy για γλωσσική μοντελοποίηση ισούται με -log P(σωστό token). Μετρά πόση μάζα πιθανότητας τοποθετεί το μοντέλο στο πραγματικό επόμενο token. Χαμηλότερη απώλεια σημαίνει ότι το μοντέλο είναι πιο σίγουρο για τη σωστή απάντηση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Αν ένα γλωσσικό μοντέλο έχει απώλεια cross-entropy 3.0, ποια είναι η περπλοκότητά του;",
-        "options": [
-          "3.0",
-          "9.0",
-          "8.0",
-          "e^3 περίπου 20.09"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Περπλοκότητα = e^(απώλεια cross-entropy). Με απώλεια = 3.0, περπλοκότητα = e^3 περίπου 20.09. Αυτό σημαίνει ότι το μοντέλο είναι, κατά μέσο όρο, τόσο αβέβαιο όσο αν επέλεγε ομοιόμορφα μεταξύ περίπου 20 tokens.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Τι συνήθως υποδεικνύει όταν η απώλεια εκπαίδευσης συνεχίζει να μειώνεται αλλά η απώλεια επικύρωσης αρχίζει να αυξάνεται;",
-        "options": [
-          "Ο ρυθμός εκμάθησης είναι πολύ χαμηλός",
-          "Το μοντέλο υποπροσαρμόζεται",
-          "Το μοντέλο υπερπροσαρμόζεται στα δεδομένα εκπαίδευσης",
-          "Το μέγεθος παρτίδας είναι πολύ μεγάλο"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Μια απόκλιση όπου η απώλεια εκπαίδευσης πέφτει αλλά η απώλεια επικύρωσης αυξάνεται είναι το κλασικό σημάδι υπερπροσαρμογής. Το μοντέλο απομνημονεύει τα δεδομένα εκπαίδευσης αντί να μαθαίνει γενικεύσιμα μοτίβα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποιες από τις ακόλουθες είναι έγκυρες μετρικές αξιολόγησης γλωσσικών μοντέλων; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Περπλοκότητα σε κρατημένο σετ ελέγχου",
-          "Σκορ R-τετράγωνο στα logits",
-          "Σκορ F1 ατομικών πιθανοτήτων token",
-          "Ακρίβεια σε downstream εργασίες (π.χ. benchmarks ερωτήσεων-απαντήσεων)"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Εξήγηση: Η περπλοκότητα (εσωτερική μετρική) και η ακρίβεια σε downstream εργασίες (εξωτερική μετρική) είναι και οι δύο τυπικές προσεγγίσεις αξιολόγησης LLM. Το R-τετράγωνο είναι για παλινδρόμηση, και το F1 σε ατομικές πιθανότητες token δεν είναι τυπική μετρική γλωσσικού μοντέλου.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Γιατί προτιμάται η cross-entropy έναντι του μέσου τετραγωνικού σφάλματος (MSE) για εκπαίδευση γλωσσικών μοντέλων;",
-        "options": [
-          "Η cross-entropy παράγει ισχυρότερες κλίσεις για σίγουρες λάθος προβλέψεις, επιταχύνοντας τη διόρθωση",
-          "Το MSE δεν μπορεί να υπολογιστεί σε διακριτά tokens",
-          "Η cross-entropy χρησιμοποιεί λιγότερες πράξεις κινητής υποδιαστολής",
-          "Το MSE απαιτεί οι ετικέτες να είναι συνεχείς τιμές"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Όταν το μοντέλο αποδίδει με σιγουριά υψηλή πιθανότητα στο λάθος token, η απώλεια cross-entropy παράγει μια πολύ μεγάλη κλίση που αναγκάζει ταχεία διόρθωση. Οι κλίσεις MSE στις εξόδους softmax εξαφανίζονται σε αυτό το καθεστώς, καθιστώντας τη μάθηση πολύ πιο αργή.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

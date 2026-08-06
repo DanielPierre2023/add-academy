@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este scopul principal al unui pipeline RAG (Retrieval-Augmented Generation)?",
-        "options": [
-          "Înlocuirea completă a arhitecturii transformer",
-          "Antrenarea unui model nou de la zero pe date de domeniu",
-          "Ancorarea răspunsurilor LLM în cunoștințe externe prin recuperarea documentelor relevante la momentul interogării",
-          "Comprimarea modelului în mai puțini parametri"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: RAG recuperează documente relevante dintr-o bază de cunoștințe externă la momentul interogării și le furnizează LLM-ului ca context, reducând halucinațiile și permițând răspunsuri actualizate fără re-antrenare.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Pentru ce sunt folosite embedding-urile vectoriale într-un sistem RAG?",
-        "options": [
-          "Criptarea conținutului documentelor pentru confidențialitate",
-          "Reprezentarea textului ca vectori numerici denși pentru căutarea similarității semantice",
-          "Tokenizarea textului în unități de sub-cuvinte",
-          "Comprimarea imaginilor în fișiere mai mici"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Embedding-urile vectoriale mapează textul într-un spațiu de dimensiune mare unde textele similare semantic sunt apropiate, permițând recuperarea după semnificație în loc de potrivirea exactă de cuvinte cheie.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "De ce este importantă fragmentarea când se construiește o bază de cunoștințe RAG?",
-        "options": [
-          "Împarte documentele în bucăți de dimensiune potrivită astfel încât fiecare fragment să se potrivească modelului de embedding și să poarte context focalizat",
-          "Elimină toate semnele de punctuație din text",
-          "Traduce documentele în mai multe limbi automat",
-          "Unește toate documentele într-un singur fișier"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Fragmentarea împarte documentele mari în segmente mai mici, focalizate, care se încadrează în limita de token-uri a modelului de embedding și asigură că fiecare bucată recuperată poartă informații relevante și concentrate.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt metrici comune de similaritate pentru căutarea vectorială? Selectați toate răspunsurile corecte",
-        "options": [
-          "Similaritate cosinus",
-          "Pierdere cross-entropy",
-          "Scor de perplexitate",
-          "Distanță euclidiană"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Explicație: Similaritatea cosinus măsoară unghiul între vectori (direcția), în timp ce distanța euclidiană măsoară distanța în linie dreaptă. Ambele sunt metrici standard în bazele de date vectoriale. Cross-entropy și perplexitatea sunt metrici de antrenare/evaluare, nu metrici de recuperare.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ce se întâmplă dacă fragmentele sunt prea mari într-un pipeline RAG?",
-        "options": [
-          "Modelul de embedding rulează mai rapid",
-          "Sistemul le împarte automat mai departe",
-          "Fragmentele depășesc limita de token-uri a modelului de embedding și calitatea recuperării scade",
-          "Fragmentele recuperate amestecă subiecte nerelaționate, diluând contextul relevant transmis LLM-ului"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Fragmentele prea mari tind să acopere mai multe subiecte, așa că embedding-ul devine o medie neclară iar textul recuperat diluează informațiile relevante cu conținut irelevant, afectând calitatea răspunsului.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποιος είναι ο κύριος σκοπός μιας αγωγής RAG (Retrieval-Augmented Generation);",
-        "options": [
-          "Πλήρης αντικατάσταση αρχιτεκτονικής transformer",
-          "Εκπαίδευση νέου μοντέλου από αρχή σε δεδομένα τομέα",
-          "Αγκύρωση απαντήσεων LLM σε εξωτερική γνώση ανακτώντας σχετικά έγγραφα κατά ερώτηση",
-          "Συμπίεση μοντέλου σε λιγότερες παραμέτρους"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το RAG ανακτά σχετικά έγγραφα από εξωτερική βάση γνώσεων κατά ερώτηση και τα τροφοδοτεί στο LLM ως πλαίσιο, μειώνοντας ψευδαισθήσεις και επιτρέποντας ενημερωμένες απαντήσεις χωρίς επανεκπαίδευση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Σε τι χρησιμοποιούνται τα διανυσματικά embeddings σε σύστημα RAG;",
-        "options": [
-          "Κρυπτογράφηση περιεχομένου εγγράφων για ιδιωτικότητα",
-          "Αναπαράσταση κειμένου ως πυκνά αριθμητικά διανύσματα για αναζήτηση σημασιολογικής ομοιότητας",
-          "Τεκμηρίωση κειμένου σε μονάδες υπο-λέξεων",
-          "Συμπίεση εικόνων σε μικρότερα αρχεία"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Τα διανυσματικά embeddings αντιστοιχίζουν κείμενο σε χώρο υψηλών διαστάσεων όπου σημασιολογικά παρόμοια κείμενα είναι κοντά, επιτρέποντας ανάκτηση βάσει νοήματος αντί ακριβούς αντιστοίχισης λέξεων-κλειδιών.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Γιατί είναι σημαντικός ο τεμαχισμός κατά κατασκευή βάσης γνώσεων RAG;",
-        "options": [
-          "Χωρίζει έγγραφα σε τμήματα κατάλληλου μεγέθους ώστε κάθε τμήμα να χωράει στο μοντέλο embedding και να φέρει εστιασμένο πλαίσιο",
-          "Αφαιρεί όλα τα σημεία στίξης από κείμενο",
-          "Μεταφράζει αυτόματα έγγραφα σε πολλές γλώσσες",
-          "Συγχωνεύει όλα τα έγγραφα σε ένα αρχείο"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Ο τεμαχισμός σπάει μεγάλα έγγραφα σε μικρότερα, εστιασμένα τμήματα που χωρούν στο όριο tokens του μοντέλου embedding και εξασφαλίζουν ότι κάθε ανακτημένο τμήμα φέρει σχετικές, συγκεντρωμένες πληροφορίες.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποιες από τις ακόλουθες είναι κοινές μετρικές ομοιότητας για διανυσματική αναζήτηση; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Ομοιότητα συνημιτόνου",
-          "Απώλεια cross-entropy",
-          "Σκορ περπλοκότητας",
-          "Ευκλείδεια απόσταση"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Εξήγηση: Η ομοιότητα συνημιτόνου μετρά τη γωνία μεταξύ διανυσμάτων (κατεύθυνση), ενώ η ευκλείδεια απόσταση μετρά την ευθεία απόσταση. Και οι δύο είναι τυπικές μετρικές σε διανυσματικές βάσεις δεδομένων. Η cross-entropy και η περπλοκότητα είναι μετρικές εκπαίδευσης/αξιολόγησης, όχι ανάκτησης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Τι συμβαίνει αν τα τμήματα είναι πολύ μεγάλα σε αγωγή RAG;",
-        "options": [
-          "Το μοντέλο embedding τρέχει γρηγορότερα",
-          "Το σύστημα τα χωρίζει αυτόματα περαιτέρω",
-          "Τα τμήματα υπερβαίνουν όριο tokens μοντέλου embedding και ποιότητα ανάκτησης πέφτει",
-          "Τα ανακτημένα τμήματα αναμειγνύουν άσχετα θέματα, αραιώνοντας σχετικό πλαίσιο που περνά στο LLM"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Τα υπερβολικά μεγάλα τμήματα τείνουν να καλύπτουν πολλαπλά θέματα, οπότε το embedding γίνεται θολός μέσος όρος και το ανακτημένο κείμενο αραιώνει τις σχετικές πληροφορίες με άσχετο περιεχόμενο, βλάπτοντας ποιότητα απαντήσεων.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

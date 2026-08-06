@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ce indică de obicei un salt brusc în pierderea de antrenare?",
-        "options": [
-          "Modelul a convergat cu succes",
-          "O posibilă corupție a datelor, problemă cu rata de învățare sau instabilitate numerică",
-          "Dimensiunea lotului este prea mare",
-          "Dimensiunea vocabularului trebuie crescută"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Salturile bruște de pierdere semnalează de obicei probleme precum loturi de date corupte, o rată de învățare prea mare care cauzează actualizări divergente sau depășire numerică în gradienți sau activări.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "De ce este important să monitorizăm normele gradienților în timpul pre-antrenării?",
-        "options": [
-          "Pentru a determina dimensiunea optimă a vocabularului",
-          "Pentru a măsura cât de repede generează modelul text",
-          "Pentru a detecta gradienți care explodează sau dispar și care împiedică învățarea stabilă",
-          "Pentru a alege numărul de capete de attention"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Normele gradienților dezvăluie dacă actualizările parametrilor sunt sănătoase. Gradienții care explodează (norme crescând la infinit) cauzează divergență, în timp ce gradienții care dispar (norme micșorându-se la zero) opresc învățarea. Ambele necesită intervenție.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Care este scopul principal al salvării checkpoint-urilor în timpul antrenării?",
-        "options": [
-          "Reluarea antrenării de la o stare bună cunoscută dacă apare o defecțiune",
-          "Reducerea amprentei de memorie a modelului",
-          "Accelerarea pasului forward",
-          "Creșterea automată a dimensiunii lotului"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Checkpoint-urile salvează ponderile modelului, starea optimizatorului și pasul de antrenare astfel încât antrenarea să poată fi reluată după căderi, defecțiuni hardware sau pentru a reveni la o stare anterioară unui salt de pierdere.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt semne de comportament anormal în antrenare? Selectați toate răspunsurile corecte",
-        "options": [
-          "Pierderea scade lin pe parcursul epocilor",
-          "Valori NaN sau Inf apar în pierdere",
-          "Normele gradienților rămân într-un interval stabil",
-          "Pierderea stagnează la o valoare apropiată de log(vocab_size) pentru mulți pași"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Explicație: Valorile NaN/Inf indică colaps numeric. O pierdere blocată lângă log(vocab_size) înseamnă că modelul nu este mai bun decât ghicirea aleatorie — nu a reușit să învețe. Scăderea lină a pierderii și normele stabile ale gradienților sunt semne sănătoase.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Când depanați o antrenare care a divergat, care este primul pas recomandat?",
-        "options": [
-          "Dublarea dimensiunii modelului pentru a adăuga mai multă capacitate",
-          "Eliminarea tuturor straturilor de dropout",
-          "Creșterea ratei de învățare pentru a converge mai rapid",
-          "Revenirea la ultimul checkpoint stabil și reducerea ratei de învățare"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Revenirea la un checkpoint bun cunoscut și reducerea ratei de învățare este strategia standard de recuperare pentru divergență. Creșterea ratei de învățare sau a dimensiunii modelului ar agrava probabil problema.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Τι υποδεικνύει συνήθως μια ξαφνική αιχμή στην απώλεια εκπαίδευσης;",
-        "options": [
-          "Το μοντέλο έχει συγκλίνει επιτυχώς",
-          "Πιθανή καταστροφή δεδομένων, ζήτημα ρυθμού εκμάθησης ή αριθμητική αστάθεια",
-          "Το μέγεθος παρτίδας είναι πολύ μεγάλο",
-          "Το μέγεθος λεξιλογίου πρέπει να αυξηθεί"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Οι ξαφνικές αιχμές απώλειας συνήθως σηματοδοτούν προβλήματα όπως κατεστραμμένες παρτίδες δεδομένων, ρυθμό εκμάθησης πολύ υψηλό που προκαλεί αποκλίνουσες ενημερώσεις ή αριθμητική υπερχείλιση σε κλίσεις ή ενεργοποιήσεις.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Γιατί είναι σημαντικό να παρακολουθούμε τις νόρμες κλίσεων κατά την προεκπαίδευση;",
-        "options": [
-          "Για να καθορίσουμε το βέλτιστο μέγεθος λεξιλογίου",
-          "Για να μετρήσουμε πόσο γρήγορα παράγει κείμενο το μοντέλο",
-          "Για να ανιχνεύσουμε εκρηγνυόμενες ή εξαφανιζόμενες κλίσεις που εμποδίζουν σταθερή μάθηση",
-          "Για να επιλέξουμε τον αριθμό κεφαλιών attention"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Οι νόρμες κλίσεων αποκαλύπτουν αν οι ενημερώσεις παραμέτρων είναι υγιείς. Οι εκρηγνυόμενες κλίσεις (νόρμες που αυξάνονται στο άπειρο) προκαλούν απόκλιση, ενώ οι εξαφανιζόμενες κλίσεις (νόρμες που μειώνονται σε μηδέν) σταματούν τη μάθηση. Και τα δύο απαιτούν παρέμβαση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ποιος είναι ο κύριος σκοπός της αποθήκευσης checkpoints κατά την εκπαίδευση;",
-        "options": [
-          "Συνέχιση εκπαίδευσης από γνωστή καλή κατάσταση αν συμβεί αστοχία",
-          "Μείωση αποτυπώματος μνήμης μοντέλου",
-          "Επιτάχυνση forward pass",
-          "Αυτόματη αύξηση μεγέθους παρτίδας"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Τα checkpoints αποθηκεύουν τα βάρη μοντέλου, την κατάσταση βελτιστοποιητή και το βήμα εκπαίδευσης ώστε η εκπαίδευση να μπορεί να συνεχιστεί μετά από κρασαρίσματα, αστοχίες υλικού ή για επαναφορά σε κατάσταση πριν μια αιχμή απώλειας.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποια από τα ακόλουθα είναι σημάδια ανώμαλης συμπεριφοράς εκπαίδευσης; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Η απώλεια μειώνεται ομαλά μέσω εποχών",
-          "Εμφανίζονται τιμές NaN ή Inf στην απώλεια",
-          "Οι νόρμες κλίσεων παραμένουν σε σταθερό εύρος",
-          "Η απώλεια σταθεροποιείται σε τιμή κοντά στο log(vocab_size) για πολλά βήματα"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Εξήγηση: Οι τιμές NaN/Inf υποδεικνύουν αριθμητική κατάρρευση. Μια απώλεια κολλημένη κοντά στο log(vocab_size) σημαίνει ότι το μοντέλο δεν είναι καλύτερο από τυχαία μαντεψιά — απέτυχε να μάθει. Η ομαλή μείωση απώλειας και οι σταθερές νόρμες κλίσεων είναι υγιή σημάδια.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Κατά τον εντοπισμό σφαλμάτων σε εκπαίδευση που απέκλινε, ποιο είναι το συνιστώμενο πρώτο βήμα;",
-        "options": [
-          "Διπλασιασμός μεγέθους μοντέλου για περισσότερη χωρητικότητα",
-          "Αφαίρεση όλων των επιπέδων dropout",
-          "Αύξηση ρυθμού εκμάθησης για ταχύτερη σύγκλιση",
-          "Επαναφορά στο τελευταίο σταθερό checkpoint και μείωση ρυθμού εκμάθησης"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Η επαναφορά σε γνωστό καλό checkpoint και η μείωση του ρυθμού εκμάθησης είναι η τυπική στρατηγική ανάκαμψης από απόκλιση. Η αύξηση ρυθμού εκμάθησης ή μεγέθους μοντέλου πιθανώς θα χειροτερεύσει το πρόβλημα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

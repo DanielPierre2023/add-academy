@@ -57,15 +57,15 @@
       },
       {
         "index": 4,
-        "text": "What are the 5 SaaS products you will build by the end of this course?",
+        "text": "What are the 5 GenAI SaaS products you will build by the end of this course?",
         "options": [
-          "Social media bot, image generator, speech-to-text, video editor, game AI",
+          "Social media bot, speech-to-text, video editor, game AI, email generator",
           "Database manager, file converter, web scraper, email client, calculator",
-          "AI Writing Assistant, Code Reviewer, RAG Chatbot, Content Moderator, Translation API",
+          "Image Generation, Video Generation, Text Composition & Rewriting, Plagiarism & AI Detection, OCR & Document Intelligence",
           "Search engine, recommendation system, fraud detector, sentiment analyzer, spam filter"
         ],
         "correct": [2],
-        "explanation": "These 5 products cover the most important LLM use cases: generation, code understanding, retrieval-augmented generation, safety, and multilingual capabilities.",
+        "explanation": "These 5 SaaS products cover real market verticals: visual content creation (image & video), text processing (rewriting & plagiarism detection), and document intelligence (OCR). Each can be deployed and offered commercially.",
         "isMulti": false
       }
     ]
@@ -127,15 +127,15 @@
       },
       {
         "index": 4,
-        "text": "Care sunt cele 5 produse SaaS pe care le vei construi până la sfârșitul acestui curs?",
+        "text": "Care sunt cele 5 produse GenAI SaaS pe care le vei construi până la sfârșitul acestui curs?",
         "options": [
-          "Bot social media, generator de imagini, speech-to-text, editor video, AI pentru jocuri",
+          "Bot social media, speech-to-text, editor video, AI pentru jocuri, generator email",
           "Manager bază de date, convertor fișiere, web scraper, client email, calculator",
-          "Asistent AI de Scriere, Reviewer de Cod, Chatbot RAG, Moderator de Conținut, API de Traducere",
+          "Generare de Imagini, Generare Video, Compunere & Rescriere Text, Detecție Plagiat & AI, OCR & Inteligență Documentară",
           "Motor de căutare, sistem de recomandări, detector de fraudă, analizor de sentimente, filtru spam"
         ],
         "correct": [2],
-        "explanation": "Aceste 5 produse acoperă cele mai importante cazuri de utilizare LLM: generare, înțelegerea codului, generare augmentată prin recuperare, siguranță și capacități multilingve.",
+        "explanation": "Aceste 5 produse SaaS acoperă verticale reale de piață: crearea de conținut vizual (imagini și video), procesarea textului (rescriere și detecția plagiatului) și inteligența documentară (OCR). Fiecare poate fi implementat și oferit comercial.",
         "isMulti": false
       }
     ]
@@ -197,15 +197,15 @@
       },
       {
         "index": 4,
-        "text": "Ποια είναι τα 5 SaaS προϊόντα που θα φτιάξετε μέχρι το τέλος αυτού του μαθήματος;",
+        "text": "Ποια είναι τα 5 GenAI SaaS προϊόντα που θα φτιάξετε μέχρι το τέλος αυτού του μαθήματος;",
         "options": [
-          "Bot κοινωνικών δικτύων, γεννήτρια εικόνων, speech-to-text, επεξεργαστής βίντεο, AI παιχνιδιών",
+          "Bot κοινωνικών δικτύων, speech-to-text, επεξεργαστής βίντεο, AI παιχνιδιών, γεννήτρια email",
           "Διαχειριστής βάσης δεδομένων, μετατροπέας αρχείων, web scraper, email client, αριθμομηχανή",
-          "AI Βοηθός Συγγραφής, Code Reviewer, RAG Chatbot, Συντονιστής Περιεχομένου, API Μετάφρασης",
+          "Δημιουργία Εικόνων, Δημιουργία Βίντεο, Σύνθεση & Αναδιατύπωση Κειμένου, Ανίχνευση Λογοκλοπής & AI, OCR & Νοημοσύνη Εγγράφων",
           "Μηχανή αναζήτησης, σύστημα συστάσεων, ανιχνευτής απάτης, αναλυτής συναισθημάτων, φίλτρο spam"
         ],
         "correct": [2],
-        "explanation": "Αυτά τα 5 προϊόντα καλύπτουν τις σημαντικότερες περιπτώσεις χρήσης LLM: παραγωγή, κατανόηση κώδικα, ανάκτηση-ενισχυμένη παραγωγή, ασφάλεια και πολυγλωσσικές δυνατότητες.",
+        "explanation": "Αυτά τα 5 SaaS προϊόντα καλύπτουν πραγματικές αγορές: δημιουργία οπτικού περιεχομένου (εικόνες & βίντεο), επεξεργασία κειμένου (αναδιατύπωση & ανίχνευση λογοκλοπής) και νοημοσύνη εγγράφων (OCR). Κάθε ένα μπορεί να αναπτυχθεί και να προσφερθεί εμπορικά.",
         "isMulti": false
       }
     ]

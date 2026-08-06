@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este principala limitare a decodării greedy pentru generarea de text?",
-        "options": [
-          "Necesită prea multă memorie",
-          "Nu poate procesa secvențe lungi",
-          "Alege întotdeauna token-ul cu probabilitatea cea mai mare, producând text repetitiv și previzibil",
-          "Necesită un tokenizer special"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Decodarea greedy selectează token-ul argmax la fiecare pas. Această abordare deterministă cade adesea în bucle repetitive și ratează secvențe global mai bune care încep cu un token de probabilitate mai mică.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Cum afectează parametrul de temperatură distribuția softmax în timpul generării?",
-        "options": [
-          "Temperatura mai mare face distribuția mai ascuțită (mai sigură)",
-          "Temperatura mai mare aplatizează distribuția, crescând aleatorismul și diversitatea",
-          "Temperatura afectează doar primul token dintr-o secvență",
-          "Temperatura controlează lungimea maximă a secvenței"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Temperatura T împarte logit-urile înainte de softmax: softmax(z/T). T mai mare aplatizează distribuția (mai uniformă, mai aleatorie), în timp ce T mai mic o ascute (apropiindu-se de greedy pe măsură ce T->0).",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce face eșantionarea top-p (nucleus) diferit de eșantionarea top-k?",
-        "options": [
-          "Top-p selectează întotdeauna exact p token-uri",
-          "Top-p ignoră complet distribuția de probabilitate",
-          "Top-p folosește un număr fix de candidați indiferent de forma distribuției",
-          "Top-p ajustează dinamic dimensiunea setului de candidați pe baza probabilității cumulative, adaptându-se la forma distribuției"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Top-p selectează cel mai mic set de token-uri a cărui probabilitate cumulativă depășește p. Când modelul este sigur (distribuție ascuțită), mai puține token-uri sunt incluse; când este nesigur, mai multe token-uri sunt luate în considerare. Aceasta se adaptează la context, spre deosebire de top-k fix.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ce strategii pot ajuta la reducerea repetițiilor în textul generat? Selectați toate răspunsurile corecte",
-        "options": [
-          "Penalizare de repetiție care reduce probabilitatea token-urilor generate anterior",
-          "Setarea temperaturii la 0",
-          "Folosirea doar a decodării greedy",
-          "Creșterea temperaturii sau folosirea eșantionării nucleus pentru a introduce diversitate"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Explicație: Penalizarea de repetiție penalizează explicit token-urile care au apărut deja în ieșire. Creșterea temperaturii sau folosirea eșantionării nucleus introduce stocasticitate. Setarea temperaturii la 0 sau folosirea decodării greedy crește de fapt repetițiile.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "În căutarea beam cu lățime B, câte secvențe candidat sunt menținute la fiecare pas?",
-        "options": [
-          "B secvențe, păstrând primele B după log-probabilitatea cumulativă",
-          "B^2 secvențe, ridicând la pătrat lățimea beam-ului la fiecare pas",
-          "Toate secvențele posibile sunt păstrate și eliminate la final",
-          "Doar 1 secvență, dar B token-uri sunt eșantionate per pas"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Căutarea beam menține exact B ipoteze candidate. La fiecare pas, fiecare beam este extins cu toate token-urile din vocabular, apoi doar primele B extensii (după log-probabilitatea cumulativă) sunt păstrate. Aceasta explorează mai multe căi fără căutare exhaustivă.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποιος είναι ο κύριος περιορισμός της άπληστης αποκωδικοποίησης για δημιουργία κειμένου;",
-        "options": [
-          "Απαιτεί πάρα πολλή μνήμη",
-          "Δεν μπορεί να επεξεργαστεί μεγάλες ακολουθίες",
-          "Επιλέγει πάντα το token με την υψηλότερη πιθανότητα, παράγοντας επαναλαμβανόμενο και προβλέψιμο κείμενο",
-          "Απαιτεί ειδικό tokenizer"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Η άπληστη αποκωδικοποίηση επιλέγει το argmax token σε κάθε βήμα. Αυτή η ντετερμινιστική προσέγγιση πέφτει συχνά σε επαναλαμβανόμενους βρόχους και χάνει καλύτερες ακολουθίες που ξεκινούν με token χαμηλότερης πιθανότητας.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Πώς επηρεάζει η παράμετρος θερμοκρασίας την κατανομή softmax κατά τη δημιουργία;",
-        "options": [
-          "Υψηλότερη θερμοκρασία κάνει την κατανομή πιο αιχμηρή (πιο σίγουρη)",
-          "Υψηλότερη θερμοκρασία ισοπεδώνει την κατανομή, αυξάνοντας την τυχαιότητα και ποικιλομορφία",
-          "Η θερμοκρασία επηρεάζει μόνο το πρώτο token σε μια ακολουθία",
-          "Η θερμοκρασία ελέγχει το μέγιστο μήκος ακολουθίας"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Η θερμοκρασία T διαιρεί τα logits πριν τη softmax: softmax(z/T). Υψηλότερο T ισοπεδώνει την κατανομή (πιο ομοιόμορφη, πιο τυχαία), ενώ χαμηλότερο T την αιχμηρώνει (πλησιάζοντας την άπληστη καθώς T->0).",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Τι κάνει η δειγματοληψία top-p (πυρήνα) διαφορετικά από τη δειγματοληψία top-k;",
-        "options": [
-          "Η top-p επιλέγει πάντα ακριβώς p tokens",
-          "Η top-p αγνοεί εντελώς την κατανομή πιθανότητας",
-          "Η top-p χρησιμοποιεί σταθερό αριθμό υποψηφίων ανεξάρτητα από το σχήμα κατανομής",
-          "Η top-p προσαρμόζει δυναμικά το μέγεθος του συνόλου υποψηφίων βάσει αθροιστικής πιθανότητας, προσαρμοζόμενη στο σχήμα κατανομής"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Η top-p επιλέγει το μικρότερο σύνολο tokens του οποίου η αθροιστική πιθανότητα υπερβαίνει το p. Όταν το μοντέλο είναι σίγουρο (αιχμηρή κατανομή), λιγότερα tokens περιλαμβάνονται. Όταν αβέβαιο, περισσότερα tokens εξετάζονται. Αυτό προσαρμόζεται στο πλαίσιο σε αντίθεση με το σταθερό top-k.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποιες στρατηγικές μπορούν να βοηθήσουν στη μείωση επαναλήψεων στο δημιουργημένο κείμενο; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Ποινή επανάληψης που μειώνει την πιθανότητα ήδη δημιουργημένων tokens",
-          "Ρύθμιση θερμοκρασίας σε 0",
-          "Χρήση μόνο άπληστης αποκωδικοποίησης",
-          "Αύξηση θερμοκρασίας ή χρήση δειγματοληψίας πυρήνα για εισαγωγή ποικιλομορφίας"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Εξήγηση: Η ποινή επανάληψης τιμωρεί ρητά tokens που εμφανίστηκαν ήδη στην έξοδο. Η αύξηση θερμοκρασίας ή η χρήση δειγματοληψίας πυρήνα εισάγει στοχαστικότητα. Η ρύθμιση θερμοκρασίας σε 0 ή η χρήση άπληστης αποκωδικοποίησης στην πραγματικότητα αυξάνει τις επαναλήψεις.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Στην αναζήτηση δέσμης με πλάτος B, πόσες υποψήφιες ακολουθίες διατηρούνται σε κάθε βήμα;",
-        "options": [
-          "B ακολουθίες, κρατώντας τις κορυφαίες B κατά αθροιστική log-πιθανότητα",
-          "B^2 ακολουθίες, υψώνοντας στο τετράγωνο το πλάτος δέσμης σε κάθε βήμα",
-          "Όλες οι πιθανές ακολουθίες διατηρούνται και κλαδεύονται στο τέλος",
-          "Μόνο 1 ακολουθία, αλλά B tokens δειγματοληπτούνται ανά βήμα"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Η αναζήτηση δέσμης διατηρεί ακριβώς B υποψήφιες υποθέσεις. Σε κάθε βήμα, κάθε δέσμη επεκτείνεται με όλα τα tokens λεξιλογίου, μετά μόνο οι κορυφαίες B επεκτάσεις (κατά αθροιστική log-πιθανότητα) διατηρούνται. Αυτό εξερευνά πολλαπλές διαδρομές χωρίς εξαντλητική αναζήτηση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

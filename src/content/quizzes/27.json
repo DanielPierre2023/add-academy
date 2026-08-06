@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ce distinge AdamW de optimizatorul Adam original?",
-        "options": [
-          "AdamW folosește o rată de învățare fixă în loc de rate adaptive",
-          "AdamW elimină complet momentum-ul",
-          "AdamW adaugă zgomot de gradient pentru o explorare mai bună",
-          "AdamW decuplează degradarea ponderilor de actualizarea gradientului, aplicând-o direct pe ponderi"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: În Adam, regularizarea L2 este încâlcită cu rata de învățare adaptivă, făcând-o mai puțin eficientă. AdamW rezolvă acest lucru aplicând degradarea ponderilor direct pe parametri (w = w - lr * wd * w), decuplată de actualizarea bazată pe gradient.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "De ce se folosește încălzirea ratei de învățare la începutul antrenării?",
-        "options": [
-          "Pentru a crește treptat dimensiunea modelului",
-          "Pentru a preveni actualizări mari, instabile când estimările de moment ale optimizatorului sunt nesigure în primii pași",
-          "Pentru a pre-calcula măștile de attention",
-          "Pentru a reduce dimensiunea vocabularului înainte de antrenarea reală"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: În primii pași, mediile mobile ale lui Adam (momentele de ordinul întâi și al doilea) sunt inițializate la zero și nu sunt încă estimări fiabile. O rată de învățare mică în timpul încălzirii previne ca aceste estimări imprecise să cauzeze actualizări distructiv de mari.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce face declinul cosinus cu rata de învățare?",
-        "options": [
-          "O menține constantă pe tot parcursul antrenării",
-          "O crește liniar până la sfârșitul antrenării",
-          "O scade treptat urmând o curbă semi-cosinus de la vârf la aproape zero",
-          "O alternează între valori mari și mici la fiecare epocă"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Declinul cosinus scade lin rata de învățare urmând o curbă semi-cosinus. Începe lent (regiune plată lângă vârf), scade mai rapid la mijloc și încetinește din nou la final. Aceasta oferă modelului convergență cu granularitate fină.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt adevărate despre degradarea ponderilor în antrenarea LLM? Selectați toate răspunsurile corecte",
-        "options": [
-          "Penalizează ponderile mari pentru a reduce supraadaptarea",
-          "Se aplică de obicei termenilor de bias și parametrilor LayerNorm",
-          "Se aplică de obicei doar matricelor de ponderi, nu bias-urilor sau parametrilor de normalizare",
-          "Înlocuiește complet dropout-ul ca tehnică de regularizare"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Explicație: Degradarea ponderilor acționează ca un regularizator prin micșorarea ponderilor mari, prevenind supraadaptarea. Buna practică o aplică doar matricelor de ponderi (nu bias-urilor sau parametrilor LayerNorm), deoarece acești parametri de dimensiune redusă ar trebui să rămână neconstrânși.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Care este un program tipic al ratei de învățare pentru pre-antrenarea LLM?",
-        "options": [
-          "Rată de învățare constantă ridicată pe tot parcursul",
-          "Încălzire liniară urmată de declin cosinus",
-          "Creștere exponențială pentru întreaga antrenare",
-          "Declin în trepte care înjumătățește rata la fiecare epocă"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Programul standard LLM este încălzire liniară (pe parcursul a aproximativ 1-5% din totalul pașilor) până la o rată de învățare de vârf, urmată de declin cosinus. Acest tipar este folosit de GPT-3, LLaMA și cele mai multe LLM-uri moderne.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Τι διαφοροποιεί τον AdamW από τον αρχικό βελτιστοποιητή Adam;",
-        "options": [
-          "Ο AdamW χρησιμοποιεί σταθερό ρυθμό εκμάθησης αντί για προσαρμοστικούς",
-          "Ο AdamW αφαιρεί εντελώς τη ορμή",
-          "Ο AdamW προσθέτει θόρυβο κλίσης για καλύτερη εξερεύνηση",
-          "Ο AdamW αποσυνδέει τη φθορά βαρών από την ενημέρωση κλίσης, εφαρμόζοντάς την απευθείας στα βάρη"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Στον Adam, η κανονικοποίηση L2 είναι μπλεγμένη με τον προσαρμοστικό ρυθμό εκμάθησης, καθιστώντας την λιγότερο αποτελεσματική. Ο AdamW το διορθώνει εφαρμόζοντας τη φθορά βαρών απευθείας στις παραμέτρους (w = w - lr * wd * w), αποσυνδεδεμένη από την ενημέρωση βάσει κλίσης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Γιατί χρησιμοποιείται η θέρμανση ρυθμού εκμάθησης στην αρχή της εκπαίδευσης;",
-        "options": [
-          "Για σταδιακή αύξηση μεγέθους μοντέλου",
-          "Για αποτροπή μεγάλων, ασταθών ενημερώσεων όταν οι εκτιμήσεις ροπών του βελτιστοποιητή είναι αναξιόπιστες στα πρώτα βήματα",
-          "Για προϋπολογισμό μασκών attention",
-          "Για μείωση μεγέθους λεξιλογίου πριν την πραγματική εκπαίδευση"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Στα πρώτα βήματα, οι κυλιόμενοι μέσοι του Adam (ροπές πρώτης και δεύτερης τάξης) αρχικοποιούνται σε μηδέν και δεν είναι ακόμα αξιόπιστες εκτιμήσεις. Ένας μικρός ρυθμός εκμάθησης κατά τη θέρμανση αποτρέπει αυτές τις ανακριβείς εκτιμήσεις από το να προκαλέσουν καταστροφικά μεγάλες ενημερώσεις.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Τι κάνει η ημιτονοειδής μείωση στον ρυθμό εκμάθησης;",
-        "options": [
-          "Τον διατηρεί σταθερό καθ' όλη την εκπαίδευση",
-          "Τον αυξάνει γραμμικά μέχρι το τέλος της εκπαίδευσης",
-          "Τον μειώνει σταδιακά ακολουθώντας μια καμπύλη ημι-συνημιτόνου από την κορυφή σε σχεδόν μηδέν",
-          "Τον εναλλάσσει μεταξύ υψηλών και χαμηλών τιμών κάθε εποχή"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Η ημιτονοειδής μείωση μειώνει ομαλά τον ρυθμό εκμάθησης ακολουθώντας καμπύλη ημι-συνημιτόνου. Ξεκινά αργά (επίπεδη περιοχή κοντά στην κορυφή), μειώνεται γρηγορότερα στη μέση και επιβραδύνει ξανά κοντά στο τέλος. Αυτό δίνει στο μοντέλο λεπτομερή σύγκλιση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποια από τα ακόλουθα ισχύουν για τη φθορά βαρών στην εκπαίδευση LLM; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Τιμωρεί τα μεγάλα βάρη για μείωση υπερπροσαρμογής",
-          "Εφαρμόζεται συνήθως στους όρους bias και τις παραμέτρους LayerNorm",
-          "Εφαρμόζεται συνήθως μόνο σε πίνακες βαρών, όχι σε bias ή παραμέτρους κανονικοποίησης",
-          "Αντικαθιστά πλήρως το dropout ως τεχνική κανονικοποίησης"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Εξήγηση: Η φθορά βαρών λειτουργεί ως κανονικοποιητής συρρικνώνοντας τα μεγάλα βάρη, αποτρέποντας την υπερπροσαρμογή. Η βέλτιστη πρακτική την εφαρμόζει μόνο σε πίνακες βαρών (όχι σε bias ή παραμέτρους LayerNorm), αφού αυτές οι παράμετροι χαμηλής διάστασης πρέπει να παραμένουν ελεύθερες.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ποιο είναι ένα τυπικό πρόγραμμα ρυθμού εκμάθησης για προεκπαίδευση LLM;",
-        "options": [
-          "Σταθερά υψηλός ρυθμός εκμάθησης",
-          "Γραμμική θέρμανση ακολουθούμενη από ημιτονοειδή μείωση",
-          "Εκθετική αύξηση για ολόκληρη την εκπαίδευση",
-          "Βηματική μείωση που υποδιπλασιάζει τον ρυθμό κάθε εποχή"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Το τυπικό πρόγραμμα LLM είναι γραμμική θέρμανση (σε περίπου 1-5% των συνολικών βημάτων) σε κορυφαίο ρυθμό εκμάθησης, ακολουθούμενη από ημιτονοειδή μείωση. Αυτό το μοτίβο χρησιμοποιείται από GPT-3, LLaMA και τα περισσότερα σύγχρονα LLMs.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

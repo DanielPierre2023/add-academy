@@ -87,79 +87,54 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este ideea centrală din spatele LoRA (Low-Rank Adaptation)?",
-        "options": [
-          "Înlocuirea tuturor matricelor de ponderi cu matrice aleatorii mai mici",
-          "Eliminarea neuronilor neimportanți pentru reducerea dimensiunii modelului",
-          "Înghețarea ponderilor originale și învățarea matricelor de actualizare de rang redus care sunt adăugate la acestea",
-          "Antrenarea doar a stratului de embedding păstrând toate celelalte straturi fixe"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: LoRA înghează ponderile originale pre-antrenate și introduce matrice de descompunere de rang redus antrenabile (A și B) al căror produs este adăugat la matricea de ponderi originală. Aceasta reduce drastic numărul de parametri antrenabili menținând calitatea modelului.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "În LoRA, o actualizare de ponderi este reprezentată ca W + BA, unde B are forma (d x r) și A are forma (r x k). Ce controlează rangul r?",
-        "options": [
-          "Numărul de capete de attention din model",
-          "Expresivitatea și numărul de parametri antrenabili în actualizarea de rang redus",
-          "Dimensiunea lotului folosită în timpul antrenării",
-          "Numărul de straturi care sunt înghețate"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Rangul r determină dimensionalitatea descompunerii de rang redus. Un rang mai mare permite actualizări mai expresive dar crește numărul de parametri antrenabili. Valorile tipice variază de la 4 la 64 în funcție de complexitatea sarcinii.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Care dintre următoarele sunt beneficii ale folosirii LoRA comparativ cu ajustarea fină completă? Selectați toate răspunsurile corecte",
-        "options": [
-          "Semnificativ mai puțini parametri antrenabili",
-          "Depășește întotdeauna ajustarea fină completă pe orice sarcină",
-          "Cerințe mai mici de memorie GPU în timpul antrenării",
-          "Mai mulți adaptori LoRA pot fi schimbați fără reîncărcarea modelului de bază"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           2,
           3
         ],
-        "explanation": "✅ Explicație: LoRA antrenează mult mai puțini parametri (adesea <1% din model), necesită mai puțină memorie GPU deoarece stările optimizatorului sunt necesare doar pentru matricele mici de adaptor și permite schimbarea rapidă a adaptoarelor pentru diferite sarcini pe același model de bază. Nu depășește întotdeauna ajustarea fină completă.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "Ce distinge QLoRA de LoRA standard?",
-        "options": [
-          "QLoRA folosește un rang mai mare pentru performanțe mai bune",
-          "QLoRA aplică LoRA doar matricelor de proiecție query",
-          "QLoRA înlocuiește arhitectura transformer cu o variantă cuantizată",
-          "QLoRA cuantizează modelul de bază la precizie de 4 biți și antrenează adaptori LoRA în precizie superioară deasupra"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: QLoRA combină cuantizarea NormalFloat pe 4 biți a modelului de bază înghețat cu antrenarea adaptoarelor LoRA în precizie BFloat16/Float16. Aceasta permite ajustarea fină a modelelor foarte mari pe GPU-uri de consum menținând calitate apropiată de precizia completă.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Dacă o matrice de ponderi W are dimensiunile 4096 x 4096 și LoRA folosește rang r=16, câți parametri antrenabili adaugă adaptorul LoRA pentru acea singură matrice?",
-        "options": [
-          "65.536",
-          "131.072",
-          "16.777.216",
-          "4.096"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: LoRA adaugă matricele B (4096 x 16) și A (16 x 4096), totalizând 4096 x 16 + 16 x 4096 = 65.536 + 65.536 = 131.072 parametri. Comparați cu cei 4096 x 4096 = 16.777.216 parametri originali — o reducere de 128x.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -169,79 +144,54 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποια είναι η βασική ιδέα πίσω από το LoRA (Low-Rank Adaptation);",
-        "options": [
-          "Αντικατάσταση όλων των πινάκων βαρών με μικρότερους τυχαίους πίνακες",
-          "Κλάδεμα ασήμαντων νευρώνων για μείωση μεγέθους μοντέλου",
-          "Πάγωμα αρχικών βαρών και εκμάθηση πινάκων ενημέρωσης χαμηλής τάξης που προστίθενται σε αυτά",
-          "Εκπαίδευση μόνο του επιπέδου embedding κρατώντας όλα τα άλλα σταθερά"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το LoRA παγώνει τα αρχικά προεκπαιδευμένα βάρη και εισάγει εκπαιδεύσιμους πίνακες αποσύνθεσης χαμηλής τάξης (A και B) των οποίων το γινόμενο προστίθεται στον αρχικό πίνακα βαρών. Αυτό μειώνει δραματικά τον αριθμό εκπαιδεύσιμων παραμέτρων διατηρώντας την ποιότητα μοντέλου.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Στο LoRA, μια ενημέρωση βαρών αναπαρίσταται ως W + BA, όπου ο B έχει σχήμα (d x r) και ο A σχήμα (r x k). Τι ελέγχει η τάξη r;",
-        "options": [
-          "Τον αριθμό κεφαλιών attention στο μοντέλο",
-          "Την εκφραστικότητα και τον αριθμό εκπαιδεύσιμων παραμέτρων στην ενημέρωση χαμηλής τάξης",
-          "Το μέγεθος παρτίδας κατά την εκπαίδευση",
-          "Τον αριθμό επιπέδων που παγώνονται"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Η τάξη r καθορίζει τη διαστατικότητα της αποσύνθεσης χαμηλής τάξης. Υψηλότερη τάξη επιτρέπει πιο εκφραστικές ενημερώσεις αλλά αυξάνει τον αριθμό εκπαιδεύσιμων παραμέτρων. Τυπικές τιμές κυμαίνονται από 4 έως 64 ανάλογα με την πολυπλοκότητα εργασίας.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ποια από τα ακόλουθα είναι πλεονεκτήματα χρήσης LoRA σε σύγκριση με πλήρη ακριβή ρύθμιση; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Σημαντικά λιγότερες εκπαιδεύσιμες παράμετροι",
-          "Ξεπερνά πάντα την πλήρη ακριβή ρύθμιση σε κάθε εργασία",
-          "Χαμηλότερες απαιτήσεις μνήμης GPU κατά εκπαίδευση",
-          "Πολλαπλοί LoRA adaptors μπορούν να εναλλαχθούν χωρίς επαναφόρτωση βασικού μοντέλου"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           2,
           3
         ],
-        "explanation": "✅ Εξήγηση: Το LoRA εκπαιδεύει πολύ λιγότερες παραμέτρους (συχνά <1% του μοντέλου), απαιτεί λιγότερη μνήμη GPU αφού καταστάσεις βελτιστοποιητή χρειάζονται μόνο για τους μικρούς πίνακες adaptor, και επιτρέπει εν θερμώ εναλλαγή adaptors για διαφορετικές εργασίες στο ίδιο βασικό μοντέλο. Δεν ξεπερνά πάντα την πλήρη ακριβή ρύθμιση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "Τι διαφοροποιεί το QLoRA από το τυπικό LoRA;",
-        "options": [
-          "Το QLoRA χρησιμοποιεί υψηλότερη τάξη για καλύτερη απόδοση",
-          "Το QLoRA εφαρμόζει LoRA μόνο σε πίνακες προβολής query",
-          "Το QLoRA αντικαθιστά αρχιτεκτονική transformer με κβαντισμένη παραλλαγή",
-          "Το QLoRA κβαντίζει το βασικό μοντέλο σε ακρίβεια 4-bit και εκπαιδεύει adaptors LoRA σε υψηλότερη ακρίβεια"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Το QLoRA συνδυάζει κβάντιση NormalFloat 4-bit του παγωμένου βασικού μοντέλου με εκπαίδευση adaptor LoRA σε ακρίβεια BFloat16/Float16. Αυτό επιτρέπει ακριβή ρύθμιση πολύ μεγάλων μοντέλων σε GPUs καταναλωτή διατηρώντας ποιότητα κοντά στην πλήρη ακρίβεια.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Αν ένας πίνακας βαρών W έχει διαστάσεις 4096 x 4096 και το LoRA χρησιμοποιεί τάξη r=16, πόσες εκπαιδεύσιμες παραμέτρους προσθέτει ο adaptor LoRA για αυτόν τον μόνο πίνακα;",
-        "options": [
-          "65.536",
-          "131.072",
-          "16.777.216",
-          "4.096"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Το LoRA προσθέτει πίνακες B (4096 x 16) και A (16 x 4096), σύνολο 4096 x 16 + 16 x 4096 = 65.536 + 65.536 = 131.072 παράμετροι. Συγκρίνετε με τις αρχικές 4096 x 4096 = 16.777.216 παραμέτρους — μείωση 128x.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

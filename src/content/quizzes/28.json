@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este scopul acumulării gradienților?",
-        "options": [
-          "Accelerarea pasului forward prin memorarea activărilor intermediare",
-          "Reducerea numărului total de parametri ai modelului",
-          "Simularea unei dimensiuni efective mai mari a lotului prin însumarea gradienților pe mai multe micro-loturi înainte de actualizare",
-          "Prevenirea dispariției gradienților în rețele adânci"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Acumularea gradienților rulează mai multe pase forward-backward (micro-loturi) și însumează gradienții înainte de un singur pas al optimizatorului. Aceasta obține același efect ca un lot mai mare fără a necesita memoria GPU pentru a stoca lotul complet.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Dacă dimensiunea micro-lotului este 4 și pașii de acumulare a gradienților sunt 8, care este dimensiunea efectivă a lotului?",
-        "options": [
-          "4",
-          "32",
-          "12",
-          "2"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Dimensiunea efectivă a lotului = dimensiunea micro-lotului x pașii de acumulare = 4 x 8 = 32. Actualizarea optimizatorului folosește gradienți acumulați din toate cele 32 de exemple, echivalent cu procesarea lor într-un singur lot mare.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Care este beneficiul cheie al antrenării cu precizie mixtă FP16/BF16?",
-        "options": [
-          "Dublează numărul de parametri ai modelului",
-          "Elimină necesitatea decupării gradienților",
-          "Îmbunătățește acuratețea modelului prin calcule mai precise",
-          "Reduce utilizarea memoriei și crește debitul folosind operații pe 16 biți pentru majoritatea calculelor"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Precizia mixtă folosește 16 biți (jumătate de precizie) pentru pasele forward/backward, înjumătățind memoria pentru activări și ponderi. O copie principală a ponderilor în FP32 este menținută pentru pasul optimizatorului pentru a păstra stabilitatea numerică.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt tehnici valide de optimizare a memoriei pentru antrenarea LLM? Selectați toate răspunsurile corecte",
-        "options": [
-          "Creșterea lungimii contextului pentru a utiliza mai multă lățime de bandă de memorie",
-          "Checkpointing-ul activărilor (recalcularea activărilor în loc de stocarea lor)",
-          "Acumularea gradienților pentru reducerea cerințelor de memorie per pas",
-          "Dezactivarea stării optimizatorului pentru economisirea memoriei"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Explicație: Checkpointing-ul activărilor schimbă calcul cu memorie prin recalcularea activărilor în pasul backward în loc de stocarea lor. Acumularea gradienților reduce memoria de vârf prin procesarea micro-loturilor mai mici. Dezactivarea stării optimizatorului ar strica antrenarea.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "De ce este BF16 adesea preferat față de FP16 pentru antrenarea LLM?",
-        "options": [
-          "BF16 are același interval de exponenți ca FP32, reducând riscurile de depășire fără a necesita scalarea pierderii",
-          "BF16 folosește doar 8 biți, înjumătățind memoria comparativ cu FP16",
-          "BF16 are precizie mai mare a mantisei decât FP16",
-          "BF16 este suportat pe toate GPU-urile în timp ce FP16 nu este"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: BF16 folosește 8 biți de exponent (la fel ca FP32) față de 5 biți ai FP16. Aceasta oferă BF16 același interval dinamic ca FP32, eliminând practic problemele de depășire care afectează antrenarea FP16, eliminând necesitatea scalării pierderii.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποιος είναι ο σκοπός της συσσώρευσης κλίσεων;",
-        "options": [
-          "Επιτάχυνση του forward pass αποθηκεύοντας ενδιάμεσες ενεργοποιήσεις",
-          "Μείωση του συνολικού αριθμού παραμέτρων του μοντέλου",
-          "Προσομοίωση μεγαλύτερου αποτελεσματικού μεγέθους παρτίδας αθροίζοντας κλίσεις σε πολλαπλές μικρο-παρτίδες πριν την ενημέρωση",
-          "Αποτροπή εξαφανιζόμενων κλίσεων σε βαθιά δίκτυα"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Η συσσώρευση κλίσεων εκτελεί πολλαπλά forward-backward passes (μικρο-παρτίδες) και αθροίζει τις κλίσεις πριν εκτελέσει ένα μόνο βήμα βελτιστοποιητή. Αυτό επιτυγχάνει το ίδιο αποτέλεσμα με μεγαλύτερο μέγεθος παρτίδας χωρίς να απαιτεί μνήμη GPU για ολόκληρη την παρτίδα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Αν το μέγεθος μικρο-παρτίδας είναι 4 και τα βήματα συσσώρευσης κλίσεων είναι 8, ποιο είναι το αποτελεσματικό μέγεθος παρτίδας;",
-        "options": [
-          "4",
-          "32",
-          "12",
-          "2"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Αποτελεσματικό μέγεθος παρτίδας = μέγεθος μικρο-παρτίδας x βήματα συσσώρευσης = 4 x 8 = 32. Η ενημέρωση βελτιστοποιητή χρησιμοποιεί κλίσεις συσσωρευμένες από όλα τα 32 παραδείγματα, ισοδύναμο με την επεξεργασία τους σε μία μεγάλη παρτίδα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ποιο είναι το βασικό πλεονέκτημα της εκπαίδευσης μικτής ακρίβειας FP16/BF16;",
-        "options": [
-          "Διπλασιάζει τον αριθμό παραμέτρων του μοντέλου",
-          "Εξαλείφει την ανάγκη αποκοπής κλίσεων",
-          "Βελτιώνει την ακρίβεια μοντέλου χρησιμοποιώντας πιο ακριβείς υπολογισμούς",
-          "Μειώνει τη χρήση μνήμης και αυξάνει τη διεκπεραίωση χρησιμοποιώντας πράξεις 16-bit για τους περισσότερους υπολογισμούς"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Η μικτή ακρίβεια χρησιμοποιεί 16-bit (μισή ακρίβεια) για forward/backward passes, μειώνοντας στο μισό τη μνήμη για ενεργοποιήσεις και βάρη. Ένα κύριο αντίγραφο βαρών σε FP32 διατηρείται για το βήμα βελτιστοποιητή για αριθμητική σταθερότητα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποιες από τις ακόλουθες είναι έγκυρες τεχνικές βελτιστοποίησης μνήμης για εκπαίδευση LLM; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Αύξηση μήκους πλαισίου για χρήση περισσότερου εύρους ζώνης μνήμης",
-          "Checkpointing ενεργοποιήσεων (επαναϋπολογισμός αντί αποθήκευσης)",
-          "Συσσώρευση κλίσεων για μείωση απαιτήσεων μνήμης ανά βήμα",
-          "Απενεργοποίηση κατάστασης βελτιστοποιητή για εξοικονόμηση μνήμης"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Εξήγηση: Το checkpointing ενεργοποιήσεων ανταλλάσσει υπολογισμό με μνήμη επαναϋπολογίζοντας ενεργοποιήσεις κατά το backward pass αντί να τις αποθηκεύει. Η συσσώρευση κλίσεων μειώνει την κορυφαία μνήμη επεξεργάζοντας μικρότερες μικρο-παρτίδες. Η απενεργοποίηση κατάστασης βελτιστοποιητή θα χαλούσε την εκπαίδευση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Γιατί προτιμάται συχνά το BF16 έναντι του FP16 για εκπαίδευση LLM;",
-        "options": [
-          "Το BF16 έχει το ίδιο εύρος εκθέτη με το FP32, μειώνοντας κινδύνους υπερχείλισης χωρίς να χρειάζεται κλιμάκωση απώλειας",
-          "Το BF16 χρησιμοποιεί μόνο 8 bits, μειώνοντας τη μνήμη στο μισό σε σύγκριση με FP16",
-          "Το BF16 έχει μεγαλύτερη ακρίβεια mantissa από το FP16",
-          "Το BF16 υποστηρίζεται σε όλες τις GPUs ενώ το FP16 όχι"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Το BF16 χρησιμοποιεί 8 bits εκθέτη (ίδια με FP32) έναντι 5 bits εκθέτη του FP16. Αυτό δίνει στο BF16 το ίδιο δυναμικό εύρος με το FP32, εξαλείφοντας ουσιαστικά τα ζητήματα υπερχείλισης που πλήττουν την εκπαίδευση FP16, αφαιρώντας την ανάγκη κλιμάκωσης απώλειας.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Într-un sistem LLM fine-tuned end-to-end, care este ordinea corectă a etapelor pipeline-ului?",
-        "options": [
-          "Implementare → Fine-tuning → Colectarea datelor → Evaluare",
-          "Colectarea datelor → Preprocesare → Fine-tuning → Evaluare → Implementare",
-          "Fine-tuning → Colectarea datelor → Implementare → Preprocesare",
-          "Evaluare → Implementare → Fine-tuning → Colectarea datelor"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Un pipeline corect începe cu colectarea și curățarea datelor, apoi fine-tuning-ul modelului, evaluarea calității acestuia și în final implementarea pentru inferență.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "De ce este evaluarea pe un set de test separat esențială înainte de implementarea unui model fine-tuned?",
-        "options": [
-          "Reduce numărul de parametri ai modelului",
-          "Accelerează inferența la momentul implementării",
-          "Repară automat orice erori din model",
-          "Relevă dacă modelul generalizează dincolo de datele de antrenare și detectează supraadaptarea"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Un set de test separat nu a fost niciodată văzut în timpul antrenării, așa că performanța pe acesta indică generalizarea în lumea reală. Performanța slabă pe test semnalează supraadaptare sau probleme cu datele care trebuie abordate înainte de implementare.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce rol joacă preprocesarea datelor într-un pipeline de fine-tuning?",
-        "options": [
-          "Curăță, formatează și structurează datele brute în formatul pe care modelul îl așteaptă pentru antrenare",
-          "Înlocuiește tokenizer-ul modelului cu unul nou",
-          "Mărește automat fereastra de context a modelului",
-          "Implementează modelul pe un server de producție"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Preprocesarea transformă datele brute colectate în exemple de antrenare curate, formatate corespunzător (ex. perechi instrucțiune-răspuns, format de chat) pe care scriptul de fine-tuning le așteaptă.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ce componente fac parte de obicei dintr-o implementare completă a unui LLM fine-tuned? Selectați toate răspunsurile corecte",
-        "options": [
-          "Un cluster dedicat de preantrenare care rulează 24/7",
-          "Un server de inferență cu modelul fine-tuned încărcat și un endpoint API",
-          "Monitorizare și logare pentru urmărirea performanței modelului în producție",
-          "Un flux de lucru manual de copiere-lipire pentru fiecare cerere a utilizatorului"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Explicație: O implementare în producție necesită un server de inferență care expune un API, plus monitorizare și logare pentru a detecta regresii de calitate, probleme de latență sau intrări neașteptate. Clusterele de preantrenare nu fac parte din implementare.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Care este avantajul combinării fine-tuning-ului cu RAG într-un sistem capstone?",
-        "options": [
-          "Elimină necesitatea oricăror date de antrenare",
-          "Face modelul mai mic și mai rapid de încărcat",
-          "Fine-tuning-ul adaptează stilul și cunoștințele de domeniu ale modelului, în timp ce RAG oferă acces la informații externe actuale",
-          "Elimină necesitatea unei ferestre de context"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Fine-tuning-ul încorporează expertiza de domeniu și stilul de output în ponderile modelului, în timp ce RAG recuperează dinamic fapte actualizate la momentul interogării. Împreună produc un sistem care este atât expert în domeniu, cât și fundamentat factual.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Σε ένα σύστημα LLM fine-tuned από άκρη σε άκρη, ποια είναι η σωστή σειρά των σταδίων του pipeline;",
-        "options": [
-          "Ανάπτυξη → Fine-tuning → Συλλογή δεδομένων → Αξιολόγηση",
-          "Συλλογή δεδομένων → Προεπεξεργασία → Fine-tuning → Αξιολόγηση → Ανάπτυξη",
-          "Fine-tuning → Συλλογή δεδομένων → Ανάπτυξη → Προεπεξεργασία",
-          "Αξιολόγηση → Ανάπτυξη → Fine-tuning → Συλλογή δεδομένων"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Ένα σωστό pipeline ξεκινά με τη συλλογή και τον καθαρισμό δεδομένων, στη συνέχεια fine-tuning του μοντέλου, αξιολόγηση της ποιότητάς του και τέλος ανάπτυξη για εξαγωγή συμπερασμάτων.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Γιατί είναι κρίσιμη η αξιολόγηση σε ξεχωριστό σύνολο δοκιμής πριν την ανάπτυξη ενός fine-tuned μοντέλου;",
-        "options": [
-          "Μειώνει τον αριθμό παραμέτρων του μοντέλου",
-          "Επιταχύνει την εξαγωγή συμπερασμάτων κατά την ανάπτυξη",
-          "Διορθώνει αυτόματα τυχόν σφάλματα στο μοντέλο",
-          "Αποκαλύπτει αν το μοντέλο γενικεύει πέρα από τα δεδομένα εκπαίδευσης και εντοπίζει υπερπροσαρμογή"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Ένα ξεχωριστό σύνολο δοκιμής δεν είδε ποτέ κατά την εκπαίδευση, οπότε η απόδοση σε αυτό δείχνει γενίκευση στον πραγματικό κόσμο. Χαμηλή απόδοση στο σύνολο δοκιμής σηματοδοτεί υπερπροσαρμογή ή προβλήματα δεδομένων που πρέπει να αντιμετωπιστούν πριν την ανάπτυξη.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ποιον ρόλο παίζει η προεπεξεργασία δεδομένων σε ένα pipeline fine-tuning;",
-        "options": [
-          "Καθαρίζει, μορφοποιεί και δομεί τα ακατέργαστα δεδομένα στη μορφή που αναμένει το μοντέλο για εκπαίδευση",
-          "Αντικαθιστά τον tokenizer του μοντέλου με νέο",
-          "Αυξάνει αυτόματα το παράθυρο πλαισίου του μοντέλου",
-          "Αναπτύσσει το μοντέλο σε διακομιστή παραγωγής"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Η προεπεξεργασία μετατρέπει τα ακατέργαστα συλλεχθέντα δεδομένα σε καθαρά, σωστά μορφοποιημένα παραδείγματα εκπαίδευσης (π.χ. ζεύγη οδηγίας-απάντησης, μορφή chat) που αναμένει το script fine-tuning.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποια στοιχεία αποτελούν συνήθως μέρος μιας πλήρους ανάπτυξης fine-tuned LLM; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Ένα αποκλειστικό cluster προεκπαίδευσης που λειτουργεί 24/7",
-          "Ένας διακομιστής εξαγωγής συμπερασμάτων με το fine-tuned μοντέλο φορτωμένο και ένα API endpoint",
-          "Παρακολούθηση και καταγραφή για την ανίχνευση της απόδοσης του μοντέλου στην παραγωγή",
-          "Μια χειροκίνητη ροή εργασίας αντιγραφής-επικόλλησης για κάθε αίτημα χρήστη"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Εξήγηση: Μια ανάπτυξη παραγωγής χρειάζεται έναν διακομιστή εξαγωγής συμπερασμάτων που εκθέτει ένα API, συν παρακολούθηση και καταγραφή για τον εντοπισμό υποβαθμίσεων ποιότητας, προβλημάτων καθυστέρησης ή απροσδόκητων εισόδων. Τα clusters προεκπαίδευσης δεν αποτελούν μέρος της ανάπτυξης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ποιο είναι το πλεονέκτημα του συνδυασμού fine-tuning με RAG σε ένα capstone σύστημα;",
-        "options": [
-          "Εξαλείφει την ανάγκη για οποιαδήποτε δεδομένα εκπαίδευσης",
-          "Κάνει το μοντέλο μικρότερο και πιο γρήγορο στη φόρτωση",
-          "Το fine-tuning προσαρμόζει το στυλ και τη γνώση τομέα του μοντέλου, ενώ το RAG παρέχει πρόσβαση σε τρέχουσες εξωτερικές πληροφορίες",
-          "Εξαλείφει την ανάγκη για παράθυρο πλαισίου"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το fine-tuning ενσωματώνει την εξειδίκευση τομέα και το στυλ εξόδου στα βάρη του μοντέλου, ενώ το RAG ανακτά δυναμικά ενημερωμένα γεγονότα κατά τη στιγμή του ερωτήματος. Μαζί παράγουν ένα σύστημα που είναι τόσο ειδικός τομέα όσο και τεκμηριωμένο σε γεγονότα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

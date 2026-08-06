@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este formula de bază pentru o conexiune reziduală (shortcut)?",
-        "options": [
-          "y = f(x)",
-          "y = x * f(x)",
-          "y = x + f(x)",
-          "y = max(x, f(x))"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Conexiunea reziduală adaugă intrarea direct la ieșirea sub-stratului: y = x + f(x). Aceasta permite funcției identitate să fie învățată trivial (setând f(x) = 0) și creează o autostradă pentru gradienți.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ce problemă rezolvă în principal conexiunile reziduale?",
-        "options": [
-          "Supraînvățarea în rețele superficiale",
-          "Gradienți care dispar/explodează în rețele adânci",
-          "Viteză de inferență lentă",
-          "Utilizare mare a memoriei"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: În rețelele adânci, gradienții se micșorează exponențial pe măsură ce se propagă prin straturi. Conexiunile reziduale oferă o autostradă directă pentru gradienți, permițând antrenarea eficientă a rețelelor cu peste 100 de straturi.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce este perspectiva «fluxului rezidual»?",
-        "options": [
-          "Fiecare strat înlocuiește complet reprezentarea",
-          "Informația curge doar înainte, niciodată înapoi",
-          "Modelul folosește un format de date de tip streaming",
-          "Un vector persistent curge prin rețea; fiecare strat citește din el și scrie în el aditiv"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Fluxul rezidual este un concept modern de interpretabilitate: gândește-te la starea ascunsă ca un vector persistent la care fiecare strat adaugă, în loc ca fiecare strat să înlocuiască reprezentarea.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "De ce necesită conexiunile reziduale dimensiuni identice? Selectați toate răspunsurile corecte",
-        "options": [
-          "Adunarea x + f(x) necesită ca ambii tensori să aibă aceeași formă",
-          "Modelul nu poate învăța dacă dimensiunile diferă",
-          "De aceea FFN-ul se proiectează înapoi la d_model după expansiunea la 4xd_model",
-          "Dimensiuni diferite ar cauza explozia gradienților"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Explicație: Adunarea element cu element necesită aceeași formă. Exact de aceea FFN-ul se extinde la 4d apoi se proiectează înapoi la d_model, și de aceea ieșirea attention-ului este proiectată înapoi la d_model.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "În blocul transformer GPT-2, care este tiparul complet cu conexiuni reziduale?",
-        "options": [
-          "Attention -> LayerNorm -> FFN -> LayerNorm",
-          "x + Attention(LayerNorm(x)) -> apoi + FFN(LayerNorm(...))",
-          "LayerNorm(Attention(x) + FFN(x))",
-          "FFN -> Attention -> LayerNorm -> rezidual"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: GPT-2 folosește pre-norm cu reziduale: x1 = x + MultiHeadAttention(LayerNorm(x)), apoi x2 = x1 + FFN(LayerNorm(x1)). Fiecare sub-strat este învelit: normalizare mai întâi, apoi adăugare reziduală.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποιος είναι ο βασικός τύπος για μια υπολειμματική (shortcut) σύνδεση;",
-        "options": [
-          "y = f(x)",
-          "y = x * f(x)",
-          "y = x + f(x)",
-          "y = max(x, f(x))"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Η υπολειμματική σύνδεση προσθέτει την είσοδο απευθείας στην έξοδο του υποεπιπέδου: y = x + f(x). Αυτό επιτρέπει στη συνάρτηση ταυτότητας να μαθευτεί τετριμμένα (θέτοντας f(x) = 0) και δημιουργεί μια λεωφόρο κλίσεων.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ποιο πρόβλημα λύνουν κυρίως οι υπολειμματικές συνδέσεις;",
-        "options": [
-          "Υπερπροσαρμογή σε ρηχά δίκτυα",
-          "Εξαφανιζόμενες/εκρηγνυόμενες κλίσεις σε βαθιά δίκτυα",
-          "Αργή ταχύτητα εξαγωγής συμπερασμάτων",
-          "Υψηλή χρήση μνήμης"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Σε βαθιά δίκτυα, οι κλίσεις μειώνονται εκθετικά καθώς διαδίδονται μέσα από τα επίπεδα. Οι υπολειμματικές συνδέσεις παρέχουν μια άμεση λεωφόρο κλίσεων, επιτρέποντας αποτελεσματική εκπαίδευση δικτύων με 100+ επίπεδα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Τι είναι η προοπτική του «υπολειμματικού ρεύματος»;",
-        "options": [
-          "Κάθε επίπεδο αντικαθιστά πλήρως την αναπαράσταση",
-          "Η πληροφορία ρέει μόνο προς τα εμπρός, ποτέ προς τα πίσω",
-          "Το μοντέλο χρησιμοποιεί μορφή ροής δεδομένων",
-          "Ένα μόνιμο διάνυσμα ρέει μέσα στο δίκτυο· κάθε επίπεδο διαβάζει από αυτό και γράφει σε αυτό προσθετικά"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Το υπολειμματικό ρεύμα είναι μια σύγχρονη έννοια ερμηνευσιμότητας: σκεφτείτε την κρυφή κατάσταση ως ένα μόνιμο διάνυσμα στο οποίο κάθε επίπεδο προσθέτει, αντί κάθε επίπεδο να αντικαθιστά την αναπαράσταση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Γιατί οι υπολειμματικές συνδέσεις απαιτούν ταιριαστές διαστάσεις; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Η πρόσθεση x + f(x) απαιτεί και οι δύο τανυστές να έχουν ίδιο σχήμα",
-          "Το μοντέλο δεν μπορεί να μάθει αν οι διαστάσεις διαφέρουν",
-          "Γι' αυτό το FFN προβάλλεται πίσω στο d_model μετά την επέκταση σε 4xd_model",
-          "Διαφορετικές διαστάσεις θα προκαλούσαν έκρηξη κλίσεων"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Εξήγηση: Η πρόσθεση κατά στοιχείο απαιτεί ίδιο σχήμα. Ακριβώς γι' αυτό το FFN επεκτείνεται σε 4d και μετά προβάλλεται πίσω στο d_model, και η έξοδος attention προβάλλεται πίσω στο d_model.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Στο μπλοκ transformer GPT-2, ποιο είναι το πλήρες μοτίβο με υπολειμματικές συνδέσεις;",
-        "options": [
-          "Attention -> LayerNorm -> FFN -> LayerNorm",
-          "x + Attention(LayerNorm(x)) -> μετά + FFN(LayerNorm(...))",
-          "LayerNorm(Attention(x) + FFN(x))",
-          "FFN -> Attention -> LayerNorm -> υπολειμματική"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Το GPT-2 χρησιμοποιεί pre-norm με υπολείμματα: x1 = x + MultiHeadAttention(LayerNorm(x)), μετά x2 = x1 + FFN(LayerNorm(x1)). Κάθε υποεπίπεδο περιτυλίγεται: κανονικοποίηση πρώτα, μετά υπολειμματική πρόσθεση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

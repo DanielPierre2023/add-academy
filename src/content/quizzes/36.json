@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este scopul principal al RLHF (Reinforcement Learning from Human Feedback)?",
-        "options": [
-          "Pre-antrenarea modelelor de limbaj pe date de scară web",
-          "Comprimarea modelelor pentru inferență eficientă",
-          "Înlocuirea completă a ajustării fine supervizate",
-          "Alinierea ieșirilor modelului cu preferințele umane pentru utilitate, inofensivitate și onestitate"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: RLHF folosește feedback-ul preferințelor umane pentru a ajusta fin modelele astfel încât ieșirile lor să se alinieze mai bine cu ceea ce oamenii consideră util, sigur și veridic. Este aplicat de obicei după ajustarea fină supervizată ca pas de aliniere.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "În pipeline-ul RLHF, care este rolul modelului de recompensă?",
-        "options": [
-          "Generarea datelor de antrenare pentru pre-antrenare",
-          "Evaluarea ieșirilor modelului pe baza preferințelor umane învățate, furnizând un semnal de recompensă pentru antrenarea RL",
-          "Tokenizarea textului de intrare înainte de a intra în modelul de politică",
-          "Selectarea straturilor de înghețat în timpul antrenării"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Modelul de recompensă este antrenat pe date de comparație umană pentru a prezice ce ieșiri preferă oamenii. În timpul antrenării RL, atribuie scoruri scalare de recompensă ieșirilor modelului de politică, ghidând procesul de optimizare.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Care dintre următoarele sunt componente cheie ale algoritmului PPO așa cum este folosit în RLHF? Selectați toate răspunsurile corecte",
-        "options": [
-          "Un obiectiv surogat decupat pentru a preveni actualizări mari de politică",
-          "Învățare contrastivă între exemple pozitive și negative",
-          "O penalizare de divergență KL pentru a menține politica aproape de modelul de referință",
-          "Regularizare dropout aplicată modelului de recompensă"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Explicație: PPO folosește un obiectiv surogat decupat pentru actualizări stabile ale politicii, iar o penalizare de divergență KL este adăugată de obicei în RLHF pentru a preveni modelul de politică de la devierea prea mare de la modelul inițial ajustat fin supervizat, ceea ce ar putea duce la exploatarea recompensei.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "Cum este antrenat de obicei modelul de recompensă în pipeline-ul RLHF?",
-        "options": [
-          "Folosind predicția token-ului următor pe un corpus mare",
-          "Folosind învățare prin recompensă cu recompense din mediu",
-          "Pe date de comparație umană unde adnotatorii clasifică sau aleg între ieșirile modelului",
-          "Prin distilarea unui model profesor mai mare"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Modelul de recompensă este antrenat pe seturi de date unde adnotatorii umani compară perechi de ieșiri ale modelului și indică pe care o preferă. Modelul învață să atribuie scoruri mai mari ieșirilor preferate folosind o pierdere de clasament sau Bradley-Terry.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Ce este «exploatarea recompensei» în contextul RLHF?",
-        "options": [
-          "Când modelul de politică exploatează defectele modelului de recompensă pentru a obține scoruri mari fără a îmbunătăți cu adevărat calitatea",
-          "Când modelul de recompensă este antrenat pe prea multe date",
-          "Când adnotatorii umani furnizează intenționat etichete incorecte",
-          "Când rata de învățare este setată prea mare în timpul antrenării PPO"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Exploatarea recompensei apare când modelul de politică învață să producă ieșiri care primesc scoruri mari de recompensă exploatând imperfecțiunile modelului de recompensă, în loc să genereze conținut cu adevărat mai bun. Penalizările KL ajută la atenuarea acestei probleme.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποιος είναι ο κύριος σκοπός του RLHF (Ενισχυτική Μάθηση από Ανθρώπινη Ανατροφοδότηση);",
-        "options": [
-          "Προεκπαίδευση γλωσσικών μοντέλων σε δεδομένα κλίμακας web",
-          "Συμπίεση μοντέλων για αποδοτική εξαγωγή συμπερασμάτων",
-          "Πλήρης αντικατάσταση εποπτευόμενης ακριβούς ρύθμισης",
-          "Ευθυγράμμιση εξόδων μοντέλου με ανθρώπινες προτιμήσεις για χρησιμότητα, αβλαβότητα και ειλικρίνεια"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Το RLHF χρησιμοποιεί ανατροφοδότηση ανθρώπινων προτιμήσεων για ακριβή ρύθμιση μοντέλων ώστε οι έξοδοί τους να ευθυγραμμίζονται καλύτερα με αυτό που οι άνθρωποι θεωρούν χρήσιμο, ασφαλές και αληθινό. Εφαρμόζεται τυπικά μετά την εποπτευόμενη ακριβή ρύθμιση ως βήμα ευθυγράμμισης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Στην αγωγή RLHF, ποιος είναι ο ρόλος του μοντέλου ανταμοιβής;",
-        "options": [
-          "Δημιουργία δεδομένων εκπαίδευσης για προεκπαίδευση",
-          "Βαθμολόγηση εξόδων μοντέλου βάσει εκπαιδευμένων ανθρώπινων προτιμήσεων, παρέχοντας σήμα ανταμοιβής για εκπαίδευση RL",
-          "Τεκμηρίωση κειμένου εισόδου πριν εισέλθει στο μοντέλο πολιτικής",
-          "Επιλογή επιπέδων για πάγωμα κατά εκπαίδευση"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Το μοντέλο ανταμοιβής εκπαιδεύεται σε δεδομένα ανθρώπινης σύγκρισης για πρόβλεψη ποιες εξόδους προτιμούν οι άνθρωποι. Κατά την εκπαίδευση RL, αποδίδει βαθμωτά σκορ ανταμοιβής στις εξόδους μοντέλου πολιτικής, καθοδηγώντας τη διαδικασία βελτιστοποίησης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ποια από τα ακόλουθα είναι βασικά συστατικά του αλγορίθμου PPO όπως χρησιμοποιείται στο RLHF; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Αποκομμένος υποκατάστατος στόχος για αποτροπή μεγάλων ενημερώσεων πολιτικής",
-          "Αντιπαραθετική μάθηση μεταξύ θετικών και αρνητικών παραδειγμάτων",
-          "Ποινή απόκλισης KL για διατήρηση πολιτικής κοντά στο μοντέλο αναφοράς",
-          "Κανονικοποίηση dropout εφαρμοσμένη στο μοντέλο ανταμοιβής"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Εξήγηση: Ο PPO χρησιμοποιεί αποκομμένο υποκατάστατο στόχο για σταθερές ενημερώσεις πολιτικής, και ποινή απόκλισης KL προστίθεται τυπικά στο RLHF για αποτροπή του μοντέλου πολιτικής από υπερβολική απόκλιση από το αρχικό εποπτευόμενα ρυθμισμένο μοντέλο, που θα μπορούσε να οδηγήσει σε εκμετάλλευση ανταμοιβής.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "Πώς εκπαιδεύεται τυπικά το μοντέλο ανταμοιβής στην αγωγή RLHF;",
-        "options": [
-          "Χρησιμοποιώντας πρόβλεψη επόμενου token σε μεγάλο σώμα",
-          "Χρησιμοποιώντας ενισχυτική μάθηση με ανταμοιβές περιβάλλοντος",
-          "Σε δεδομένα ανθρώπινης σύγκρισης όπου σχολιαστές κατατάσσουν ή επιλέγουν μεταξύ εξόδων μοντέλου",
-          "Με απόσταξη μεγαλύτερου μοντέλου δάσκαλου"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το μοντέλο ανταμοιβής εκπαιδεύεται σε datasets όπου ανθρώπινοι σχολιαστές συγκρίνουν ζεύγη εξόδων μοντέλου και υποδεικνύουν ποια προτιμούν. Το μοντέλο μαθαίνει να αποδίδει υψηλότερα σκορ σε προτιμώμενες εξόδους χρησιμοποιώντας απώλεια κατάταξης ή Bradley-Terry.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Τι είναι η «εκμετάλλευση ανταμοιβής» στο πλαίσιο RLHF;",
-        "options": [
-          "Όταν το μοντέλο πολιτικής εκμεταλλεύεται ελαττώματα του μοντέλου ανταμοιβής για υψηλά σκορ χωρίς πραγματική βελτίωση ποιότητας",
-          "Όταν το μοντέλο ανταμοιβής εκπαιδεύεται σε πάρα πολλά δεδομένα",
-          "Όταν ανθρώπινοι σχολιαστές παρέχουν σκόπιμα λάθος ετικέτες",
-          "Όταν ο ρυθμός εκμάθησης ρυθμίζεται πολύ υψηλά κατά εκπαίδευση PPO"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Η εκμετάλλευση ανταμοιβής συμβαίνει όταν το μοντέλο πολιτικής μαθαίνει να παράγει εξόδους που λαμβάνουν υψηλά σκορ ανταμοιβής εκμεταλλευόμενο ατέλειες του μοντέλου ανταμοιβής, αντί να δημιουργεί πραγματικά καλύτερο περιεχόμενο. Οι ποινές KL βοηθούν στη μετρίαση αυτού.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este avantajul cheie al GELU față de ReLU în transformer-e?",
-        "options": [
-          "GELU este întotdeauna mai rapid de calculat",
-          "GELU folosește mai puțini parametri",
-          "GELU este netedă și diferențiabilă peste tot, evitând neuronii morți",
-          "Ieșirile GELU sunt întotdeauna pozitive"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: GELU oferă o activare netedă, probabilistică care evită problema «neuronilor morți» a ReLU (unde neuronii produc permanent zero pentru intrări negative). Gradientul său neted ajută la stabilitatea antrenării.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Care este raportul de expansiune într-o rețea feed-forward de transformer?",
-        "options": [
-          "d_model -> 2xd_model -> d_model",
-          "d_model -> 4xd_model -> d_model",
-          "d_model -> d_model -> d_model",
-          "d_model -> 8xd_model -> d_model"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: FFN-ul standard al transformer-ului se extinde la de 4 ori dimensiunea modelului în stratul ascuns, apoi se proiectează înapoi. Această expansiune oferă rețelei mai multă capacitate de a învăța tipare complexe.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce rol joacă FFN-ul într-un transformer?",
-        "options": [
-          "Calculează scoruri de attention între token-uri",
-          "Generează codări poziționale",
-          "Tokenizează textul de intrare",
-          "Procesează fiecare token independent, acționând ca o memorie învățată care stochează cunoștințe"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: FFN-ul operează pe fiecare poziție independent (spre deosebire de attention care amestecă pozițiile). Cercetările arată că straturile FFN stochează cunoștințe factuale ca perechi cheie-valoare în matricele lor de ponderi.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt adevărate despre funcția de activare GELU? Selectați toate răspunsurile corecte",
-        "options": [
-          "Poate produce valori negative mici pentru intrări ușor negative",
-          "Are o curbură bruscă la zero precum ReLU",
-          "Poate fi aproximată ca x * sigma(1.702x)",
-          "Anulează întotdeauna intrările negative"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Explicație: GELU este netedă (fără curbură la zero), permite ieșiri negative mici (activare soft) și are o aproximare practică bazată pe sigmoid.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "De ce are FFN-ul mai mulți parametri decât stratul de attention în cele mai multe transformer-e?",
-        "options": [
-          "Pentru că attention-ul nu folosește matrice de ponderi",
-          "Pentru că expansiunea de 4x creează matrice mari de ponderi (d x 4d + 4d x d)",
-          "Pentru că FFN-ul procesează mai multe token-uri simultan",
-          "Pentru că FFN-ul are mai multe straturi"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Cu factor de expansiune 4, FFN-ul are două matrice de dimensiune d x 4d și 4d x d, totalizând 8d^2 parametri, comparativ cu 4d^2 ai attention-ului (proiecțiile Q, K, V, O).",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποιο είναι το βασικό πλεονέκτημα του GELU έναντι του ReLU στους transformers;",
-        "options": [
-          "Το GELU είναι πάντα πιο γρήγορο στον υπολογισμό",
-          "Το GELU χρησιμοποιεί λιγότερες παραμέτρους",
-          "Το GELU είναι ομαλό και παραγωγίσιμο παντού, αποφεύγοντας νεκρούς νευρώνες",
-          "Οι έξοδοι GELU είναι πάντα θετικές"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το GELU παρέχει μια ομαλή, πιθανοτική πύλη που αποφεύγει το πρόβλημα των «νεκρών νευρώνων» του ReLU (όπου οι νευρώνες βγάζουν μόνιμα μηδέν για αρνητικές εισόδους). Η ομαλή κλίση του βοηθά τη σταθερότητα εκπαίδευσης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ποιος είναι ο λόγος επέκτασης σε ένα δίκτυο feed-forward transformer;",
-        "options": [
-          "d_model -> 2xd_model -> d_model",
-          "d_model -> 4xd_model -> d_model",
-          "d_model -> d_model -> d_model",
-          "d_model -> 8xd_model -> d_model"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Το τυπικό FFN transformer επεκτείνεται σε 4 φορές τη διάσταση του μοντέλου στο κρυφό επίπεδο και μετά προβάλλεται πίσω. Αυτή η επέκταση δίνει στο δίκτυο περισσότερη χωρητικότητα για εκμάθηση σύνθετων μοτίβων.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ποιον ρόλο παίζει το FFN σε ένα transformer;",
-        "options": [
-          "Υπολογίζει σκορ attention μεταξύ tokens",
-          "Δημιουργεί κωδικοποιήσεις θέσης",
-          "Τεκμηριώνει το κείμενο εισόδου",
-          "Επεξεργάζεται κάθε token ανεξάρτητα, λειτουργώντας ως εκπαιδευμένη μνήμη που αποθηκεύει γνώσεις"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Το FFN λειτουργεί σε κάθε θέση ανεξάρτητα (σε αντίθεση με το attention που αναμειγνύει θέσεις). Η έρευνα δείχνει ότι τα επίπεδα FFN αποθηκεύουν πραγματολογική γνώση ως ζεύγη κλειδιού-τιμής στους πίνακες βαρών τους.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποια από τα ακόλουθα ισχύουν για τη συνάρτηση ενεργοποίησης GELU; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Μπορεί να παράγει μικρές αρνητικές τιμές για ελαφρώς αρνητικές εισόδους",
-          "Έχει απότομη γωνία στο μηδέν όπως το ReLU",
-          "Μπορεί να προσεγγιστεί ως x * sigma(1.702x)",
-          "Μηδενίζει πάντα τις αρνητικές εισόδους"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Εξήγηση: Το GELU είναι ομαλό (χωρίς γωνία στο μηδέν), επιτρέπει μικρές αρνητικές εξόδους (ήπια πύλη) και έχει μια πρακτική σιγμοειδή προσέγγιση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Γιατί το FFN έχει περισσότερες παραμέτρους από το επίπεδο attention στους περισσότερους transformers;",
-        "options": [
-          "Επειδή το attention δεν χρησιμοποιεί πίνακες βαρών",
-          "Επειδή η επέκταση 4x δημιουργεί μεγάλους πίνακες βαρών (d x 4d + 4d x d)",
-          "Επειδή το FFN επεξεργάζεται πολλαπλά tokens ταυτόχρονα",
-          "Επειδή το FFN έχει περισσότερα επίπεδα"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Με συντελεστή επέκτασης 4, το FFN έχει δύο πίνακες μεγέθους d x 4d και 4d x d, σύνολο 8d^2 παράμετροι, σε σύγκριση με 4d^2 του attention (προβολές Q, K, V, O).",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

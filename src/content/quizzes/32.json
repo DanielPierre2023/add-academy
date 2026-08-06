@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ce măsoară perplexitatea în contextul evaluării unui generator de text pre-antrenat?",
-        "options": [
-          "Numărul de parametri ai modelului",
-          "Viteza generării de text în token-uri pe secundă",
-          "Cât de surprins este modelul de text nevăzut — mai mic înseamnă predicție mai bună",
-          "Diversitatea eșantioanelor de text generate"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Perplexitate = exp(pierdere cross-entropy). Reprezintă numărul efectiv de token-uri la fel de probabile pe care modelul le consideră la fiecare poziție. Perplexitate mai mică înseamnă că modelul atribuie probabilitate mai mare token-ului următor real, indicând o modelare mai bună a limbajului.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "De ce este insuficient să evaluăm un generator de text folosind doar perplexitatea?",
-        "options": [
-          "Perplexitatea este prea costisitoare de calculat",
-          "Perplexitatea măsoară acuratețea predicției dar nu aspectele calității ieșirii precum coerența, diversitatea sau corectitudinea factuală",
-          "Perplexitatea funcționează doar pentru modele de clasificare",
-          "Perplexitatea necesită evaluatori umani pentru calcul"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Perplexitatea surprinde cât de bine prezice modelul distribuția de antrenare dar nu spune nimic despre dacă textul generat este coerent, divers, factual sau util. Un model poate avea perplexitate mică producând totuși ieșiri repetitive sau fără sens.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce măsoară metrica distinct-n în textul generat?",
-        "options": [
-          "Raportul n-gramelor unice la n-gramele totale, indicând diversitatea lexicală",
-          "Corectitudinea gramaticală a propozițiilor generate",
-          "Similaritatea semantică cu un text de referință",
-          "Numărul de subiecte distincte acoperite în ieșire"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Distinct-n calculează proporția n-gramelor unice (unigrame, bigrame etc.) dintre toate n-gramele din textul generat. Un scor distinct-n mic dezvăluie generare repetitivă, chiar dacă perplexitatea este acceptabilă.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt abordări valide pentru evaluarea calității ieșirii unui generator de text pre-antrenat? Selectați toate răspunsurile corecte",
-        "options": [
-          "Verificarea doar dacă pierderea modelului este sub 1.0",
-          "Evaluare umană a eșantioanelor generate pentru coerență și fluență",
-          "Măsurarea metricilor de diversitate (distinct-n, self-BLEU) alături de perplexitate",
-          "Numărarea numărului total de token-uri generate"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Explicație: Evaluarea cuprinzătoare combină metrici automate (perplexitate pentru calitatea predicției, distinct-n și self-BLEU pentru diversitate) cu evaluare umană pentru coerență, fluență și acuratețe factuală. Pragurile de pierdere și numărul de token-uri singure nu sunt măsuri semnificative de calitate.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ce măsoară un scor self-BLEU când se evaluează diversitatea textului generat?",
-        "options": [
-          "Cât de similar este textul generat cu o referință umană",
-          "Perplexitatea modelului pe propriile ieșiri",
-          "Acuratețea tokenizer-ului pe textul generat",
-          "Cât de similare sunt diferitele eșantioane generate între ele — mai mic înseamnă mai divers"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Self-BLEU calculează scoruri BLEU între perechi de eșantioane generate. Un self-BLEU mare înseamnă că modelul produce ieșiri foarte similare pe diferite prompt-uri sau seed-uri, indicând diversitate scăzută. Un self-BLEU mai mic indică text mai variat.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Τι μετρά η περπλοκότητα στο πλαίσιο αξιολόγησης ενός προεκπαιδευμένου δημιουργού κειμένου;",
-        "options": [
-          "Τον αριθμό παραμέτρων του μοντέλου",
-          "Την ταχύτητα δημιουργίας κειμένου σε tokens ανά δευτερόλεπτο",
-          "Πόσο εκπλαγμένο είναι το μοντέλο από αόρατο κείμενο — χαμηλότερο σημαίνει καλύτερη πρόβλεψη",
-          "Την ποικιλομορφία δημιουργημένων δειγμάτων κειμένου"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Περπλοκότητα = exp(απώλεια cross-entropy). Αντιπροσωπεύει τον αποτελεσματικό αριθμό ισοπίθανων επόμενων tokens που εξετάζει το μοντέλο σε κάθε θέση. Χαμηλότερη περπλοκότητα σημαίνει ότι το μοντέλο αποδίδει υψηλότερη πιθανότητα στο πραγματικό επόμενο token, υποδεικνύοντας καλύτερη γλωσσική μοντελοποίηση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Γιατί είναι ανεπαρκές να αξιολογούμε ένα δημιουργό κειμένου χρησιμοποιώντας μόνο την περπλοκότητα;",
-        "options": [
-          "Η περπλοκότητα είναι πολύ δαπανηρή στον υπολογισμό",
-          "Η περπλοκότητα μετρά ακρίβεια πρόβλεψης αλλά όχι πτυχές ποιότητας εξόδου όπως συνοχή, ποικιλομορφία ή πραγματολογική ορθότητα",
-          "Η περπλοκότητα λειτουργεί μόνο για μοντέλα ταξινόμησης",
-          "Η περπλοκότητα απαιτεί ανθρώπινους αξιολογητές για υπολογισμό"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Η περπλοκότητα αποτυπώνει πόσο καλά προβλέπει το μοντέλο την κατανομή εκπαίδευσης αλλά δεν λέει τίποτα για το αν το δημιουργημένο κείμενο είναι συνεκτικό, ποικίλο, πραγματολογικά ακριβές ή χρήσιμο. Ένα μοντέλο μπορεί να έχει χαμηλή περπλοκότητα παράγοντας παρόλα αυτά επαναλαμβανόμενες ή ανόητες εξόδους.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Τι μετρά η μετρική distinct-n στο δημιουργημένο κείμενο;",
-        "options": [
-          "Η αναλογία μοναδικών n-grams προς συνολικά n-grams, υποδεικνύοντας λεξιλογική ποικιλομορφία",
-          "Η γραμματική ορθότητα δημιουργημένων προτάσεων",
-          "Η σημασιολογική ομοιότητα με κείμενο αναφοράς",
-          "Ο αριθμός ξεχωριστών θεμάτων που καλύπτονται στην έξοδο"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Η distinct-n υπολογίζει την αναλογία μοναδικών n-grams (μονογράμματα, διγράμματα κτλ.) μεταξύ όλων των n-grams στο δημιουργημένο κείμενο. Χαμηλό σκορ distinct-n αποκαλύπτει επαναλαμβανόμενη δημιουργία, ακόμα κι αν η περπλοκότητα είναι αποδεκτή.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποιες από τις ακόλουθες είναι έγκυρες προσεγγίσεις αξιολόγησης ποιότητας εξόδου προεκπαιδευμένου δημιουργού κειμένου; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Μόνο έλεγχος αν η απώλεια μοντέλου είναι κάτω από 1.0",
-          "Ανθρώπινη αξιολόγηση δημιουργημένων δειγμάτων για συνοχή και ευχέρεια",
-          "Μέτρηση μετρικών ποικιλομορφίας (distinct-n, self-BLEU) μαζί με περπλοκότητα",
-          "Μέτρηση συνολικού αριθμού δημιουργημένων tokens"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Εξήγηση: Η ολοκληρωμένη αξιολόγηση συνδυάζει αυτοματοποιημένες μετρικές (περπλοκότητα για ποιότητα πρόβλεψης, distinct-n και self-BLEU για ποικιλομορφία) με ανθρώπινη αξιολόγηση για συνοχή, ευχέρεια και πραγματολογική ακρίβεια. Τα κατώφλια απώλειας και οι μετρήσεις tokens μόνα τους δεν είναι σημαντικά μέτρα ποιότητας.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Τι μετρά ένα σκορ self-BLEU κατά την αξιολόγηση ποικιλομορφίας δημιουργημένου κειμένου;",
-        "options": [
-          "Πόσο παρόμοιο είναι το δημιουργημένο κείμενο με ανθρώπινη αναφορά",
-          "Η περπλοκότητα του μοντέλου στις δικές του εξόδους",
-          "Η ακρίβεια του tokenizer σε δημιουργημένο κείμενο",
-          "Πόσο παρόμοια είναι διαφορετικά δημιουργημένα δείγματα μεταξύ τους — χαμηλότερο σημαίνει πιο ποικίλο"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Το self-BLEU υπολογίζει σκορ BLEU μεταξύ ζευγών δημιουργημένων δειγμάτων. Υψηλό self-BLEU σημαίνει ότι το μοντέλο παράγει πολύ παρόμοιες εξόδους σε διαφορετικά prompts ή seeds, υποδεικνύοντας χαμηλή ποικιλομορφία. Χαμηλότερο self-BLEU υποδεικνύει πιο ποικίλο κείμενο.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

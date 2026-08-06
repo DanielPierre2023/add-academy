@@ -87,79 +87,54 @@
     "questions": [
       {
         "index": 0,
-        "text": "Care este scopul unei conexiuni reziduale (skip) într-un bloc transformer?",
-        "options": [
-          "Reducerea numărului de parametri",
-          "Ajutarea gradienților să curgă prin rețele adânci prin adăugarea directă a intrării la ieșire: y = x + f(x)",
-          "Înlocuirea mecanismului de attention",
-          "Creșterea lungimii secvenței"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Conexiunile reziduale adaugă intrarea la ieșirea sub-stratului: y = x + Attention(x). Aceasta oferă o autostradă pentru gradienți, prevenind dispariția gradienților în rețele adânci.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Unde se plasează Layer Normalization (pre-norm) într-un bloc transformer?",
-        "options": [
-          "Înainte de sub-stratul de attention: y = x + Attention(LayerNorm(x))",
-          "După întregul bloc transformer",
-          "Doar în timpul inferenței",
-          "Între multi-head attention și dropout"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Pre-norm aplică LayerNorm înainte de fiecare sub-strat. GPT-2 și cele mai multe LLM-uri moderne folosesc pre-norm deoarece oferă o dinamică de antrenare mai stabilă.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce combină AttentionBlock complet?",
-        "options": [
-          "Doar multi-head attention",
-          "Attention și rețea feed-forward doar",
-          "Normalizare de strat, self-attention cauzal multi-head, dropout și conexiune reziduală",
-          "Tokenizer și strat de embedding"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: AttentionBlock învelește: LayerNorm -> Self-Attention Cauzal Multi-Head -> Dropout -> Adunare Reziduală. Aceasta este o jumătate dintr-un bloc transformer complet (cealaltă jumătate este rețeaua feed-forward).",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ce concepte din Etapa 3 sunt combinate în modulul final de attention? Selectați toate răspunsurile corecte",
-        "options": [
-          "Attention cu produs scalar scalat (L13)",
-          "Mascare cauzală (L15)",
-          "Tokenizare BPE (L8)",
-          "Împărțire multi-head (L16)"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           1,
           3
         ],
-        "explanation": "✅ Explicație: Modulul final de attention combină attention-ul cu produs scalar scalat, proiecțiile QKV, mascarea cauzală și împărțirea multi-head. Tokenizarea aparține Etapei 2.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ce urmează după Etapa 3 (Attention) în construirea unui model GPT?",
-        "options": [
-          "Antrenarea imediată a modelului",
-          "Implementarea modelului în producție",
-          "Adăugarea mai multor straturi de attention",
-          "Etapa 4: Construirea arhitecturii Transformer complete — adăugarea rețelelor feed-forward, stivuirea blocurilor și capul de ieșire"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Etapa 4 adaugă rețeaua feed-forward, stivuiește mai multe blocuri transformer și adaugă capul de ieșire al modelului de limbaj pentru a completa arhitectura GPT.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -169,79 +144,54 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποιος είναι ο σκοπός μιας υπολειμματικής (skip) σύνδεσης σε ένα μπλοκ transformer;",
-        "options": [
-          "Μείωση του αριθμού παραμέτρων",
-          "Βοηθά τις κλίσεις να ρέουν μέσα από βαθιά δίκτυα προσθέτοντας απευθείας την είσοδο στην έξοδο: y = x + f(x)",
-          "Αντικατάσταση του μηχανισμού attention",
-          "Αύξηση του μήκους ακολουθίας"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Οι υπολειμματικές συνδέσεις προσθέτουν την είσοδο στην έξοδο του υποεπιπέδου: y = x + Attention(x). Αυτό παρέχει μια λεωφόρο κλίσεων, αποτρέποντας τις εξαφανιζόμενες κλίσεις σε βαθιά δίκτυα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Πού τοποθετείται η Layer Normalization (pre-norm) σε ένα μπλοκ transformer;",
-        "options": [
-          "Πριν από το υποεπίπεδο attention: y = x + Attention(LayerNorm(x))",
-          "Μετά από ολόκληρο το μπλοκ transformer",
-          "Μόνο κατά την εξαγωγή συμπερασμάτων",
-          "Μεταξύ multi-head attention και dropout"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Το pre-norm εφαρμόζει LayerNorm πριν από κάθε υποεπίπεδο. Το GPT-2 και τα περισσότερα σύγχρονα LLMs χρησιμοποιούν pre-norm επειδή παρέχει πιο σταθερή δυναμική εκπαίδευσης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Τι συνδυάζει το πλήρες AttentionBlock;",
-        "options": [
-          "Μόνο multi-head attention",
-          "Attention και δίκτυο feed-forward μόνο",
-          "Κανονικοποίηση επιπέδου, αιτιατό self-attention πολλαπλών κεφαλιών, dropout και υπολειμματική σύνδεση",
-          "Tokenizer και επίπεδο embedding"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το AttentionBlock περιτυλίγει: LayerNorm -> Αιτιατό Self-Attention Πολλαπλών Κεφαλιών -> Dropout -> Υπολειμματική Πρόσθεση. Αυτό είναι το μισό ενός πλήρους μπλοκ transformer (το άλλο μισό είναι το δίκτυο feed-forward).",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποιες έννοιες από το Στάδιο 3 συνδυάζονται στο τελικό μονάδα attention; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Κλιμακωτό attention εσωτερικού γινομένου (L13)",
-          "Αιτιατή μάσκα (L15)",
-          "Τεκμηρίωση BPE (L8)",
-          "Διαχωρισμός πολλαπλών κεφαλιών (L16)"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           1,
           3
         ],
-        "explanation": "✅ Εξήγηση: Η τελική μονάδα attention συνδυάζει κλιμακωτό attention εσωτερικού γινομένου, προβολές QKV, αιτιατή μάσκα και διαχωρισμό πολλαπλών κεφαλιών. Η τεκμηρίωση ανήκει στο Στάδιο 2.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Τι ακολουθεί μετά το Στάδιο 3 (Attention) στην κατασκευή ενός μοντέλου GPT;",
-        "options": [
-          "Άμεση εκπαίδευση του μοντέλου",
-          "Ανάπτυξη του μοντέλου σε παραγωγή",
-          "Προσθήκη περισσότερων επιπέδων attention",
-          "Στάδιο 4: Κατασκευή πλήρους αρχιτεκτονικής Transformer — προσθήκη δικτύων feed-forward, στοίβαξη μπλοκ και κεφαλή εξόδου"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Το Στάδιο 4 προσθέτει το δίκτυο feed-forward, στοιβάζει πολλαπλά μπλοκ transformer και προσθέτει την κεφαλή εξόδου γλωσσικού μοντέλου για να ολοκληρώσει την αρχιτεκτονική GPT.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

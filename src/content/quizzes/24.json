@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "În Mini GPT-2-ul nostru, care este fluxul complet de date de la textul de intrare la token-urile de ieșire?",
-        "options": [
-          "Text -> attention -> ieșire",
-          "Text -> tokenizare -> embed token+poz -> Nx(LN+Attn+Rezidual, LN+FFN+Rezidual) -> LN -> liniar -> argmax",
-          "Text -> embed -> RNN -> softmax",
-          "Text -> FFN -> attention -> decodare"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Pipeline-ul complet: tokenizează textul, însumează embedding-urile de token-uri + poziționale, trece prin N blocuri transformer (fiecare: LN->attention+rezidual, LN->FFN+rezidual), LN final, liniar la vocab, argmax pentru token-ul prezis.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ce componente din etapele anterioare integrează Mini GPT-2?",
-        "options": [
-          "Doar tokenizer și attention",
-          "Doar embedding-uri și blocuri transformer",
-          "Tokenizer, embedding-uri, attention cauzal multi-head, FFN cu GELU, LayerNorm, reziduale",
-          "Ponderi GPT-2 pre-antrenate"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Capstone-ul integrează fiecare componentă construită în toate cele 4 etape: tokenizer (Etapa 2), embedding-uri (Etapa 2), attention (Etapa 3), GELU, LayerNorm, reziduale, blocuri transformer (Etapa 4).",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "De ce generează Mini GPT-2-ul nostru text aleatoriu?",
-        "options": [
-          "Pentru că toate ponderile sunt inițializate aleatoriu — nu a văzut niciodată date de antrenare",
-          "Pentru că arhitectura este greșită",
-          "Pentru că lungimea contextului este prea scurtă",
-          "Pentru că am folosit NumPy în loc de PyTorch"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Arhitectura este corectă, dar ponderile aleatorii produc ieșiri aleatorii. Antrenarea (Etapa 5) ajustează ponderile folosind coborârea gradientului pe un corpus mare de text astfel încât modelul să învețe tiparele limbajului.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ce face generarea autoregresivă să funcționeze? Selectați toate răspunsurile corecte",
-        "options": [
-          "Modelul vede toate token-urile inclusiv cele viitoare",
-          "Mascarea cauzală previne vizualizarea token-urilor viitoare",
-          "Fiecare token generat este adăugat la intrare pentru pasul următor",
-          "Modelul generează toate token-urile simultan"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Explicație: Mascarea cauzală asigură că fiecare poziție poate acorda atenție doar pozițiilor anterioare. Generarea este secvențială: prezice un token, îl adaugă, prezice următorul și repetă.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Care este următorul pas după construirea arhitecturii GPT complete?",
-        "options": [
-          "Implementarea imediată în producție",
-          "Adăugarea mai multor blocuri transformer",
-          "Înlocuirea NumPy cu o altă bibliotecă",
-          "Etapa 5: Pre-antrenarea — antrenarea modelului pe un corpus mare de text folosind predicția token-ului următor"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: Etapa 5 acoperă pre-antrenarea: alimentarea cu date text masive, calcularea pierderii cross-entropy pe predicțiile token-ului următor și actualizarea ponderilor prin backpropagation. Aceasta este ceea ce face modelul util!",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Στο Mini GPT-2 μας, ποια είναι η πλήρης ροή δεδομένων από την είσοδο κειμένου στα tokens εξόδου;",
-        "options": [
-          "Κείμενο -> attention -> έξοδος",
-          "Κείμενο -> τεκμηρίωση -> embed token+θέσης -> Nx(LN+Attn+Υπολειμματική, LN+FFN+Υπολειμματική) -> LN -> γραμμικό -> argmax",
-          "Κείμενο -> embed -> RNN -> softmax",
-          "Κείμενο -> FFN -> attention -> αποκωδικοποίηση"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Η πλήρης αγωγή: τεκμηριώνει το κείμενο, αθροίζει embeddings token + θέσης, περνά από N μπλοκ transformer (κάθε ένα: LN->attention+υπολειμματική, LN->FFN+υπολειμματική), τελικό LN, γραμμικό σε vocab, argmax για προβλεπόμενο token.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ποια συστατικά από προηγούμενα στάδια ενσωματώνει το Mini GPT-2;",
-        "options": [
-          "Μόνο tokenizer και attention",
-          "Μόνο embeddings και μπλοκ transformer",
-          "Tokenizer, embeddings, αιτιατό attention πολλαπλών κεφαλιών, FFN με GELU, LayerNorm, υπολειμματικές",
-          "Προεκπαιδευμένα βάρη GPT-2"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Η ολοκλήρωση ενσωματώνει κάθε συστατικό που κατασκευάστηκε σε όλα τα 4 στάδια: tokenizer (Στάδιο 2), embeddings (Στάδιο 2), attention (Στάδιο 3), GELU, LayerNorm, υπολειμματικές, μπλοκ transformer (Στάδιο 4).",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Γιατί το Mini GPT-2 μας παράγει τυχαίο κείμενο;",
-        "options": [
-          "Επειδή όλα τα βάρη αρχικοποιούνται τυχαία — δεν έχει δει ποτέ δεδομένα εκπαίδευσης",
-          "Επειδή η αρχιτεκτονική είναι λάθος",
-          "Επειδή το μήκος πλαισίου είναι πολύ μικρό",
-          "Επειδή χρησιμοποιήσαμε NumPy αντί για PyTorch"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Η αρχιτεκτονική είναι σωστή, αλλά τα τυχαία βάρη παράγουν τυχαίες εξόδους. Η εκπαίδευση (Στάδιο 5) προσαρμόζει τα βάρη χρησιμοποιώντας gradient descent σε μεγάλο σώμα κειμένου ώστε το μοντέλο να μάθει γλωσσικά μοτίβα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Τι κάνει την αυτοπαλίνδρομη δημιουργία να λειτουργεί; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Το μοντέλο βλέπει όλα τα tokens συμπεριλαμβανομένων των μελλοντικών",
-          "Η αιτιατή μάσκα αποτρέπει την προβολή μελλοντικών tokens",
-          "Κάθε δημιουργημένο token προστίθεται στην είσοδο για το επόμενο βήμα",
-          "Το μοντέλο δημιουργεί όλα τα tokens ταυτόχρονα"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           1,
           2
         ],
-        "explanation": "✅ Εξήγηση: Η αιτιατή μάσκα εξασφαλίζει ότι κάθε θέση μπορεί να δώσει προσοχή μόνο σε προηγούμενες θέσεις. Η δημιουργία είναι ακολουθιακή: πρόβλεψη ενός token, προσθήκη του, πρόβλεψη του επόμενου και επανάληψη.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ποιο είναι το επόμενο βήμα μετά την κατασκευή της πλήρους αρχιτεκτονικής GPT;",
-        "options": [
-          "Άμεση ανάπτυξη σε παραγωγή",
-          "Προσθήκη περισσότερων μπλοκ transformer",
-          "Αντικατάσταση NumPy με άλλη βιβλιοθήκη",
-          "Στάδιο 5: Προεκπαίδευση — εκπαίδευση του μοντέλου σε μεγάλο σώμα κειμένου χρησιμοποιώντας πρόβλεψη επόμενου token"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Το Στάδιο 5 καλύπτει την προεκπαίδευση: τροφοδοσία μαζικών δεδομένων κειμένου, υπολογισμός απώλειας cross-entropy στις προβλέψεις επόμενου token και ενημέρωση βαρών μέσω backpropagation. Αυτό κάνει το μοντέλο πραγματικά χρήσιμο!",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

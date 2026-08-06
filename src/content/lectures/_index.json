@@ -237,7 +237,7 @@
       },
       "prev": "12",
       "next": "14",
-      "codeBlockCount": 0,
+      "codeBlockCount": 4,
       "hasQuiz": true
     },
     {
@@ -253,7 +253,7 @@
       },
       "prev": "13",
       "next": "15",
-      "codeBlockCount": 0,
+      "codeBlockCount": 4,
       "hasQuiz": true
     },
     {
@@ -269,7 +269,7 @@
       },
       "prev": "14",
       "next": "16",
-      "codeBlockCount": 0,
+      "codeBlockCount": 4,
       "hasQuiz": true
     },
     {
@@ -285,7 +285,7 @@
       },
       "prev": "15",
       "next": "17",
-      "codeBlockCount": 0,
+      "codeBlockCount": 4,
       "hasQuiz": true
     },
     {
@@ -301,7 +301,7 @@
       },
       "prev": "16",
       "next": "18",
-      "codeBlockCount": 0,
+      "codeBlockCount": 3,
       "hasQuiz": true
     },
     {
@@ -317,7 +317,7 @@
       },
       "prev": "17",
       "next": "19",
-      "codeBlockCount": 0,
+      "codeBlockCount": 3,
       "hasQuiz": true
     },
     {
@@ -327,9 +327,9 @@
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 19: GELU Activation & Feed-Forward Networks",
-        "ro": "Lecția 19: Activarea GELU și rețelele Feed-Forward",
-        "el": "Διάλεξη 19: Ενεργοποίηση GELU και δίκτυα πρόσθιας τροφοδότησης"
+        "en": "GELU Activation & Feed-Forward Networks",
+        "ro": "Activarea GELU și rețelele Feed-Forward",
+        "el": "Ενεργοποίηση GELU και δίκτυα πρόσθιας τροφοδότησης"
       },
       "prev": "18",
       "next": "20",
@@ -343,9 +343,9 @@
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 20: Layer Normalization",
-        "ro": "Lecția 20: Normalizarea pe straturi",
-        "el": "Διάλεξη 20: Κανονικοποίηση στρώματος"
+        "en": "Layer Normalization",
+        "ro": "Normalizarea pe straturi",
+        "el": "Κανονικοποίηση στρώματος"
       },
       "prev": "19",
       "next": "21",
@@ -359,9 +359,9 @@
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 21: Shortcut (Residual) Connections",
-        "ro": "Lecția 21: Conexiuni Reziduale (Shortcut)",
-        "el": "Διάλεξη 21: Συνδέσεις Συντόμευσης (Residual)"
+        "en": "Shortcut (Residual) Connections",
+        "ro": "Conexiuni Reziduale (Shortcut)",
+        "el": "Συνδέσεις Συντόμευσης (Residual)"
       },
       "prev": "20",
       "next": "22",
@@ -375,9 +375,9 @@
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 22: The Transformer Block",
-        "ro": "Lecția 22: Blocul Transformer",
-        "el": "Διάλεξη 22: Το Μπλοκ Transformer"
+        "en": "The Transformer Block",
+        "ro": "Blocul Transformer",
+        "el": "Το Μπλοκ Transformer"
       },
       "prev": "21",
       "next": "23",
@@ -391,9 +391,9 @@
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 23: GPT Architecture Assembly",
-        "ro": "Lecția 23: Asamblarea arhitecturii GPT",
-        "el": "Διάλεξη 23: Συναρμολόγηση της αρχιτεκτονικής GPT"
+        "en": "GPT Architecture Assembly",
+        "ro": "Asamblarea arhitecturii GPT",
+        "el": "Συναρμολόγηση της αρχιτεκτονικής GPT"
       },
       "prev": "22",
       "next": "24",
@@ -407,13 +407,29 @@
       "stageName": "Architecture",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 24: Stage 4 Capstone — Mini GPT-2 from Scratch",
-        "ro": "Lecția 24: Capstone Etapa 4 — Mini GPT-2 de la zero",
-        "el": "Διάλεξη 24: Capstone Σταδίου 4 — Mini GPT-2 από την αρχή"
+        "en": "Stage 4 Capstone — Mini GPT-2 from Scratch",
+        "ro": "Capstone Etapa 4 — Mini GPT-2 de la zero",
+        "el": "Capstone Σταδίου 4 — Mini GPT-2 από την αρχή"
       },
       "prev": "23",
-      "next": "25",
+      "next": "24b",
       "codeBlockCount": 3,
+      "hasQuiz": true
+    },
+    {
+      "id": "24b",
+      "number": 24.5,
+      "stage": 4,
+      "stageName": "Architecture",
+      "isGenAI": false,
+      "title": {
+        "en": "Backpropagation Through the Transformer",
+        "ro": "Retropropagarea prin Transformer",
+        "el": "Οπισθοδιάδοση μέσω του Transformer"
+      },
+      "prev": "24",
+      "next": "25",
+      "codeBlockCount": 4,
       "hasQuiz": true
     },
     {
@@ -423,11 +439,11 @@
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 25: Evaluating Generative Text Models",
-        "ro": "Lecția 25: Evaluarea modelelor generative de text",
-        "el": "Διάλεξη 25: Αξιολόγηση γεννητικών μοντέλων κειμένου"
+        "en": "Evaluating Generative Text Models",
+        "ro": "Evaluarea modelelor generative de text",
+        "el": "Αξιολόγηση γεννητικών μοντέλων κειμένου"
       },
-      "prev": "24",
+      "prev": "24b",
       "next": "26",
       "codeBlockCount": 4,
       "hasQuiz": true
@@ -439,9 +455,9 @@
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 26: The Pretraining Loop",
-        "ro": "Lecția 26: Bucla de preantrenament",
-        "el": "Διάλεξη 26: Ο βρόχος προεκπαίδευσης"
+        "en": "The Pretraining Loop",
+        "ro": "Bucla de preantrenament",
+        "el": "Ο βρόχος προεκπαίδευσης"
       },
       "prev": "25",
       "next": "27",
@@ -455,9 +471,9 @@
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 27: Learning Rate Scheduling & Optimization",
-        "ro": "Lecția 27: Programarea ratei de învățare și optimizare",
-        "el": "Διάλεξη 27: Προγραμματισμός ρυθμού μάθησης & Βελτιστοποίηση"
+        "en": "Learning Rate Scheduling & Optimization",
+        "ro": "Programarea ratei de învățare și optimizare",
+        "el": "Προγραμματισμός ρυθμού μάθησης & Βελτιστοποίηση"
       },
       "prev": "26",
       "next": "28",
@@ -519,9 +535,9 @@
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 31: Putting It All Together — Pretraining Mini GPT-2",
-        "ro": "Lecția 31: Punând Totul Cap la Cap — Preantrenarea Mini GPT-2",
-        "el": "Διάλεξη 31: Συνδυάζοντας τα Πάντα — Προεκπαίδευση Mini GPT-2"
+        "en": "Putting It All Together — Pretraining Mini GPT-2",
+        "ro": "Punând Totul Cap la Cap — Preantrenarea Mini GPT-2",
+        "el": "Συνδυάζοντας τα Πάντα — Προεκπαίδευση Mini GPT-2"
       },
       "prev": "30",
       "next": "32",
@@ -535,9 +551,9 @@
       "stageName": "Pretraining",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 32: Stage 5 Capstone — Pretrained Text Generator",
-        "ro": "Lecția 32: Proiectul Final al Etapei 5 — Generator de Text Preantrenat",
-        "el": "Διάλεξη 32: Τελικό Έργο Σταδίου 5 — Γεννήτρια Κειμένου με Προεκπαίδευση"
+        "en": "Stage 5 Capstone — Pretrained Text Generator",
+        "ro": "Proiectul Final al Etapei 5 — Generator de Text Preantrenat",
+        "el": "Τελικό Έργο Σταδίου 5 — Γεννήτρια Κειμένου με Προεκπαίδευση"
       },
       "prev": "31",
       "next": "33",
@@ -551,9 +567,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 33: Instruction Fine-tuning — Teaching Models to Follow Instructions",
-        "ro": "Lecția 33: Instruction Fine-tuning — Învățarea Modelelor să Urmeze Instrucțiuni",
-        "el": "Διάλεξη 33: Instruction Fine-tuning — Διδάσκοντας τα Μοντέλα να Ακολουθούν Οδηγίες"
+        "en": "Instruction Fine-tuning — Teaching Models to Follow Instructions",
+        "ro": "Instruction Fine-tuning — Învățarea Modelelor să Urmeze Instrucțiuni",
+        "el": "Instruction Fine-tuning — Διδάσκοντας τα Μοντέλα να Ακολουθούν Οδηγίες"
       },
       "prev": "32",
       "next": "34",
@@ -567,9 +583,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 34: Classification Fine-tuning",
-        "ro": "Lecția 34: Fine-tuning pentru Clasificare",
-        "el": "Διάλεξη 34: Fine-tuning για Ταξινόμηση"
+        "en": "Classification Fine-tuning",
+        "ro": "Fine-tuning pentru Clasificare",
+        "el": "Fine-tuning για Ταξινόμηση"
       },
       "prev": "33",
       "next": "35",
@@ -583,9 +599,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 35: LoRA — Low-Rank Adaptation",
-        "ro": "Lecția 35: LoRA — Adaptare de Rang Scăzut",
-        "el": "Διάλεξη 35: LoRA — Προσαρμογή Χαμηλής Τάξης"
+        "en": "LoRA — Low-Rank Adaptation",
+        "ro": "LoRA — Adaptare de Rang Scăzut",
+        "el": "LoRA — Προσαρμογή Χαμηλής Τάξης"
       },
       "prev": "34",
       "next": "36",
@@ -599,9 +615,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 36: RLHF — Reinforcement Learning from Human Feedback",
-        "ro": "Lecția 36: RLHF — Învățare prin Întărire din Feedback Uman",
-        "el": "Διάλεξη 36: RLHF — Ενισχυτική Μάθηση από Ανθρώπινη Ανατροφοδότηση"
+        "en": "RLHF — Reinforcement Learning from Human Feedback",
+        "ro": "RLHF — Învățare prin Întărire din Feedback Uman",
+        "el": "RLHF — Ενισχυτική Μάθηση από Ανθρώπινη Ανατροφοδότηση"
       },
       "prev": "35",
       "next": "37",
@@ -615,9 +631,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 37: DPO — Direct Preference Optimization",
-        "ro": "Lecția 37: DPO — Optimizare Directă a Preferințelor",
-        "el": "Διάλεξη 37: DPO — Άμεση Βελτιστοποίηση Προτιμήσεων"
+        "en": "DPO — Direct Preference Optimization",
+        "ro": "DPO — Optimizare Directă a Preferințelor",
+        "el": "DPO — Άμεση Βελτιστοποίηση Προτιμήσεων"
       },
       "prev": "36",
       "next": "38",
@@ -631,9 +647,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 38: Evaluating Fine-tuned Models",
-        "ro": "Lecția 38: Evaluarea Modelelor Fine-tuned",
-        "el": "Διάλεξη 38: Αξιολόγηση Μοντέλων Fine-tuned"
+        "en": "Evaluating Fine-tuned Models",
+        "ro": "Evaluarea Modelelor Fine-tuned",
+        "el": "Αξιολόγηση Μοντέλων Fine-tuned"
       },
       "prev": "37",
       "next": "39",
@@ -647,9 +663,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 39: Model Quantization & Efficient Deployment",
-        "ro": "Lecția 39: Cuantizarea Modelelor & Deployment Eficient",
-        "el": "Διάλεξη 39: Κβαντοποίηση Μοντέλων & Αποδοτικό Deployment"
+        "en": "Model Quantization & Efficient Deployment",
+        "ro": "Cuantizarea Modelelor & Deployment Eficient",
+        "el": "Κβαντοποίηση Μοντέλων & Αποδοτικό Deployment"
       },
       "prev": "38",
       "next": "40",
@@ -663,9 +679,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 40: Retrieval-Augmented Generation (RAG)",
-        "ro": "Lecția 40: Generare augmentată prin recuperare (RAG)",
-        "el": "Διάλεξη 40: Ανάκτηση-Ενισχυμένη Παραγωγή (RAG)"
+        "en": "Retrieval-Augmented Generation (RAG)",
+        "ro": "Generare augmentată prin recuperare (RAG)",
+        "el": "Ανάκτηση-Ενισχυμένη Παραγωγή (RAG)"
       },
       "prev": "39",
       "next": "41",
@@ -679,9 +695,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 41: Building a RAG Chatbot",
-        "ro": "Lecția 41: Construirea unui chatbot RAG",
-        "el": "Διάλεξη 41: Κατασκευή ενός chatbot RAG"
+        "en": "Building a RAG Chatbot",
+        "ro": "Construirea unui chatbot RAG",
+        "el": "Κατασκευή ενός chatbot RAG"
       },
       "prev": "40",
       "next": "42",
@@ -695,9 +711,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 42: Fine-tuned Specialist — Domain-Specific LLMs",
-        "ro": "Lecția 42: Specialist ajustat fin — LLM-uri specifice domeniului",
-        "el": "Διάλεξη 42: Μικρορυθμισμένος ειδικός — LLM ειδικά για τομέα"
+        "en": "Fine-tuned Specialist — Domain-Specific LLMs",
+        "ro": "Specialist ajustat fin — LLM-uri specifice domeniului",
+        "el": "Μικρορυθμισμένος ειδικός — LLM ειδικά για τομέα"
       },
       "prev": "41",
       "next": "43",
@@ -711,9 +727,9 @@
       "stageName": "Fine-tuning",
       "isGenAI": false,
       "title": {
-        "en": "Lecture 43: Stage 6 Capstone — Complete Fine-tuned LLM System",
-        "ro": "Lecția 43: Capstone Etapa 6 — Sistem LLM complet ajustat fin",
-        "el": "Διάλεξη 43: Capstone Σταδίου 6 — Πλήρες μικρορυθμισμένο σύστημα LLM"
+        "en": "Stage 6 Capstone — Complete Fine-tuned LLM System",
+        "ro": "Capstone Etapa 6 — Sistem LLM complet ajustat fin",
+        "el": "Capstone Σταδίου 6 — Πλήρες μικρορυθμισμένο σύστημα LLM"
       },
       "prev": "42",
       "next": "genai-1",
@@ -733,7 +749,7 @@
       },
       "prev": "43",
       "next": "genai-2",
-      "codeBlockCount": 15,
+      "codeBlockCount": 17,
       "hasQuiz": false
     },
     {
@@ -749,7 +765,7 @@
       },
       "prev": "genai-1",
       "next": "genai-3",
-      "codeBlockCount": 14,
+      "codeBlockCount": 18,
       "hasQuiz": false
     },
     {
@@ -765,7 +781,7 @@
       },
       "prev": "genai-2",
       "next": "genai-4",
-      "codeBlockCount": 13,
+      "codeBlockCount": 17,
       "hasQuiz": false
     },
     {
@@ -781,7 +797,7 @@
       },
       "prev": "genai-3",
       "next": "genai-5",
-      "codeBlockCount": 13,
+      "codeBlockCount": 17,
       "hasQuiz": false
     },
     {
@@ -797,11 +813,11 @@
       },
       "prev": "genai-4",
       "next": "home",
-      "codeBlockCount": 14,
+      "codeBlockCount": 18,
       "hasQuiz": false
     }
   ],
-  "totalLectures": 50,
-  "totalCodeBlocks": 176,
-  "totalQuizzes": 35
+  "totalLectures": 51,
+  "totalCodeBlocks": 180,
+  "totalQuizzes": 36
 }

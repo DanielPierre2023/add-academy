@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "De ce este preferată Layer Normalization față de Batch Normalization în transformer-e?",
-        "options": [
-          "Layer Norm folosește mai puțini parametri",
-          "Layer Norm normalizează pe dimensiunea caracteristicilor în cadrul unui singur eșantion, independent de dimensiunea lotului",
-          "Layer Norm este mai rapidă de calculat",
-          "Layer Norm nu necesită parametri care pot fi învățați"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Layer Norm normalizează pe dimensiunea caracteristicilor per eșantion, fiind independentă de dimensiunea lotului. Aceasta este crucială pentru secvențe de lungime variabilă și generare autoregresivă unde dimensiunea lotului poate fi 1.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Care sunt parametrii care pot fi învățați în Layer Normalization?",
-        "options": [
-          "Gamma (gamma) pentru scalare și Beta (beta) pentru deplasare",
-          "Media (mu) și varianța (sigma^2)",
-          "Matricele Query, Key și Value",
-          "Rata de învățare și epsilon"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: După normalizarea la medie zero și varianță unitară, gamma și beta permit rețelei să învețe scala și deplasarea optime pentru fiecare dimensiune a caracteristicilor.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Care este diferența dintre pre-norm și post-norm în transformer-e?",
-        "options": [
-          "Pre-norm aplică normalizarea după sub-strat",
-          "Post-norm aplică normalizarea înainte de sub-strat",
-          "Pre-norm: x + Substrat(LayerNorm(x)); Post-norm: LayerNorm(x + Substrat(x))",
-          "Sunt identice în practică"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Pre-norm normalizează înainte de sub-strat (folosit în GPT-2 și cele mai multe LLM-uri moderne), în timp ce post-norm normalizează după (transformer-ul original). Pre-norm oferă un flux de gradienți mai stabil.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt adevărate despre RMSNorm? Selectați toate răspunsurile corecte",
-        "options": [
-          "Necesită calcularea atât a mediei cât și a varianței",
-          "Normalizează doar prin media pătratică, omițând centrarea pe medie",
-          "Este mai lent decât Layer Norm",
-          "Este folosit în LLaMA și alte arhitecturi moderne"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Explicație: RMSNorm simplifică Layer Norm prin eliminarea centrării pe medie, împărțind doar la RMS. Este mai eficient computațional și este folosit în LLaMA, Gemma și alte arhitecturi moderne.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ce previne valoarea epsilon (epsilon) în Layer Norm?",
-        "options": [
-          "Împărțirea la zero când varianța este foarte mică",
-          "Depășirea în calculul mediei",
-          "Valorile negative în ieșire",
-          "Gradienții devenind prea mari"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Epsilon este o constantă mică (de obicei 1e-5) adăugată la varianță înainte de extragerea rădăcinii pătrate, prevenind împărțirea la zero când caracteristicile sunt aproape identice.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Γιατί προτιμάται η Layer Normalization έναντι της Batch Normalization στους transformers;",
-        "options": [
-          "Η Layer Norm χρησιμοποιεί λιγότερες παραμέτρους",
-          "Η Layer Norm κανονικοποιεί κατά μήκος των χαρακτηριστικών μέσα σε ένα μόνο δείγμα, ανεξάρτητα από το μέγεθος παρτίδας",
-          "Η Layer Norm είναι πιο γρήγορη στον υπολογισμό",
-          "Η Layer Norm δεν απαιτεί εκπαιδεύσιμες παραμέτρους"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Η Layer Norm κανονικοποιεί κατά μήκος της διάστασης χαρακτηριστικών ανά δείγμα, καθιστώντας την ανεξάρτητη από το μέγεθος παρτίδας. Αυτό είναι κρίσιμο για ακολουθίες μεταβλητού μήκους και αυτοπαλίνδρομη δημιουργία όπου το μέγεθος παρτίδας μπορεί να είναι 1.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ποιες είναι οι εκπαιδεύσιμες παράμετροι στη Layer Normalization;",
-        "options": [
-          "Gamma (gamma) για κλιμάκωση και Beta (beta) για μετατόπιση",
-          "Μέσος (mu) και διακύμανση (sigma^2)",
-          "Πίνακες Query, Key και Value",
-          "Ρυθμός εκμάθησης και epsilon"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Μετά την κανονικοποίηση σε μηδενικό μέσο και μοναδιαία διακύμανση, τα gamma και beta επιτρέπουν στο δίκτυο να μάθει τη βέλτιστη κλίμακα και μετατόπιση για κάθε διάσταση χαρακτηριστικών.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ποια είναι η διαφορά μεταξύ pre-norm και post-norm στους transformers;",
-        "options": [
-          "Το pre-norm εφαρμόζει κανονικοποίηση μετά το υποεπίπεδο",
-          "Το post-norm εφαρμόζει κανονικοποίηση πριν το υποεπίπεδο",
-          "Pre-norm: x + Υποεπίπεδο(LayerNorm(x)); Post-norm: LayerNorm(x + Υποεπίπεδο(x))",
-          "Είναι ταυτόσημα στην πράξη"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το pre-norm κανονικοποιεί πριν το υποεπίπεδο (χρησιμοποιείται στο GPT-2 και τα περισσότερα σύγχρονα LLMs), ενώ το post-norm κανονικοποιεί μετά (αρχικός transformer). Το pre-norm παρέχει πιο σταθερή ροή κλίσεων.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποια από τα ακόλουθα ισχύουν για το RMSNorm; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Απαιτεί υπολογισμό τόσο μέσου όσο και διακύμανσης",
-          "Κανονικοποιεί μόνο βάσει τετραγωνικής ρίζας μέσου τετραγώνου, παραλείποντας τον κεντρισμό μέσου",
-          "Είναι πιο αργό από τη Layer Norm",
-          "Χρησιμοποιείται στο LLaMA και σε άλλες σύγχρονες αρχιτεκτονικές"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Εξήγηση: Το RMSNorm απλοποιεί τη Layer Norm αφαιρώντας τον κεντρισμό μέσου, διαιρώντας μόνο με το RMS. Είναι υπολογιστικά φθηνότερο και χρησιμοποιείται στο LLaMA, Gemma και σε άλλες σύγχρονες αρχιτεκτονικές.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Τι αποτρέπει η τιμή epsilon (epsilon) στη Layer Norm;",
-        "options": [
-          "Διαίρεση με το μηδέν όταν η διακύμανση είναι πολύ μικρή",
-          "Υπερχείλιση στον υπολογισμό μέσου",
-          "Αρνητικές τιμές στην έξοδο",
-          "Κλίσεις που γίνονται πολύ μεγάλες"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Το epsilon είναι μια μικρή σταθερά (τυπικά 1e-5) που προστίθεται στη διακύμανση πριν την εξαγωγή τετραγωνικής ρίζας, αποτρέποντας τη διαίρεση με μηδέν όταν τα χαρακτηριστικά είναι σχεδόν ταυτόσημα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ce este un cap de clasificare în contextul ajustării fine a unui model de limbaj pentru clasificare?",
-        "options": [
-          "Un model pre-antrenat separat care clasifică textul independent",
-          "Mecanismul de attention din primul strat transformer",
-          "Un strat liniar adăugat deasupra transformer-ului care mapează stările ascunse la logit-uri de clasă",
-          "Stratul de embedding al tokenizer-ului folosit pentru codarea etichetelor"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Un cap de clasificare este de obicei un strat liniar (complet conectat) atașat la ieșirea transformer-ului care proiectează reprezentarea ascunsă în numărul de clase țintă, producând logit-uri pentru clasificare.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "De ce se folosește înghețarea straturilor în timpul ajustării fine pentru clasificare?",
-        "options": [
-          "Pentru a crește numărul total de parametri antrenabili",
-          "Pentru a păstra reprezentările învățate în straturile inferioare, actualizând doar straturile superioare și capul de clasificare",
-          "Pentru a face inferența mai rapidă prin eliminarea straturilor inutile",
-          "Pentru a converti modelul de la float32 la precizie int8"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: Înghețarea straturilor păstrează fixe ponderile straturilor anterioare în timpul ajustării fine, conservând reprezentările generale ale limbajului învățate în pre-antrenare. Doar straturile superioare și noul cap de clasificare sunt actualizate, reducând riscul de supraadaptare și costul antrenării.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Într-un model de limbaj cauzal (doar decoder) folosit pentru clasificare, de ce se folosește de obicei starea ascunsă a ultimului token pentru predicție?",
-        "options": [
-          "Pentru că primul token nu are informații contextuale",
-          "Pentru că ultimul token corespunde întotdeauna etichetei",
-          "Pentru că token-urile din mijloc conțin cele mai importante informații",
-          "Pentru că attention-ul cauzal permite ultimului token să acorde atenție tuturor token-urilor anterioare, agregând contextul întregii secvențe"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație: În attention-ul cauzal (de la stânga la dreapta), fiecare token poate acorda atenție doar sieși și token-urilor precedente. Starea ascunsă a ultimului token conține deci informații din întreaga secvență de intrare, făcând-o cea mai informativă poziție pentru clasificare.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele sunt avantaje ale ajustării fine a unui LLM pre-antrenat pentru clasificare față de antrenarea unui clasificator de la zero? Selectați toate răspunsurile corecte",
-        "options": [
-          "Modelul are deja o înțelegere puternică a limbajului din pre-antrenare",
-          "Necesită întotdeauna mai multe date etichetate decât antrenarea de la zero",
-          "Modelele pre-antrenate nu se pot supraadapta pe seturi mici de date",
-          "Obține de obicei performanțe bune cu mai puține exemple etichetate"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Explicație: LLM-urile pre-antrenate posedă reprezentări bogate ale limbajului care se transferă bine la sarcini downstream și pot obține performanțe puternice de clasificare cu relativ puține exemple etichetate comparativ cu antrenarea de la zero. Totuși, se pot supraadapta pe seturi de date foarte mici.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Când se ajustează fin un model doar decoder precum GPT pentru clasificare, ce funcție de pierdere se aplică de obicei la ieșirea capului de clasificare?",
-        "options": [
-          "Pierdere cross-entropy",
-          "Eroare medie pătratică",
-          "Pierdere contrastivă",
-          "Pierdere hinge"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Pierderea cross-entropy este funcția de pierdere standard pentru sarcinile de clasificare. Măsoară diferența între distribuția de probabilitate prezisă (din softmax peste logit-uri) și eticheta reală, oferind gradienți bine calibrați pentru antrenare.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Τι είναι μια κεφαλή ταξινόμησης στο πλαίσιο ακριβούς ρύθμισης γλωσσικού μοντέλου για ταξινόμηση;",
-        "options": [
-          "Ένα ξεχωριστό προεκπαιδευμένο μοντέλο που ταξινομεί κείμενο ανεξάρτητα",
-          "Ο μηχανισμός attention στο πρώτο επίπεδο transformer",
-          "Ένα γραμμικό επίπεδο που προστίθεται πάνω στον transformer και αντιστοιχίζει κρυφές καταστάσεις σε logits κλάσεων",
-          "Το επίπεδο embedding του tokenizer για κωδικοποίηση ετικετών"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Μια κεφαλή ταξινόμησης είναι τυπικά ένα γραμμικό (πλήρως συνδεδεμένο) επίπεδο που προστίθεται στην έξοδο του transformer και προβάλλει την κρυφή αναπαράσταση στον αριθμό κλάσεων στόχου, παράγοντας logits για ταξινόμηση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Γιατί χρησιμοποιείται το πάγωμα επιπέδων κατά την ακριβή ρύθμιση ταξινόμησης;",
-        "options": [
-          "Για αύξηση συνολικού αριθμού εκπαιδεύσιμων παραμέτρων",
-          "Για διατήρηση εκπαιδευμένων αναπαραστάσεων στα κατώτερα επίπεδα ενημερώνοντας μόνο ανώτερα επίπεδα και κεφαλή ταξινόμησης",
-          "Για ταχύτερη εξαγωγή συμπερασμάτων αφαιρώντας περιττά επίπεδα",
-          "Για μετατροπή μοντέλου από float32 σε ακρίβεια int8"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Το πάγωμα επιπέδων κρατά σταθερά τα βάρη πρωιμότερων επιπέδων κατά την ακριβή ρύθμιση, διατηρώντας τις γενικές γλωσσικές αναπαραστάσεις που μαθεύτηκαν κατά την προεκπαίδευση. Μόνο τα ανώτερα επίπεδα και η νέα κεφαλή ταξινόμησης ενημερώνονται, μειώνοντας τον κίνδυνο υπερπροσαρμογής και το κόστος εκπαίδευσης.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Σε ένα αιτιατό (μόνο αποκωδικοποιητής) γλωσσικό μοντέλο για ταξινόμηση, γιατί χρησιμοποιείται τυπικά η κρυφή κατάσταση του τελευταίου token για πρόβλεψη;",
-        "options": [
-          "Επειδή το πρώτο token δεν έχει πληροφορίες πλαισίου",
-          "Επειδή το τελευταίο token αντιστοιχεί πάντα στην ετικέτα",
-          "Επειδή τα μεσαία tokens περιέχουν τις σημαντικότερες πληροφορίες",
-          "Επειδή το αιτιατό attention επιτρέπει στο τελευταίο token να δώσει προσοχή σε όλα τα προηγούμενα tokens, συγκεντρώνοντας πλήρες πλαίσιο ακολουθίας"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση: Στο αιτιατό (αριστερά-προς-δεξιά) attention, κάθε token μπορεί να δώσει προσοχή μόνο στον εαυτό του και στα προηγούμενα tokens. Η κρυφή κατάσταση του τελευταίου token περιέχει επομένως πληροφορίες από ολόκληρη την ακολουθία εισόδου, καθιστώντας την πιο πληροφοριακή θέση για ταξινόμηση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποια από τα ακόλουθα είναι πλεονεκτήματα ακριβούς ρύθμισης προεκπαιδευμένου LLM για ταξινόμηση έναντι εκπαίδευσης ταξινομητή από την αρχή; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Το μοντέλο έχει ήδη ισχυρή κατανόηση γλώσσας από προεκπαίδευση",
-          "Απαιτεί πάντα περισσότερα επισημασμένα δεδομένα από εκπαίδευση από αρχή",
-          "Τα προεκπαιδευμένα μοντέλα δεν μπορούν να υπερπροσαρμοστούν σε μικρά datasets",
-          "Επιτυγχάνει τυπικά καλή απόδοση με λιγότερα επισημασμένα παραδείγματα"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Εξήγηση: Τα προεκπαιδευμένα LLMs φέρουν πλούσιες γλωσσικές αναπαραστάσεις που μεταφέρονται καλά σε downstream εργασίες και μπορούν να επιτύχουν ισχυρή απόδοση ταξινόμησης με σχετικά λίγα επισημασμένα παραδείγματα σε σύγκριση με εκπαίδευση από αρχή. Ωστόσο, μπορούν ακόμα να υπερπροσαρμοστούν σε πολύ μικρά datasets.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Κατά την ακριβή ρύθμιση μοντέλου μόνο αποκωδικοποιητή όπως GPT για ταξινόμηση, ποια συνάρτηση απώλειας εφαρμόζεται τυπικά στην έξοδο κεφαλής ταξινόμησης;",
-        "options": [
-          "Απώλεια cross-entropy",
-          "Μέσο τετραγωνικό σφάλμα",
-          "Αντιπαραθετική απώλεια",
-          "Απώλεια hinge"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Η απώλεια cross-entropy είναι η τυπική συνάρτηση απώλειας για εργασίες ταξινόμησης. Μετρά τη διαφορά μεταξύ της προβλεπόμενης κατανομής πιθανότητας (από softmax πάνω στα logits) και της πραγματικής ετικέτας, παρέχοντας καλά βαθμονομημένες κλίσεις για εκπαίδευση.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]

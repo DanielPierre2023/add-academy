@@ -86,78 +86,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ce problemă rezolvă mecanismul de attention în modelele de secvențe?",
-        "options": [
-          "Reducerea numărului de parametri",
-          "Eliminarea necesității embedding-urilor",
-          "Blocajul informațional al comprimării unei întregi secvențe într-un vector de dimensiune fixă",
-          "Accelerarea antrenării modelelor"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Înainte de attention, modelele encoder-decoder trebuiau să comprime întreaga intrare într-un singur vector de context. Attention permite focalizarea dinamică pe părțile relevante ale intrării.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "De ce împărțim scorurile produsului scalar la sqrt(d_k) în attention scalat?",
-        "options": [
-          "Pentru a face toate scorurile pozitive",
-          "Pentru a preveni ca produsele scalare mari să împingă softmax în regiuni cu gradienți care dispar",
-          "Pentru a normaliza ieșirea să aibă suma 1",
-          "Pentru a reduce timpul de calcul"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație: În dimensiuni mari, produsele scalare cresc proporțional cu sqrt(d_k). Fără scalare, softmax primește valori extreme, producând ieșiri aproape one-hot cu gradienți care dispar.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce face funcția softmax cu scorurile de attention?",
-        "options": [
-          "Convertește scorurile brute într-o distribuție de probabilitate care are suma 1",
-          "Aplică activarea ReLU",
-          "Împarte la scorul maxim",
-          "Anulează valorile negative"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație: Softmax exponențiază fiecare scor și normalizează astfel încât toate ponderile să aibă suma 1, creând o distribuție de probabilitate validă peste pozițiile de intrare.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care dintre următoarele afirmații sunt adevărate despre ponderile de attention? Selectați toate răspunsurile corecte",
-        "options": [
-          "Sunt întotdeauna uniforme (egale pentru toate pozițiile)",
-          "Au suma 1 pentru fiecare poziție de query",
-          "Sunt binare (0 sau 1)",
-          "Similaritatea mai mare între query și key produce o pondere mai mare"
-        ],
+        "text": "Selectați toate răspunsurile corecte",
+        "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Explicație: Ponderile de attention formează o distribuție de probabilitate (suma 1) și reflectă similaritatea între query-uri și key-uri. Sunt continue, nu binare sau uniforme.",
+        "explanation": "✅ Explicație:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Care este ieșirea mecanismului de attention?",
-        "options": [
-          "Un singur scor scalar per token",
-          "Embedding-urile originale de intrare",
-          "O sumă ponderată a vectorilor value, unde ponderile provin din similaritățile query-key",
-          "O mască binară care indică la ce token-uri să se acorde atenție"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație: Vectorul de context pentru fiecare poziție este calculat ca o sumă ponderată a vectorilor Value, cu ponderi determinate de produsele scalare Query-Key.",
+        "explanation": "✅ Explicație:",
         "isMulti": false
       }
     ]
@@ -167,78 +142,53 @@
     "questions": [
       {
         "index": 0,
-        "text": "Ποιο πρόβλημα λύνει ο μηχανισμός attention στα μοντέλα ακολουθιών;",
-        "options": [
-          "Μείωση του αριθμού παραμέτρων",
-          "Εξάλειψη της ανάγκης για embeddings",
-          "Το πληροφοριακό στενό σημείο της συμπίεσης μιας ολόκληρης ακολουθίας σε ένα διάνυσμα σταθερού μεγέθους",
-          "Επιτάχυνση της εκπαίδευσης μοντέλων"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Πριν από το attention, τα μοντέλα encoder-decoder έπρεπε να συμπιέσουν ολόκληρη την είσοδο σε ένα μόνο διάνυσμα πλαισίου. Το attention επιτρέπει δυναμική εστίαση σε σχετικά μέρη της εισόδου.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Γιατί διαιρούμε τα σκορ εσωτερικού γινομένου με sqrt(d_k) στο κλιμακωτό attention;",
-        "options": [
-          "Για να γίνουν όλα τα σκορ θετικά",
-          "Για να αποτρέψουμε τα μεγάλα εσωτερικά γινόμενα από το να σπρώξουν τη softmax σε περιοχές με εξαφανιζόμενες κλίσεις",
-          "Για να κανονικοποιήσουμε την έξοδο ώστε να αθροίζει σε 1",
-          "Για να μειώσουμε τον χρόνο υπολογισμού"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση: Σε υψηλές διαστάσεις, τα εσωτερικά γινόμενα αυξάνονται αναλογικά με sqrt(d_k). Χωρίς κλιμάκωση, η softmax λαμβάνει ακραίες τιμές, παράγοντας σχεδόν one-hot εξόδους με εξαφανιζόμενες κλίσεις.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Τι κάνει η συνάρτηση softmax στα σκορ attention;",
-        "options": [
-          "Μετατρέπει τα ακατέργαστα σκορ σε κατανομή πιθανότητας που αθροίζει σε 1",
-          "Εφαρμόζει ενεργοποίηση ReLU",
-          "Διαιρεί με το μέγιστο σκορ",
-          "Μηδενίζει τις αρνητικές τιμές"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση: Η softmax εκθετοποιεί κάθε σκορ και κανονικοποιεί ώστε όλα τα βάρη να αθροίζουν σε 1, δημιουργώντας μια έγκυρη κατανομή πιθανότητας πάνω στις θέσεις εισόδου.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποια από τα ακόλουθα ισχύουν για τα βάρη attention; Επιλέξτε όλες τις σωστές απαντήσεις",
-        "options": [
-          "Είναι πάντα ομοιόμορφα (ίσα για όλες τις θέσεις)",
-          "Αθροίζουν σε 1 για κάθε θέση query",
-          "Είναι δυαδικά (0 ή 1)",
-          "Η μεγαλύτερη ομοιότητα μεταξύ query και key παράγει μεγαλύτερο βάρος"
-        ],
+        "text": "Επιλέξτε όλες τις σωστές",
+        "options": [],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Εξήγηση: Τα βάρη attention σχηματίζουν κατανομή πιθανότητας (άθροισμα 1) και αντανακλούν την ομοιότητα μεταξύ queries και keys. Είναι συνεχή, όχι δυαδικά ή ομοιόμορφα.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ποια είναι η έξοδος του μηχανισμού attention;",
-        "options": [
-          "Ένα μόνο βαθμωτό σκορ ανά token",
-          "Τα αρχικά embeddings εισόδου",
-          "Ένα σταθμισμένο άθροισμα διανυσμάτων value, όπου τα βάρη προέρχονται από ομοιότητες query-key",
-          "Μια δυαδική μάσκα που υποδεικνύει σε ποια tokens να δοθεί προσοχή"
-        ],
+        "text": "",
+        "options": [],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση: Το διάνυσμα πλαισίου για κάθε θέση υπολογίζεται ως σταθμισμένο άθροισμα διανυσμάτων Value, με βάρη που καθορίζονται από τα εσωτερικά γινόμενα Query-Key.",
+        "explanation": "✅ Εξήγηση:",
         "isMulti": false
       }
     ]
