@@ -407,14 +407,14 @@ export function LectureViewer({
             {prev ? (
               <Link href={`/lectures/${prev}`} className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}>
                 <ChevronLeft className="h-4 w-4" />
-                {t('prev_lecture', lang)}
+                {t('course_prev', lang)}
               </Link>
             ) : (
               <div />
             )}
             {next ? (
               <Link href={`/lectures/${next}`} className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}>
-                {t('next_lecture', lang)}
+                {t('course_next', lang)}
                 <ChevronRight className="h-4 w-4" />
               </Link>
             ) : (
