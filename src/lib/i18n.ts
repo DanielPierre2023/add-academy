@@ -121,6 +121,10 @@ const translations: Record<Language, Record<string, string>> = {
     cert_not_ready: 'Complete all lectures to earn your certificate',
     cert_name: 'Your name on the certificate',
 
+    // Lecture navigation
+    mark_complete: 'Mark as Complete',
+    completed: 'Completed',
+
     // General
     loading: 'Loading...',
     dark_mode: 'Dark Mode',
@@ -240,6 +244,9 @@ const translations: Record<Language, Record<string, string>> = {
     cert_not_ready: 'Completează toate lecțiile pentru a obține certificatul',
     cert_name: 'Numele tău pe certificat',
 
+    mark_complete: 'Marchează ca Finalizată',
+    completed: 'Finalizată',
+
     loading: 'Se încarcă...',
     dark_mode: 'Mod Întunecat',
     language: 'Limbă',
@@ -357,6 +364,9 @@ const translations: Record<Language, Record<string, string>> = {
     cert_download: 'Λήψη Πιστοποιητικού',
     cert_not_ready: 'Ολοκληρώστε όλα τα μαθήματα για το πιστοποιητικό',
     cert_name: 'Το όνομά σας στο πιστοποιητικό',
+
+    mark_complete: 'Σημείωση ως Ολοκληρωμένο',
+    completed: 'Ολοκληρώθηκε',
 
     loading: 'Φόρτωση...',
     dark_mode: 'Σκούρο Θέμα',
