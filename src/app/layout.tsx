@@ -3,8 +3,6 @@ import { Manrope, Fraunces } from 'next/font/google';
 import { Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/layout/theme-provider';
-import { AuthProvider } from '@/components/auth/auth-provider';
-import { XPToastContainer } from '@/components/gamification/xp-toast';
 
 const manrope = Manrope({
   variable: '--font-manrope',
@@ -41,12 +39,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider>
-          <AuthProvider>
-            {children}
-            <XPToastContainer />
-          </AuthProvider>
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
