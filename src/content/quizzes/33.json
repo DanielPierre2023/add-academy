@@ -86,53 +86,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Care este obiectivul principal al ajustării fine prin instrucțiuni?",
+        "options": [
+          "Creșterea dimensiunii vocabularului modelului de bază",
+          "Învățarea unui model pre-antrenat să urmeze instrucțiunile utilizatorului și să producă răspunsuri utile",
+          "Pre-antrenarea unui model de la zero pe date etichetate",
+          "Comprimarea modelului pentru implementare pe dispozitive edge"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Ajustarea fină prin instrucțiuni adaptează un model de limbaj pre-antrenat astfel încât să poată înțelege și urma instrucțiuni în limbaj natural, producând răspunsuri aliniate cu intenția utilizatorului.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "În formatul de date Alpaca, ce câmp conține ieșirea așteptată a modelului?",
+        "options": [
+          "instruction",
+          "input",
+          "output",
+          "context"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Formatul Alpaca folosește trei câmpuri: «instruction» (descrierea sarcinii), «input» (context adițional opțional) și «output» (răspunsul dorit al modelului).",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Selectați toate răspunsurile corecte",
-        "options": [],
+        "text": "Care dintre următoarele sunt adevărate despre formatul de date ShareGPT? Selectați toate răspunsurile corecte",
+        "options": [
+          "Stochează conversații ca o listă de ture de mesaje cu roluri",
+          "Este limitat doar la perechi instrucțiune-răspuns cu o singură tură",
+          "Suportă natural date de dialog cu mai multe ture",
+          "Necesită antrenarea unui tokenizer separat de la zero"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Formatul ShareGPT reprezintă conversațiile ca liste de ture (ex. roluri human/gpt), fiind ideal pentru ajustarea fină pe dialog multi-tură. Spre deosebire de Alpaca, nu este limitat la perechi cu o singură tură.",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Care este scopul unui șablon de chat în timpul ajustării fine prin instrucțiuni?",
+        "options": [
+          "Definirea arhitecturii modelului și a numărului de straturi",
+          "Controlul programului ratei de învățare în timpul antrenării",
+          "Comprimarea setului de date pentru încărcare mai rapidă",
+          "Formatarea mesajelor de intrare cu token-uri speciale astfel încât modelul să distingă între roluri"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Șabloanele de chat (ex. ChatML, stil Llama) învelesc mesajele cu token-uri speciale care indică limitele rolurilor (system, user, assistant), permițând modelului să parseze corect conversațiile multi-tură.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Ce realizează mascarea pierderii în timpul ajustării fine prin instrucțiuni?",
+        "options": [
+          "Previne modelul de la generarea token-urilor speciale",
+          "Exclude token-urile de prompt/instrucțiune din calculul pierderii astfel încât modelul să învețe doar să genereze răspunsul",
+          "Maschează token-uri aleatorii pentru a crea un obiectiv de debruiere",
+          "Ascunde valoarea pierderii din jurnalele de antrenare"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Mascarea pierderii setează pierderea la zero pentru token-urile de prompt/instrucțiune, asigurând că modelul este antrenat doar să prezică token-urile răspunsului asistentului. Aceasta previne modelul de la irosirea capacității pentru a reproduce intrarea utilizatorului.",
         "isMulti": false
       }
     ]
@@ -142,53 +167,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Ποιος είναι ο κύριος στόχος της εκπαίδευσης ακριβούς ρύθμισης βάσει οδηγιών;",
+        "options": [
+          "Αύξηση μεγέθους λεξιλογίου βασικού μοντέλου",
+          "Εκπαίδευση ενός προεκπαιδευμένου μοντέλου να ακολουθεί οδηγίες χρήστη και να παράγει χρήσιμες απαντήσεις",
+          "Προεκπαίδευση μοντέλου από την αρχή σε επισημασμένα δεδομένα",
+          "Συμπίεση μοντέλου για ανάπτυξη σε συσκευές edge"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η ακριβής ρύθμιση βάσει οδηγιών προσαρμόζει ένα προεκπαιδευμένο γλωσσικό μοντέλο ώστε να μπορεί να κατανοεί και να ακολουθεί οδηγίες σε φυσική γλώσσα, παράγοντας απαντήσεις ευθυγραμμισμένες με την πρόθεση του χρήστη.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Στη μορφή δεδομένων Alpaca, ποιο πεδίο περιέχει την αναμενόμενη έξοδο του μοντέλου;",
+        "options": [
+          "instruction",
+          "input",
+          "output",
+          "context"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η μορφή Alpaca χρησιμοποιεί τρία πεδία: «instruction» (η περιγραφή εργασίας), «input» (προαιρετικό πρόσθετο πλαίσιο) και «output» (η επιθυμητή απάντηση μοντέλου).",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Επιλέξτε όλες τις σωστές",
-        "options": [],
+        "text": "Ποια από τα ακόλουθα ισχύουν για τη μορφή δεδομένων ShareGPT; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Αποθηκεύει συνομιλίες ως λίστα σειρών μηνυμάτων με ρόλους",
+          "Περιορίζεται μόνο σε ζεύγη οδηγίας-απάντησης μιας σειράς",
+          "Υποστηρίζει φυσικά δεδομένα διαλόγου πολλαπλών σειρών",
+          "Απαιτεί εκπαίδευση ξεχωριστού tokenizer από την αρχή"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η μορφή ShareGPT αναπαριστά συνομιλίες ως λίστες σειρών (π.χ. ρόλοι human/gpt), καθιστώντας την ιδανική για ακριβή ρύθμιση πολλαπλών σειρών διαλόγου. Σε αντίθεση με το Alpaca, δεν περιορίζεται σε ζεύγη μιας σειράς.",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Ποιος είναι ο σκοπός ενός προτύπου συνομιλίας κατά την ακριβή ρύθμιση βάσει οδηγιών;",
+        "options": [
+          "Ορισμός αρχιτεκτονικής μοντέλου και αριθμού επιπέδων",
+          "Έλεγχος προγράμματος ρυθμού εκμάθησης κατά εκπαίδευση",
+          "Συμπίεση dataset για ταχύτερη φόρτωση",
+          "Μορφοποίηση μηνυμάτων εισόδου με ειδικά tokens ώστε το μοντέλο να διακρίνει τους ρόλους"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Τα πρότυπα συνομιλίας (π.χ. ChatML, στυλ Llama) περιτυλίγουν τα μηνύματα με ειδικά tokens που υποδεικνύουν τα όρια ρόλων (system, user, assistant), επιτρέποντας στο μοντέλο να αναλύσει σωστά τις πολυσειρακές συνομιλίες.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Τι επιτυγχάνει η μάσκα απώλειας κατά την ακριβή ρύθμιση βάσει οδηγιών;",
+        "options": [
+          "Αποτρέπει το μοντέλο από τη δημιουργία ειδικών tokens",
+          "Εξαιρεί tokens prompt/οδηγίας από τον υπολογισμό απώλειας ώστε το μοντέλο να μαθαίνει μόνο να δημιουργεί την απάντηση",
+          "Μασκάρει τυχαία tokens για δημιουργία στόχου αποθορυβοποίησης",
+          "Κρύβει την τιμή απώλειας από τα αρχεία καταγραφής εκπαίδευσης"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η μάσκα απώλειας θέτει την απώλεια σε μηδέν για tokens prompt/οδηγίας, εξασφαλίζοντας ότι το μοντέλο εκπαιδεύεται μόνο στην πρόβλεψη tokens απάντησης βοηθού. Αυτό αποτρέπει το μοντέλο από τη σπατάλη χωρητικότητας μαθαίνοντας να αναπαράγει την είσοδο χρήστη.",
         "isMulti": false
       }
     ]

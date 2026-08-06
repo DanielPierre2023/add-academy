@@ -242,14 +242,14 @@ export const STAGES: Stage[] = [
     number: 4,
     name: { en: 'LLM Architecture', ro: 'Arhitectura LLM', el: 'Αρχιτεκτονική LLM' },
     icon: '🧱',
-    lectures: ['19', '20', '21', '22', '23', '24'],
+    lectures: ['19', '20', '21', '22', '23', '24', '24b'],
     color: '#f59e0b',
   },
   {
     number: 5,
     name: { en: 'Pretraining', ro: 'Pre-antrenare', el: 'Προεκπαίδευση' },
     icon: '⚡',
-    lectures: ['25', '26', '27', '28', '29', '30', '31', '32'],
+    lectures: ['25', '26', '27', '28', '29', '30', '31', '32', '32b'],
     color: '#10b981',
   },
   {
@@ -263,7 +263,7 @@ export const STAGES: Stage[] = [
     number: 7,
     name: { en: 'GenAI SaaS Products', ro: 'Curs de IA Generativă', el: 'Προϊόντα GenAI SaaS' },
     icon: '⭐',
-    lectures: ['genai-1', 'genai-2', 'genai-3', 'genai-4', 'genai-5'],
+    lectures: ['genai-0', 'genai-1', 'genai-2', 'genai-3', 'genai-4', 'genai-5'],
     color: '#6366f1',
   },
 ];

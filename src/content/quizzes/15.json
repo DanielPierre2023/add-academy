@@ -86,53 +86,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "De ce este necesară mascarea cauzală pentru modelele de limbaj autoregresive?",
+        "options": [
+          "Pentru a reduce utilizarea memoriei",
+          "Pentru a accelera antrenarea",
+          "Pentru a preveni token-urile să acorde atenție pozițiilor viitoare — modelul trebuie să prezică fără a vedea răspunsul",
+          "Pentru a face toate ponderile de attention egale"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: În modelele autoregresive (precum GPT), fiecare token ar trebui să acorde atenție doar token-urilor de la poziții anterioare. Fără mascare, modelul ar „trișa” văzând răspunsul pe care trebuie să-l prezică.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Cum este aplicată masca cauzală în practică?",
+        "options": [
+          "Setând pozițiile viitoare la 0 în ponderile de attention",
+          "Adăugând infinit negativ la pozițiile viitoare ÎNAINTE de softmax, făcând ponderile lor efectiv zero",
+          "Eliminând token-urile viitoare din intrare",
+          "Multiplicând token-urile viitoare cu -1"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Masca setează pozițiile viitoare la -infinit înainte de softmax. Deoarece exp(-inf) = 0, aceste poziții primesc pondere de attention zero, blocând efectiv fluxul de informații din viitor.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Ce formă are masca cauzală pentru o secvență de lungime T?",
+        "options": [
+          "O matrice triunghiulară inferioară de formă (T, T) cu unu-uri sub și pe diagonală",
+          "O matrice diagonală de formă (T, T)",
+          "Un vector de lungime T",
+          "O matrice triunghiulară superioară de formă (T, T)"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Masca cauzală este o matrice triunghiulară inferioară (T x T). Poziția i poate acorda atenție pozițiilor 0..i (diagonala și sub ea). Triunghiul superior este mascat.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Selectați toate răspunsurile corecte",
-        "options": [],
+        "text": "Ce rol joacă dropout în attention? Selectați toate răspunsurile corecte",
+        "options": [
+          "Regularizare — previne dependența excesivă de tipare specifice de attention în timpul antrenării",
+          "Înlocuiește masca cauzală în timpul inferenței",
+          "Este dezactivat în timpul inferenței (activ doar în antrenare)",
+          "Crește lungimea secvenței"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Dropout anulează aleatoriu ponderi de attention în timpul antrenării ca regularizare. Este dezactivat în timpul inferenței pentru a utiliza capacitatea completă de attention.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "În self-attention cauzal, la ce poate acorda atenție token-ul de la poziția 3 (indexat de la 0)?",
+        "options": [
+          "Doar poziția 3",
+          "Toate pozițiile din secvență",
+          "Pozițiile 0, 1, 2 (nu el însuși)",
+          "Pozițiile 0, 1, 2, 3 (el însuși și toate pozițiile anterioare)"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Cu mascare cauzală, poziția 3 poate acorda atenție pozițiilor 0, 1, 2 și sie însuși (3). Acesta este tiparul triunghiular inferior — diagonala este inclusă.",
         "isMulti": false
       }
     ]
@@ -142,53 +167,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Γιατί είναι απαραίτητη η αιτιατή μάσκα για τα αυτοπαλίνδρομα γλωσσικά μοντέλα;",
+        "options": [
+          "Για να μειώσει τη χρήση μνήμης",
+          "Για να επιταχύνει την εκπαίδευση",
+          "Για να αποτρέψει τα tokens από το να δίνουν προσοχή σε μελλοντικές θέσεις — το μοντέλο πρέπει να προβλέψει χωρίς να βλέπει την απάντηση",
+          "Για να κάνει όλα τα βάρη attention ίσα"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Στα αυτοπαλίνδρομα μοντέλα (όπως το GPT), κάθε token πρέπει να δίνει προσοχή μόνο σε tokens σε προηγούμενες θέσεις. Χωρίς μάσκα, το μοντέλο θα «εξαπατούσε» βλέποντας την απάντηση που πρέπει να προβλέψει.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Πώς εφαρμόζεται η αιτιατή μάσκα στην πράξη;",
+        "options": [
+          "Θέτοντας τις μελλοντικές θέσεις σε 0 στα βάρη attention",
+          "Προσθέτοντας αρνητικό άπειρο στις μελλοντικές θέσεις ΠΡΙΝ τη softmax, κάνοντας τα βάρη τους ουσιαστικά μηδέν",
+          "Αφαιρώντας τα μελλοντικά tokens από την είσοδο",
+          "Πολλαπλασιάζοντας τα μελλοντικά tokens με -1"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η μάσκα θέτει τις μελλοντικές θέσεις σε -άπειρο πριν τη softmax. Επειδή exp(-inf) = 0, αυτές οι θέσεις λαμβάνουν μηδενικό βάρος attention, αποκλείοντας ουσιαστικά τη ροή πληροφοριών από το μέλλον.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Ποιο σχήμα έχει η αιτιατή μάσκα για μια ακολουθία μήκους T;",
+        "options": [
+          "Ένας κάτω τριγωνικός πίνακας σχήματος (T, T) με μονάδες κάτω και πάνω στη διαγώνιο",
+          "Ένας διαγώνιος πίνακας σχήματος (T, T)",
+          "Ένα διάνυσμα μήκους T",
+          "Ένας άνω τριγωνικός πίνακας σχήματος (T, T)"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η αιτιατή μάσκα είναι ένας κάτω τριγωνικός πίνακας (T x T). Η θέση i μπορεί να δώσει προσοχή στις θέσεις 0..i (η διαγώνιος και κάτω). Το άνω τρίγωνο αποκρύπτεται.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Επιλέξτε όλες τις σωστές",
-        "options": [],
+        "text": "Ποιον ρόλο παίζει το dropout στο attention; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Κανονικοποίηση — αποτρέπει την υπερεξάρτηση από συγκεκριμένα μοτίβα attention κατά την εκπαίδευση",
+          "Αντικαθιστά την αιτιατή μάσκα κατά την εξαγωγή συμπερασμάτων",
+          "Απενεργοποιείται κατά την εξαγωγή συμπερασμάτων (ενεργό μόνο κατά την εκπαίδευση)",
+          "Αυξάνει το μήκος ακολουθίας"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το dropout μηδενίζει τυχαία βάρη attention κατά την εκπαίδευση ως κανονικοποίηση. Απενεργοποιείται κατά την εξαγωγή συμπερασμάτων για χρήση πλήρους χωρητικότητας attention.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Στο αιτιατό self-attention, σε τι μπορεί να δώσει προσοχή το token στη θέση 3 (με δείκτη από το 0);",
+        "options": [
+          "Μόνο στη θέση 3",
+          "Σε όλες τις θέσεις της ακολουθίας",
+          "Στις θέσεις 0, 1, 2 (όχι στον εαυτό του)",
+          "Στις θέσεις 0, 1, 2, 3 (στον εαυτό του και σε όλες τις προηγούμενες θέσεις)"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Με αιτιατή μάσκα, η θέση 3 μπορεί να δώσει προσοχή στις θέσεις 0, 1, 2 και στον εαυτό της (3). Αυτό είναι το κάτω τριγωνικό μοτίβο — η διαγώνιος περιλαμβάνεται.",
         "isMulti": false
       }
     ]

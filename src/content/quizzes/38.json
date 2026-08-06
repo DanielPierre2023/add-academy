@@ -86,53 +86,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Ce măsoară în principal MMLU într-un model de limbaj?",
+        "options": [
+          "Viteza generării de text în token-uri pe secundă",
+          "Capacitatea modelului de a traduce între limbi",
+          "Cunoștințe multisarcină și raționament pe 57 de materii academice",
+          "Perplexitatea pe un corpus reținut"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: MMLU (Massive Multitask Language Understanding) testează un model pe 57 de materii de la STEM la umanistice, măsurând cunoștințele ample și capacitatea de raționament.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Ce este contaminarea benchmark-urilor?",
+        "options": [
+          "Rularea unui benchmark pe hardware prea lent",
+          "Când datele de test ale benchmark-ului apar în setul de antrenare al modelului, umflând scorurile",
+          "Folosirea prea multor benchmark-uri pentru a evalua un singur model",
+          "Amestecarea diferitelor arhitecturi de model într-o comparație"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Contaminarea benchmark-urilor apare când exemple de test se scurg în datele de antrenare, permițând modelului să memoreze răspunsurile în loc să raționeze cu adevărat, producând scoruri artificial mari.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Ce evaluează HellaSwag?",
+        "options": [
+          "Rezolvarea problemelor matematice",
+          "Acuratețea generării de cod",
+          "Reamintirea factuală din Wikipedia",
+          "Raționamentul de bun simț prin completarea propozițiilor"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: HellaSwag testează inferența în limbaj natural de bun simț cerând modelelor să aleagă cea mai plauzibilă continuare a unui scenariu din opțiuni create adversarial.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Selectați toate răspunsurile corecte",
-        "options": [],
+        "text": "Care dintre următoarele sunt metrici de evaluare valide pentru modelele de limbaj? Selectați toate răspunsurile corecte",
+        "options": [
+          "Perplexitatea pe un set de test reținut",
+          "Numărul de parametri ai modelului",
+          "Acuratețea few-shot pe sarcini downstream",
+          "Calculul de antrenare măsurat în FLOP-uri"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Perplexitatea măsoară cât de bine prezice modelul text nevăzut, iar acuratețea few-shot măsoară performanța pe sarcini cu exemple minimale. Numărul de parametri și FLOP-urile descriu modelul, nu calitatea sa.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "De ce este riscant să comparăm modele folosind un singur benchmark?",
+        "options": [
+          "Un model poate fi supraadaptat sau optimizat pentru acel benchmark specific fără a generaliza",
+          "Benchmark-urile produc întotdeauna scoruri identice pentru toate modelele",
+          "Benchmark-urile singulare rulează mai rapid deci sunt mai puțin precise",
+          "Este imposibil să rulezi același benchmark de două ori"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Un singur benchmark surprinde doar o felie de capabilitate. Modelele pot fi ajustate să exceleze la un test în timp ce au performanțe slabe în altă parte, așa că evaluarea multi-benchmark oferă o imagine mai completă.",
         "isMulti": false
       }
     ]
@@ -142,53 +167,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Τι μετρά κυρίως το MMLU σε ένα γλωσσικό μοντέλο;",
+        "options": [
+          "Ταχύτητα δημιουργίας κειμένου σε tokens ανά δευτερόλεπτο",
+          "Ικανότητα μετάφρασης μεταξύ γλωσσών",
+          "Πολυεργασιακή γνώση και συλλογισμό σε 57 ακαδημαϊκά μαθήματα",
+          "Περπλοκότητα σε κρατημένο σώμα"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το MMLU (Massive Multitask Language Understanding) δοκιμάζει ένα μοντέλο σε 57 μαθήματα από STEM έως ανθρωπιστικές, μετρώντας ευρεία γνώση και ικανότητα συλλογισμού.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Τι είναι η μόλυνση benchmarks;",
+        "options": [
+          "Εκτέλεση benchmark σε πολύ αργό hardware",
+          "Όταν δεδομένα ελέγχου benchmark εμφανίζονται στο σετ εκπαίδευσης μοντέλου, διογκώνοντας σκορ",
+          "Χρήση πάρα πολλών benchmarks για αξιολόγηση ενός μοντέλου",
+          "Ανάμειξη διαφορετικών αρχιτεκτονικών σε σύγκριση"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η μόλυνση benchmark συμβαίνει όταν παραδείγματα ελέγχου διαρρέουν στα δεδομένα εκπαίδευσης, επιτρέποντας στο μοντέλο να απομνημονεύσει απαντήσεις αντί να συλλογίζεται πραγματικά, παράγοντας τεχνητά υψηλά σκορ.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Τι αξιολογεί το HellaSwag;",
+        "options": [
+          "Επίλυση μαθηματικών προβλημάτων",
+          "Ακρίβεια δημιουργίας κώδικα",
+          "Πραγματολογική ανάκληση από Wikipedia",
+          "Συλλογισμό κοινής λογικής μέσω συμπλήρωσης προτάσεων"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το HellaSwag δοκιμάζει εξαγωγή συμπερασμάτων φυσικής γλώσσας κοινής λογικής ζητώντας από μοντέλα να επιλέξουν την πιο εύλογη συνέχεια σεναρίου από ανταγωνιστικά κατασκευασμένες επιλογές.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Επιλέξτε όλες τις σωστές",
-        "options": [],
+        "text": "Ποιες από τις ακόλουθες είναι έγκυρες μετρικές αξιολόγησης γλωσσικών μοντέλων; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Περπλοκότητα σε κρατημένο σετ ελέγχου",
+          "Αριθμός παραμέτρων μοντέλου",
+          "Ακρίβεια few-shot σε downstream εργασίες",
+          "Υπολογιστικό κόστος εκπαίδευσης σε FLOPs"
+        ],
         "correct": [
           0,
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η περπλοκότητα μετρά πόσο καλά προβλέπει το μοντέλο αόρατο κείμενο, και η ακρίβεια few-shot μετρά απόδοση εργασίας με ελάχιστα παραδείγματα. Ο αριθμός παραμέτρων και τα FLOPs περιγράφουν το μοντέλο, όχι την ποιότητά του.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Γιατί είναι επικίνδυνο να συγκρίνουμε μοντέλα χρησιμοποιώντας μόνο ένα benchmark;",
+        "options": [
+          "Ένα μοντέλο μπορεί να υπερπροσαρμοστεί ή να βελτιστοποιηθεί για αυτό το συγκεκριμένο benchmark χωρίς γενίκευση",
+          "Τα benchmarks παράγουν πάντα ταυτόσημα σκορ για όλα τα μοντέλα",
+          "Μεμονωμένα benchmarks τρέχουν πιο γρήγορα οπότε είναι λιγότερο ακριβή",
+          "Είναι αδύνατο να τρέξεις το ίδιο benchmark δύο φορές"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Ένα μόνο benchmark αποτυπώνει μόνο μία πτυχή ικανότητας. Τα μοντέλα μπορούν να ρυθμιστούν να υπερέχουν σε ένα τεστ ενώ υστερούν αλλού, οπότε η αξιολόγηση πολλαπλών benchmarks δίνει πληρέστερη εικόνα.",
         "isMulti": false
       }
     ]
