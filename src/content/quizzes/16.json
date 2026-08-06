@@ -86,53 +86,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "De ce folosesc transformer-ele mai multe capete de attention în loc de unul singur?",
+        "options": [
+          "Pentru a crește dimensiunea vocabularului",
+          "Fiecare cap poate învăța tipare diferite de relații — sintactice, semantice, poziționale",
+          "Mai multe capete reduc calculul total",
+          "Un singur cap nu poate procesa loturi"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Mai multe capete permit modelului să acorde atenție simultan la diferite tipuri de relații. Un cap poate captura sintaxa, altul coreferința, altul similaritatea semantică.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Dacă d_model=512 și num_heads=8, care este d_k (dimensiunea per cap)?",
+        "options": [
+          "64 (512 / 8)",
+          "512",
+          "4096 (512 * 8)",
+          "8"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: În multi-head attention, d_k = d_model / num_heads = 512/8 = 64. Fiecare cap operează pe un subspațiu mai mic, iar rezultatele sunt concatenate înapoi la d_model.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Ce se întâmplă după ce toate capetele calculează ieșirile lor de attention?",
+        "options": [
+          "Sunt mediate element cu element",
+          "Se folosește doar ieșirea celui mai bun cap",
+          "Sunt concatenate și proiectate printr-o matrice de ieșire învățată W_o",
+          "Sunt însumate și împărțite la num_heads"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Ieșirile capetelor (fiecare de dimensiune d_k) sunt concatenate înapoi la dimensiunea d_model, apoi proiectate prin W_o pentru a produce ieșirea finală.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Are multi-head attention mai mulți parametri decât single-head attention cu același d_model?",
+        "options": [
+          "Da, semnificativ mai mulți datorită matricelor separate W_q, W_k, W_v per cap",
+          "Aproximativ la fel — împărțirea pe capete menține parametrii totali similari, plus W_o",
+          "Mai puțini parametri",
+          "Depinde de funcția de activare"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Fiecare cap folosește ponderi d_model x d_k (unde d_k = d_model/h). Cu h capete, parametrii totali Q/K/V = h * 3 * d_model * d_k = 3 * d_model^2, la fel ca single-head. W_o adaugă încă d_model^2.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Selectați toate răspunsurile corecte",
-        "options": [],
+        "text": "Ce beneficii oferă multi-head attention față de single-head? Selectați toate răspunsurile corecte",
+        "options": [
+          "Captează diferite tipuri de relații simultan",
+          "Reduce complexitatea pătratică a attention-ului",
+          "Elimină necesitatea codărilor poziționale",
+          "Antrenare mai stabilă prin comportament de tip ansamblu"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Mai multe capete captează diferite tipuri de relații și oferă beneficii de tip ansamblu pentru stabilitate. Nu reduc complexitatea O(n^2) și nu înlocuiesc codările poziționale.",
         "isMulti": true
       }
     ]
@@ -142,53 +167,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Γιατί οι transformers χρησιμοποιούν πολλαπλά κεφάλια attention αντί για ένα;",
+        "options": [
+          "Για να αυξήσουν το μέγεθος του λεξιλογίου",
+          "Κάθε κεφάλι μπορεί να μάθει διαφορετικά μοτίβα σχέσεων — συντακτικά, σημασιολογικά, θέσης",
+          "Πολλαπλά κεφάλια μειώνουν τον συνολικό υπολογισμό",
+          "Ένα μόνο κεφάλι δεν μπορεί να επεξεργαστεί παρτίδες"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Τα πολλαπλά κεφάλια επιτρέπουν στο μοντέλο να δίνει ταυτόχρονα προσοχή σε διαφορετικούς τύπους σχέσεων. Ένα κεφάλι μπορεί να αποτυπώνει σύνταξη, ένα άλλο συναναφορά, ένα άλλο σημασιολογική ομοιότητα.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Αν d_model=512 και num_heads=8, ποιο είναι το d_k (η διάσταση ανά κεφάλι);",
+        "options": [
+          "64 (512 / 8)",
+          "512",
+          "4096 (512 * 8)",
+          "8"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Στο multi-head attention, d_k = d_model / num_heads = 512/8 = 64. Κάθε κεφάλι λειτουργεί σε μικρότερο υποχώρο και τα αποτελέσματα συνενώνονται πίσω στο d_model.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Τι συμβαίνει αφού όλα τα κεφάλια υπολογίσουν τις εξόδους attention τους;",
+        "options": [
+          "Υπολογίζεται ο μέσος όρος κατά στοιχείο",
+          "Χρησιμοποιείται μόνο η έξοδος του καλύτερου κεφαλιού",
+          "Συνενώνονται και προβάλλονται μέσω ενός εκπαιδευμένου πίνακα εξόδου W_o",
+          "Αθροίζονται και διαιρούνται με τον αριθμό κεφαλιών"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Οι έξοδοι των κεφαλιών (κάθε μία d_k διαστάσεων) συνενώνονται πίσω σε d_model διαστάσεις και προβάλλονται μέσω W_o για την τελική έξοδο.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Έχει το multi-head attention περισσότερες παραμέτρους από το single-head attention με ίδιο d_model;",
+        "options": [
+          "Ναι, σημαντικά περισσότερες λόγω ξεχωριστών W_q, W_k, W_v ανά κεφάλι",
+          "Περίπου τις ίδιες — ο διαχωρισμός σε κεφάλια διατηρεί τις παραμέτρους παρόμοιες, συν τον W_o",
+          "Λιγότερες παραμέτρους",
+          "Εξαρτάται από τη συνάρτηση ενεργοποίησης"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Κάθε κεφάλι χρησιμοποιεί βάρη d_model x d_k (όπου d_k = d_model/h). Με h κεφάλια, σύνολο Q/K/V = h * 3 * d_model * d_k = 3 * d_model^2, ίδιο με single-head. Ο W_o προσθέτει ακόμη d_model^2.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Επιλέξτε όλες τις σωστές",
-        "options": [],
+        "text": "Ποια πλεονεκτήματα προσφέρει το multi-head attention έναντι του single-head; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Αποτυπώνει ταυτόχρονα διαφορετικούς τύπους σχέσεων",
+          "Μειώνει την τετραγωνική πολυπλοκότητα του attention",
+          "Εξαλείφει την ανάγκη κωδικοποιήσεων θέσης",
+          "Πιο σταθερή εκπαίδευση μέσω συμπεριφοράς τύπου συνόλου"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Τα πολλαπλά κεφάλια αποτυπώνουν διαφορετικούς τύπους σχέσεων και παρέχουν πλεονεκτήματα σταθερότητας τύπου συνόλου. Δεν μειώνουν την O(n^2) πολυπλοκότητα ούτε αντικαθιστούν τις κωδικοποιήσεις θέσης.",
         "isMulti": true
       }
     ]

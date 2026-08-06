@@ -54,10 +54,106 @@
   },
   "ro": {
     "id": "quiz-genai-4-ro",
-    "questions": []
+    "questions": [
+      {
+        "index": 0,
+        "text": "De ce folosește TruthLens semnături MinHash în loc să compare seturi complete de shingle-uri direct?",
+        "options": [
+          "MinHash produce scoruri de similaritate mai precise decât Jaccard exact",
+          "Semnăturile MinHash au dimensiune fixă, făcând comparația O(k) indiferent de lungimea documentului",
+          "MinHash poate detecta textul generat de AI în timp ce comparația de shingle-uri nu poate",
+          "MinHash necesită mai puțină memorie pentru a stoca textul original al documentului"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "✅ Explicație: MinHash produce semnături de dimensiune fixă (ex. 200 de numere întregi) indiferent de dimensiunea documentului. Compararea a două semnături este O(k), în timp ce compararea seturilor complete de shingle-uri este O(n). Acest lucru face practică compararea cu milioane de documente.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ce semnal statistic indică text generat de AI deoarece LLM-urile produc output mai uniform decât oamenii?",
+        "options": [
+          "Perplexitate ridicată — textul AI este mai greu de prezis de modelele lingvistice",
+          "Raport ridicat de hapax legomena — AI folosește mai multe cuvinte unice",
+          "Burstiness scăzut — AI produce propoziții de lungime mai consistentă",
+          "Similaritate Jaccard scăzută — textul AI nu se potrivește cu documentele de referință"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "✅ Explicație: Burstiness măsoară varianța lungimii propozițiilor. Oamenii alternează între propoziții scurte și lungi. Modelele AI produc lungimi mai uniforme, rezultând burstiness scăzut — un semnal puternic de detecție.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Care sunt metrici de bogăție a vocabularului folosite în detecția textului AI? Selectați toate răspunsurile corecte",
+        "options": [
+          "Yule's K — măsoară repetiția cuvintelor într-un text",
+          "Indicele Jaccard — măsoară suprapunerea între două seturi de shingle-uri",
+          "Raportul hapax legomena — fracțiunea cuvintelor care apar exact o dată",
+          "Raportul type-token — cuvinte unice împărțite la totalul cuvintelor"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "✅ Explicație: A, C, D. Yule's K, raportul hapax legomena și raportul type-token sunt metrici de bogăție a vocabularului care analizează diversitatea cuvintelor într-un document. Indicele Jaccard (B) compară două seturi — este o metrică de similaritate, nu de bogăție a vocabularului.",
+        "isMulti": true
+      }
+    ]
   },
   "el": {
     "id": "quiz-genai-4-el",
-    "questions": []
+    "questions": [
+      {
+        "index": 0,
+        "text": "Γιατί το TruthLens χρησιμοποιεί υπογραφές MinHash αντί να συγκρίνει πλήρη σύνολα shingles απευθείας;",
+        "options": [
+          "Το MinHash παράγει ακριβέστερα σκορ ομοιότητας από τον ακριβή Jaccard",
+          "Οι υπογραφές MinHash έχουν σταθερό μέγεθος, κάνοντας τη σύγκριση O(k) ανεξαρτήτως μήκους εγγράφου",
+          "Το MinHash μπορεί να ανιχνεύσει κείμενο δημιουργημένο από AI ενώ η σύγκριση shingles δεν μπορεί",
+          "Το MinHash απαιτεί λιγότερη μνήμη για αποθήκευση του αρχικού κειμένου"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "✅ Εξήγηση: Το MinHash παράγει υπογραφές σταθερού μεγέθους (π.χ. 200 ακέραιοι) ανεξάρτητα από το μέγεθος του εγγράφου. Η σύγκριση δύο υπογραφών είναι O(k), ενώ η σύγκριση πλήρων συνόλων shingles είναι O(n). Αυτό καθιστά πρακτική τη σύγκριση με εκατομμύρια έγγραφα.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ποιο στατιστικό σήμα υποδεικνύει κείμενο δημιουργημένο από AI επειδή τα LLMs παράγουν πιο ομοιόμορφη έξοδο από τους ανθρώπους;",
+        "options": [
+          "Υψηλή perplexity — το κείμενο AI είναι δυσκολότερο να προβλεφθεί από γλωσσικά μοντέλα",
+          "Υψηλός λόγος hapax legomena — η AI χρησιμοποιεί περισσότερες μοναδικές λέξεις",
+          "Χαμηλό burstiness — η AI παράγει προτάσεις πιο σταθερού μήκους",
+          "Χαμηλή ομοιότητα Jaccard — το κείμενο AI δεν ταιριάζει με έγγραφα αναφοράς"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "✅ Εξήγηση: Το burstiness μετρά τη διακύμανση μήκους προτάσεων. Οι άνθρωποι εναλλάσσονται μεταξύ σύντομων και μακριών προτάσεων. Τα μοντέλα AI παράγουν πιο ομοιόμορφο μήκος, με αποτέλεσμα χαμηλό burstiness — ένα ισχυρό σήμα ανίχνευσης.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ποιες είναι μετρικές πλούτου λεξιλογίου που χρησιμοποιούνται στην ανίχνευση κειμένου AI; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Yule's K — μετρά την επανάληψη λέξεων σε ένα κείμενο",
+          "Δείκτης Jaccard — μετρά την επικάλυψη μεταξύ δύο συνόλων shingles",
+          "Λόγος hapax legomena — κλάσμα λέξεων που εμφανίζονται ακριβώς μία φορά",
+          "Λόγος type-token — μοναδικές λέξεις διαιρεμένες με το σύνολο λέξεων"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "✅ Εξήγηση: A, Γ, Δ. Το Yule's K, ο λόγος hapax legomena και ο λόγος type-token είναι μετρικές πλούτου λεξιλογίου που αναλύουν την ποικιλία λέξεων σε ένα έγγραφο. Ο δείκτης Jaccard (B) συγκρίνει δύο σύνολα — είναι μετρική ομοιότητας, όχι πλούτου λεξιλογίου.",
+        "isMulti": true
+      }
+    ]
   }
 }

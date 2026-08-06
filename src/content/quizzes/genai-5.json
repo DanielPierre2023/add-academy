@@ -54,10 +54,106 @@
   },
   "ro": {
     "id": "quiz-genai-5-ro",
-    "questions": []
+    "questions": [
+      {
+        "index": 0,
+        "text": "Ce determină metoda lui Otsu într-un pipeline OCR?",
+        "options": [
+          "Dimensiunea fontului caracterelor din imagine",
+          "Pragul optim pentru separarea primului plan (text) de fundal",
+          "Ordinea de citire a blocurilor de text pe pagină",
+          "Limba documentului"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "✅ Explicație: Metoda lui Otsu maximizează varianța inter-clasă pentru a găsi valoarea unică de intensitate care separă cel mai bine pixelii întunecați de prim-plan (text) de pixelii mai deschisi de fundal. Acest pas de binarizare este critic înainte de a putea începe segmentarea caracterelor.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "De ce se efectuează analiza layout-ului documentului înainte de extragerea informațiilor?",
+        "options": [
+          "Reduce dimensiunea fișierului documentului încărcat",
+          "Traduce documentul în engleză",
+          "Identifică zonele (anteturi, tabele, corp) astfel încât extractoarele pot aplica regulile potrivite fiecărei regiuni",
+          "Criptează câmpurile sensibile pentru securitate"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "✅ Explicație: Analiza layout-ului segmentează pagina în anteturi, text de corp, tabele și subsoluri. Aceasta permite etapei de extracție să aplice reguli specializate — de exemplu, analiză compatibilă cu tabelele pentru elemente rând versus analiză de text liber pentru adrese — producând un output structurat mult mai precis.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ce tehnici folosește pipeline-ul Q&A al DocMind pentru a răspunde la întrebări despre un document? Selectați toate răspunsurile corecte",
+        "options": [
+          "Fragmentarea textului cu suprapunere pentru a păstra contextul la granițe",
+          "Antrenarea unei rețele neuronale pe fiecare document încărcat",
+          "Expansiunea cuvintelor cheie ale interogării folosind dicționare de sinonime",
+          "Scorarea fragmentelor prin numărul de potriviri de cuvinte cheie și euristici de prezență a datelor"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "✅ Explicație: A, C, D. Pipeline-ul împarte textul în fragmente suprapuse, extinde întrebarea utilizatorului cu sinonime, apoi scorează fiecare fragment după câte cuvinte cheie conține (cu bonusuri pentru valori monetare și date). Nu se antrenează nicio rețea neuronală — abordarea este complet bazată pe cuvinte cheie, făcând-o rapidă și fără dependențe.",
+        "isMulti": true
+      }
+    ]
   },
   "el": {
     "id": "quiz-genai-5-el",
-    "questions": []
+    "questions": [
+      {
+        "index": 0,
+        "text": "Τι καθορίζει η μέθοδος Otsu σε ένα pipeline OCR;",
+        "options": [
+          "Το μέγεθος γραμματοσειράς των χαρακτήρων στην εικόνα",
+          "Το βέλτιστο κατώφλι για διαχωρισμό πρώτου πλάνου (κείμενο) από φόντο",
+          "Τη σειρά ανάγνωσης των μπλοκ κειμένου στη σελίδα",
+          "Τη γλώσσα του εγγράφου"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "✅ Εξήγηση: Η μέθοδος Otsu μεγιστοποιεί τη διακύμανση μεταξύ κλάσεων για να βρει τη μοναδική τιμή έντασης που διαχωρίζει καλύτερα τα σκοτεινά pixels πρώτου πλάνου (κείμενο) από τα ανοιχτόχρωμα pixels φόντου. Αυτό το βήμα δυαδοποίησης είναι κρίσιμο πριν αρχίσει η κατάτμηση χαρακτήρων.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Γιατί εκτελείται η ανάλυση διάταξης εγγράφου πριν από την εξαγωγή πληροφοριών;",
+        "options": [
+          "Μειώνει το μέγεθος αρχείου του μεταφορτωμένου εγγράφου",
+          "Μεταφράζει το έγγραφο στα αγγλικά",
+          "Αναγνωρίζει ζώνες (επικεφαλίδες, πίνακες, σώμα) ώστε οι εξαγωγείς να εφαρμόζουν τους σωστούς κανόνες σε κάθε περιοχή",
+          "Κρυπτογραφεί ευαίσθητα πεδία για ασφάλεια"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "✅ Εξήγηση: Η ανάλυση διάταξης κατατέμνει τη σελίδα σε επικεφαλίδες, κύριο κείμενο, πίνακες και υποσέλιδα. Αυτό επιτρέπει στο στάδιο εξαγωγής να εφαρμόζει εξειδικευμένους κανόνες — για παράδειγμα, ανάλυση συμβατή με πίνακες για στοιχεία γραμμών έναντι ανάλυσης ελεύθερου κειμένου για διευθύνσεις — παράγοντας πολύ ακριβέστερη δομημένη έξοδο.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ποιες τεχνικές χρησιμοποιεί το pipeline Q&A του DocMind για να απαντά σε ερωτήσεις σχετικά με ένα έγγραφο; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Τεμαχισμός κειμένου με επικάλυψη για διατήρηση πλαισίου στα όρια",
+          "Εκπαίδευση νευρωνικού δικτύου σε κάθε μεταφορτωμένο έγγραφο",
+          "Επέκταση λέξεων-κλειδιών ερωτήματος χρησιμοποιώντας λεξικά συνωνύμων",
+          "Βαθμολόγηση τεμαχίων βάσει αριθμού αντιστοιχιών λέξεων-κλειδιών και ευρετικών παρουσίας δεδομένων"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "✅ Εξήγηση: A, Γ, Δ. Το pipeline χωρίζει το κείμενο σε τεμάχια με επικάλυψη, επεκτείνει την ερώτηση του χρήστη με συνώνυμα, και βαθμολογεί κάθε τεμάχιο βάσει του πόσες λέξεις-κλειδιά περιέχει (με μπόνους για νομισματικές αξίες και ημερομηνίες). Δεν εκπαιδεύεται κανένα νευρωνικό δίκτυο — η προσέγγιση είναι εξ ολοκλήρου βασισμένη σε λέξεις-κλειδιά, καθιστώντας την γρήγορη και χωρίς εξαρτήσεις.",
+        "isMulti": true
+      }
+    ]
   }
 }

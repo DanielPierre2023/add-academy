@@ -12,9 +12,7 @@
           "8 GB",
           "40 GB"
         ],
-        "correct": [
-          2
-        ],
+        "correct": [2],
         "explanation": "LoRA fine-tuning a 7B model requires approximately 8 GB VRAM due to efficient parameter freezing. Full fine-tuning would need 40+ GB.",
         "isMulti": false
       },
@@ -27,9 +25,7 @@
           "Local Python cannot run numpy",
           "The browser sandbox supports PyTorch natively"
         ],
-        "correct": [
-          1
-        ],
+        "correct": [1],
         "explanation": "Pyodide (browser Python) is perfect for quick numpy experiments and concept visualization, but cannot run PyTorch, access GPUs, or deploy real services.",
         "isMulti": false
       },
@@ -42,26 +38,20 @@
           "virtualenv --create llm-env",
           "python -m venv llm-env"
         ],
-        "correct": [
-          3
-        ],
+        "correct": [3],
         "explanation": "python -m venv is the standard library way to create virtual environments. It creates an isolated Python installation in the llm-env directory.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Which files should be in your .gitignore for an ML project?Select all that apply",
+        "text": "Which files should be in your .gitignore for an ML project? Select all that apply",
         "options": [
           ".env (API keys)",
           "requirements.txt",
           "checkpoints/*.pt (model weights)",
           "data/ (large training datasets)"
         ],
-        "correct": [
-          0,
-          2,
-          3
-        ],
+        "correct": [0, 2, 3],
         "explanation": ".env contains secrets, model checkpoints are large binary files, and training data is too big for Git. requirements.txt should be committed so others can reproduce your environment.",
         "isMulti": true
       },
@@ -74,9 +64,7 @@
           "AI Writing Assistant, Code Reviewer, RAG Chatbot, Content Moderator, Translation API",
           "Search engine, recommendation system, fraud detector, sentiment analyzer, spam filter"
         ],
-        "correct": [
-          2
-        ],
+        "correct": [2],
         "explanation": "These 5 products cover the most important LLM use cases: generation, code understanding, retrieval-augmented generation, safety, and multilingual capabilities.",
         "isMulti": false
       }
@@ -87,79 +75,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "What is the minimum GPU VRAM needed to fine-tune a 7B parameter model with LoRA?",
+        "text": "Care este memoria VRAM minimă a GPU-ului necesară pentru a face fine-tuning unui model cu 7B parametri folosind LoRA?",
         "options": [
           "4 GB",
           "6 GB",
           "8 GB",
           "40 GB"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "LoRA fine-tuning a 7B model requires approximately 8 GB VRAM due to efficient parameter freezing. Full fine-tuning would need 40+ GB.",
+        "correct": [2],
+        "explanation": "Fine-tuning-ul LoRA al unui model 7B necesită aproximativ 8 GB VRAM datorită înghețării eficiente a parametrilor. Fine-tuning-ul complet ar necesita 40+ GB.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Why does this course use both a browser sandbox AND real Python environments?",
+        "text": "De ce folosește acest curs atât un sandbox în browser CÂT ȘI medii Python reale?",
         "options": [
-          "The browser sandbox is faster than local Python",
-          "Browser sandbox teaches concepts quickly; real environments are needed for GPU training and deployment",
-          "Local Python cannot run numpy",
-          "The browser sandbox supports PyTorch natively"
+          "Sandbox-ul din browser este mai rapid decât Python local",
+          "Sandbox-ul din browser predă concepte rapid; mediile reale sunt necesare pentru antrenament GPU și deployment",
+          "Python local nu poate rula numpy",
+          "Sandbox-ul din browser suportă PyTorch nativ"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Pyodide (browser Python) is perfect for quick numpy experiments and concept visualization, but cannot run PyTorch, access GPUs, or deploy real services.",
+        "correct": [1],
+        "explanation": "Pyodide (Python în browser) este perfect pentru experimente rapide cu numpy și vizualizarea conceptelor, dar nu poate rula PyTorch, accesa GPU-uri sau deploya servicii reale.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Which command creates a Python virtual environment?",
+        "text": "Ce comandă creează un mediu virtual Python?",
         "options": [
           "pip install venv",
           "conda create env",
           "virtualenv --create llm-env",
           "python -m venv llm-env"
         ],
-        "correct": [
-          3
-        ],
-        "explanation": "python -m venv is the standard library way to create virtual environments. It creates an isolated Python installation in the llm-env directory.",
+        "correct": [3],
+        "explanation": "python -m venv este metoda standard din biblioteca standard pentru a crea medii virtuale. Creează o instalare Python izolată în directorul llm-env.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Which files should be in your .gitignore for an ML project?Select all that apply",
+        "text": "Ce fișiere ar trebui să fie în .gitignore pentru un proiect ML? Selectați toate variantele corecte",
         "options": [
-          ".env (API keys)",
+          ".env (chei API)",
           "requirements.txt",
-          "checkpoints/*.pt (model weights)",
-          "data/ (large training datasets)"
+          "checkpoints/*.pt (ponderi model)",
+          "data/ (seturi mari de date de antrenament)"
         ],
-        "correct": [
-          0,
-          2,
-          3
-        ],
-        "explanation": ".env contains secrets, model checkpoints are large binary files, and training data is too big for Git. requirements.txt should be committed so others can reproduce your environment.",
+        "correct": [0, 2, 3],
+        "explanation": ".env conține secrete, checkpoint-urile modelului sunt fișiere binare mari, iar datele de antrenament sunt prea mari pentru Git. requirements.txt ar trebui comis pentru ca alții să poată reproduce mediul tău.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "What are the 5 SaaS products you will build by the end of this course?",
+        "text": "Care sunt cele 5 produse SaaS pe care le vei construi până la sfârșitul acestui curs?",
         "options": [
-          "Social media bot, image generator, speech-to-text, video editor, game AI",
-          "Database manager, file converter, web scraper, email client, calculator",
-          "AI Writing Assistant, Code Reviewer, RAG Chatbot, Content Moderator, Translation API",
-          "Search engine, recommendation system, fraud detector, sentiment analyzer, spam filter"
+          "Bot social media, generator de imagini, speech-to-text, editor video, AI pentru jocuri",
+          "Manager bază de date, convertor fișiere, web scraper, client email, calculator",
+          "Asistent AI de Scriere, Reviewer de Cod, Chatbot RAG, Moderator de Conținut, API de Traducere",
+          "Motor de căutare, sistem de recomandări, detector de fraudă, analizor de sentimente, filtru spam"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "These 5 products cover the most important LLM use cases: generation, code understanding, retrieval-augmented generation, safety, and multilingual capabilities.",
+        "correct": [2],
+        "explanation": "Aceste 5 produse acoperă cele mai importante cazuri de utilizare LLM: generare, înțelegerea codului, generare augmentată prin recuperare, siguranță și capacități multilingve.",
         "isMulti": false
       }
     ]
@@ -169,79 +145,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "What is the minimum GPU VRAM needed to fine-tune a 7B parameter model with LoRA?",
+        "text": "Ποια είναι η ελάχιστη GPU VRAM που χρειάζεται για fine-tuning ενός μοντέλου 7B παραμέτρων με LoRA;",
         "options": [
           "4 GB",
           "6 GB",
           "8 GB",
           "40 GB"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "LoRA fine-tuning a 7B model requires approximately 8 GB VRAM due to efficient parameter freezing. Full fine-tuning would need 40+ GB.",
+        "correct": [2],
+        "explanation": "Το LoRA fine-tuning ενός μοντέλου 7B απαιτεί περίπου 8 GB VRAM λόγω αποδοτικού παγώματος παραμέτρων. Το πλήρες fine-tuning θα χρειαζόταν 40+ GB.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Why does this course use both a browser sandbox AND real Python environments?",
+        "text": "Γιατί αυτό το μάθημα χρησιμοποιεί τόσο sandbox στο browser ΟΣΟ ΚΑΙ πραγματικά περιβάλλοντα Python;",
         "options": [
-          "The browser sandbox is faster than local Python",
-          "Browser sandbox teaches concepts quickly; real environments are needed for GPU training and deployment",
-          "Local Python cannot run numpy",
-          "The browser sandbox supports PyTorch natively"
+          "Το sandbox του browser είναι πιο γρήγορο από τοπική Python",
+          "Το sandbox του browser διδάσκει έννοιες γρήγορα· πραγματικά περιβάλλοντα χρειάζονται για εκπαίδευση GPU και deployment",
+          "Η τοπική Python δεν μπορεί να τρέξει numpy",
+          "Το sandbox του browser υποστηρίζει PyTorch εγγενώς"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Pyodide (browser Python) is perfect for quick numpy experiments and concept visualization, but cannot run PyTorch, access GPUs, or deploy real services.",
+        "correct": [1],
+        "explanation": "Το Pyodide (Python στο browser) είναι ιδανικό για γρήγορα πειράματα numpy και οπτικοποίηση εννοιών, αλλά δεν μπορεί να τρέξει PyTorch, να χρησιμοποιήσει GPU ή να κάνει deploy πραγματικές υπηρεσίες.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Which command creates a Python virtual environment?",
+        "text": "Ποια εντολή δημιουργεί ένα εικονικό περιβάλλον Python;",
         "options": [
           "pip install venv",
           "conda create env",
           "virtualenv --create llm-env",
           "python -m venv llm-env"
         ],
-        "correct": [
-          3
-        ],
-        "explanation": "python -m venv is the standard library way to create virtual environments. It creates an isolated Python installation in the llm-env directory.",
+        "correct": [3],
+        "explanation": "Η python -m venv είναι ο τυπικός τρόπος δημιουργίας εικονικών περιβαλλόντων. Δημιουργεί μια απομονωμένη εγκατάσταση Python στον κατάλογο llm-env.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Which files should be in your .gitignore for an ML project?Select all that apply",
+        "text": "Ποια αρχεία πρέπει να είναι στο .gitignore ενός ML project; Επιλέξτε όλα όσα ισχύουν",
         "options": [
-          ".env (API keys)",
+          ".env (κλειδιά API)",
           "requirements.txt",
-          "checkpoints/*.pt (model weights)",
-          "data/ (large training datasets)"
+          "checkpoints/*.pt (βάρη μοντέλου)",
+          "data/ (μεγάλα σύνολα δεδομένων εκπαίδευσης)"
         ],
-        "correct": [
-          0,
-          2,
-          3
-        ],
-        "explanation": ".env contains secrets, model checkpoints are large binary files, and training data is too big for Git. requirements.txt should be committed so others can reproduce your environment.",
+        "correct": [0, 2, 3],
+        "explanation": "Το .env περιέχει μυστικά, τα checkpoint μοντέλων είναι μεγάλα δυαδικά αρχεία και τα δεδομένα εκπαίδευσης είναι πολύ μεγάλα για Git. Το requirements.txt πρέπει να γίνει commit ώστε άλλοι να αναπαράγουν το περιβάλλον σας.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "What are the 5 SaaS products you will build by the end of this course?",
+        "text": "Ποια είναι τα 5 SaaS προϊόντα που θα φτιάξετε μέχρι το τέλος αυτού του μαθήματος;",
         "options": [
-          "Social media bot, image generator, speech-to-text, video editor, game AI",
-          "Database manager, file converter, web scraper, email client, calculator",
-          "AI Writing Assistant, Code Reviewer, RAG Chatbot, Content Moderator, Translation API",
-          "Search engine, recommendation system, fraud detector, sentiment analyzer, spam filter"
+          "Bot κοινωνικών δικτύων, γεννήτρια εικόνων, speech-to-text, επεξεργαστής βίντεο, AI παιχνιδιών",
+          "Διαχειριστής βάσης δεδομένων, μετατροπέας αρχείων, web scraper, email client, αριθμομηχανή",
+          "AI Βοηθός Συγγραφής, Code Reviewer, RAG Chatbot, Συντονιστής Περιεχομένου, API Μετάφρασης",
+          "Μηχανή αναζήτησης, σύστημα συστάσεων, ανιχνευτής απάτης, αναλυτής συναισθημάτων, φίλτρο spam"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "These 5 products cover the most important LLM use cases: generation, code understanding, retrieval-augmented generation, safety, and multilingual capabilities.",
+        "correct": [2],
+        "explanation": "Αυτά τα 5 προϊόντα καλύπτουν τις σημαντικότερες περιπτώσεις χρήσης LLM: παραγωγή, κατανόηση κώδικα, ανάκτηση-ενισχυμένη παραγωγή, ασφάλεια και πολυγλωσσικές δυνατότητες.",
         "isMulti": false
       }
     ]

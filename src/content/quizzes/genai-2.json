@@ -54,10 +54,106 @@
   },
   "ro": {
     "id": "quiz-genai-2-ro",
-    "questions": []
+    "questions": [
+      {
+        "index": 0,
+        "text": "De ce necesită un SaaS de generare video o coadă de sarcini asincronă în loc de un simplu model cerere-răspuns?",
+        "options": [
+          "Deoarece fișierele video sunt prea mari pentru a fi transmise prin HTTP",
+          "Deoarece generarea video durează 30 de secunde până la 5 minute, ceea ce depășește limitele tipice de timeout HTTP",
+          "Deoarece browserele nu pot afișa conținut video direct",
+          "Deoarece API-urile video acceptă doar conexiuni WebSocket"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "✅ Explicație: Generarea video este un proces de lungă durată (30s–5min). Conexiunile HTTP ar expira, așa că returnezi imediat un ID de sarcină și lași clienții să verifice progresul sau să primească callback-uri webhook la finalizare.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Care este scopul principal al limitării sarcinilor concurente de generare video într-un SaaS?",
+        "options": [
+          "Pentru a face coada să pară ocupată și a crea cerere artificială",
+          "Pentru a îmbunătăți calitatea video prin dedicarea mai multor resurse GPU per sarcină",
+          "Pentru a controla costurile API și a preveni cheltuielile excesive pe generarea bazată pe GPU",
+          "Pentru a simplifica codul evitând multithreading-ul"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "✅ Explicație: Fiecare apel de generare video costă 0,10$–1,00$ în taxe API. Fără limite de concurență, un vârf de trafic ar putea lansa sute de sarcini simultane și epuiza bugetul în câteva minute. Coada impune o rată controlabilă de cheltuieli.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Care sunt strategii valide pentru gestionarea sarcinilor eșuate de generare video? Selectați toate răspunsurile corecte",
+        "options": [
+          "Reîncercare automată cu un număr maxim de reîncercări",
+          "Eliminarea silențioasă a sarcinii și rambursarea utilizatorului fără notificare",
+          "Notificarea utilizatorului prin webhook sau stare de polling că sarcina a eșuat",
+          "Repunerea sarcinii în coadă cu aceiași parametri pentru o altă încercare"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "✅ Explicație: A, C, D. Sarcinile eșuate ar trebui reîncercate automat (până la o limită), repuse în coadă pentru altă încercare, iar utilizatorul ar trebui notificat despre eșec prin metoda de notificare aleasă. Eliminarea silențioasă a sarcinilor (B) este o experiență slabă și erodează încrederea.",
+        "isMulti": true
+      }
+    ]
   },
   "el": {
     "id": "quiz-genai-2-el",
-    "questions": []
+    "questions": [
+      {
+        "index": 0,
+        "text": "Γιατί απαιτεί ένα SaaS δημιουργίας βίντεο μια ασύγχρονη ουρά εργασιών αντί ενός απλού μοτίβου αίτησης-απάντησης;",
+        "options": [
+          "Επειδή τα αρχεία βίντεο είναι πολύ μεγάλα για μετάδοση μέσω HTTP",
+          "Επειδή η δημιουργία βίντεο διαρκεί 30 δευτερόλεπτα έως 5 λεπτά, υπερβαίνοντας τα τυπικά όρια timeout HTTP",
+          "Επειδή τα προγράμματα περιήγησης δεν μπορούν να εμφανίσουν περιεχόμενο βίντεο απευθείας",
+          "Επειδή τα API βίντεο δέχονται μόνο συνδέσεις WebSocket"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "✅ Εξήγηση: Η δημιουργία βίντεο είναι μια μακροχρόνια διεργασία (30s–5min). Οι συνδέσεις HTTP θα έληγαν, οπότε επιστρέφετε αμέσως ένα αναγνωριστικό εργασίας και αφήνετε τους πελάτες να ελέγχουν την πρόοδο ή να λαμβάνουν webhook callbacks όταν ολοκληρωθεί.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ποιος είναι ο κύριος σκοπός του περιορισμού ταυτόχρονων εργασιών δημιουργίας βίντεο σε ένα SaaS;",
+        "options": [
+          "Για να φαίνεται η ουρά απασχολημένη και να δημιουργηθεί τεχνητή ζήτηση",
+          "Για βελτίωση ποιότητας βίντεο αφιερώνοντας περισσότερους πόρους GPU ανά εργασία",
+          "Για τον έλεγχο κόστους API και την αποτροπή ανεξέλεγκτων δαπανών σε δημιουργία βασισμένη σε GPU",
+          "Για απλοποίηση του κώδικα αποφεύγοντας multithreading"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "✅ Εξήγηση: Κάθε κλήση δημιουργίας βίντεο κοστίζει 0,10$–1,00$ σε χρεώσεις API. Χωρίς όρια ταυτόχρονων εργασιών, μια αιχμή κίνησης θα μπορούσε να ξεκινήσει εκατοντάδες ταυτόχρονες εργασίες και να εξαντλήσει τον προϋπολογισμό σε λεπτά. Η ουρά επιβάλλει ελεγχόμενο ρυθμό δαπανών.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ποιες είναι έγκυρες στρατηγικές για τη διαχείριση αποτυχημένων εργασιών δημιουργίας βίντεο; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Αυτόματη επανάληψη με μέγιστο αριθμό προσπαθειών",
+          "Σιωπηρή απόρριψη της εργασίας και επιστροφή χρημάτων χωρίς ειδοποίηση",
+          "Ειδοποίηση του χρήστη μέσω webhook ή κατάστασης polling ότι η εργασία απέτυχε",
+          "Επαναφορά της εργασίας στην ουρά με τις ίδιες παραμέτρους για νέα προσπάθεια"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "✅ Εξήγηση: A, Γ, Δ. Οι αποτυχημένες εργασίες πρέπει να επαναλαμβάνονται αυτόματα (μέχρι ένα όριο), να μπαίνουν ξανά στην ουρά για νέα προσπάθεια, και ο χρήστης πρέπει να ειδοποιείται για την αποτυχία μέσω της μεθόδου ειδοποίησης που επέλεξε. Η σιωπηρή απόρριψη εργασιών (B) είναι κακή εμπειρία χρήστη και υπονομεύει την εμπιστοσύνη.",
+        "isMulti": true
+      }
+    ]
   }
 }

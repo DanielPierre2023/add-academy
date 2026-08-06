@@ -87,54 +87,79 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Care este inovația cheie a DPO (Direct Preference Optimization) comparativ cu RLHF?",
+        "options": [
+          "DPO folosește un model de recompensă mai mare pentru evaluare mai bună",
+          "DPO antrenează modelul folosind doar exemple pozitive",
+          "DPO elimină necesitatea unui model de recompensă separat și a antrenării RL, optimizând preferințele direct cu o pierdere de tip clasificare",
+          "DPO necesită mai multe adnotări umane decât RLHF"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: DPO reformulează obiectivul RLHF într-o pierdere simplă de clasificare pe perechi de preferințe, ocolind necesitatea de a antrena un model de recompensă separat și de a rula PPO. Aceasta face pipeline-ul de antrenare mai simplu și mai stabil.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Din ce constă un exemplu de antrenare DPO?",
+        "options": [
+          "Un singur răspuns cu un scor numeric de calitate",
+          "Un prompt asociat cu un răspuns ales (preferat) și un răspuns respins (nepreferat)",
+          "O secvență de token-uri cu poziții mascate pentru predicție",
+          "O instrucțiune cu mai multe răspunsuri corecte clasificate după dificultate"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Datele de antrenare DPO constau din triplete: un prompt, un răspuns ales (preferat) și un răspuns respins (nepreferat). Modelul învață să crească probabilitatea răspunsului ales relativ la cel respins.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Selectați toate răspunsurile corecte",
-        "options": [],
+        "text": "Care dintre următoarele sunt avantaje ale DPO față de RLHF tradițional? Selectați toate răspunsurile corecte",
+        "options": [
+          "Nu este nevoie să se antreneze și să se mențină un model de recompensă separat",
+          "Antrenarea este mai stabilă deoarece evită provocările optimizării RL",
+          "DPO nu necesită date de preferințe umane",
+          "Implementare mai simplă cu infrastructură standard de antrenare supervizată"
+        ],
         "correct": [
           0,
           1,
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: DPO elimină pasul de antrenare a modelului de recompensă, evită instabilitatea antrenării RL bazate pe PPO și poate fi implementat cu instrumente standard de învățare supervizată. Totuși, necesită încă date de preferințe umane sub formă de perechi ales/respins.",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "În funcția de pierdere DPO, ce rol joacă modelul de referință?",
+        "options": [
+          "Generează noi exemple de antrenare în timpul optimizării",
+          "Servește ca model de recompensă pentru evaluarea ieșirilor",
+          "Înlocuiește modelul de politică după finalizarea antrenării",
+          "Oferă o bază de referință pentru a preveni politica de la devierea prea mare, analog constrângerii KL din RLHF"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Modelul de referință (de obicei modelul SFT înainte de antrenarea DPO) acționează ca un regularizator în pierderea DPO. Pierderea compară raporturile log-probabilităților între modelul de politică și cel de referință pentru răspunsurile alese și respinse, impunând implicit o constrângere KL similară cu RLHF.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Când ar putea fi preferat RLHF față de DPO în ciuda simplității DPO?",
+        "options": [
+          "Când nu sunt disponibile date de preferințe umane",
+          "Când modelul este prea mic pentru ajustare fină",
+          "Când explorarea online și îmbunătățirea iterativă a modelului de recompensă pot produce o aliniere mai bună decât seturile statice de preferințe",
+          "Când infrastructura de antrenare nu suportă calculul gradienților"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: RLHF permite generarea și evaluarea online de noi eșantioane în timpul antrenării, permițând îmbunătățirea iterativă atât a politicii cât și a modelului de recompensă. DPO este limitat la date de preferințe offline, care ar putea să nu surprindă la fel de bine comportamentul în evoluție al politicii ca metodele online.",
         "isMulti": false
       }
     ]
@@ -144,54 +169,79 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Ποια είναι η βασική καινοτομία του DPO (Direct Preference Optimization) σε σύγκριση με RLHF;",
+        "options": [
+          "Το DPO χρησιμοποιεί μεγαλύτερο μοντέλο ανταμοιβής για καλύτερη βαθμολόγηση",
+          "Το DPO εκπαιδεύει το μοντέλο χρησιμοποιώντας μόνο θετικά παραδείγματα",
+          "Το DPO εξαλείφει την ανάγκη ξεχωριστού μοντέλου ανταμοιβής και εκπαίδευσης RL, βελτιστοποιώντας προτιμήσεις απευθείας με απώλεια τύπου ταξινόμησης",
+          "Το DPO απαιτεί περισσότερες ανθρώπινες σχολιασμούς από RLHF"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το DPO αναδιατυπώνει τον στόχο RLHF σε απλή απώλεια ταξινόμησης σε ζεύγη προτιμήσεων, παρακάμπτοντας την ανάγκη εκπαίδευσης ξεχωριστού μοντέλου ανταμοιβής και εκτέλεσης PPO. Αυτό κάνει την αγωγή εκπαίδευσης απλούστερη και πιο σταθερή.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Από τι αποτελείται ένα παράδειγμα εκπαίδευσης DPO;",
+        "options": [
+          "Μία μόνο απάντηση με αριθμητικό σκορ ποιότητας",
+          "Ένα prompt συνοδευόμενο από επιλεγμένη (προτιμώμενη) απάντηση και απορριφθείσα (μη προτιμώμενη) απάντηση",
+          "Μια ακολουθία tokens με μασκαρισμένες θέσεις για πρόβλεψη",
+          "Μια οδηγία με πολλαπλές σωστές απαντήσεις κατατεταγμένες κατά δυσκολία"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Τα δεδομένα εκπαίδευσης DPO αποτελούνται από τριπλέτες: ένα prompt, μια επιλεγμένη (προτιμώμενη) απάντηση και μια απορριφθείσα (μη προτιμώμενη) απάντηση. Το μοντέλο μαθαίνει να αυξήσει την πιθανότητα της επιλεγμένης απάντησης σχετικά με την απορριφθείσα.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Επιλέξτε όλες τις σωστές",
-        "options": [],
+        "text": "Ποια από τα ακόλουθα είναι πλεονεκτήματα DPO έναντι παραδοσιακού RLHF; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Δεν χρειάζεται εκπαίδευση και συντήρηση ξεχωριστού μοντέλου ανταμοιβής",
+          "Η εκπαίδευση είναι πιο σταθερή αφού αποφεύγει προκλήσεις βελτιστοποίησης RL",
+          "Το DPO δεν απαιτεί δεδομένα ανθρώπινων προτιμήσεων",
+          "Απλούστερη υλοποίηση με τυπική υποδομή εποπτευόμενης εκπαίδευσης"
+        ],
         "correct": [
           0,
           1,
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το DPO αφαιρεί το βήμα εκπαίδευσης μοντέλου ανταμοιβής, αποφεύγει την αστάθεια εκπαίδευσης RL βάσει PPO και μπορεί να υλοποιηθεί με τυπικά εργαλεία εποπτευόμενης μάθησης. Ωστόσο, εξακολουθεί να απαιτεί δεδομένα ανθρώπινων προτιμήσεων σε μορφή ζευγών επιλεγμένων/απορριφθέντων.",
         "isMulti": true
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Στη συνάρτηση απώλειας DPO, ποιον ρόλο παίζει το μοντέλο αναφοράς;",
+        "options": [
+          "Δημιουργεί νέα παραδείγματα εκπαίδευσης κατά τη βελτιστοποίηση",
+          "Χρησιμεύει ως μοντέλο ανταμοιβής για βαθμολόγηση εξόδων",
+          "Αντικαθιστά το μοντέλο πολιτικής μετά ολοκλήρωση εκπαίδευσης",
+          "Παρέχει βάση αναφοράς για αποτροπή υπερβολικής απόκλισης πολιτικής, ανάλογα με τον περιορισμό KL στο RLHF"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το μοντέλο αναφοράς (τυπικά το SFT μοντέλο πριν εκπαίδευση DPO) λειτουργεί ως κανονικοποιητής στην απώλεια DPO. Η απώλεια συγκρίνει λόγους log-πιθανότητας μεταξύ μοντέλου πολιτικής και αναφοράς για επιλεγμένες και απορριφθείσες απαντήσεις, επιβάλλοντας σιωπηρά περιορισμό KL παρόμοιο με RLHF.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Πότε μπορεί να προτιμηθεί το RLHF έναντι DPO παρά την απλότητα του DPO;",
+        "options": [
+          "Όταν δεν υπάρχουν διαθέσιμα δεδομένα ανθρώπινων προτιμήσεων",
+          "Όταν το μοντέλο είναι πολύ μικρό για ακριβή ρύθμιση",
+          "Όταν η online εξερεύνηση και η επαναληπτική βελτίωση μοντέλου ανταμοιβής μπορούν να αποδώσουν καλύτερη ευθυγράμμιση από στατικά datasets προτιμήσεων",
+          "Όταν η υποδομή εκπαίδευσης δεν υποστηρίζει υπολογισμό κλίσεων"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το RLHF επιτρέπει online δημιουργία και βαθμολόγηση νέων δειγμάτων κατά εκπαίδευση, επιτρέποντας επαναληπτική βελτίωση τόσο πολιτικής όσο και μοντέλου ανταμοιβής. Το DPO περιορίζεται σε offline δεδομένα προτιμήσεων, που μπορεί να μην αποτυπώνουν τη μεταβαλλόμενη συμπεριφορά πολιτικής τόσο καλά όσο online μέθοδοι.",
         "isMulti": false
       }
     ]

@@ -86,53 +86,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Care este obiectivul principal al cuantizării modelelor?",
+        "options": [
+          "Creșterea numărului de parametri ai modelului",
+          "Reducerea dimensiunii modelului și a costului de inferență prin folosirea formatelor numerice de precizie mai mică",
+          "Adăugarea mai multor date de antrenare pentru îmbunătățirea acurateței",
+          "Convertirea modelului din Python în C++"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Cuantizarea mapează ponderile de la formate de precizie mare (FP32/FP16) la formate de precizie mai mică (INT8, INT4), micșorând dimensiunea modelului și accelerând inferența cu pierdere minimă de calitate.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Care este diferența cheie între PTQ și QAT?",
+        "options": [
+          "PTQ necesită mai multă memorie GPU decât QAT",
+          "QAT poate fi aplicat doar modelelor mici",
+          "PTQ antrenează modelul de la zero în timp ce QAT nu",
+          "PTQ cuantizează după finalizarea antrenării, în timp ce QAT simulează cuantizarea în timpul antrenării"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Post-Training Quantization (PTQ) convertește un model deja antrenat, în timp ce Quantization-Aware Training (QAT) injectează noduri de cuantizare falsă în timpul antrenării astfel încât modelul să învețe să compenseze pierderea de precizie.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Pentru ce este folosit în principal formatul GGUF?",
+        "options": [
+          "Stocarea seturilor de date de antrenare într-un format comprimat",
+          "Definirea arhitecturii modelului în YAML",
+          "Împachetarea modelelor cuantizate pentru inferență locală eficientă pe CPU/GPU",
+          "Criptarea ponderilor modelului pentru implementare sigură"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: GGUF (GPT-Generated Unified Format) este un format de fișier unic folosit de llama.cpp și instrumente similare pentru a stoca ponderi de model cuantizate cu metadate pentru inferență locală eficientă.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Selectați toate răspunsurile corecte",
-        "options": [],
+        "text": "Care dintre următoarele sunt adevărate despre cuantizarea INT4 comparativ cu INT8? Selectați toate răspunsurile corecte",
+        "options": [
+          "INT4 produce întotdeauna ieșiri de calitate mai bună decât INT8",
+          "INT4 folosește jumătate din biții per pondere comparativ cu INT8, rezultând modele mai mici",
+          "INT4 nu necesită date de calibrare",
+          "INT4 cauzează de obicei mai multă degradare a calității decât INT8"
+        ],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: INT4 înjumătățește biții per pondere comparativ cu INT8, făcând modelele mai mici și mai rapide, dar reprezentarea mai grosieră cauzează de obicei mai multă pierdere de acuratețe. Calibrarea atentă ajută la atenuarea acesteia.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Care este o strategie comună de implementare pentru servirea LLM-urilor cuantizate la mulți utilizatori?",
+        "options": [
+          "Rularea modelelor cuantizate în spatele unui API cu inferență în loturi pe servere GPU",
+          "Trimiterea ponderilor modelului fiecărui utilizator individual prin email",
+          "Rularea modelului FP32 complet pe un singur CPU",
+          "Stocarea modelului exclusiv în localStorage-ul browserului"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Modelele cuantizate sunt de obicei servite prin endpoint-uri API care grupează cererile și folosesc accelerare GPU, oferind latență mică și inferență eficientă din punct de vedere al costurilor la scară.",
         "isMulti": false
       }
     ]
@@ -142,53 +167,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Ποιος είναι ο κύριος στόχος της κβάντισης μοντέλων;",
+        "options": [
+          "Αύξηση αριθμού παραμέτρων μοντέλου",
+          "Μείωση μεγέθους μοντέλου και κόστους εξαγωγής συμπερασμάτων χρησιμοποιώντας μορφές αριθμών χαμηλότερης ακρίβειας",
+          "Προσθήκη δεδομένων εκπαίδευσης για βελτίωση ακρίβειας",
+          "Μετατροπή μοντέλου από Python σε C++"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η κβάντιση αντιστοιχίζει βάρη από μορφές υψηλής ακρίβειας (FP32/FP16) σε χαμηλότερης ακρίβειας (INT8, INT4), μειώνοντας μέγεθος μοντέλου και επιταχύνοντας εξαγωγή συμπερασμάτων με ελάχιστη απώλεια ποιότητας.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Ποια είναι η βασική διαφορά μεταξύ PTQ και QAT;",
+        "options": [
+          "Η PTQ απαιτεί περισσότερη μνήμη GPU από QAT",
+          "Η QAT εφαρμόζεται μόνο σε μικρά μοντέλα",
+          "Η PTQ εκπαιδεύει μοντέλο από αρχή ενώ η QAT όχι",
+          "Η PTQ κβαντίζει μετά ολοκλήρωση εκπαίδευσης, ενώ η QAT προσομοιώνει κβάντιση κατά εκπαίδευση"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η Post-Training Quantization (PTQ) μετατρέπει ένα ήδη εκπαιδευμένο μοντέλο, ενώ η Quantization-Aware Training (QAT) εισάγει ψεύτικους κόμβους κβάντισης κατά εκπαίδευση ώστε το μοντέλο να μάθει να αντισταθμίζει την απώλεια ακρίβειας.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Σε τι χρησιμοποιείται κυρίως η μορφή GGUF;",
+        "options": [
+          "Αποθήκευση datasets εκπαίδευσης σε συμπιεσμένη μορφή",
+          "Ορισμός αρχιτεκτονικής μοντέλου σε YAML",
+          "Πακετάρισμα κβαντισμένων μοντέλων για αποδοτική τοπική εξαγωγή συμπερασμάτων CPU/GPU",
+          "Κρυπτογράφηση βαρών μοντέλου για ασφαλή ανάπτυξη"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το GGUF (GPT-Generated Unified Format) είναι μορφή ενός αρχείου που χρησιμοποιείται από llama.cpp και παρόμοια εργαλεία για αποθήκευση κβαντισμένων βαρών μοντέλου με μεταδεδομένα για αποδοτική τοπική εξαγωγή συμπερασμάτων.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Επιλέξτε όλες τις σωστές",
-        "options": [],
+        "text": "Ποια από τα ακόλουθα ισχύουν για κβάντιση INT4 σε σύγκριση με INT8; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Η INT4 παράγει πάντα καλύτερη ποιότητα εξόδου από INT8",
+          "Η INT4 χρησιμοποιεί τα μισά bits ανά βάρος σε σύγκριση με INT8, παράγοντας μικρότερα μοντέλα",
+          "Η INT4 δεν απαιτεί δεδομένα βαθμονόμησης",
+          "Η INT4 τυπικά επιφέρει μεγαλύτερη υποβάθμιση ποιότητας από INT8"
+        ],
         "correct": [
           1,
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Η INT4 μειώνει στο μισό τα bits ανά βάρος σε σύγκριση με INT8, κάνοντας μοντέλα μικρότερα και ταχύτερα, αλλά η πιο αδρή αναπαράσταση τυπικά προκαλεί μεγαλύτερη απώλεια ακρίβειας. Η προσεκτική βαθμονόμηση βοηθά στη μετρίαση.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Ποια είναι μια κοινή στρατηγική ανάπτυξης για εξυπηρέτηση κβαντισμένων LLMs σε πολλούς χρήστες;",
+        "options": [
+          "Εκτέλεση κβαντισμένων μοντέλων πίσω από API με ομαδοποιημένη εξαγωγή συμπερασμάτων σε GPU servers",
+          "Αποστολή βαρών μοντέλου σε κάθε χρήστη ατομικά μέσω email",
+          "Εκτέλεση πλήρους FP32 μοντέλου σε μόνο CPU",
+          "Αποθήκευση μοντέλου αποκλειστικά σε browser localStorage"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Τα κβαντισμένα μοντέλα εξυπηρετούνται τυπικά μέσω API endpoints που ομαδοποιούν αιτήματα και χρησιμοποιούν επιτάχυνση GPU, παρέχοντας χαμηλή καθυστέρηση και οικονομική εξαγωγή συμπερασμάτων σε κλίμακα.",
         "isMulti": false
       }
     ]

@@ -86,53 +86,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Ce este fine-tuning-ul specific unui domeniu?",
+        "options": [
+          "Antrenarea unui model de la zero pe date generale de pe web",
+          "Eliminarea straturilor dintr-un model preantrenat pentru a-l face mai mic",
+          "Continuarea antrenării unui model preantrenat pe date specializate dintr-un domeniu particular",
+          "Traducerea interfeței modelului într-o limbă specifică"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Fine-tuning-ul specific unui domeniu adaptează un model fundație preantrenat antrenându-l în continuare pe date dintr-un domeniu specializat (ex. medical, juridic, financiar), îmbunătățindu-i performanța pe sarcini din acel domeniu.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Ce este curriculum learning în contextul fine-tuning-ului?",
+        "options": [
+          "Amestecarea aleatorie a datelor de antrenare la fiecare epocă",
+          "Ordonarea datelor de antrenare de la exemple mai simple la mai complexe pentru a îmbunătăți învățarea",
+          "Utilizarea doar a celor mai dificile exemple pentru antrenare",
+          "Un program de studiu pentru un curs universitar de machine learning"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Curriculum learning prezintă exemplele de antrenare în ordinea dificultății crescătoare, imitând modul în care oamenii învață. Acest lucru poate duce la convergență mai rapidă și generalizare mai bună.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Cum reduce LoRA (Low-Rank Adaptation) costul fine-tuning-ului?",
+        "options": [
+          "Îngheață ponderile originale și antrenează matrice mici de rang redus injectate în fiecare strat",
+          "Șterge jumătate din straturile modelului înainte de antrenare",
+          "Folosește precizie FP64 pentru toate calculele",
+          "Antrenează doar stratul de embedding și îngheață tot restul"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: LoRA păstrează ponderile preantrenate originale înghețate și adaugă matrice mici de descompunere de rang redus (A și B) antrenabile în straturile de attention, reducând dramatic numărul de parametri antrenabili.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Selectați toate răspunsurile corecte",
-        "options": [],
+        "text": "Care sunt avantajele compoziției adaptoarelor LoRA? Selectați toate răspunsurile corecte",
+        "options": [
+          "Mai multe adaptoare specifice sarcinilor pot fi schimbate sau combinate fără reantrenarea modelului de bază",
+          "Elimină necesitatea oricăror date de antrenare",
+          "Garantează pierdere zero de calitate comparativ cu fine-tuning-ul complet",
+          "Adaptoarele sunt fișiere mici care pot fi stocate și implementate independent de modelul de bază"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Adaptoarele LoRA sunt minuscule (adesea megaocteți) comparativ cu modelul complet (gigaocteți). Mai multe adaptoare pentru sarcini diferite pot fi schimbate la cald sau combinate la momentul inferenței fără a modifica ponderile de bază.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Ce risc introduce fine-tuning-ul specific unui domeniu dacă setul de date este prea îngust?",
+        "options": [
+          "Modelul devine mai rapid la inferență",
+          "Vocabularul modelului se extinde automat",
+          "Modelul se îmbunătățește la toate benchmark-urile generale",
+          "Uitarea catastrofică, prin care modelul pierde capacitățile generale pe care le avea înainte de fine-tuning"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Fine-tuning-ul pe un set de date îngust poate cauza uitare catastrofică, prin care modelul își suprascrie cunoștințele largi preantrenate și pierde capacitatea de a gestiona sarcini în afara domeniului îngust.",
         "isMulti": false
       }
     ]
@@ -142,53 +167,78 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Τι είναι το domain-specific fine-tuning;",
+        "options": [
+          "Εκπαίδευση ενός μοντέλου από το μηδέν σε γενικά δεδομένα του web",
+          "Αφαίρεση επιπέδων από ένα προεκπαιδευμένο μοντέλο για να γίνει μικρότερο",
+          "Συνέχιση της εκπαίδευσης ενός προεκπαιδευμένου μοντέλου σε εξειδικευμένα δεδομένα από ένα συγκεκριμένο πεδίο",
+          "Μετάφραση της διεπαφής του μοντέλου σε μια συγκεκριμένη γλώσσα"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το domain-specific fine-tuning προσαρμόζει ένα προεκπαιδευμένο θεμελιώδες μοντέλο εκπαιδεύοντάς το περαιτέρω σε δεδομένα από εξειδικευμένο τομέα (π.χ. ιατρικό, νομικό, χρηματοοικονομικό), βελτιώνοντας την απόδοσή του σε εργασίες του τομέα.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Τι είναι το curriculum learning στο πλαίσιο του fine-tuning;",
+        "options": [
+          "Τυχαία ανακατανομή δεδομένων εκπαίδευσης σε κάθε εποχή",
+          "Ταξινόμηση δεδομένων εκπαίδευσης από απλούστερα σε πιο σύνθετα παραδείγματα για βελτίωση της μάθησης",
+          "Χρήση μόνο των πιο δύσκολων παραδειγμάτων για εκπαίδευση",
+          "Ένα πρόγραμμα σπουδών πανεπιστημιακού μαθήματος machine learning"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το curriculum learning παρουσιάζει τα παραδείγματα εκπαίδευσης σε σειρά αυξανόμενης δυσκολίας, μιμούμενο τον τρόπο που μαθαίνουν οι άνθρωποι. Αυτό μπορεί να οδηγήσει σε ταχύτερη σύγκλιση και καλύτερη γενίκευση.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Πώς μειώνει το LoRA (Low-Rank Adaptation) το κόστος fine-tuning;",
+        "options": [
+          "Παγώνει τα αρχικά βάρη και εκπαιδεύει μικρούς πίνακες χαμηλής τάξης που εισάγονται σε κάθε επίπεδο",
+          "Διαγράφει τα μισά επίπεδα του μοντέλου πριν την εκπαίδευση",
+          "Χρησιμοποιεί ακρίβεια FP64 για όλους τους υπολογισμούς",
+          "Εκπαιδεύει μόνο το επίπεδο embedding και παγώνει τα υπόλοιπα"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το LoRA κρατά τα αρχικά προεκπαιδευμένα βάρη παγωμένα και προσθέτει μικρούς εκπαιδεύσιμους πίνακες αποσύνθεσης χαμηλής τάξης (A και B) στα επίπεδα attention, μειώνοντας δραματικά τον αριθμό εκπαιδεύσιμων παραμέτρων.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Επιλέξτε όλες τις σωστές",
-        "options": [],
+        "text": "Ποια είναι τα πλεονεκτήματα της σύνθεσης adapters LoRA; Επιλέξτε όλες τις σωστές απαντήσεις",
+        "options": [
+          "Πολλαπλοί adapters ειδικοί ανά εργασία μπορούν να εναλλάσσονται ή να συγχωνεύονται χωρίς επανεκπαίδευση του βασικού μοντέλου",
+          "Εξαλείφει την ανάγκη για οποιαδήποτε δεδομένα εκπαίδευσης",
+          "Εγγυάται μηδενική απώλεια ποιότητας σε σύγκριση με πλήρες fine-tuning",
+          "Οι adapters είναι μικρά αρχεία που μπορούν να αποθηκευτούν και να αναπτυχθούν ανεξάρτητα από το βασικό μοντέλο"
+        ],
         "correct": [
           0,
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Οι adapters LoRA είναι μικροσκοπικοί (συχνά megabytes) σε σύγκριση με το πλήρες μοντέλο (gigabytes). Πολλαπλοί adapters για διαφορετικές εργασίες μπορούν να εναλλάσσονται ή να συνδυάζονται κατά τη στιγμή της εξαγωγής συμπερασμάτων χωρίς να τροποποιηθούν τα βασικά βάρη.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Ποιον κίνδυνο εισάγει το domain-specific fine-tuning αν το σύνολο δεδομένων είναι πολύ στενό;",
+        "options": [
+          "Το μοντέλο γίνεται ταχύτερο στην εξαγωγή συμπερασμάτων",
+          "Το λεξιλόγιο του μοντέλου επεκτείνεται αυτόματα",
+          "Το μοντέλο βελτιώνεται σε όλα τα γενικά benchmarks",
+          "Καταστροφική λήθη, όπου το μοντέλο χάνει γενικές ικανότητες που είχε πριν το fine-tuning"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το fine-tuning σε στενό σύνολο δεδομένων μπορεί να προκαλέσει καταστροφική λήθη, όπου το μοντέλο αντικαθιστά τη γενική προεκπαιδευμένη γνώση του και χάνει την ικανότητα να χειρίζεται εργασίες εκτός του στενού τομέα.",
         "isMulti": false
       }
     ]

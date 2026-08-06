@@ -85,52 +85,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Ce distinge self-attention de attention-ul general?",
+        "options": [
+          "Self-attention folosește un vector de context fix",
+          "Query-urile, key-urile și value-urile provin toate din aceeași secvență de intrare",
+          "Self-attention nu are parametri care pot fi învățați",
+          "Self-attention funcționează doar cu imagini"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: În self-attention, Q, K și V sunt derivate din aceeași secvență de intrare (prin proiecții învățate), în timp ce cross-attention derivă Q dintr-o secvență și K/V din alta.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Din ce sunt calculate matricele Q, K, V?",
+        "options": [
+          "Doar din inițializare aleatorie — nu sunt învățate",
+          "Doar din ieșirea blocului transformer anterior",
+          "Proiecții liniare ale intrării: Q=XW_q, K=XW_k, V=XW_v cu matrice de ponderi învățate",
+          "Reguli fixe bazate pe frecvența cuvintelor"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Q, K, V sunt produse prin multiplicarea intrării X cu trei matrice de ponderi învățate separate W_q, W_k, W_v. Aceste proiecții permit fiecăreia să se specializeze în rolul său.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Ce rol joacă vectorul Query?",
+        "options": [
+          "Reprezintă «ce caut?» — criteriile de căutare ale token-ului curent",
+          "Stochează conținutul real care urmează să fie extras",
+          "Servește ca codare pozițională",
+          "Aplică dropout în timpul antrenării"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Query-ul codifică ceea ce un token caută. Key-ul codifică ce oferă un token. Produsul scalar Q*K măsoară compatibilitatea. Value-ul furnizează informația reală de extras.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Dacă intrarea X are forma (batch, seq_len, d_model) și W_q are forma (d_model, d_k), care este forma lui Q?",
+        "options": [
+          "(batch, d_k)",
+          "(batch, d_model, d_k)",
+          "(seq_len, d_k)",
+          "(batch, seq_len, d_k)"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Q = X @ W_q, deci (batch, seq_len, d_model) @ (d_model, d_k) = (batch, seq_len, d_k). Fiecare token primește un vector query de dimensiune d_k.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "De ce folosește self-attention proiecții separate în loc de intrări brute?",
+        "options": [
+          "Pentru a reduce lungimea secvenței",
+          "Proiecțiile permit modelului să învețe reprezentări diferite pentru căutare (Q), a fi găsit (K) și extragerea informației (V)",
+          "Intrările brute ar cauza depășire numerică",
+          "Proiecțiile sunt folosite doar pentru eficiență, nu pentru expresivitate"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Explicație:",
+        "explanation": "✅ Explicație: Matricele separate W_q, W_k, W_v permit modelului să învețe reprezentări specializate: ce să caute, ce să anunțe și ce conținut să furnizeze. Folosirea intrărilor brute ar limita expresivitatea.",
         "isMulti": false
       }
     ]
@@ -140,52 +165,77 @@
     "questions": [
       {
         "index": 0,
-        "text": "",
-        "options": [],
+        "text": "Τι διαφοροποιεί το self-attention από το γενικό attention;",
+        "options": [
+          "Το self-attention χρησιμοποιεί σταθερό διάνυσμα πλαισίου",
+          "Τα queries, keys και values προέρχονται όλα από την ίδια ακολουθία εισόδου",
+          "Το self-attention δεν έχει εκπαιδεύσιμες παραμέτρους",
+          "Το self-attention λειτουργεί μόνο με εικόνες"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Στο self-attention, τα Q, K και V προέρχονται όλα από την ίδια ακολουθία εισόδου (μέσω εκπαιδευμένων προβολών), ενώ στο cross-attention τα Q προέρχονται από μία ακολουθία και τα K/V από άλλη.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "",
-        "options": [],
+        "text": "Από τι υπολογίζονται οι πίνακες Q, K, V;",
+        "options": [
+          "Μόνο από τυχαία αρχικοποίηση — δεν εκπαιδεύονται",
+          "Μόνο από την έξοδο του προηγούμενου μπλοκ transformer",
+          "Γραμμικές προβολές της εισόδου: Q=XW_q, K=XW_k, V=XW_v με εκπαιδευμένους πίνακες βαρών",
+          "Σταθεροί κανόνες βασισμένοι στη συχνότητα λέξεων"
+        ],
         "correct": [
           2
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Τα Q, K, V παράγονται πολλαπλασιάζοντας την είσοδο X με τρεις ξεχωριστούς εκπαιδευμένους πίνακες βαρών W_q, W_k, W_v. Αυτές οι προβολές επιτρέπουν σε κάθε ένα να εξειδικευτεί στον ρόλο του.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "",
-        "options": [],
+        "text": "Ποιον ρόλο παίζει το διάνυσμα Query;",
+        "options": [
+          "Αντιπροσωπεύει «τι ψάχνω;» — τα κριτήρια αναζήτησης του τρέχοντος token",
+          "Αποθηκεύει το πραγματικό περιεχόμενο προς ανάκτηση",
+          "Χρησιμεύει ως κωδικοποίηση θέσης",
+          "Εφαρμόζει dropout κατά την εκπαίδευση"
+        ],
         "correct": [
           0
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Το Query κωδικοποιεί τι ψάχνει ένα token. Το Key κωδικοποιεί τι προσφέρει ένα token. Το εσωτερικό γινόμενο Q*K μετρά τη συμβατότητα. Το Value παρέχει την πραγματική πληροφορία προς ανάκτηση.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "",
-        "options": [],
+        "text": "Αν η είσοδος X έχει σχήμα (batch, seq_len, d_model) και ο W_q έχει σχήμα (d_model, d_k), ποιο είναι το σχήμα του Q;",
+        "options": [
+          "(batch, d_k)",
+          "(batch, d_model, d_k)",
+          "(seq_len, d_k)",
+          "(batch, seq_len, d_k)"
+        ],
         "correct": [
           3
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Q = X @ W_q, άρα (batch, seq_len, d_model) @ (d_model, d_k) = (batch, seq_len, d_k). Κάθε token λαμβάνει ένα διάνυσμα query διάστασης d_k.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "",
-        "options": [],
+        "text": "Γιατί το self-attention χρησιμοποιεί ξεχωριστές προβολές αντί για ακατέργαστες εισόδους;",
+        "options": [
+          "Για να μειώσει το μήκος ακολουθίας",
+          "Οι προβολές επιτρέπουν στο μοντέλο να μάθει διαφορετικές αναπαραστάσεις για αναζήτηση (Q), εύρεση (K) και ανάκτηση πληροφορίας (V)",
+          "Οι ακατέργαστες είσοδοι θα προκαλούσαν αριθμητική υπερχείλιση",
+          "Οι προβολές χρησιμοποιούνται μόνο για αποδοτικότητα, όχι για εκφραστικότητα"
+        ],
         "correct": [
           1
         ],
-        "explanation": "✅ Εξήγηση:",
+        "explanation": "✅ Εξήγηση: Οι ξεχωριστοί πίνακες W_q, W_k, W_v επιτρέπουν στο μοντέλο να μάθει εξειδικευμένες αναπαραστάσεις: τι να αναζητήσει, τι να προβάλει και ποιο περιεχόμενο να παρέχει. Η χρήση ακατέργαστων εισόδων θα περιόριζε την εκφραστικότητα.",
         "isMulti": false
       }
     ]
