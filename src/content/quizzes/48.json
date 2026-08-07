@@ -1,0 +1,213 @@
+{
+  "lectureId": "48",
+  "en": {
+    "id": "quiz-48-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "How do AI API providers typically charge for usage?",
+        "options": [
+          "A flat monthly fee regardless of how much you use",
+          "Per token — separately for input tokens and output tokens, with output tokens usually costing more",
+          "Per number of API keys created",
+          "Per hour of server uptime"
+        ],
+        "correct": [1],
+        "explanation": "AI API pricing is token-based. Providers charge separately for input tokens (your prompt) and output tokens (the model's response), with output tokens typically costing 2-5x more because they require more computation to generate.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Which of the following correctly ranks these models from cheapest to most expensive for input tokens?",
+        "options": [
+          "Claude Opus 4 < GPT-4o < DeepSeek V3",
+          "DeepSeek V3 < GPT-4o-mini < GPT-4o < Claude Opus 4",
+          "GPT-4o < Claude Opus 4 < DeepSeek V3 < GPT-4o-mini",
+          "All AI APIs cost exactly the same per token"
+        ],
+        "correct": [1],
+        "explanation": "DeepSeek V3 is among the cheapest options, GPT-4o-mini is a budget-friendly OpenAI model, GPT-4o is mid-to-high range, and Claude Opus 4 is a premium model. Prices vary dramatically across providers and model tiers.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which providers offer models that are particularly cost-effective for high-volume applications? Select all that apply.",
+        "options": [
+          "DeepSeek (V3 and R1)",
+          "Google Gemini Flash",
+          "Moonshot Kimi",
+          "OpenAI GPT-4o (full version)"
+        ],
+        "correct": [0, 1, 2],
+        "explanation": "DeepSeek, Google Gemini Flash, and Moonshot Kimi all offer very competitive pricing suitable for high-volume applications. GPT-4o full version is a premium model that costs significantly more per token.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Why might you choose a more expensive model like Claude Opus or GPT-4o over a cheaper alternative?",
+        "options": [
+          "Expensive models are always faster at generating responses",
+          "Expensive models use less memory on the server",
+          "Premium models generally offer superior reasoning, instruction following, and output quality for complex tasks",
+          "There is never a reason — cheaper models are always better"
+        ],
+        "correct": [2],
+        "explanation": "Premium models like Claude Opus and GPT-4o excel at complex reasoning, nuanced instruction following, and high-quality output. For simple tasks a cheaper model works fine, but for demanding applications the quality difference justifies the higher cost.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "What is a practical strategy for managing AI API costs in a SaaS product?",
+        "options": [
+          "Always use the most expensive model for every request to ensure quality",
+          "Route simple requests to cheaper models and reserve expensive models for complex tasks that require higher quality",
+          "Avoid using AI APIs entirely and only use locally trained models",
+          "Send each request to all providers simultaneously and use whichever responds first"
+        ],
+        "correct": [1],
+        "explanation": "Smart cost management means matching the model to the task. Simple classification or extraction can use budget models (GPT-4o-mini, Gemini Flash), while complex reasoning or creative tasks warrant premium models. This tiered approach optimises both cost and quality.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-48-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Cum taxează de obicei furnizorii de API-uri AI utilizarea?",
+        "options": [
+          "O taxă lunară fixă indiferent de cât folosești",
+          "Per token — separat pentru token-uri de intrare și token-uri de ieșire, token-urile de ieșire costând de obicei mai mult",
+          "Per număr de chei API create",
+          "Per oră de funcționare a serverului"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Prețurile API-urilor AI sunt bazate pe token-uri. Furnizorii taxează separat pentru token-urile de intrare (promptul tău) și token-urile de ieșire (răspunsul modelului), token-urile de ieșire costând de obicei de 2-5 ori mai mult deoarece necesită mai mult calcul pentru generare.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Care dintre următoarele clasifică corect aceste modele de la cel mai ieftin la cel mai scump pentru token-uri de intrare?",
+        "options": [
+          "Claude Opus 4 < GPT-4o < DeepSeek V3",
+          "DeepSeek V3 < GPT-4o-mini < GPT-4o < Claude Opus 4",
+          "GPT-4o < Claude Opus 4 < DeepSeek V3 < GPT-4o-mini",
+          "Toate API-urile AI costă exact la fel per token"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: DeepSeek V3 este printre cele mai ieftine opțiuni, GPT-4o-mini este un model OpenAI accesibil, GPT-4o este de gamă medie-înaltă, iar Claude Opus 4 este un model premium. Prețurile variază dramatic între furnizori și niveluri de model.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Care furnizori oferă modele deosebit de rentabile pentru aplicații cu volum mare? Selectează toate variantele corecte.",
+        "options": [
+          "DeepSeek (V3 și R1)",
+          "Google Gemini Flash",
+          "Moonshot Kimi",
+          "OpenAI GPT-4o (versiunea completă)"
+        ],
+        "correct": [0, 1, 2],
+        "explanation": "✅ Explicație: DeepSeek, Google Gemini Flash și Moonshot Kimi oferă toate prețuri foarte competitive potrivite pentru aplicații cu volum mare. Versiunea completă GPT-4o este un model premium care costă semnificativ mai mult per token.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "De ce ai alege un model mai scump precum Claude Opus sau GPT-4o în locul unei alternative mai ieftine?",
+        "options": [
+          "Modelele scumpe sunt întotdeauna mai rapide la generarea răspunsurilor",
+          "Modelele scumpe folosesc mai puțină memorie pe server",
+          "Modelele premium oferă în general raționament superior, urmarea instrucțiunilor și calitate a ieșirii pentru sarcini complexe",
+          "Nu există niciodată un motiv — modelele mai ieftine sunt întotdeauna mai bune"
+        ],
+        "correct": [2],
+        "explanation": "✅ Explicație: Modelele premium precum Claude Opus și GPT-4o excelează la raționament complex, urmarea nuanțată a instrucțiunilor și ieșire de înaltă calitate. Pentru sarcini simple, un model mai ieftin funcționează bine, dar pentru aplicații pretențioase diferența de calitate justifică costul mai mare.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Care este o strategie practică pentru gestionarea costurilor API-urilor AI într-un produs SaaS?",
+        "options": [
+          "Folosește întotdeauna cel mai scump model pentru fiecare cerere pentru a asigura calitatea",
+          "Dirijează cererile simple către modele mai ieftine și rezervă modelele scumpe pentru sarcini complexe care necesită calitate superioară",
+          "Evită complet utilizarea API-urilor AI și folosește doar modele antrenate local",
+          "Trimite fiecare cerere la toți furnizorii simultan și folosește pe cel care răspunde primul"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Gestionarea inteligentă a costurilor înseamnă potrivirea modelului cu sarcina. Clasificarea simplă sau extragerea pot folosi modele bugetare (GPT-4o-mini, Gemini Flash), în timp ce raționamentul complex sau sarcinile creative merită modele premium. Această abordare pe niveluri optimizează atât costul cât și calitatea.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-48-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Πώς χρεώνουν συνήθως οι πάροχοι AI API τη χρήση;",
+        "options": [
+          "Πάγιο μηνιαίο τέλος ανεξαρτήτως χρήσης",
+          "Ανά token — ξεχωριστά για tokens εισόδου και tokens εξόδου, με τα tokens εξόδου να κοστίζουν συνήθως περισσότερο",
+          "Ανά αριθμό κλειδιών API που δημιουργήθηκαν",
+          "Ανά ώρα λειτουργίας διακομιστή"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Η τιμολόγηση AI API βασίζεται σε tokens. Οι πάροχοι χρεώνουν ξεχωριστά για tokens εισόδου (το prompt σας) και tokens εξόδου (η απάντηση του μοντέλου), με τα tokens εξόδου να κοστίζουν συνήθως 2-5 φορές περισσότερο επειδή απαιτούν περισσότερο υπολογισμό για τη δημιουργία τους.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ποια από τα ακόλουθα κατατάσσει σωστά αυτά τα μοντέλα από το φθηνότερο στο ακριβότερο για tokens εισόδου;",
+        "options": [
+          "Claude Opus 4 < GPT-4o < DeepSeek V3",
+          "DeepSeek V3 < GPT-4o-mini < GPT-4o < Claude Opus 4",
+          "GPT-4o < Claude Opus 4 < DeepSeek V3 < GPT-4o-mini",
+          "Όλα τα AI API κοστίζουν ακριβώς το ίδιο ανά token"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Το DeepSeek V3 είναι μεταξύ των φθηνότερων επιλογών, το GPT-4o-mini είναι ένα οικονομικό μοντέλο OpenAI, το GPT-4o είναι μεσαίας-υψηλής κατηγορίας και το Claude Opus 4 είναι premium μοντέλο. Οι τιμές ποικίλλουν δραματικά μεταξύ παρόχων και επιπέδων μοντέλων.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ποιοι πάροχοι προσφέρουν μοντέλα ιδιαίτερα οικονομικά για εφαρμογές μεγάλου όγκου; Επιλέξτε όλα τα σωστά.",
+        "options": [
+          "DeepSeek (V3 και R1)",
+          "Google Gemini Flash",
+          "Moonshot Kimi",
+          "OpenAI GPT-4o (πλήρης έκδοση)"
+        ],
+        "correct": [0, 1, 2],
+        "explanation": "✅ Εξήγηση: Τα DeepSeek, Google Gemini Flash και Moonshot Kimi προσφέρουν όλα πολύ ανταγωνιστικές τιμές κατάλληλες για εφαρμογές μεγάλου όγκου. Η πλήρης έκδοση GPT-4o είναι premium μοντέλο που κοστίζει σημαντικά περισσότερο ανά token.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Γιατί μπορεί να επιλέξετε ένα ακριβότερο μοντέλο όπως το Claude Opus ή το GPT-4o αντί μιας φθηνότερης εναλλακτικής;",
+        "options": [
+          "Τα ακριβά μοντέλα είναι πάντα ταχύτερα στη δημιουργία απαντήσεων",
+          "Τα ακριβά μοντέλα χρησιμοποιούν λιγότερη μνήμη στον διακομιστή",
+          "Τα premium μοντέλα προσφέρουν γενικά ανώτερη ικανότητα συλλογισμού, ακολούθησης οδηγιών και ποιότητα εξόδου για σύνθετες εργασίες",
+          "Δεν υπάρχει ποτέ λόγος — τα φθηνότερα μοντέλα είναι πάντα καλύτερα"
+        ],
+        "correct": [2],
+        "explanation": "✅ Εξήγηση: Τα premium μοντέλα όπως το Claude Opus και το GPT-4o υπερέχουν σε σύνθετο συλλογισμό, αποχρωσμένη ακολούθηση οδηγιών και υψηλής ποιότητας έξοδο. Για απλές εργασίες ένα φθηνότερο μοντέλο λειτουργεί μια χαρά, αλλά για απαιτητικές εφαρμογές η διαφορά ποιότητας δικαιολογεί το υψηλότερο κόστος.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Ποια είναι μια πρακτική στρατηγική για τη διαχείριση κόστους AI API σε ένα προϊόν SaaS;",
+        "options": [
+          "Χρησιμοποιείτε πάντα το ακριβότερο μοντέλο για κάθε αίτημα για εξασφάλιση ποιότητας",
+          "Δρομολογείτε απλά αιτήματα σε φθηνότερα μοντέλα και κρατάτε τα ακριβά μοντέλα για σύνθετες εργασίες που απαιτούν υψηλότερη ποιότητα",
+          "Αποφεύγετε εντελώς τη χρήση AI API και χρησιμοποιείτε μόνο τοπικά εκπαιδευμένα μοντέλα",
+          "Στέλνετε κάθε αίτημα σε όλους τους παρόχους ταυτόχρονα και χρησιμοποιείτε όποιον απαντήσει πρώτος"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Η έξυπνη διαχείριση κόστους σημαίνει αντιστοίχιση μοντέλου με εργασία. Η απλή ταξινόμηση ή εξαγωγή μπορεί να χρησιμοποιεί οικονομικά μοντέλα (GPT-4o-mini, Gemini Flash), ενώ ο σύνθετος συλλογισμός ή δημιουργικές εργασίες δικαιολογούν premium μοντέλα. Αυτή η κλιμακωτή προσέγγιση βελτιστοποιεί τόσο κόστος όσο και ποιότητα.",
+        "isMulti": false
+      }
+    ]
+  }
+}

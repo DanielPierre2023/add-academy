@@ -1,0 +1,213 @@
+{
+  "lectureId": "51",
+  "en": {
+    "id": "quiz-51-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "What is the correct sequence of steps to deploy your completed LLM system as described in the capstone?",
+        "options": [
+          "Buy a domain → Write code → Test locally → Hope it works in production",
+          "Download the project ZIP → Create a GitHub repository → Push the code → Deploy via Vercel",
+          "Deploy to Vercel first → Then write the code → Then push to GitHub",
+          "Email the code to yourself → Open it on a server → Manually start the application"
+        ],
+        "correct": [1],
+        "explanation": "The capstone deployment follows a clear sequence: download your project as a ZIP, create a new GitHub repository, push your code there, and connect the repository to Vercel for automatic deployment. This gives you a live URL in minutes.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "How many stages does the complete ADD Academy LLM course cover?",
+        "options": [
+          "3 stages: Basics, Training, Deployment",
+          "5 stages: Fundamentals through Fine-tuning",
+          "7 stages: from LLM Fundamentals through GenAI SaaS",
+          "10 stages: one for each month of the year"
+        ],
+        "correct": [2],
+        "explanation": "The ADD Academy course covers 7 main stages, progressing from LLM Fundamentals through Tokenization, Architecture, Training, Advanced Topics, Fine-tuning, and finally GenAI SaaS — plus the NeuralForge Platform stage that ties everything together.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which of the following are recommended next steps after completing the capstone? Select all that apply.",
+        "options": [
+          "Experiment with different LoRA configurations on your trained model",
+          "Build additional SaaS products using the patterns learned",
+          "Delete all your code and start from scratch with a different language",
+          "Explore commercial API integration for production-grade applications"
+        ],
+        "correct": [0, 1, 3],
+        "explanation": "After the capstone, students are encouraged to continue experimenting with LoRA fine-tuning, build new SaaS products using the established patterns, and explore commercial API integration for production use. Deleting everything is not a recommended learning strategy.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "What is the purpose of connecting SaaS products to your deployed LLM system?",
+        "options": [
+          "To make the LLM run faster by distributing load across multiple applications",
+          "To create end-user-facing applications that leverage the LLM's capabilities for specific tasks like image generation, text creation, or fact-checking",
+          "To replace the LLM with simpler rule-based systems",
+          "SaaS products cannot be connected to LLMs"
+        ],
+        "correct": [1],
+        "explanation": "Connecting SaaS products to your LLM creates practical applications that users can interact with. Each product (PixelForge, ClipCraft, ProseAI, TruthLens, DocMind) leverages the LLM for a specific use case, turning raw AI capability into user-friendly tools.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Why is local development setup recommended before deploying to production?",
+        "options": [
+          "Local development is required by law in most countries",
+          "It allows you to test changes quickly, debug issues without affecting live users, and iterate faster before pushing to production",
+          "Local development is only for beginners — professionals deploy directly",
+          "It is cheaper because local computers use less electricity than servers"
+        ],
+        "correct": [1],
+        "explanation": "Local development lets you test and debug without affecting your live application. You can iterate quickly, catch bugs early, and verify that everything works before pushing changes to production where real users would be impacted.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-51-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Care este secvența corectă de pași pentru a implementa sistemul LLM complet, așa cum este descris în proiectul capstone?",
+        "options": [
+          "Cumpără un domeniu → Scrie cod → Testează local → Speră că funcționează în producție",
+          "Descarcă ZIP-ul proiectului → Creează un depozit GitHub → Trimite codul → Implementează prin Vercel",
+          "Implementează pe Vercel mai întâi → Apoi scrie codul → Apoi trimite pe GitHub",
+          "Trimite-ți codul prin email → Deschide-l pe un server → Pornește manual aplicația"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Implementarea capstone urmează o secvență clară: descarcă proiectul ca ZIP, creează un depozit GitHub nou, trimite codul acolo și conectează depozitul la Vercel pentru implementare automată. Aceasta îți oferă un URL live în câteva minute.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Câte etape acoperă cursul complet ADD Academy LLM?",
+        "options": [
+          "3 etape: Baze, Antrenament, Implementare",
+          "5 etape: de la Fundamente la Ajustare fină",
+          "7 etape: de la Fundamentele LLM la GenAI SaaS",
+          "10 etape: câte una pentru fiecare lună din an"
+        ],
+        "correct": [2],
+        "explanation": "✅ Explicație: Cursul ADD Academy acoperă 7 etape principale, progresând de la Fundamentele LLM prin Tokenizare, Arhitectură, Antrenament, Subiecte Avansate, Ajustare Fină și în final GenAI SaaS — plus etapa Platformei NeuralForge care leagă totul.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Care dintre următorii sunt pași următori recomandați după finalizarea proiectului capstone? Selectează toate variantele corecte.",
+        "options": [
+          "Experimentează cu diferite configurații LoRA pe modelul tău antrenat",
+          "Construiește produse SaaS suplimentare folosind modelele învățate",
+          "Șterge tot codul și începe de la zero cu un alt limbaj",
+          "Explorează integrarea API-urilor comerciale pentru aplicații de nivel producție"
+        ],
+        "correct": [0, 1, 3],
+        "explanation": "✅ Explicație: După capstone, studenții sunt încurajați să continue să experimenteze cu ajustarea fină LoRA, să construiască noi produse SaaS folosind modelele stabilite și să exploreze integrarea API-urilor comerciale pentru utilizare în producție. Ștergerea a tot nu este o strategie de învățare recomandată.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Care este scopul conectării produselor SaaS la sistemul LLM implementat?",
+        "options": [
+          "Să facă LLM-ul să ruleze mai repede prin distribuirea sarcinii pe mai multe aplicații",
+          "Să creeze aplicații orientate către utilizatorul final care valorifică capacitățile LLM-ului pentru sarcini specifice precum generarea de imagini, crearea de text sau verificarea faptelor",
+          "Să înlocuiască LLM-ul cu sisteme mai simple bazate pe reguli",
+          "Produsele SaaS nu pot fi conectate la LLM-uri"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Conectarea produselor SaaS la LLM-ul tău creează aplicații practice cu care utilizatorii pot interacționa. Fiecare produs (PixelForge, ClipCraft, ProseAI, TruthLens, DocMind) valorifică LLM-ul pentru un caz de utilizare specific, transformând capacitatea AI brută în instrumente prietenoase cu utilizatorul.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "De ce este recomandată configurarea dezvoltării locale înainte de implementarea în producție?",
+        "options": [
+          "Dezvoltarea locală este cerută de lege în majoritatea țărilor",
+          "Îți permite să testezi modificările rapid, să depanezi probleme fără a afecta utilizatorii live și să iterezi mai repede înainte de a trimite în producție",
+          "Dezvoltarea locală este doar pentru începători — profesioniștii implementează direct",
+          "Este mai ieftin deoarece computerele locale consumă mai puțină electricitate decât serverele"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Dezvoltarea locală îți permite să testezi și să depanezi fără a afecta aplicația ta live. Poți itera rapid, descoperi erori devreme și verifica că totul funcționează înainte de a trimite modificările în producție unde utilizatorii reali ar fi afectați.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-51-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Ποια είναι η σωστή ακολουθία βημάτων για την ανάπτυξη του ολοκληρωμένου συστήματος LLM σας όπως περιγράφεται στο capstone;",
+        "options": [
+          "Αγορά domain → Γράψιμο κώδικα → Τοπική δοκιμή → Ελπίζοντας ότι θα λειτουργήσει στην παραγωγή",
+          "Λήψη του ZIP του έργου → Δημιουργία αποθετηρίου GitHub → Push του κώδικα → Ανάπτυξη μέσω Vercel",
+          "Ανάπτυξη στο Vercel πρώτα → Μετά γράψιμο κώδικα → Μετά push στο GitHub",
+          "Αποστολή του κώδικα με email στον εαυτό σας → Άνοιγμα σε διακομιστή → Χειροκίνητη εκκίνηση εφαρμογής"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Η ανάπτυξη capstone ακολουθεί μια σαφή ακολουθία: κατεβάστε το έργο σας ως ZIP, δημιουργήστε ένα νέο αποθετήριο GitHub, στείλτε τον κώδικά σας εκεί και συνδέστε το αποθετήριο με το Vercel για αυτόματη ανάπτυξη. Αυτό σας δίνει ένα ζωντανό URL σε λίγα λεπτά.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Πόσα στάδια καλύπτει το πλήρες μάθημα ADD Academy LLM;",
+        "options": [
+          "3 στάδια: Βασικά, Εκπαίδευση, Ανάπτυξη",
+          "5 στάδια: Θεμελιώδη μέχρι Μικρορύθμιση",
+          "7 στάδια: από τα Θεμελιώδη LLM μέχρι GenAI SaaS",
+          "10 στάδια: ένα για κάθε μήνα του έτους"
+        ],
+        "correct": [2],
+        "explanation": "✅ Εξήγηση: Το μάθημα ADD Academy καλύπτει 7 κύρια στάδια, προχωρώντας από τα Θεμελιώδη LLM μέσω Tokenization, Αρχιτεκτονικής, Εκπαίδευσης, Προχωρημένων Θεμάτων, Μικρορύθμισης και τέλος GenAI SaaS — συν το στάδιο Πλατφόρμας NeuralForge που τα συνδέει όλα.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ποια από τα ακόλουθα είναι συνιστώμενα επόμενα βήματα μετά την ολοκλήρωση του capstone; Επιλέξτε όλα τα σωστά.",
+        "options": [
+          "Πειραματισμός με διαφορετικές διαμορφώσεις LoRA στο εκπαιδευμένο μοντέλο σας",
+          "Κατασκευή πρόσθετων SaaS προϊόντων χρησιμοποιώντας τα μοτίβα που μάθατε",
+          "Διαγραφή όλου του κώδικα και ξεκίνημα από το μηδέν με διαφορετική γλώσσα",
+          "Εξερεύνηση ενσωμάτωσης εμπορικών API για εφαρμογές επιπέδου παραγωγής"
+        ],
+        "correct": [0, 1, 3],
+        "explanation": "✅ Εξήγηση: Μετά το capstone, οι φοιτητές ενθαρρύνονται να συνεχίσουν τον πειραματισμό με μικρορύθμιση LoRA, να κατασκευάσουν νέα SaaS προϊόντα χρησιμοποιώντας τα καθιερωμένα μοτίβα και να εξερευνήσουν ενσωμάτωση εμπορικών API για χρήση στην παραγωγή. Η διαγραφή τα πάντων δεν είναι συνιστώμενη στρατηγική μάθησης.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Ποιος είναι ο σκοπός της σύνδεσης SaaS προϊόντων με το αναπτυγμένο σύστημα LLM σας;",
+        "options": [
+          "Να κάνει το LLM να τρέχει ταχύτερα κατανέμοντας το φορτίο σε πολλαπλές εφαρμογές",
+          "Να δημιουργήσει εφαρμογές προσανατολισμένες στον τελικό χρήστη που αξιοποιούν τις δυνατότητες του LLM για συγκεκριμένες εργασίες όπως δημιουργία εικόνων, δημιουργία κειμένου ή έλεγχο γεγονότων",
+          "Να αντικαταστήσει το LLM με απλούστερα συστήματα βασισμένα σε κανόνες",
+          "Τα SaaS προϊόντα δεν μπορούν να συνδεθούν με LLMs"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Η σύνδεση SaaS προϊόντων με το LLM σας δημιουργεί πρακτικές εφαρμογές με τις οποίες μπορούν να αλληλεπιδράσουν οι χρήστες. Κάθε προϊόν (PixelForge, ClipCraft, ProseAI, TruthLens, DocMind) αξιοποιεί το LLM για μια συγκεκριμένη περίπτωση χρήσης, μετατρέποντας την ακατέργαστη δυνατότητα AI σε φιλικά προς τον χρήστη εργαλεία.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Γιατί συνιστάται η ρύθμιση τοπικής ανάπτυξης πριν την ανάπτυξη στην παραγωγή;",
+        "options": [
+          "Η τοπική ανάπτυξη απαιτείται από τον νόμο στις περισσότερες χώρες",
+          "Σας επιτρέπει να δοκιμάζετε αλλαγές γρήγορα, να αποσφαλματώνετε προβλήματα χωρίς να επηρεάζετε ζωντανούς χρήστες και να επαναλαμβάνετε ταχύτερα πριν την προώθηση στην παραγωγή",
+          "Η τοπική ανάπτυξη είναι μόνο για αρχάριους — οι επαγγελματίες αναπτύσσουν απευθείας",
+          "Είναι φθηνότερη επειδή οι τοπικοί υπολογιστές καταναλώνουν λιγότερη ηλεκτρική ενέργεια από τους διακομιστές"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Η τοπική ανάπτυξη σας επιτρέπει να δοκιμάζετε και να αποσφαλματώνετε χωρίς να επηρεάζετε τη ζωντανή εφαρμογή σας. Μπορείτε να επαναλαμβάνετε γρήγορα, να εντοπίζετε σφάλματα νωρίς και να επαληθεύετε ότι όλα λειτουργούν πριν προωθήσετε αλλαγές στην παραγωγή όπου πραγματικοί χρήστες θα επηρεαστούν.",
+        "isMulti": false
+      }
+    ]
+  }
+}

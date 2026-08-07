@@ -1,0 +1,213 @@
+{
+  "lectureId": "50",
+  "en": {
+    "id": "quiz-50-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "What is the role of an HTTP API endpoint when connecting an LLM to a SaaS product?",
+        "options": [
+          "It stores the LLM's weights on the server",
+          "It serves as the communication interface that receives requests and returns LLM-generated responses to the SaaS application",
+          "It replaces the LLM entirely with hardcoded responses",
+          "It is only used for logging and has no impact on functionality"
+        ],
+        "correct": [1],
+        "explanation": "An HTTP API endpoint acts as the bridge between your SaaS product and the LLM. The SaaS sends user input to the endpoint, the endpoint forwards it to the LLM, and returns the generated response back to the application.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Which GenAI SaaS products are built in the ADD Academy course? Select all that apply.",
+        "options": [
+          "PixelForge (AI image generation)",
+          "ClipCraft (AI video creation)",
+          "TruthLens (AI fact-checking)",
+          "DocMind (document intelligence)"
+        ],
+        "correct": [0, 1, 2, 3],
+        "explanation": "The course covers five GenAI SaaS products: PixelForge (image generation), ClipCraft (video creation), ProseAI (text generation), TruthLens (fact-checking), and DocMind (document intelligence). All four listed options are correct.",
+        "isMulti": true
+      },
+      {
+        "index": 2,
+        "text": "What is a fallback strategy when connecting an LLM to a SaaS product?",
+        "options": [
+          "Shutting down the entire application when the primary LLM is unavailable",
+          "Using a commercial API (like OpenAI or Anthropic) as a backup when the local/custom LLM is unavailable or insufficient",
+          "Displaying an error page and asking users to try again tomorrow",
+          "Switching to a completely different SaaS product"
+        ],
+        "correct": [1],
+        "explanation": "A fallback strategy means having a backup plan — typically routing requests to a commercial API when your primary LLM (local or custom) is unavailable, too slow, or produces insufficient quality. This ensures your SaaS product remains functional at all times.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "What does the NeuralForge API Generator help you do?",
+        "options": [
+          "It generates training data for your LLM automatically",
+          "It creates ready-to-use API endpoints that connect your trained LLM to your SaaS products",
+          "It replaces the need for any front-end code",
+          "It automatically deploys your model to all cloud providers"
+        ],
+        "correct": [1],
+        "explanation": "The NeuralForge API Generator creates the API endpoints needed to serve your LLM's capabilities to your SaaS products. It handles the boilerplate of receiving requests, processing them through the model, and returning formatted responses.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Why is testing your LLM API endpoint important before integrating it into a production SaaS product?",
+        "options": [
+          "Testing is optional — if the code compiles, it works correctly",
+          "Testing verifies that the endpoint handles various inputs correctly, returns proper response formats, and handles errors gracefully",
+          "Testing is only needed for paid APIs, not free ones",
+          "Testing slows down development and should be skipped"
+        ],
+        "correct": [1],
+        "explanation": "Testing your API endpoint before production integration ensures it handles edge cases, returns responses in the expected format, manages errors without crashing, and performs within acceptable latency. Untested endpoints can cause silent failures in your SaaS product.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-50-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Care este rolul unui endpoint API HTTP când conectezi un LLM la un produs SaaS?",
+        "options": [
+          "Stochează ponderile LLM-ului pe server",
+          "Servește ca interfață de comunicare care primește cereri și returnează răspunsuri generate de LLM către aplicația SaaS",
+          "Înlocuiește complet LLM-ul cu răspunsuri codificate fix",
+          "Este folosit doar pentru logare și nu are impact asupra funcționalității"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Un endpoint API HTTP acționează ca punte între produsul tău SaaS și LLM. SaaS-ul trimite intrarea utilizatorului către endpoint, endpoint-ul o transmite către LLM și returnează răspunsul generat înapoi la aplicație.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Care produse GenAI SaaS sunt construite în cursul ADD Academy? Selectează toate variantele corecte.",
+        "options": [
+          "PixelForge (generare de imagini AI)",
+          "ClipCraft (creare video AI)",
+          "TruthLens (verificarea faptelor AI)",
+          "DocMind (inteligență documentară)"
+        ],
+        "correct": [0, 1, 2, 3],
+        "explanation": "✅ Explicație: Cursul acoperă cinci produse GenAI SaaS: PixelForge (generare de imagini), ClipCraft (creare video), ProseAI (generare de text), TruthLens (verificarea faptelor) și DocMind (inteligență documentară). Toate cele patru opțiuni listate sunt corecte.",
+        "isMulti": true
+      },
+      {
+        "index": 2,
+        "text": "Ce este o strategie de fallback când conectezi un LLM la un produs SaaS?",
+        "options": [
+          "Oprirea completă a aplicației când LLM-ul primar nu este disponibil",
+          "Utilizarea unui API comercial (precum OpenAI sau Anthropic) ca backup când LLM-ul local/personalizat nu este disponibil sau insuficient",
+          "Afișarea unei pagini de eroare și cererea utilizatorilor să încerce din nou mâine",
+          "Trecerea la un produs SaaS complet diferit"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: O strategie de fallback înseamnă a avea un plan de rezervă — de obicei dirijarea cererilor către un API comercial când LLM-ul tău primar (local sau personalizat) nu este disponibil, prea lent sau produce calitate insuficientă. Aceasta asigură că produsul tău SaaS rămâne funcțional în orice moment.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Ce te ajută să faci Generatorul de API NeuralForge?",
+        "options": [
+          "Generează automat date de antrenament pentru LLM-ul tău",
+          "Creează endpoint-uri API gata de utilizare care conectează LLM-ul tău antrenat la produsele tale SaaS",
+          "Înlocuiește nevoia de orice cod front-end",
+          "Implementează automat modelul tău la toți furnizorii de cloud"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Generatorul de API NeuralForge creează endpoint-urile API necesare pentru a servi capacitățile LLM-ului tău produselor tale SaaS. Se ocupă de codul standard de primire a cererilor, procesarea lor prin model și returnarea răspunsurilor formatate.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "De ce este important să testezi endpoint-ul API al LLM-ului înainte de a-l integra într-un produs SaaS de producție?",
+        "options": [
+          "Testarea este opțională — dacă codul compilează, funcționează corect",
+          "Testarea verifică că endpoint-ul gestionează corect diverse intrări, returnează formate de răspuns corecte și gestionează erorile cu grație",
+          "Testarea este necesară doar pentru API-uri plătite, nu pentru cele gratuite",
+          "Testarea încetinește dezvoltarea și ar trebui omisă"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Testarea endpoint-ului API înainte de integrarea în producție asigură că gestionează cazurile limită, returnează răspunsuri în formatul așteptat, gestionează erorile fără a se bloca și performează în limite acceptabile de latență. Endpoint-urile netestate pot cauza eșecuri silențioase în produsul tău SaaS.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-50-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Ποιος είναι ο ρόλος ενός HTTP API endpoint κατά τη σύνδεση ενός LLM με ένα προϊόν SaaS;",
+        "options": [
+          "Αποθηκεύει τα βάρη του LLM στον διακομιστή",
+          "Λειτουργεί ως διεπαφή επικοινωνίας που δέχεται αιτήματα και επιστρέφει απαντήσεις που δημιουργήθηκαν από το LLM στην εφαρμογή SaaS",
+          "Αντικαθιστά εντελώς το LLM με σκληρά κωδικοποιημένες απαντήσεις",
+          "Χρησιμοποιείται μόνο για καταγραφή και δεν έχει αντίκτυπο στη λειτουργικότητα"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Ένα HTTP API endpoint λειτουργεί ως γέφυρα μεταξύ του SaaS προϊόντος σας και του LLM. Το SaaS στέλνει την είσοδο του χρήστη στο endpoint, το endpoint την προωθεί στο LLM και επιστρέφει τη δημιουργημένη απάντηση πίσω στην εφαρμογή.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ποια προϊόντα GenAI SaaS κατασκευάζονται στο μάθημα ADD Academy; Επιλέξτε όλα τα σωστά.",
+        "options": [
+          "PixelForge (δημιουργία εικόνων AI)",
+          "ClipCraft (δημιουργία βίντεο AI)",
+          "TruthLens (έλεγχος γεγονότων AI)",
+          "DocMind (νοημοσύνη εγγράφων)"
+        ],
+        "correct": [0, 1, 2, 3],
+        "explanation": "✅ Εξήγηση: Το μάθημα καλύπτει πέντε προϊόντα GenAI SaaS: PixelForge (δημιουργία εικόνων), ClipCraft (δημιουργία βίντεο), ProseAI (δημιουργία κειμένου), TruthLens (έλεγχος γεγονότων) και DocMind (νοημοσύνη εγγράφων). Και οι τέσσερις αναφερόμενες επιλογές είναι σωστές.",
+        "isMulti": true
+      },
+      {
+        "index": 2,
+        "text": "Τι είναι μια στρατηγική εφεδρείας (fallback) κατά τη σύνδεση ενός LLM με ένα προϊόν SaaS;",
+        "options": [
+          "Τερματισμός ολόκληρης της εφαρμογής όταν το κύριο LLM δεν είναι διαθέσιμο",
+          "Χρήση ενός εμπορικού API (όπως OpenAI ή Anthropic) ως εφεδρεία όταν το τοπικό/προσαρμοσμένο LLM δεν είναι διαθέσιμο ή ανεπαρκές",
+          "Εμφάνιση σελίδας σφάλματος και αίτημα στους χρήστες να δοκιμάσουν ξανά αύριο",
+          "Εναλλαγή σε ένα εντελώς διαφορετικό SaaS προϊόν"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Μια στρατηγική εφεδρείας σημαίνει ύπαρξη εφεδρικού σχεδίου — συνήθως δρομολόγηση αιτημάτων σε εμπορικό API όταν το κύριο LLM σας (τοπικό ή προσαρμοσμένο) δεν είναι διαθέσιμο, είναι πολύ αργό ή παράγει ανεπαρκή ποιότητα. Αυτό εξασφαλίζει ότι το SaaS προϊόν σας παραμένει λειτουργικό ανά πάσα στιγμή.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Τι σας βοηθά να κάνετε ο NeuralForge API Generator;",
+        "options": [
+          "Δημιουργεί αυτόματα δεδομένα εκπαίδευσης για το LLM σας",
+          "Δημιουργεί έτοιμα προς χρήση API endpoints που συνδέουν το εκπαιδευμένο LLM σας με τα SaaS προϊόντα σας",
+          "Αντικαθιστά την ανάγκη για οποιονδήποτε κώδικα front-end",
+          "Αναπτύσσει αυτόματα το μοντέλο σας σε όλους τους παρόχους cloud"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Ο NeuralForge API Generator δημιουργεί τα API endpoints που χρειάζονται για να εξυπηρετήσετε τις δυνατότητες του LLM σας στα SaaS προϊόντα σας. Χειρίζεται τον βασικό κώδικα λήψης αιτημάτων, επεξεργασίας τους μέσω του μοντέλου και επιστροφής μορφοποιημένων απαντήσεων.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Γιατί είναι σημαντική η δοκιμή του API endpoint του LLM σας πριν την ενσωμάτωσή του σε ένα SaaS προϊόν παραγωγής;",
+        "options": [
+          "Η δοκιμή είναι προαιρετική — αν ο κώδικας μεταγλωττίζεται, λειτουργεί σωστά",
+          "Η δοκιμή επαληθεύει ότι το endpoint χειρίζεται σωστά διάφορες εισόδους, επιστρέφει σωστές μορφές απάντησης και χειρίζεται τα σφάλματα ομαλά",
+          "Η δοκιμή χρειάζεται μόνο για πληρωμένα APIs, όχι για δωρεάν",
+          "Η δοκιμή επιβραδύνει την ανάπτυξη και πρέπει να παραλείπεται"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Η δοκιμή του API endpoint πριν την ενσωμάτωση στην παραγωγή εξασφαλίζει ότι χειρίζεται ακραίες περιπτώσεις, επιστρέφει απαντήσεις στην αναμενόμενη μορφή, διαχειρίζεται σφάλματα χωρίς κατάρρευση και αποδίδει εντός αποδεκτής καθυστέρησης. Μη δοκιμασμένα endpoints μπορούν να προκαλέσουν σιωπηλές αποτυχίες στο SaaS προϊόν σας.",
+        "isMulti": false
+      }
+    ]
+  }
+}

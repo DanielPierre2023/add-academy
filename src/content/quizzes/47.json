@@ -1,0 +1,213 @@
+{
+  "lectureId": "47",
+  "en": {
+    "id": "quiz-47-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "What is the correct sequence of steps to deploy a project from your computer to the web using GitHub and Vercel?",
+        "options": [
+          "Deploy on Vercel → Create a GitHub repo → Write code → Push to GitHub",
+          "Write code → Create a GitHub repo → Push to GitHub → Connect repo to Vercel for automatic deployment",
+          "Create a Vercel account → Write code directly on Vercel → GitHub is not needed",
+          "Push to GitHub → Delete the repo → Create a new repo → Deploy manually"
+        ],
+        "correct": [1],
+        "explanation": "The standard deployment workflow is: write your code locally, create a GitHub repository, push your code to GitHub, then connect that repository to Vercel which automatically deploys your site on every push.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "What does a Git commit represent?",
+        "options": [
+          "A backup copy of your entire computer",
+          "A snapshot of your project's changes at a specific point in time, with a descriptive message",
+          "An automatic deployment to a live website",
+          "A request to merge someone else's code into your project"
+        ],
+        "correct": [1],
+        "explanation": "A Git commit is a saved snapshot of the changes you have made, accompanied by a message describing what changed and why. It creates a point in your project's history you can always return to.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which of the following are true about Vercel's free tier for hobby projects? Select all that apply.",
+        "options": [
+          "It provides automatic deployments from GitHub on every push",
+          "It requires a credit card and charges per deployment",
+          "It includes free SSL/HTTPS certificates",
+          "It supports custom domains"
+        ],
+        "correct": [0, 2, 3],
+        "explanation": "Vercel's free Hobby tier provides automatic deployments from GitHub, free SSL certificates, and custom domain support — all without requiring a credit card. This makes it possible to go from code to a live website at $0 cost.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Why is the total development cost described as $0 in this lecture?",
+        "options": [
+          "Because AI companies sponsor all student projects",
+          "Because GitHub, Vercel, and Supabase all offer generous free tiers sufficient for learning and small projects",
+          "Because the tools are pirated versions",
+          "Because the costs are hidden and billed later"
+        ],
+        "correct": [1],
+        "explanation": "GitHub (free repos and Git hosting), Vercel (free Hobby tier with automatic deployments), and Supabase (free tier database) all provide free plans that are more than sufficient for learning projects and small applications, making the total cost genuinely $0.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "What is the purpose of the 'git push' command?",
+        "options": [
+          "It deletes your local repository",
+          "It downloads code from GitHub to your computer",
+          "It uploads your local commits to the remote repository on GitHub",
+          "It creates a new branch in your project"
+        ],
+        "correct": [2],
+        "explanation": "'git push' sends your local commits to the remote repository (e.g., GitHub). Once pushed, Vercel detects the new commits and automatically triggers a new deployment of your site.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-47-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Care este secvența corectă de pași pentru a implementa un proiect de pe computerul tău pe web folosind GitHub și Vercel?",
+        "options": [
+          "Implementează pe Vercel → Creează un repo GitHub → Scrie cod → Trimite pe GitHub",
+          "Scrie cod → Creează un repo GitHub → Trimite pe GitHub → Conectează repo-ul la Vercel pentru implementare automată",
+          "Creează un cont Vercel → Scrie cod direct pe Vercel → GitHub nu este necesar",
+          "Trimite pe GitHub → Șterge repo-ul → Creează un repo nou → Implementează manual"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Fluxul standard de implementare este: scrie codul local, creează un depozit GitHub, trimite codul pe GitHub, apoi conectează acel depozit la Vercel care implementează automat site-ul tău la fiecare push.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ce reprezintă un commit Git?",
+        "options": [
+          "O copie de rezervă a întregului tău computer",
+          "O captură a modificărilor proiectului tău la un moment specific în timp, cu un mesaj descriptiv",
+          "O implementare automată pe un site web live",
+          "O cerere de a integra codul altcuiva în proiectul tău"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Un commit Git este o captură salvată a modificărilor pe care le-ai făcut, însoțită de un mesaj care descrie ce s-a schimbat și de ce. Creează un punct în istoria proiectului tău la care poți reveni oricând.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Care dintre următoarele sunt adevărate despre nivelul gratuit al Vercel pentru proiecte hobby? Selectează toate variantele corecte.",
+        "options": [
+          "Oferă implementări automate din GitHub la fiecare push",
+          "Necesită un card de credit și taxează per implementare",
+          "Include certificate SSL/HTTPS gratuite",
+          "Acceptă domenii personalizate"
+        ],
+        "correct": [0, 2, 3],
+        "explanation": "✅ Explicație: Nivelul gratuit Hobby al Vercel oferă implementări automate din GitHub, certificate SSL gratuite și suport pentru domenii personalizate — totul fără a necesita un card de credit. Acest lucru face posibilă trecerea de la cod la un site web live cu cost de 0$.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "De ce este costul total de dezvoltare descris ca fiind 0$ în această lecție?",
+        "options": [
+          "Pentru că companiile AI sponsorizează toate proiectele studenților",
+          "Pentru că GitHub, Vercel și Supabase oferă toate niveluri gratuite generoase, suficiente pentru învățare și proiecte mici",
+          "Pentru că instrumentele sunt versiuni piratate",
+          "Pentru că costurile sunt ascunse și facturate ulterior"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: GitHub (repo-uri gratuite și găzduire Git), Vercel (nivel gratuit Hobby cu implementări automate) și Supabase (nivel gratuit pentru baze de date) oferă toate planuri gratuite mai mult decât suficiente pentru proiecte de învățare și aplicații mici, făcând costul total cu adevărat 0$.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Care este scopul comenzii 'git push'?",
+        "options": [
+          "Șterge depozitul tău local",
+          "Descarcă codul de pe GitHub pe computerul tău",
+          "Încarcă commit-urile tale locale în depozitul remote de pe GitHub",
+          "Creează o ramură nouă în proiectul tău"
+        ],
+        "correct": [2],
+        "explanation": "✅ Explicație: 'git push' trimite commit-urile tale locale către depozitul remote (de ex., GitHub). Odată trimise, Vercel detectează noile commit-uri și declanșează automat o nouă implementare a site-ului tău.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-47-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Ποια είναι η σωστή ακολουθία βημάτων για να αναπτύξετε ένα έργο από τον υπολογιστή σας στο διαδίκτυο χρησιμοποιώντας GitHub και Vercel;",
+        "options": [
+          "Ανάπτυξη στο Vercel → Δημιουργία repo GitHub → Γράψιμο κώδικα → Push στο GitHub",
+          "Γράψιμο κώδικα → Δημιουργία repo GitHub → Push στο GitHub → Σύνδεση repo με Vercel για αυτόματη ανάπτυξη",
+          "Δημιουργία λογαριασμού Vercel → Γράψιμο κώδικα απευθείας στο Vercel → Το GitHub δεν χρειάζεται",
+          "Push στο GitHub → Διαγραφή repo → Δημιουργία νέου repo → Χειροκίνητη ανάπτυξη"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Η τυπική ροή εργασίας ανάπτυξης είναι: γράψτε τον κώδικά σας τοπικά, δημιουργήστε ένα αποθετήριο GitHub, στείλτε τον κώδικά σας στο GitHub και στη συνέχεια συνδέστε αυτό το αποθετήριο με το Vercel που αναπτύσσει αυτόματα τον ιστότοπό σας σε κάθε push.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Τι αντιπροσωπεύει ένα Git commit;",
+        "options": [
+          "Ένα αντίγραφο ασφαλείας ολόκληρου του υπολογιστή σας",
+          "Ένα στιγμιότυπο των αλλαγών του έργου σας σε μια συγκεκριμένη χρονική στιγμή, με ένα περιγραφικό μήνυμα",
+          "Μια αυτόματη ανάπτυξη σε ζωντανό ιστότοπο",
+          "Ένα αίτημα συγχώνευσης του κώδικα κάποιου άλλου στο έργο σας"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Ένα Git commit είναι ένα αποθηκευμένο στιγμιότυπο των αλλαγών που κάνατε, συνοδευόμενο από ένα μήνυμα που περιγράφει τι άλλαξε και γιατί. Δημιουργεί ένα σημείο στην ιστορία του έργου σας στο οποίο μπορείτε πάντα να επιστρέψετε.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ποια από τα ακόλουθα ισχύουν για το δωρεάν πακέτο του Vercel για χομπίστικα έργα; Επιλέξτε όλα τα σωστά.",
+        "options": [
+          "Παρέχει αυτόματες αναπτύξεις από το GitHub σε κάθε push",
+          "Απαιτεί πιστωτική κάρτα και χρεώνει ανά ανάπτυξη",
+          "Περιλαμβάνει δωρεάν πιστοποιητικά SSL/HTTPS",
+          "Υποστηρίζει προσαρμοσμένα domains"
+        ],
+        "correct": [0, 2, 3],
+        "explanation": "✅ Εξήγηση: Το δωρεάν πακέτο Hobby του Vercel παρέχει αυτόματες αναπτύξεις από το GitHub, δωρεάν πιστοποιητικά SSL και υποστήριξη προσαρμοσμένων domains — όλα χωρίς να απαιτείται πιστωτική κάρτα. Αυτό καθιστά δυνατή τη μετάβαση από κώδικα σε ζωντανό ιστότοπο με κόστος 0$.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Γιατί το συνολικό κόστος ανάπτυξης περιγράφεται ως 0$ σε αυτή τη διάλεξη;",
+        "options": [
+          "Επειδή οι εταιρείες AI χορηγούν όλα τα φοιτητικά έργα",
+          "Επειδή το GitHub, το Vercel και το Supabase προσφέρουν όλα γενναιόδωρα δωρεάν πακέτα επαρκή για μάθηση και μικρά έργα",
+          "Επειδή τα εργαλεία είναι πειρατικές εκδόσεις",
+          "Επειδή τα κόστη είναι κρυφά και χρεώνονται αργότερα"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Το GitHub (δωρεάν repos και φιλοξενία Git), το Vercel (δωρεάν πακέτο Hobby με αυτόματες αναπτύξεις) και το Supabase (δωρεάν πακέτο βάσης δεδομένων) προσφέρουν όλα δωρεάν πλάνα υπεραρκετά για μαθησιακά έργα και μικρές εφαρμογές, κάνοντας το συνολικό κόστος πραγματικά 0$.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Ποιος είναι ο σκοπός της εντολής 'git push';",
+        "options": [
+          "Διαγράφει το τοπικό σας αποθετήριο",
+          "Κατεβάζει κώδικα από το GitHub στον υπολογιστή σας",
+          "Ανεβάζει τα τοπικά σας commits στο απομακρυσμένο αποθετήριο στο GitHub",
+          "Δημιουργεί ένα νέο κλαδί στο έργο σας"
+        ],
+        "correct": [2],
+        "explanation": "✅ Εξήγηση: Η εντολή 'git push' στέλνει τα τοπικά σας commits στο απομακρυσμένο αποθετήριο (π.χ., GitHub). Μόλις σταλούν, το Vercel ανιχνεύει τα νέα commits και ενεργοποιεί αυτόματα μια νέα ανάπτυξη του ιστοτόπου σας.",
+        "isMulti": false
+      }
+    ]
+  }
+}

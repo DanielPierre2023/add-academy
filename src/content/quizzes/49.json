@@ -1,0 +1,213 @@
+{
+  "lectureId": "49",
+  "en": {
+    "id": "quiz-49-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "What are the five key components of an effective prompt according to this lecture?",
+        "options": [
+          "Input, Output, Error, Log, Debug",
+          "Role, Context, Task, Format, Constraints",
+          "System, User, Assistant, Function, Tool",
+          "Temperature, Top-k, Top-p, Frequency, Presence"
+        ],
+        "correct": [1],
+        "explanation": "The five components of an effective prompt are: Role (who the AI should be), Context (background information), Task (what to do), Format (how to structure the output), and Constraints (limitations and rules to follow).",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "What is the difference between zero-shot and few-shot prompting?",
+        "options": [
+          "Zero-shot uses no examples while few-shot provides example input-output pairs to guide the model",
+          "Zero-shot is faster because it uses fewer tokens",
+          "Few-shot only works with GPT models, zero-shot works with all models",
+          "There is no practical difference between the two techniques"
+        ],
+        "correct": [0],
+        "explanation": "Zero-shot prompting asks the model to perform a task with no examples — relying entirely on the model's training. Few-shot prompting includes example input-output pairs in the prompt, showing the model exactly what format and style of response is expected.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Which prompting techniques help improve the reasoning quality of an LLM's output? Select all that apply.",
+        "options": [
+          "Chain-of-thought prompting — asking the model to think step by step",
+          "Negative prompting — telling the model what NOT to do",
+          "Reducing the temperature to 0 for all tasks",
+          "Structured output — requesting responses in JSON or specific formats"
+        ],
+        "correct": [0, 1],
+        "explanation": "Chain-of-thought prompting improves reasoning by making the model show its work step by step. Negative prompting helps by eliminating common mistakes. Reducing temperature to 0 makes output deterministic but does not improve reasoning, and structured output controls format, not reasoning quality.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "What is the purpose of a system prompt versus a user prompt?",
+        "options": [
+          "System prompts are visible to the end user, user prompts are hidden",
+          "System prompts set the AI's behaviour, personality, and rules for the entire conversation; user prompts are the individual messages from the user",
+          "System prompts are only used for debugging and have no effect on output",
+          "There is no difference — they are processed identically by the model"
+        ],
+        "correct": [1],
+        "explanation": "The system prompt establishes the AI's role, behaviour guidelines, and constraints that persist throughout the conversation. User prompts are the actual questions or instructions from the end user. The system prompt shapes how the model responds to all user prompts.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "How does temperature control affect LLM output?",
+        "options": [
+          "Higher temperature makes output more random and creative; lower temperature makes it more deterministic and focused",
+          "Temperature only affects the speed of generation, not the content",
+          "Temperature must always be set to exactly 1.0",
+          "Lower temperature produces longer responses, higher produces shorter ones"
+        ],
+        "correct": [0],
+        "explanation": "Temperature controls the randomness of the model's token selection. At low temperatures (near 0), the model almost always picks the highest-probability token, giving deterministic output. At higher temperatures, it samples more broadly, producing more varied and creative — but potentially less accurate — responses.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-49-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Care sunt cele cinci componente cheie ale unui prompt eficient conform acestei lecții?",
+        "options": [
+          "Intrare, Ieșire, Eroare, Jurnal, Depanare",
+          "Rol, Context, Sarcină, Format, Constrângeri",
+          "Sistem, Utilizator, Asistent, Funcție, Instrument",
+          "Temperatură, Top-k, Top-p, Frecvență, Prezență"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Cele cinci componente ale unui prompt eficient sunt: Rol (cine ar trebui să fie AI-ul), Context (informații de fundal), Sarcină (ce trebuie făcut), Format (cum să structureze rezultatul) și Constrângeri (limitări și reguli de urmat).",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Care este diferența dintre promptarea zero-shot și few-shot?",
+        "options": [
+          "Zero-shot nu folosește exemple, în timp ce few-shot oferă perechi de exemple intrare-ieșire pentru a ghida modelul",
+          "Zero-shot este mai rapid deoarece folosește mai puține token-uri",
+          "Few-shot funcționează doar cu modele GPT, zero-shot funcționează cu toate modelele",
+          "Nu există nicio diferență practică între cele două tehnici"
+        ],
+        "correct": [0],
+        "explanation": "✅ Explicație: Promptarea zero-shot cere modelului să efectueze o sarcină fără exemple — bazându-se în întregime pe antrenamentul modelului. Promptarea few-shot include perechi de exemple intrare-ieșire în prompt, arătând modelului exact ce format și stil de răspuns este așteptat.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Care tehnici de promptare ajută la îmbunătățirea calității raționamentului ieșirii unui LLM? Selectează toate variantele corecte.",
+        "options": [
+          "Promptarea chain-of-thought — cererea modelului să gândească pas cu pas",
+          "Promptarea negativă — spunerea modelului ce NU trebuie să facă",
+          "Reducerea temperaturii la 0 pentru toate sarcinile",
+          "Ieșire structurată — solicitarea răspunsurilor în JSON sau formate specifice"
+        ],
+        "correct": [0, 1],
+        "explanation": "✅ Explicație: Promptarea chain-of-thought îmbunătățește raționamentul făcând modelul să își arate munca pas cu pas. Promptarea negativă ajută prin eliminarea greșelilor comune. Reducerea temperaturii la 0 face ieșirea deterministă dar nu îmbunătățește raționamentul, iar ieșirea structurată controlează formatul, nu calitatea raționamentului.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Care este scopul unui prompt de sistem versus un prompt de utilizator?",
+        "options": [
+          "Prompturile de sistem sunt vizibile utilizatorului final, prompturile de utilizator sunt ascunse",
+          "Prompturile de sistem stabilesc comportamentul, personalitatea și regulile AI-ului pentru întreaga conversație; prompturile de utilizator sunt mesajele individuale ale utilizatorului",
+          "Prompturile de sistem sunt folosite doar pentru depanare și nu au niciun efect asupra ieșirii",
+          "Nu există nicio diferență — sunt procesate identic de model"
+        ],
+        "correct": [1],
+        "explanation": "✅ Explicație: Promptul de sistem stabilește rolul AI-ului, ghidurile de comportament și constrângerile care persistă pe parcursul întregii conversații. Prompturile de utilizator sunt întrebările sau instrucțiunile reale ale utilizatorului final. Promptul de sistem modelează modul în care modelul răspunde la toate prompturile utilizatorului.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Cum afectează controlul temperaturii ieșirea LLM-ului?",
+        "options": [
+          "Temperatura mai mare face ieșirea mai aleatoare și creativă; temperatura mai mică o face mai deterministă și focalizată",
+          "Temperatura afectează doar viteza de generare, nu conținutul",
+          "Temperatura trebuie setată întotdeauna la exact 1.0",
+          "Temperatura mai mică produce răspunsuri mai lungi, cea mai mare produce mai scurte"
+        ],
+        "correct": [0],
+        "explanation": "✅ Explicație: Temperatura controlează aleatorietatea selecției de token-uri a modelului. La temperaturi scăzute (aproape de 0), modelul alege aproape întotdeauna token-ul cu cea mai mare probabilitate, oferind ieșire deterministă. La temperaturi mai mari, eșantionează mai larg, producând răspunsuri mai variate și creative — dar potențial mai puțin precise.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-49-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Ποια είναι τα πέντε βασικά στοιχεία ενός αποτελεσματικού prompt σύμφωνα με αυτή τη διάλεξη;",
+        "options": [
+          "Είσοδος, Έξοδος, Σφάλμα, Αρχείο καταγραφής, Αποσφαλμάτωση",
+          "Ρόλος, Πλαίσιο, Εργασία, Μορφή, Περιορισμοί",
+          "Σύστημα, Χρήστης, Βοηθός, Συνάρτηση, Εργαλείο",
+          "Θερμοκρασία, Top-k, Top-p, Συχνότητα, Παρουσία"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Τα πέντε στοιχεία ενός αποτελεσματικού prompt είναι: Ρόλος (ποιος πρέπει να είναι η AI), Πλαίσιο (πληροφορίες υποβάθρου), Εργασία (τι πρέπει να κάνει), Μορφή (πώς να δομήσει την έξοδο) και Περιορισμοί (όρια και κανόνες που πρέπει να ακολουθήσει).",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Ποια είναι η διαφορά μεταξύ zero-shot και few-shot prompting;",
+        "options": [
+          "Το zero-shot δεν χρησιμοποιεί παραδείγματα ενώ το few-shot παρέχει ζεύγη παραδειγμάτων εισόδου-εξόδου για να καθοδηγήσει το μοντέλο",
+          "Το zero-shot είναι ταχύτερο επειδή χρησιμοποιεί λιγότερα tokens",
+          "Το few-shot λειτουργεί μόνο με μοντέλα GPT, το zero-shot λειτουργεί με όλα τα μοντέλα",
+          "Δεν υπάρχει πρακτική διαφορά μεταξύ των δύο τεχνικών"
+        ],
+        "correct": [0],
+        "explanation": "✅ Εξήγηση: Το zero-shot prompting ζητά από το μοντέλο να εκτελέσει μια εργασία χωρίς παραδείγματα — βασιζόμενο εξ ολοκλήρου στην εκπαίδευσή του. Το few-shot prompting περιλαμβάνει ζεύγη παραδειγμάτων εισόδου-εξόδου στο prompt, δείχνοντας στο μοντέλο ακριβώς ποια μορφή και στυλ απάντησης αναμένεται.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ποιες τεχνικές prompting βοηθούν στη βελτίωση της ποιότητας συλλογισμού της εξόδου ενός LLM; Επιλέξτε όλα τα σωστά.",
+        "options": [
+          "Chain-of-thought prompting — ζητώντας από το μοντέλο να σκεφτεί βήμα προς βήμα",
+          "Αρνητικό prompting — λέγοντας στο μοντέλο τι ΔΕΝ πρέπει να κάνει",
+          "Μείωση θερμοκρασίας στο 0 για όλες τις εργασίες",
+          "Δομημένη έξοδος — ζητώντας απαντήσεις σε JSON ή συγκεκριμένες μορφές"
+        ],
+        "correct": [0, 1],
+        "explanation": "✅ Εξήγηση: Το chain-of-thought prompting βελτιώνει τον συλλογισμό κάνοντας το μοντέλο να δείχνει τη δουλειά του βήμα προς βήμα. Το αρνητικό prompting βοηθά εξαλείφοντας συνηθισμένα λάθη. Η μείωση θερμοκρασίας στο 0 κάνει την έξοδο ντετερμινιστική αλλά δεν βελτιώνει τον συλλογισμό, και η δομημένη έξοδος ελέγχει τη μορφή, όχι την ποιότητα συλλογισμού.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Ποιος είναι ο σκοπός ενός system prompt σε σύγκριση με ένα user prompt;",
+        "options": [
+          "Τα system prompts είναι ορατά στον τελικό χρήστη, τα user prompts είναι κρυφά",
+          "Τα system prompts καθορίζουν τη συμπεριφορά, την προσωπικότητα και τους κανόνες της AI για ολόκληρη τη συνομιλία· τα user prompts είναι τα μεμονωμένα μηνύματα του χρήστη",
+          "Τα system prompts χρησιμοποιούνται μόνο για αποσφαλμάτωση και δεν έχουν επίδραση στην έξοδο",
+          "Δεν υπάρχει διαφορά — επεξεργάζονται πανομοιότυπα από το μοντέλο"
+        ],
+        "correct": [1],
+        "explanation": "✅ Εξήγηση: Το system prompt καθιερώνει τον ρόλο της AI, τις κατευθυντήριες γραμμές συμπεριφοράς και τους περιορισμούς που διατηρούνται σε ολόκληρη τη συνομιλία. Τα user prompts είναι οι πραγματικές ερωτήσεις ή οδηγίες του τελικού χρήστη. Το system prompt διαμορφώνει τον τρόπο που το μοντέλο ανταποκρίνεται σε όλα τα user prompts.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Πώς επηρεάζει ο έλεγχος θερμοκρασίας την έξοδο του LLM;",
+        "options": [
+          "Υψηλότερη θερμοκρασία κάνει την έξοδο πιο τυχαία και δημιουργική· χαμηλότερη θερμοκρασία την κάνει πιο ντετερμινιστική και εστιασμένη",
+          "Η θερμοκρασία επηρεάζει μόνο την ταχύτητα δημιουργίας, όχι το περιεχόμενο",
+          "Η θερμοκρασία πρέπει πάντα να ρυθμίζεται ακριβώς στο 1.0",
+          "Χαμηλότερη θερμοκρασία παράγει μεγαλύτερες απαντήσεις, υψηλότερη παράγει μικρότερες"
+        ],
+        "correct": [0],
+        "explanation": "✅ Εξήγηση: Η θερμοκρασία ελέγχει την τυχαιότητα της επιλογής tokens του μοντέλου. Σε χαμηλές θερμοκρασίες (κοντά στο 0), το μοντέλο σχεδόν πάντα επιλέγει το token με την υψηλότερη πιθανότητα, δίνοντας ντετερμινιστική έξοδο. Σε υψηλότερες θερμοκρασίες, δειγματοληπτεί ευρύτερα, παράγοντας πιο ποικίλες και δημιουργικές — αλλά δυνητικά λιγότερο ακριβείς — απαντήσεις.",
+        "isMulti": false
+      }
+    ]
+  }
+}
