@@ -748,8 +748,136 @@
         "el": "Capstone Σταδίου 6 — Πλήρες μικρορυθμισμένο σύστημα LLM"
       },
       "prev": "42",
-      "next": "genai-0",
+      "next": "44",
       "codeBlockCount": 6,
+      "hasQuiz": true
+    },
+    {
+      "id": "44",
+      "number": 44,
+      "stage": 8,
+      "stageName": "NeuralForge Platform",
+      "isGenAI": false,
+      "title": {
+        "en": "Training Data — Free Datasets & Personal Data Loading",
+        "ro": "Date de antrenament — Seturi de date gratuite și încărcarea datelor personale",
+        "el": "Δεδομένα εκπαίδευσης — Δωρεάν σύνολα δεδομένων και φόρτωση προσωπικών δεδομένων"
+      },
+      "prev": "43",
+      "next": "45",
+      "codeBlockCount": 2,
+      "hasQuiz": true
+    },
+    {
+      "id": "45",
+      "number": 45,
+      "stage": 8,
+      "stageName": "NeuralForge Platform",
+      "isGenAI": false,
+      "title": {
+        "en": "PyTorch Training — Making Your LLM Actually Learn",
+        "ro": "Antrenament PyTorch — Cum învață cu adevărat LLM-ul tău",
+        "el": "Εκπαίδευση PyTorch — Κάνοντας το LLM σας να μαθαίνει πραγματικά"
+      },
+      "prev": "44",
+      "next": "46",
+      "codeBlockCount": 3,
+      "hasQuiz": true
+    },
+    {
+      "id": "46",
+      "number": 46,
+      "stage": 8,
+      "stageName": "NeuralForge Platform",
+      "isGenAI": false,
+      "title": {
+        "en": "Visual Fine-tuning with NeuralForge",
+        "ro": "Ajustare fină vizuală cu NeuralForge",
+        "el": "Οπτική μικρορύθμιση με NeuralForge"
+      },
+      "prev": "45",
+      "next": "47",
+      "codeBlockCount": 2,
+      "hasQuiz": true
+    },
+    {
+      "id": "47",
+      "number": 47,
+      "stage": 8,
+      "stageName": "NeuralForge Platform",
+      "isGenAI": false,
+      "title": {
+        "en": "Your Toolkit — GitHub, Vercel & Cloud Costs Explained",
+        "ro": "Instrumentele tale — GitHub, Vercel și costurile cloud explicate",
+        "el": "Η εργαλειοθήκη σας — GitHub, Vercel και εξήγηση κόστους cloud"
+      },
+      "prev": "46",
+      "next": "48",
+      "codeBlockCount": 0,
+      "hasQuiz": true
+    },
+    {
+      "id": "48",
+      "number": 48,
+      "stage": 8,
+      "stageName": "NeuralForge Platform",
+      "isGenAI": false,
+      "title": {
+        "en": "AI API Cost Comparison — OpenAI, Anthropic, Google, Grok, DeepSeek, Kimi",
+        "ro": "Compararea Costurilor API-urilor AI — OpenAI, Anthropic, Google, Grok, DeepSeek, Kimi",
+        "el": "Σύγκριση Κόστους AI API — OpenAI, Anthropic, Google, Grok, DeepSeek, Kimi"
+      },
+      "prev": "47",
+      "next": "49",
+      "codeBlockCount": 1,
+      "hasQuiz": true
+    },
+    {
+      "id": "49",
+      "number": 49,
+      "stage": 8,
+      "stageName": "NeuralForge Platform",
+      "isGenAI": false,
+      "title": {
+        "en": "Prompt Engineering Mastery",
+        "ro": "Stapanirea Ingineriei de Prompturi",
+        "el": "Mastery Prompt Engineering"
+      },
+      "prev": "48",
+      "next": "50",
+      "codeBlockCount": 2,
+      "hasQuiz": true
+    },
+    {
+      "id": "50",
+      "number": 50,
+      "stage": 8,
+      "stageName": "NeuralForge Platform",
+      "isGenAI": false,
+      "title": {
+        "en": "Connecting Your LLM to GenAI SaaS Products",
+        "ro": "Conectarea LLM-ului la Produsele GenAI SaaS",
+        "el": "Σύνδεση του LLM σας με τα Προϊόντα GenAI SaaS"
+      },
+      "prev": "49",
+      "next": "51",
+      "codeBlockCount": 3,
+      "hasQuiz": true
+    },
+    {
+      "id": "51",
+      "number": 51,
+      "stage": 8,
+      "stageName": "NeuralForge Platform",
+      "isGenAI": false,
+      "title": {
+        "en": "Final Capstone — Deploy Your Complete LLM System",
+        "ro": "Capstone Final — Implementarea Sistemului Complet LLM",
+        "el": "Τελικό Capstone — Ανάπτυξη του Πλήρους Συστήματος LLM"
+      },
+      "prev": "50",
+      "next": "genai-0",
+      "codeBlockCount": 2,
       "hasQuiz": true
     },
     {
@@ -763,7 +891,7 @@
         "ro": "Fundatia GenAI SaaS: API-uri, Personalizare si Deployment",
         "el": "Vaseis GenAI SaaS: APIs, Prosarmogi & Deployment"
       },
-      "prev": "43",
+      "prev": "51",
       "next": "genai-1",
       "codeBlockCount": 6,
       "hasQuiz": true
@@ -849,7 +977,7 @@
       "hasQuiz": false
     }
   ],
-  "totalLectures": 53,
-  "totalCodeBlocks": 193,
-  "totalQuizzes": 38
+  "totalLectures": 61,
+  "totalCodeBlocks": 208,
+  "totalQuizzes": 46
 }
