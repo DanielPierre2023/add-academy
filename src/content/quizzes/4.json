@@ -5,79 +5,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "Why do transformers require positional encoding, unlike RNNs?",
+        "text": "In the sentence 'The cat sat on the mat because it was tired,' how does the Transformer's attention mechanism determine that 'it' refers to 'the cat' rather than 'the mat'?",
         "options": [
-          "Transformers process tokens in parallel with no inherent notion of sequence order",
-          "Transformers use convolutional layers that are position-invariant",
-          "Positional encoding replaces the need for an embedding layer",
-          "RNNs use positional encoding internally, but transformers must add it explicitly"
+          "It follows a grammatical rule that pronouns always refer to the first noun",
+          "It randomly assigns attention to nearby words",
+          "During pretraining, the model learned that 'tired' is an animate property, so the Query vector of 'it' produces high attention scores with the Key vector of 'cat' (animate) rather than 'mat' (inanimate)",
+          "It looks up the answer in a pronoun resolution database"
         ],
-        "correct": [
-          0
-        ],
-        "explanation": "Transformers process all tokens simultaneously via self-attention, treating input as a set, not a sequence. Without positional encoding, 'cat sat mat' = 'mat sat cat'. RNNs encode order naturally by processing tokens sequentially.",
+        "correct": [2],
+        "explanation": "The attention mechanism uses learned Query and Key vectors to compute relevance scores. Through pretraining on millions of sentences, the model's Q and K vectors were shaped so that pronouns followed by animate properties (like 'tired', 'hungry', 'happy') produce high attention scores with animate nouns. Mats do not get tired, cats do — the model learned this statistical pattern from the data, not from explicit rules.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "What is the primary advantage of multi-head attention over single-head attention?",
+        "text": "Why did the Transformer's 'Attention Is All You Need' paper (2017) have such a massive impact on the field?",
         "options": [
-          "It reduces the total number of parameters in the model",
-          "It allows the model to jointly attend to information from different representation subspaces",
-          "It eliminates the need for residual connections",
-          "It forces each head to attend to a fixed window of neighboring tokens"
+          "It introduced a minor improvement to existing RNN architectures",
+          "It proved that hand-written grammar rules are the best approach for NLP",
+          "It demonstrated that attention alone — without any recurrence — could process sequences in parallel, solve long-range dependencies, and achieve state-of-the-art results, fundamentally replacing the dominant RNN/LSTM paradigm",
+          "It was the first paper ever written about artificial intelligence"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Multi-head attention splits representation into subspaces, letting different heads capture different relationship types (syntactic vs. semantic). It doesn't reduce parameters or constrain heads to local windows.",
+        "correct": [2],
+        "explanation": "The 2017 paper was revolutionary because it showed that recurrence was unnecessary. By relying solely on attention mechanisms, Transformers could process all tokens simultaneously (enabling massive GPU parallelism), directly connect any two tokens regardless of distance (solving long-range dependencies), and achieve better results than RNNs. Within two years, virtually every state-of-the-art NLP result used Transformers, and the architecture spread to vision, audio, and protein folding.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Which are true about the original 'Attention Is All You Need' architecture?Select all that apply",
+        "text": "In the library analogy for the attention mechanism, what do Query (Q), Key (K), and Value (V) represent?",
         "options": [
-          "It uses an encoder-decoder structure for machine translation",
-          "It relies on recurrence in the encoder to capture long-range dependencies",
-          "It uses residual connections and layer normalization to stabilize training",
-          "The decoder uses masked self-attention to prevent attending to future positions"
+          "Q = the book's price, K = the book's weight, V = the book's color",
+          "Q = your question ('what information do I need?'), K = book titles ('what does this book contain?'), V = book contents ('the actual information to share')",
+          "Q = the librarian, K = the library card, V = the late fees",
+          "Q, K, and V all represent the same thing — the word's meaning"
         ],
-        "correct": [
-          0,
-          2,
-          3
-        ],
-        "explanation": "The original transformer uses encoder-decoder for translation, residual connections + layer norm, and masked self-attention in the decoder. It does NOT use recurrence — eliminating recurrence is the paper's central contribution.",
-        "isMulti": true
-      },
-      {
-        "index": 3,
-        "text": "Why did transformers largely replace RNNs and LSTMs for sequence modeling?",
-        "options": [
-          "Transformers use less memory than RNNs for the same sequence length",
-          "RNNs cannot model any long-range dependencies, while transformers can",
-          "Transformers allow full parallelization during training, whereas RNNs must process tokens sequentially",
-          "Transformers do not require backpropagation, unlike RNNs"
-        ],
-        "correct": [
-          2
-        ],
-        "explanation": "The key advantage is parallelization: RNNs process sequentially (slow). Transformers compute attention over all positions simultaneously. RNNs CAN model long-range dependencies in theory. Transformers actually use MORE memory (quadratic). Both use backpropagation.",
+        "correct": [1],
+        "explanation": "In the attention mechanism: the Query represents what a token is looking for (like walking into a library with a question), the Key represents what each token advertises about itself (like book titles on spines), and the Value is the actual information content (like the book's contents). The Query is compared against all Keys to find relevant matches, and then the corresponding Values are combined based on relevance scores.",
         "isMulti": false
       },
       {
-        "index": 4,
-        "text": "In self-attention, what do Query (Q), Key (K), and Value (V) represent conceptually?",
+        "index": 3,
+        "text": "What is the difference between a Transformer and an LLM? Select all correct statements.",
         "options": [
-          "Q = what a token is looking for, K = what a token offers to match, V = actual content to aggregate",
-          "Q = the token's position, K = the token's embedding, V = the attention weight",
-          "Q, K, V are three identical copies of the input with no distinct roles",
-          "Q determines output length, K determines input length, V stores positional encoding"
+          "A Transformer is an architecture (a blueprint), while an LLM is a specific trained model built using that architecture",
+          "All modern LLMs use the Transformer architecture, but not all Transformers are LLMs",
+          "A Transformer and an LLM are exactly the same thing",
+          "A small Transformer model trained for sentiment analysis with 10 million parameters is a Transformer but not an LLM"
         ],
-        "correct": [
-          0
+        "correct": [0, 1, 3],
+        "explanation": "The Transformer is a design pattern — a set of architectural principles (self-attention, feedforward layers, residual connections, etc.). An LLM is a concrete, trained model with specific parameter values learned from large-scale text data. All modern LLMs (GPT, Claude, LLaMA) are built on the Transformer architecture, but a small Transformer used for a specific task like sentiment analysis would not qualify as 'large' and therefore is not an LLM.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Why does a Transformer decoder use 'causal masking' (preventing tokens from seeing future tokens)?",
+        "options": [
+          "To save memory by reducing the number of computations",
+          "Because during text generation, future tokens do not exist yet — the model must generate each token using only the tokens that came before it",
+          "To make the model run slower for safety reasons",
+          "Because looking at future tokens would make the model too accurate"
         ],
-        "explanation": "Q (Query) = what info a token seeks. K (Key) = what a token advertises. Their dot product determines attention weights. V (Value) carries the content that gets weighted and summed.",
+        "correct": [1],
+        "explanation": "Causal masking is essential for autoregressive generation. When the model generates the fifth word, only words 1 through 4 exist — word 6 has not been created yet. If the model could see future tokens during training, it would learn to 'cheat' by copying the answer instead of learning to predict. The mask ensures training matches the actual generation process, where the model must predict each next token based solely on what precedes it.",
         "isMulti": false
       }
     ]
@@ -87,79 +75,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "De ce au nevoie transformer-ele de codificare pozițională, spre deosebire de RNN-uri?",
+        "text": "In propozitia 'Pisica a stat pe covoras pentru ca era obosita,' cum determina mecanismul de attention al Transformer-ului ca 'era' se refera la 'pisica' si nu la 'covoras'?",
         "options": [
-          "Transformer-ele procesează token-urile în paralel, fără noțiune inerentă de ordine secvențială",
-          "Transformer-ele folosesc straturi convoluționale care sunt invariante la poziție",
-          "Codificarea pozițională înlocuiește nevoia de strat de embedding",
-          "RNN-urile folosesc codificare pozițională intern, dar transformer-ele trebuie să o adauge explicit"
+          "Urmeaza o regula gramaticala ca pronumele se refera intotdeauna la primul substantiv",
+          "Atribuie aleatoriu attention cuvintelor apropiate",
+          "In timpul pretraining-ului, modelul a invatat ca 'obosita' este o proprietate a fiintelor, asa ca vectorul Query al pronumelui produce scoruri mari de attention cu vectorul Key al 'pisica' (animat) si nu al 'covoras' (inanimat)",
+          "Cauta raspunsul intr-o baza de date de rezolutie a pronumelor"
         ],
-        "correct": [
-          0
-        ],
-        "explanation": "Transformer-ele procesează toți tokenii simultan prin self-attention, tratând input-ul ca mulțime, nu secvență. Fără codificare pozițională, ordinea cuvintelor s-ar pierde.",
+        "correct": [2],
+        "explanation": "Mecanismul de attention foloseste vectori invatati Query si Key pentru a calcula scoruri de relevanta. Prin pretraining pe milioane de propozitii, vectorii Q si K ai modelului au fost modelati astfel incat pronumele urmate de proprietati animate produc scoruri mari de attention cu substantive animate. Covorasele nu obosesc, pisicile da.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Care este avantajul principal al atenției multi-cap față de atenția cu un singur cap?",
+        "text": "De ce a avut articolul 'Attention Is All You Need' (2017) un impact atat de masiv asupra domeniului?",
         "options": [
-          "Reduce numărul total de parametri din model",
-          "Permite modelului să participe simultan la informații din subspații de reprezentare diferite",
-          "Elimină nevoia de conexiuni reziduale",
-          "Forțează fiecare cap să participe la o fereastră fixă de tokeni vecini"
+          "A introdus o imbunatatire minora a arhitecturilor RNN existente",
+          "A dovedit ca regulile gramaticale scrise manual sunt cea mai buna abordare pentru NLP",
+          "A demonstrat ca attention-ul singur — fara recurenta — poate procesa secvente in paralel, rezolva dependentele pe distante lungi si atinge rezultate de varf, inlocuind fundamental paradigma dominanta RNN/LSTM",
+          "A fost primul articol scris vreodata despre inteligenta artificiala"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Atenția multi-cap împarte reprezentarea în subspații, permițând diferitelor capete să surprindă diferite tipuri de relații (sintactice vs. semantice).",
+        "correct": [2],
+        "explanation": "Articolul din 2017 a fost revolutionar pentru ca a demonstrat ca recurenta este inutila. Bazandu-se exclusiv pe mecanisme de attention, Transformer-ele pot procesa toate token-urile simultan, conecta direct orice doua token-uri indiferent de distanta si obtine rezultate mai bune decat RNN-urile.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Care sunt adevărate despre arhitectura originală 'Attention Is All You Need'?Selectați toate care se aplică",
+        "text": "In analogia bibliotecii pentru mecanismul de attention, ce reprezinta Query (Q), Key (K) si Value (V)?",
         "options": [
-          "Folosește o structură encoder-decoder pentru traducere automată",
-          "Se bazează pe recurență în encoder pentru a surprinde dependențe la distanță mare",
-          "Folosește conexiuni reziduale și normalizare de strat pentru stabilizarea antrenamentului",
-          "Decoder-ul folosește self-attention mascată pentru a preveni participarea la poziții viitoare"
+          "Q = pretul cartii, K = greutatea cartii, V = culoarea cartii",
+          "Q = intrebarea ta ('ce informatii am nevoie?'), K = titlurile cartilor ('ce contine aceasta carte?'), V = continutul cartilor ('informatia efectiva de impartasit')",
+          "Q = bibliotecarul, K = legitimatia de biblioteca, V = penalitatile de intarziere",
+          "Q, K si V reprezinta toate acelasi lucru — sensul cuvantului"
         ],
-        "correct": [
-          0,
-          2,
-          3
-        ],
-        "explanation": "Transformer-ul original folosește encoder-decoder, conexiuni reziduale + normalizare, și self-attention mascată în decoder. NU folosește recurență — eliminarea recurenței este contribuția centrală.",
-        "isMulti": true
-      },
-      {
-        "index": 3,
-        "text": "De ce au înlocuit transformer-ele în mare parte RNN-urile și LSTM-urile?",
-        "options": [
-          "Transformer-ele folosesc mai puțină memorie decât RNN-urile pentru aceeași lungime de secvență",
-          "RNN-urile nu pot modela nicio dependență pe termen lung",
-          "Transformer-ele permit paralelizare completă în timpul antrenamentului, în timp ce RNN-urile procesează secvențial",
-          "Transformer-ele nu necesită retropropagare, spre deosebire de RNN-uri"
-        ],
-        "correct": [
-          2
-        ],
-        "explanation": "Avantajul cheie: paralelizarea. RNN-urile procesează secvențial (lent). Transformer-ele calculează atenția pe toate pozițiile simultan. RNN-urile POT modela dependențe pe termen lung. Transformer-ele folosesc de fapt MAI MULTĂ memorie.",
+        "correct": [1],
+        "explanation": "In mecanismul de attention: Query-ul reprezinta ce cauta un token (ca atunci cand intri intr-o biblioteca cu o intrebare), Key-ul reprezinta ce anunta fiecare token despre sine (ca titlurile de pe cotorul cartilor), iar Value-ul este continutul informational real (ca si continutul cartilor).",
         "isMulti": false
       },
       {
-        "index": 4,
-        "text": "În self-attention, ce reprezintă conceptual Query (Q), Key (K) și Value (V)?",
+        "index": 3,
+        "text": "Care este diferenta dintre un Transformer si un LLM? Selecteaza toate afirmatiile corecte.",
         "options": [
-          "Q = ce caută un token, K = ce oferă un token pentru potrivire, V = conținutul real de agregat",
-          "Q = poziția tokenului, K = embedding-ul tokenului, V = ponderea atenției",
-          "Q, K, V sunt trei copii identice ale inputului fără roluri distincte",
-          "Q determină lungimea output-ului, K determină lungimea inputului, V stochează codificarea pozițională"
+          "Un Transformer este o arhitectura (un plan), in timp ce un LLM este un model specific antrenat construit folosind acea arhitectura",
+          "Toate LLM-urile moderne folosesc arhitectura Transformer, dar nu toate Transformer-ele sunt LLM-uri",
+          "Un Transformer si un LLM sunt exact acelasi lucru",
+          "Un model Transformer mic antrenat pentru analiza sentimentelor cu 10 milioane de parametri este un Transformer dar nu un LLM"
         ],
-        "correct": [
-          0
+        "correct": [0, 1, 3],
+        "explanation": "Transformer-ul este un tipar de design — un set de principii arhitecturale. Un LLM este un model concret, antrenat, cu valori specifice ale parametrilor invatate din date text la scara larga. Toate LLM-urile moderne sunt construite pe arhitectura Transformer, dar un Transformer mic folosit pentru o sarcina specifica nu s-ar califica drept 'mare'.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "De ce foloseste un decoder Transformer 'mascare cauzala' (prevenind token-urile sa vada token-urile viitoare)?",
+        "options": [
+          "Pentru a economisi memorie reducand numarul de calcule",
+          "Pentru ca in timpul generarii de text, token-urile viitoare nu exista inca — modelul trebuie sa genereze fiecare token folosind doar token-urile care au venit inaintea lui",
+          "Pentru a face modelul sa ruleze mai lent din motive de siguranta",
+          "Pentru ca a privi token-urile viitoare ar face modelul prea precis"
         ],
-        "explanation": "Q (Query) = ce informație caută un token. K (Key) = ce oferă un token. Produsul lor scalar determină ponderile atenției. V (Value) poartă conținutul care este ponderat și sumat.",
+        "correct": [1],
+        "explanation": "Mascarea cauzala este esentiala pentru generarea autoregresiva. Cand modelul genereaza al cincilea cuvant, doar cuvintele 1 pana la 4 exista. Daca modelul ar putea vedea token-urile viitoare in timpul antrenamentului, ar invata sa 'triseze' copiind raspunsul. Masca asigura ca antrenamentul corespunde procesului real de generare.",
         "isMulti": false
       }
     ]
@@ -169,79 +145,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "Γιατί οι transformers χρειάζονται κωδικοποίηση θέσης, σε αντίθεση με τα RNN;",
+        "text": "Στην προταση 'Η γατα καθοταν στο χαλι γιατι ηταν κουρασμενη,' πως ο μηχανισμος attention του Transformer καθοριζει οτι το 'ηταν' αναφερεται στη 'γατα' και οχι στο 'χαλι';",
         "options": [
-          "Οι transformers επεξεργάζονται tokens παράλληλα χωρίς εγγενή έννοια σειράς",
-          "Οι transformers χρησιμοποιούν convolutional layers αδιάφορα θέσης",
-          "Η κωδικοποίηση θέσης αντικαθιστά την ανάγκη για embedding layer",
-          "Τα RNN χρησιμοποιούν κωδικοποίηση θέσης εσωτερικά, αλλά οι transformers πρέπει να την προσθέσουν ρητά"
+          "Ακολουθει εναν γραμματικο κανονα οτι οι αντωνυμιες αναφερονται παντα στο πρωτο ουσιαστικο",
+          "Αναθετει τυχαια attention σε κοντινες λεξεις",
+          "Κατα τη διαρκεια του pretraining, το μοντελο εμαθε οτι 'κουρασμενη' ειναι ιδιοτητα εμψυχου, ετσι το διανυσμα Query παραγει υψηλα σκορ attention με το διανυσμα Key του 'γατα' (εμψυχο) αντι του 'χαλι' (αψυχο)",
+          "Αναζητα την απαντηση σε μια βαση δεδομενων επιλυσης αντωνυμιων"
         ],
-        "correct": [
-          0
-        ],
-        "explanation": "Οι transformers επεξεργάζονται όλα τα tokens ταυτόχρονα μέσω self-attention. Χωρίς κωδικοποίηση θέσης, η σειρά λέξεων θα χανόταν.",
+        "correct": [2],
+        "explanation": "Ο μηχανισμος attention χρησιμοποιει εκπαιδευμενα διανυσματα Query και Key. Μεσω pretraining σε εκατομμυρια προτασεις, τα διανυσματα Q και K διαμορφωθηκαν ωστε οι αντωνυμιες που ακολουθουνται απο ιδιοτητες εμψυχων να παραγουν υψηλα σκορ attention με εμψυχα ουσιαστικα.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ποιο είναι το κύριο πλεονέκτημα της multi-head attention έναντι single-head;",
+        "text": "Γιατι το αρθρο 'Attention Is All You Need' (2017) ειχε τοσο τεραστιο αντικτυπο στον τομεα;",
         "options": [
-          "Μειώνει τον συνολικό αριθμό παραμέτρων",
-          "Επιτρέπει στο μοντέλο να παρακολουθεί ταυτόχρονα πληροφορίες από διαφορετικούς υποχώρους αναπαράστασης",
-          "Εξαλείφει την ανάγκη για residual connections",
-          "Αναγκάζει κάθε κεφαλή να παρακολουθεί σταθερό παράθυρο γειτονικών tokens"
+          "Εισηγαγε μια μικρη βελτιωση στις υπαρχουσες αρχιτεκτονικες RNN",
+          "Απεδειξε οτι οι χειρογραφοι γραμματικοι κανονες ειναι η καλυτερη προσεγγιση για NLP",
+          "Απεδειξε οτι το attention μονο του — χωρις καμια αναδρομη — μπορει να επεξεργαστει ακολουθιες παραλληλα, να λυσει μακροπροθεσμες εξαρτησεις και να πετυχει αποτελεσματα αιχμης, αντικαθιστωντας θεμελιωδως το κυριαρχο παραδειγμα RNN/LSTM",
+          "Ηταν το πρωτο αρθρο που γραφτηκε ποτε για τεχνητη νοημοσυνη"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Η multi-head attention χωρίζει την αναπαράσταση σε υποχώρους, επιτρέποντας σε διαφορετικές κεφαλές να συλλαμβάνουν διαφορετικούς τύπους σχέσεων.",
+        "correct": [2],
+        "explanation": "Το αρθρο του 2017 ηταν επαναστατικο επειδη εδειξε οτι η αναδρομη ηταν περιττη. Βασιζομενα αποκλειστικα σε μηχανισμους attention, τα Transformers μπορουσαν να επεξεργαστουν ολα τα tokens ταυτοχρονα και να πετυχουν καλυτερα αποτελεσματα απο τα RNNs.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ποια ισχύουν για την αρχική αρχιτεκτονική 'Attention Is All You Need';Επιλέξτε όλα όσα ισχύουν",
+        "text": "Στην αναλογια της βιβλιοθηκης για τον μηχανισμο attention, τι αντιπροσωπευουν τα Query (Q), Key (K) και Value (V);",
         "options": [
-          "Χρησιμοποιεί δομή encoder-decoder για μηχανική μετάφραση",
-          "Βασίζεται σε αναδρομή στον encoder για μακροπρόθεσμες εξαρτήσεις",
-          "Χρησιμοποιεί residual connections και layer normalization για σταθεροποίηση",
-          "Ο decoder χρησιμοποιεί masked self-attention για αποτροπή πρόσβασης σε μελλοντικές θέσεις"
+          "Q = η τιμη του βιβλιου, K = το βαρος του βιβλιου, V = το χρωμα του βιβλιου",
+          "Q = η ερωτηση σου ('τι πληροφοριες χρειαζομαι;'), K = τιτλοι βιβλιων ('τι περιεχει αυτο το βιβλιο;'), V = περιεχομενα βιβλιων ('η πραγματικη πληροφορια προς κοινοποιηση')",
+          "Q = ο βιβλιοθηκαριος, K = η καρτα βιβλιοθηκης, V = τα προστιμα καθυστερησης",
+          "Τα Q, K και V αντιπροσωπευουν ολα το ιδιο πραγμα — τη σημασια της λεξης"
         ],
-        "correct": [
-          0,
-          2,
-          3
-        ],
-        "explanation": "Ο αρχικός transformer χρησιμοποιεί encoder-decoder, residual connections + layer norm, και masked self-attention στον decoder. ΔΕΝ χρησιμοποιεί αναδρομή.",
-        "isMulti": true
-      },
-      {
-        "index": 3,
-        "text": "Γιατί οι transformers αντικατέστησαν σε μεγάλο βαθμό τα RNN και LSTM;",
-        "options": [
-          "Οι transformers χρησιμοποιούν λιγότερη μνήμη για το ίδιο μήκος ακολουθίας",
-          "Τα RNN δεν μπορούν να μοντελοποιήσουν καμία μακροπρόθεσμη εξάρτηση",
-          "Οι transformers επιτρέπουν πλήρη παραλληλοποίηση, ενώ τα RNN επεξεργάζονται ακολουθιακά",
-          "Οι transformers δεν χρειάζονται backpropagation"
-        ],
-        "correct": [
-          2
-        ],
-        "explanation": "Βασικό πλεονέκτημα: παραλληλοποίηση. Τα RNN επεξεργάζονται ακολουθιακά (αργά). Οι transformers υπολογίζουν attention σε όλες τις θέσεις ταυτόχρονα.",
+        "correct": [1],
+        "explanation": "Στον μηχανισμο attention: το Query αντιπροσωπευει τι ψαχνει ενα token, το Key αντιπροσωπευει τι διαφημιζει καθε token για τον εαυτο του, και το Value ειναι το πραγματικο πληροφοριακο περιεχομενο.",
         "isMulti": false
       },
       {
-        "index": 4,
-        "text": "Στο self-attention, τι αντιπροσωπεύουν εννοιολογικά Query (Q), Key (K) και Value (V);",
+        "index": 3,
+        "text": "Ποια ειναι η διαφορα μεταξυ ενος Transformer και ενος LLM; Επελεξε ολες τις σωστες δηλωσεις.",
         "options": [
-          "Q = τι ψάχνει ένα token, K = τι προσφέρει για αντιστοίχιση, V = πραγματικό περιεχόμενο προς συνάθροιση",
-          "Q = θέση token, K = embedding token, V = βάρος attention",
-          "Q, K, V είναι τρία πανομοιότυπα αντίγραφα εισόδου χωρίς ξεχωριστούς ρόλους",
-          "Q καθορίζει μήκος εξόδου, K μήκος εισόδου, V αποθηκεύει κωδικοποίηση θέσης"
+          "Ενα Transformer ειναι μια αρχιτεκτονικη (ενα σχεδιο), ενω ενα LLM ειναι ενα συγκεκριμενο εκπαιδευμενο μοντελο χτισμενο χρησιμοποιωντας αυτη την αρχιτεκτονικη",
+          "Ολα τα μοντερνα LLMs χρησιμοποιουν την αρχιτεκτονικη Transformer, αλλα δεν ειναι ολα τα Transformers LLMs",
+          "Ενα Transformer και ενα LLM ειναι ακριβως το ιδιο πραγμα",
+          "Ενα μικρο μοντελο Transformer εκπαιδευμενο για αναλυση συναισθηματος με 10 εκατομμυρια παραμετρους ειναι Transformer αλλα οχι LLM"
         ],
-        "correct": [
-          0
+        "correct": [0, 1, 3],
+        "explanation": "Το Transformer ειναι ενα σχεδιαστικο μοτιβο. Ενα LLM ειναι ενα συγκεκριμενο, εκπαιδευμενο μοντελο με συγκεκριμενες τιμες παραμετρων. Ολα τα μοντερνα LLMs ειναι χτισμενα στην αρχιτεκτονικη Transformer, αλλα ενα μικρο Transformer για συγκεκριμενη εργασια δεν πληροι τα κριτηρια για 'μεγαλο'.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Γιατι ενας decoder Transformer χρησιμοποιει 'αιτιακη μασκα' (εμποδιζοντας τα tokens να βλεπουν μελλοντικα tokens);",
+        "options": [
+          "Για να εξοικονομησει μνημη μειωνοντας τον αριθμο υπολογισμων",
+          "Επειδη κατα τη δημιουργια κειμενου, τα μελλοντικα tokens δεν υπαρχουν ακομα — το μοντελο πρεπει να δημιουργησει καθε token χρησιμοποιωντας μονο τα tokens που ηρθαν πριν απο αυτο",
+          "Για να κανει το μοντελο να τρεχει πιο αργα για λογους ασφαλειας",
+          "Επειδη το να βλεπει μελλοντικα tokens θα εκανε το μοντελο πολυ ακριβες"
         ],
-        "explanation": "Q = τι πληροφορία ψάχνει ένα token. K = τι προσφέρει. Το εσωτερικό γινόμενό τους καθορίζει τα βάρη attention. V φέρει το περιεχόμενο που ζυγίζεται.",
+        "correct": [1],
+        "explanation": "Η αιτιακη μασκα ειναι απαραιτητη για την αυτοπαλινδρομικη παραγωγη. Οταν το μοντελο δημιουργει την πεμπτη λεξη, μονο οι λεξεις 1 εως 4 υπαρχουν. Αν το μοντελο μπορουσε να δει μελλοντικα tokens κατα την εκπαιδευση, θα μαθαινε να 'εξαπατα' αντιγραφοντας την απαντηση.",
         "isMulti": false
       }
     ]

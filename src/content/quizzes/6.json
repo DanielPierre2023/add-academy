@@ -5,79 +5,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "In the LLM training pipeline, what is the objective function during pretraining?",
+        "text": "The course uses a car-building analogy for its three stages. If Stage 1 is studying the manual and Stage 2 is building the car from parts, what does Stage 3 (Finetuning & Evaluation) correspond to?",
         "options": [
-          "Predicting masked tokens in random positions (masked language modeling)",
-          "Predicting the next token given all preceding tokens (causal language modeling)",
-          "Classifying whether two sentences follow each other logically (next sentence prediction)",
-          "Minimizing distance between hidden states and human-annotated embeddings"
+          "Buying a new car from a dealership",
+          "Scrapping the car and starting over",
+          "Customizing the car for a specific purpose (race car or family SUV) and test-driving it on a track",
+          "Reading a second manual about a different type of vehicle"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "GPT-style LLMs use causal (autoregressive) language modeling: predicting the next token given preceding context. Masked LM is BERT. Next sentence prediction was a BERT auxiliary objective.",
+        "correct": [2],
+        "explanation": "Stage 3 takes the working model from Stage 2 and specializes it: classification finetuning adapts it for categorizing text (like a race car tuned for speed), instruction finetuning adapts it for conversation (like a family SUV optimized for comfort), and evaluation is the test drive that verifies performance. The model does not start over — it builds on its pretrained knowledge.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "During alignment, what is the correct relationship between SFT and RLHF?",
+        "text": "Why does the course teach you to build a character-level tokenizer before implementing BPE (Byte Pair Encoding)?",
         "options": [
-          "SFT and RLHF are alternative names for the same process",
-          "SFT fine-tunes on demonstrations first, then RLHF refines using a reward model trained on human preferences",
-          "RLHF is performed first to establish a reward signal, then SFT maximizes that reward",
-          "SFT replaces pretraining entirely, while RLHF replaces evaluation"
+          "Because character-level tokenizers are superior to BPE in all cases",
+          "Because the character-level tokenizer is simpler, letting you understand the fundamentals of tokenization (text to numbers and back) before tackling the more complex BPE algorithm",
+          "Because BPE is outdated and no longer used",
+          "Because you cannot implement BPE without first building a character-level tokenizer"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Standard pipeline: (1) SFT on instruction-response pairs teaches instruction following, then (2) RLHF with a reward model from human preference rankings further optimizes outputs. SFT first because RLHF works better starting from an instruction-tuned model.",
+        "correct": [1],
+        "explanation": "The pedagogical approach is progressive: a character-level tokenizer where each character becomes one token (H=72, e=101, etc.) is the simplest possible implementation. It teaches the core concept — converting text to numbers and back — without the complexity of subword merging. Once you understand this foundation, the BPE algorithm's iterative pair-merging process makes much more sense. This is part of the course's philosophy: conceptual understanding first, then complexity.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Why is learning rate scheduling (warmup + decay) important during pretraining?",
+        "text": "In the 'sliding window' approach for creating training data, given the tokenized text [17, 482, 95, 221, 63] and a context length of 3, which input-target pair would the model learn from?",
         "options": [
-          "Warmup prevents large destabilizing gradient updates early when parameters are random; decay helps convergence later",
-          "Warmup uses maximum learning rate from the start; decay only saves compute",
-          "Learning rate scheduling is optional with no measurable effect on model quality",
-          "Warmup trains embeddings before attention layers activate; decay freezes early layers"
+          "Input: [17, 482, 95] → Target: [17, 482, 95]",
+          "Input: [17, 482, 95] → Target: [482, 95, 221]",
+          "Input: [17] → Target: [482, 95, 221, 63]",
+          "Input: [63, 221, 95] → Target: [482, 17]"
         ],
-        "correct": [
-          0
-        ],
-        "explanation": "Warmup gradually increases the learning rate, preventing catastrophically large updates from random initialization. Cosine decay then helps the model settle into a good minimum. This is empirically critical, not optional.",
+        "correct": [1],
+        "explanation": "The sliding window creates input-target pairs where the target is the input shifted by one position. Given input tokens [17, 482, 95], the model must predict the next token at each position: after 17 predict 482, after [17, 482] predict 95, after [17, 482, 95] predict 221. So the target sequence is [482, 95, 221] — each element is the next token that should follow the corresponding prefix of the input.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Which are valid reasons why data collection and preprocessing (Stage 1) is critical?Select all that apply",
+        "text": "Why does a Transformer need both token embeddings AND positional embeddings? Select all that apply.",
         "options": [
-          "Training data quality directly determines the model's knowledge, biases, and failure modes",
-          "Deduplication prevents the model from memorizing and regurgitating repeated passages",
-          "Preprocessing is trivial because modern tokenizers handle any raw data without cleaning",
-          "Filtering toxic or personally identifiable content is necessary for safety and legal compliance"
+          "Token embeddings capture what a word means (its semantic content), but not where it appears in the sentence",
+          "Without positional embeddings, the model would treat 'dog bites man' and 'man bites dog' as identical because attention has no inherent notion of word order",
+          "Positional embeddings are just decorative and have no functional purpose",
+          "The combination of both lets the model know both the meaning and the position of each token"
         ],
-        "correct": [
-          0,
-          1,
-          3
-        ],
-        "explanation": "Data quality shapes model behavior. Deduplication improves generalization. Filtering is essential for safety/legal reasons. Preprocessing is NOT trivial — it requires extensive format normalization, language filtering, quality scoring, and content filtering.",
+        "correct": [0, 1, 3],
+        "explanation": "Unlike RNNs that process tokens sequentially (and thus inherently know position), Transformers process all tokens simultaneously. Token embeddings provide semantic meaning (what the word is), but two identical sequences with different word orders would produce the same attention patterns without positional information. Positional embeddings add the 'where' — telling the model that token A is at position 1 and token B is at position 3. Together, the model knows both what each token means and where it sits in the sequence.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Why is AdamW commonly preferred over standard SGD for training LLMs?",
+        "text": "After completing Stage 2, you can load the official GPT-2 weights from OpenAI into your model architecture. What does this prove if your model produces the same outputs as the real GPT-2?",
         "options": [
-          "AdamW uses no memory beyond model parameters, making it more memory-efficient",
-          "AdamW maintains per-parameter adaptive learning rates with properly decoupled weight decay",
-          "AdamW eliminates the need for learning rate scheduling entirely",
-          "AdamW guarantees convergence to the global optimum, whereas SGD only finds local optima"
+          "That you have a faster model than OpenAI's",
+          "That your architectural implementation is correct — your code structurally matches OpenAI's GPT-2 exactly",
+          "That you have trained a new model from scratch",
+          "That GPT-2's weights are broken and need to be fixed"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "AdamW combines adaptive per-parameter learning rates with properly decoupled weight decay. It uses MORE memory than SGD (storing two moment estimates per parameter). Scheduling is still needed. No optimizer guarantees global optimality for non-convex neural networks.",
+        "correct": [1],
+        "explanation": "Loading OpenAI's official weights into your model is the ultimate validation of your implementation. If your code can accept the real GPT-2 parameters and produce identical outputs for the same inputs, it proves your Transformer blocks, attention mechanism, feedforward networks, layer normalization, and embeddings are all architecturally correct. It does not mean you trained a new model — you are using OpenAI's trained weights — but it confirms your code is a faithful reproduction of the GPT-2 architecture.",
         "isMulti": false
       }
     ]
@@ -87,79 +75,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "În pipeline-ul de antrenament LLM, care este funcția obiectiv în timpul pre-antrenamentului?",
+        "text": "Cursul foloseste o analogie cu construirea unei masini pentru cele trei etape. Daca Etapa 1 este studierea manualului si Etapa 2 este construirea masinii din piese, la ce corespunde Etapa 3 (Finetuning si Evaluare)?",
         "options": [
-          "Prezicerea token-urilor mascate în poziții aleatorii (modelarea limbajului mascat)",
-          "Prezicerea token-ului următor dat fiind toți tokenii precedenți (modelarea limbajului cauzal)",
-          "Clasificarea dacă două propoziții se succed logic (predicția propoziției următoare)",
-          "Minimizarea distanței între stările ascunse ale modelului și embedding-uri adnotate uman"
+          "Cumpararea unei masini noi de la un dealer",
+          "Casarea masinii si inceperea de la zero",
+          "Personalizarea masinii pentru un scop specific (masina de curse sau SUV de familie) si testarea ei pe pista",
+          "Citirea unui al doilea manual despre un alt tip de vehicul"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "LLM-urile stil GPT folosesc modelarea limbajului cauzal: prezicerea token-ului următor dat fiind contextul precedent. Modelarea mascată este BERT. Predicția propoziției următoare a fost un obiectiv auxiliar BERT.",
+        "correct": [2],
+        "explanation": "Etapa 3 ia modelul functional din Etapa 2 si il specializeaza: finetuning-ul de clasificare il adapteaza pentru categorizarea textului, finetuning-ul de instructiuni il adapteaza pentru conversatie, iar evaluarea este testul de conducere care verifica performanta. Modelul nu incepe de la zero — construieste pe cunostintele pretrenate.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "În aliniere, care este relația corectă între SFT și RLHF?",
+        "text": "De ce cursul te invata sa construiesti un tokenizer la nivel de caracter inainte de a implementa BPE (Byte Pair Encoding)?",
         "options": [
-          "SFT și RLHF sunt denumiri alternative pentru același proces",
-          "SFT ajustează fin pe demonstrații mai întâi, apoi RLHF rafinează folosind un model de recompensă",
-          "RLHF se efectuează primul pentru a stabili un semnal de recompensă, apoi SFT maximizează",
-          "SFT înlocuiește pre-antrenamentul complet, iar RLHF înlocuiește evaluarea"
+          "Pentru ca tokenizer-ele la nivel de caracter sunt superioare BPE in toate cazurile",
+          "Pentru ca tokenizer-ul la nivel de caracter este mai simplu, permitandu-ti sa intelegi fundamentele tokenizarii (text in numere si inapoi) inainte de a aborda algoritmul BPE mai complex",
+          "Pentru ca BPE este invechit si nu mai este folosit",
+          "Pentru ca nu poti implementa BPE fara a construi mai intai un tokenizer la nivel de caracter"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Pipeline standard: (1) SFT pe perechi instrucțiune-răspuns învață urmarea instrucțiunilor, apoi (2) RLHF cu model de recompensă din preferințe umane optimizează suplimentar.",
+        "correct": [1],
+        "explanation": "Abordarea pedagogica este progresiva: un tokenizer la nivel de caracter unde fiecare caracter devine un token este cea mai simpla implementare posibila. Invata conceptul de baza — convertirea textului in numere si inapoi — fara complexitatea combinarii subcuvintelor. Odata ce intelegi aceasta fundatie, algoritmul BPE are mult mai mult sens.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "De ce este programarea ratei de învățare (warmup + decay) importantă în pre-antrenament?",
+        "text": "In abordarea 'sliding window' pentru crearea datelor de antrenament, avand textul tokenizat [17, 482, 95, 221, 63] si o lungime de context de 3, care pereche input-target ar invata modelul?",
         "options": [
-          "Warmup previne actualizări de gradient mari și destabilizatoare la început; decay ajută convergența ulterior",
-          "Warmup folosește rata maximă de învățare de la început; decay economisește doar calcul",
-          "Programarea ratei de învățare este opțională fără efect măsurabil asupra calității",
-          "Warmup antrenează embedding-urile înainte ca straturile de atenție să se activeze"
+          "Input: [17, 482, 95] → Target: [17, 482, 95]",
+          "Input: [17, 482, 95] → Target: [482, 95, 221]",
+          "Input: [17] → Target: [482, 95, 221, 63]",
+          "Input: [63, 221, 95] → Target: [482, 17]"
         ],
-        "correct": [
-          0
-        ],
-        "explanation": "Warmup crește gradual rata de învățare, prevenind actualizări catastrofal de mari din inițializarea aleatorie. Decay-ul cosinus ajută modelul să se stabilească într-un minim bun.",
+        "correct": [1],
+        "explanation": "Sliding window creeaza perechi input-target unde target-ul este input-ul deplasat cu o pozitie. Avand token-urile de intrare [17, 482, 95], modelul trebuie sa prezica urmatorul token la fiecare pozitie: dupa 17 prezice 482, dupa [17, 482] prezice 95, dupa [17, 482, 95] prezice 221. Deci secventa target este [482, 95, 221].",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Care sunt motive valide pentru care colectarea și preprocesarea datelor (Etapa 1) este critică?Selectați toate care se aplică",
+        "text": "De ce are nevoie un Transformer atat de token embeddings CAT SI de positional embeddings? Selecteaza toate raspunsurile corecte.",
         "options": [
-          "Calitatea datelor determină direct cunoștințele, prejudecățile și modurile de eșec ale modelului",
-          "Deduplicarea previne modelul să memoreze și să regurgiteze pasaje repetate",
-          "Preprocesarea este trivială deoarece tokenizer-ele moderne gestionează orice date brute",
-          "Filtrarea conținutului toxic sau cu date personale este necesară pentru siguranță și conformitate legală"
+          "Token embeddings capteaza ce inseamna un cuvant (continutul sau semantic), dar nu unde apare in propozitie",
+          "Fara positional embeddings, modelul ar trata 'cainele musca omul' si 'omul musca cainele' ca fiind identice, deoarece attention nu are notiune inerenta de ordine a cuvintelor",
+          "Positional embeddings sunt doar decorative si nu au niciun scop functional",
+          "Combinatia celor doua permite modelului sa cunoasca atat sensul cat si pozitia fiecarui token"
         ],
-        "correct": [
-          0,
-          1,
-          3
-        ],
-        "explanation": "Calitatea datelor modelează comportamentul. Deduplicarea îmbunătățește generalizarea. Filtrarea este esențială pentru siguranță/legalitate. Preprocesarea NU este trivială — necesită normalizare, filtrare și scorare extensivă.",
+        "correct": [0, 1, 3],
+        "explanation": "Spre deosebire de RNN-uri care proceseaza token-urile secvential, Transformer-ele proceseaza toate token-urile simultan. Token embeddings ofera sensul semantic, dar fara informatii pozitionale, doua secvente cu ordini diferite ale cuvintelor ar produce aceleasi tipare de attention. Positional embeddings adauga informatia de 'unde'. Impreuna, modelul stie atat ce inseamna fiecare token cat si unde se afla in secventa.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "De ce este AdamW preferat în general față de SGD standard pentru antrenarea LLM-urilor?",
+        "text": "Dupa finalizarea Etapei 2, poti incarca ponderile oficiale GPT-2 de la OpenAI in arhitectura ta de model. Ce dovedeste acest lucru daca modelul tau produce aceleasi rezultate ca GPT-2 real?",
         "options": [
-          "AdamW nu folosește memorie dincolo de parametrii modelului, fiind mai eficient",
-          "AdamW menține rate de învățare adaptive per-parametru cu weight decay corect decuplat",
-          "AdamW elimină complet nevoia de programare a ratei de învățare",
-          "AdamW garantează convergența la optimul global, în timp ce SGD găsește doar optime locale"
+          "Ca ai un model mai rapid decat cel al OpenAI",
+          "Ca implementarea ta arhitecturala este corecta — codul tau se potriveste structural exact cu GPT-2 al OpenAI",
+          "Ca ai antrenat un model nou de la zero",
+          "Ca ponderile GPT-2 sunt stricate si trebuie reparate"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "AdamW combină rate de învățare adaptive per-parametru cu weight decay corect decuplat. Folosește MAI MULTĂ memorie decât SGD. Programarea încă e necesară. Niciun optimizator nu garantează optimul global.",
+        "correct": [1],
+        "explanation": "Incarcarea ponderilor oficiale OpenAI in modelul tau este validarea suprema a implementarii tale. Daca codul tau poate accepta parametrii reali GPT-2 si produce rezultate identice, dovedeste ca blocurile tale Transformer, mecanismul de attention, retelele feedforward si embeddings sunt toate arhitectural corecte.",
         "isMulti": false
       }
     ]
@@ -169,79 +145,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "Στο pipeline εκπαίδευσης LLM, ποια είναι η αντικειμενική συνάρτηση κατά την προ-εκπαίδευση;",
+        "text": "Το μαθημα χρησιμοποιει μια αναλογια κατασκευης αυτοκινητου για τα τρια σταδια του. Αν το Σταδιο 1 ειναι η μελετη του εγχειριδιου και το Σταδιο 2 ειναι η κατασκευη του αυτοκινητου απο ανταλλακτικα, σε τι αντιστοιχει το Σταδιο 3 (Finetuning & Αξιολογηση);",
         "options": [
-          "Πρόβλεψη masked tokens σε τυχαίες θέσεις (masked language modeling)",
-          "Πρόβλεψη επόμενου token δεδομένων όλων των προηγούμενων (causal language modeling)",
-          "Ταξινόμηση αν δύο προτάσεις ακολουθούν λογικά (next sentence prediction)",
-          "Ελαχιστοποίηση απόστασης μεταξύ κρυφών καταστάσεων και ανθρώπινα σημειωμένων embeddings"
+          "Αγορα νεου αυτοκινητου απο αντιπροσωπεια",
+          "Διαλυση του αυτοκινητου και ξεκινημα απο την αρχη",
+          "Προσαρμογη του αυτοκινητου για συγκεκριμενο σκοπο (αγωνιστικο ή οικογενειακο SUV) και δοκιμαστικη οδηγηση σε πιστα",
+          "Αναγνωση ενος δευτερου εγχειριδιου για διαφορετικο τυπο οχηματος"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Τα GPT-style LLM χρησιμοποιούν αιτιακή μοντελοποίηση γλώσσας: πρόβλεψη επόμενου token. Το masked LM είναι BERT. Το next sentence prediction ήταν βοηθητικός στόχος BERT.",
+        "correct": [2],
+        "explanation": "Το Σταδιο 3 παιρνει το λειτουργικο μοντελο απο το Σταδιο 2 και το εξειδικευει: το classification finetuning το προσαρμοζει για κατηγοριοποιηση κειμενου, το instruction finetuning για συνομιλια, και η αξιολογηση ειναι η δοκιμαστικη οδηγηση. Το μοντελο δεν ξεκινα απο την αρχη — χτιζει πανω στη pretrained γνωση του.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Στην ευθυγράμμιση, ποια η σωστή σχέση μεταξύ SFT και RLHF;",
+        "text": "Γιατι το μαθημα σε διδασκει να χτισεις εναν tokenizer σε επιπεδο χαρακτηρων πριν υλοποιησεις BPE (Byte Pair Encoding);",
         "options": [
-          "SFT και RLHF είναι εναλλακτικά ονόματα για την ίδια διαδικασία",
-          "Το SFT ρυθμίζει πρώτα σε επιδείξεις, μετά το RLHF βελτιώνει χρησιμοποιώντας μοντέλο ανταμοιβής",
-          "Το RLHF εκτελείται πρώτο, μετά το SFT μεγιστοποιεί την ανταμοιβή",
-          "Το SFT αντικαθιστά πλήρως την προ-εκπαίδευση"
+          "Επειδη οι tokenizers σε επιπεδο χαρακτηρων ειναι ανωτεροι απο τον BPE σε ολες τις περιπτωσεις",
+          "Επειδη ο tokenizer σε επιπεδο χαρακτηρων ειναι πιο απλος, επιτρεποντας σου να κατανοησεις τα θεμελια της tokenization (κειμενο σε αριθμους και αντιστροφα) πριν αντιμετωπισεις τον πιο πολυπλοκο αλγοριθμο BPE",
+          "Επειδη ο BPE ειναι ξεπερασμενος και δεν χρησιμοποιειται πλεον",
+          "Επειδη δεν μπορεις να υλοποιησεις BPE χωρις να χτισεις πρωτα εναν tokenizer σε επιπεδο χαρακτηρων"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Τυπικό pipeline: (1) SFT σε ζεύγη οδηγιών-απαντήσεων, στη συνέχεια (2) RLHF με μοντέλο ανταμοιβής από ανθρώπινες προτιμήσεις.",
+        "correct": [1],
+        "explanation": "Η παιδαγωγικη προσεγγιση ειναι προοδευτικη: ενας tokenizer σε επιπεδο χαρακτηρων οπου καθε χαρακτηρας γινεται ενα token ειναι η πιο απλη δυνατη υλοποιηση. Διδασκει την βασικη εννοια — μετατροπη κειμενου σε αριθμους και αντιστροφα — χωρις την πολυπλοκοτητα της συγχωνευσης υπολεξεων.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Γιατί ο προγραμματισμός ρυθμού μάθησης (warmup + decay) είναι σημαντικός;",
+        "text": "Στην προσεγγιση 'sliding window' για δημιουργια δεδομενων εκπαιδευσης, με tokenized κειμενο [17, 482, 95, 221, 63] και μηκος πλαισιου 3, ποιο ζευγος input-target θα μαθαινε το μοντελο;",
         "options": [
-          "Το warmup αποτρέπει μεγάλες αποσταθεροποιητικές ενημερώσεις gradient στην αρχή; το decay βοηθά στη σύγκλιση",
-          "Το warmup χρησιμοποιεί μέγιστο ρυθμό από την αρχή; το decay εξοικονομεί μόνο υπολογισμό",
-          "Ο προγραμματισμός ρυθμού μάθησης είναι προαιρετικός χωρίς μετρήσιμο αποτέλεσμα",
-          "Το warmup εκπαιδεύει τα embeddings πριν ενεργοποιηθούν τα attention layers"
+          "Input: [17, 482, 95] → Target: [17, 482, 95]",
+          "Input: [17, 482, 95] → Target: [482, 95, 221]",
+          "Input: [17] → Target: [482, 95, 221, 63]",
+          "Input: [63, 221, 95] → Target: [482, 17]"
         ],
-        "correct": [
-          0
-        ],
-        "explanation": "Το warmup αυξάνει σταδιακά τον ρυθμό μάθησης, αποτρέποντας καταστροφικά μεγάλες ενημερώσεις. Το cosine decay βοηθά το μοντέλο να σταθεροποιηθεί σε καλό ελάχιστο.",
+        "correct": [1],
+        "explanation": "Το sliding window δημιουργει ζευγη input-target οπου ο στοχος ειναι η εισοδος μετατοπισμενη κατα μια θεση. Με tokens εισοδου [17, 482, 95], το μοντελο πρεπει να προβλεψει το επομενο token σε καθε θεση. Ετσι η ακολουθια στοχος ειναι [482, 95, 221].",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ποιοι είναι έγκυροι λόγοι που η συλλογή δεδομένων (Στάδιο 1) είναι κρίσιμη;Επιλέξτε όλα όσα ισχύουν",
+        "text": "Γιατι ενα Transformer χρειαζεται τοσο token embeddings ΟΣΟ ΚΑΙ positional embeddings; Επελεξε ολες τις σωστες απαντησεις.",
         "options": [
-          "Η ποιότητα δεδομένων καθορίζει άμεσα γνώσεις, προκαταλήψεις και αστοχίες μοντέλου",
-          "Η αποδιπλασιοποίηση αποτρέπει την απομνημόνευση επαναλαμβανόμενων αποσπασμάτων",
-          "Η προεπεξεργασία είναι τετριμμένη γιατί οι tokenizers χειρίζονται οποιαδήποτε ακατέργαστα δεδομένα",
-          "Το φιλτράρισμα τοξικού περιεχομένου είναι απαραίτητο για ασφάλεια και νομική συμμόρφωση"
+          "Τα token embeddings αποτυπωνουν τι σημαινει μια λεξη (το σημασιολογικο περιεχομενο της), αλλα οχι πού εμφανιζεται στην προταση",
+          "Χωρις positional embeddings, το μοντελο θα αντιμετωπιζε τα 'ο σκυλος δαγκωνει τον ανθρωπο' και 'ο ανθρωπος δαγκωνει τον σκυλο' ως πανομοιοτυπα, γιατι το attention δεν εχει εγγενη εννοια σειρας λεξεων",
+          "Τα positional embeddings ειναι απλα διακοσμητικα χωρις λειτουργικο σκοπο",
+          "Ο συνδυασμος και των δυο επιτρεπει στο μοντελο να γνωριζει τοσο τη σημασια οσο και τη θεση καθε token"
         ],
-        "correct": [
-          0,
-          1,
-          3
-        ],
-        "explanation": "Η ποιότητα δεδομένων διαμορφώνει τη συμπεριφορά. Η αποδιπλασιοποίηση βελτιώνει τη γενίκευση. Το φιλτράρισμα είναι ουσιώδες. Η προεπεξεργασία ΔΕΝ είναι τετριμμένη.",
+        "correct": [0, 1, 3],
+        "explanation": "Σε αντιθεση με τα RNNs που επεξεργαζονται tokens σειριακα, τα Transformers επεξεργαζονται ολα τα tokens ταυτοχρονα. Τα token embeddings παρεχουν σημασιολογικο νοημα, αλλα χωρις πληροφοριες θεσης, δυο ακολουθιες με διαφορετικη σειρα λεξεων θα παρηγαγαν τα ιδια μοτιβα attention. Τα positional embeddings προσθετουν το 'που'. Μαζι, το μοντελο γνωριζει τοσο τι σημαινει καθε token οσο και που βρισκεται.",
         "isMulti": true
       },
       {
         "index": 4,
-        "text": "Γιατί προτιμάται ο AdamW έναντι του τυπικού SGD για εκπαίδευση LLM;",
+        "text": "Μετα την ολοκληρωση του Σταδιου 2, μπορεις να φορτωσεις τα επισημα βαρη GPT-2 της OpenAI στην αρχιτεκτονικη του μοντελου σου. Τι αποδεικνυει αυτο αν το μοντελο σου παραγει τα ιδια αποτελεσματα με το πραγματικο GPT-2;",
         "options": [
-          "Ο AdamW δεν χρησιμοποιεί μνήμη πέρα από τις παραμέτρους, είναι πιο αποδοτικός",
-          "Ο AdamW διατηρεί προσαρμοστικούς ρυθμούς μάθησης ανά παράμετρο με σωστά αποσυνδεδεμένο weight decay",
-          "Ο AdamW εξαλείφει πλήρως την ανάγκη για προγραμματισμό ρυθμού μάθησης",
-          "Ο AdamW εγγυάται σύγκλιση στο ολικό βέλτιστο"
+          "Οτι εχεις ενα ταχυτερο μοντελο απο αυτο της OpenAI",
+          "Οτι η αρχιτεκτονικη σου υλοποιηση ειναι σωστη — ο κωδικας σου ταιριαζει δομικα ακριβως με το GPT-2 της OpenAI",
+          "Οτι εχεις εκπαιδευσει ενα νεο μοντελο απο το μηδεν",
+          "Οτι τα βαρη του GPT-2 ειναι χαλασμενα και πρεπει να διορθωθουν"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Ο AdamW συνδυάζει προσαρμοστικούς ρυθμούς ανά παράμετρο με σωστά αποσυνδεδεμένο weight decay. Χρησιμοποιεί ΠΕΡΙΣΣΟΤΕΡΗ μνήμη. Ο προγραμματισμός εξακολουθεί να χρειάζεται.",
+        "correct": [1],
+        "explanation": "Η φορτωση των επισημων βαρων της OpenAI στο μοντελο σου ειναι η υψιστη επικυρωση της υλοποιησης σου. Αν ο κωδικας σου μπορει να δεχτει τις πραγματικες παραμετρους GPT-2 και να παραγει πανομοιοτυπα αποτελεσματα, αποδεικνυει οτι τα Transformer blocks, ο μηχανισμος attention, τα feedforward networks και τα embeddings ειναι ολα αρχιτεκτονικα σωστα.",
         "isMulti": false
       }
     ]

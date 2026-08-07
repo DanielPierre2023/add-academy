@@ -5,78 +5,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "Why do LLMs use subword tokenization instead of splitting text into whole words?",
+        "text": "When an LLM processes the sentence 'What is the capital of France?', what is the correct order of the processing pipeline?",
         "options": [
-          "It makes the model run faster because subwords require less memory than whole words",
-          "It allows the model to handle rare, misspelled, or novel words by composing them from known subword pieces",
-          "It is required because LLMs cannot process sequences longer than 100 characters",
-          "It ensures every word in every language is always represented as exactly one token"
+          "Prediction → Embedding → Tokenization → Transformer → Output",
+          "Tokenization → Embedding → Transformer layers → Prediction → Output",
+          "Embedding → Tokenization → Prediction → Transformer → Output",
+          "Transformer → Tokenization → Embedding → Output → Prediction"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Subword tokenization solves the vocabulary problem: rare or unknown words can be broken into familiar subword units. Common words may be one token but rare words get split into multiple.",
+        "correct": [1],
+        "explanation": "The LLM pipeline follows a specific order: first the text is split into tokens (tokenization), then each token is converted into a numerical vector (embedding), then these vectors pass through multiple Transformer layers that refine understanding, then the model predicts probabilities for the next token, and finally the selected token is converted back to text.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "What effect does increasing the temperature parameter have during text generation?",
+        "text": "Why is the Transformer architecture considered revolutionary compared to RNNs and LSTMs? Select all that apply.",
         "options": [
-          "It makes the model generate longer responses with more detail",
-          "It increases the speed of token generation by simplifying computations",
-          "It flattens the probability distribution over tokens, making the output more random and diverse",
-          "It causes the model to access more of its training data for better accuracy"
+          "Transformers process all tokens in parallel rather than one at a time, making training much faster",
+          "Transformers use smaller datasets and fewer parameters than RNNs",
+          "The attention mechanism allows any word to directly relate to any other word regardless of distance",
+          "Transformers completely eliminated the need for training data"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Higher temperature flattens the probability distribution, giving less likely tokens a better chance. This increases diversity but may reduce coherence.",
-        "isMulti": false
-      },
-      {
-        "index": 2,
-        "text": "What is the key difference between a base model and an instruction-tuned model?Select all that apply",
-        "options": [
-          "Base models have more parameters and are therefore always more capable",
-          "Instruction-tuned models have been further trained to follow user instructions and produce helpful responses",
-          "Base models can only generate text, while instruction-tuned models can also understand images",
-          "A base model predicts next tokens from raw text and tends to continue text rather than answer questions directly"
-        ],
-        "correct": [
-          1,
-          3
-        ],
-        "explanation": "A base model predicts next tokens; ask it a question and it may continue writing questions. Instruction-tuned models are further trained (SFT/RLHF) to follow instructions helpfully.",
+        "correct": [0, 2],
+        "explanation": "The Transformer solved two critical problems with RNNs: sequential processing (RNNs had to process one token at a time, while Transformers process all tokens simultaneously using GPUs) and long-range dependencies (RNNs struggled to connect distant words, while the attention mechanism lets any token directly attend to any other token in a single step). Transformers actually require more data and parameters, not fewer.",
         "isMulti": true
       },
       {
-        "index": 3,
-        "text": "A model's context window is 8,192 tokens. Which statement is true?",
+        "index": 2,
+        "text": "A colleague claims that ChatGPT is 'just AI.' How would you more precisely classify it using the nested hierarchy covered in this lecture?",
         "options": [
-          "The model can remember information from its previous 8,192 conversations",
-          "The total of both input and generated output must fit within 8,192 tokens for a single interaction",
-          "The model can only accept inputs of up to 8,192 words",
-          "After 8,192 tokens, the model automatically compresses earlier context to continue"
+          "ChatGPT is AI but not Machine Learning",
+          "ChatGPT is AI, Machine Learning, Deep Learning, Generative AI, and an LLM — all five categories",
+          "ChatGPT is only Generative AI, not related to Machine Learning",
+          "ChatGPT is Deep Learning but not Generative AI"
         ],
-        "correct": [
-          1
+        "correct": [1],
+        "explanation": "These categories are nested like Russian dolls. ChatGPT is an LLM (it processes language at scale), which makes it Generative AI (it creates new content), which is a subset of Deep Learning (it uses neural networks with many layers), which is a subset of Machine Learning (it learns from data), which is a subset of AI (it performs tasks requiring intelligence). Every LLM belongs to all five categories.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Why do LLMs sometimes 'hallucinate' — confidently stating incorrect information as if it were fact?",
+        "options": [
+          "Because they are programmed to lie occasionally to test users",
+          "Because they have a faulty database that contains wrong facts",
+          "Because they optimize for producing fluent, probable-sounding text, not for factual accuracy — when training data is insufficient, they fill gaps with plausible but invented content",
+          "Because their internet connection drops and they cannot verify facts"
         ],
-        "explanation": "The context window is the maximum tokens (input + output combined) for a single interaction. It doesn't span conversations, tokens aren't words, and standard Transformers don't compress context.",
+        "correct": [2],
+        "explanation": "Hallucinations occur because LLMs are fundamentally next-token predictors optimized for fluency, not truth databases. They generate text that sounds plausible based on statistical patterns. When encountering topics with sparse training data, they produce confident-sounding but fabricated details. They have no internal fact-checking mechanism and no concept of truth versus falsehood.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "What does 'perplexity' measure when evaluating a language model?",
+        "text": "What practical advantage does a decoder-only model (like GPT) have over an encoder-only model (like BERT)?",
         "options": [
-          "How confused human users feel reading the model's outputs",
-          "The number of grammatical errors per 1,000 generated tokens",
-          "How surprised the model is by the actual next token — lower values mean better prediction",
-          "The ratio of correct to incorrect answers on a standardized benchmark"
+          "Decoder-only models are always smaller and faster",
+          "Decoder-only models can both understand and generate text, while encoder-only models can only understand text without generating new content",
+          "Encoder-only models cannot process any text at all",
+          "Decoder-only models do not need any training data"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Perplexity quantifies how well the model predicts the next token. Lower perplexity = higher probability assigned to actual tokens = better language model.",
+        "correct": [1],
+        "explanation": "Encoder-only models like BERT excel at understanding tasks (classification, sentiment analysis, search) because they read text bidirectionally, but they cannot generate new text. Decoder-only models like GPT generate text one token at a time and, at sufficient scale, can also perform understanding tasks. This versatility — both understanding and generation — is why decoder-only architectures dominate modern LLMs.",
         "isMulti": false
       }
     ]
@@ -86,78 +75,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "De ce folosesc LLM-urile tokenizare sub-cuvânt în loc de împărțirea textului în cuvinte întregi?",
+        "text": "Cand un LLM proceseaza propozitia 'Care este capitala Frantei?', care este ordinea corecta a pipeline-ului de procesare?",
         "options": [
-          "Face modelul să ruleze mai rapid deoarece sub-cuvintele necesită mai puțină memorie",
-          "Permite modelului să gestioneze cuvinte rare, greșit ortografiate sau noi, compunându-le din piese sub-cuvânt cunoscute",
-          "Este necesar deoarece LLM-urile nu pot procesa secvențe mai lungi de 100 de caractere",
-          "Asigură că fiecare cuvânt din fiecare limbă este reprezentat întotdeauna ca exact un token"
+          "Predictie → Embedding → Tokenizare → Transformer → Iesire",
+          "Tokenizare → Embedding → Straturi Transformer → Predictie → Iesire",
+          "Embedding → Tokenizare → Predictie → Transformer → Iesire",
+          "Transformer → Tokenizare → Embedding → Iesire → Predictie"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Tokenizarea sub-cuvânt rezolvă problema vocabularului: cuvintele rare pot fi descompuse în unități sub-cuvânt familiare. Cuvintele comune pot fi un singur token, dar cele rare sunt împărțite în mai mulți.",
+        "correct": [1],
+        "explanation": "Pipeline-ul LLM urmeaza o ordine specifica: mai intai textul este impartit in token-uri (tokenizare), apoi fiecare token este convertit intr-un vector numeric (embedding), apoi acesti vectori trec prin mai multe straturi Transformer care rafineaza intelegerea, apoi modelul prezice probabilitati pentru urmatorul token, si in final token-ul selectat este convertit inapoi in text.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Ce efect are creșterea parametrului de temperatură în timpul generării de text?",
+        "text": "De ce este arhitectura Transformer considerata revolutionara comparativ cu RNN-urile si LSTM-urile? Selecteaza toate raspunsurile corecte.",
         "options": [
-          "Face modelul să genereze răspunsuri mai lungi cu mai multe detalii",
-          "Crește viteza de generare a token-urilor prin simplificarea calculelor",
-          "Aplatizează distribuția de probabilitate peste token-uri, făcând output-ul mai aleatoriu și divers",
-          "Determină modelul să acceseze mai multe date de antrenament pentru o precizie mai bună"
+          "Transformer-ele proceseaza toate token-urile in paralel in loc de unul pe rand, facand antrenamentul mult mai rapid",
+          "Transformer-ele folosesc seturi de date mai mici si mai putini parametri decat RNN-urile",
+          "Mecanismul de attention permite oricarui cuvant sa se raporteze direct la orice alt cuvant, indiferent de distanta",
+          "Transformer-ele au eliminat complet necesitatea datelor de antrenament"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Temperatura mai mare aplatizează distribuția de probabilitate, dând token-urilor mai puțin probabile o șansă mai bună. Acest lucru crește diversitatea dar poate reduce coerența.",
-        "isMulti": false
-      },
-      {
-        "index": 2,
-        "text": "Care este diferența cheie între un model de bază și un model ajustat pe instrucțiuni?Selectați toate care se aplică",
-        "options": [
-          "Modelele de bază au mai mulți parametri și sunt deci întotdeauna mai capabile",
-          "Modelele ajustate pe instrucțiuni au fost antrenate suplimentar pentru a urma instrucțiunile utilizatorului",
-          "Modelele de bază pot genera doar text, în timp ce cele ajustate pot și înțelege imagini",
-          "Un model de bază prezice token-uri din text brut și tinde să continue textul în loc să răspundă direct la întrebări"
-        ],
-        "correct": [
-          1,
-          3
-        ],
-        "explanation": "Un model de bază prezice token-uri; pune-i o întrebare și poate continua să scrie întrebări. Modelele ajustate sunt antrenate suplimentar (SFT/RLHF) pentru a urma instrucțiuni.",
+        "correct": [0, 2],
+        "explanation": "Transformer-ul a rezolvat doua probleme critice ale RNN-urilor: procesarea secventiala (RNN-urile trebuiau sa proceseze cate un token pe rand, in timp ce Transformer-ele proceseaza toate token-urile simultan) si dependentele pe distante lungi (mecanismul de attention permite oricarui token sa se raporteze direct la orice alt token intr-un singur pas).",
         "isMulti": true
       },
       {
-        "index": 3,
-        "text": "Fereastra de context a unui model este de 8.192 token-uri. Care afirmație este adevărată?",
+        "index": 2,
+        "text": "Un coleg sustine ca ChatGPT este 'doar AI.' Cum l-ai clasifica mai precis folosind ierarhia imbricata acoperita in aceasta lectie?",
         "options": [
-          "Modelul poate reține informații din ultimele 8.192 de conversații",
-          "Totalul input-ului și output-ului generat trebuie să se încadreze în 8.192 token-uri pentru o singură interacțiune",
-          "Modelul poate accepta doar inputuri de până la 8.192 de cuvinte",
-          "După 8.192 token-uri, modelul comprimă automat contextul anterior pentru a continua"
+          "ChatGPT este AI dar nu Machine Learning",
+          "ChatGPT este AI, Machine Learning, Deep Learning, AI Generativ si un LLM — toate cele cinci categorii",
+          "ChatGPT este doar AI Generativ, fara legatura cu Machine Learning",
+          "ChatGPT este Deep Learning dar nu AI Generativ"
         ],
-        "correct": [
-          1
+        "correct": [1],
+        "explanation": "Aceste categorii sunt imbricate ca papusile rusesti. ChatGPT este un LLM (proceseaza limbajul la scara), ceea ce il face AI Generativ (creeaza continut nou), care este un subset al Deep Learning (foloseste retele neuronale cu multe straturi), care este un subset al Machine Learning (invata din date), care este un subset al AI (realizeaza sarcini care necesita inteligenta).",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "De ce LLM-urile uneori 'halucineaza' — afirmand cu incredere informatii incorecte ca si cum ar fi adevarate?",
+        "options": [
+          "Pentru ca sunt programate sa minta ocazional pentru a testa utilizatorii",
+          "Pentru ca au o baza de date defecta care contine fapte gresite",
+          "Pentru ca optimizeaza producerea de text fluent si plauzibil, nu acuratetea factuala — cand datele de antrenament sunt insuficiente, completeaza golurile cu continut plauzibil dar inventat",
+          "Pentru ca conexiunea lor la internet se intrerupe si nu pot verifica faptele"
         ],
-        "explanation": "Fereastra de context este maximul de token-uri (input + output combinat) pentru o singură interacțiune. Nu se extinde între conversații, token-urile nu sunt cuvinte, iar Transformer-ele standard nu comprimă contextul.",
+        "correct": [2],
+        "explanation": "Halucinatiile apar pentru ca LLM-urile sunt fundamental predictoare de token-uri urmatoare optimizate pentru fluenta, nu baze de date de fapte. Genereaza text care suna plauzibil pe baza tiparelor statistice. Nu au niciun mecanism intern de verificare a faptelor.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Ce măsoară 'perplexitatea' la evaluarea unui model de limbaj?",
+        "text": "Ce avantaj practic are un model doar-decoder (precum GPT) fata de un model doar-encoder (precum BERT)?",
         "options": [
-          "Cât de confuzi se simt utilizatorii citind output-urile modelului",
-          "Numărul de erori gramaticale la fiecare 1.000 de token-uri generate",
-          "Cât de surprins este modelul de token-ul următor real — valori mai mici înseamnă predicție mai bună",
-          "Raportul răspunsurilor corecte față de cele incorecte pe un benchmark standardizat"
+          "Modelele doar-decoder sunt intotdeauna mai mici si mai rapide",
+          "Modelele doar-decoder pot atat sa inteleaga cat si sa genereze text, in timp ce modelele doar-encoder pot doar sa inteleaga textul fara a genera continut nou",
+          "Modelele doar-encoder nu pot procesa deloc text",
+          "Modelele doar-decoder nu au nevoie de date de antrenament"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Perplexitatea cuantifică cât de bine prezice modelul token-ul următor. Perplexitate mai mică = probabilitate mai mare atribuită token-urilor reale = model de limbaj mai bun.",
+        "correct": [1],
+        "explanation": "Modelele doar-encoder precum BERT exceleaza la sarcini de intelegere (clasificare, analiza sentimentelor, cautare), dar nu pot genera text nou. Modelele doar-decoder precum GPT genereaza text token cu token si, la o scara suficienta, pot realiza si sarcini de intelegere. Aceasta versatilitate este motivul pentru care arhitecturile doar-decoder domina LLM-urile moderne.",
         "isMulti": false
       }
     ]
@@ -167,78 +145,67 @@
     "questions": [
       {
         "index": 0,
-        "text": "Γιατί τα LLM χρησιμοποιούν tokenization υπολέξεων αντί για διαχωρισμό σε ολόκληρες λέξεις;",
+        "text": "Οταν ενα LLM επεξεργαζεται την προταση 'Ποια ειναι η πρωτευουσα της Γαλλιας;', ποια ειναι η σωστη σειρα του pipeline επεξεργασιας;",
         "options": [
-          "Κάνει το μοντέλο πιο γρήγορο επειδή οι υπολέξεις χρειάζονται λιγότερη μνήμη",
-          "Επιτρέπει στο μοντέλο να χειρίζεται σπάνιες, λανθασμένες ή νέες λέξεις συνθέτοντάς τες από γνωστά κομμάτια",
-          "Είναι απαραίτητο επειδή τα LLM δεν μπορούν να επεξεργαστούν ακολουθίες μεγαλύτερες από 100 χαρακτήρες",
-          "Εξασφαλίζει ότι κάθε λέξη σε κάθε γλώσσα αντιπροσωπεύεται πάντα ως ακριβώς ένα token"
+          "Προβλεψη → Embedding → Tokenization → Transformer → Εξοδος",
+          "Tokenization → Embedding → Στρωματα Transformer → Προβλεψη → Εξοδος",
+          "Embedding → Tokenization → Προβλεψη → Transformer → Εξοδος",
+          "Transformer → Tokenization → Embedding → Εξοδος → Προβλεψη"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Το tokenization υπολέξεων λύνει το πρόβλημα λεξιλογίου: σπάνιες λέξεις μπορούν να αναλυθούν σε γνωστές μονάδες υπολέξεων.",
+        "correct": [1],
+        "explanation": "Το pipeline του LLM ακολουθει συγκεκριμενη σειρα: πρωτα το κειμενο χωριζεται σε tokens (tokenization), μετα καθε token μετατρεπεται σε αριθμητικο διανυσμα (embedding), μετα αυτα τα διανυσματα περνουν απο πολλαπλα στρωματα Transformer, μετα το μοντελο προβλεπει πιθανοτητες για το επομενο token, και τελος το επιλεγμενο token μετατρεπεται σε κειμενο.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Τι επίδραση έχει η αύξηση της θερμοκρασίας κατά τη δημιουργία κειμένου;",
+        "text": "Γιατι η αρχιτεκτονικη Transformer θεωρειται επαναστατικη σε σχεση με τα RNNs και LSTMs; Επελεξε ολες τις σωστες απαντησεις.",
         "options": [
-          "Κάνει το μοντέλο να παράγει μεγαλύτερες απαντήσεις με περισσότερες λεπτομέρειες",
-          "Αυξάνει την ταχύτητα δημιουργίας tokens απλοποιώντας τους υπολογισμούς",
-          "Ισοπεδώνει την κατανομή πιθανοτήτων, κάνοντας την έξοδο πιο τυχαία και ποικίλη",
-          "Αναγκάζει το μοντέλο να αποκτήσει πρόσβαση σε περισσότερα δεδομένα εκπαίδευσης"
+          "Τα Transformers επεξεργαζονται ολα τα tokens παραλληλα αντι για ενα τη φορα, κανοντας την εκπαιδευση πολυ ταχυτερη",
+          "Τα Transformers χρησιμοποιουν μικροτερα σετ δεδομενων και λιγοτερες παραμετρους απο τα RNNs",
+          "Ο μηχανισμος attention επιτρεπει σε καθε λεξη να σχετιζεται αμεσα με οποιαδηποτε αλλη λεξη ανεξαρτητως αποστασης",
+          "Τα Transformers εξαλειψαν πληρως την αναγκη για δεδομενα εκπαιδευσης"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Υψηλότερη θερμοκρασία ισοπεδώνει την κατανομή πιθανοτήτων, δίνοντας στα λιγότερο πιθανά tokens καλύτερη πιθανότητα. Αυξάνει την ποικιλομορφία αλλά μπορεί να μειώσει τη συνοχή.",
-        "isMulti": false
-      },
-      {
-        "index": 2,
-        "text": "Ποια είναι η βασική διαφορά μεταξύ βασικού μοντέλου και μοντέλου ρυθμισμένου σε οδηγίες;Επιλέξτε όλα όσα ισχύουν",
-        "options": [
-          "Τα βασικά μοντέλα έχουν περισσότερες παραμέτρους και είναι πάντα πιο ικανά",
-          "Τα μοντέλα ρυθμισμένα σε οδηγίες έχουν εκπαιδευτεί επιπλέον για να ακολουθούν οδηγίες χρηστών",
-          "Τα βασικά μοντέλα μπορούν μόνο να παράγουν κείμενο, ενώ τα ρυθμισμένα κατανοούν και εικόνες",
-          "Ένα βασικό μοντέλο προβλέπει tokens από ακατέργαστο κείμενο και τείνει να συνεχίζει αντί να απαντά"
-        ],
-        "correct": [
-          1,
-          3
-        ],
-        "explanation": "Ένα βασικό μοντέλο προβλέπει tokens. Ρωτήστε το κάτι και μπορεί να συνεχίσει να γράφει ερωτήσεις. Τα ρυθμισμένα μοντέλα εκπαιδεύονται επιπλέον (SFT/RLHF) για να ακολουθούν οδηγίες.",
+        "correct": [0, 2],
+        "explanation": "Το Transformer ελυσε δυο κρισιμα προβληματα των RNNs: τη σειριακη επεξεργασια (τα RNNs επρεπε να επεξεργαζονται ενα token τη φορα, ενω τα Transformers επεξεργαζονται ολα τα tokens ταυτοχρονα) και τις μακροπροθεσμες εξαρτησεις (ο μηχανισμος attention επιτρεπει σε καθε token να σχετιστει αμεσα με οποιοδηποτε αλλο token).",
         "isMulti": true
       },
       {
-        "index": 3,
-        "text": "Το παράθυρο context ενός μοντέλου είναι 8.192 tokens. Ποια δήλωση ισχύει;",
+        "index": 2,
+        "text": "Ενας συναδελφος ισχυριζεται οτι το ChatGPT ειναι 'απλα AI.' Πως θα το ταξινομουσες πιο ακριβως χρησιμοποιωντας την ενθετη ιεραρχια που καλυφθηκε σε αυτη τη διαλεξη;",
         "options": [
-          "Το μοντέλο θυμάται πληροφορίες από τις προηγούμενες 8.192 συνομιλίες του",
-          "Το σύνολο εισόδου και παραγόμενης εξόδου πρέπει να χωρά στα 8.192 tokens ανά αλληλεπίδραση",
-          "Το μοντέλο δέχεται μόνο εισόδους μέχρι 8.192 λέξεις",
-          "Μετά τα 8.192 tokens, το μοντέλο συμπιέζει αυτόματα το προηγούμενο context"
+          "Το ChatGPT ειναι AI αλλα οχι Machine Learning",
+          "Το ChatGPT ειναι AI, Machine Learning, Deep Learning, Generative AI και ενα LLM — και οι πεντε κατηγοριες",
+          "Το ChatGPT ειναι μονο Generative AI, χωρις σχεση με Machine Learning",
+          "Το ChatGPT ειναι Deep Learning αλλα οχι Generative AI"
         ],
-        "correct": [
-          1
+        "correct": [1],
+        "explanation": "Αυτες οι κατηγοριες ειναι ενθετες σαν ρωσικες κουκλες. Το ChatGPT ειναι ενα LLM (επεξεργαζεται γλωσσα σε κλιμακα), που το κανει Generative AI (δημιουργει νεο περιεχομενο), που ειναι υποσυνολο του Deep Learning, που ειναι υποσυνολο του Machine Learning, που ειναι υποσυνολο του AI.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Γιατι τα LLMs μερικες φορες 'παραισθαινουν' — δηλωνοντας με σιγουρια εσφαλμενες πληροφοριες σαν να ηταν αληθεια;",
+        "options": [
+          "Επειδη ειναι προγραμματισμενα να ψευδονται περιστασιακα για να δοκιμασουν τους χρηστες",
+          "Επειδη εχουν μια ελαττωματικη βαση δεδομενων που περιεχει λαθος γεγονοτα",
+          "Επειδη βελτιστοποιουν την παραγωγη ευφραδους, πιθανοφανους κειμενου, οχι την τεκμηριωμενη ακριβεια — οταν τα δεδομενα εκπαιδευσης ειναι ανεπαρκη, γεμιζουν τα κενα με πιθανοφανες αλλα επινοημενο περιεχομενο",
+          "Επειδη η συνδεση τους στο διαδικτυο πεφτει και δεν μπορουν να επαληθευσουν γεγονοτα"
         ],
-        "explanation": "Το παράθυρο context είναι ο μέγιστος αριθμός tokens (είσοδος + έξοδος μαζί) για μία αλληλεπίδραση. Δεν εκτείνεται σε συνομιλίες και τα tokens δεν είναι λέξεις.",
+        "correct": [2],
+        "explanation": "Οι παραισθησεις συμβαινουν επειδη τα LLMs ειναι βασικα προβλεπτες επομενου token βελτιστοποιημενοι για ευφραδεια, οχι βασεις δεδομενων γεγονοτων. Δημιουργουν κειμενο που ακουγεται πιθανοφανες βασισμενο σε στατιστικα μοτιβα. Δεν εχουν εσωτερικο μηχανισμο ελεγχου αληθειας.",
         "isMulti": false
       },
       {
         "index": 4,
-        "text": "Τι μετρά η 'perplexity' κατά την αξιολόγηση ενός γλωσσικού μοντέλου;",
+        "text": "Ποιο πρακτικο πλεονεκτημα εχει ενα μοντελο μονο-αποκωδικοποιητη (οπως το GPT) εναντι ενος μοντελου μονο-κωδικοποιητη (οπως το BERT);",
         "options": [
-          "Πόσο μπερδεμένοι αισθάνονται οι χρήστες διαβάζοντας τις εξόδους",
-          "Τον αριθμό γραμματικών σφαλμάτων ανά 1.000 παραγόμενα tokens",
-          "Πόσο εκπληγμένο είναι το μοντέλο από το πραγματικό επόμενο token — χαμηλότερες τιμές = καλύτερη πρόβλεψη",
-          "Την αναλογία σωστών προς λανθασμένες απαντήσεις σε τυποποιημένο benchmark"
+          "Τα μοντελα μονο-αποκωδικοποιητη ειναι παντα μικροτερα και ταχυτερα",
+          "Τα μοντελα μονο-αποκωδικοποιητη μπορουν τοσο να κατανοουν οσο και να δημιουργουν κειμενο, ενω τα μοντελα μονο-κωδικοποιητη μπορουν μονο να κατανοουν κειμενο χωρις να δημιουργουν νεο περιεχομενο",
+          "Τα μοντελα μονο-κωδικοποιητη δεν μπορουν να επεξεργαστουν καθολου κειμενο",
+          "Τα μοντελα μονο-αποκωδικοποιητη δεν χρειαζονται δεδομενα εκπαιδευσης"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Η perplexity ποσοτικοποιεί πόσο καλά προβλέπει το μοντέλο το επόμενο token. Χαμηλότερη perplexity = υψηλότερη πιθανότητα στα πραγματικά tokens = καλύτερο μοντέλο.",
+        "correct": [1],
+        "explanation": "Τα μοντελα μονο-κωδικοποιητη οπως το BERT υπερεχουν σε εργασιες κατανοησης αλλα δεν μπορουν να δημιουργησουν νεο κειμενο. Τα μοντελα μονο-αποκωδικοποιητη οπως το GPT δημιουργουν κειμενο token-token και, σε επαρκη κλιμακα, μπορουν επισης να εκτελεσουν εργασιες κατανοησης. Αυτη η ευελιξια ειναι ο λογος που οι αρχιτεκτονικες μονο-αποκωδικοποιητη κυριαρχουν στα μοντερνα LLMs.",
         "isMulti": false
       }
     ]

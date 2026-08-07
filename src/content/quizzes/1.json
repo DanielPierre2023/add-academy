@@ -5,79 +5,68 @@
     "questions": [
       {
         "index": 0,
-        "text": "When an LLM generates a response to your question, what is it fundamentally doing?",
+        "text": "A friend tells you: 'ChatGPT understands what I say, just like a human.' Based on what you learned, which response best reflects how LLMs actually work?",
         "options": [
-          "Searching a database of pre-written answers and selecting the best match",
-          "Predicting the most likely next token repeatedly based on learned statistical patterns",
-          "Following a complex decision tree of hand-coded rules created by engineers",
-          "Retrieving and combining relevant paragraphs from its training documents"
+          "That's correct — LLMs understand language the same way humans do",
+          "LLMs predict statistically likely next words based on patterns learned from massive text data, which creates the appearance of understanding",
+          "LLMs look up answers in a giant database of questions and responses",
+          "LLMs follow hand-written rules created by programmers for every possible question"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "LLMs are next-token predictors. They don\\'t store or retrieve documents, and they don\\'t follow hand-written rules. They generate text by repeatedly predicting what token is most likely to come next.",
+        "correct": [1],
+        "explanation": "LLMs do not 'understand' language the way humans do. They predict the most probable next token based on statistical patterns absorbed from enormous amounts of training text. The impressive fluency creates an illusion of understanding, but the core mechanism is pattern-based prediction, not comprehension.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "What does 'Large' in Large Language Model primarily refer to?",
+        "text": "Why is the knowledge in an LLM described as 'distributed' across its parameters?",
         "options": [
-          "The physical size of the servers required to run the model",
-          "The number of languages the model can understand",
-          "The number of parameters in the model and the scale of training data",
-          "The length of text the model can generate in a single response"
+          "Because each parameter stores one specific fact, like a cell in a spreadsheet",
+          "Because the model's knowledge is split evenly across different servers",
+          "Because no single parameter encodes a specific piece of knowledge — billions of parameters work together to produce meaningful outputs",
+          "Because the model distributes its answers to multiple users at once"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "'Large' refers to billions of parameters and trillions of training tokens. It does not refer to server size, language count, or output length.",
+        "correct": [2],
+        "explanation": "Unlike a database where information is stored in identifiable locations, an LLM's knowledge is spread across billions of parameters working together. No one can point to a specific parameter and say 'this one knows about French history.' The knowledge emerges from the collective interaction of all parameters, similar to how memories in the brain arise from networks of neurons rather than individual cells.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "How does an LLM's behavior differ from traditional rule-based software?",
+        "text": "What would happen if you trained an LLM on only children's storybooks instead of the broad internet?",
         "options": [
-          "Traditional software learns from data, while LLMs follow fixed instructions",
-          "LLMs execute deterministic algorithms, while traditional software uses probability",
-          "LLM behavior emerges from patterns learned during training rather than from explicitly programmed rules",
-          "Traditional software cannot process text, while LLMs are limited to text only"
+          "It would become more intelligent because children's books are clearer",
+          "It would work identically to GPT-3 since the architecture is the same",
+          "It would likely generate story-like text well but lack knowledge of science, code, current events, and many other domains",
+          "It would be unable to generate any text at all"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "The key difference is that LLM behavior emerges from training on data, not from hand-written rules. Traditional software follows explicit instructions — it is the LLM that learns from data.",
+        "correct": [2],
+        "explanation": "The breadth and quality of training data directly shapes what an LLM can do. A model trained only on children's stories would learn story patterns, simple vocabulary, and narrative structure, but would lack the diverse world knowledge, technical understanding, and reasoning patterns that come from training on varied internet text, code, scientific papers, and more.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "What are 'parameters' in the context of an LLM?",
+        "text": "Which of the following are valid reasons for building an LLM from scratch rather than just using an existing API? Select all that apply.",
         "options": [
-          "The configuration settings an engineer manually adjusts before each query",
-          "The input prompts and instructions given to the model by users",
-          "Numerical values learned from data during training that determine the model's behavior",
-          "The hardware specifications of the GPU cluster used for inference"
+          "Understanding the internals helps you diagnose why a model behaves unexpectedly",
+          "Building from scratch guarantees your model will outperform GPT-4",
+          "Fundamental concepts like tokenization and attention remain stable even as specific tools change",
+          "Companies increasingly want specialized, private models tailored to their needs"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Parameters are adjustable numerical values (weights) learned automatically from data during training. They are not manually set, not user inputs, and not hardware specs.",
-        "isMulti": false
+        "correct": [0, 2, 3],
+        "explanation": "Building from scratch provides debugging insight (understanding tokenization quirks, context limits, temperature effects), future-proof knowledge (the core ideas from 2017 remain foundational), and the ability to customize models for specific domains. However, a small educational model will not outperform massive commercial systems — the value is in the understanding, not in competing on scale.",
+        "isMulti": true
       },
       {
         "index": 4,
-        "text": "Which of the following statements about the Transformer architecture are correct?Select all that apply",
+        "text": "The lecture compares traditional software to LLMs. If a traditional calculator app and an LLM both answer '2 + 2 = 4', why is the nature of their answers fundamentally different?",
         "options": [
-          "It was introduced in 2017 and forms the architectural foundation of modern LLMs",
-          "It replaced all previous neural network architectures because they could not process language at all",
-          "Its key innovation — the attention mechanism — allows the model to weigh relationships between all tokens in a sequence",
-          "It requires training data to be manually labeled with grammar rules before training can begin"
+          "The calculator uses more electricity",
+          "The calculator follows an explicit programmed rule, while the LLM predicts '4' because it is the statistically most likely continuation based on training patterns",
+          "There is no difference — both use the same underlying mathematics",
+          "The LLM is always more accurate than the calculator"
         ],
-        "correct": [
-          0,
-          2
-        ],
-        "explanation": "The Transformer (2017) is indeed the foundation of modern LLMs, and attention is its core innovation. Previous architectures (RNNs, LSTMs) could process language but less effectively at scale. No manual grammar labeling is required.",
-        "isMulti": true
+        "correct": [1],
+        "explanation": "Traditional software operates through explicit, hand-written rules (if input is '2+2', output '4'). An LLM arrives at the same answer through learned statistical patterns — it has seen '2+2=4' enough times in training data that it predicts '4' as the most likely next token. This is why calculators are always exact while LLMs can occasionally make arithmetic errors, especially with larger numbers.",
+        "isMulti": false
       }
     ]
   },
@@ -86,79 +75,68 @@
     "questions": [
       {
         "index": 0,
-        "text": "Când un LLM generează un răspuns la întrebarea ta, ce face de fapt la nivel fundamental?",
+        "text": "Un prieten iti spune: 'ChatGPT intelege ce spun, exact ca un om.' Pe baza a ceea ce ai invatat, care raspuns reflecta cel mai bine cum functioneaza de fapt LLM-urile?",
         "options": [
-          "Caută într-o bază de date de răspunsuri pre-scrise și selectează cea mai bună potrivire",
-          "Prezice cel mai probabil token următor în mod repetat pe baza tiparelor statistice învățate",
-          "Urmează un arbore decizional complex de reguli codificate manual de ingineri",
-          "Recuperează și combină paragrafe relevante din documentele sale de antrenament"
+          "Este corect — LLM-urile inteleg limbajul la fel ca oamenii",
+          "LLM-urile prezic cuvinte urmatoare probabile statistic pe baza tiparelor invatate din date text masive, ceea ce creeaza aparenta de intelegere",
+          "LLM-urile cauta raspunsuri intr-o baza de date uriasa de intrebari si raspunsuri",
+          "LLM-urile urmeaza reguli scrise manual de programatori pentru fiecare intrebare posibila"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "LLM-urile sunt predictori de token-uri. Nu stochează și nu recuperează documente, și nu urmează reguli scrise manual. Generează text prezicând repetat ce token este cel mai probabil să urmeze.",
+        "correct": [1],
+        "explanation": "LLM-urile nu 'inteleg' limbajul asa cum o fac oamenii. Ele prezic cel mai probabil token urmator pe baza tiparelor statistice absorbite din cantitati enorme de text de antrenament. Fluenta impresionanta creeaza o iluzie de intelegere, dar mecanismul de baza este predictia bazata pe tipare, nu comprehensiunea.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "La ce se referă în principal cuvântul 'Large' din Large Language Model?",
+        "text": "De ce cunostintele unui LLM sunt descrise ca fiind 'distribuite' in parametrii sai?",
         "options": [
-          "Dimensiunea fizică a serverelor necesare rulării modelului",
-          "Numărul de limbi pe care modelul le poate înțelege",
-          "Numărul de parametri ai modelului și scara datelor de antrenament",
-          "Lungimea textului pe care modelul îl poate genera într-un singur răspuns"
+          "Pentru ca fiecare parametru stocheaza un fapt specific, ca o celula intr-un tabel",
+          "Pentru ca cunostintele modelului sunt impartite uniform pe diferite servere",
+          "Pentru ca niciun parametru individual nu codifica o informatie specifica — miliarde de parametri lucreaza impreuna pentru a produce rezultate semnificative",
+          "Pentru ca modelul distribuie raspunsurile sale mai multor utilizatori simultan"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "'Large' se referă la miliarde de parametri și trilioane de token-uri de antrenament. Nu se referă la dimensiunea serverelor, numărul de limbi sau lungimea output-ului.",
+        "correct": [2],
+        "explanation": "Spre deosebire de o baza de date unde informatia este stocata in locatii identificabile, cunostintele unui LLM sunt raspandite pe miliarde de parametri care lucreaza impreuna. Nimeni nu poate indica un parametru specific si sa spuna 'acesta stie despre istoria Frantei.' Cunostintele apar din interactiunea colectiva a tuturor parametrilor.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Cum diferă comportamentul unui LLM de cel al software-ului tradițional bazat pe reguli?",
+        "text": "Ce s-ar intampla daca ai antrena un LLM doar pe povesti pentru copii in loc de internetul larg?",
         "options": [
-          "Software-ul tradițional învață din date, în timp ce LLM-urile urmează instrucțiuni fixe",
-          "LLM-urile execută algoritmi deterministici, în timp ce software-ul tradițional folosește probabilități",
-          "Comportamentul LLM apare din tipare învățate în timpul antrenamentului, nu din reguli programate explicit",
-          "Software-ul tradițional nu poate procesa text, în timp ce LLM-urile sunt limitate doar la text"
+          "Ar deveni mai inteligent pentru ca povestile pentru copii sunt mai clare",
+          "Ar functiona identic cu GPT-3 deoarece arhitectura este aceeasi",
+          "Ar genera probabil text de tip poveste bine, dar i-ar lipsi cunostintele despre stiinta, cod, evenimente curente si multe alte domenii",
+          "Nu ar putea genera niciun text"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Diferența cheie este că comportamentul LLM apare din antrenament pe date, nu din reguli scrise manual. Software-ul tradițional urmează instrucțiuni explicite — LLM-ul este cel care învață din date.",
+        "correct": [2],
+        "explanation": "Amploarea si calitatea datelor de antrenament modeleaza direct ce poate face un LLM. Un model antrenat doar pe povesti pentru copii ar invata tipare narative si vocabular simplu, dar i-ar lipsi cunostintele diverse despre lume, intelegerea tehnica si tiparele de rationament care provin din antrenarea pe text variat de pe internet, cod, lucrari stiintifice si altele.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ce sunt 'parametrii' în contextul unui LLM?",
+        "text": "Care dintre urmatoarele sunt motive valide pentru a construi un LLM de la zero in loc sa folosesti pur si simplu un API existent? Selecteaza toate raspunsurile corecte.",
         "options": [
-          "Setările de configurare pe care un inginer le ajustează manual înainte de fiecare interogare",
-          "Prompt-urile de input și instrucțiunile date modelului de utilizatori",
-          "Valori numerice învățate din date în timpul antrenamentului care determină comportamentul modelului",
-          "Specificațiile hardware ale clusterului GPU folosit pentru inferență"
+          "Intelegerea mecanismelor interne te ajuta sa diagnostichezi de ce un model se comporta neasteptat",
+          "Construirea de la zero garanteaza ca modelul tau va depasi GPT-4",
+          "Conceptele fundamentale precum tokenizarea si attention raman stabile chiar daca uneltele specifice se schimba",
+          "Companiile vor din ce in ce mai mult modele specializate, private, adaptate nevoilor lor"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Parametrii sunt valori numerice ajustabile (ponderi) învățate automat din date în timpul procesului de antrenament. Nu sunt setați manual, nu sunt inputuri ale utilizatorilor și nu sunt specificații hardware.",
-        "isMulti": false
+        "correct": [0, 2, 3],
+        "explanation": "Construirea de la zero ofera perspectiva pentru depanare, cunostinte rezistente in timp (ideile de baza din 2017 raman fundamentale) si capacitatea de a personaliza modele pentru domenii specifice. Totusi, un model educational mic nu va depasi sistemele comerciale masive — valoarea sta in intelegere, nu in competitia la scara.",
+        "isMulti": true
       },
       {
         "index": 4,
-        "text": "Care dintre următoarele afirmații despre arhitectura Transformer sunt corecte?Selectați toate care se aplică",
+        "text": "Lectia compara software-ul traditional cu LLM-urile. Daca o aplicatie de calculator traditionala si un LLM raspund ambele '2 + 2 = 4', de ce este natura raspunsurilor lor fundamental diferita?",
         "options": [
-          "A fost introdusă în 2017 și formează fundația arhitecturală a LLM-urilor moderne",
-          "A înlocuit toate arhitecturile anterioare de rețele neuronale deoarece acestea nu puteau procesa limbajul deloc",
-          "Inovația sa cheie — mecanismul de atenție — permite modelului să evalueze relațiile între toți tokenii dintr-o secvență",
-          "Necesită ca datele de antrenament să fie etichetate manual cu reguli gramaticale înainte de antrenament"
+          "Calculatorul foloseste mai multa electricitate",
+          "Calculatorul urmeaza o regula programata explicit, in timp ce LLM-ul prezice '4' pentru ca este continuarea cea mai probabila statistic pe baza tiparelor de antrenament",
+          "Nu exista nicio diferenta — ambele folosesc aceeasi matematica de baza",
+          "LLM-ul este intotdeauna mai precis decat calculatorul"
         ],
-        "correct": [
-          0,
-          2
-        ],
-        "explanation": "Transformer-ul (2017) este fundația LLM-urilor moderne, iar atenția este inovația sa principală. Arhitecturile anterioare (RNN, LSTM) puteau procesa limbajul, dar mai puțin eficient la scară mare.",
-        "isMulti": true
+        "correct": [1],
+        "explanation": "Software-ul traditional opereaza prin reguli explicite, scrise manual. Un LLM ajunge la acelasi raspuns prin tipare statistice invatate — a vazut '2+2=4' suficient de multe ori in datele de antrenament incat prezice '4' ca cel mai probabil token urmator. De aceea calculatoarele sunt intotdeauna exacte, in timp ce LLM-urile pot face ocazional erori aritmetice.",
+        "isMulti": false
       }
     ]
   },
@@ -167,79 +145,68 @@
     "questions": [
       {
         "index": 0,
-        "text": "Όταν ένα LLM παράγει μια απάντηση στην ερώτησή σας, τι κάνει ουσιαστικά;",
+        "text": "Ενας φιλος σου λεει: 'Το ChatGPT καταλαβαινει τι λεω, οπως ακριβως ενας ανθρωπος.' Με βαση οσα εμαθες, ποια απαντηση αντικατοπτριζει καλυτερα πως λειτουργουν πραγματικα τα LLMs;",
         "options": [
-          "Ψάχνει σε βάση δεδομένων προ-γραμμένων απαντήσεων και επιλέγει την καλύτερη",
-          "Προβλέπει επαναληπτικά το πιο πιθανό επόμενο token βάσει στατιστικών μοτίβων",
-          "Ακολουθεί ένα πολύπλοκο δέντρο αποφάσεων κανόνων κωδικοποιημένων από μηχανικούς",
-          "Ανακτά και συνδυάζει σχετικές παραγράφους από τα έγγραφα εκπαίδευσής του"
+          "Ειναι σωστο — τα LLMs κατανοουν τη γλωσσα οπως οι ανθρωποι",
+          "Τα LLMs προβλεπουν στατιστικα πιθανες επομενες λεξεις βασισμενα σε μοτιβα που εμαθαν απο τεραστια δεδομενα κειμενου, δημιουργωντας την εντυπωση κατανοησης",
+          "Τα LLMs αναζητουν απαντησεις σε μια τεραστια βαση δεδομενων ερωτησεων και απαντησεων",
+          "Τα LLMs ακολουθουν χειρογραφους κανονες που δημιουργησαν προγραμματιστες για καθε πιθανη ερωτηση"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Τα LLM είναι προβλεπτικά μοντέλα token. Δεν αποθηκεύουν, δεν ανακτούν έγγραφα και δεν ακολουθούν κανόνες γραμμένους χειροκίνητα. Παράγουν κείμενο προβλέποντας ποιο token είναι πιο πιθανό.",
+        "correct": [1],
+        "explanation": "Τα LLMs δεν 'κατανοουν' τη γλωσσα οπως οι ανθρωποι. Προβλεπουν το πιο πιθανο επομενο token βασισμενα σε στατιστικα μοτιβα που απορροφησαν απο τεραστιες ποσοτητες κειμενου εκπαιδευσης. Η εντυπωσιακη ευφραδεια δημιουργει μια ψευδαισθηση κατανοησης, αλλα ο βασικος μηχανισμος ειναι προβλεψη βασισμενη σε μοτιβα.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Σε τι αναφέρεται κυρίως το 'Large' στο Large Language Model;",
+        "text": "Γιατι η γνωση ενος LLM περιγραφεται ως 'κατανεμημενη' στις παραμετρους του;",
         "options": [
-          "Στο φυσικό μέγεθος των servers που απαιτούνται",
-          "Στον αριθμό γλωσσών που καταλαβαίνει το μοντέλο",
-          "Στον αριθμό παραμέτρων του μοντέλου και στην κλίμακα δεδομένων εκπαίδευσης",
-          "Στο μήκος κειμένου που μπορεί να παράγει σε μία απάντηση"
+          "Επειδη καθε παραμετρος αποθηκευει ενα συγκεκριμενο γεγονος, οπως ενα κελι σε ενα υπολογιστικο φυλλο",
+          "Επειδη η γνωση του μοντελου μοιραζεται ομοιομορφα σε διαφορετικους διακομιστες",
+          "Επειδη καμια μεμονωμενη παραμετρος δεν κωδικοποιει μια συγκεκριμενη πληροφορια — δισεκατομμυρια παραμετροι συνεργαζονται για να παραγουν ουσιαστικα αποτελεσματα",
+          "Επειδη το μοντελο διανεμει τις απαντησεις του σε πολλους χρηστες ταυτοχρονα"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "'Large' αναφέρεται σε δισεκατομμύρια παραμέτρους και τρισεκατομμύρια tokens εκπαίδευσης. Δεν αφορά μέγεθος servers, αριθμό γλωσσών ή μήκος εξόδου.",
+        "correct": [2],
+        "explanation": "Σε αντιθεση με μια βαση δεδομενων οπου η πληροφορια αποθηκευεται σε αναγνωρισιμες θεσεις, η γνωση ενος LLM ειναι κατανεμημενη σε δισεκατομμυρια παραμετρους που συνεργαζονται. Κανεις δεν μπορει να δειξει μια συγκεκριμενη παραμετρο και να πει 'αυτη γνωριζει για τη γαλλικη ιστορια.' Η γνωση αναδυεται απο τη συλλογικη αλληλεπιδραση ολων των παραμετρων.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Πώς διαφέρει η συμπεριφορά ενός LLM από παραδοσιακό λογισμικό βασισμένο σε κανόνες;",
+        "text": "Τι θα συνεβαινε αν εκπαιδευες ενα LLM μονο σε παιδικα παραμυθια αντι για το ευρυ διαδικτυο;",
         "options": [
-          "Το παραδοσιακό λογισμικό μαθαίνει από δεδομένα, ενώ τα LLM ακολουθούν σταθερές οδηγίες",
-          "Τα LLM εκτελούν ντετερμινιστικούς αλγορίθμους, ενώ το παραδοσιακό λογισμικό χρησιμοποιεί πιθανότητες",
-          "Η συμπεριφορά LLM προκύπτει από μοτίβα που μαθαίνονται κατά την εκπαίδευση, όχι από ρητά προγραμματισμένους κανόνες",
-          "Το παραδοσιακό λογισμικό δεν μπορεί να επεξεργαστεί κείμενο, ενώ τα LLM περιορίζονται μόνο σε κείμενο"
+          "Θα γινοταν πιο εξυπνο επειδη τα παιδικα βιβλια ειναι πιο ξεκαθαρα",
+          "Θα λειτουργουσε πανομοιοτυπα με το GPT-3 αφου η αρχιτεκτονικη ειναι ιδια",
+          "Θα δημιουργουσε πιθανως κειμενο τυπου ιστοριας καλα, αλλα θα του ελειπαν γνωσεις επιστημης, κωδικα, τρεχοντων γεγονοτων και πολλων αλλων τομεων",
+          "Δεν θα μπορουσε να δημιουργησει κανενα κειμενο"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Η βασική διαφορά είναι ότι η συμπεριφορά LLM προκύπτει από εκπαίδευση σε δεδομένα, όχι από χειρόγραφους κανόνες.",
+        "correct": [2],
+        "explanation": "Το ευρος και η ποιοτητα των δεδομενων εκπαιδευσης διαμορφωνουν αμεσα τι μπορει να κανει ενα LLM. Ενα μοντελο εκπαιδευμενο μονο σε παιδικα παραμυθια θα μαθαινε αφηγηματικα μοτιβα και απλο λεξιλογιο, αλλα θα του ελειπαν οι ποικιλες γνωσεις κοσμου και η τεχνικη κατανοηση.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Τι είναι οι 'παράμετροι' στο πλαίσιο ενός LLM;",
+        "text": "Ποιοι απο τους παρακατω ειναι εγκυροι λογοι για να χτισεις ενα LLM απο το μηδεν αντι να χρησιμοποιησεις απλα ενα υπαρχον API; Επελεξε ολες τις σωστες απαντησεις.",
         "options": [
-          "Ρυθμίσεις διαμόρφωσης που ένας μηχανικός προσαρμόζει χειροκίνητα πριν κάθε ερώτηση",
-          "Τα prompts εισόδου και οι οδηγίες που δίνουν οι χρήστες στο μοντέλο",
-          "Αριθμητικές τιμές που μαθαίνονται από δεδομένα κατά την εκπαίδευση και καθορίζουν τη συμπεριφορά του μοντέλου",
-          "Οι προδιαγραφές υλικού του cluster GPU που χρησιμοποιείται για εξαγωγή συμπερασμάτων"
+          "Η κατανοηση των εσωτερικων μηχανισμων σε βοηθα να διαγνωσεις γιατι ενα μοντελο συμπεριφερεται απροσδοκητα",
+          "Η κατασκευη απο το μηδεν εγγυαται οτι το μοντελο σου θα ξεπερασει το GPT-4",
+          "Θεμελιωδεις εννοιες οπως η tokenization και το attention παραμενουν σταθερες ακομα κι αν αλλαζουν τα συγκεκριμενα εργαλεια",
+          "Οι εταιρειες θελουν ολο και περισσοτερο εξειδικευμενα, ιδιωτικα μοντελα προσαρμοσμενα στις αναγκες τους"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Οι παράμετροι είναι ρυθμιζόμενες αριθμητικές τιμές (βάρη) που μαθαίνονται αυτόματα από δεδομένα κατά τη διαδικασία εκπαίδευσης.",
-        "isMulti": false
+        "correct": [0, 2, 3],
+        "explanation": "Η κατασκευη απο το μηδεν παρεχει διορατικοτητα αποσφαλματωσης, γνωσεις ανθεκτικες στο χρονο (οι βασικες ιδεες απο το 2017 παραμενουν θεμελιωδεις) και τη δυνατοτητα προσαρμογης μοντελων για συγκεκριμενους τομεις. Ωστοσο, ενα μικρο εκπαιδευτικο μοντελο δεν θα ξεπερασει τα τεραστια εμπορικα συστηματα.",
+        "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ποιες από τις ακόλουθες δηλώσεις για την αρχιτεκτονική Transformer είναι σωστές;Επιλέξτε όλα όσα ισχύουν",
+        "text": "Η διαλεξη συγκρινει το παραδοσιακο λογισμικο με τα LLMs. Αν μια παραδοσιακη εφαρμογη αριθμομηχανης και ενα LLM απαντουν και τα δυο '2 + 2 = 4', γιατι ειναι η φυση των απαντησεων τους θεμελιωδως διαφορετικη;",
         "options": [
-          "Εισήχθη το 2017 και αποτελεί τη βάση των σύγχρονων LLM",
-          "Αντικατέστησε όλες τις προηγούμενες αρχιτεκτονικές επειδή δεν μπορούσαν καθόλου να επεξεργαστούν γλώσσα",
-          "Η καινοτομία του — ο μηχανισμός προσοχής — επιτρέπει στο μοντέλο να αξιολογεί σχέσεις μεταξύ tokens",
-          "Απαιτεί τα δεδομένα εκπαίδευσης να επισημανθούν χειροκίνητα με γραμματικούς κανόνες"
+          "Η αριθμομηχανη χρησιμοποιει περισσοτερη ηλεκτρικη ενεργεια",
+          "Η αριθμομηχανη ακολουθει εναν ρητα προγραμματισμενο κανονα, ενω το LLM προβλεπει το '4' επειδη ειναι η στατιστικα πιο πιθανη συνεχεια βασισμενη σε μοτιβα εκπαιδευσης",
+          "Δεν υπαρχει καμια διαφορα — και τα δυο χρησιμοποιουν τα ιδια υποκειμενα μαθηματικα",
+          "Το LLM ειναι παντα πιο ακριβες απο την αριθμομηχανη"
         ],
-        "correct": [
-          0,
-          2
-        ],
-        "explanation": "Ο Transformer (2017) είναι η βάση των σύγχρονων LLM και η προσοχή είναι η κεντρική καινοτομία. Προηγούμενες αρχιτεκτονικές (RNN, LSTM) μπορούσαν να επεξεργαστούν γλώσσα αλλά λιγότερο αποτελεσματικά.",
-        "isMulti": true
+        "correct": [1],
+        "explanation": "Το παραδοσιακο λογισμικο λειτουργει μεσω ρητων κανονων γραμμενων στο χερι. Ενα LLM φτανει στην ιδια απαντηση μεσω εκμαθημενων στατιστικων μοτιβων — εχει δει το '2+2=4' αρκετες φορες στα δεδομενα εκπαιδευσης ωστε να προβλεπει το '4' ως το πιο πιθανο επομενο token.",
+        "isMulti": false
       }
     ]
   }

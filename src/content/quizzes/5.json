@@ -5,79 +5,68 @@
     "questions": [
       {
         "index": 0,
-        "text": "GPT-3 demonstrates 'in-context learning' (few-shot prompting). What happens during this process?",
+        "text": "GPT-3 has 175 billion parameters while GPT-1 had 117 million — a 1,500x increase. Yet the fundamental architecture barely changed. What does this tell us about the Transformer design?",
         "options": [
-          "The model's weights are updated via gradient steps on the provided examples",
-          "The model conditions on the prompt examples to infer the task pattern, without any weight updates",
-          "The model retrieves similar examples from its training data and fine-tunes on them at inference",
-          "The examples select a specialized sub-network within GPT-3 pre-trained for that specific task"
+          "The Transformer is a bad architecture that needs constant redesign",
+          "The Transformer scales remarkably well — making it bigger with more data consistently produces better results without architectural changes",
+          "Parameter count does not matter at all for model quality",
+          "GPT-3 uses a completely different architecture than GPT-1"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "In-context learning works through forward passes with frozen weights. GPT-3 uses the examples as context to recognize patterns — no gradient updates, no retrieval, no sub-network selection.",
+        "correct": [1],
+        "explanation": "One of the most remarkable properties of the Transformer is its scaling behavior. The same decoder-only Transformer design from GPT-1 was simply scaled up — more layers, more parameters, more training data — to create GPT-2, GPT-3, and GPT-4. This predictable scaling (described by scaling laws) is why companies continue to invest in larger models: the architecture does not break at scale, it consistently improves.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "GPT-3 uses a decoder-only architecture. What does this mean in practice?",
+        "text": "A user sets the temperature to 0.1 when asking GPT for a factual answer, and temperature to 1.5 when brainstorming creative story ideas. Why do these different settings make sense for these tasks?",
         "options": [
-          "It has no attention mechanism — it relies solely on feed-forward layers",
-          "It processes input bidirectionally but generates output left-to-right",
-          "It uses only masked (causal) self-attention, where each token can only attend to itself and previous tokens",
-          "It has both encoder and decoder, but the encoder is frozen during inference"
+          "Temperature controls the model's internet access speed",
+          "Low temperature makes the model always pick the most probable token (ideal for factual accuracy), while high temperature gives unlikely tokens a real chance of being selected (ideal for creative, unexpected outputs)",
+          "Temperature has no effect on the output",
+          "High temperature makes the model more factual, low temperature makes it more creative"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Decoder-only means causal (masked) self-attention throughout: each position can only attend to earlier positions. No separate encoder. Not bidirectional (that's BERT). Attention IS the core mechanism.",
+        "correct": [1],
+        "explanation": "Temperature reshapes the probability distribution over tokens. At low temperature (near 0), probabilities become sharply peaked — the most likely token gets selected almost every time, producing deterministic, factual outputs. At high temperature, the distribution flattens — unusual tokens get a meaningful chance of selection, producing more diverse, creative, and sometimes surprising (but less reliable) outputs. Matching temperature to the task is a key practical skill.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "What role does the softmax layer play at the output of GPT-3?",
+        "text": "What is 'few-shot learning' and why was it considered GPT-3's most important breakthrough?",
         "options": [
-          "It selects the single most probable next token deterministically",
-          "It converts the model's raw logits into a probability distribution over the entire vocabulary",
-          "It normalizes the attention weights within each transformer layer",
-          "It reduces the vocabulary size by pruning low-probability tokens before generation"
+          "Few-shot learning means the model was trained on very few examples total",
+          "Few-shot learning means the model can learn new tasks from a few examples provided directly in the prompt, without any retraining — turning the prompt into a kind of programming language",
+          "Few-shot learning means the model can only answer a few questions per day",
+          "Few-shot learning means the model forgets everything after a few uses"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "The final softmax transforms raw logits into a valid probability distribution summing to 1 over all vocabulary tokens. Token selection is done by the sampling strategy (greedy, top-k), not softmax itself.",
+        "correct": [1],
+        "explanation": "Before GPT-3, adapting a model to a new task required collecting labeled data and retraining. GPT-3 showed that you could provide a few examples directly in the prompt (e.g., 'Translate: Hello = Bonjour, Goodbye = Au revoir, Thank you = ?') and the model would recognize and continue the pattern. This turned prompts into a programming interface — you could 'program' the model to do almost anything by demonstrating the pattern with examples, no retraining required.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "The 'scaling hypothesis' as demonstrated by GPT-3 suggests that:",
+        "text": "Why does GPT use subword tokenization (BPE) instead of splitting text into whole words? Select all that apply.",
         "options": [
-          "Performance improves predictably with increases in parameters, data, and compute, often without architectural changes",
-          "Smaller models always outperform larger ones if trained longer on better data",
-          "Scaling only works up to about 10 billion parameters, after which performance plateaus",
-          "Scaling model size is effective only with task-specific architectural modifications"
+          "Whole-word tokenization would require an impossibly large vocabulary to cover all words, misspellings, names, and technical terms across all languages",
+          "Subword tokenization allows the model to handle never-before-seen words by breaking them into known sub-pieces",
+          "Subword tokenization lets related words like 'run', 'running', and 'runner' share common components",
+          "Whole-word tokenization is actually better but GPT chose BPE by mistake"
         ],
-        "correct": [
-          0
-        ],
-        "explanation": "The scaling hypothesis: increasing model size, data, and compute leads to smooth, predictable improvements — often without new architectures. GPT-3's 175B parameters demonstrated capabilities absent in smaller models.",
-        "isMulti": false
+        "correct": [0, 1, 2],
+        "explanation": "Subword tokenization (BPE) solves three problems: vocabulary explosion (whole words would need millions of entries), unknown words (rare words can be assembled from known sub-pieces, like 'un'+'believ'+'able'), and morphological sharing (related words share common tokens, helping the model recognize their connections). GPT-3 uses just 50,257 tokens to represent all possible text.",
+        "isMulti": true
       },
       {
         "index": 4,
-        "text": "Which statements about GPT-3's Byte Pair Encoding (BPE) tokenization are correct?Select all that apply",
+        "text": "GPT-3 can write Python code, even though nobody specifically trained it to program. How is this possible?",
         "options": [
-          "BPE starts with individual characters and iteratively merges the most frequent adjacent pairs",
-          "BPE guarantees that every English word maps to exactly one token",
-          "BPE can handle out-of-vocabulary words by breaking them into subword units",
-          "The same word may be tokenized differently depending on surrounding words"
+          "GPT-3 has a built-in Python interpreter",
+          "GPT-3's training data included billions of lines of open-source code from GitHub, so it learned programming patterns as part of next-word prediction — code generation is an emergent ability from learning to predict code tokens",
+          "GPT-3 copies code directly from the internet in real time",
+          "GPT-3 cannot actually write code — it only generates random characters that look like code"
         ],
-        "correct": [
-          0,
-          2
-        ],
-        "explanation": "BPE starts with characters and merges frequent pairs. It handles any input by decomposing rare words into subword pieces. But it does NOT guarantee one token per word, and standard BPE is deterministic (same word = same tokenization regardless of context).",
-        "isMulti": true
+        "correct": [1],
+        "explanation": "GPT-3's training data included substantial amounts of code from GitHub and programming documentation. Through next-token prediction on this code, the model learned programming syntax, patterns, common algorithms, and even documentation conventions. Code generation was never a specific training objective — it emerged as a side effect of the model becoming very good at predicting the next token in code files. This is a prime example of emergent abilities.",
+        "isMulti": false
       }
     ]
   },
@@ -86,79 +75,68 @@
     "questions": [
       {
         "index": 0,
-        "text": "GPT-3 demonstrează 'învățare în context' (few-shot). Ce se întâmplă în acest proces?",
+        "text": "GPT-3 are 175 de miliarde de parametri in timp ce GPT-1 avea 117 milioane — o crestere de 1.500x. Totusi arhitectura fundamentala abia s-a schimbat. Ce ne spune acest lucru despre designul Transformer?",
         "options": [
-          "Ponderile modelului sunt actualizate prin pași de gradient pe exemplele furnizate",
-          "Modelul condiționează pe exemplele din prompt pentru a deduce tiparul sarcinii, fără actualizări de ponderi",
-          "Modelul recuperează exemple similare din datele de antrenament și se ajustează fin la inferență",
-          "Exemplele selectează o sub-rețea specializată din GPT-3 pre-antrenată pentru acea sarcină"
+          "Transformer-ul este o arhitectura slaba care necesita redesign constant",
+          "Transformer-ul se scaleaza remarcabil de bine — marirea lui cu mai multe date produce constant rezultate mai bune fara schimbari arhitecturale",
+          "Numarul de parametri nu conteaza deloc pentru calitatea modelului",
+          "GPT-3 foloseste o arhitectura complet diferita fata de GPT-1"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Învățarea în context funcționează prin treceri înainte cu ponderi înghețate. GPT-3 folosește exemplele ca context pentru a recunoaște tipare — fără actualizări de gradient.",
+        "correct": [1],
+        "explanation": "Una dintre cele mai remarcabile proprietati ale Transformer-ului este comportamentul sau de scalare. Acelasi design Transformer decoder-only de la GPT-1 a fost pur si simplu marit — mai multe straturi, mai multi parametri, mai multe date de antrenament. Aceasta scalare previzibila este motivul pentru care companiile continua sa investeasca in modele mai mari.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "GPT-3 folosește o arhitectură doar-decoder. Ce înseamnă aceasta în practică?",
+        "text": "Un utilizator seteaza temperature la 0.1 cand cere GPT-ului un raspuns factual, si temperature la 1.5 cand face brainstorming de idei creative de povesti. De ce au sens aceste setari diferite pentru aceste sarcini?",
         "options": [
-          "Nu are mecanism de atenție — se bazează exclusiv pe straturi feed-forward",
-          "Procesează inputul bidirecțional dar generează output de la stânga la dreapta",
-          "Folosește doar self-attention mascată (cauzală), unde fiecare token participă doar la sine și tokenii anteriori",
-          "Are atât encoder cât și decoder, dar encoder-ul este înghețat în timpul inferenței"
+          "Temperature controleaza viteza de acces la internet a modelului",
+          "Temperature scazuta face modelul sa aleaga mereu cel mai probabil token (ideal pentru acuratete factuala), in timp ce temperature ridicata da token-urilor improbabile o sansa reala de selectie (ideal pentru rezultate creative, neasteptate)",
+          "Temperature nu are niciun efect asupra rezultatului",
+          "Temperature ridicata face modelul mai factual, temperature scazuta il face mai creativ"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Doar-decoder înseamnă self-attention cauzală (mascată): fiecare poziție participă doar la poziții anterioare. Nu există encoder separat. Nu procesează bidirecțional (aceasta e abordarea BERT).",
+        "correct": [1],
+        "explanation": "Temperature reformuleaza distributia de probabilitate peste token-uri. La temperature scazuta, probabilitatile devin ascutite — cel mai probabil token este selectat aproape de fiecare data, producand rezultate deterministe. La temperature ridicata, distributia se aplatizeaza — token-urile neobisnuite primesc o sansa semnificativa de selectie.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Ce rol joacă stratul softmax la ieșirea GPT-3?",
+        "text": "Ce este 'few-shot learning' si de ce a fost considerat cea mai importanta descoperire a GPT-3?",
         "options": [
-          "Selectează cel mai probabil token următor în mod determinist",
-          "Convertește logit-urile brute ale modelului într-o distribuție de probabilitate peste întreg vocabularul",
-          "Normalizează ponderile atenției din fiecare strat transformer",
-          "Reduce dimensiunea vocabularului eliminând tokenii cu probabilitate scăzută"
+          "Few-shot learning inseamna ca modelul a fost antrenat pe foarte putine exemple in total",
+          "Few-shot learning inseamna ca modelul poate invata sarcini noi din cateva exemple furnizate direct in prompt, fara nicio reantrenare — transformand prompt-ul intr-un fel de limbaj de programare",
+          "Few-shot learning inseamna ca modelul poate raspunde doar la cateva intrebari pe zi",
+          "Few-shot learning inseamna ca modelul uita totul dupa cateva utilizari"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Softmax-ul final transformă logit-urile brute într-o distribuție de probabilitate validă care se însumează la 1 peste toți tokenii vocabularului. Selecția tokenului e făcută de strategia de eșantionare.",
+        "correct": [1],
+        "explanation": "Inainte de GPT-3, adaptarea unui model la o sarcina noua necesita colectarea de date etichetate si reantrenare. GPT-3 a aratat ca poti furniza cateva exemple direct in prompt si modelul recunoaste si continua tiparul. Aceasta a transformat prompt-urile intr-o interfata de programare.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Ipoteza scalării demonstrată de GPT-3 sugerează că:",
+        "text": "De ce foloseste GPT tokenizare la nivel de subcuvant (BPE) in loc sa imparta textul in cuvinte intregi? Selecteaza toate raspunsurile corecte.",
         "options": [
-          "Performanța se îmbunătățește predictibil cu creșterea parametrilor, datelor și calculului, adesea fără modificări arhitecturale",
-          "Modelele mai mici depășesc întotdeauna modelele mai mari dacă sunt antrenate mai mult pe date mai bune",
-          "Scalarea funcționează doar până la aproximativ 10 miliarde de parametri",
-          "Scalarea este eficientă doar cu modificări arhitecturale specifice sarcinii"
+          "Tokenizarea pe cuvinte intregi ar necesita un vocabular imposibil de mare pentru a acoperi toate cuvintele, greselile de ortografie, numele si termenii tehnici din toate limbile",
+          "Tokenizarea pe subcuvinte permite modelului sa gestioneze cuvinte niciodata vazute inainte, descompunandu-le in sub-piese cunoscute",
+          "Tokenizarea pe subcuvinte permite cuvintelor inrudite precum 'alerga', 'alergand' si 'alergator' sa imparta componente comune",
+          "Tokenizarea pe cuvinte intregi este de fapt mai buna, dar GPT a ales BPE din greseala"
         ],
-        "correct": [
-          0
-        ],
-        "explanation": "Ipoteza scalării: creșterea dimensiunii modelului, datelor și calculului duce la îmbunătățiri liniare și predictibile — adesea fără arhitecturi noi.",
-        "isMulti": false
+        "correct": [0, 1, 2],
+        "explanation": "Tokenizarea pe subcuvinte (BPE) rezolva trei probleme: explozia vocabularului, cuvintele necunoscute (cuvintele rare pot fi asamblate din sub-piese cunoscute) si partajarea morfologica (cuvintele inrudite impart token-uri comune). GPT-3 foloseste doar 50.257 de token-uri pentru a reprezenta tot textul posibil.",
+        "isMulti": true
       },
       {
         "index": 4,
-        "text": "Care afirmații despre tokenizarea BPE a GPT-3 sunt corecte?Selectați toate care se aplică",
+        "text": "GPT-3 poate scrie cod Python, desi nimeni nu l-a antrenat specific sa programeze. Cum este posibil acest lucru?",
         "options": [
-          "BPE începe cu caractere individuale și îmbină iterativ cele mai frecvente perechi adiacente",
-          "BPE garantează că fiecare cuvânt englezesc corespunde exact unui token",
-          "BPE poate gestiona cuvinte noi descompunându-le în unități sub-cuvânt",
-          "Același cuvânt poate fi tokenizat diferit în funcție de cuvintele înconjurătoare"
+          "GPT-3 are un interpretor Python incorporat",
+          "Datele de antrenament ale GPT-3 au inclus miliarde de linii de cod open-source de pe GitHub, asa ca a invatat tiparele de programare ca parte a predictiei urmatorul-cuvant — generarea de cod este o abilitate emergenta din invatarea de a prezice token-uri de cod",
+          "GPT-3 copiaza cod direct de pe internet in timp real",
+          "GPT-3 nu poate scrie de fapt cod — genereaza doar caractere aleatorii care arata ca si cod"
         ],
-        "correct": [
-          0,
-          2
-        ],
-        "explanation": "BPE începe cu caractere și îmbină perechi frecvente. Poate gestiona orice input descompunând cuvintele rare. NU garantează un token per cuvânt, iar BPE standard este deterministic.",
-        "isMulti": true
+        "correct": [1],
+        "explanation": "Datele de antrenament ale GPT-3 au inclus cantitati substantiale de cod de pe GitHub. Prin predictia next-token pe acest cod, modelul a invatat sintaxa de programare, tipare, algoritmi comuni si conventii de documentatie. Generarea de cod nu a fost niciodata un obiectiv specific de antrenament — a aparut ca un efect secundar al modelului devenind foarte bun la prezicerea urmatorului token in fisierele de cod.",
+        "isMulti": false
       }
     ]
   },
@@ -167,79 +145,68 @@
     "questions": [
       {
         "index": 0,
-        "text": "Το GPT-3 επιδεικνύει 'μάθηση εντός πλαισίου' (few-shot). Τι συμβαίνει κατά τη διαδικασία;",
+        "text": "Το GPT-3 εχει 175 δισεκατομμυρια παραμετρους ενω το GPT-1 ειχε 117 εκατομμυρια — μια αυξηση 1.500x. Ωστοσο η θεμελιωδης αρχιτεκτονικη μολις αλλαξε. Τι μας λεει αυτο για τον σχεδιασμο Transformer;",
         "options": [
-          "Τα βάρη ενημερώνονται μέσω βημάτων gradient στα παρεχόμενα παραδείγματα",
-          "Το μοντέλο χρησιμοποιεί τα παραδείγματα στο prompt για να συμπεράνει το μοτίβο, χωρίς ενημέρωση βαρών",
-          "Ανακτά παρόμοια παραδείγματα από τα δεδομένα εκπαίδευσης και κάνει μικρο-ρύθμιση",
-          "Τα παραδείγματα επιλέγουν ένα εξειδικευμένο υπο-δίκτυο εντός GPT-3"
+          "Το Transformer ειναι μια κακη αρχιτεκτονικη που χρειαζεται συνεχη επανασχεδιασμο",
+          "Το Transformer κλιμακωνεται εξαιρετικα καλα — η μεγεθυνση του με περισσοτερα δεδομενα παραγει σταθερα καλυτερα αποτελεσματα χωρις αρχιτεκτονικες αλλαγες",
+          "Ο αριθμος παραμετρων δεν εχει καμια σημασια για την ποιοτητα του μοντελου",
+          "Το GPT-3 χρησιμοποιει μια εντελως διαφορετικη αρχιτεκτονικη απο το GPT-1"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Η μάθηση εντός πλαισίου λειτουργεί μέσω forward passes με παγωμένα βάρη. Το GPT-3 χρησιμοποιεί τα παραδείγματα ως πλαίσιο για αναγνώριση μοτίβων.",
+        "correct": [1],
+        "explanation": "Μια απο τις πιο αξιοσημειωτες ιδιοτητες του Transformer ειναι η συμπεριφορα κλιμακωσης του. Ο ιδιος σχεδιασμος decoder-only Transformer απο το GPT-1 απλα μεγεθυνθηκε — περισσοτερα στρωματα, περισσοτερες παραμετροι, περισσοτερα δεδομενα εκπαιδευσης. Αυτη η προβλεψιμη κλιμακωση ειναι ο λογος που οι εταιρειες συνεχιζουν να επενδυουν σε μεγαλυτερα μοντελα.",
         "isMulti": false
       },
       {
         "index": 1,
-        "text": "Το GPT-3 χρησιμοποιεί αρχιτεκτονική μόνο-decoder. Τι σημαίνει αυτό πρακτικά;",
+        "text": "Ενας χρηστης ρυθμιζει τη θερμοκρασια στο 0.1 οταν ζητα μια τεκμηριωμενη απαντηση, και στο 1.5 οταν κανει brainstorming για δημιουργικες ιδεες ιστοριων. Γιατι εχουν νοημα αυτες οι διαφορετικες ρυθμισεις;",
         "options": [
-          "Δεν έχει μηχανισμό attention — βασίζεται αποκλειστικά σε feed-forward layers",
-          "Επεξεργάζεται είσοδο αμφίδρομα αλλά παράγει έξοδο αριστερά-προς-δεξιά",
-          "Χρησιμοποιεί μόνο masked (αιτιακή) self-attention, όπου κάθε token βλέπει μόνο εαυτό και προηγούμενα tokens",
-          "Έχει encoder και decoder, αλλά ο encoder είναι παγωμένος κατά τη χρήση"
+          "Η θερμοκρασια ελεγχει την ταχυτητα προσβασης στο διαδικτυο του μοντελου",
+          "Χαμηλη θερμοκρασια κανει το μοντελο να επιλεγει παντα το πιο πιθανο token (ιδανικο για τεκμηριωμενη ακριβεια), ενω υψηλη θερμοκρασια δινει στα απιθανα tokens πραγματικη ευκαιρια επιλογης (ιδανικο για δημιουργικα, απροσδοκητα αποτελεσματα)",
+          "Η θερμοκρασια δεν εχει καμια επιδραση στην εξοδο",
+          "Υψηλη θερμοκρασια κανει το μοντελο πιο τεκμηριωμενο, χαμηλη θερμοκρασια πιο δημιουργικο"
         ],
-        "correct": [
-          2
-        ],
-        "explanation": "Μόνο-decoder σημαίνει αιτιακή (masked) self-attention: κάθε θέση βλέπει μόνο προηγούμενες θέσεις. Κανένας ξεχωριστός encoder.",
+        "correct": [1],
+        "explanation": "Η θερμοκρασια αναδιαμορφωνει την κατανομη πιθανοτητων. Σε χαμηλη θερμοκρασια, οι πιθανοτητες γινονται αιχμηρες — το πιο πιθανο token επιλεγεται σχεδον καθε φορα. Σε υψηλη θερμοκρασια, η κατανομη ισοπεδωνεται — ασυνηθιστα tokens παιρνουν σημαντικη ευκαιρια επιλογης.",
         "isMulti": false
       },
       {
         "index": 2,
-        "text": "Τι ρόλο παίζει το softmax layer στην έξοδο του GPT-3;",
+        "text": "Τι ειναι το 'few-shot learning' και γιατι θεωρηθηκε η σημαντικοτερη ανακαλυψη του GPT-3;",
         "options": [
-          "Επιλέγει ντετερμινιστικά το πιο πιθανό επόμενο token",
-          "Μετατρέπει τα logits σε κατανομή πιθανοτήτων πάνω σε ολόκληρο το λεξιλόγιο",
-          "Κανονικοποιεί τα βάρη attention εντός κάθε transformer layer",
-          "Μειώνει το μέγεθος λεξιλογίου αφαιρώντας tokens χαμηλής πιθανότητας"
+          "Few-shot learning σημαινει οτι το μοντελο εκπαιδευτηκε σε πολυ λιγα παραδειγματα συνολικα",
+          "Few-shot learning σημαινει οτι το μοντελο μπορει να μαθει νεες εργασιες απο λιγα παραδειγματα που παρεχονται απευθειας στο prompt, χωρις καμια επανεκπαιδευση — μετατρεποντας το prompt σε ενα ειδος γλωσσας προγραμματισμου",
+          "Few-shot learning σημαινει οτι το μοντελο μπορει να απαντησει μονο σε λιγες ερωτησεις την ημερα",
+          "Few-shot learning σημαινει οτι το μοντελο ξεχνα τα παντα μετα απο λιγες χρησεις"
         ],
-        "correct": [
-          1
-        ],
-        "explanation": "Το τελικό softmax μετατρέπει τα logits σε έγκυρη κατανομή πιθανοτήτων. Η επιλογή token γίνεται από τη στρατηγική δειγματοληψίας, όχι από το softmax.",
+        "correct": [1],
+        "explanation": "Πριν απο το GPT-3, η προσαρμογη ενος μοντελου σε μια νεα εργασια απαιτουσε συλλογη δεδομενων και επανεκπαιδευση. Το GPT-3 εδειξε οτι μπορεις να παρεχεις λιγα παραδειγματα στο prompt και το μοντελο αναγνωριζει και συνεχιζει το μοτιβο. Αυτο μετεμορφωσε τα prompts σε διεπαφη προγραμματισμου.",
         "isMulti": false
       },
       {
         "index": 3,
-        "text": "Η υπόθεση κλιμάκωσης του GPT-3 υποδηλώνει ότι:",
+        "text": "Γιατι το GPT χρησιμοποιει tokenization υπολεξεων (BPE) αντι να χωριζει το κειμενο σε ολοκληρες λεξεις; Επελεξε ολες τις σωστες απαντησεις.",
         "options": [
-          "Η απόδοση βελτιώνεται προβλέψιμα με αύξηση παραμέτρων, δεδομένων και υπολογισμού, χωρίς αρχιτεκτονικές αλλαγές",
-          "Μικρότερα μοντέλα ξεπερνούν πάντα μεγαλύτερα αν εκπαιδευτούν περισσότερο σε καλύτερα δεδομένα",
-          "Η κλιμάκωση λειτουργεί μόνο μέχρι ~10 δισεκατομμύρια παραμέτρους",
-          "Η κλιμάκωση αποδίδει μόνο με αρχιτεκτονικές τροποποιήσεις ανά εργασία"
+          "Η tokenization ολοκληρων λεξεων θα απαιτουσε ενα αδυνατα μεγαλο λεξιλογιο για να καλυψει ολες τις λεξεις, ορθογραφικα λαθη, ονοματα και τεχνικους ορους σε ολες τις γλωσσες",
+          "Η tokenization υπολεξεων επιτρεπει στο μοντελο να χειριστει λεξεις που δεν εχει ξαναδει, σπαζοντας τες σε γνωστα υπο-κομματια",
+          "Η tokenization υπολεξεων επιτρεπει σε σχετικες λεξεις να μοιραζονται κοινα συστατικα",
+          "Η tokenization ολοκληρων λεξεων ειναι στην πραγματικοτητα καλυτερη αλλα το GPT επελεξε BPE κατα λαθος"
         ],
-        "correct": [
-          0
-        ],
-        "explanation": "Η υπόθεση κλιμάκωσης: αύξηση μεγέθους μοντέλου, δεδομένων και υπολογισμού οδηγεί σε ομαλές, προβλέψιμες βελτιώσεις — χωρίς νέες αρχιτεκτονικές.",
-        "isMulti": false
+        "correct": [0, 1, 2],
+        "explanation": "Η tokenization υπολεξεων (BPE) λυνει τρια προβληματα: εκρηξη λεξιλογιου, αγνωστες λεξεις (σπανιες λεξεις μπορουν να συναρμολογηθουν απο γνωστα υπο-κομματια) και μορφολογικη κοινοχρησια (σχετικες λεξεις μοιραζονται κοινα tokens). Το GPT-3 χρησιμοποιει μονο 50.257 tokens.",
+        "isMulti": true
       },
       {
         "index": 4,
-        "text": "Ποιες δηλώσεις για το BPE tokenization του GPT-3 είναι σωστές;Επιλέξτε όλα όσα ισχύουν",
+        "text": "Το GPT-3 μπορει να γραψει κωδικα Python, παρολο που κανεις δεν το εκπαιδευσε συγκεκριμενα να προγραμματιζει. Πως ειναι αυτο δυνατο;",
         "options": [
-          "Το BPE ξεκινά με μεμονωμένους χαρακτήρες και συγχωνεύει τα πιο συχνά ζεύγη",
-          "Το BPE εγγυάται ότι κάθε αγγλική λέξη αντιστοιχεί σε ακριβώς ένα token",
-          "Το BPE μπορεί να χειριστεί άγνωστες λέξεις αναλύοντάς τες σε μονάδες υπολέξεων",
-          "Η ίδια λέξη μπορεί να tokenοποιηθεί διαφορετικά ανάλογα με τις γειτονικές λέξεις"
+          "Το GPT-3 εχει ενσωματωμενο διερμηνεα Python",
+          "Τα δεδομενα εκπαιδευσης του GPT-3 περιελαμβαναν δισεκατομμυρια γραμμες κωδικα ανοιχτου κωδικα απο το GitHub, ετσι εμαθε μοτιβα προγραμματισμου ως μερος της προβλεψης επομενης λεξης — η δημιουργια κωδικα ειναι μια αναδυομενη ικανοτητα",
+          "Το GPT-3 αντιγραφει κωδικα απευθειας απο το διαδικτυο σε πραγματικο χρονο",
+          "Το GPT-3 δεν μπορει πραγματικα να γραψει κωδικα — δημιουργει μονο τυχαιους χαρακτηρες που μοιαζουν με κωδικα"
         ],
-        "correct": [
-          0,
-          2
-        ],
-        "explanation": "Το BPE ξεκινά με χαρακτήρες και συγχωνεύει συχνά ζεύγη. Μπορεί να χειριστεί οποιαδήποτε είσοδο. ΔΕΝ εγγυάται ένα token ανά λέξη, και είναι ντετερμινιστικό.",
-        "isMulti": true
+        "correct": [1],
+        "explanation": "Τα δεδομενα εκπαιδευσης του GPT-3 περιελαμβαναν σημαντικες ποσοτητες κωδικα απο το GitHub. Μεσω της προβλεψης next-token σε αυτον τον κωδικα, το μοντελο εμαθε συνταξη προγραμματισμου, μοτιβα και κοινους αλγοριθμους. Η δημιουργια κωδικα αναδυθηκε ως παρενεργεια.",
+        "isMulti": false
       }
     ]
   }
