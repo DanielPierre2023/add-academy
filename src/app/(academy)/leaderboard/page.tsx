@@ -3,7 +3,7 @@
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useAuth } from '@/components/auth/auth-provider';
+import { useAuth } from '@/lib/auth/auth-context';
 import {
   Trophy,
   Medal,
@@ -91,7 +91,7 @@ export default function LeaderboardPage() {
   // Insert current user into leaderboard
   const userEntry = user ? {
     rank: 0,
-    name: user.name || user.email?.split('@')[0] || txt.you,
+    name: user.displayName || user.email?.split('@')[0] || txt.you,
     xp: stats.xp,
     level: stats.level,
     streak: stats.streak,
