@@ -33,8 +33,9 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Protected routes require auth
-  const protectedPaths = ['/dashboard', '/certificate', '/school/dashboard', '/account'];
+  // Dashboard has its own client-side auth guard (shows "sign in" prompt).
+  // Only hard-redirect for paths that truly require server-side auth.
+  const protectedPaths = ['/certificate', '/school/dashboard', '/account'];
   const isProtected = protectedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path)
   );
