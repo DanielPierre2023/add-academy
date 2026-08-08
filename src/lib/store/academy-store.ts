@@ -12,6 +12,14 @@ interface XPEvent {
   timestamp: string;
 }
 
+interface QuizAttempt {
+  lectureId: string;
+  questionIndex: number;
+  correct: boolean;
+  timestamp: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+}
+
 interface AcademyState {
   // Language & Theme
   language: Language;
@@ -66,6 +74,23 @@ interface AcademyState {
   getGamificationStats: () => GamificationStats;
   getLevel: () => number;
   getXPProgress: () => { current: number; needed: number; percentage: number };
+
+  // Adaptive Difficulty
+  quizAttempts: QuizAttempt[];
+  addQuizAttempt: (attempt: QuizAttempt) => void;
+  getDifficultyLevel: () => 'easy' | 'medium' | 'hard';
+  getWeakTopics: () => string[];
+
+  // Bookmarks
+  bookmarks: string[];
+  toggleBookmark: (lectureId: string) => void;
+  isBookmarked: (lectureId: string) => boolean;
+
+  // Spaced Repetition
+  reviewQueue: Array<{ lectureId: string; questionIndex: number; nextReview: string; interval: number }>;
+  addToReviewQueue: (lectureId: string, questionIndex: number) => void;
+  getReviewsDue: () => Array<{ lectureId: string; questionIndex: number; nextReview: string; interval: number }>;
+  completeReview: (lectureId: string, questionIndex: number, correct: boolean) => void;
 }
 
 const TOTAL_LECTURES = 49; // 44 main + 5 genai
@@ -297,6 +322,83 @@ export const useAcademyStore = create<AcademyState>()(
           percentage: neededXP > 0 ? Math.round((progressXP / neededXP) * 100) : 100,
         };
       },
+
+      // Adaptive Difficulty
+      quizAttempts: [],
+      addQuizAttempt: (attempt) =>
+        set((state) => ({
+          quizAttempts: [...state.quizAttempts.slice(-200), attempt],
+        })),
+      getDifficultyLevel: () => {
+        const { quizAttempts } = get();
+        if (quizAttempts.length < 5) return 'medium';
+        const recent = quizAttempts.slice(-20);
+        const correctRate = recent.filter((a) => a.correct).length / recent.length;
+        if (correctRate >= 0.8) return 'hard';
+        if (correctRate <= 0.4) return 'easy';
+        return 'medium';
+      },
+      getWeakTopics: () => {
+        const { quizAttempts } = get();
+        const byLecture: Record<string, { correct: number; total: number }> = {};
+        for (const attempt of quizAttempts) {
+          if (!byLecture[attempt.lectureId]) {
+            byLecture[attempt.lectureId] = { correct: 0, total: 0 };
+          }
+          byLecture[attempt.lectureId].total++;
+          if (attempt.correct) byLecture[attempt.lectureId].correct++;
+        }
+        return Object.entries(byLecture)
+          .filter(([, stats]) => stats.total >= 2 && stats.correct / stats.total < 0.5)
+          .map(([lectureId]) => lectureId);
+      },
+
+      // Bookmarks
+      bookmarks: [],
+      toggleBookmark: (lectureId) =>
+        set((state) => ({
+          bookmarks: state.bookmarks.includes(lectureId)
+            ? state.bookmarks.filter((id) => id !== lectureId)
+            : [...state.bookmarks, lectureId],
+        })),
+      isBookmarked: (lectureId) => get().bookmarks.includes(lectureId),
+
+      // Spaced Repetition
+      reviewQueue: [],
+      addToReviewQueue: (lectureId, questionIndex) =>
+        set((state) => {
+          const exists = state.reviewQueue.some(
+            (r) => r.lectureId === lectureId && r.questionIndex === questionIndex
+          );
+          if (exists) return state;
+          return {
+            reviewQueue: [
+              ...state.reviewQueue,
+              {
+                lectureId,
+                questionIndex,
+                nextReview: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+                interval: 1, // days
+              },
+            ],
+          };
+        }),
+      getReviewsDue: () => {
+        const now = new Date().toISOString();
+        return get().reviewQueue.filter((r) => r.nextReview <= now);
+      },
+      completeReview: (lectureId, questionIndex, correct) =>
+        set((state) => ({
+          reviewQueue: state.reviewQueue.map((r) => {
+            if (r.lectureId !== lectureId || r.questionIndex !== questionIndex) return r;
+            const newInterval = correct ? Math.min(r.interval * 2.5, 30) : 1;
+            return {
+              ...r,
+              interval: newInterval,
+              nextReview: new Date(Date.now() + newInterval * 24 * 60 * 60 * 1000).toISOString(),
+            };
+          }),
+        })),
     }),
     {
       name: 'add-academy-store',
@@ -312,6 +414,10 @@ export const useAcademyStore = create<AcademyState>()(
         unlockedAchievements: state.unlockedAchievements,
         xpEvents: state.xpEvents,
         totalCodeBlocksRun: state.totalCodeBlocksRun,
+        // Adaptive difficulty & features persisted
+        quizAttempts: state.quizAttempts,
+        bookmarks: state.bookmarks,
+        reviewQueue: state.reviewQueue,
       }),
     }
   )

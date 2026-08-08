@@ -4,6 +4,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { CourseSidebar } from '@/components/layout/course-sidebar';
 import { AITutor } from '@/components/academy/ai-tutor';
+import { KeyboardNav } from '@/components/academy/keyboard-nav';
 
 export default function AcademyLayout({
   children,
@@ -31,6 +32,9 @@ export default function AcademyLayout({
         {/* AI Tutor sliding panel */}
         <AITutor />
       </div>
+
+      {/* Keyboard shortcuts */}
+      <KeyboardNav />
     </div>
   );
 }
