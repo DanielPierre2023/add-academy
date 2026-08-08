@@ -266,4 +266,18 @@ export const STAGES: Stage[] = [
     lectures: ['genai-0', 'genai-1', 'genai-2', 'genai-3', 'genai-4', 'genai-5'],
     color: '#6366f1',
   },
+  {
+    number: 8,
+    name: { en: 'NeuralForge Platform', ro: 'Platforma NeuralForge', el: 'Πλατφόρμα NeuralForge' },
+    icon: '🔧',
+    lectures: ['44', '45', '46', '47', '48', '49', '50', '51'],
+    color: '#f97316',
+  },
+  {
+    number: 9,
+    name: { en: 'Advanced Topics', ro: 'Subiecte Avansate', el: 'Προχωρημένα Θέματα' },
+    icon: '🚀',
+    lectures: ['52', '53', '54', '55'],
+    color: '#14b8a6',
+  },
 ];

@@ -14,7 +14,8 @@
       "prev": null,
       "next": null,
       "codeBlockCount": 0,
-      "hasQuiz": false
+      "hasQuiz": false,
+      "estimatedMinutes": 5
     },
     {
       "id": "1",
@@ -30,7 +31,8 @@
       "prev": null,
       "next": "2",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 25
     },
     {
       "id": "2",
@@ -46,7 +48,8 @@
       "prev": "1",
       "next": "3",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 20
     },
     {
       "id": "0",
@@ -62,7 +65,8 @@
       "prev": "home",
       "next": "1",
       "codeBlockCount": 6,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 30
     },
     {
       "id": "3",
@@ -78,7 +82,8 @@
       "prev": "2",
       "next": "4",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 20
     },
     {
       "id": "4",
@@ -94,7 +99,8 @@
       "prev": "3",
       "next": "5",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 25
     },
     {
       "id": "5",
@@ -110,7 +116,8 @@
       "prev": "4",
       "next": "6",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 25
     },
     {
       "id": "6",
@@ -126,7 +133,8 @@
       "prev": "5",
       "next": "7",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 20
     },
     {
       "id": "7",
@@ -142,7 +150,8 @@
       "prev": "6",
       "next": "8",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "8",
@@ -158,7 +167,8 @@
       "prev": "7",
       "next": "9",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "9",
@@ -174,7 +184,8 @@
       "prev": "8",
       "next": "10",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "10",
@@ -190,7 +201,8 @@
       "prev": "9",
       "next": "11",
       "codeBlockCount": 0,
-      "hasQuiz": false
+      "hasQuiz": false,
+      "estimatedMinutes": 30
     },
     {
       "id": "11",
@@ -206,7 +218,8 @@
       "prev": "10",
       "next": "12",
       "codeBlockCount": 0,
-      "hasQuiz": false
+      "hasQuiz": false,
+      "estimatedMinutes": 30
     },
     {
       "id": "12",
@@ -222,7 +235,8 @@
       "prev": "11",
       "next": "review-s2",
       "codeBlockCount": 0,
-      "hasQuiz": false
+      "hasQuiz": false,
+      "estimatedMinutes": 35
     },
     {
       "id": "review-s2",
@@ -239,7 +253,8 @@
       "prev": "12",
       "next": "13",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 15
     },
     {
       "id": "13",
@@ -255,7 +270,8 @@
       "prev": "review-s2",
       "next": "14",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "14",
@@ -269,9 +285,27 @@
         "el": "Μηχανισμος Self-Attention"
       },
       "prev": "13",
+      "next": "14b",
+      "codeBlockCount": 4,
+      "hasQuiz": true,
+      "estimatedMinutes": 40
+    },
+    {
+      "id": "14b",
+      "number": 14.5,
+      "stage": 3,
+      "stageName": "Attention",
+      "isGenAI": false,
+      "title": {
+        "en": "Visualizing Attention: Interactive Heatmap Explorer",
+        "ro": "Vizualizarea Atenției: Explorer Interactiv de Heatmap",
+        "el": "Οπτικοποίηση Προσοχής: Διαδραστικός Εξερευνητής Θερμικού Χάρτη"
+      },
+      "prev": "14",
       "next": "15",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "15",
@@ -284,10 +318,11 @@
         "ro": "Atenția proprie cauzală (mascată)",
         "el": "Αιτιακη (Μασκαρισμενη) Self-Attention"
       },
-      "prev": "14",
+      "prev": "14b",
       "next": "16",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "16",
@@ -303,7 +338,8 @@
       "prev": "15",
       "next": "17",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "17",
@@ -319,7 +355,8 @@
       "prev": "16",
       "next": "18",
       "codeBlockCount": 3,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "18",
@@ -335,7 +372,8 @@
       "prev": "17",
       "next": "19",
       "codeBlockCount": 3,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "19",
@@ -351,7 +389,8 @@
       "prev": "18",
       "next": "20",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "20",
@@ -367,7 +406,8 @@
       "prev": "19",
       "next": "21",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "21",
@@ -383,7 +423,8 @@
       "prev": "20",
       "next": "22",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 30
     },
     {
       "id": "22",
@@ -399,7 +440,8 @@
       "prev": "21",
       "next": "23",
       "codeBlockCount": 3,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "23",
@@ -415,7 +457,8 @@
       "prev": "22",
       "next": "24",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "24",
@@ -431,7 +474,8 @@
       "prev": "23",
       "next": "24b",
       "codeBlockCount": 3,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "24b",
@@ -447,7 +491,8 @@
       "prev": "24",
       "next": "review-s4",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "review-s4",
@@ -464,7 +509,8 @@
       "prev": "24b",
       "next": "25",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 15
     },
     {
       "id": "25",
@@ -480,7 +526,8 @@
       "prev": "review-s4",
       "next": "26",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "26",
@@ -496,7 +543,8 @@
       "prev": "25",
       "next": "27",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "27",
@@ -512,7 +560,8 @@
       "prev": "26",
       "next": "28",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "28",
@@ -528,7 +577,8 @@
       "prev": "27",
       "next": "29",
       "codeBlockCount": 5,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "29",
@@ -544,7 +594,8 @@
       "prev": "28",
       "next": "30",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "30",
@@ -560,7 +611,8 @@
       "prev": "29",
       "next": "31",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "31",
@@ -576,7 +628,8 @@
       "prev": "30",
       "next": "32",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "32",
@@ -592,7 +645,8 @@
       "prev": "31",
       "next": "32b",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 50
     },
     {
       "id": "32b",
@@ -608,7 +662,8 @@
       "prev": "32",
       "next": "33",
       "codeBlockCount": 7,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "33",
@@ -624,7 +679,8 @@
       "prev": "32b",
       "next": "34",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "34",
@@ -640,7 +696,8 @@
       "prev": "33",
       "next": "35",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "35",
@@ -656,7 +713,8 @@
       "prev": "34",
       "next": "36",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "36",
@@ -672,7 +730,8 @@
       "prev": "35",
       "next": "37",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "37",
@@ -688,7 +747,8 @@
       "prev": "36",
       "next": "38",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "38",
@@ -704,7 +764,8 @@
       "prev": "37",
       "next": "39",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "39",
@@ -720,7 +781,8 @@
       "prev": "38",
       "next": "40",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "40",
@@ -736,7 +798,8 @@
       "prev": "39",
       "next": "41",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "41",
@@ -752,7 +815,8 @@
       "prev": "40",
       "next": "42",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "42",
@@ -768,7 +832,8 @@
       "prev": "41",
       "next": "43",
       "codeBlockCount": 4,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "43",
@@ -784,7 +849,8 @@
       "prev": "42",
       "next": "44",
       "codeBlockCount": 6,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 50
     },
     {
       "id": "44",
@@ -800,7 +866,8 @@
       "prev": "43",
       "next": "45",
       "codeBlockCount": 2,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "45",
@@ -816,7 +883,8 @@
       "prev": "44",
       "next": "46",
       "codeBlockCount": 3,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 40
     },
     {
       "id": "46",
@@ -832,7 +900,8 @@
       "prev": "45",
       "next": "47",
       "codeBlockCount": 2,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "47",
@@ -848,7 +917,8 @@
       "prev": "46",
       "next": "48",
       "codeBlockCount": 0,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 30
     },
     {
       "id": "48",
@@ -864,7 +934,8 @@
       "prev": "47",
       "next": "49",
       "codeBlockCount": 1,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 25
     },
     {
       "id": "49",
@@ -880,7 +951,8 @@
       "prev": "48",
       "next": "50",
       "codeBlockCount": 2,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "50",
@@ -896,7 +968,8 @@
       "prev": "49",
       "next": "51",
       "codeBlockCount": 3,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "51",
@@ -912,7 +985,8 @@
       "prev": "50",
       "next": "genai-0",
       "codeBlockCount": 2,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 45
     },
     {
       "id": "genai-0",
@@ -928,7 +1002,8 @@
       "prev": "51",
       "next": "genai-1",
       "codeBlockCount": 6,
-      "hasQuiz": true
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     },
     {
       "id": "genai-1",
@@ -944,7 +1019,8 @@
       "prev": "genai-0",
       "next": "genai-2",
       "codeBlockCount": 17,
-      "hasQuiz": false
+      "hasQuiz": false,
+      "estimatedMinutes": 50
     },
     {
       "id": "genai-2",
@@ -960,7 +1036,8 @@
       "prev": "genai-1",
       "next": "genai-3",
       "codeBlockCount": 18,
-      "hasQuiz": false
+      "hasQuiz": false,
+      "estimatedMinutes": 50
     },
     {
       "id": "genai-3",
@@ -976,7 +1053,8 @@
       "prev": "genai-2",
       "next": "genai-4",
       "codeBlockCount": 17,
-      "hasQuiz": false
+      "hasQuiz": false,
+      "estimatedMinutes": 50
     },
     {
       "id": "genai-4",
@@ -992,7 +1070,8 @@
       "prev": "genai-3",
       "next": "genai-5",
       "codeBlockCount": 17,
-      "hasQuiz": false
+      "hasQuiz": false,
+      "estimatedMinutes": 50
     },
     {
       "id": "genai-5",
@@ -1006,12 +1085,81 @@
         "el": "Διάλεξη GenAI 5: Κατασκευή ενός SaaS OCR & Νοημοσύνης Εγγράφων"
       },
       "prev": "genai-4",
-      "next": "home",
+      "next": "52",
       "codeBlockCount": 18,
-      "hasQuiz": false
+      "hasQuiz": false,
+      "estimatedMinutes": 50
+    },
+    {
+      "id": "52",
+      "number": 52,
+      "stage": 9,
+      "stageName": "Advanced Topics",
+      "isGenAI": false,
+      "title": {
+        "en": "LLM Security & Safety",
+        "ro": "Securitatea și Siguranța LLM",
+        "el": "Ασφάλεια & Προστασία LLM"
+      },
+      "prev": "genai-5",
+      "next": "53",
+      "codeBlockCount": 4,
+      "hasQuiz": true,
+      "estimatedMinutes": 40
+    },
+    {
+      "id": "53",
+      "number": 53,
+      "stage": 9,
+      "stageName": "Advanced Topics",
+      "isGenAI": false,
+      "title": {
+        "en": "Reasoning Architectures & AI Agents",
+        "ro": "Arhitecturi de Raționament & Agenți AI",
+        "el": "Αρχιτεκτονικές Συλλογισμού & Πράκτορες AI"
+      },
+      "prev": "52",
+      "next": "54",
+      "codeBlockCount": 5,
+      "hasQuiz": true,
+      "estimatedMinutes": 45
+    },
+    {
+      "id": "54",
+      "number": 54,
+      "stage": 9,
+      "stageName": "Advanced Topics",
+      "isGenAI": false,
+      "title": {
+        "en": "Multimodal Models: Beyond Text",
+        "ro": "Modele Multimodale: Dincolo de Text",
+        "el": "Πολυτροπικά Μοντέλα: Πέρα από το Κείμενο"
+      },
+      "prev": "53",
+      "next": "55",
+      "codeBlockCount": 4,
+      "hasQuiz": true,
+      "estimatedMinutes": 40
+    },
+    {
+      "id": "55",
+      "number": 55,
+      "stage": 9,
+      "stageName": "Advanced Topics",
+      "isGenAI": false,
+      "title": {
+        "en": "LLM Observability & Production Monitoring",
+        "ro": "Observabilitate LLM & Monitorizare în Producție",
+        "el": "Παρατηρησιμότητα LLM & Παρακολούθηση Παραγωγής"
+      },
+      "prev": "54",
+      "next": "home",
+      "codeBlockCount": 4,
+      "hasQuiz": true,
+      "estimatedMinutes": 35
     }
   ],
-  "totalLectures": 61,
-  "totalCodeBlocks": 208,
-  "totalQuizzes": 52
+  "totalLectures": 66,
+  "totalCodeBlocks": 229,
+  "totalQuizzes": 57
 }

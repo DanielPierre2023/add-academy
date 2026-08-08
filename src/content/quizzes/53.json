@@ -1,0 +1,213 @@
+{
+  "lectureId": "53",
+  "en": {
+    "id": "quiz-53-en",
+    "questions": [
+      {
+        "index": 0,
+        "text": "What is the main benefit of chain-of-thought (CoT) prompting?",
+        "options": [
+          "It reduces the number of tokens the model generates",
+          "It encourages the model to break down complex problems into intermediate reasoning steps before arriving at an answer",
+          "It allows the model to access external databases during inference",
+          "It compresses the model weights for faster execution"
+        ],
+        "correct": [1],
+        "explanation": "Chain-of-thought prompting improves reasoning by guiding the model to produce intermediate steps, making it more likely to arrive at correct answers for complex tasks like math, logic, and multi-step problems.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "How does Tree-of-Thought (ToT) reasoning extend chain-of-thought prompting?",
+        "options": [
+          "It replaces text reasoning with image-based reasoning",
+          "It limits the model to a single linear reasoning path to avoid confusion",
+          "It explores multiple reasoning branches in parallel and evaluates each path before selecting the best one",
+          "It removes the need for any prompting by using a specialized architecture"
+        ],
+        "correct": [2],
+        "explanation": "Tree-of-Thought extends chain-of-thought by allowing the model to explore multiple reasoning paths simultaneously, evaluate the promise of each branch, and backtrack when a path is unproductive, similar to how humans consider multiple approaches to a problem.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "What characterizes the ReAct (Reasoning + Acting) pattern for AI agents?",
+        "options": [
+          "The agent only reasons internally and never takes external actions",
+          "The agent alternates between reasoning about the situation and taking actions such as searching or computing, using observations to inform the next step",
+          "The agent reacts to stimuli without any reasoning or planning",
+          "The agent delegates all tasks to other agents without performing any reasoning"
+        ],
+        "correct": [1],
+        "explanation": "ReAct interleaves reasoning traces with action steps. The agent thinks about what it knows and what it needs, takes an action (like a web search or tool call), observes the result, and then reasons about the next step, creating a thought-action-observation loop.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Which of the following are key components of function calling (tool use) in LLMs? Select all that apply.",
+        "options": [
+          "The model generates a structured call with function name and arguments based on user intent",
+          "The model directly executes code on the server without any intermediary",
+          "A schema or definition of available tools is provided to the model as part of its context",
+          "The application layer executes the function and returns results to the model for further processing"
+        ],
+        "correct": [0, 2, 3],
+        "explanation": "Function calling involves three key components: providing tool definitions/schemas to the model, the model generating structured calls (function name + arguments) based on user intent, and the application executing the function and returning results. The model itself does not execute code directly.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "What is a primary advantage of multi-agent systems over a single-agent approach?",
+        "options": [
+          "They always use fewer tokens than single agents",
+          "They allow specialized agents to handle different subtasks, enabling complex workflows through collaboration and division of labor",
+          "They eliminate the need for any orchestration or coordination logic",
+          "They guarantee that every task is completed without errors"
+        ],
+        "correct": [1],
+        "explanation": "Multi-agent systems excel at complex tasks by assigning specialized roles to different agents (e.g., a planner, a coder, a reviewer). This division of labor allows each agent to focus on its strength, but it does require orchestration logic and does not guarantee error-free results.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ro": {
+    "id": "quiz-53-ro",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Care este principalul beneficiu al promptingului chain-of-thought (CoT)?",
+        "options": [
+          "Reduce numarul de tokeni pe care modelul ii genereaza",
+          "Incurajeaza modelul sa descompuna problemele complexe in pasi intermediari de rationament inainte de a ajunge la un raspuns",
+          "Permite modelului sa acceseze baze de date externe in timpul inferentei",
+          "Comprima ponderile modelului pentru o executie mai rapida"
+        ],
+        "correct": [1],
+        "explanation": "Promptingul chain-of-thought imbunatateste rationamentul ghidand modelul sa produca pasi intermediari, crescand probabilitatea de a ajunge la raspunsuri corecte pentru sarcini complexe precum matematica, logica si problemele cu mai multi pasi.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Cum extinde rationamentul Tree-of-Thought (ToT) promptingul chain-of-thought?",
+        "options": [
+          "Inlocuieste rationamentul textual cu rationament bazat pe imagini",
+          "Limiteaza modelul la o singura cale de rationament liniara pentru a evita confuzia",
+          "Exploreaza mai multe ramuri de rationament in paralel si evalueaza fiecare cale inainte de a o selecta pe cea mai buna",
+          "Elimina nevoia oricarui prompting prin utilizarea unei arhitecturi specializate"
+        ],
+        "correct": [2],
+        "explanation": "Tree-of-Thought extinde chain-of-thought permitand modelului sa exploreze mai multe cai de rationament simultan, sa evalueze promisiunea fiecarei ramuri si sa revina cand o cale este neproductiva, similar modului in care oamenii iau in considerare mai multe abordari ale unei probleme.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ce caracterizeaza modelul ReAct (Reasoning + Acting) pentru agentii AI?",
+        "options": [
+          "Agentul rationalizeaza doar intern si nu intreprinde niciodata actiuni externe",
+          "Agentul alterneaza intre rationament despre situatie si intreprinderea de actiuni precum cautarea sau calculul, folosind observatiile pentru a informa pasul urmator",
+          "Agentul reactioneaza la stimuli fara niciun rationament sau planificare",
+          "Agentul deleaga toate sarcinile altor agenti fara a efectua vreun rationament"
+        ],
+        "correct": [1],
+        "explanation": "ReAct intercaleaza urmele de rationament cu pasii de actiune. Agentul gandeste la ce stie si ce are nevoie, intreprinde o actiune (precum o cautare web sau un apel de instrument), observa rezultatul si apoi rationeaza despre pasul urmator, creand o bucla gandire-actiune-observatie.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Care dintre urmatoarele sunt componente cheie ale apelarii de functii (utilizarea instrumentelor) in LLM-uri? Selectati toate variantele corecte.",
+        "options": [
+          "Modelul genereaza un apel structurat cu numele functiei si argumentele bazate pe intentia utilizatorului",
+          "Modelul executa direct cod pe server fara niciun intermediar",
+          "O schema sau definitie a instrumentelor disponibile este furnizata modelului ca parte a contextului sau",
+          "Stratul aplicatiei executa functia si returneaza rezultatele modelului pentru procesare ulterioara"
+        ],
+        "correct": [0, 2, 3],
+        "explanation": "Apelarea de functii implica trei componente cheie: furnizarea definitiilor/schemelor instrumentelor modelului, generarea de catre model a apelurilor structurate (nume functie + argumente) bazate pe intentia utilizatorului, si executarea functiei de catre aplicatie cu returnarea rezultatelor. Modelul in sine nu executa cod direct.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Care este un avantaj principal al sistemelor multi-agent fata de abordarea cu un singur agent?",
+        "options": [
+          "Folosesc intotdeauna mai putini tokeni decat agentii singuri",
+          "Permit agentilor specializati sa gestioneze diferite subsarcini, permitand fluxuri de lucru complexe prin colaborare si diviziunea muncii",
+          "Elimina nevoia oricarei logici de orchestrare sau coordonare",
+          "Garanteaza ca fiecare sarcina este finalizata fara erori"
+        ],
+        "correct": [1],
+        "explanation": "Sistemele multi-agent exceleaza la sarcini complexe atribuind roluri specializate diferitilor agenti (de exemplu, un planificator, un programator, un recenzent). Aceasta diviziune a muncii permite fiecarui agent sa se concentreze pe punctul sau forte, dar necesita logica de orchestrare si nu garanteaza rezultate fara erori.",
+        "isMulti": false
+      }
+    ]
+  },
+  "el": {
+    "id": "quiz-53-el",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Poio einai to kyrio pleonektima tis technkis chain-of-thought (CoT) prompting?",
+        "options": [
+          "Meionei ton arithmo ton tokens pou paragei to montelo",
+          "Encoyrazzei to montelo na analyei polyploka provlimata se endiamesa vimata syllogismoy prin na ftasei se mia apantisi",
+          "Epitrepei sto montelo na echei prosvasi se exoterrikes vaseis dedomenon kata tin exagogi symperasmaton",
+          "Sympiezei ta vari tou montelou gia tachiteri ektelesi"
+        ],
+        "correct": [1],
+        "explanation": "To chain-of-thought prompting veltionei ton syllogismo kathodigointas to montelo na paragei endiamesa vimata, afxanointas tin pithanotita na ftasei se sostes apantiseis gia polyplokes ergasies opos mathimatika, logiki kai provlimata pollaplonn vimatoin.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Pos epekteinei o syllogismos Tree-of-Thought (ToT) to chain-of-thought prompting?",
+        "options": [
+          "Antikathista ton syllogismo keimenou me syllogismo vasismeno se eikones",
+          "Periorizzei to montelo se mia monadiki grammiki poreia syllogismoy gia na apofygei ti sygchysi",
+          "Exereyna pollapla kladia syllogismoy parallila kai axiologei kathe poreia prin epilexei tin kalyteri",
+          "Exaleifei tin anagki gia opoiodipote prompting chrisimopoiointas mia exeidikefmeni architektoniki"
+        ],
+        "correct": [2],
+        "explanation": "To Tree-of-Thought epekteinei to chain-of-thought epitrepointas sto montelo na exereyna pollapla monopatia syllogismoy taytochrinna, na axiologei tin prospatheia kathe kladioy kai na epistrefei otan mia poreia einai aparagogiki, omoioa me ton tropo pou oi anthropoi exetazoun pollapla proseggiseis enos provlimatos.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Ti charaktirizei to montelo ReAct (Reasoning + Acting) gia tous praktortes AI?",
+        "options": [
+          "O praktoras syllogizetai mono esoterrika kai den proverinnei pote se exoterikes enerdgeies",
+          "O praktoras enalassetai metaxy syllogismoy gia tin katastasi kai lipsis energeion opos anazitisi i ypologismos, chrisimopoiointas paratiriiseis gia na enimerosei to epomeno vima",
+          "O praktoras antidra sta erethrismata choris kanena syllogismo i schediasmo",
+          "O praktoras anatheti oles tis ergasies se allous praktortes choris na ektelei kanena syllogismo"
+        ],
+        "correct": [1],
+        "explanation": "To ReAct enallassei ichni syllogismoy me vimata enerdgeias. O praktoras skeftetai ti gnoirizei kai ti chreiazzetai, provernei se mia energeia (opos anazitisi sto diadiktyo i klisi ergaleiou), paratiirei to apotelesma kai meta syllogizetai gia to epomeno vima, dimiourgointas enan vrycho skepsis-energeias-paratirissis.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Poia apo ta parakatoi einai vasika stoicheia tis klisis synartiseon (chrisi ergaleion) sta LLM? Epilexte oles tis sostes apantiseis.",
+        "options": [
+          "To montelo paragei mia domimeni klisi me onoma synartisis kai orismata vasismena stin prothesi tou christi",
+          "To montelo ektelei apeftheias kodika ston server choris kanena endiameso",
+          "Ena schima i orismos ton diathesimon ergaleion parechetai sto montelo os meros tou plaisiou tou",
+          "To epipedo efarmogis ektelei ti synartisi kai epistrefei ta apotelesmata sto montelo gia peraiteri epexergasia"
+        ],
+        "correct": [0, 2, 3],
+        "explanation": "I klisi synartiseon perilamvanei tria vasika stoicheia: parohi orismon/schimaton ergaleion sto montelo, paragogi domimenon kliseon apo to montelo (onoma synartisis + orismata) vasismeni stin prothesi tou christi, kai ektelesi tis synartisis apo tin efarmogi me epistrofi apotelesmaton. To montelo den ektelei apeftheias kodika.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Poio einai ena kyrio pleonektima ton systimaton pollapolon praktoron se sygkrisi me tin prosengisi enos monadikoy praktora?",
+        "options": [
+          "Chrisimopoioun panta ligottera tokens apo tous monadikous praktortes",
+          "Epitrepoun se exeidikeymmenous praktortes na diacheirizontai diaforetikes ypoergasies, epitrepontas polyplokes roes ergasias meso synergasias kai katamerismoy ergasias",
+          "Exaleifoun tin anagki gia opoiadipote logiki orchestrasias i syntonismoy",
+          "Eggiountai oti kathe ergasia oloklironetai choris sfalmata"
+        ],
+        "correct": [1],
+        "explanation": "Ta systimata pollapolon praktoron ypereechoun se polyplokes ergasies anathetointas exeidikeymmenous rolous se diaforetikous praktortes (p.ch., enas schediastis, enas programmatistis, enas axiologitis). Aftos o katamerismos ergasias epitrepei se kathe praktora na epikentrothei sto dynato tou simeio, alla apaotei logiki orchestrasias kai den eggatai apotelesmata choris sfalmata.",
+        "isMulti": false
+      }
+    ]
+  }
+}
