@@ -10,71 +10,78 @@ interface ADDLogoProps {
 }
 
 const SIZES = {
-  sm: { mark: 'h-6', full: 'h-6', text: 'text-sm' },
-  md: { mark: 'h-8', full: 'h-8', text: 'text-base' },
-  lg: { mark: 'h-10', full: 'h-10', text: 'text-xl' },
+  sm: { imgH: 32, imgW: 68, text: 'text-sm', subtitle: 'text-[8px]' },
+  md: { imgH: 40, imgW: 86, text: 'text-base', subtitle: 'text-[9px]' },
+  lg: { imgH: 56, imgW: 120, text: 'text-xl', subtitle: 'text-[10px]' },
 };
 
 /**
  * ADD Individual Solutions logo component.
  *
- * - `mark`    — just the ADD pill (for favicons, compact spaces)
- * - `full`    — ADD pill + "Individual Solutions" text
- * - `academy` — ADD pill + "Academy" branded text (default)
+ * Uses the actual company logo image from /add-logo.jpg.
+ *
+ * - `mark`    — just the logo image (for compact spaces)
+ * - `full`    — logo image at full width
+ * - `academy` — logo image + "Academy" branded text (default)
  */
 export function ADDLogo({ variant = 'academy', className, size = 'md' }: ADDLogoProps) {
   const s = SIZES[size];
 
   if (variant === 'mark') {
     return (
-      <span
-        className={cn(
-          'inline-flex items-center justify-center rounded-lg bg-[#E8453C] px-2 py-0.5 font-heading font-black tracking-wide text-white',
-          s.text,
-          className
-        )}
-      >
-        ADD
-      </span>
+      <Image
+        src="/add-logo.jpg"
+        alt="ADD Individual Solutions"
+        width={s.imgW}
+        height={s.imgH}
+        className={cn('rounded-md object-contain', className)}
+        priority
+      />
     );
   }
 
-  return (
-    <span className={cn('inline-flex items-center gap-2', className)}>
-      {/* ADD pill mark */}
-      <span
-        className={cn(
-          'inline-flex items-center justify-center rounded-lg bg-[#E8453C] px-2 py-0.5 font-heading font-black tracking-wide text-white',
-          s.text
-        )}
-      >
-        ADD
-      </span>
+  if (variant === 'full') {
+    return (
+      <Image
+        src="/add-logo.jpg"
+        alt="ADD Individual Solutions — Our Vision Your Way"
+        width={s.imgW * 2}
+        height={s.imgH * 2}
+        className={cn('object-contain', className)}
+        priority
+      />
+    );
+  }
 
-      {variant === 'academy' ? (
-        <span className="flex flex-col leading-none">
-          <span
-            className={cn(
-              'font-heading font-bold tracking-wide text-secondary',
-              size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-xl' : 'text-base'
-            )}
-          >
-            Academy
-          </span>
-          <span className="text-[9px] font-mono uppercase tracking-widest text-current opacity-50">
-            by ADD Individual Solutions
-          </span>
+  // academy variant: logo + "Academy" text
+  return (
+    <span className={cn('inline-flex items-center gap-3', className)}>
+      <Image
+        src="/add-logo.jpg"
+        alt="ADD Individual Solutions"
+        width={s.imgW}
+        height={s.imgH}
+        className="rounded-md object-contain"
+        priority
+      />
+      <span className="flex flex-col leading-none">
+        <span
+          className={cn(
+            'font-heading font-bold tracking-wide text-secondary',
+            s.text
+          )}
+        >
+          Academy
         </span>
-      ) : (
-        <span className="flex flex-col leading-tight">
-          <span className={cn('font-heading font-bold tracking-tight', s.text)}>
-            Individual
-          </span>
-          <span className={cn('font-heading font-bold tracking-tight', s.text)}>
-            Solutions
-          </span>
+        <span
+          className={cn(
+            'font-mono uppercase tracking-widest text-current opacity-50',
+            s.subtitle
+          )}
+        >
+          by ADD Individual Solutions
         </span>
-      )}
+      </span>
     </span>
   );
 }
