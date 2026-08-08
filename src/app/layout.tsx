@@ -3,7 +3,7 @@ import { Manrope, Fraunces } from 'next/font/google';
 import { Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/layout/theme-provider';
-import { AuthProvider } from '@/components/auth/auth-provider';
+import { AuthProvider } from '@/lib/auth/auth-context';
 import { XPToastContainer } from '@/components/gamification/xp-toast';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 
@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     'LLM', 'large language model', 'machine learning', 'AI course',
     'transformers', 'attention mechanism', 'tokenization', 'fine-tuning',
     'PyTorch', 'deep learning', 'NLP', 'GenAI', 'build LLM from scratch',
+    'AgenticAI', 'AI agents', 'ADD Individual Solutions',
   ],
   authors: [{ name: 'ADD Individual Solutions' }],
   creator: 'ADD Individual Solutions',
@@ -76,7 +77,11 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
     apple: '/apple-touch-icon.png',
   },
   manifest: '/manifest.json',

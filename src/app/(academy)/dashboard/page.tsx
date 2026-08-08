@@ -1,305 +1,240 @@
 'use client';
 
-import { useAcademyStore } from '@/lib/store/academy-store';
-import { t } from '@/lib/i18n';
-import { getLectureIndex, getLecturesByStage, getLectureTitle } from '@/lib/lectures';
-import { STAGES, ACHIEVEMENTS, xpForLevel } from '@/types';
-import { cn } from '@/lib/utils';
-import { formatTime } from '@/lib/utils';
+import { useMemo } from 'react';
+import Link from 'next/link';
 import {
+  User,
+  CreditCard,
+  Calendar,
   BookOpen,
-  Clock,
   Trophy,
   Flame,
-  CheckCircle2,
-  ChevronRight,
-  Zap,
+  Shield,
+  Building2,
+  ExternalLink,
+  Clock,
 } from 'lucide-react';
-import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import type { Language } from '@/types';
+import { useAuth } from '@/lib/auth/auth-context';
+import { useAcademyStore } from '@/lib/store/academy-store';
+import { SAAS_PRODUCTS, BILLING_CYCLE_MONTHS } from '@/lib/subscriptions/plans';
+import { cn } from '@/lib/utils';
 
 export default function DashboardPage() {
-  const language = useAcademyStore((s) => s.language) as Language;
-  const getCompletionPercentage = useAcademyStore((s) => s.getCompletionPercentage);
-  const progress = useAcademyStore((s) => s.progress);
-  const quizScores = useAcademyStore((s) => s.quizScores);
-  const getGamificationStats = useAcademyStore((s) => s.getGamificationStats);
-  const getXPProgress = useAcademyStore((s) => s.getXPProgress);
-  const unlockedAchievements = useAcademyStore((s) => s.unlockedAchievements);
-  const index = getLectureIndex();
+  const language = useAcademyStore((s) => s.language);
+  const { user, isOrgUser, isAdmin, effectiveTier, canAccessStage, canAccessProduct } = useAuth();
+  const { getGamificationStats, getLevel, getXPProgress, getCompletionPercentage } = useAcademyStore();
 
-  const completionPct = getCompletionPercentage();
   const stats = getGamificationStats();
+  const level = getLevel();
   const xpProgress = getXPProgress();
+  const completion = getCompletionPercentage();
 
-  // Total study time
-  const totalTime = Object.values(progress).reduce(
-    (sum, p) => sum + (p.timeSpent || 0),
-    0
-  );
+  const daysLeft = useMemo(() => {
+    if (!user?.subscription?.periodEnd) return null;
+    const diff = new Date(user.subscription.periodEnd).getTime() - Date.now();
+    return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+  }, [user?.subscription?.periodEnd]);
 
-  // Quiz average
-  const scoreValues = Object.values(quizScores);
-  const quizAvg =
-    scoreValues.length > 0
-      ? Math.round(scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length)
-      : 0;
-
-  // Recent activity (last 5 lectures by completedAt or timeSpent)
-  const recentActivity = Object.values(progress)
-    .filter((p) => p.timeSpent > 0)
-    .sort((a, b) => {
-      if (a.completedAt && b.completedAt)
-        return new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime();
-      if (a.completedAt) return -1;
-      if (b.completedAt) return 1;
-      return b.timeSpent - a.timeSpent;
-    })
-    .slice(0, 5);
-
-  const statCards = [
-    {
-      icon: BookOpen,
-      label: t('dash_progress', language),
-      value: `${Math.round(completionPct)}%`,
-      color: 'text-blue-500',
-      bg: 'bg-blue-500/10',
-      extra: <Progress value={completionPct} className="mt-2 h-2" />,
-    },
-    {
-      icon: Clock,
-      label: t('dash_time', language),
-      value: totalTime > 0 ? formatTime(totalTime) : '0m',
-      color: 'text-purple-500',
-      bg: 'bg-purple-500/10',
-    },
-    {
-      icon: Trophy,
-      label: t('dash_quizzes', language),
-      value: scoreValues.length > 0 ? `${quizAvg}%` : '--',
-      color: 'text-amber-500',
-      bg: 'bg-amber-500/10',
-    },
-    {
-      icon: Flame,
-      label: t('dash_streak', language),
-      value: `${stats.streak} ${language === 'ro' ? 'zile' : language === 'el' ? 'μέρες' : 'days'}`,
-      color: 'text-red-500',
-      bg: 'bg-red-500/10',
-    },
-  ];
+  if (!user) {
+    return (
+      <div className="py-12 text-center">
+        <User className="mx-auto h-12 w-12 text-muted-foreground" />
+        <h2 className="mt-4 font-heading text-xl font-bold text-foreground">
+          {language === 'ro' ? 'Autentifică-te pentru a vedea panoul de control' : 'Sign in to view your dashboard'}
+        </h2>
+        <Link
+          href="/login"
+          className="mt-4 inline-block rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground"
+        >
+          {language === 'ro' ? 'Autentificare' : 'Sign in'}
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-8 pb-16">
-      {/* Title */}
-      <h1 className="text-3xl font-bold">{t('dash_title', language)}</h1>
-
-      {/* XP & Level Card */}
-      <Card className="border-secondary/30 bg-gradient-to-r from-primary/5 to-secondary/5">
-        <CardContent className="py-6">
-          <div className="flex items-center gap-4 mb-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-secondary-foreground font-bold text-lg">
-              {stats.level}
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium flex items-center gap-1.5">
-                  <Zap className="h-4 w-4 text-secondary" />
-                  Level {stats.level}
+    <div className="py-6 space-y-8">
+      {/* Header */}
+      <div className="flex items-center gap-4">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+          {user.avatarUrl ? (
+            <img src={user.avatarUrl} alt="" className="h-16 w-16 rounded-full object-cover" />
+          ) : (
+            <User className="h-8 w-8" />
+          )}
+        </div>
+        <div>
+          <h1 className="font-heading text-2xl font-bold text-foreground">
+            {user.displayName || user.email.split('@')[0]}
+          </h1>
+          <p className="text-sm text-muted-foreground">{user.email}</p>
+          {isOrgUser && (
+            <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-secondary/10 px-2 py-0.5 text-xs font-medium text-secondary">
+              <Building2 className="h-3 w-3" />
+              {language === 'ro' ? 'Cont de organizație' : 'Organization account'}
+              {isAdmin && (
+                <span className="ml-1 rounded bg-secondary px-1 text-[9px] text-secondary-foreground">
+                  Admin
                 </span>
-                <span className="text-xs text-muted-foreground tabular-nums">
-                  {stats.xp} / {xpForLevel(stats.level + 1)} XP
-                </span>
-              </div>
-              <div className="h-3 w-full overflow-hidden rounded-full bg-muted">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-secondary to-secondary/80 transition-all duration-500"
-                  style={{ width: `${xpProgress.percentage}%` }}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="flex gap-6 text-xs text-muted-foreground">
-            <span>{stats.lecturesCompleted} lectures completed</span>
-            <span>{stats.codeBlocksRun} code blocks run</span>
-            <span>{stats.quizzesAttempted} quizzes attempted</span>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Stat Cards */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {statCards.map((card) => (
-          <Card key={card.label}>
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-3">
-                <div
-                  className={cn(
-                    'flex h-10 w-10 items-center justify-center rounded-lg',
-                    card.bg
-                  )}
-                >
-                  <card.icon className={cn('h-5 w-5', card.color)} />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">{card.label}</p>
-                  <p className="text-2xl font-bold">{card.value}</p>
-                </div>
-              </div>
-              {card.extra}
-            </CardContent>
-          </Card>
-        ))}
+              )}
+            </span>
+          )}
+        </div>
       </div>
 
-      {/* Achievements */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            🏅 {t('dash_achievements', language)}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {ACHIEVEMENTS.map((achievement) => {
-              const unlocked = unlockedAchievements.includes(achievement.id);
-              return (
-                <div
-                  key={achievement.id}
-                  className={cn(
-                    'flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-all',
-                    unlocked
-                      ? 'border-secondary/40 bg-secondary/5'
-                      : 'border-border opacity-40 grayscale'
-                  )}
-                >
-                  <span className="text-2xl">{achievement.icon}</span>
-                  <span className="text-xs font-medium leading-tight">
-                    {achievement.name[language]}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground leading-tight">
-                    {achievement.description[language]}
-                  </span>
-                  {unlocked && (
-                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
-                      ✓
-                    </Badge>
-                  )}
-                </div>
-              );
-            })}
+      {/* Stats cards */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-xl border border-border bg-card p-4">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Trophy className="h-4 w-4 text-secondary" />
+            {language === 'ro' ? 'Nivel' : 'Level'}
           </div>
-        </CardContent>
-      </Card>
+          <div className="mt-2 text-2xl font-bold text-foreground">{level}</div>
+          <div className="mt-1 h-1.5 rounded-full bg-muted overflow-hidden">
+            <div
+              className="h-full rounded-full bg-secondary transition-all"
+              style={{ width: `${xpProgress.percentage}%` }}
+            />
+          </div>
+          <p className="mt-1 text-xs text-muted-foreground">{stats.xp} XP</p>
+        </div>
 
-      {/* Stage Progress */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">
-            {t('course_progress', language)}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {STAGES.map((stage) => {
-            const stageLectures = getLecturesByStage(stage.number);
-            const completedCount = stageLectures.filter(
-              (l) => progress[l.id]?.completed
-            ).length;
-            const pct =
-              stageLectures.length > 0
-                ? (completedCount / stageLectures.length) * 100
-                : 0;
+        <div className="rounded-xl border border-border bg-card p-4">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Flame className="h-4 w-4 text-orange-500" />
+            {language === 'ro' ? 'Serie' : 'Streak'}
+          </div>
+          <div className="mt-2 text-2xl font-bold text-foreground">{stats.streak} {language === 'ro' ? 'zile' : 'days'}</div>
+        </div>
 
-            return (
-              <div key={stage.number}>
-                <div className="mb-1 flex items-center justify-between text-sm">
-                  <span className="flex items-center gap-2">
-                    <span>{stage.icon}</span>
-                    <span className="font-medium">{stage.name[language]}</span>
-                  </span>
-                  <span className="text-muted-foreground">
-                    {completedCount}/{stageLectures.length}
+        <div className="rounded-xl border border-border bg-card p-4">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <BookOpen className="h-4 w-4 text-primary" />
+            {language === 'ro' ? 'Progres' : 'Progress'}
+          </div>
+          <div className="mt-2 text-2xl font-bold text-foreground">{completion}%</div>
+          <p className="mt-1 text-xs text-muted-foreground">
+            {stats.lecturesCompleted} / 49 {language === 'ro' ? 'lecții' : 'lectures'}
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-border bg-card p-4">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Shield className="h-4 w-4 text-green-500" />
+            {language === 'ro' ? 'Realizări' : 'Achievements'}
+          </div>
+          <div className="mt-2 text-2xl font-bold text-foreground">{stats.perfectQuizzes}</div>
+          <p className="mt-1 text-xs text-muted-foreground">
+            {language === 'ro' ? 'Quiz-uri perfecte' : 'Perfect quizzes'}
+          </p>
+        </div>
+      </div>
+
+      {/* Subscription section — hidden for org users */}
+      {!isOrgUser && (
+        <div className="rounded-xl border border-border bg-card p-6">
+          <h2 className="flex items-center gap-2 font-heading text-lg font-bold text-foreground">
+            <CreditCard className="h-5 w-5 text-primary" />
+            {language === 'ro' ? 'Abonament' : 'Subscription'}
+          </h2>
+
+          {user.subscription ? (
+            <div className="mt-4 space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary capitalize">
+                    {effectiveTier.replace('_', ' ')}
                   </span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
-                  <div
-                    className="h-full rounded-full transition-all duration-300"
-                    style={{
-                      width: `${pct}%`,
-                      backgroundColor: stage.color,
-                    }}
-                  />
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Calendar className="h-4 w-4" />
+                  {daysLeft !== null && (
+                    <span>
+                      {daysLeft} {language === 'ro' ? 'zile rămase' : 'days remaining'}
+                    </span>
+                  )}
                 </div>
               </div>
-            );
-          })}
-        </CardContent>
-      </Card>
 
-      {/* Recent Activity */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">
-            {t('dash_recent', language)}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {recentActivity.length === 0 ? (
-            <p className="py-8 text-center text-sm text-muted-foreground">
-              No activity yet. Start a lecture to track your progress!
-            </p>
-          ) : (
-            <div className="space-y-1">
-              {recentActivity.map((item, i) => {
-                const lecture = index.lectures.find(
-                  (l) => l.id === item.lectureId
-                );
-                return (
-                  <div key={item.lectureId}>
-                    {i > 0 && <Separator className="my-1" />}
-                    <Link
-                      href={`/lectures/${item.lectureId}`}
-                      className="flex items-center gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-muted/50"
+              {/* What's unlocked */}
+              <div>
+                <h4 className="text-sm font-medium text-foreground mb-2">
+                  {language === 'ro' ? 'Acces deblocat:' : 'Unlocked access:'}
+                </h4>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {[2, 3, 4, 5, 6].map((stage) => (
+                    <div
+                      key={stage}
+                      className={cn(
+                        'flex items-center gap-2 rounded-lg px-3 py-2 text-sm',
+                        canAccessStage(stage) ? 'bg-green-500/10 text-green-600' : 'bg-muted text-muted-foreground'
+                      )}
                     >
-                      <div
-                        className={cn(
-                          'flex h-8 w-8 items-center justify-center rounded-full',
-                          item.completed
-                            ? 'bg-emerald-100 dark:bg-emerald-900/30'
-                            : 'bg-muted'
-                        )}
-                      >
-                        {item.completed ? (
-                          <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                        ) : (
-                          <BookOpen className="h-4 w-4 text-muted-foreground" />
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="truncate text-sm font-medium">
-                          {lecture
-                            ? getLectureTitle(item.lectureId, language)
-                            : item.lectureId}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {formatTime(item.timeSpent)} spent
-                          {item.completedAt &&
-                            ` — completed ${new Date(item.completedAt).toLocaleDateString()}`}
-                        </p>
-                      </div>
-                      <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                    </Link>
-                  </div>
-                );
-              })}
+                      {canAccessStage(stage) ? '✓' : '🔒'} Stage {stage}
+                    </div>
+                  ))}
+                  {SAAS_PRODUCTS.map((p) => (
+                    <div
+                      key={p.id}
+                      className={cn(
+                        'flex items-center gap-2 rounded-lg px-3 py-2 text-sm',
+                        canAccessProduct(p.id) ? 'bg-green-500/10 text-green-600' : 'bg-muted text-muted-foreground'
+                      )}
+                    >
+                      {canAccessProduct(p.id) ? '✓' : '🔒'} {p.icon} {p.name}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <Link
+                href="/pricing"
+                className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+              >
+                {language === 'ro' ? 'Schimbă planul' : 'Change plan'}
+                <ExternalLink className="h-3 w-3" />
+              </Link>
+            </div>
+          ) : (
+            <div className="mt-4 space-y-3">
+              <p className="text-sm text-muted-foreground">
+                {language === 'ro'
+                  ? 'Ai acces gratuit la Etapele 0 și 1. Abonează-te pentru a debloca mai mult conținut.'
+                  : 'You have free access to Stages 0 & 1. Subscribe to unlock more content.'}
+              </p>
+              <Link
+                href="/pricing"
+                className="inline-flex items-center gap-1 rounded-lg bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors"
+              >
+                {language === 'ro' ? 'Vezi planurile' : 'View plans'}
+                <ExternalLink className="h-3 w-3" />
+              </Link>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      )}
+
+      {/* Organization admin section */}
+      {isAdmin && (
+        <div className="rounded-xl border border-secondary/30 bg-secondary/5 p-6">
+          <h2 className="flex items-center gap-2 font-heading text-lg font-bold text-foreground">
+            <Building2 className="h-5 w-5 text-secondary" />
+            {language === 'ro' ? 'Administrare organizație' : 'Organization Admin'}
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {language === 'ro'
+              ? 'Gestionează membrii organizației, coduri de invitare și setări.'
+              : 'Manage organization members, invite codes, and settings.'}
+          </p>
+          <Link
+            href="/admin"
+            className="mt-4 inline-flex items-center gap-1 rounded-lg bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors"
+          >
+            {language === 'ro' ? 'Panou de administrare' : 'Admin Panel'}
+            <ExternalLink className="h-3 w-3" />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

@@ -14,17 +14,16 @@ import {
   X,
   Star,
   Map,
-  Award,
-  Users,
-  BarChart3,
-  Bookmark,
-  CheckCheck,
+  LayoutDashboard,
+  CreditCard,
+  Shield,
 } from 'lucide-react';
 import type { Language } from '@/types';
 import { STAGES } from '@/types';
 import { t } from '@/lib/i18n';
 import { getLectureIndex, type LectureIndexEntry } from '@/lib/lectures';
 import { useAcademyStore } from '@/lib/store/academy-store';
+import { useAuth } from '@/lib/auth/auth-context';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
@@ -46,22 +45,21 @@ const STAGE_SECTIONS: Record<number, Record<string, string>> = {
   0: { en: 'GETTING STARTED', ro: 'INTRODUCERE', el: 'ΕΙΣΑΓΩΓΗ' },
   1: { en: 'STAGE 1: LLM FUNDAMENTALS', ro: 'ETAPA 1: FUNDAMENTELE LLM', el: 'ΣΤΑΔΙΟ 1: ΘΕΜΕΛΙΑ LLM' },
   2: { en: 'STAGE 2: TOKENIZATION & DATA', ro: 'ETAPA 2: DATE & TOKENIZARE', el: 'ΣΤΑΔΙΟ 2: TOKENIZATION' },
-  3: { en: 'STAGE 3: ATTENTION MECHANISM', ro: 'ETAPA 3: MECANISMUL ATENȚIEI', el: 'ΣΤΑΔΙΟ 3: ΜΗΧΑΝΙΣΜΟΣ ΠΡΟΣΟΧΗΣ' },
-  4: { en: 'STAGE 4: LLM ARCHITECTURE', ro: 'ETAPA 4: ARHITECTURA LLM', el: 'ΣΤΑΔΙΟ 4: ΑΡΧΙΤΕΚΤΟΝΙΚΗ LLM' },
-  5: { en: 'STAGE 5: PRETRAINING', ro: 'ETAPA 5: PRE-ANTRENARE', el: 'ΣΤΑΔΙΟ 5: ΠΡΟΕΚΠΑΙΔΕΥΣΗ' },
-  6: { en: 'STAGE 6: FINE-TUNING', ro: 'ETAPA 6: AJUSTARE FINĂ', el: 'ΣΤΑΔΙΟ 6: ΜΙΚΡΟΡΥΘΜΙΣΗ' },
-  7: { en: 'GENAI COURSE', ro: 'CURS DE IA GENERATIVĂ', el: 'ΜΑΘΗΜΑ GENAI' },
+  3: { en: 'STAGE 3: ATTENTION MECHANISM', ro: 'ETAPA 3: MECANISMUL DE ATENȚIE', el: 'ΣΤΑΔΙΟ 3: ΜΗΧΑΝΙΣΜΟΣ ΠΡΟΣΟΧΗΣ' },
+  4: { en: 'STAGE 4: TRANSFORMER ARCH.', ro: 'ETAPA 4: ARHITECTURA TRANSFORMER', el: 'ΣΤΑΔΙΟ 4: ΑΡΧΙΤΕΚΤΟΝΙΚΗ' },
+  5: { en: 'STAGE 5: PRETRAINING', ro: 'ETAPA 5: PRE-ANTRENAMENT', el: 'ΣΤΑΔΙΟ 5: ΠΡΟΕΚΠΑΙΔΕΥΣΗ' },
+  6: { en: 'STAGE 6: FINE-TUNING & DEPLOY', ro: 'ETAPA 6: AJUSTARE & DEPLOYMENT', el: 'ΣΤΑΔΙΟ 6: ΜΙΚΡΟΡΥΘΜΙΣΗ' },
+  7: { en: 'STAGE 7: GENAI SAAS', ro: 'ETAPA 7: GENAI SAAS', el: 'ΣΤΑΔΙΟ 7: GENAI SAAS' },
 };
 
 export function CourseSidebar() {
   const language = useAcademyStore((s) => s.language);
+  const { user, isAdmin, isOrgUser } = useAuth();
   const currentLecture = useAcademyStore((s) => s.currentLecture);
   const setCurrentLecture = useAcademyStore((s) => s.setCurrentLecture);
   const sidebarOpen = useAcademyStore((s) => s.sidebarOpen);
   const setSidebarOpen = useAcademyStore((s) => s.setSidebarOpen);
   const progress = useAcademyStore((s) => s.progress);
-  const bookmarks = useAcademyStore((s) => s.bookmarks);
-  const markCompleted = useAcademyStore((s) => s.markCompleted);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [courseMapOpen, setCourseMapOpen] = useState(true);
@@ -189,8 +187,8 @@ export function CourseSidebar() {
         {courseMapOpen && (
           <ScrollArea className="flex-1 overflow-y-auto">
             <div className="px-3 pb-4">
-              {/* Homepage link */}
-              <div className="mb-2">
+              {/* Navigation links */}
+              <div className="mb-3 space-y-0.5">
                 <Link
                   href="/"
                   onClick={() => setSidebarOpen(false)}
@@ -206,142 +204,42 @@ export function CourseSidebar() {
                     {language === 'ro' ? 'Pagina Cursului' : language === 'el' ? 'Σελίδα Μαθήματος' : 'Course Page'}
                   </span>
                 </Link>
-              </div>
 
-              {/* Certificate link */}
-              <div className="mb-1">
-                <Link
-                  href="/certificate"
-                  onClick={() => setSidebarOpen(false)}
-                  className={cn(
-                    'flex items-center gap-2 rounded-md px-2 py-1.5 text-xs transition-colors',
-                    'text-sidebar-foreground/70 hover:bg-sidebar-accent'
-                  )}
-                >
-                  <Award className="h-3.5 w-3.5 text-secondary" />
-                  <span>
-                    {language === 'ro' ? 'Certificat' : language === 'el' ? 'Πιστοποιητικό' : 'Certificate'}
-                  </span>
-                </Link>
-              </div>
+                {user && (
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <LayoutDashboard className="h-3.5 w-3.5 text-primary" />
+                    <span>{language === 'ro' ? 'Panou de control' : language === 'el' ? 'Πίνακας Ελέγχου' : 'Dashboard'}</span>
+                  </Link>
+                )}
 
-              {/* Community link */}
-              <div className="mb-1">
-                <Link
-                  href="/community"
-                  onClick={() => setSidebarOpen(false)}
-                  className={cn(
-                    'flex items-center gap-2 rounded-md px-2 py-1.5 text-xs transition-colors',
-                    'text-sidebar-foreground/70 hover:bg-sidebar-accent'
-                  )}
-                >
-                  <Users className="h-3.5 w-3.5 text-secondary" />
-                  <span>
-                    {language === 'ro' ? 'Comunitate' : language === 'el' ? 'Κοινότητα' : 'Community'}
-                  </span>
-                </Link>
-              </div>
+                {user && !isOrgUser && (
+                  <Link
+                    href="/pricing"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <CreditCard className="h-3.5 w-3.5 text-secondary" />
+                    <span>{language === 'ro' ? 'Abonamente' : language === 'el' ? 'Συνδρομές' : 'Pricing'}</span>
+                  </Link>
+                )}
 
-              {/* Frameworks link */}
-              <div className="mb-1">
-                <Link
-                  href="/frameworks"
-                  onClick={() => setSidebarOpen(false)}
-                  className={cn(
-                    'flex items-center gap-2 rounded-md px-2 py-1.5 text-xs transition-colors',
-                    'text-sidebar-foreground/70 hover:bg-sidebar-accent'
-                  )}
-                >
-                  <BarChart3 className="h-3.5 w-3.5 text-secondary" />
-                  <span>
-                    {language === 'ro' ? 'Framework-uri' : language === 'el' ? 'Frameworks' : 'Frameworks'}
-                  </span>
-                </Link>
-              </div>
+                {isAdmin && (
+                  <Link
+                    href="/admin"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <Shield className="h-3.5 w-3.5 text-green-500" />
+                    <span>{language === 'ro' ? 'Admin' : 'Admin'}</span>
+                  </Link>
+                )}
 
-              {/* Leaderboard link */}
-              <div className="mb-1">
-                <Link
-                  href="/leaderboard"
-                  onClick={() => setSidebarOpen(false)}
-                  className={cn(
-                    'flex items-center gap-2 rounded-md px-2 py-1.5 text-xs transition-colors',
-                    'text-sidebar-foreground/70 hover:bg-sidebar-accent'
-                  )}
-                >
-                  <Star className="h-3.5 w-3.5 text-yellow-500" />
-                  <span>
-                    {language === 'ro' ? 'Clasament' : language === 'el' ? 'Κατάταξη' : 'Leaderboard'}
-                  </span>
-                </Link>
+                <div className="border-b border-sidebar-border my-2" />
               </div>
-
-              {/* Review link */}
-              <div className="mb-1">
-                <Link
-                  href="/review"
-                  onClick={() => setSidebarOpen(false)}
-                  className={cn(
-                    'flex items-center gap-2 rounded-md px-2 py-1.5 text-xs transition-colors',
-                    'text-sidebar-foreground/70 hover:bg-sidebar-accent'
-                  )}
-                >
-                  <CheckCircle2 className="h-3.5 w-3.5 text-green-500" />
-                  <span>
-                    {language === 'ro' ? 'Revizuire' : language === 'el' ? 'Επανάληψη' : 'Smart Review'}
-                  </span>
-                </Link>
-              </div>
-
-              {/* Progress link */}
-              <div className="mb-2">
-                <Link
-                  href="/progress"
-                  onClick={() => setSidebarOpen(false)}
-                  className={cn(
-                    'flex items-center gap-2 rounded-md px-2 py-1.5 text-xs transition-colors',
-                    'text-sidebar-foreground/70 hover:bg-sidebar-accent'
-                  )}
-                >
-                  <BarChart3 className="h-3.5 w-3.5 text-blue-500" />
-                  <span>
-                    {language === 'ro' ? 'Progres' : language === 'el' ? 'Πρόοδος' : 'Progress Report'}
-                  </span>
-                </Link>
-              </div>
-
-              {/* Bookmarks section */}
-              {bookmarks.length > 0 && (
-                <div className="mb-2">
-                  <div className="flex items-center gap-1 px-2 pt-2 pb-1">
-                    <Bookmark className="h-3 w-3 text-sidebar-foreground/40" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">
-                      {language === 'ro' ? 'Marcaje' : language === 'el' ? 'Σελιδοδείκτες' : 'Bookmarks'}
-                    </span>
-                  </div>
-                  <div className="space-y-0.5">
-                    {bookmarks.map((id) => {
-                      const entry = lectureMap[id];
-                      if (!entry) return null;
-                      const title = entry.title[language] || entry.title.en || id;
-                      return (
-                        <Link
-                          key={id}
-                          href={`/lectures/${id}`}
-                          onClick={() => {
-                            setCurrentLecture(id);
-                            setSidebarOpen(false);
-                          }}
-                          className="flex items-center gap-2 rounded-md px-2 py-1 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent"
-                        >
-                          <Bookmark className="h-3 w-3 text-yellow-500" />
-                          <span className="line-clamp-1">{title}</span>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
 
               {STAGES.map((stage) => {
                 const isSearching = filteredStages !== null;
@@ -378,23 +276,6 @@ export function CourseSidebar() {
                         {stage.lectures.filter((id) => progress[id]?.completed).length}/{stage.lectures.length}
                       </span>
                     </button>
-
-                    {/* Mark all complete button — only show if stage is expanded and not all done */}
-                    {isExpanded && stage.lectures.some((id) => !progress[id]?.completed) && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          stage.lectures.forEach((id) => {
-                            if (!progress[id]?.completed) markCompleted(id);
-                          });
-                        }}
-                        className="mx-2 mb-1 flex items-center gap-1 rounded px-2 py-0.5 text-[10px] text-sidebar-foreground/50 hover:text-sidebar-foreground/80 hover:bg-sidebar-accent transition-colors"
-                        title={language === 'ro' ? 'Marchează tot ca finalizat' : language === 'el' ? 'Σημείωση όλων ως ολοκληρωμένα' : 'Mark all as complete'}
-                      >
-                        <CheckCheck className="h-3 w-3" />
-                        {language === 'ro' ? 'Finalizează tot' : language === 'el' ? 'Ολοκλήρωση όλων' : 'Complete all'}
-                      </button>
-                    )}
 
                     {/* Lecture items */}
                     {isExpanded && (
