@@ -103,12 +103,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Fetch full user profile from academy_students + academy_subscriptions
   const fetchUserProfile = useCallback(async (supabaseUser: SupabaseUser): Promise<AppUser | null> => {
     try {
-      // Query academy_students with joined subscriptions
-      const { data: student } = await supabase
+      // Query academy_students — try with subscription join first, fall back to without
+      let student: Record<string, unknown> | null = null;
+
+      // Attempt 1: with subscription join (using FK hint)
+      const { data: withSubs, error: joinError } = await supabase
         .from('academy_students')
-        .select('*, academy_subscriptions(*)')
+        .select('*, academy_subscriptions!academy_subscriptions_student_id_fkey(*)')
         .eq('id', supabaseUser.id)
         .single();
+
+      if (!joinError && withSubs) {
+        student = withSubs;
+      } else {
+        // Attempt 2: without join (still gets profile + admin role)
+        const { data: withoutSubs } = await supabase
+          .from('academy_students')
+          .select('*')
+          .eq('id', supabaseUser.id)
+          .single();
+
+        if (withoutSubs) {
+          student = { ...withoutSubs, academy_subscriptions: [] };
+        }
+      }
 
       if (!student) {
         // Student record not found — the handle_academy_signup trigger
@@ -126,7 +144,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       // Map the active subscription (most recent active one)
-      const activeSubs = (student.academy_subscriptions || [])
+      const activeSubs = ((student.academy_subscriptions as Record<string, unknown>[]) || [])
         .filter((s: Record<string, unknown>) => s.status === 'active')
         .sort((a: Record<string, unknown>, b: Record<string, unknown>) =>
           String(b.created_at || '').localeCompare(String(a.created_at || ''))
@@ -149,14 +167,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         : null;
 
       return {
-        id: student.id,
-        email: student.email,
-        displayName: student.display_name || student.full_name,
-        avatarUrl: student.avatar_url,
-        schoolId: student.school_id,
+        id: student.id as string,
+        email: student.email as string,
+        displayName: (student.display_name || student.full_name) as string | null,
+        avatarUrl: student.avatar_url as string | null,
+        schoolId: student.school_id as string | null,
         orgRole: student.org_role as 'admin' | 'member' | null,
         subscription,
-        createdAt: student.created_at,
+        createdAt: student.created_at as string,
       };
     } catch {
       // Fallback: return basic user from Supabase auth

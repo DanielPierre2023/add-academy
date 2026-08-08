@@ -18,6 +18,7 @@ import {
   CreditCard,
   Shield,
   Download,
+  Lock,
 } from 'lucide-react';
 import type { Language } from '@/types';
 import { STAGES } from '@/types';
@@ -55,7 +56,7 @@ const STAGE_SECTIONS: Record<number, Record<string, string>> = {
 
 export function CourseSidebar() {
   const language = useAcademyStore((s) => s.language);
-  const { user, isAdmin, isOrgUser } = useAuth();
+  const { user, isAdmin, isOrgUser, canAccessStage } = useAuth();
   const currentLecture = useAcademyStore((s) => s.currentLecture);
   const setCurrentLecture = useAcademyStore((s) => s.setCurrentLecture);
   const sidebarOpen = useAcademyStore((s) => s.sidebarOpen);
@@ -284,6 +285,9 @@ export function CourseSidebar() {
                       <span className="flex-1 text-left text-[10px] font-bold uppercase tracking-widest text-secondary">
                         {sectionLabel}
                       </span>
+                      {stage.number > 1 && !canAccessStage(stage.number) && (
+                        <Lock className="h-3 w-3 shrink-0 text-sidebar-foreground/30" />
+                      )}
                       <span className="text-[10px] text-sidebar-foreground/40 tabular-nums">
                         {stage.lectures.filter((id) => progress[id]?.completed).length}/{stage.lectures.length}
                       </span>

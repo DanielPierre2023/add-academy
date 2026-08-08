@@ -1,5 +1,6 @@
 import { getLectureContent, getQuizData, getLectureIndex } from '@/lib/lectures';
 import { LectureViewer } from '@/components/academy/lecture-viewer';
+import { ContentGate } from '@/components/academy/content-gate';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
@@ -21,13 +22,15 @@ export default async function LecturePage({ params }: { params: Promise<{ id: st
   const entry = index.lectures.find((l) => l.id === id);
 
   return (
-    <LectureViewer
-      lectureId={id}
-      content={content}
-      quiz={quiz}
-      prev={entry?.prev ?? null}
-      next={entry?.next ?? null}
-      hasQuiz={entry?.hasQuiz ?? false}
-    />
+    <ContentGate lectureId={id}>
+      <LectureViewer
+        lectureId={id}
+        content={content}
+        quiz={quiz}
+        prev={entry?.prev ?? null}
+        next={entry?.next ?? null}
+        hasQuiz={entry?.hasQuiz ?? false}
+      />
+    </ContentGate>
   );
 }
