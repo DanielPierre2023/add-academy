@@ -17,6 +17,7 @@ import {
   LayoutDashboard,
   CreditCard,
   Shield,
+  Download,
 } from 'lucide-react';
 import type { Language } from '@/types';
 import { STAGES } from '@/types';
@@ -213,6 +214,17 @@ export function CourseSidebar() {
                   >
                     <LayoutDashboard className="h-3.5 w-3.5 text-primary" />
                     <span>{language === 'ro' ? 'Panou de control' : language === 'el' ? 'Πίνακας Ελέγχου' : 'Dashboard'}</span>
+                  </Link>
+                )}
+
+                {user && (
+                  <Link
+                    href="/downloads"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <Download className="h-3.5 w-3.5 text-amber-500" />
+                    <span>{language === 'ro' ? 'Descarcari' : language === 'el' ? 'Λήψεις' : 'Downloads'}</span>
                   </Link>
                 )}
 

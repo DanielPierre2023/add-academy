@@ -13,6 +13,7 @@ import {
   Building2,
   ExternalLink,
   Clock,
+  Download,
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
@@ -127,6 +128,40 @@ export default function DashboardPage() {
           <p className="mt-1 text-xs text-muted-foreground">
             {language === 'ro' ? 'Quiz-uri perfecte' : 'Perfect quizzes'}
           </p>
+        </div>
+      </div>
+
+      {/* Download threshold note */}
+      <div className="flex items-start gap-3 rounded-xl border border-amber-500/30 bg-amber-500/5 px-5 py-4">
+        <Download className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" />
+        <div>
+          <p className="text-sm font-medium text-foreground">
+            {language === 'ro'
+              ? 'Descarcari de deployment'
+              : language === 'el'
+                ? 'Λήψεις ανάπτυξης'
+                : 'Deployment Downloads'}
+          </p>
+          <p className="mt-0.5 text-sm text-muted-foreground">
+            {completion >= 80
+              ? (language === 'ro'
+                  ? 'Ai atins pragul de 80%! Verifica pagina de descarcari.'
+                  : language === 'el'
+                    ? 'Φτάσατε το όριο 80%! Ελέγξτε τις λήψεις σας.'
+                    : 'You\'ve reached the 80% threshold! Check your downloads page.')
+              : (language === 'ro'
+                  ? `Finalizeaza cel putin 80% din curs pentru a debloca descarcarile ZIP. Progresul tau: ${completion}%.`
+                  : language === 'el'
+                    ? `Ολοκληρώστε τουλάχιστον 80% για λήψεις ZIP. Πρόοδος: ${completion}%.`
+                    : `Complete at least 80% of a course to unlock ZIP downloads. Your progress: ${completion}%.`)}
+          </p>
+          <Link
+            href="/downloads"
+            className="mt-2 inline-flex items-center gap-1 text-sm text-amber-600 hover:underline dark:text-amber-400"
+          >
+            {language === 'ro' ? 'Pagina descarcari' : language === 'el' ? 'Σελίδα λήψεων' : 'Downloads page'}
+            <ExternalLink className="h-3 w-3" />
+          </Link>
         </div>
       </div>
 

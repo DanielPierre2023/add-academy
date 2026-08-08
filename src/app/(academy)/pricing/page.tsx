@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, Sparkles, Zap, Crown, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, Sparkles, Zap, Crown, ChevronDown, ChevronUp, Download } from 'lucide-react';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { useAuth } from '@/lib/auth/auth-context';
 import {
@@ -166,6 +166,14 @@ export default function PricingPage() {
             : language === 'el'
               ? 'Χρέωση κάθε 3 μήνες'
               : 'Billed every 3 months'}
+        </div>
+        <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-4 py-2 text-sm text-amber-700 dark:text-amber-400">
+          <Download className="h-4 w-4" />
+          {language === 'ro'
+            ? 'Finalizeaza 80% din curs pentru a debloca descarcarile de deployment'
+            : language === 'el'
+              ? 'Ολοκληρώστε 80% για λήψη προϊόντων ανάπτυξης'
+              : 'Complete 80% of a course to unlock deployment-ready downloads'}
         </div>
       </div>
 

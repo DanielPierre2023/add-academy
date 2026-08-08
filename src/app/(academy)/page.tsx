@@ -12,7 +12,7 @@ import {
   ChevronRight,
   GraduationCap,
   Play,
-  School,
+  Download,
 } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
@@ -31,7 +31,7 @@ export default function HomePage() {
   const nextLecture = index.lectures.find((l) => !progress[l.id]?.completed);
 
   const stats = [
-    { value: '66', label: t('home_stats_lectures', language) },
+    { value: '49', label: t('home_stats_lectures', language) },
     { value: '5', label: 'SaaS Products' },
     { value: '100+', label: t('home_stats_exercises', language) },
     { value: '3', label: t('home_stats_languages', language) },
@@ -135,6 +135,31 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════
+          Download Threshold Note
+          ══════════════════════════════════════════════ */}
+      <section className="px-4 sm:px-6 lg:px-8">
+        <div className="flex items-start gap-4 rounded-xl border border-secondary/30 bg-secondary/5 px-5 py-4">
+          <Download className="mt-0.5 h-5 w-5 shrink-0 text-secondary" />
+          <div>
+            <p className="text-sm font-medium text-foreground">
+              {language === 'ro'
+                ? 'Descarcă produse gata de deployment'
+                : language === 'el'
+                  ? 'Κατεβάστε έτοιμα προϊόντα ανάπτυξης'
+                  : 'Download deployment-ready products'}
+            </p>
+            <p className="mt-0.5 text-sm text-muted-foreground">
+              {language === 'ro'
+                ? 'Finalizeaza cel putin 80% dintr-un curs pentru a debloca NeuralForge LLM sau produsele GenAI SaaS ca ZIP-uri gata de deployment.'
+                : language === 'el'
+                  ? 'Ολοκληρώστε τουλάχιστον 80% ενός μαθήματος για να ξεκλειδώσετε το NeuralForge LLM ή τα GenAI SaaS ως ZIP αρχεία έτοιμα για ανάπτυξη.'
+                  : 'Complete at least 80% of a course to unlock the NeuralForge LLM or GenAI SaaS products as deployment-ready ZIP downloads.'}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
           Continue Learning (if user has progress)
           ══════════════════════════════════════════════ */}
       {hasProgress && (
@@ -228,45 +253,6 @@ export default function HomePage() {
             );
           })}
         </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════
-          School CTA
-          ══════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-4">
-        <Card className="overflow-hidden border-primary/20">
-          <CardContent className="flex flex-col sm:flex-row items-center gap-6 py-8 px-6">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/10">
-              <School className="h-8 w-8 text-primary" />
-            </div>
-            <div className="flex-1 text-center sm:text-left">
-              <h3 className="text-lg font-bold">
-                {language === 'ro'
-                  ? 'Ești profesor? Înscrie-ți liceul gratuit!'
-                  : language === 'el'
-                    ? 'Είστε εκπαιδευτικός; Εγγράψτε το σχολείο σας δωρεάν!'
-                    : 'Are you a teacher? Enroll your high school for free!'}
-              </h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                {language === 'ro'
-                  ? 'Oferă elevilor tăi acces gratuit la întregul curs de LLM Academy.'
-                  : language === 'el'
-                    ? 'Δώστε στους μαθητές σας δωρεάν πρόσβαση σε ολόκληρο το μάθημα LLM Academy.'
-                    : 'Give your students free access to the entire LLM Academy course.'}
-              </p>
-            </div>
-            <Link
-              href="/school/apply"
-              className={cn(
-                buttonVariants({ variant: 'default' }),
-                'shrink-0 gap-2'
-              )}
-            >
-              <School className="h-4 w-4" />
-              {t('school_submit', language)}
-            </Link>
-          </CardContent>
-        </Card>
       </section>
     </div>
   );
