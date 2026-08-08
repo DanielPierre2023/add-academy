@@ -61,7 +61,8 @@ function getStagesCompletion(
 export default function DownloadsPage() {
   const language = useAcademyStore((s) => s.language) as Language;
   const progress = useAcademyStore((s) => s.progress);
-  const stats = useAcademyStore((s) => s.getGamificationStats());
+  const { getGamificationStats } = useAcademyStore();
+  const stats = getGamificationStats();
   const { user, isOrgUser, effectiveTier, canAccessStage, canAccessProduct } = useAuth();
 
   const [generating, setGenerating] = useState<string | null>(null);

@@ -153,6 +153,48 @@ sys.stderr = sys.__stderr__
   return { stdout, stderr: finalStderr };
 }
 
+// Expose runPyodideCode globally so inline onclick attributes in lecture HTML work
+if (typeof window !== 'undefined') {
+  (window as any).runPyodideCode = async function runPyodideCode(button: HTMLButtonElement) {
+    const wrapper = button.closest('.code-block');
+    if (!wrapper) return;
+
+    const codeEl = wrapper.querySelector('pre code');
+    if (!codeEl) return;
+    const code = codeEl.textContent || '';
+
+    let outputDiv = wrapper.querySelector('.output, .code-output') as HTMLDivElement;
+    if (!outputDiv) {
+      outputDiv = document.createElement('div');
+      outputDiv.className = 'output';
+      wrapper.appendChild(outputDiv);
+    }
+
+    button.textContent = '⏳ Running...';
+    button.disabled = true;
+    outputDiv.classList.add('visible');
+    outputDiv.classList.remove('error');
+    outputDiv.textContent = 'Loading Python runtime...';
+
+    try {
+      const result = await runPythonCode(code);
+      if (result.stderr) {
+        outputDiv.classList.add('error');
+        outputDiv.textContent = result.stderr;
+      } else {
+        outputDiv.classList.remove('error');
+        outputDiv.textContent = result.stdout || '(no output)';
+      }
+    } catch (err: any) {
+      outputDiv.classList.add('error');
+      outputDiv.textContent = err.message || 'Error running code';
+    }
+
+    button.textContent = '▶ Run';
+    button.disabled = false;
+  };
+}
+
 export function LectureViewer({
   lectureId,
   content,
@@ -201,12 +243,13 @@ export function LectureViewer({
       ? (quiz?.['en']?.questions ?? [])
       : rawQuizQuestions;
 
-  // Set current lecture on mount
+  // Set current lecture on mount (read timeSpent from store directly to avoid progress dep)
   useEffect(() => {
     setCurrentLecture(lectureId);
     setScrolledToBottom(false);
-    timeRef.current = progress[lectureId]?.timeSpent ?? 0;
-  }, [lectureId, setCurrentLecture, setScrolledToBottom, progress]);
+    timeRef.current = useAcademyStore.getState().progress[lectureId]?.timeSpent ?? 0;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lectureId]);
 
   // Track time spent
   useEffect(() => {

@@ -108,8 +108,12 @@ export const useAcademyStore = create<AcademyState>()(
 
       // Navigation
       currentLecture: 'home',
-      setCurrentLecture: (id) =>
-        set({ currentLecture: id, lectureEntryTime: Date.now(), scrolledToBottom: false }),
+      setCurrentLecture: (id) => {
+        // Only update entry time if actually changing to a different lecture
+        const current = get().currentLecture;
+        if (current === id) return;
+        set({ currentLecture: id, lectureEntryTime: Date.now(), scrolledToBottom: false });
+      },
       sidebarOpen: true,
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
       tutorOpen: false,
