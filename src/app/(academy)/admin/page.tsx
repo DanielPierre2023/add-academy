@@ -11,6 +11,11 @@ import {
   Shield,
   Globe,
   RefreshCw,
+  ChevronDown,
+  ChevronRight,
+  Plus,
+  UserCheck,
+  BarChart3,
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
@@ -24,6 +29,7 @@ interface SchoolMember {
   full_name: string | null;
   org_role: 'admin' | 'member' | null;
   created_at: string;
+  school_id: string | null;
 }
 
 interface SchoolData {
@@ -31,85 +37,123 @@ interface SchoolData {
   name: string;
   slug: string;
   country: string;
+  city: string | null;
   domain: string | null;
   invite_code: string | null;
+  contact_email: string;
   verified: boolean;
   max_students: number;
   current_students: number;
 }
 
+/** Platform admin = org_role 'admin' without a school_id */
+function isPlatformAdmin(schoolId: string | null | undefined, isAdmin: boolean): boolean {
+  return isAdmin && !schoolId;
+}
+
 export default function AdminPage() {
   const language = useAcademyStore((s) => s.language);
   const { user, isAdmin } = useAuth();
-  const [school, setSchool] = useState<SchoolData | null>(null);
-  const [members, setMembers] = useState<SchoolMember[]>([]);
-  const [copied, setCopied] = useState(false);
-  const [domainInput, setDomainInput] = useState('');
+  const [schools, setSchools] = useState<SchoolData[]>([]);
+  const [allStudents, setAllStudents] = useState<SchoolMember[]>([]);
+  const [expandedSchool, setExpandedSchool] = useState<string | null>(null);
+  const [copied, setCopied] = useState<string | false>(false);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = useCallback(async () => {
-    if (!user?.schoolId) return;
+  const platformAdmin = isPlatformAdmin(user?.schoolId, isAdmin);
+
+  // ── Platform admin: fetch ALL schools + ALL students ──
+  const fetchPlatformData = useCallback(async () => {
     setLoading(true);
 
-    const { data: schoolData } = await supabase
-      .from('academy_schools')
-      .select('*')
-      .eq('id', user.schoolId)
-      .single();
+    const [{ data: schoolsData }, { data: studentsData }] = await Promise.all([
+      supabase
+        .from('academy_schools')
+        .select('*')
+        .order('name', { ascending: true }),
+      supabase
+        .from('academy_students')
+        .select('id, email, display_name, full_name, org_role, created_at, school_id')
+        .order('created_at', { ascending: false }),
+    ]);
 
-    if (schoolData) {
-      setSchool(schoolData as SchoolData);
-      setDomainInput(schoolData.domain || '');
+    if (schoolsData) setSchools(schoolsData as SchoolData[]);
+    if (studentsData) setAllStudents(studentsData as SchoolMember[]);
+    setLoading(false);
+  }, []);
+
+  // ── School admin: fetch own school + members ──
+  const fetchSchoolData = useCallback(async () => {
+    if (!user?.schoolId) {
+      setLoading(false);
+      return;
     }
+    setLoading(true);
 
-    const { data: memberData } = await supabase
-      .from('academy_students')
-      .select('id, email, display_name, full_name, org_role, created_at')
-      .eq('school_id', user.schoolId)
-      .order('created_at', { ascending: true });
+    const [{ data: schoolData }, { data: memberData }] = await Promise.all([
+      supabase
+        .from('academy_schools')
+        .select('*')
+        .eq('id', user.schoolId)
+        .single(),
+      supabase
+        .from('academy_students')
+        .select('id, email, display_name, full_name, org_role, created_at, school_id')
+        .eq('school_id', user.schoolId)
+        .order('created_at', { ascending: true }),
+    ]);
 
-    if (memberData) setMembers(memberData as SchoolMember[]);
+    if (schoolData) setSchools([schoolData as SchoolData]);
+    if (memberData) setAllStudents(memberData as SchoolMember[]);
     setLoading(false);
   }, [user?.schoolId]);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
-
-  const copyInviteCode = () => {
-    if (school?.invite_code) {
-      navigator.clipboard.writeText(school.invite_code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+  useEffect(() => {
+    if (platformAdmin) {
+      fetchPlatformData();
+    } else {
+      fetchSchoolData();
     }
+  }, [platformAdmin, fetchPlatformData, fetchSchoolData]);
+
+  const copyInviteCode = (code: string) => {
+    navigator.clipboard.writeText(code);
+    setCopied(code);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const regenerateCode = async () => {
-    if (!school) return;
+  const regenerateCode = async (school: SchoolData) => {
     const newCode = `${school.slug.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
     await supabase
       .from('academy_schools')
       .update({ invite_code: newCode })
       .eq('id', school.id);
-    setSchool({ ...school, invite_code: newCode });
+    setSchools((prev) =>
+      prev.map((s) => (s.id === school.id ? { ...s, invite_code: newCode } : s))
+    );
   };
 
-  const updateDomain = async () => {
-    if (!school) return;
+  const toggleVerified = async (school: SchoolData) => {
+    if (!platformAdmin) return;
+    const newVerified = !school.verified;
     await supabase
       .from('academy_schools')
-      .update({ domain: domainInput || null })
+      .update({ verified: newVerified })
       .eq('id', school.id);
-    setSchool({ ...school, domain: domainInput || null });
+    setSchools((prev) =>
+      prev.map((s) => (s.id === school.id ? { ...s, verified: newVerified } : s))
+    );
   };
 
   const removeMember = async (memberId: string) => {
-    if (!school) return;
     await supabase
       .from('academy_students')
       .update({ school_id: null, org_role: null, tier: 'free' })
       .eq('id', memberId);
-    setMembers(members.filter((m) => m.id !== memberId));
+    setAllStudents((prev) => prev.filter((m) => m.id !== memberId));
   };
 
+  // ── Access check ──
   if (!isAdmin) {
     return (
       <div className="py-12 text-center">
@@ -119,8 +163,8 @@ export default function AdminPage() {
         </h2>
         <p className="mt-2 text-muted-foreground">
           {language === 'ro'
-            ? 'Doar administratorii organizației pot accesa această pagină.'
-            : 'Only organization admins can access this page.'}
+            ? 'Doar administratorii pot accesa această pagină.'
+            : 'Only admins can access this page.'}
         </p>
       </div>
     );
@@ -134,141 +178,280 @@ export default function AdminPage() {
     );
   }
 
+  // ── Computed stats ──
+  const totalStudents = allStudents.length;
+  const orgStudents = allStudents.filter((s) => s.school_id).length;
+  const freeStudents = allStudents.filter((s) => !s.school_id).length;
+  const totalSeats = schools.reduce((sum, s) => sum + s.max_students, 0);
+  const usedSeats = schools.reduce((sum, s) => sum + s.current_students, 0);
+
+  const membersOfSchool = (schoolId: string) =>
+    allStudents.filter((s) => s.school_id === schoolId);
+
   return (
     <div className="py-6 space-y-8">
+      {/* Header */}
       <div>
         <h1 className="font-heading text-2xl font-bold text-foreground flex items-center gap-2">
-          <Building2 className="h-6 w-6 text-secondary" />
-          {school?.name || 'Organization'}
+          <Shield className="h-6 w-6 text-secondary" />
+          {platformAdmin
+            ? (language === 'ro' ? 'Administrare Platformă' : 'Platform Administration')
+            : (language === 'ro' ? 'Administrare Organizație' : 'Organization Administration')}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {language === 'ro' ? 'Administrare organizație' : 'Organization administration'}
+          {platformAdmin
+            ? (language === 'ro'
+              ? 'Gestionează toate organizațiile și studenții'
+              : 'Manage all organizations and students')
+            : (language === 'ro'
+              ? 'Administrare organizație'
+              : 'Organization administration')}
         </p>
       </div>
 
-      {/* Stats */}
-      <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-xl border border-border bg-card p-4">
-          <div className="text-sm text-muted-foreground">{language === 'ro' ? 'Studenți' : 'Students'}</div>
-          <div className="mt-1 text-2xl font-bold text-foreground">
-            {school?.current_students} / {school?.max_students}
+      {/* Platform-wide stats (platform admin only) */}
+      {platformAdmin && (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-xl border border-border bg-card p-4">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Building2 className="h-4 w-4" />
+              {language === 'ro' ? 'Organizații' : 'Organizations'}
+            </div>
+            <div className="mt-1 text-2xl font-bold text-foreground">{schools.length}</div>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-4">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Users className="h-4 w-4" />
+              {language === 'ro' ? 'Total Studenți' : 'Total Students'}
+            </div>
+            <div className="mt-1 text-2xl font-bold text-foreground">{totalStudents}</div>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-4">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <UserCheck className="h-4 w-4" />
+              {language === 'ro' ? 'În Organizații' : 'In Organizations'}
+            </div>
+            <div className="mt-1 text-2xl font-bold text-foreground">
+              {orgStudents} <span className="text-sm font-normal text-muted-foreground">/ {freeStudents} free</span>
+            </div>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-4">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <BarChart3 className="h-4 w-4" />
+              {language === 'ro' ? 'Locuri Utilizate' : 'Seats Used'}
+            </div>
+            <div className="mt-1 text-2xl font-bold text-foreground">
+              {usedSeats} / {totalSeats}
+            </div>
           </div>
         </div>
-        <div className="rounded-xl border border-border bg-card p-4">
-          <div className="text-sm text-muted-foreground">{language === 'ro' ? 'Locuri disponibile' : 'Available seats'}</div>
-          <div className="mt-1 text-2xl font-bold text-foreground">
-            {(school?.max_students || 0) - (school?.current_students || 0)}
-          </div>
-        </div>
-        <div className="rounded-xl border border-border bg-card p-4">
-          <div className="text-sm text-muted-foreground">{language === 'ro' ? 'Status' : 'Status'}</div>
-          <div className={cn('mt-1 text-2xl font-bold', school?.verified ? 'text-green-600' : 'text-amber-500')}>
-            {school?.verified
-              ? (language === 'ro' ? 'Verificat' : 'Verified')
-              : (language === 'ro' ? 'În așteptare' : 'Pending')}
-          </div>
-        </div>
-      </div>
+      )}
 
-      {/* Invite Code */}
-      <div className="rounded-xl border border-border bg-card p-6">
-        <h3 className="flex items-center gap-2 font-heading text-lg font-bold text-foreground">
-          <Key className="h-5 w-5 text-secondary" />
-          {language === 'ro' ? 'Cod de invitare' : 'Invite Code'}
-        </h3>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {language === 'ro'
-            ? 'Distribuie acest cod elevilor/studenților pentru a se alătura.'
-            : 'Share this code with students to join your organization.'}
-        </p>
-        <div className="mt-4 flex items-center gap-2">
-          <div className="flex-1 rounded-lg border border-border bg-muted px-4 py-3 font-mono text-lg font-bold tracking-widest text-foreground">
-            {school?.invite_code || '—'}
-          </div>
-          <button
-            onClick={copyInviteCode}
-            className="rounded-lg border border-border p-3 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-          >
-            {copied ? <Check className="h-5 w-5 text-green-500" /> : <Copy className="h-5 w-5" />}
-          </button>
-          <button
-            onClick={regenerateCode}
-            className="rounded-lg border border-border p-3 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-            title="Regenerate code"
-          >
-            <RefreshCw className="h-5 w-5" />
-          </button>
+      {/* Organizations list */}
+      {schools.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-border bg-card/50 p-8 text-center">
+          <Building2 className="mx-auto h-10 w-10 text-muted-foreground/50" />
+          <p className="mt-3 text-sm text-muted-foreground">
+            {language === 'ro' ? 'Nu există organizații încă.' : 'No organizations yet.'}
+          </p>
         </div>
-      </div>
+      ) : (
+        <div className="space-y-4">
+          {schools.map((school) => {
+            const isExpanded = expandedSchool === school.id;
+            const members = membersOfSchool(school.id);
 
-      {/* Domain auto-join */}
-      <div className="rounded-xl border border-border bg-card p-6">
-        <h3 className="flex items-center gap-2 font-heading text-lg font-bold text-foreground">
-          <Globe className="h-5 w-5 text-primary" />
-          {language === 'ro' ? 'Auto-asociere pe domeniu' : 'Domain Auto-Join'}
-        </h3>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {language === 'ro'
-            ? 'Utilizatorii cu adrese de email pe acest domeniu se vor alătura automat.'
-            : 'Users with email addresses on this domain will auto-join your organization.'}
-        </p>
-        <div className="mt-4 flex items-center gap-2">
-          <input
-            type="text"
-            value={domainInput}
-            onChange={(e) => setDomainInput(e.target.value)}
-            placeholder="school.edu"
-            className="flex-1 rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-          />
-          <button
-            onClick={updateDomain}
-            className="rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            {language === 'ro' ? 'Salvează' : 'Save'}
-          </button>
-        </div>
-      </div>
-
-      {/* Members */}
-      <div className="rounded-xl border border-border bg-card p-6">
-        <h3 className="flex items-center gap-2 font-heading text-lg font-bold text-foreground">
-          <Users className="h-5 w-5 text-primary" />
-          {language === 'ro' ? 'Studenți' : 'Students'} ({members.length})
-        </h3>
-
-        <div className="mt-4 divide-y divide-border">
-          {members.map((member) => {
-            const name = member.display_name || member.full_name || member.email.split('@')[0];
             return (
-              <div key={member.id} className="flex items-center justify-between py-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
-                    {name[0].toUpperCase()}
-                  </div>
-                  <div>
-                    <div className="text-sm font-medium text-foreground">{name}</div>
-                    <div className="text-xs text-muted-foreground">{member.email}</div>
-                  </div>
-                  {member.org_role === 'admin' && (
-                    <span className="rounded bg-secondary/10 px-1.5 py-0.5 text-[10px] font-bold text-secondary">
-                      Admin
-                    </span>
+              <div key={school.id} className="rounded-xl border border-border bg-card overflow-hidden">
+                {/* School header */}
+                <button
+                  onClick={() => setExpandedSchool(isExpanded ? null : school.id)}
+                  className="flex w-full items-center gap-4 p-4 text-left hover:bg-muted/50 transition-colors"
+                >
+                  {isExpanded ? (
+                    <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
+                  ) : (
+                    <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
                   )}
-                </div>
-                {member.id !== user?.id && member.org_role !== 'admin' && (
-                  <button
-                    onClick={() => removeMember(member.id)}
-                    className="rounded p-1 text-muted-foreground hover:text-destructive transition-colors"
-                    title="Remove student"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="font-heading font-bold text-foreground truncate">
+                        {school.name}
+                      </span>
+                      <span
+                        className={cn(
+                          'rounded px-1.5 py-0.5 text-[10px] font-bold',
+                          school.verified
+                            ? 'bg-green-500/10 text-green-500'
+                            : 'bg-amber-500/10 text-amber-500'
+                        )}
+                      >
+                        {school.verified ? 'Verified' : 'Pending'}
+                      </span>
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {school.country}{school.city ? `, ${school.city}` : ''} · {school.slug}
+                      {school.domain ? ` · ${school.domain}` : ''}
+                    </div>
+                  </div>
+
+                  <div className="text-right shrink-0">
+                    <div className="text-sm font-bold text-foreground">
+                      {school.current_students}/{school.max_students}
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      {language === 'ro' ? 'studenți' : 'students'}
+                    </div>
+                  </div>
+                </button>
+
+                {/* Expanded school details */}
+                {isExpanded && (
+                  <div className="border-t border-border p-4 space-y-4">
+                    {/* Actions row */}
+                    <div className="flex flex-wrap gap-2">
+                      {/* Invite code */}
+                      {school.invite_code && (
+                        <div className="flex items-center gap-1 rounded-lg border border-border bg-muted px-3 py-1.5">
+                          <Key className="h-3.5 w-3.5 text-secondary" />
+                          <span className="font-mono text-sm font-bold tracking-wider text-foreground">
+                            {school.invite_code}
+                          </span>
+                          <button
+                            onClick={() => copyInviteCode(school.invite_code!)}
+                            className="ml-1 text-muted-foreground hover:text-foreground"
+                          >
+                            {copied === school.invite_code ? (
+                              <Check className="h-3.5 w-3.5 text-green-500" />
+                            ) : (
+                              <Copy className="h-3.5 w-3.5" />
+                            )}
+                          </button>
+                        </div>
+                      )}
+
+                      {platformAdmin && (
+                        <>
+                          <button
+                            onClick={() => regenerateCode(school)}
+                            className="flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                          >
+                            <RefreshCw className="h-3.5 w-3.5" />
+                            {language === 'ro' ? 'Regenerează cod' : 'Regenerate code'}
+                          </button>
+                          <button
+                            onClick={() => toggleVerified(school)}
+                            className={cn(
+                              'flex items-center gap-1 rounded-lg border px-3 py-1.5 text-xs transition-colors',
+                              school.verified
+                                ? 'border-amber-500/30 text-amber-500 hover:bg-amber-500/10'
+                                : 'border-green-500/30 text-green-500 hover:bg-green-500/10'
+                            )}
+                          >
+                            {school.verified
+                              ? (language === 'ro' ? 'Revocă verificare' : 'Revoke verification')
+                              : (language === 'ro' ? 'Verifică' : 'Verify')}
+                          </button>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Members list */}
+                    <div>
+                      <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
+                        <Users className="h-4 w-4 text-primary" />
+                        {language === 'ro' ? 'Studenți' : 'Students'} ({members.length})
+                      </h4>
+
+                      {members.length === 0 ? (
+                        <p className="text-xs text-muted-foreground py-2">
+                          {language === 'ro' ? 'Niciun student încă.' : 'No students yet.'}
+                        </p>
+                      ) : (
+                        <div className="divide-y divide-border">
+                          {members.map((member) => {
+                            const name = member.display_name || member.full_name || member.email.split('@')[0];
+                            return (
+                              <div key={member.id} className="flex items-center justify-between py-2">
+                                <div className="flex items-center gap-3">
+                                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary text-[10px] font-bold">
+                                    {name[0].toUpperCase()}
+                                  </div>
+                                  <div>
+                                    <div className="text-sm font-medium text-foreground">{name}</div>
+                                    <div className="text-[11px] text-muted-foreground">{member.email}</div>
+                                  </div>
+                                  {member.org_role === 'admin' && (
+                                    <span className="rounded bg-secondary/10 px-1.5 py-0.5 text-[10px] font-bold text-secondary">
+                                      Admin
+                                    </span>
+                                  )}
+                                </div>
+                                {member.id !== user?.id && member.org_role !== 'admin' && (
+                                  <button
+                                    onClick={() => removeMember(member.id)}
+                                    className="rounded p-1 text-muted-foreground hover:text-destructive transition-colors"
+                                    title={language === 'ro' ? 'Elimină studentul' : 'Remove student'}
+                                  >
+                                    <Trash2 className="h-4 w-4" />
+                                  </button>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 )}
               </div>
             );
           })}
         </div>
-      </div>
+      )}
+
+      {/* Free students (platform admin only) */}
+      {platformAdmin && freeStudents > 0 && (
+        <div className="rounded-xl border border-border bg-card p-6">
+          <h3 className="flex items-center gap-2 font-heading text-lg font-bold text-foreground">
+            <Users className="h-5 w-5 text-muted-foreground" />
+            {language === 'ro' ? 'Studenți Individuali (fără organizație)' : 'Individual Students (no organization)'}
+            <span className="text-sm font-normal text-muted-foreground">({freeStudents})</span>
+          </h3>
+          <div className="mt-4 divide-y divide-border">
+            {allStudents
+              .filter((s) => !s.school_id)
+              .slice(0, 50)
+              .map((member) => {
+                const name = member.display_name || member.full_name || member.email.split('@')[0];
+                return (
+                  <div key={member.id} className="flex items-center justify-between py-2">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-muted text-muted-foreground text-[10px] font-bold">
+                        {name[0].toUpperCase()}
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-foreground">{name}</div>
+                        <div className="text-[11px] text-muted-foreground">{member.email}</div>
+                      </div>
+                      {member.org_role === 'admin' && (
+                        <span className="rounded bg-red-500/10 px-1.5 py-0.5 text-[10px] font-bold text-red-500">
+                          Platform Admin
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            {freeStudents > 50 && (
+              <p className="py-2 text-xs text-muted-foreground">
+                ... {language === 'ro' ? `și încă ${freeStudents - 50}` : `and ${freeStudents - 50} more`}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
