@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Check, Gift, Clock, Crown, ChevronDown, ChevronUp, Download } from 'lucide-react';
 import { useAcademyStore } from '@/lib/store/academy-store';
+import { PageTransition } from '@/components/motion/page-transition';
 import { useAuth } from '@/lib/auth/auth-context';
 import {
   PACKAGE_PLANS,
@@ -146,6 +147,7 @@ export default function PricingPage() {
   }
 
   return (
+    <PageTransition>
     <div className="py-8">
       {/* Header */}
       <div className="text-center mb-12">
@@ -268,5 +270,6 @@ export default function PricingPage() {
         </p>
       </div>
     </div>
+    </PageTransition>
   );
 }

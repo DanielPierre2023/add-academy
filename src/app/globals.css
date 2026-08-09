@@ -143,6 +143,49 @@
 }
 
 /* ═══════════════════════════════════════════════════════
+   PREMIUM ANIMATIONS
+   ═══════════════════════════════════════════════════════ */
+
+/* Hero gradient shift */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-shift {
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Floating orbs */
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+@keyframes float-slower {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25px, 20px) scale(1.08); }
+  66% { transform: translate(20px, -25px) scale(0.92); }
+}
+@keyframes float-reverse {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, 25px) scale(1.03); }
+  66% { transform: translate(-30px, -15px) scale(0.97); }
+}
+.animate-float-slow { animation: float-slow 12s ease-in-out infinite; }
+.animate-float-slower { animation: float-slower 16s ease-in-out infinite; }
+.animate-float-reverse { animation: float-reverse 14s ease-in-out infinite; }
+
+/* Sidebar accordion */
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height, auto); opacity: 1; }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height, auto); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════
    LECTURE CONTENT STYLES — matching reference index.html
    These classes are embedded in the lecture JSON HTML content
    ═══════════════════════════════════════════════════════ */

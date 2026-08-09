@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   BarChart3,
 } from 'lucide-react';
+import { PageTransition } from '@/components/motion/page-transition';
 import { STAGES } from '@/types';
 import type { Language } from '@/types';
 
@@ -96,6 +97,7 @@ export default function ProgressPage() {
   };
 
   return (
+    <PageTransition>
     <div className="space-y-8 pb-16 print:pb-0">
       {/* Header */}
       <div className="text-center print:text-left">
@@ -226,5 +228,6 @@ export default function ProgressPage() {
         </Card>
       )}
     </div>
+    </PageTransition>
   );
 }

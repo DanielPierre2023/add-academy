@@ -1,83 +1,94 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const COLORS = ['#D4A017', '#0504AD', '#10b981', '#ec4899', '#f59e0b', '#8b5cf6', '#ef4444', '#06b6d4'];
+const SHAPES = ['square', 'circle', 'strip'] as const;
 
 interface ConfettiPiece {
   id: number;
   x: number;
   color: string;
+  shape: typeof SHAPES[number];
   delay: number;
   duration: number;
   size: number;
+  rotation: number;
+  drift: number;
 }
 
-const COLORS = ['#D4A017', '#0504AD', '#10b981', '#ec4899', '#f59e0b', '#8b5cf6', '#ef4444'];
-
-export function Confetti({ active, duration = 3000 }: { active: boolean; duration?: number }) {
-  const [pieces, setPieces] = useState<ConfettiPiece[]>([]);
+export function Confetti({ active, duration = 4000 }: { active: boolean; duration?: number }) {
   const [visible, setVisible] = useState(false);
+
+  const pieces = useMemo<ConfettiPiece[]>(() => {
+    if (!active) return [];
+    return Array.from({ length: 80 }, (_, i) => ({
+      id: i,
+      x: 5 + (i / 80) * 90 + (((i * 7) % 10) - 5),
+      color: COLORS[i % COLORS.length],
+      shape: SHAPES[i % SHAPES.length],
+      delay: ((i * 31) % 500) / 1000,
+      duration: 2 + ((i * 13) % 200) / 100,
+      size: 6 + ((i * 17) % 8),
+      rotation: ((i * 47) % 360),
+      drift: ((i * 23) % 80) - 40,
+    }));
+  }, [active]);
 
   useEffect(() => {
     if (!active) return;
-
-    const newPieces: ConfettiPiece[] = Array.from({ length: 60 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      delay: Math.random() * 0.5,
-      duration: 1.5 + Math.random() * 1.5,
-      size: 6 + Math.random() * 6,
-    }));
-
-    setPieces(newPieces);
     setVisible(true);
-
-    const timer = setTimeout(() => {
-      setVisible(false);
-      setPieces([]);
-    }, duration);
-
+    const timer = setTimeout(() => setVisible(false), duration);
     return () => clearTimeout(timer);
   }, [active, duration]);
 
-  if (!visible || pieces.length === 0) return null;
-
   return (
-    <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
-      {pieces.map((piece) => (
-        <div
-          key={piece.id}
-          className="absolute animate-confetti-fall"
-          style={{
-            left: `${piece.x}%`,
-            top: '-10px',
-            width: `${piece.size}px`,
-            height: `${piece.size * 0.6}px`,
-            backgroundColor: piece.color,
-            borderRadius: '2px',
-            animationDelay: `${piece.delay}s`,
-            animationDuration: `${piece.duration}s`,
-            transform: `rotate(${Math.random() * 360}deg)`,
-          }}
-        />
-      ))}
-      <style jsx>{`
-        @keyframes confetti-fall {
-          0% {
-            transform: translateY(0) rotate(0deg) scale(1);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(100vh) rotate(720deg) scale(0.3);
-            opacity: 0;
-          }
-        }
-        .animate-confetti-fall {
-          animation-name: confetti-fall;
-          animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-          animation-fill-mode: forwards;
-        }
-      `}</style>
-    </div>
+    <AnimatePresence>
+      {visible && pieces.length > 0 && (
+        <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
+          {pieces.map((piece) => {
+            const shapeStyle =
+              piece.shape === 'circle'
+                ? { borderRadius: '50%', width: piece.size, height: piece.size }
+                : piece.shape === 'strip'
+                  ? { borderRadius: 2, width: piece.size * 0.4, height: piece.size * 1.2 }
+                  : { borderRadius: 2, width: piece.size, height: piece.size * 0.6 };
+
+            return (
+              <motion.div
+                key={piece.id}
+                style={{
+                  position: 'absolute',
+                  left: `${piece.x}%`,
+                  top: -20,
+                  backgroundColor: piece.color,
+                  ...shapeStyle,
+                }}
+                initial={{
+                  y: -20,
+                  rotate: 0,
+                  opacity: 1,
+                  scale: 0,
+                }}
+                animate={{
+                  y: [0, window.innerHeight * 0.4, window.innerHeight + 20],
+                  x: [0, piece.drift, piece.drift * 1.5],
+                  rotate: [0, piece.rotation, piece.rotation * 2],
+                  opacity: [0, 1, 1, 0],
+                  scale: [0, 1, 1, 0.3],
+                }}
+                transition={{
+                  duration: piece.duration,
+                  delay: piece.delay,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  times: [0, 0.3, 0.8, 1],
+                }}
+              />
+            );
+          })}
+        </div>
+      )}
+    </AnimatePresence>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import {
   ChevronDown,
@@ -277,11 +278,13 @@ export function CourseSidebar() {
                       onClick={() => toggleStage(stage.number)}
                       className="flex w-full items-center gap-1 px-2 pt-3 pb-1"
                     >
-                      {isExpanded ? (
-                        <ChevronDown className="h-3 w-3 shrink-0 text-sidebar-foreground/40" />
-                      ) : (
-                        <ChevronRight className="h-3 w-3 shrink-0 text-sidebar-foreground/40" />
-                      )}
+                      <motion.span
+                        animate={{ rotate: isExpanded ? 90 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="shrink-0"
+                      >
+                        <ChevronRight className="h-3 w-3 text-sidebar-foreground/40" />
+                      </motion.span>
                       <span className="flex-1 text-left text-[10px] font-bold uppercase tracking-widest text-secondary">
                         {sectionLabel}
                       </span>
@@ -293,9 +296,16 @@ export function CourseSidebar() {
                       </span>
                     </button>
 
-                    {/* Lecture items */}
+                    {/* Lecture items — animated accordion */}
+                    <AnimatePresence initial={false}>
                     {isExpanded && (
-                      <div className="space-y-0.5">
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: [0.25, 0.4, 0.25, 1] }}
+                        className="space-y-0.5 overflow-hidden"
+                      >
                         {visibleLectures.map((lectureId) => {
                           const entry = lectureMap[lectureId];
                           if (!entry) return null;
@@ -320,18 +330,23 @@ export function CourseSidebar() {
                                   : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                               )}
                             >
-                              {/* Number circle */}
-                              <span
-                                className={cn(
-                                  'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold',
-                                  isCompleted
-                                    ? 'bg-green-500 text-white'
-                                    : isActive
-                                      ? 'bg-sidebar-primary-foreground text-sidebar-primary'
-                                      : 'bg-secondary/80 text-secondary-foreground'
+                              {/* Number circle with active pulse */}
+                              <span className="relative mt-0.5 shrink-0">
+                                {isActive && (
+                                  <span className="absolute inset-0 rounded-full bg-sidebar-primary-foreground/30 animate-ping" style={{ animationDuration: '2s' }} />
                                 )}
-                              >
-                                {isCompleted ? '✓' : lectureNum}
+                                <span
+                                  className={cn(
+                                    'relative flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold transition-colors',
+                                    isCompleted
+                                      ? 'bg-green-500 text-white'
+                                      : isActive
+                                        ? 'bg-sidebar-primary-foreground text-sidebar-primary'
+                                        : 'bg-secondary/80 text-secondary-foreground'
+                                  )}
+                                >
+                                  {isCompleted ? '✓' : lectureNum}
+                                </span>
                               </span>
 
                               {/* Title + badges */}
@@ -355,8 +370,9 @@ export function CourseSidebar() {
                             </Link>
                           );
                         })}
-                      </div>
+                      </motion.div>
                     )}
+                    </AnimatePresence>
                   </div>
                 );
               })}
