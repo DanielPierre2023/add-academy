@@ -288,7 +288,7 @@ export default function AccountView() {
                   )}
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold">{user.name || 'Academy Student'}</h2>
+                  <h2 className="text-xl font-semibold">{user.displayName || 'Academy Student'}</h2>
                   <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
                     <Mail className="h-3.5 w-3.5" />
                     {user.email}
