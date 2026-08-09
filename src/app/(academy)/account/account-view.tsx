@@ -107,7 +107,7 @@ const STAGE_PRODUCTS: StageProduct[] = [
     lectures: 8,
     price: 39,
     features: ['8 interactive lectures', 'Training loop & optimization', 'Temperature & Top-k sampling', 'Load GPT-2 weights'],
-    icon: '⚡',
+    icon: '📊',
     color: '#10b981',
   },
   {

@@ -1731,7 +1731,7 @@ export default function AdminPage() {
       {
         id: 'course-launch',
         name: 'New Course Announcement',
-        subject: '🚀 New Course Available: {{course}}',
+        subject: 'New Course Available: {{course}}',
         body: `Hi {{name}},\n\nWe're thrilled to announce a new course on ADD Academy:\n\n{{course}}\n\n{{description}}\n\nStart learning now at: https://add-academy.vercel.app\n\nBest regards,\nThe ADD Academy Team`,
       },
       {
@@ -2098,7 +2098,7 @@ export default function AdminPage() {
       case 'bug': return '🐛';
       case 'ui': return '🎨';
       case 'content': return '📝';
-      case 'feature': return '💡';
+      case 'feature': return '📌';
       case 'performance': return '🐌';
       default: return '📋';
     }

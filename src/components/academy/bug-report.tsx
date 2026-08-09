@@ -12,7 +12,7 @@ const CATEGORIES = [
   { value: 'bug', label: 'Bug / Error', icon: '🐛' },
   { value: 'ui', label: 'UI / Display Issue', icon: '🎨' },
   { value: 'content', label: 'Content Error', icon: '📝' },
-  { value: 'feature', label: 'Feature Request', icon: '💡' },
+  { value: 'feature', label: 'Feature Request', icon: '📌' },
   { value: 'performance', label: 'Slow / Performance', icon: '🐌' },
   { value: 'other', label: 'Other', icon: '📋' },
 ] as const;
