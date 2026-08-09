@@ -4,6 +4,7 @@ import { useAcademyStore } from '@/lib/store/academy-store';
 import { t } from '@/lib/i18n';
 import { getLectureIndex, getLecturesByStage } from '@/lib/lectures';
 import { STAGES } from '@/types';
+import { getIcon } from '@/lib/icons';
 import {
   BookOpen,
   Code2,
@@ -512,15 +513,20 @@ export default function HomePage() {
                   <GlowCard glowColor={`${stage.color}40`}>
                     <div className="p-5">
                       <div className="flex items-center gap-3 mb-3">
-                        <div
-                          className="flex h-10 w-10 items-center justify-center rounded-xl text-lg border transition-transform group-hover:scale-110"
-                          style={{
-                            backgroundColor: `${stage.color}15`,
-                            borderColor: `${stage.color}30`,
-                          }}
-                        >
-                          {stage.icon}
-                        </div>
+                        {(() => {
+                          const StageIcon = getIcon(stage.icon);
+                          return (
+                            <div
+                              className="flex h-10 w-10 items-center justify-center rounded-xl border transition-transform group-hover:scale-110"
+                              style={{
+                                backgroundColor: `${stage.color}15`,
+                                borderColor: `${stage.color}30`,
+                              }}
+                            >
+                              <StageIcon className="h-5 w-5" style={{ color: stage.color }} />
+                            </div>
+                          );
+                        })()}
                         <div className="flex-1 min-w-0">
                           <h3 className="text-sm font-bold truncate">
                             {stage.name[language]}

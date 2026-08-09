@@ -15,6 +15,7 @@ import {
   type PricingPlan,
 } from '@/lib/subscriptions/plans';
 import { t } from '@/lib/i18n';
+import { getIcon } from '@/lib/icons';
 import { cn } from '@/lib/utils';
 
 const cardFade = {
@@ -105,7 +106,8 @@ function PlanCard({
               <div className="flex h-5 w-5 items-center justify-center rounded-md bg-green-500/10">
                 <Check className="h-3 w-3 text-green-500" />
               </div>
-              {product?.icon} {product?.name}
+              {(() => { if (!product) return null; const I = getIcon(product.icon); return <I className="h-3.5 w-3.5 shrink-0" />; })()}
+              {product?.name}
             </li>
           );
         })}

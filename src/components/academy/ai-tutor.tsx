@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useAcademyStore } from '@/lib/store/academy-store';
+import { useAuth } from '@/lib/auth/auth-context';
 import { t } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import type { Language } from '@/types';
@@ -63,6 +64,7 @@ export function AITutor() {
     setTutorMode,
     awardXP,
   } = useAcademyStore();
+  const { session } = useAuth();
 
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -108,9 +110,14 @@ export function AITutor() {
     setIsLoading(true);
 
     try {
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.access_token}`;
+      }
+
       const response = await fetch('/api/ai-tutor', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({
           message: message.trim(),
           mode: tutorMode,

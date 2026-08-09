@@ -55,10 +55,18 @@ export async function POST(request: NextRequest) {
   try {
     const supabase = await createServerSupabaseClient();
 
-    // Verify authentication
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    // Try cookie-based auth first
+    let { data: { user } } = await supabase.auth.getUser();
+
+    // Fallback: if cookies didn't work, try Authorization header (implicit OAuth flow)
+    if (!user) {
+      const authHeader = request.headers.get('authorization');
+      if (authHeader?.startsWith('Bearer ')) {
+        const token = authHeader.slice(7);
+        const { data } = await supabase.auth.getUser(token);
+        user = data.user;
+      }
+    }
 
     if (!user) {
       return NextResponse.json(

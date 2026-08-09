@@ -24,6 +24,7 @@ import {
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { SAAS_PRODUCTS, BILLING_CYCLE_MONTHS } from '@/lib/subscriptions/plans';
+import { getIcon } from '@/lib/icons';
 import { cn } from '@/lib/utils';
 
 const fadeUp = {
@@ -390,7 +391,8 @@ export default function DashboardPage() {
                         ) : (
                           <Lock className="h-4 w-4 shrink-0" />
                         )}
-                        {p.icon} {p.name}
+                        {(() => { const I = getIcon(p.icon); return <I className="h-3.5 w-3.5 shrink-0" />; })()}
+                        {p.name}
                       </div>
                     ))}
                   </div>

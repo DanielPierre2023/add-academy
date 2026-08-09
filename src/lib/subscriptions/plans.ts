@@ -30,11 +30,11 @@ export interface PricingPlan {
 }
 
 export const SAAS_PRODUCTS = [
-  { id: 'pixelforge', name: 'PixelForge', icon: '🎨', description: 'AI image generation & editing' },
-  { id: 'clipcraft', name: 'ClipCraft', icon: '🎬', description: 'AI video creation & editing' },
-  { id: 'proseai', name: 'ProseAI', icon: '✍️', description: 'AI writing & content generation' },
-  { id: 'truthlens', name: 'TruthLens', icon: '🔍', description: 'AI fact-checking & verification' },
-  { id: 'docmind', name: 'DocMind', icon: '📄', description: 'AI document analysis & extraction' },
+  { id: 'pixelforge', name: 'PixelForge', icon: 'Palette', description: 'AI image generation & editing' },
+  { id: 'clipcraft', name: 'ClipCraft', icon: 'Film', description: 'AI video creation & editing' },
+  { id: 'proseai', name: 'ProseAI', icon: 'PenLine', description: 'AI writing & content generation' },
+  { id: 'truthlens', name: 'TruthLens', icon: 'ScanSearch', description: 'AI fact-checking & verification' },
+  { id: 'docmind', name: 'DocMind', icon: 'FileText', description: 'AI document analysis & extraction' },
 ] as const;
 
 export const STAGE_PLANS: PricingPlan[] = [

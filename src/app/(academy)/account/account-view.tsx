@@ -6,6 +6,7 @@ import { useAuth } from '@/components/auth/auth-provider';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import type { Language } from '@/types';
 import { STAGES } from '@/types';
+import { getIcon } from '@/lib/icons';
 import {
   User,
   Mail,
@@ -77,7 +78,7 @@ const STAGE_PRODUCTS: StageProduct[] = [
     lectures: 6,
     price: 19,
     features: ['6 interactive lectures', 'BPE Tokenizer from scratch', 'DataLoader & Embeddings', 'Code sandbox access'],
-    icon: '🔤',
+    icon: 'Binary',
     color: '#8b5cf6',
   },
   {
@@ -87,7 +88,7 @@ const STAGE_PRODUCTS: StageProduct[] = [
     lectures: 6,
     price: 29,
     features: ['6 interactive lectures', 'Self-Attention from scratch', 'Multi-Head Attention', 'Capstone project'],
-    icon: '🎯',
+    icon: 'ScanSearch',
     color: '#ec4899',
   },
   {
@@ -97,7 +98,7 @@ const STAGE_PRODUCTS: StageProduct[] = [
     lectures: 6,
     price: 29,
     features: ['6 interactive lectures', 'GELU, LayerNorm, Residuals', 'Transformer Block assembly', 'Code GPT-2 (124M)'],
-    icon: '🧱',
+    icon: 'Blocks',
     color: '#f59e0b',
   },
   {
@@ -107,7 +108,7 @@ const STAGE_PRODUCTS: StageProduct[] = [
     lectures: 8,
     price: 39,
     features: ['8 interactive lectures', 'Training loop & optimization', 'Temperature & Top-k sampling', 'Load GPT-2 weights'],
-    icon: '📊',
+    icon: 'BarChart3',
     color: '#10b981',
   },
   {
@@ -117,7 +118,7 @@ const STAGE_PRODUCTS: StageProduct[] = [
     lectures: 11,
     price: 39,
     features: ['11 interactive lectures', 'LoRA, RLHF, DPO', 'RAG & Chatbot building', 'Domain-specific LLMs'],
-    icon: '🎓',
+    icon: 'GraduationCap',
     color: '#ef4444',
   },
 ];
@@ -362,7 +363,9 @@ export default function AccountView() {
               {/* Free stages always shown */}
               <div className="flex items-center justify-between rounded-lg bg-green-500/10 p-3">
                 <div className="flex items-center gap-3">
-                  <span className="text-lg">🏗️</span>
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500/15">
+                    {(() => { const I = getIcon('Compass'); return <I className="h-4 w-4 text-blue-500" />; })()}
+                  </span>
                   <div>
                     <p className="text-sm font-medium">Getting Started + LLM Fundamentals</p>
                     <p className="text-xs text-muted-foreground">7 lectures — Free forever</p>
@@ -382,7 +385,9 @@ export default function AccountView() {
                     purchased ? 'bg-green-500/10' : 'bg-muted/50'
                   )}>
                     <div className="flex items-center gap-3">
-                      <span className="text-lg">{stage.icon}</span>
+                      <span className="flex h-7 w-7 items-center justify-center rounded-lg" style={{ backgroundColor: `${stage.color}15` }}>
+                        {(() => { const I = getIcon(stage.icon); return <I className="h-4 w-4" style={{ color: stage.color }} />; })()}
+                      </span>
                       <div>
                         <p className="text-sm font-medium">Stage {stage.stageNumber}: {stage.name[lang] || stage.name.en}</p>
                         <p className="text-xs text-muted-foreground">{stage.lectures} lectures</p>
@@ -611,7 +616,9 @@ export default function AccountView() {
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <span className="text-2xl">{stage.icon}</span>
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl" style={{ backgroundColor: `${stage.color}15` }}>
+                          {(() => { const I = getIcon(stage.icon); return <I className="h-5 w-5" style={{ color: stage.color }} />; })()}
+                        </span>
                         <div>
                           <p className="text-xs text-muted-foreground font-medium">Stage {stage.stageNumber}</p>
                           <h4 className="font-semibold text-sm">{stage.name[lang] || stage.name.en}</h4>

@@ -19,6 +19,7 @@ import {
 import { PageTransition } from '@/components/motion/page-transition';
 import { STAGES } from '@/types';
 import type { Language } from '@/types';
+import { getIcon } from '@/lib/icons';
 
 function formatTime(seconds: number): string {
   const h = Math.floor(seconds / 3600);
@@ -184,8 +185,9 @@ export default function ProgressPage() {
             return (
               <div key={stage.number}>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm">
-                    {stage.icon} {stageName}
+                  <span className="flex items-center gap-2 text-sm">
+                    {(() => { const I = getIcon(stage.icon); return <I className="h-4 w-4" style={{ color: stage.color }} />; })()}
+                    {stageName}
                   </span>
                   <span className="text-xs text-muted-foreground">
                     {done}/{total}
