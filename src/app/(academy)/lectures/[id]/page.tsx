@@ -5,13 +5,6 @@ import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import { STAGES } from '@/types';
 
-export async function generateStaticParams() {
-  const index = getLectureIndex();
-  return index.lectures
-    .filter((l) => l.id !== 'home')
-    .map((l) => ({ id: l.id }));
-}
-
 /**
  * Check whether a user can access a given stage, server-side.
  * Mirrors the logic in auth-context.tsx canAccessStage().
