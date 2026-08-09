@@ -48,6 +48,10 @@ import {
   ArrowDownRight,
   Plus,
   Megaphone,
+  Bug,
+  MessageSquare,
+  MessageCircle,
+  User,
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
@@ -137,6 +141,24 @@ interface CourseData {
   category: string;
   is_active: boolean;
   sort_order: number;
+}
+
+interface ReportData {
+  id: string;
+  student_id: string;
+  student_email: string;
+  student_name: string;
+  category: string;
+  priority: string;
+  title: string;
+  description: string;
+  page_url: string;
+  user_agent: string;
+  status: 'open' | 'in_progress' | 'resolved' | 'closed';
+  admin_response: string | null;
+  responded_at: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 /* ─── Helpers ───────────────────────────────────────── */
@@ -291,6 +313,7 @@ export default function AdminPage() {
   const [allStudents, setAllStudents] = useState<SchoolMember[]>([]);
   const [subscriptions, setSubscriptions] = useState<SubscriptionData[]>([]);
   const [courses, setCourses] = useState<CourseData[]>([]);
+  const [reports, setReports] = useState<ReportData[]>([]);
   const [expandedSchool, setExpandedSchool] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | false>(false);
   const [loading, setLoading] = useState(true);
@@ -303,6 +326,10 @@ export default function AdminPage() {
   const [subSearch, setSubSearch] = useState('');
   const [studentFilter, setStudentFilter] = useState<'all' | 'free' | 'paid' | 'org'>('all');
   const [subFilter, setSubFilter] = useState<'all' | 'active' | 'canceled' | 'past_due'>('all');
+  const [reportSearch, setReportSearch] = useState('');
+  const [reportFilter, setReportFilter] = useState<'all' | 'open' | 'in_progress' | 'resolved' | 'closed'>('all');
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
+  const [replyText, setReplyText] = useState('');
 
   // Dialog states
   const [emailDialogOpen, setEmailDialogOpen] = useState(false);
@@ -353,6 +380,7 @@ export default function AdminPage() {
         { data: studentsData },
         { data: subsData },
         { data: coursesData },
+        { data: reportsData },
       ] = await Promise.all([
         supabase.from('academy_schools').select('*').order('name', { ascending: true }),
         supabase
@@ -361,11 +389,13 @@ export default function AdminPage() {
           .order('created_at', { ascending: false }),
         supabase.from('academy_subscriptions').select('*').order('created_at', { ascending: false }),
         supabase.from('academy_courses').select('*').order('sort_order', { ascending: true }),
+        supabase.from('academy_reports').select('*').order('created_at', { ascending: false }),
       ]);
       if (schoolsData) setSchools(schoolsData as SchoolData[]);
       if (studentsData) setAllStudents(studentsData as SchoolMember[]);
       if (subsData) setSubscriptions(subsData as SubscriptionData[]);
       if (coursesData) setCourses(coursesData as CourseData[]);
+      if (reportsData) setReports(reportsData as ReportData[]);
     } else if (user?.schoolId) {
       const [{ data: schoolData }, { data: memberData }, { data: subsData }] = await Promise.all([
         supabase.from('academy_schools').select('*').eq('id', user.schoolId).single(),
@@ -673,6 +703,58 @@ export default function AdminPage() {
       )
     );
   };
+
+  /* ─── Report actions ─────────────────────────────── */
+
+  const updateReportStatus = async (reportId: string, status: ReportData['status']) => {
+    await supabase.from('academy_reports').update({ status }).eq('id', reportId);
+    setReports((prev) => prev.map((r) => (r.id === reportId ? { ...r, status } : r)));
+  };
+
+  const respondToReport = async (reportId: string) => {
+    if (!replyText.trim()) return;
+    const now = new Date().toISOString();
+    await supabase
+      .from('academy_reports')
+      .update({
+        admin_response: replyText.trim(),
+        responded_at: now,
+        status: 'resolved' as const,
+      })
+      .eq('id', reportId);
+    setReports((prev) =>
+      prev.map((r) =>
+        r.id === reportId
+          ? { ...r, admin_response: replyText.trim(), responded_at: now, status: 'resolved' as const }
+          : r
+      )
+    );
+    setReplyingTo(null);
+    setReplyText('');
+  };
+
+  const deleteReport = async (reportId: string) => {
+    await supabase.from('academy_reports').delete().eq('id', reportId);
+    setReports((prev) => prev.filter((r) => r.id !== reportId));
+  };
+
+  const filteredReports = useMemo(() => {
+    let result = reports;
+    if (reportSearch) {
+      const q = reportSearch.toLowerCase();
+      result = result.filter(
+        (r) =>
+          r.title.toLowerCase().includes(q) ||
+          r.description.toLowerCase().includes(q) ||
+          r.student_name.toLowerCase().includes(q) ||
+          r.student_email.toLowerCase().includes(q)
+      );
+    }
+    if (reportFilter !== 'all') {
+      result = result.filter((r) => r.status === reportFilter);
+    }
+    return result;
+  }, [reports, reportSearch, reportFilter]);
 
   /* ─── Access gate ───────────────────────────────── */
 
@@ -1913,6 +1995,232 @@ export default function AdminPage() {
     );
   };
 
+  /* ─── TAB: Reports ───────────────────────────────── */
+
+  const reportStatusColor = (status: string) => {
+    switch (status) {
+      case 'open': return 'bg-blue-500/10 text-blue-500';
+      case 'in_progress': return 'bg-amber-500/10 text-amber-500';
+      case 'resolved': return 'bg-green-500/10 text-green-500';
+      case 'closed': return 'bg-muted text-muted-foreground';
+      default: return 'bg-muted text-muted-foreground';
+    }
+  };
+
+  const reportPriorityColor = (priority: string) => {
+    switch (priority) {
+      case 'high': return 'bg-red-500/10 text-red-500';
+      case 'medium': return 'bg-amber-500/10 text-amber-500';
+      case 'low': return 'bg-blue-500/10 text-blue-500';
+      default: return 'bg-muted text-muted-foreground';
+    }
+  };
+
+  const categoryIcon = (cat: string) => {
+    switch (cat) {
+      case 'bug': return '🐛';
+      case 'ui': return '🎨';
+      case 'content': return '📝';
+      case 'feature': return '💡';
+      case 'performance': return '🐌';
+      default: return '📋';
+    }
+  };
+
+  const openReports = reports.filter((r) => r.status === 'open').length;
+  const inProgressReports = reports.filter((r) => r.status === 'in_progress').length;
+  const resolvedReports = reports.filter((r) => r.status === 'resolved').length;
+
+  const ReportsTab = () => (
+    <div className="space-y-4">
+      {/* Stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <StatCard icon={Bug} label="Total Reports" value={reports.length} color="text-primary" />
+        <StatCard icon={AlertCircle} label="Open" value={openReports} color="text-blue-500" />
+        <StatCard icon={Clock} label="In Progress" value={inProgressReports} color="text-amber-500" />
+        <StatCard icon={CheckCircle2} label="Resolved" value={resolvedReports} color="text-green-500" />
+      </div>
+
+      {/* Search & filter */}
+      <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex-1">
+          <SearchBar
+            value={reportSearch}
+            onChange={setReportSearch}
+            placeholder={t('Search reports...', 'Caută rapoarte...')}
+          />
+        </div>
+        <div className="flex gap-1.5 flex-wrap">
+          {(['all', 'open', 'in_progress', 'resolved', 'closed'] as const).map((f) => (
+            <button
+              key={f}
+              onClick={() => setReportFilter(f)}
+              className={cn(
+                'rounded-lg px-3 py-1.5 text-xs font-medium transition-colors whitespace-nowrap',
+                reportFilter === f
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted text-muted-foreground hover:text-foreground'
+              )}
+            >
+              {f === 'all' ? 'All' : f === 'in_progress' ? 'In Progress' : f.charAt(0).toUpperCase() + f.slice(1)}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Reports list */}
+      {filteredReports.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-border bg-card/50 p-8 text-center">
+          <Bug className="mx-auto h-10 w-10 text-muted-foreground/50" />
+          <p className="mt-3 text-sm text-muted-foreground">
+            {reports.length === 0
+              ? t('No reports yet. Users can submit reports using the bug button.', 'Niciun raport încă.')
+              : t('No reports match your filters.', 'Niciun raport nu corespunde filtrelor.')}
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {filteredReports.map((report) => (
+            <div key={report.id} className="rounded-xl border border-border bg-card overflow-hidden">
+              {/* Report header */}
+              <div className="p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-base">{categoryIcon(report.category)}</span>
+                      <span className="text-sm font-semibold text-foreground">{report.title}</span>
+                      <span className={cn('rounded px-1.5 py-0.5 text-[10px] font-medium', reportStatusColor(report.status))}>
+                        {report.status === 'in_progress' ? 'In Progress' : report.status.charAt(0).toUpperCase() + report.status.slice(1)}
+                      </span>
+                      <span className={cn('rounded px-1.5 py-0.5 text-[10px] font-medium', reportPriorityColor(report.priority))}>
+                        {report.priority}
+                      </span>
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                        {report.category}
+                      </span>
+                    </div>
+                    <div className="mt-1.5 text-xs text-muted-foreground flex items-center gap-3 flex-wrap">
+                      <span className="flex items-center gap-1">
+                        <User className="h-3 w-3" />
+                        {report.student_name} ({report.student_email})
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        {formatDate(report.created_at)}
+                      </span>
+                      {report.page_url && (
+                        <span className="flex items-center gap-1">
+                          <Globe className="h-3 w-3" />
+                          {report.page_url}
+                        </span>
+                      )}
+                    </div>
+                    {report.description && (
+                      <div className="mt-2 text-sm text-foreground/80 bg-muted/50 rounded-lg p-3 whitespace-pre-wrap">
+                        {report.description}
+                      </div>
+                    )}
+
+                    {/* Admin response */}
+                    {report.admin_response && (
+                      <div className="mt-2 rounded-lg border border-green-500/20 bg-green-500/5 p-3">
+                        <div className="flex items-center gap-1.5 text-[10px] font-medium text-green-600 mb-1">
+                          <MessageCircle className="h-3 w-3" />
+                          Admin Response · {formatDate(report.responded_at)}
+                        </div>
+                        <div className="text-sm text-foreground/80 whitespace-pre-wrap">{report.admin_response}</div>
+                      </div>
+                    )}
+
+                    {/* Reply form */}
+                    {replyingTo === report.id && (
+                      <div className="mt-3 space-y-2">
+                        <textarea
+                          value={replyText}
+                          onChange={(e) => setReplyText(e.target.value)}
+                          placeholder={t('Write your response...', 'Scrie răspunsul tău...')}
+                          rows={3}
+                          className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 resize-none"
+                          autoFocus
+                        />
+                        <div className="flex justify-end gap-2">
+                          <Button variant="outline" size="sm" onClick={() => { setReplyingTo(null); setReplyText(''); }}>
+                            Cancel
+                          </Button>
+                          <Button size="sm" disabled={!replyText.trim()} onClick={() => respondToReport(report.id)}>
+                            <Send className="h-3.5 w-3.5" />
+                            Send & Resolve
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex flex-col gap-1 shrink-0">
+                    {report.status === 'open' && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateReportStatus(report.id, 'in_progress')}
+                        className="text-amber-500"
+                      >
+                        <Clock className="h-3.5 w-3.5" />
+                        Start
+                      </Button>
+                    )}
+                    {(report.status === 'open' || report.status === 'in_progress') && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setReplyingTo(report.id);
+                          setReplyText(report.admin_response || '');
+                        }}
+                      >
+                        <MessageSquare className="h-3.5 w-3.5" />
+                        Reply
+                      </Button>
+                    )}
+                    {report.status !== 'closed' && report.status !== 'resolved' && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateReportStatus(report.id, 'resolved')}
+                        className="text-green-500"
+                      >
+                        <CheckCircle2 className="h-3.5 w-3.5" />
+                        Resolve
+                      </Button>
+                    )}
+                    {report.status === 'resolved' && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateReportStatus(report.id, 'closed')}
+                      >
+                        <XCircle className="h-3.5 w-3.5" />
+                        Close
+                      </Button>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => deleteReport(report.id)}
+                      className="text-muted-foreground hover:text-destructive"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
   /* ─── Dialogs ──────────────────────────────────── */
 
   const EmailDialog = () => (
@@ -2256,6 +2564,15 @@ export default function AdminPage() {
             <TrendingUp className="h-3.5 w-3.5" />
             {t('Analytics', 'Analiză')}
           </TabsTrigger>
+          <TabsTrigger value="reports">
+            <Bug className="h-3.5 w-3.5" />
+            {t('Reports', 'Rapoarte')}
+            {openReports > 0 && (
+              <span className="ml-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white">
+                {openReports}
+              </span>
+            )}
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview">
@@ -2278,6 +2595,9 @@ export default function AdminPage() {
         </TabsContent>
         <TabsContent value="analytics">
           <AnalyticsTab />
+        </TabsContent>
+        <TabsContent value="reports">
+          <ReportsTab />
         </TabsContent>
       </Tabs>
 
