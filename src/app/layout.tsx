@@ -7,6 +7,7 @@ import { AuthProvider } from '@/lib/auth/auth-context';
 import { XPToastContainer } from '@/components/gamification/xp-toast';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { HtmlLangSync } from '@/components/i18n/html-lang-sync';
+import { ProgressSyncProvider } from '@/components/academy/progress-sync-provider';
 
 const manrope = Manrope({
   variable: '--font-manrope',
@@ -100,10 +101,18 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        {/* Skip to content link for keyboard/screen-reader users */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:shadow-lg focus:outline-none"
+        >
+          Skip to content
+        </a>
         <GoogleAnalytics />
         <ThemeProvider>
           <AuthProvider>
             <HtmlLangSync />
+            <ProgressSyncProvider />
             {children}
             <XPToastContainer />
           </AuthProvider>

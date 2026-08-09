@@ -1,49 +1,52 @@
+import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
 
-/** Only allow relative paths that start with / — block protocol-relative and absolute URLs */
-function sanitizeRedirect(next: string | null): string {
-  if (!next) return '/';
-  // Must start with / and must NOT start with // (protocol-relative)
-  if (next.startsWith('/') && !next.startsWith('//')) return next;
-  return '/';
-}
-
-export async function GET(request: Request) {
+/**
+ * GET /auth/callback
+ *
+ * Handles the OAuth / PKCE code exchange after sign-in with Google
+ * (or any other OAuth provider). Supabase redirects here with a
+ * `code` query parameter; we exchange it for a session and set
+ * the auth cookies so server-side auth works on subsequent requests.
+ */
+export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
-  const next = sanitizeRedirect(searchParams.get('next'));
+  const next = searchParams.get('next') ?? '/';
+
+  // Validate redirect — only allow relative paths (prevent open redirect)
+  const redirectTo = next.startsWith('/') && !next.startsWith('//') ? next : '/';
 
   if (code) {
-    const cookieStore = await cookies();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-          setAll(cookiesToSet) {
-            try {
-              cookiesToSet.forEach(({ name, value, options }) =>
-                cookieStore.set(name, value, options)
-              );
-            } catch {
-              // Called from Server Component — ignore
-            }
-          },
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      return NextResponse.redirect(`${origin}/login?error=auth_callback_error`);
+    }
+
+    const response = NextResponse.redirect(`${origin}${redirectTo}`);
+
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
         },
-      }
-    );
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            response.cookies.set(name, value, options);
+          });
+        },
+      },
+    });
 
     const { error } = await supabase.auth.exchangeCodeForSession(code);
+
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
+      return response;
     }
   }
 
-  // Auth error — redirect to login with error
-  return NextResponse.redirect(`${origin}/login?error=auth_failed`);
+  // If code exchange failed or no code present, redirect to login with error
+  return NextResponse.redirect(`${origin}/login?error=auth_callback_error`);
 }

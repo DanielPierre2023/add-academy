@@ -23,7 +23,7 @@ export default function AcademyLayout({
         <CourseSidebar />
 
         {/* Main content — offset by sidebar width on desktop */}
-        <main className="flex-1 overflow-y-auto lg:ml-[260px]">
+        <main id="main-content" className="flex-1 overflow-y-auto lg:ml-[260px]">
           <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
             {children}
           </div>

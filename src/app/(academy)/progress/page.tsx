@@ -97,6 +97,31 @@ export default function ProgressPage() {
     window.print();
   };
 
+  const handleDataExport = () => {
+    const exportData = {
+      exportedAt: new Date().toISOString(),
+      stats: {
+        xp: stats.xp,
+        level: stats.level,
+        streak: stats.streak,
+        lecturesCompleted: stats.lecturesCompleted,
+        quizAverage: quizAvg,
+        completionPercentage: completion,
+      },
+      progress,
+      quizScores,
+    };
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+      type: 'application/json',
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `add-academy-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <PageTransition>
     <div className="space-y-8 pb-16 print:pb-0">
@@ -105,10 +130,14 @@ export default function ProgressPage() {
         <BarChart3 className="mx-auto h-16 w-16 text-secondary mb-4 print:hidden" />
         <h1 className="text-3xl font-bold font-heading mb-2">{txt.title}</h1>
         <p className="text-muted-foreground">{txt.subtitle}</p>
-        <div className="mt-4 print:hidden">
+        <div className="mt-4 flex gap-2 justify-center print:hidden">
           <Button onClick={handleExport} className="gap-2">
             <Download className="h-4 w-4" />
             {txt.export}
+          </Button>
+          <Button onClick={handleDataExport} variant="outline" className="gap-2">
+            <Download className="h-4 w-4" />
+            Export Data (JSON)
           </Button>
         </div>
       </div>
