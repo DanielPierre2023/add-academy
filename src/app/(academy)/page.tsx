@@ -88,7 +88,9 @@ export default function HomePage() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <Card className="text-center">
             <CardContent className="pt-6">
-              <div className="mx-auto mb-4 text-4xl">🧠</div>
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
+                <BookOpen className="h-7 w-7 text-primary" />
+              </div>
               <CardTitle className="mb-2 text-base">
                 {language === 'ro' ? 'Teoria LLM' : language === 'el' ? 'Θεωρία LLM' : 'LLM Theory'}
               </CardTitle>
@@ -103,7 +105,9 @@ export default function HomePage() {
           </Card>
           <Card className="text-center">
             <CardContent className="pt-6">
-              <div className="mx-auto mb-4 text-4xl">💻</div>
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-secondary/10">
+                <Code2 className="h-7 w-7 text-secondary" />
+              </div>
               <CardTitle className="mb-2 text-base">
                 {language === 'ro' ? 'Cod Practic' : language === 'el' ? 'Πρακτικός Κώδικας' : 'Hands-On Code'}
               </CardTitle>
@@ -118,7 +122,9 @@ export default function HomePage() {
           </Card>
           <Card className="text-center">
             <CardContent className="pt-6">
-              <div className="mx-auto mb-4 text-4xl">🚀</div>
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-green-500/10">
+                <Play className="h-7 w-7 text-green-600" />
+              </div>
               <CardTitle className="mb-2 text-base">
                 {language === 'ro' ? 'Antrenare & Implementare' : language === 'el' ? 'Εκπαίδευση & Ανάπτυξη' : 'Training & Deployment'}
               </CardTitle>

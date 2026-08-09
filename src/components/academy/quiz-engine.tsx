@@ -5,7 +5,7 @@ import { useAcademyStore } from '@/lib/store/academy-store';
 import { t } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import type { Language } from '@/types';
-import { CheckCircle2, RotateCcw, Zap } from 'lucide-react';
+import { CheckCircle2, RotateCcw, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -301,7 +301,7 @@ export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
                 </div>
                 {xpEarned > 0 && (
                   <div className="flex items-center gap-1 text-xs text-secondary font-bold mt-0.5">
-                    <Zap className="h-3 w-3" />
+                    <Star className="h-3 w-3" />
                     +{xpEarned} XP
                   </div>
                 )}

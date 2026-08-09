@@ -11,16 +11,16 @@ import {
   Mail,
   Shield,
   Crown,
-  Zap,
+  Unlock,
   BookOpen,
   Code2,
-  Brain,
+  ClipboardCheck,
   Trophy,
   Flame,
   ChevronRight,
   Check,
   Star,
-  Sparkles,
+  ArrowUpRight,
   Clock,
   ArrowRight,
   CreditCard,
@@ -307,7 +307,7 @@ export default function AccountView() {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
               { icon: BookOpen, label: 'Lectures', value: `${completedLectures}/49`, color: 'text-blue-500' },
-              { icon: Brain, label: 'Quizzes', value: String(quizzesTaken), color: 'text-purple-500' },
+              { icon: ClipboardCheck, label: 'Quizzes', value: String(quizzesTaken), color: 'text-purple-500' },
               { icon: Code2, label: 'Code Runs', value: String(totalCodeBlocksRun), color: 'text-green-500' },
               { icon: Flame, label: 'Streak', value: `${streak} days`, color: 'text-orange-500' },
             ].map(stat => (
@@ -408,7 +408,7 @@ export default function AccountView() {
                 className="mt-4 w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold"
                 onClick={() => setActiveTab('courses')}
               >
-                <Sparkles className="mr-2 h-4 w-4" />
+                <ArrowUpRight className="mr-2 h-4 w-4" />
                 Browse Courses & Pricing
               </Button>
             )}
@@ -745,7 +745,7 @@ export default function AccountView() {
             <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
               <span className="flex items-center gap-1"><Shield className="h-3.5 w-3.5" /> Secure payment via Stripe</span>
               <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> 3-month access</span>
-              <span className="flex items-center gap-1"><Zap className="h-3.5 w-3.5" /> Instant access</span>
+              <span className="flex items-center gap-1"><Unlock className="h-3.5 w-3.5" /> Instant access</span>
             </div>
             <p className="text-xs text-muted-foreground">
               One-time payment. No recurring charges. No auto-renewal.

@@ -10,7 +10,7 @@ import {
   Crown,
   Flame,
   Star,
-  Zap,
+  Award,
   Users,
 } from 'lucide-react';
 import type { Language } from '@/types';
@@ -213,7 +213,7 @@ export default function LeaderboardPage() {
                     </td>
                     <td className="text-right py-3 px-3 tabular-nums">
                       <span className="flex items-center justify-end gap-1">
-                        <Zap className="h-3 w-3 text-yellow-500" />
+                        <Award className="h-3 w-3 text-yellow-500" />
                         {entry.xp.toLocaleString()}
                       </span>
                     </td>

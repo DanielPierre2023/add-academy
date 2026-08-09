@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
   Cpu,
-  Zap,
+  Layers,
   FlaskConical,
   BarChart3,
   CheckCircle2,
@@ -19,7 +19,7 @@ import type { Language } from '@/types';
 const FRAMEWORKS = [
   {
     id: 'pytorch',
-    icon: Zap,
+    icon: Layers,
     color: 'text-orange-500',
     bg: 'bg-orange-500/10',
     borderColor: 'border-orange-500/30',

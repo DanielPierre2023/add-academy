@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, Sparkles, Zap, Crown, ChevronDown, ChevronUp, Download } from 'lucide-react';
+import { Check, Gift, Clock, Crown, ChevronDown, ChevronUp, Download } from 'lucide-react';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { useAuth } from '@/lib/auth/auth-context';
 import {
@@ -82,7 +82,7 @@ function PlanCard({
         })}
         {plan.id === 'full-access' && (
           <li className="flex items-center gap-2 text-sm text-secondary font-medium">
-            <Sparkles className="h-4 w-4 shrink-0" />
+            <Gift className="h-4 w-4 shrink-0" />
             {language === 'ro'
               ? 'Cursuri viitoare incluse'
               : language === 'el'
@@ -160,7 +160,7 @@ export default function PricingPage() {
               : 'Stages 0 & 1 are free forever. Choose a package or buy individual access.'}
         </p>
         <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 text-sm text-muted-foreground">
-          <Zap className="h-4 w-4 text-secondary" />
+          <Clock className="h-4 w-4 text-secondary" />
           {language === 'ro'
             ? 'Facturare la fiecare 3 luni'
             : language === 'el'

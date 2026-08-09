@@ -11,7 +11,7 @@ import {
   BookOpen,
   Clock,
   Trophy,
-  Zap,
+  Flame,
   Target,
   CheckCircle2,
   BarChart3,
@@ -142,7 +142,7 @@ export default function ProgressPage() {
         </Card>
         <Card>
           <CardContent className="pt-6 text-center">
-            <Zap className="h-8 w-8 mx-auto text-orange-500 mb-2" />
+            <Flame className="h-8 w-8 mx-auto text-orange-500 mb-2" />
             <div className="text-2xl font-bold">{stats.streak} {txt.days}</div>
             <div className="text-xs text-muted-foreground">{txt.currentStreak}</div>
           </CardContent>

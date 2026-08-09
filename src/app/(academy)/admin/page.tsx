@@ -39,7 +39,7 @@ import {
   Calendar,
   Clock,
   Award,
-  Zap,
+  Settings2,
   AlertCircle,
   CheckCircle2,
   XCircle,
@@ -1007,7 +1007,7 @@ export default function AdminPage() {
       {/* Quick actions */}
       <div className="rounded-xl border border-border bg-card p-4">
         <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-          <Zap className="h-4 w-4 text-amber-500" />
+          <Settings2 className="h-4 w-4 text-amber-500" />
           {t('Quick Actions', 'Acțiuni Rapide')}
         </h3>
         <div className="flex flex-wrap gap-2">
@@ -1684,7 +1684,7 @@ export default function AdminPage() {
       {/* SaaS Products */}
       <div className="rounded-xl border border-border bg-card p-4">
         <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-          <Zap className="h-4 w-4 text-violet-500" />
+          <Settings2 className="h-4 w-4 text-violet-500" />
           GenAI SaaS Products
         </h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">

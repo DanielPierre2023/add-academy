@@ -152,14 +152,14 @@ export const ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: 'streak-7',
-    icon: '⚡',
+    icon: '🔥',
     name: { en: 'Week Warrior', ro: 'Războinic al Săptămânii', el: 'Πολεμιστής Εβδομάδας' },
     description: { en: 'Study 7 days in a row', ro: 'Studiază 7 zile la rând', el: 'Μελετήστε 7 συνεχόμενες μέρες' },
     condition: (s) => s.streak >= 7,
   },
   {
     id: 'halfway',
-    icon: '🌟',
+    icon: '📚',
     name: { en: 'Halfway There', ro: 'La Jumătatea Drumului', el: 'Στα Μισά' },
     description: { en: 'Complete 25 lectures', ro: 'Finalizează 25 de lecții', el: 'Ολοκληρώστε 25 μαθήματα' },
     condition: (s) => s.lecturesCompleted >= 25,
@@ -173,7 +173,7 @@ export const ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: 'level-5',
-    icon: '🚀',
+    icon: '⭐',
     name: { en: 'Rising Star', ro: 'Stea în Ascensiune', el: 'Ανερχόμενο Αστέρι' },
     description: { en: 'Reach level 5', ro: 'Atinge nivelul 5', el: 'Φτάστε στο επίπεδο 5' },
     condition: (s) => s.level >= 5,
@@ -213,7 +213,7 @@ export const STAGES: Stage[] = [
   {
     number: 0,
     name: { en: 'Getting Started', ro: 'Introducere', el: 'Εισαγωγή' },
-    icon: '🏗️',
+    icon: '📋',
     lectures: ['0'],
     color: '#3b82f6',
   },
@@ -234,7 +234,7 @@ export const STAGES: Stage[] = [
   {
     number: 3,
     name: { en: 'Attention Mechanism', ro: 'Mecanismul Atenției', el: 'Μηχανισμός Προσοχής' },
-    icon: '🎯',
+    icon: '🔍',
     lectures: ['13', '14', '15', '16', '17', '18'],
     color: '#ec4899',
   },
@@ -248,7 +248,7 @@ export const STAGES: Stage[] = [
   {
     number: 5,
     name: { en: 'Pretraining', ro: 'Pre-antrenare', el: 'Προεκπαίδευση' },
-    icon: '⚡',
+    icon: '📊',
     lectures: ['25', '26', '27', '28', '29', '30', '31', '32', '32b'],
     color: '#10b981',
   },
@@ -262,7 +262,7 @@ export const STAGES: Stage[] = [
   {
     number: 7,
     name: { en: 'GenAI SaaS Products', ro: 'Curs de IA Generativă', el: 'Προϊόντα GenAI SaaS' },
-    icon: '⭐',
+    icon: '📦',
     lectures: ['genai-0', 'genai-1', 'genai-2', 'genai-3', 'genai-4', 'genai-5'],
     color: '#6366f1',
   },
@@ -276,7 +276,7 @@ export const STAGES: Stage[] = [
   {
     number: 9,
     name: { en: 'Advanced Topics', ro: 'Subiecte Avansate', el: 'Προχωρημένα Θέματα' },
-    icon: '🚀',
+    icon: '🏅',
     lectures: ['52', '53', '54', '55'],
     color: '#14b8a6',
   },

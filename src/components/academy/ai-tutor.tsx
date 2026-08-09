@@ -21,7 +21,6 @@ import {
   Bug,
   Wrench,
   Loader2,
-  Sparkles,
   AlertTriangle,
 } from 'lucide-react';
 import type { AIMessage } from '@/types';
@@ -203,13 +202,40 @@ export function AITutor() {
     sendMessage(suggestion);
   };
 
-  if (!tutorOpen) return null;
-
   const lectureLabel =
     language === 'ro' ? 'Lecția' : language === 'el' ? 'Μάθημα' : 'Lecture';
 
+  const tutorButtonLabel =
+    language === 'ro' ? 'Tutor AI' : language === 'el' ? 'AI Καθηγητής' : 'AI Tutor';
+
+  const tutorButtonTooltip =
+    language === 'ro'
+      ? 'Ai o întrebare? Întreabă tutorul tău AI!'
+      : language === 'el'
+        ? 'Έχετε ερώτηση; Ρωτήστε τον AI καθηγητή!'
+        : 'Have a question? Ask your AI tutor!';
+
   return (
-    <div className="fixed right-0 top-0 z-50 flex h-full w-full flex-col overflow-hidden border-l bg-background shadow-2xl sm:w-96">
+    <>
+      {/* ═══ Floating Tutor Button ═══ */}
+      {!tutorOpen && (
+        <button
+          onClick={() => setTutorOpen(true)}
+          className="fixed bottom-24 right-6 z-40 group flex items-center gap-2 rounded-full bg-primary pl-1.5 pr-4 py-1.5 text-primary-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+          aria-label={tutorButtonLabel}
+          title={tutorButtonTooltip}
+        >
+          {/* Tutor avatar — friendly graduation cap image */}
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-lg">
+            🎓
+          </span>
+          <span className="text-sm font-semibold hidden sm:inline">{tutorButtonLabel}</span>
+        </button>
+      )}
+
+      {/* ═══ Sliding Panel ═══ */}
+      {!tutorOpen ? null : (
+      <div className="fixed right-0 top-0 z-50 flex h-full w-full flex-col overflow-hidden border-l bg-background shadow-2xl sm:w-96">
       {/* Header */}
       <div className="flex items-center justify-between border-b px-4 py-3 shrink-0">
         <div className="flex items-center gap-2">
@@ -271,8 +297,8 @@ export function AITutor() {
         <div className="space-y-4 py-4">
           {tutorMessages.length === 0 && (
             <div className="flex flex-col items-center gap-3 pt-8 text-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                <Sparkles className="h-6 w-6 text-primary" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-2xl">
+                🎓
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed px-4">
                 {t('tutor_welcome', language)}
@@ -373,5 +399,7 @@ export function AITutor() {
         </div>
       </div>
     </div>
+      )}
+    </>
   );
 }

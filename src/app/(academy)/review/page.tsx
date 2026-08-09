@@ -7,13 +7,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
-  Brain,
+  BookOpen,
   CheckCircle2,
   XCircle,
   RotateCcw,
-  Sparkles,
+  AlertCircle,
   Clock,
   Target,
+  Eye,
 } from 'lucide-react';
 import type { Language } from '@/types';
 
@@ -98,7 +99,7 @@ export default function ReviewPage() {
     <div className="space-y-8 pb-16">
       {/* Header */}
       <div className="text-center">
-        <Brain className="mx-auto h-16 w-16 text-secondary mb-4" />
+        <BookOpen className="mx-auto h-16 w-16 text-secondary mb-4" />
         <h1 className="text-3xl font-bold font-heading mb-2">{txt.title}</h1>
         <p className="text-muted-foreground max-w-xl mx-auto">{txt.subtitle}</p>
       </div>
@@ -133,7 +134,7 @@ export default function ReviewPage() {
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-yellow-500" />
+              <AlertCircle className="h-4 w-4 text-yellow-500" />
               {txt.weakAreas}
             </CardTitle>
           </CardHeader>
@@ -183,7 +184,7 @@ export default function ReviewPage() {
 
             {!showAnswer ? (
               <Button onClick={() => setShowAnswer(true)} className="w-full gap-2">
-                <Sparkles className="h-4 w-4" />
+                <Eye className="h-4 w-4" />
                 {txt.showAnswer}
               </Button>
             ) : (

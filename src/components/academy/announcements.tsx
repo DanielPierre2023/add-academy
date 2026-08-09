@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Bell, X, Megaphone, ChevronRight, Clock, AlertCircle, Zap } from 'lucide-react';
+import { Bell, X, Megaphone, ChevronRight, Clock, AlertCircle, AlertOctagon } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { supabase } from '@/lib/auth/supabase';
@@ -40,7 +40,7 @@ const PRIORITY_CONFIG = {
     label: 'Important',
   },
   urgent: {
-    icon: Zap,
+    icon: AlertOctagon,
     color: 'text-red-500',
     bg: 'bg-red-500/10',
     border: 'border-red-500/20',
