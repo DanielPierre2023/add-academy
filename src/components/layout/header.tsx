@@ -16,6 +16,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { ADDLogo } from '@/components/brand/add-logo';
+import { AnnouncementBell } from '@/components/academy/announcements';
 
 const LANGUAGES: { code: Language; label: string }[] = [
   { code: 'en', label: 'EN' },
@@ -117,6 +118,9 @@ export function Header() {
               {language === 'ro' ? 'Autentificare' : language === 'el' ? 'Σύνδεση' : 'Sign in'}
             </Link>
           )}
+
+          {/* Announcement bell */}
+          {user && <AnnouncementBell />}
 
           {/* Theme toggle */}
           <Tooltip>

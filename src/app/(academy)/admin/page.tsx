@@ -161,6 +161,20 @@ interface ReportData {
   updated_at: string;
 }
 
+interface AnnouncementData {
+  id: string;
+  title: string;
+  content: string;
+  priority: 'normal' | 'important' | 'urgent';
+  target_audience: 'all' | 'free' | 'paid' | 'org';
+  target_school_id: string | null;
+  created_by: string;
+  published_at: string;
+  expires_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 /* ─── Helpers ───────────────────────────────────────── */
 
 function isPlatformAdmin(schoolId: string | null | undefined, isAdmin: boolean): boolean {
@@ -314,6 +328,7 @@ export default function AdminPage() {
   const [subscriptions, setSubscriptions] = useState<SubscriptionData[]>([]);
   const [courses, setCourses] = useState<CourseData[]>([]);
   const [reports, setReports] = useState<ReportData[]>([]);
+  const [announcements, setAnnouncements] = useState<AnnouncementData[]>([]);
   const [expandedSchool, setExpandedSchool] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | false>(false);
   const [loading, setLoading] = useState(true);
@@ -351,6 +366,9 @@ export default function AdminPage() {
   const [announcementDialogOpen, setAnnouncementDialogOpen] = useState(false);
   const [announcementTitle, setAnnouncementTitle] = useState('');
   const [announcementBody, setAnnouncementBody] = useState('');
+  const [announcementPriority, setAnnouncementPriority] = useState<'normal' | 'important' | 'urgent'>('normal');
+  const [announcementTarget, setAnnouncementTarget] = useState<'all' | 'free' | 'paid' | 'org'>('all');
+  const [announcementPublishing, setAnnouncementPublishing] = useState(false);
 
   const [newOrgDialogOpen, setNewOrgDialogOpen] = useState(false);
   const [newOrgName, setNewOrgName] = useState('');
@@ -381,6 +399,7 @@ export default function AdminPage() {
         { data: subsData },
         { data: coursesData },
         { data: reportsData },
+        { data: announcementsData },
       ] = await Promise.all([
         supabase.from('academy_schools').select('*').order('name', { ascending: true }),
         supabase
@@ -390,12 +409,14 @@ export default function AdminPage() {
         supabase.from('academy_subscriptions').select('*').order('created_at', { ascending: false }),
         supabase.from('academy_courses').select('*').order('sort_order', { ascending: true }),
         supabase.from('academy_reports').select('*').order('created_at', { ascending: false }),
+        supabase.from('academy_announcements').select('*').order('published_at', { ascending: false }),
       ]);
       if (schoolsData) setSchools(schoolsData as SchoolData[]);
       if (studentsData) setAllStudents(studentsData as SchoolMember[]);
       if (subsData) setSubscriptions(subsData as SubscriptionData[]);
       if (coursesData) setCourses(coursesData as CourseData[]);
       if (reportsData) setReports(reportsData as ReportData[]);
+      if (announcementsData) setAnnouncements(announcementsData as AnnouncementData[]);
     } else if (user?.schoolId) {
       const [{ data: schoolData }, { data: memberData }, { data: subsData }] = await Promise.all([
         supabase.from('academy_schools').select('*').eq('id', user.schoolId).single(),
@@ -1852,6 +1873,62 @@ export default function AdminPage() {
             })}
           </div>
         </div>
+
+        {/* Published Announcements */}
+        <div className="rounded-xl border border-border bg-card p-4">
+          <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+            <Megaphone className="h-4 w-4 text-purple-500" />
+            {t('Published Announcements', 'Anunțuri Publicate')}
+            {announcements.length > 0 && (
+              <span className="rounded-full bg-purple-500/10 px-2 py-0.5 text-[10px] font-bold text-purple-500">
+                {announcements.length}
+              </span>
+            )}
+          </h3>
+          {announcements.length === 0 ? (
+            <p className="text-xs text-muted-foreground">{t('No announcements published yet.', 'Niciun anunț publicat încă.')}</p>
+          ) : (
+            <div className="space-y-2">
+              {announcements.map((ann) => (
+                <div key={ann.id} className="rounded-lg border border-border/50 bg-muted/30 p-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-foreground">{ann.title}</span>
+                        <span className={cn(
+                          'rounded px-1.5 py-0.5 text-[9px] font-bold uppercase',
+                          ann.priority === 'urgent' ? 'bg-red-500/10 text-red-500' :
+                          ann.priority === 'important' ? 'bg-amber-500/10 text-amber-500' :
+                          'bg-blue-500/10 text-blue-500'
+                        )}>
+                          {ann.priority}
+                        </span>
+                        <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground">
+                          {ann.target_audience}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground line-clamp-2">{ann.content}</p>
+                      <div className="mt-1 text-[10px] text-muted-foreground/60">
+                        {formatDate(ann.published_at)}
+                      </div>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-red-500 hover:text-red-600 hover:bg-red-500/10 shrink-0"
+                      onClick={async () => {
+                        await supabase.from('academy_announcements').delete().eq('id', ann.id);
+                        setAnnouncements((prev) => prev.filter((a) => a.id !== ann.id));
+                      }}
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     );
   };
@@ -2349,53 +2426,128 @@ export default function AdminPage() {
     );
   };
 
-  const AnnouncementDialog = () => (
-    <Dialog open={announcementDialogOpen} onOpenChange={setAnnouncementDialogOpen}>
-      <DialogContent className="sm:max-w-lg">
-        <DialogHeader>
-          <DialogTitle>{t('New Announcement', 'Anunț Nou')}</DialogTitle>
-          <DialogDescription>
-            {t('Send an announcement to all students.', 'Trimite un anunț tuturor studenților.')}
-          </DialogDescription>
-        </DialogHeader>
-        <div className="space-y-3 py-2">
-          <div>
-            <Label htmlFor="announcement-title">Title</Label>
-            <Input
-              id="announcement-title"
-              value={announcementTitle}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAnnouncementTitle(e.target.value)}
-              placeholder="Announcement title..."
-            />
+  const AnnouncementDialog = () => {
+    const priorities = [
+      { value: 'normal' as const, label: 'Normal', color: 'bg-blue-500/10 text-blue-500' },
+      { value: 'important' as const, label: t('Important', 'Important'), color: 'bg-amber-500/10 text-amber-500' },
+      { value: 'urgent' as const, label: t('Urgent', 'Urgent'), color: 'bg-red-500/10 text-red-500' },
+    ];
+    const targets = [
+      { value: 'all' as const, label: t('All Students', 'Toți Studenții') },
+      { value: 'free' as const, label: t('Free Users', 'Utilizatori Gratis') },
+      { value: 'paid' as const, label: t('Paid Users', 'Utilizatori Plătiți') },
+      { value: 'org' as const, label: t('Org Users', 'Utilizatori Org') },
+    ];
+
+    const handlePublish = async () => {
+      if (!announcementTitle.trim() || !announcementBody.trim() || !user) return;
+      setAnnouncementPublishing(true);
+
+      const { error } = await supabase.from('academy_announcements').insert({
+        title: announcementTitle.trim(),
+        content: announcementBody.trim(),
+        priority: announcementPriority,
+        target_audience: announcementTarget,
+        created_by: user.id,
+      });
+
+      setAnnouncementPublishing(false);
+
+      if (!error) {
+        setAnnouncementDialogOpen(false);
+        setAnnouncementTitle('');
+        setAnnouncementBody('');
+        setAnnouncementPriority('normal');
+        setAnnouncementTarget('all');
+      }
+    };
+
+    return (
+      <Dialog open={announcementDialogOpen} onOpenChange={setAnnouncementDialogOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>{t('New Announcement', 'Anunț Nou')}</DialogTitle>
+            <DialogDescription>
+              {t('Publish an announcement visible to students in the academy.', 'Publică un anunț vizibil studenților în academie.')}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 py-2">
+            <div>
+              <Label htmlFor="announcement-title">{t('Title', 'Titlu')}</Label>
+              <Input
+                id="announcement-title"
+                value={announcementTitle}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAnnouncementTitle(e.target.value)}
+                placeholder={t('Announcement title...', 'Titlul anunțului...')}
+              />
+            </div>
+            <div>
+              <Label htmlFor="announcement-body">{t('Message', 'Mesaj')}</Label>
+              <Textarea
+                id="announcement-body"
+                value={announcementBody}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAnnouncementBody(e.target.value)}
+                placeholder={t('Write your announcement...', 'Scrie anunțul...')}
+                rows={6}
+              />
+            </div>
+            <div>
+              <Label>{t('Priority', 'Prioritate')}</Label>
+              <div className="mt-1 flex gap-1.5">
+                {priorities.map((p) => (
+                  <button
+                    key={p.value}
+                    onClick={() => setAnnouncementPriority(p.value)}
+                    className={cn(
+                      'rounded-lg px-3 py-1.5 text-xs font-medium transition-colors',
+                      announcementPriority === p.value
+                        ? p.color + ' ring-1 ring-current'
+                        : 'bg-muted text-muted-foreground hover:text-foreground'
+                    )}
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <Label>{t('Target Audience', 'Audiență')}</Label>
+              <div className="mt-1 flex flex-wrap gap-1.5">
+                {targets.map((tgt) => (
+                  <button
+                    key={tgt.value}
+                    onClick={() => setAnnouncementTarget(tgt.value)}
+                    className={cn(
+                      'rounded-lg px-3 py-1.5 text-xs font-medium transition-colors',
+                      announcementTarget === tgt.value
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted text-muted-foreground hover:text-foreground'
+                    )}
+                  >
+                    {tgt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
-          <div>
-            <Label htmlFor="announcement-body">Message</Label>
-            <Textarea
-              id="announcement-body"
-              value={announcementBody}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAnnouncementBody(e.target.value)}
-              placeholder="Write your announcement..."
-              rows={6}
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
-          <Button
-            onClick={() => {
-              const content = `📢 ${announcementTitle}\n\n${announcementBody}`;
-              navigator.clipboard.writeText(content);
-              setAnnouncementDialogOpen(false);
-              alert('Announcement copied to clipboard. Notification system integration coming soon.');
-            }}
-          >
-            <Megaphone className="h-3.5 w-3.5" />
-            {t('Publish', 'Publică')}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
+          <DialogFooter>
+            <DialogClose render={<Button variant="outline" />}>{t('Cancel', 'Anulează')}</DialogClose>
+            <Button
+              onClick={handlePublish}
+              disabled={!announcementTitle.trim() || !announcementBody.trim() || announcementPublishing}
+            >
+              {announcementPublishing ? (
+                <span className="animate-spin">⏳</span>
+              ) : (
+                <Megaphone className="h-3.5 w-3.5" />
+              )}
+              {t('Publish', 'Publică')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    );
+  };
 
   const NewOrgDialog = () => (
     <Dialog open={newOrgDialogOpen} onOpenChange={setNewOrgDialogOpen}>
