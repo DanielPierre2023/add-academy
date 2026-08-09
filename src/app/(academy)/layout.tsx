@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/footer';
 import { CourseSidebar } from '@/components/layout/course-sidebar';
 import { AITutor } from '@/components/academy/ai-tutor';
 import { KeyboardNav } from '@/components/academy/keyboard-nav';
+import { BugReportButton } from '@/components/academy/bug-report';
 
 export default function AcademyLayout({
   children,
@@ -35,6 +36,9 @@ export default function AcademyLayout({
 
       {/* Keyboard shortcuts */}
       <KeyboardNav />
+
+      {/* Bug report floating button */}
+      <BugReportButton />
     </div>
   );
 }
