@@ -84,7 +84,8 @@ export function Header() {
                 )}
               </button>
               {/* Dropdown */}
-              <div className="absolute right-0 top-full mt-1 hidden w-48 rounded-lg border border-white/10 bg-primary p-1 shadow-xl group-hover:block">
+              <div className="absolute right-0 top-full hidden w-48 pt-1 group-hover:block">
+              <div className="rounded-lg border border-white/10 bg-primary p-1 shadow-xl">
                 <Link
                   href="/dashboard"
                   className="flex items-center gap-2 rounded-md px-3 py-2 text-xs hover:bg-white/10 transition-colors"
@@ -108,6 +109,7 @@ export function Header() {
                   <LogOut className="h-3.5 w-3.5" />
                   {language === 'ro' ? 'Deconectare' : language === 'el' ? 'Αποσύνδεση' : 'Sign out'}
                 </button>
+              </div>
               </div>
             </div>
           ) : (
