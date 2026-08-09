@@ -150,8 +150,33 @@ export default function PricingPage() {
   const [showStages, setShowStages] = useState(false);
   const [showSaas, setShowSaas] = useState(false);
 
-  const handleSelect = (plan: PricingPlan) => {
-    alert(`Redirecting to checkout for ${plan.name.en}...`);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const handleSelect = async (plan: PricingPlan) => {
+    if (!user) {
+      // Redirect to login first
+      window.location.href = `/login?redirect=/pricing`;
+      return;
+    }
+    setSelectedPlan(plan.id);
+    try {
+      // Call Stripe checkout API
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId: plan.id }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        // Checkout not yet configured
+        console.warn('Checkout API not configured:', data);
+        setSelectedPlan(null);
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setSelectedPlan(null);
+    }
   };
 
   if (isOrgUser) {

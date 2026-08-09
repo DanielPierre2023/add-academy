@@ -62,7 +62,7 @@ export default function SchoolApplyPage() {
   // Pre-fill contact info from user profile
   useEffect(() => {
     if (user) {
-      if (!contactName && user.name) setContactName(user.name);
+      if (!contactName && user.displayName) setContactName(user.displayName);
       if (!contactEmail && user.email) setContactEmail(user.email);
     }
   }, [user, contactName, contactEmail]);

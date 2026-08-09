@@ -93,7 +93,8 @@ interface AcademyState {
   completeReview: (lectureId: string, questionIndex: number, correct: boolean) => void;
 }
 
-const TOTAL_LECTURES = 49; // 44 main + 5 genai
+// Dynamically compute total lectures from STAGES to stay in sync
+const TOTAL_LECTURES = STAGES.reduce((sum, stage) => sum + stage.lectures.length, 0);
 
 function todayString(): string {
   return new Date().toISOString().split('T')[0];
@@ -316,14 +317,15 @@ export const useAcademyStore = create<AcademyState>()(
       getXPProgress: () => {
         const xp = get().xp;
         const level = levelFromXp(xp);
-        const currentLevelXP = xpForLevel(level);
+        // For level 1, progress starts from 0; for higher levels, from previous level threshold
+        const prevLevelXP = level <= 1 ? 0 : xpForLevel(level);
         const nextLevelXP = xpForLevel(level + 1);
-        const progressXP = xp - currentLevelXP;
-        const neededXP = nextLevelXP - currentLevelXP;
+        const progressXP = Math.max(0, xp - prevLevelXP);
+        const neededXP = nextLevelXP - prevLevelXP;
         return {
           current: progressXP,
           needed: neededXP,
-          percentage: neededXP > 0 ? Math.round((progressXP / neededXP) * 100) : 100,
+          percentage: neededXP > 0 ? Math.min(100, Math.round((progressXP / neededXP) * 100)) : 100,
         };
       },
 

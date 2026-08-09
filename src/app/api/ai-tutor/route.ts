@@ -1,5 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { z } from 'zod';
+
+const aiTutorSchema = z.object({
+  message: z.string().min(1).max(4000),
+  mode: z.enum(['explain', 'debug', 'build']).default('explain'),
+  lectureId: z.string().max(50).optional(),
+  language: z.enum(['en', 'ro', 'el']).default('en'),
+  history: z.array(z.object({
+    role: z.enum(['user', 'assistant']),
+    content: z.string(),
+  })).max(50).optional(),
+  conversationId: z.string().uuid().optional().nullable(),
+});
 
 const LANGUAGE_NAMES: Record<string, string> = {
   en: 'English',
@@ -22,10 +35,22 @@ async function checkSchoolRateLimit(
   const { data: student } = await supabase
     .from('academy_students')
     .select('school_id')
-    .eq('user_id', userId)
+    .eq('id', userId)
     .single();
 
-  if (!student?.school_id) return { allowed: true }; // not a school student — no limit
+  if (!student?.school_id) {
+    // General rate limit for non-school users: 100 conversations/day
+    const GENERAL_DAILY_LIMIT = 100;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const { count } = await supabase
+      .from('academy_ai_conversations')
+      .select('id', { count: 'exact', head: true })
+      .eq('student_id', userId)
+      .gte('created_at', today.toISOString());
+    const used = count ?? 0;
+    return { allowed: used < GENERAL_DAILY_LIMIT, limit: GENERAL_DAILY_LIMIT, used };
+  }
 
   const { data: school } = await supabase
     .from('academy_schools')
@@ -75,15 +100,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { message, mode, lectureId, language, history, conversationId } =
-      await request.json();
-
-    if (!message) {
+    const body = await request.json();
+    const parsed = aiTutorSchema.safeParse(body);
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Message is required' },
+        { error: 'Invalid request', details: parsed.error.flatten().fieldErrors },
         { status: 400 }
       );
     }
+    const { message, mode, lectureId, language, history, conversationId } = parsed.data;
 
     // Check school rate limit
     const rateCheck = await checkSchoolRateLimit(supabase, user.id);
@@ -125,10 +150,13 @@ export async function POST(request: NextRequest) {
     ];
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey,
+        },
         body: JSON.stringify({
           systemInstruction: {
             parts: [{ text: systemPrompt + langContext + lectureContext }],

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { t } from '@/lib/i18n';
 import { getLectureIndex } from '@/lib/lectures';
@@ -21,12 +21,66 @@ export default function CertificatePage() {
   const completedCount = Object.values(progress).filter((p) => p.completed).length;
   const percentage = getCompletionPercentage();
   const isEligible = percentage >= 80;
+  const [downloading, setDownloading] = useState(false);
 
   const quizValues = Object.values(quizScores);
   const quizAverage =
     quizValues.length > 0
       ? Math.round(quizValues.reduce((a, b) => a + b, 0) / quizValues.length)
       : 0;
+
+  const handleDownload = useCallback(async () => {
+    if (!name.trim() || downloading) return;
+    setDownloading(true);
+    try {
+      // Generate a simple certificate as a downloadable HTML file
+      const certDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      const certHtml = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>ADD Academy Certificate</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Manrope:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0a0a2e;font-family:'Manrope',sans-serif}
+.cert{width:900px;padding:60px;background:linear-gradient(135deg,#0d0d3a 0%,#1a1a5c 100%);border:3px solid #c8942a;border-radius:16px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.cert::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 30%,rgba(200,148,42,0.05) 0%,transparent 50%);pointer-events:none}
+h1{font-family:'Fraunces',serif;font-size:36px;color:#c8942a;margin-bottom:8px}
+.subtitle{font-size:14px;color:#8888bb;margin-bottom:40px}
+.certifies{font-size:16px;color:#aaa;margin-bottom:12px}
+.student-name{font-family:'Fraunces',serif;font-size:42px;font-weight:700;color:#fff;margin-bottom:16px;border-bottom:2px solid #c8942a;display:inline-block;padding-bottom:8px}
+.course-name{font-size:18px;color:#c8942a;margin:24px 0;font-style:italic}
+.stats{display:flex;justify-content:center;gap:48px;margin:32px 0;font-size:14px;color:#aaa}
+.stats .val{font-size:20px;font-weight:600;color:#fff;display:block}
+.date{font-size:13px;color:#777;margin-top:32px}
+</style></head><body>
+<div class="cert">
+<h1>ADD Academy</h1>
+<p class="subtitle">Certificate of Completion</p>
+<p class="certifies">This certifies that</p>
+<p class="student-name">${name.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+<p class="course-name">&ldquo;Building Large Language Models from Scratch&rdquo;</p>
+<div class="stats">
+<div><span class="val">${completedCount}</span>Lectures</div>
+<div><span class="val">${quizAverage}%</span>Quiz Average</div>
+<div><span class="val">${certDate}</span>Date</div>
+</div>
+<p class="date">Issued on ${certDate}</p>
+</div></body></html>`;
+
+      const blob = new Blob([certHtml], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ADD-Academy-Certificate-${name.replace(/\s+/g, '-')}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Certificate download failed:', err);
+    } finally {
+      setDownloading(false);
+    }
+  }, [name, downloading, completedCount, quizAverage]);
 
   return (
     <div className="space-y-8">
@@ -113,9 +167,9 @@ export default function CertificatePage() {
 
               {/* Download Button */}
               <div className="text-center">
-                <Button size="lg" disabled={!name.trim()} className="gap-2">
+                <Button size="lg" disabled={!name.trim() || downloading} onClick={handleDownload} className="gap-2">
                   <Download className="h-4 w-4" />
-                  {t('cert_download', language)}
+                  {downloading ? 'Generating...' : t('cert_download', language)}
                 </Button>
                 <p className="mt-2 text-xs text-muted-foreground">
                   PDF certificate with verification QR code

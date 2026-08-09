@@ -168,8 +168,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: 'scholar',
     icon: 'GraduationCap',
     name: { en: 'LLM Scholar', ro: 'Savant LLM', el: 'Μελετητής LLM' },
-    description: { en: 'Complete all 49 lectures', ro: 'Finalizează toate cele 49 de lecții', el: 'Ολοκληρώστε και τα 49 μαθήματα' },
-    condition: (s) => s.lecturesCompleted >= 49,
+    description: { en: 'Complete all lectures', ro: 'Finalizează toate lecțiile', el: 'Ολοκληρώστε όλα τα μαθήματα' },
+    condition: (s) => s.lecturesCompleted >= STAGES.reduce((sum, st) => sum + st.lectures.length, 0),
   },
   {
     id: 'level-5',

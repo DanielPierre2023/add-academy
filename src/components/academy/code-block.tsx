@@ -56,7 +56,7 @@ export function CodeBlock({ id, title, code, language, runnable }: CodeBlockProp
     if (!window.loadPyodide) {
       await new Promise<void>((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js';
+        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js';
         script.onload = () => resolve();
         script.onerror = () => reject(new Error('Failed to load Pyodide'));
         document.head.appendChild(script);
@@ -66,7 +66,7 @@ export function CodeBlock({ id, title, code, language, runnable }: CodeBlockProp
     // Initialize Pyodide
     if (!window.pyodide) {
       window.pyodide = await window.loadPyodide({
-        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/',
+        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/',
       });
     }
 

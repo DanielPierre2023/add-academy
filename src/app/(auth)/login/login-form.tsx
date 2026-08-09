@@ -16,7 +16,9 @@ export default function LoginForm() {
   const language = useAcademyStore((s) => s.language) as Language;
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get('redirect') || '/';
+  const rawRedirect = searchParams.get('redirect') || '/';
+  // Only allow relative paths — block protocol-relative and absolute URLs
+  const redirectTo = rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/';
   const errorParam = searchParams.get('error');
 
   const [email, setEmail] = useState('');

@@ -11,7 +11,8 @@ function findStageForLecture(lectureId: string): number {
   for (const stage of STAGES) {
     if (stage.lectures.includes(lectureId)) return stage.number;
   }
-  return -1;
+  // Unmapped lectures default to highest stage (locked) — never -1 (free)
+  return STAGES.length > 0 ? STAGES[STAGES.length - 1].number : 0;
 }
 
 interface ContentGateProps {

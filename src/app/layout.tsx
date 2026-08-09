@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/layout/theme-provider';
 import { AuthProvider } from '@/lib/auth/auth-context';
 import { XPToastContainer } from '@/components/gamification/xp-toast';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
+import { HtmlLangSync } from '@/components/i18n/html-lang-sync';
 
 const manrope = Manrope({
   variable: '--font-manrope',
@@ -102,6 +103,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <ThemeProvider>
           <AuthProvider>
+            <HtmlLangSync />
             {children}
             <XPToastContainer />
           </AuthProvider>

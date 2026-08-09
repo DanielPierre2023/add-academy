@@ -1,13 +1,19 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 /**
  * Wraps page content in a smooth fade + slide entrance animation.
- * Use in page.tsx files: <PageTransition>...content...</PageTransition>
+ * Respects prefers-reduced-motion by skipping animation.
  */
 export function PageTransition({ children }: { children: ReactNode }) {
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <>{children}</>;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
