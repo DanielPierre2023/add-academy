@@ -15,13 +15,13 @@ export interface PricingPlan {
   id: string;
   name: Record<string, string>;
   description: Record<string, string>;
-  type: 'stage' | 'saas' | 'package';
-  /** Price in EUR per 3-month cycle */
+  type: 'subscription';
   price: number;
-  /** Original price before discount (for display) */
-  originalPrice?: number;
-  /** What this plan unlocks */
+  interval: 'month' | 'year';
+  /** Original price before discount (for optional strikethrough display) */
+  originalPrice?: number;          // ← ADD THIS LINE
   includes: {
+    everything?: boolean;
     stages?: number[];
     products?: string[];
   };
