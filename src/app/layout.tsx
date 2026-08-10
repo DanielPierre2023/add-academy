@@ -8,6 +8,7 @@ import { XPToastContainer } from '@/components/gamification/xp-toast';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { HtmlLangSync } from '@/components/i18n/html-lang-sync';
 import { ProgressSyncProvider } from '@/components/academy/progress-sync-provider';
+import { getLectureIndex } from '@/lib/lectures';
 
 const manrope = Manrope({
   variable: '--font-manrope',
@@ -26,47 +27,55 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: 'ADD Academy — Build LLMs from Scratch',
-    template: '%s | ADD Academy',
-  },
-  description:
-    'An interactive course that takes you from zero to building large language models from scratch. Learn transformers, attention, tokenization, training, and deployment — with hands-on code in every lecture.',
-  keywords: [
-    'LLM', 'large language model', 'machine learning', 'AI course',
-    'transformers', 'attention mechanism', 'tokenization', 'fine-tuning',
-    'PyTorch', 'deep learning', 'NLP', 'GenAI', 'build LLM from scratch',
-    'AgenticAI', 'AI agents', 'ADD Individual Solutions',
-  ],
-  authors: [{ name: 'ADD Individual Solutions' }],
-  creator: 'ADD Individual Solutions',
-  publisher: 'ADD Individual Solutions',
-  metadataBase: new URL('https://academy.add-individual-solutions.com'),
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://academy.add-individual-solutions.com',
-    siteName: 'ADD Academy',
-    title: 'ADD Academy — Build LLMs from Scratch',
+/**
+ * Dynamic metadata — pulls lecture/code-block/quiz counts from the
+ * single source of truth (_index.json) so they never go stale.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const index = getLectureIndex();
+  const { totalLectures, totalCodeBlocks, totalQuizzes } = index;
+
+  const statsLine = `${totalLectures} lectures, ${totalCodeBlocks} code blocks, ${totalQuizzes} quizzes across 3 languages`;
+
+  return {
+    title: {
+      default: 'ADD Academy — Build LLMs from Scratch',
+      template: '%s | ADD Academy',
+    },
     description:
-      'Interactive course: build large language models from scratch. 66 lectures, 274 code blocks, 312 quiz questions across 3 languages.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'ADD Academy — Build LLMs from Scratch',
-      },
+      'An interactive course that takes you from zero to building large language models from scratch. Learn transformers, attention, tokenization, training, and deployment — with hands-on code in every lecture.',
+    keywords: [
+      'LLM', 'large language model', 'machine learning', 'AI course',
+      'transformers', 'attention mechanism', 'tokenization', 'fine-tuning',
+      'PyTorch', 'deep learning', 'NLP', 'GenAI', 'build LLM from scratch',
+      'AgenticAI', 'AI agents', 'ADD Individual Solutions',
     ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'ADD Academy — Build LLMs from Scratch',
-    description:
-      'Interactive course: build large language models from scratch. 66 lectures, 274 code blocks, 312 quiz questions.',
-    images: ['/og-image.png'],
-  },
+    authors: [{ name: 'ADD Individual Solutions' }],
+    creator: 'ADD Individual Solutions',
+    publisher: 'ADD Individual Solutions',
+    metadataBase: new URL('https://academy.add-individual-solutions.com'),
+    openGraph: {
+      type: 'website',
+      locale: 'en_US',
+      url: 'https://academy.add-individual-solutions.com',
+      siteName: 'ADD Academy',
+      title: 'ADD Academy — Build LLMs from Scratch',
+      description: `Interactive course: build large language models from scratch. ${statsLine}.`,
+      images: [
+        {
+          url: '/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: 'ADD Academy — Build LLMs from Scratch',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'ADD Academy — Build LLMs from Scratch',
+      description: `Interactive course: build large language models from scratch. ${statsLine}.`,
+      images: ['/og-image.png'],
+    },
   robots: {
     index: true,
     follow: true,
@@ -86,8 +95,9 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-touch-icon.png',
   },
-  manifest: '/manifest.json',
-};
+    manifest: '/manifest.json',
+  };
+}
 
 export default function RootLayout({
   children,

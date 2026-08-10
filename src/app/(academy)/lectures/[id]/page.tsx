@@ -135,28 +135,25 @@ function createContentTeaser(content: any): any {
     const html = teaser[lang];
     if (typeof html !== 'string') continue;
 
-    // Find a reasonable cut point: after the 3rd closing </p> or </div>
-    // that appears after at least 400 characters
-    const tagPattern = /<\/(?:p|div|section|h[1-6])>/gi;
-    let match: RegExpExecArray | null;
-    let cutIndex = -1;
-    let tagCount = 0;
+    // Extract only the title/header and first paragraph — nothing more.
+    // This prevents scraping of premium content while giving a meaningful preview.
+    const firstParagraph = html.match(/<p[^>]*>[\s\S]*?<\/p>/i);
+    const header = html.match(/<h[1-3][^>]*>[\s\S]*?<\/h[1-3]>/i);
 
-    while ((match = tagPattern.exec(html)) !== null) {
-      tagCount++;
-      if (match.index >= 400 && tagCount >= 3) {
-        cutIndex = match.index + match[0].length;
-        break;
-      }
+    let teaserHtml = '';
+    if (header) teaserHtml += header[0];
+    if (firstParagraph) teaserHtml += firstParagraph[0];
+
+    // Fallback: first 200 characters if no tags found
+    if (!teaserHtml) {
+      teaserHtml = html.substring(0, 200);
     }
 
-    // If we couldn't find a good cut point, cut at 800 chars at last tag
-    if (cutIndex === -1) {
-      const fallbackMatch = html.substring(0, 1200).match(/[\s\S]*<\/(?:p|div|section|h[1-6])>/);
-      cutIndex = fallbackMatch ? fallbackMatch[0].length : Math.min(html.length, 800);
-    }
+    // Strip any code blocks from the teaser — code IS the product
+    teaserHtml = teaserHtml.replace(/<pre[\s\S]*?<\/pre>/gi, '');
+    teaserHtml = teaserHtml.replace(/<code[\s\S]*?<\/code>/gi, '');
 
-    teaser[lang] = html.substring(0, cutIndex);
+    teaser[lang] = teaserHtml;
   }
 
   return teaser;

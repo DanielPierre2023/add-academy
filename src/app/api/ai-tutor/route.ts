@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { z } from 'zod';
 
 const aiTutorSchema = z.object({
@@ -77,6 +78,19 @@ async function checkSchoolRateLimit(
 }
 
 export async function POST(request: NextRequest) {
+  // Rate limit: 10 AI tutor requests per minute per IP
+  const ip = getClientIp(request);
+  const rl = rateLimit(`ai-tutor:${ip}`, 10, 60_000);
+  if (!rl.success) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again shortly.' },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(Math.ceil(rl.resetMs / 1000)) },
+      }
+    );
+  }
+
   try {
     const supabase = await createServerSupabaseClient();
 

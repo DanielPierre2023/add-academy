@@ -195,6 +195,94 @@ if (typeof window !== 'undefined') {
   };
 }
 
+/**
+ * Interactive code block rendered from the codeBlocks JSON data.
+ * Used for lectures where code is stored separately (not inline in HTML).
+ */
+function CodeBlockRunner({
+  block,
+  lang,
+  lectureId,
+  index,
+}: {
+  block: LectureContent['codeBlocks'][number];
+  lang: string;
+  lectureId: string;
+  index: number;
+}) {
+  const [output, setOutput] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const title = typeof block.title === 'object'
+    ? (block.title as Record<string, string>)[lang] || (block.title as Record<string, string>).en || ''
+    : block.title || '';
+
+  const handleRun = async () => {
+    setIsRunning(true);
+    setOutput('Loading Python runtime...');
+    setIsError(false);
+
+    try {
+      const { stdout, stderr } = await runPythonCode(block.code);
+      if (stderr) {
+        setIsError(true);
+        setOutput(stderr);
+      } else {
+        setIsError(false);
+        setOutput(stdout || '(no output)');
+      }
+
+      // Award XP
+      const blockId = block.id || `codeblock-${index}`;
+      const latestProgress = useAcademyStore.getState().progress;
+      const currentBlocks = latestProgress[lectureId]?.codeBlocksRun || [];
+      if (!currentBlocks.includes(blockId)) {
+        useAcademyStore.getState().updateProgress(lectureId, {
+          codeBlocksRun: [...currentBlocks, blockId],
+        });
+        const result = useAcademyStore.getState().awardXP('code', XP_VALUES.CODE_BLOCK_RUN, lectureId);
+        showXPToast({
+          amount: XP_VALUES.CODE_BLOCK_RUN,
+          type: 'code',
+          achievements: result.newAchievements,
+          levelUp: result.leveledUp ? result.newLevel : undefined,
+        });
+      }
+    } catch (err: any) {
+      setIsError(true);
+      setOutput(err.message || 'Error running code');
+    }
+
+    setIsRunning(false);
+  };
+
+  return (
+    <div className="code-block" data-block-id={block.id || `codeblock-${index}`}>
+      <div className="code-block-header">
+        <span>{title || `Python — Code Block ${index + 1}`}</span>
+        <button
+          className="run-btn"
+          onClick={handleRun}
+          disabled={isRunning}
+        >
+          {isRunning ? '⏳ Running...' : '▶ Run'}
+        </button>
+      </div>
+      <pre>
+        <code className={`language-${block.language || 'python'}`}>
+          {block.code}
+        </code>
+      </pre>
+      {output && (
+        <div className={`output visible${isError ? ' error' : ''}`}>
+          {output}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function LectureViewer({
   lectureId,
   content,
@@ -265,13 +353,53 @@ export function LectureViewer({
     };
   }, [lectureId, updateProgress]);
 
-  // Wire up inline Run buttons for Pyodide code blocks
+  // Wire up inline Run buttons for Pyodide code blocks.
+  // Handles three patterns:
+  //   A) Existing .run-btn elements in lecture HTML (lectures 0, 7-10, etc.)
+  //   B) <pre><code class="language-python"> blocks without a run button (lecture 54)
+  //   C) Placeholder "# See Code Block N" references (lectures 52-53, 55) —
+  //      these are replaced by the codeBlocks React rendering below.
   useEffect(() => {
     if (!contentRef.current) return;
 
     const container = contentRef.current;
-    const runButtons = container.querySelectorAll('.run-btn');
 
+    // Pattern B: Inject run buttons for bare Python code blocks that lack one.
+    // Find all <pre> elements inside .code-block wrappers (or standalone)
+    // whose <code> has class language-python but no sibling .run-btn.
+    container.querySelectorAll('pre > code.language-python').forEach((codeEl) => {
+      const pre = codeEl.parentElement;
+      if (!pre) return;
+      // Walk up to the .code-block wrapper, or use the <pre> itself
+      const wrapper = pre.closest('.code-block') || pre.parentElement;
+      if (!wrapper) return;
+      // Skip if a run button already exists
+      if (wrapper.querySelector('.run-btn')) return;
+
+      // Create a header bar with a run button
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+      header.innerHTML = '<span>Python</span>';
+      const runBtn = document.createElement('button');
+      runBtn.className = 'run-btn';
+      runBtn.textContent = '▶ Run';
+      header.appendChild(runBtn);
+
+      // Create output div
+      const outputDiv = document.createElement('div');
+      outputDiv.className = 'output';
+
+      // Insert header before <pre> and output after <pre>
+      pre.parentNode?.insertBefore(header, pre);
+      if (pre.nextSibling) {
+        pre.parentNode?.insertBefore(outputDiv, pre.nextSibling);
+      } else {
+        pre.parentNode?.appendChild(outputDiv);
+      }
+    });
+
+    // Now attach handlers to ALL .run-btn elements (both original and injected)
+    const runButtons = container.querySelectorAll('.run-btn');
     const handlers: Array<{ btn: Element; handler: (e: Event) => void }> = [];
 
     runButtons.forEach((btn) => {
@@ -280,10 +408,10 @@ export function LectureViewer({
         e.stopPropagation();
 
         const button = btn as HTMLButtonElement;
-        const wrapper = button.closest('.code-block');
+        // Walk up to find the code: check .code-block wrapper, or sibling <pre>
+        const wrapper = button.closest('.code-block') || button.closest('.code-block-header')?.parentElement;
         if (!wrapper) return;
 
-        // Find the code content
         const codeEl = wrapper.querySelector('pre code');
         if (!codeEl) return;
         const code = codeEl.textContent || '';
@@ -313,10 +441,11 @@ export function LectureViewer({
             outputDiv.textContent = stdout || '(no output)';
           }
 
-          // Award XP for running code (use getState to avoid stale closures)
-          // Use block index as stable ID (data-block-id may not exist on server-rendered HTML)
-          const allBlocks = container.querySelectorAll('.code-block');
-          const blockIndex = Array.from(allBlocks).indexOf(wrapper as Element);
+          // Award XP for running code
+          const allBlocks = container.querySelectorAll('.code-block, .code-block-header');
+          const blockIndex = Array.from(allBlocks).indexOf(
+            (wrapper.classList.contains('code-block') ? wrapper : button.closest('.code-block-header')) as Element
+          );
           const blockId = wrapper.getAttribute('data-block-id') || `block-${blockIndex}`;
           const latestProgress = useAcademyStore.getState().progress;
           const currentBlocks = latestProgress[lectureId]?.codeBlocksRun || [];
@@ -424,6 +553,22 @@ export function LectureViewer({
             className="content"
             dangerouslySetInnerHTML={{ __html: lectureHtml }}
           />
+
+          {/* Render codeBlocks from JSON data (for lectures that use placeholder
+              references like "See Code Block 1: ..." instead of inline HTML) */}
+          {content.codeBlocks && content.codeBlocks.length > 0 && (
+            <div className="content space-y-6">
+              {content.codeBlocks.map((block, i) => (
+                <CodeBlockRunner
+                  key={block.id || `cb-${i}`}
+                  block={block}
+                  lang={lang}
+                  lectureId={lectureId}
+                  index={i}
+                />
+              ))}
+            </div>
+          )}
 
           {/* Quiz Section */}
           {quiz && quizQuestions.length > 0 && (

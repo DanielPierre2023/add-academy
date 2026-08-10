@@ -199,6 +199,41 @@ export const ACHIEVEMENTS: Achievement[] = [
     description: { en: 'Attempt 10 quizzes', ro: 'Încearcă 10 quiz-uri', el: 'Δοκιμάστε 10 quiz' },
     condition: (s) => s.quizzesAttempted >= 10,
   },
+  {
+    id: 'perfectionist',
+    icon: 'Trophy',
+    name: { en: 'Perfectionist', ro: 'Perfecționist', el: 'Τελειομανής' },
+    description: { en: 'Get 5 perfect quiz scores', ro: 'Obține 5 scoruri perfecte', el: 'Επιτύχετε 5 τέλεια σκορ' },
+    condition: (s) => s.perfectQuizzes >= 5,
+  },
+  {
+    id: 'code-100',
+    icon: 'Cpu',
+    name: { en: 'Code Machine', ro: 'Mașină de Cod', el: 'Μηχανή Κώδικα' },
+    description: { en: 'Run 100 code blocks', ro: 'Rulează 100 de blocuri de cod', el: 'Εκτελέστε 100 μπλοκ κώδικα' },
+    condition: (s) => s.codeBlocksRun >= 100,
+  },
+  {
+    id: 'streak-14',
+    icon: 'Flame',
+    name: { en: 'Two-Week Champion', ro: 'Campion de Două Săptămâni', el: 'Πρωταθλητής Δύο Εβδομάδων' },
+    description: { en: 'Study 14 days in a row', ro: 'Studiază 14 zile la rând', el: 'Μελετήστε 14 συνεχόμενες μέρες' },
+    condition: (s) => s.streak >= 14,
+  },
+  {
+    id: 'deep-study',
+    icon: 'Clock',
+    name: { en: 'Deep Study', ro: 'Studiu Aprofundat', el: 'Βαθιά Μελέτη' },
+    description: { en: 'Spend 10+ hours studying', ro: 'Petrece 10+ ore studiind', el: 'Αφιερώστε 10+ ώρες μελέτης' },
+    condition: (s) => s.totalTimeSeconds >= 36000,
+  },
+  {
+    id: 'stage-3-clear',
+    icon: 'Shield',
+    name: { en: 'Attention Master', ro: 'Maestrul Atenției', el: 'Κύριος Προσοχής' },
+    description: { en: 'Complete the Attention stage', ro: 'Completează etapa Atenției', el: 'Ολοκληρώστε το στάδιο Προσοχής' },
+    condition: (s) => s.stagesCompleted >= 3,
+  },
 ];
 
 export interface Stage {

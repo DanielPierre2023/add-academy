@@ -46,15 +46,15 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Admin-only route: verify org_role = 'admin'
+  // Admin-only route: verify role from trusted academy_roles table
   if (user && request.nextUrl.pathname.startsWith('/admin')) {
-    const { data: student } = await supabase
-      .from('academy_students')
-      .select('org_role')
-      .eq('id', user.id)
+    const { data: roleRow } = await supabase
+      .from('academy_roles')
+      .select('role')
+      .eq('user_id', user.id)
       .single();
 
-    if (!student || student.org_role !== 'admin') {
+    if (!roleRow || roleRow.role !== 'admin') {
       const url = request.nextUrl.clone();
       url.pathname = '/';
       return NextResponse.redirect(url);

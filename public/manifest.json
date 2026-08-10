@@ -1,7 +1,7 @@
 {
   "name": "ADD Academy — Build LLMs from Scratch",
   "short_name": "ADD Academy",
-  "description": "Interactive course: build large language models from scratch. 66 lectures, 274 code blocks, 312 quiz questions.",
+  "description": "Interactive course: build large language models from scratch. Lectures, code blocks, and quizzes across 3 languages.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#060A10",
@@ -21,6 +21,18 @@
       "src": "/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png"
+    },
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

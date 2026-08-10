@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { createServerSupabaseClient, createServiceRoleClient } from '@/lib/supabase/server';
 import { getQuizData } from '@/lib/lectures';
+import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { z } from 'zod';
 
 const QuizSubmissionSchema = z.object({
@@ -21,6 +22,19 @@ const QuizSubmissionSchema = z.object({
  * Requires authentication. Does NOT return correctAnswers to prevent leaking.
  */
 export async function POST(request: NextRequest) {
+  // Rate limit: 30 quiz submissions per minute per IP
+  const ip = getClientIp(request);
+  const rl = rateLimit(`quiz:${ip}`, 30, 60_000);
+  if (!rl.success) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again shortly.' },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(Math.ceil(rl.resetMs / 1000)) },
+      }
+    );
+  }
+
   // Require authentication
   const supabase = await createServerSupabaseClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -101,10 +115,40 @@ export async function POST(request: NextRequest) {
     };
   }
 
+  const percentage = Math.round((correctCount / quiz.questions.length) * 100);
+
+  // Record the submission via service role (bypasses read-only RLS)
+  try {
+    const admin = createServiceRoleClient();
+    await admin.from('academy_quiz_submissions').insert({
+      student_id: user.id,
+      lecture_id: lectureId,
+      answers,
+      score: percentage,
+      total_questions: quiz.questions.length,
+      correct_count: correctCount,
+    });
+
+    // Also update progress with quiz score
+    await admin.from('academy_progress').upsert(
+      {
+        student_id: user.id,
+        lecture_id: lectureId,
+        quiz_score: percentage,
+        quiz_attempted: true,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: 'student_id,lecture_id', ignoreDuplicates: false }
+    );
+  } catch (err) {
+    // Log but don't fail the response — score recording is best-effort
+    console.error('[quiz] Failed to record submission:', err);
+  }
+
   return NextResponse.json({
     results,
     score: correctCount,
     total: quiz.questions.length,
-    percentage: Math.round((correctCount / quiz.questions.length) * 100),
+    percentage,
   });
 }

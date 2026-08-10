@@ -2,10 +2,16 @@
 
 import { createClient } from '@/lib/supabase/client';
 import { useAcademyStore } from './academy-store';
+import { syncProgress } from './progress-actions';
 
 /**
  * Syncs local progress data from Zustand/localStorage to the
- * `academy_progress` table in Supabase.
+ * `academy_progress` table in Supabase via a server action.
+ *
+ * Progress writes go through the server action (not direct client
+ * writes) because RLS enforces read-only access for clients on
+ * academy_progress. This prevents score forgery while allowing
+ * legitimate progress tracking.
  *
  * Designed to be called after key user actions (completing a lecture,
  * finishing a quiz) without blocking the UI. Failures are logged but
@@ -19,38 +25,29 @@ export async function syncProgressToSupabase(userId: string): Promise<void> {
   syncInFlight = true;
 
   try {
-    const supabase = createClient();
     const state = useAcademyStore.getState();
     const entries = Object.values(state.progress);
 
     if (entries.length === 0) return;
 
-    // Upsert each completed lecture's progress
-    const rows = entries
+    // Filter to entries worth syncing
+    const toSync = entries
       .filter((p) => p.completed || p.quizScore !== null || p.timeSpent > 60)
       .map((p) => ({
-        student_id: userId,
-        lecture_id: p.lectureId,
+        lectureId: p.lectureId,
         completed: p.completed,
-        quiz_score: p.quizScore,
-        time_spent_seconds: Math.round(p.timeSpent),
-        completed_at: p.completedAt || null,
-        updated_at: new Date().toISOString(),
+        quizScore: p.quizScore,
+        timeSpent: Math.round(p.timeSpent),
+        completedAt: p.completedAt || null,
       }));
 
-    if (rows.length === 0) return;
+    if (toSync.length === 0) return;
 
-    // Batch upsert — uses student_id + lecture_id as the conflict key
-    const { error } = await supabase
-      .from('academy_progress')
-      .upsert(rows, {
-        onConflict: 'student_id,lecture_id',
-        ignoreDuplicates: false,
-      });
+    // Sync via server action (bypasses read-only RLS)
+    const result = await syncProgress(toSync);
 
-    if (error) {
-      // Log but don't throw — sync is best-effort
-      console.warn('[progress-sync] Failed to sync progress:', error.message);
+    if (result.error) {
+      console.warn('[progress-sync] Server sync failed:', result.error);
     }
   } catch (err) {
     console.warn('[progress-sync] Unexpected error:', err);
@@ -63,6 +60,8 @@ export async function syncProgressToSupabase(userId: string): Promise<void> {
  * Loads progress from Supabase and merges with local state.
  * Server data wins for completed status; local data wins for time spent
  * (since it accumulates client-side).
+ *
+ * This uses the client directly since it's a SELECT (still allowed by RLS).
  */
 export async function loadProgressFromSupabase(userId: string): Promise<void> {
   try {

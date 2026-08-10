@@ -100,7 +100,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch full user profile from academy_students + academy_subscriptions
+  // Fetch full user profile from academy_students + academy_subscriptions + academy_roles
   const fetchUserProfile = useCallback(async (supabaseUser: SupabaseUser): Promise<AppUser | null> => {
     try {
       const supabase = createClient();
@@ -117,7 +117,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!joinError && withSubs) {
         student = withSubs;
       } else {
-        // Attempt 2: without join (still gets profile + admin role)
+        // Attempt 2: without join (still gets profile)
         const { data: withoutSubs } = await supabase
           .from('academy_students')
           .select('*')
@@ -129,6 +129,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       }
 
+      // Check trusted academy_roles table for admin status
+      const { data: roleRow } = await supabase
+        .from('academy_roles')
+        .select('role')
+        .eq('user_id', supabaseUser.id)
+        .single();
+
+      const trustedRole = roleRow?.role === 'admin' ? 'admin' : (student?.org_role as string | null) === 'member' ? 'member' : null;
+
       if (!student) {
         // Student record not found — the handle_academy_signup trigger
         // should have created it. Return a basic user object.
@@ -138,7 +147,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           displayName: supabaseUser.user_metadata?.full_name || supabaseUser.user_metadata?.name || null,
           avatarUrl: supabaseUser.user_metadata?.avatar_url || null,
           schoolId: null,
-          orgRole: null,
+          orgRole: trustedRole as 'admin' | 'member' | null,
           subscription: null,
           createdAt: new Date().toISOString(),
         };
@@ -173,7 +182,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         displayName: (student.display_name || student.full_name) as string | null,
         avatarUrl: student.avatar_url as string | null,
         schoolId: student.school_id as string | null,
-        orgRole: student.org_role as 'admin' | 'member' | null,
+        orgRole: trustedRole as 'admin' | 'member' | null,
         subscription,
         createdAt: student.created_at as string,
       };
@@ -192,11 +201,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // Listen to auth state changes
+  // Listen to auth state changes.
+  // Use getSession() as the single source for the initial state,
+  // and onAuthStateChange only for subsequent events (SIGNED_IN,
+  // SIGNED_OUT, TOKEN_REFRESHED). This prevents a race where
+  // both fire concurrently and one resolves with a stale/null
+  // session, causing a flash of locked/login content.
   useEffect(() => {
+    let initialised = false;
     const supabase = createClient();
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, newSession) => {
+        // Skip the INITIAL_SESSION event — getSession() handles it below
+        if (!initialised) return;
+
         setSession(newSession);
         if (newSession?.user) {
           const profile = await fetchUserProfile(newSession.user);
@@ -204,11 +223,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           setUser(null);
         }
-        setLoading(false);
       }
     );
 
-    // Initial session check
+    // Initial session check — the single place that sets loading = false
     supabase.auth.getSession().then(async ({ data: { session: s } }) => {
       setSession(s);
       if (s?.user) {
@@ -216,6 +234,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(profile);
       }
       setLoading(false);
+      initialised = true;
     });
 
     return () => subscription.unsubscribe();
@@ -304,19 +323,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInWithOrgCode = useCallback(async (code: string, email: string, password: string) => {
     const supabase = createClient();
-    // Verify the school invite code
-    const { data: school } = await supabase
-      .from('academy_schools')
-      .select('id, name, max_students, current_students, verified')
-      .eq('invite_code', code.toUpperCase())
-      .single();
-
-    if (!school) return { error: 'Invalid organization code' };
-    if (!school.verified) return { error: 'This organization has not been verified yet' };
-    if (school.current_students >= school.max_students) return { error: 'Organization has reached maximum seats' };
 
     // Sign up (the handle_academy_signup trigger will create the student record)
-    const { data: authData, error: authError } = await supabase.auth.signUp({
+    const { error: authError } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { full_name: email.split('@')[0] } },
@@ -328,31 +337,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (signInError) return { error: signInError.message };
     }
 
-    // Link student to school (if not already linked by domain auto-join)
-    const userId = authData?.user?.id || (await supabase.auth.getUser()).data.user?.id;
-    if (userId) {
-      const { data: existingStudent } = await supabase
-        .from('academy_students')
-        .select('school_id')
-        .eq('id', userId)
-        .single();
-
-      if (existingStudent && !existingStudent.school_id) {
-        await supabase
-          .from('academy_students')
-          .update({
-            school_id: school.id,
-            org_role: 'member',
-            tier: 'full_access',
-          })
-          .eq('id', userId);
-
-        // Increment student count
-        await supabase.rpc('academy_increment_school_seats', { p_school_id: school.id });
-      }
-    }
-
-    return { error: null };
+    // Enroll in school via server action (updates sensitive columns server-side)
+    const { enrollInSchool } = await import('@/lib/auth/enroll-school');
+    const result = await enrollInSchool(code);
+    return result;
   }, []);
 
   const signOut = useCallback(async () => {
