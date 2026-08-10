@@ -1,25 +1,30 @@
 /**
  * ADD Academy subscription plans.
  *
- * Pricing model:
- * - Stage 0 & 1 are FREE for everyone
- * - Individual stages (2–7) can be purchased
- * - Individual GenAI SaaS products can be purchased
- * - Packages: full LLM course, all 5 SaaS, or full access
- * - Discounts apply for packages vs individual
- * - All subscriptions are 3-month billing cycles
- * - Organization users get full access at no cost
+ * Pricing model (subscription):
+ *  - Stage 0 & 1 are FREE for everyone (no account needed)
+ *  - All-Access is a recurring subscription: EUR 12/month or EUR 99/year
+ *  - Students get 50% off, applied by an admin discount after verification
+ *  - Organisations (schools) get full access for free (up to 20 seats)
+ *  - Future courses are included in All-Access
+ *
+ * NOTE: The STAGE_PLANS / SAAS_PLANS / PACKAGE_PLANS exports below are
+ * retained for backward compatibility with the admin dashboard and legacy
+ * pricing references. The active, marketed offering is ALL_ACCESS_PLANS.
  */
+
+export type PlanType = 'subscription' | 'stage' | 'saas' | 'package';
 
 export interface PricingPlan {
   id: string;
   name: Record<string, string>;
   description: Record<string, string>;
-  type: 'subscription';
+  type: PlanType;
   price: number;
-  interval: 'month' | 'year';
+  /** Billing interval (only meaningful for recurring subscriptions) */
+  interval?: 'month' | 'year';
   /** Original price before discount (for optional strikethrough display) */
-  originalPrice?: number;          // ← ADD THIS LINE
+  originalPrice?: number;
   includes: {
     everything?: boolean;
     stages?: number[];
@@ -36,6 +41,43 @@ export const SAAS_PRODUCTS = [
   { id: 'truthlens', name: 'TruthLens', icon: 'ScanSearch', description: 'AI fact-checking & verification' },
   { id: 'docmind', name: 'DocMind', icon: 'FileText', description: 'AI document analysis & extraction' },
 ] as const;
+
+/* ─── ALL-ACCESS SUBSCRIPTION (the active, marketed offering) ─────────── */
+
+export const ALL_ACCESS_PLANS: PricingPlan[] = [
+  {
+    id: 'all-access-monthly',
+    name: { en: 'All-Access Monthly', ro: 'Acces Complet Lunar', el: 'Πλήρης Πρόσβαση Μηνιαία' },
+    description: {
+      en: 'Everything: the full LLM course, all GenAI SaaS tools, and every future course. Cancel anytime.',
+      ro: 'Totul: cursul LLM complet, toate uneltele GenAI SaaS și fiecare curs viitor. Anulează oricând.',
+      el: 'Τα πάντα: το πλήρες μάθημα LLM, όλα τα εργαλεία GenAI SaaS και κάθε μελλοντικό μάθημα. Ακύρωση οποτεδήποτε.',
+    },
+    type: 'subscription',
+    price: 12,
+    interval: 'month',
+    includes: { everything: true },
+    badge: { en: 'Most Flexible', ro: 'Cel Mai Flexibil', el: 'Πιο Ευέλικτο' },
+  },
+  {
+    id: 'all-access-annual',
+    name: { en: 'All-Access Annual', ro: 'Acces Complet Anual', el: 'Πλήρης Πρόσβαση Ετήσια' },
+    description: {
+      en: 'Everything, billed yearly — get 2 months free versus paying monthly. Cancel anytime.',
+      ro: 'Totul, facturat anual — primești 2 luni gratis față de plata lunară. Anulează oricând.',
+      el: 'Τα πάντα, ετήσια χρέωση — 2 μήνες δωρεάν σε σχέση με τη μηνιαία. Ακύρωση οποτεδήποτε.',
+    },
+    type: 'subscription',
+    price: 99,
+    interval: 'year',
+    originalPrice: 144,
+    includes: { everything: true },
+    popular: true,
+    badge: { en: 'Best Value · 2 Months Free', ro: 'Cea Mai Bună Valoare · 2 Luni Gratis', el: 'Καλύτερη Αξία · 2 Μήνες Δωρεάν' },
+  },
+];
+
+/* ─── Legacy exports (kept for backward compatibility) ───────────────── */
 
 export const STAGE_PLANS: PricingPlan[] = [
   {
@@ -139,7 +181,12 @@ export const PACKAGE_PLANS: PricingPlan[] = [
   },
 ];
 
-export const ALL_PLANS = [...PACKAGE_PLANS, ...STAGE_PLANS, ...SAAS_PLANS];
+export const ALL_PLANS = [...ALL_ACCESS_PLANS, ...PACKAGE_PLANS, ...STAGE_PLANS, ...SAAS_PLANS];
 
-/** Billing cycle in months */
-export const BILLING_CYCLE_MONTHS = 3;
+/**
+ * @deprecated Subscriptions are no longer billed in fixed 3-month cycles.
+ * Billing is monthly or annual per each plan's `interval`. This constant is
+ * kept only so existing imports keep compiling; treat 1 = one month.
+ * The accurate, interval-aware revenue math lives in src/lib/admin/metrics.ts.
+ */
+export const BILLING_CYCLE_MONTHS = 1;
