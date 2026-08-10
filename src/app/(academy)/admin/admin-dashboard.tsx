@@ -82,6 +82,8 @@ import {
   SAAS_PLANS,
   SAAS_PRODUCTS,
 } from '@/lib/subscriptions/plans';
+import { computeRevenue, computeCustomerStats } from '@/lib/admin/metrics';
+import { formatEuro, formatPercent, formatCount } from '@/lib/admin/format';
 
 /* ─── Types ─────────────────────────────────────────── */
 
@@ -466,21 +468,24 @@ export default function AdminDashboard() {
   const membersOfSchool = (schoolId: string) =>
     allStudents.filter((s) => s.school_id === schoolId);
 
-  // Revenue estimation (based on subscription tiers)
-  const monthlyRevenue = useMemo(() => {
-    let total = 0;
-    subscriptions
-      .filter((s) => s.status === 'active')
-      .forEach((sub) => {
-        const plan = ALL_PLANS.find((p) => p.id === sub.tier || p.id === sub.tier.replace('_', '-'));
-        if (plan) {
-          total += (plan.price * (100 - sub.discount_percent)) / 100 / 3; // monthly from 3-month cycle
-        } else if (sub.tier === 'full_access') {
-          total += 99 / 3;
-        }
-      });
-    return total;
-  }, [subscriptions]);
+  // Real, non-comped financial + customer metrics (see src/lib/admin/metrics.ts)
+  const emailByStudentId = useMemo(
+    () => new Map(allStudents.map((s) => [s.id, s.email])),
+    [allStudents],
+  );
+
+  const revenue = useMemo(
+    () => computeRevenue(subscriptions, emailByStudentId),
+    [subscriptions, emailByStudentId],
+  );
+
+  const customerStats = useMemo(
+    () => computeCustomerStats(allStudents, subscriptions),
+    [allStudents, subscriptions],
+  );
+
+  // Back-compat alias for existing references
+  const monthlyRevenue = revenue.mrr;
 
   // Filtered students
   const filteredStudents = useMemo(() => {
@@ -967,8 +972,8 @@ export default function AdminDashboard() {
         <StatCard
           icon={DollarSign}
           label={t('Est. Monthly Rev.', 'Venit Lunar Est.')}
-          value={`€${monthlyRevenue.toFixed(0)}`}
-          subValue={`€${(monthlyRevenue * 3).toFixed(0)} / quarter`}
+          value={formatEuro(revenue.mrr)}
+          subValue={`${formatEuro(revenue.perCycle)} / quarter · ${formatCount(revenue.payingCount)} paying`}
           color="text-violet-500"
         />
       </div>
@@ -1414,7 +1419,7 @@ export default function AdminDashboard() {
         <StatCard
           icon={Percent}
           label="Avg Discount"
-          value={`${subscriptions.length > 0 ? Math.round(subscriptions.reduce((s, sub) => s + sub.discount_percent, 0) / subscriptions.length) : 0}%`}
+          value={formatPercent(customerStats.avgDiscountPct)}
           color="text-amber-500"
         />
       </div>
@@ -2018,8 +2023,8 @@ export default function AdminDashboard() {
           <StatCard
             icon={Award}
             label="Conversion"
-            value={`${totalStudents > 0 ? Math.round((allStudents.filter((s) => s.tier !== 'free').length / totalStudents) * 100) : 0}%`}
-            subValue="free → paid"
+            value={formatPercent(customerStats.conversionPct)}
+            subValue={`${formatCount(customerStats.paying)} of ${formatCount(customerStats.addressable)} addressable`}
             color="text-violet-500"
           />
         </div>
