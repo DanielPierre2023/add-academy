@@ -53,7 +53,7 @@ export async function signUpWithEmail(formData: FormData) {
         school_id: schoolId,
         tier: schoolId ? 'school' : 'free',
       },
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://add-academy.vercel.app'}/auth/callback`,
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://academy.add-individual-solutions.com'}/auth/callback`,
     },
   });
 
