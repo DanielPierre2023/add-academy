@@ -32,6 +32,7 @@ interface SchoolData {
   city: string | null;
   contact_name: string;
   contact_email: string;
+  invite_code: string | null;
   verified: boolean;
   max_students: number;
   ai_tutor_daily_limit: number;
@@ -96,7 +97,7 @@ export default function SchoolDashboardPage() {
 
   async function handleCopyCode() {
     if (!school) return;
-    await navigator.clipboard.writeText(school.id);
+    await navigator.clipboard.writeText(school.invite_code || school.id);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -151,7 +152,7 @@ export default function SchoolDashboardPage() {
                 {t('school_enrollment_code', language)}
               </p>
               <p className="font-mono text-lg font-bold tracking-wider mt-1">
-                {school.id}
+                {school.invite_code || school.id}
               </p>
             </div>
             <Button

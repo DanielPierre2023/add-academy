@@ -7,12 +7,12 @@
       "stageName": "Home",
       "isGenAI": false,
       "title": {
-        "en": "${t('home_title')}",
-        "ro": "${t('home_title')}",
-        "el": "${t('home_title')}"
+        "en": "Build LLMs from Scratch",
+        "ro": "Construiește LLM-uri de la Zero",
+        "el": "Κατασκευάστε LLMs από το Μηδέν"
       },
       "prev": null,
-      "next": null,
+      "next": "0",
       "codeBlockCount": 0,
       "hasQuiz": false,
       "estimatedMinutes": 5
@@ -28,7 +28,7 @@
         "ro": "Construiește LLM-uri de la Zero: Introducere în Serie",
         "el": "Κατασκευή LLMs από το Μηδέν: Εισαγωγή στη Σειρά"
       },
-      "prev": null,
+      "prev": "0",
       "next": "2",
       "codeBlockCount": 0,
       "hasQuiz": true,
@@ -230,7 +230,7 @@
       "title": {
         "en": "Data Preprocessing Pipeline",
         "ro": "Pipeline-ul de preprocesare a datelor",
-        "el": "Αγωγος Προεπεξεργασιας Δεδομενων"
+        "el": "Αγωγός Προεπεξεργασίας Δεδομένων"
       },
       "prev": "11",
       "next": "review-s2",
@@ -265,7 +265,7 @@
       "title": {
         "en": "Attention Intuition & Dot-Product Scoring",
         "ro": "Intuiția atenției & Scorarea prin produs scalar",
-        "el": "Διαισθηση Προσοχης & Βαθμολογηση Εσωτερικου Γινομενου"
+        "el": "Διαίσθηση Προσοχής & Βαθμολόγηση Εσωτερικού Γινομένου"
       },
       "prev": "review-s2",
       "next": "14",
@@ -316,7 +316,7 @@
       "title": {
         "en": "Causal (Masked) Self-Attention",
         "ro": "Atenția proprie cauzală (mascată)",
-        "el": "Αιτιακη (Μασκαρισμενη) Self-Attention"
+        "el": "Αιτιακή (Μασκαρισμένη) Αυτοπροσοχή"
       },
       "prev": "14b",
       "next": "16",
@@ -333,7 +333,7 @@
       "title": {
         "en": "Multi-Head Attention",
         "ro": "Atenție Multi-Head",
-        "el": "Πολυκεφαλη Προσοχη (Multi-Head Attention)"
+        "el": "Πολυκέφαλη Προσοχή (Multi-Head Attention)"
       },
       "prev": "15",
       "next": "17",
@@ -350,7 +350,7 @@
       "title": {
         "en": "Attention Variants & Optimizations",
         "ro": "Variante și optimizări ale atenției",
-        "el": "Παραλλαγες & Βελτιστοποιησεις Attention"
+        "el": "Παραλλαγές & Βελτιστοποιήσεις Προσοχής"
       },
       "prev": "16",
       "next": "18",
@@ -656,8 +656,8 @@
       "isGenAI": false,
       "title": {
         "en": "Your LLM in the Real World: Frontend, API & Custom Training",
-        "ro": "LLM-ul Tau in Lumea Reala: Frontend, API si Antrenament Personalizat",
-        "el": "To LLM sou ston Pragmatiko Kosmo: Frontend, API & Prosarmismeni Ekpaideusi"
+        "ro": "LLM-ul Tău în Lumea Reală: Frontend, API și Antrenament Personalizat",
+        "el": "Το LLM σου στον Πραγματικό Κόσμο: Frontend, API & Προσαρμοσμένη Εκπαίδευση"
       },
       "prev": "32",
       "next": "33",
@@ -945,8 +945,8 @@
       "isGenAI": false,
       "title": {
         "en": "Prompt Engineering Mastery",
-        "ro": "Stapanirea Ingineriei de Prompturi",
-        "el": "Mastery Prompt Engineering"
+        "ro": "Stăpânirea Ingineriei de Prompturi",
+        "el": "Εξειδίκευση στη Μηχανική Προτροπών"
       },
       "prev": "48",
       "next": "50",
@@ -996,8 +996,8 @@
       "isGenAI": true,
       "title": {
         "en": "GenAI SaaS Foundation: APIs, Customization & Deployment",
-        "ro": "Fundatia GenAI SaaS: API-uri, Personalizare si Deployment",
-        "el": "Vaseis GenAI SaaS: APIs, Prosarmogi & Deployment"
+        "ro": "Fundația GenAI SaaS: API-uri, Personalizare și Deployment",
+        "el": "Βάσεις GenAI SaaS: APIs, Προσαρμογή & Deployment"
       },
       "prev": "51",
       "next": "genai-1",
@@ -1153,13 +1153,13 @@
         "el": "Παρατηρησιμότητα LLM & Παρακολούθηση Παραγωγής"
       },
       "prev": "54",
-      "next": "home",
+      "next": null,
       "codeBlockCount": 4,
       "hasQuiz": true,
       "estimatedMinutes": 35
     }
   ],
-  "totalLectures": 66,
-  "totalCodeBlocks": 229,
-  "totalQuizzes": 57
+  "totalLectures": 68,
+  "totalCodeBlocks": 269,
+  "totalQuizzes": 59
 }

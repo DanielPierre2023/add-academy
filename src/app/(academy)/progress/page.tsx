@@ -147,7 +147,7 @@ export default function ProgressPage() {
         <Card>
           <CardContent className="pt-6 text-center">
             <BookOpen className="h-8 w-8 mx-auto text-blue-500 mb-2" />
-            <div className="text-2xl font-bold">{stats.lecturesCompleted}/66</div>
+            <div className="text-2xl font-bold">{stats.lecturesCompleted}/68</div>
             <div className="text-xs text-muted-foreground">{txt.lecturesCompleted}</div>
           </CardContent>
         </Card>

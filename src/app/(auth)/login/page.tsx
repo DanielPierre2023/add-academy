@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Mail, Lock, Eye, EyeOff, Building2 } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { ADDLogo } from '@/components/brand/add-logo';
@@ -11,6 +11,7 @@ type LoginTab = 'email' | 'organization';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { signInWithEmail, signInWithGoogle, signInWithOrgCode } = useAuth();
 
   const [tab, setTab] = useState<LoginTab>('email');
@@ -20,6 +21,14 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // Read error from URL params (e.g. OAuth callback failure)
+  useEffect(() => {
+    const errorParam = searchParams.get('error');
+    if (errorParam === 'auth_callback_error') {
+      setError('Authentication failed. Please try again.');
+    }
+  }, [searchParams]);
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();

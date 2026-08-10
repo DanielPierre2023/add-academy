@@ -9,7 +9,7 @@ const aiTutorSchema = z.object({
   language: z.enum(['en', 'ro', 'el']).default('en'),
   history: z.array(z.object({
     role: z.enum(['user', 'assistant']),
-    content: z.string(),
+    content: z.string().max(8000),
   })).max(50).optional(),
   conversationId: z.string().uuid().optional().nullable(),
 });

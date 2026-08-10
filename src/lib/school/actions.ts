@@ -1,6 +1,15 @@
 'use server';
 
+import { z } from 'zod';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
+
+const schoolApplicationSchema = z.object({
+  name: z.string().min(2, 'School name must be at least 2 characters').max(200),
+  country: z.string().min(2, 'Country is required').max(100),
+  city: z.string().max(100).optional().default(''),
+  contactName: z.string().min(2, 'Contact name is required').max(200),
+  contactEmail: z.string().email('Invalid email address').max(254),
+});
 
 export interface SchoolApplication {
   name: string;
@@ -11,6 +20,11 @@ export interface SchoolApplication {
 }
 
 export async function submitSchoolApplication(data: SchoolApplication) {
+  const parsed = schoolApplicationSchema.safeParse(data);
+  if (!parsed.success) {
+    return { error: parsed.error.errors[0]?.message || 'Invalid input.' };
+  }
+
   const supabase = await createServerSupabaseClient();
   const { data: { user } } = await supabase.auth.getUser();
 

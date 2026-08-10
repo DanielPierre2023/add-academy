@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { getQuizData } from '@/lib/lectures';
 import { z } from 'zod';
 
@@ -15,11 +16,22 @@ const QuizSubmissionSchema = z.object({
  * POST /api/quiz — validate quiz answers server-side.
  *
  * Accepts: { lectureId, language, answers: { "0": [1], "1": [0, 2], ... } }
- * Returns: { results: { "0": { correct: true, correctAnswers: [1] }, ... }, score, total }
+ * Returns: { results: { "0": { correct: true, explanation: "..." }, ... }, score, total }
  *
- * This prevents clients from seeing the correct answers before submitting.
+ * Requires authentication. Does NOT return correctAnswers to prevent leaking.
  */
 export async function POST(request: NextRequest) {
+  // Require authentication
+  const supabase = await createServerSupabaseClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json(
+      { error: 'Authentication required' },
+      { status: 401 }
+    );
+  }
+
   let body: unknown;
   try {
     body = await request.json();
@@ -63,17 +75,17 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Validate each answer
+  // Validate each answer — do NOT return correctAnswers
   const results: Record<
     string,
-    { correct: boolean; correctAnswers: number[]; explanation: string }
+    { correct: boolean; explanation: string }
   > = {};
   let correctCount = 0;
 
   for (const question of quiz.questions) {
     const idx = String(question.index);
     const userAnswer = answers[idx] || [];
-    const correctAnswers = question.correct;
+    const correctAnswers: number[] = question.correct;
 
     // Check if user's answers match exactly
     const isCorrect =
@@ -85,7 +97,6 @@ export async function POST(request: NextRequest) {
 
     results[idx] = {
       correct: isCorrect,
-      correctAnswers,
       explanation: question.explanation || '',
     };
   }

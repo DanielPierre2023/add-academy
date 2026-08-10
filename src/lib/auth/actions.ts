@@ -6,7 +6,9 @@ import { redirect } from 'next/navigation';
 export async function signInWithEmail(formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
-  const redirectTo = (formData.get('redirect') as string) || '/';
+  const rawRedirect = (formData.get('redirect') as string) || '/';
+  // Only allow relative paths — prevent open redirect
+  const redirectTo = rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/';
 
   const supabase = await createServerSupabaseClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });

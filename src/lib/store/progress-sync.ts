@@ -1,6 +1,6 @@
 'use client';
 
-import { getSupabase } from '@/lib/auth/supabase';
+import { createClient } from '@/lib/supabase/client';
 import { useAcademyStore } from './academy-store';
 
 /**
@@ -19,7 +19,7 @@ export async function syncProgressToSupabase(userId: string): Promise<void> {
   syncInFlight = true;
 
   try {
-    const supabase = getSupabase();
+    const supabase = createClient();
     const state = useAcademyStore.getState();
     const entries = Object.values(state.progress);
 
@@ -66,7 +66,7 @@ export async function syncProgressToSupabase(userId: string): Promise<void> {
  */
 export async function loadProgressFromSupabase(userId: string): Promise<void> {
   try {
-    const supabase = getSupabase();
+    const supabase = createClient();
     const { data, error } = await supabase
       .from('academy_progress')
       .select('lecture_id, completed, quiz_score, time_spent_seconds, completed_at')

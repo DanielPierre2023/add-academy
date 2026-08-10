@@ -8,7 +8,7 @@ import {
   useCallback,
   type ReactNode,
 } from 'react';
-import { supabase } from './supabase';
+import { createClient } from '@/lib/supabase/client';
 import type { User as SupabaseUser, Session } from '@supabase/supabase-js';
 
 /* ─── Types ────────────────────────────────────────────── */
@@ -103,6 +103,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Fetch full user profile from academy_students + academy_subscriptions
   const fetchUserProfile = useCallback(async (supabaseUser: SupabaseUser): Promise<AppUser | null> => {
     try {
+      const supabase = createClient();
       // Query academy_students — try with subscription join first, fall back to without
       let student: Record<string, unknown> | null = null;
 
@@ -193,6 +194,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Listen to auth state changes
   useEffect(() => {
+    const supabase = createClient();
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, newSession) => {
         setSession(newSession);
@@ -274,11 +276,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   /* ─── Auth actions ──────────────────────────────── */
 
   const signInWithEmail = useCallback(async (email: string, password: string) => {
+    const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     return { error: error?.message || null };
   }, []);
 
   const signUpWithEmail = useCallback(async (email: string, password: string, name: string) => {
+    const supabase = createClient();
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -288,6 +292,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signInWithGoogle = useCallback(async () => {
+    const supabase = createClient();
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -298,6 +303,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signInWithOrgCode = useCallback(async (code: string, email: string, password: string) => {
+    const supabase = createClient();
     // Verify the school invite code
     const { data: school } = await supabase
       .from('academy_schools')
@@ -350,12 +356,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signOut = useCallback(async () => {
+    const supabase = createClient();
     await supabase.auth.signOut();
     setUser(null);
     setSession(null);
   }, []);
 
   const resetPassword = useCallback(async (email: string) => {
+    const supabase = createClient();
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/auth/reset-password`,
     });

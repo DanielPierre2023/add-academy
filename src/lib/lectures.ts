@@ -38,7 +38,11 @@ export function getLecturesByStage(stageNumber: number): LectureIndexEntry[] {
   return (indexData as LectureIndex).lectures.filter((l) => l.stage === stageNumber);
 }
 
+/** Only allow alphanumeric IDs, hyphens, and single dots (no path traversal) */
+const SAFE_ID = /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/;
+
 export async function getLectureContent(id: string) {
+  if (!SAFE_ID.test(id) || id.includes('..')) return null;
   try {
     const data = await import(`@/content/lectures/${id}.json`);
     return data.default || data;
@@ -48,6 +52,7 @@ export async function getLectureContent(id: string) {
 }
 
 export async function getQuizData(id: string) {
+  if (!SAFE_ID.test(id) || id.includes('..')) return null;
   try {
     const data = await import(`@/content/quizzes/${id}.json`);
     return data.default || data;

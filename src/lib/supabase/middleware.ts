@@ -46,5 +46,20 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // Admin-only route: verify org_role = 'admin'
+  if (user && request.nextUrl.pathname.startsWith('/admin')) {
+    const { data: student } = await supabase
+      .from('academy_students')
+      .select('org_role')
+      .eq('id', user.id)
+      .single();
+
+    if (!student || student.org_role !== 'admin') {
+      const url = request.nextUrl.clone();
+      url.pathname = '/';
+      return NextResponse.redirect(url);
+    }
+  }
+
   return supabaseResponse;
 }

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Bell, X, Megaphone, ChevronRight, Clock, AlertCircle, AlertOctagon } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
-import { supabase } from '@/lib/auth/supabase';
+import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 
 interface Announcement {
@@ -81,7 +81,7 @@ export function AnnouncementBell() {
   const fetchAnnouncements = useCallback(async () => {
     if (!user) return;
 
-    const { data: annData } = await supabase
+    const { data: annData } = await createClient()
       .from('academy_announcements')
       .select('*')
       .order('published_at', { ascending: false })
@@ -101,7 +101,7 @@ export function AnnouncementBell() {
       setAnnouncements(filtered);
     }
 
-    const { data: readData } = await supabase
+    const { data: readData } = await createClient()
       .from('academy_announcement_reads')
       .select('announcement_id')
       .eq('student_id', user.id);
@@ -120,7 +120,7 @@ export function AnnouncementBell() {
   const markAsRead = async (announcementId: string) => {
     if (!user || readIds.has(announcementId)) return;
 
-    await supabase.from('academy_announcement_reads').insert({
+    await createClient().from('academy_announcement_reads').insert({
       announcement_id: announcementId,
       student_id: user.id,
     });
@@ -138,7 +138,7 @@ export function AnnouncementBell() {
       student_id: user.id,
     }));
 
-    await supabase.from('academy_announcement_reads').insert(inserts);
+    await createClient().from('academy_announcement_reads').insert(inserts);
     setReadIds(new Set(announcements.map((a) => a.id)));
   };
 

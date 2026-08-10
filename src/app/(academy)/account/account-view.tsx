@@ -307,7 +307,7 @@ export default function AccountView() {
           {/* Stats grid */}
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              { icon: BookOpen, label: 'Lectures', value: `${completedLectures}/49`, color: 'text-blue-500' },
+              { icon: BookOpen, label: 'Lectures', value: `${completedLectures}/68`, color: 'text-blue-500' },
               { icon: ClipboardCheck, label: 'Quizzes', value: String(quizzesTaken), color: 'text-purple-500' },
               { icon: Code2, label: 'Code Runs', value: String(totalCodeBlocksRun), color: 'text-green-500' },
               { icon: Flame, label: 'Streak', value: `${streak} days`, color: 'text-orange-500' },

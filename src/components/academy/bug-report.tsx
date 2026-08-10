@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Bug, Send, X, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
-import { supabase } from '@/lib/auth/supabase';
+import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
@@ -40,7 +40,7 @@ export function BugReportButton() {
     if (!title.trim() || !user) return;
     setSubmitting(true);
 
-    const { error } = await supabase.from('academy_reports').insert({
+    const { error } = await createClient().from('academy_reports').insert({
       student_id: user.id,
       student_email: user.email,
       student_name: user.displayName || user.email,

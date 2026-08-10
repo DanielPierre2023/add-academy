@@ -172,7 +172,7 @@ h1{font-family:'Fraunces',serif;font-size:36px;color:#c8942a;margin-bottom:8px}
                   {downloading ? 'Generating...' : t('cert_download', language)}
                 </Button>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  PDF certificate with verification QR code
+                  PDF certificate of completion
                 </p>
               </div>
             </CardContent>

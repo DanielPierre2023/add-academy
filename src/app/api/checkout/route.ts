@@ -6,7 +6,7 @@ const VALID_PLAN_IDS = ['individual_monthly', 'individual_annual', 'school_month
 
 const CheckoutSchema = z.object({
   planId: z.enum(VALID_PLAN_IDS, {
-    error: `planId must be one of: ${VALID_PLAN_IDS.join(', ')}`,
+    message: `planId must be one of: ${VALID_PLAN_IDS.join(', ')}`,
   }),
   schoolId: z.string().uuid().optional(),
 });

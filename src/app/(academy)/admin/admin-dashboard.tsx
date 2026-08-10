@@ -55,7 +55,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
-import { supabase } from '@/lib/auth/supabase';
+import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -401,15 +401,15 @@ export default function AdminDashboard() {
         { data: reportsData },
         { data: announcementsData },
       ] = await Promise.all([
-        supabase.from('academy_schools').select('*').order('name', { ascending: true }),
-        supabase
+        createClient().from('academy_schools').select('*').order('name', { ascending: true }),
+        createClient()
           .from('academy_students')
           .select('id, email, display_name, full_name, org_role, tier, created_at, last_active_at, school_id, preferred_language')
           .order('created_at', { ascending: false }),
-        supabase.from('academy_subscriptions').select('*').order('created_at', { ascending: false }),
-        supabase.from('academy_courses').select('*').order('sort_order', { ascending: true }),
-        supabase.from('academy_reports').select('*').order('created_at', { ascending: false }),
-        supabase.from('academy_announcements').select('*').order('published_at', { ascending: false }),
+        createClient().from('academy_subscriptions').select('*').order('created_at', { ascending: false }),
+        createClient().from('academy_courses').select('*').order('sort_order', { ascending: true }),
+        createClient().from('academy_reports').select('*').order('created_at', { ascending: false }),
+        createClient().from('academy_announcements').select('*').order('published_at', { ascending: false }),
       ]);
       if (schoolsData) setSchools(schoolsData as SchoolData[]);
       if (studentsData) setAllStudents(studentsData as SchoolMember[]);
@@ -419,13 +419,13 @@ export default function AdminDashboard() {
       if (announcementsData) setAnnouncements(announcementsData as AnnouncementData[]);
     } else if (user?.schoolId) {
       const [{ data: schoolData }, { data: memberData }, { data: subsData }] = await Promise.all([
-        supabase.from('academy_schools').select('*').eq('id', user.schoolId).single(),
-        supabase
+        createClient().from('academy_schools').select('*').eq('id', user.schoolId).single(),
+        createClient()
           .from('academy_students')
           .select('id, email, display_name, full_name, org_role, tier, created_at, last_active_at, school_id, preferred_language')
           .eq('school_id', user.schoolId)
           .order('created_at', { ascending: true }),
-        supabase.from('academy_subscriptions').select('*').order('created_at', { ascending: false }),
+        createClient().from('academy_subscriptions').select('*').order('created_at', { ascending: false }),
       ]);
       if (schoolData) setSchools([schoolData as SchoolData]);
       if (memberData) setAllStudents(memberData as SchoolMember[]);
@@ -529,32 +529,32 @@ export default function AdminDashboard() {
 
   const regenerateCode = async (school: SchoolData) => {
     const newCode = `${school.slug.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
-    await supabase.from('academy_schools').update({ invite_code: newCode }).eq('id', school.id);
+    await createClient().from('academy_schools').update({ invite_code: newCode }).eq('id', school.id);
     setSchools((prev) => prev.map((s) => (s.id === school.id ? { ...s, invite_code: newCode } : s)));
   };
 
   const toggleVerified = async (school: SchoolData) => {
     const newVerified = !school.verified;
-    await supabase.from('academy_schools').update({ verified: newVerified }).eq('id', school.id);
+    await createClient().from('academy_schools').update({ verified: newVerified }).eq('id', school.id);
     setSchools((prev) => prev.map((s) => (s.id === school.id ? { ...s, verified: newVerified } : s)));
   };
 
   const updateMaxStudents = async (school: SchoolData, delta: number) => {
     const newMax = Math.max(school.current_students, school.max_students + delta);
-    await supabase.from('academy_schools').update({ max_students: newMax }).eq('id', school.id);
+    await createClient().from('academy_schools').update({ max_students: newMax }).eq('id', school.id);
     setSchools((prev) => prev.map((s) => (s.id === school.id ? { ...s, max_students: newMax } : s)));
   };
 
   const removeMemberFromOrg = async (member: SchoolMember) => {
     setActionLoading(member.id);
-    await supabase
+    await createClient()
       .from('academy_students')
       .update({ school_id: null, org_role: null, tier: 'free' })
       .eq('id', member.id);
     if (member.school_id) {
       const school = schools.find((s) => s.id === member.school_id);
       if (school) {
-        await supabase
+        await createClient()
           .from('academy_schools')
           .update({ current_students: Math.max(0, school.current_students - 1) })
           .eq('id', school.id);
@@ -578,7 +578,7 @@ export default function AdminDashboard() {
   const toggleOrgAdmin = async (member: SchoolMember) => {
     setActionLoading(member.id);
     const newRole = member.org_role === 'admin' ? 'member' : 'admin';
-    await supabase.from('academy_students').update({ org_role: newRole }).eq('id', member.id);
+    await createClient().from('academy_students').update({ org_role: newRole }).eq('id', member.id);
     setAllStudents((prev) =>
       prev.map((s) => (s.id === member.id ? { ...s, org_role: newRole } : s))
     );
@@ -588,8 +588,8 @@ export default function AdminDashboard() {
   const deleteStudent = async (member: SchoolMember) => {
     if (!confirm(`Delete ${memberName(member)} (${member.email})? This cannot be undone.`)) return;
     setActionLoading(member.id);
-    await supabase.from('academy_subscriptions').delete().eq('student_id', member.id);
-    await supabase.from('academy_students').delete().eq('id', member.id);
+    await createClient().from('academy_subscriptions').delete().eq('student_id', member.id);
+    await createClient().from('academy_students').delete().eq('id', member.id);
     setAllStudents((prev) => prev.filter((s) => s.id !== member.id));
     setSubscriptions((prev) => prev.filter((s) => s.student_id !== member.id));
     setActionLoading(null);
@@ -597,7 +597,7 @@ export default function AdminDashboard() {
 
   const updateStudentTier = async (studentId: string, newTier: string) => {
     setActionLoading(studentId);
-    await supabase.from('academy_students').update({ tier: newTier }).eq('id', studentId);
+    await createClient().from('academy_students').update({ tier: newTier }).eq('id', studentId);
     setAllStudents((prev) =>
       prev.map((s) => (s.id === studentId ? { ...s, tier: newTier } : s))
     );
@@ -605,7 +605,7 @@ export default function AdminDashboard() {
   };
 
   const updateSubscriptionDiscount = async (subId: string, discount: number) => {
-    await supabase.from('academy_subscriptions').update({ discount_percent: discount }).eq('id', subId);
+    await createClient().from('academy_subscriptions').update({ discount_percent: discount }).eq('id', subId);
     setSubscriptions((prev) =>
       prev.map((s) => (s.id === subId ? { ...s, discount_percent: discount } : s))
     );
@@ -613,7 +613,7 @@ export default function AdminDashboard() {
 
   const toggleSubscriptionAutoRenew = async (sub: SubscriptionData) => {
     const newValue = !sub.auto_renew;
-    await supabase.from('academy_subscriptions').update({ auto_renew: newValue }).eq('id', sub.id);
+    await createClient().from('academy_subscriptions').update({ auto_renew: newValue }).eq('id', sub.id);
     setSubscriptions((prev) =>
       prev.map((s) => (s.id === sub.id ? { ...s, auto_renew: newValue } : s))
     );
@@ -621,7 +621,7 @@ export default function AdminDashboard() {
 
   const cancelSubscription = async (sub: SubscriptionData) => {
     if (!confirm('Cancel this subscription?')) return;
-    await supabase
+    await createClient()
       .from('academy_subscriptions')
       .update({ status: 'canceled', cancel_at_period_end: true })
       .eq('id', sub.id);
@@ -634,7 +634,7 @@ export default function AdminDashboard() {
 
   const toggleCourseActive = async (course: CourseData) => {
     const newActive = !course.is_active;
-    await supabase.from('academy_courses').update({ is_active: newActive }).eq('id', course.id);
+    await createClient().from('academy_courses').update({ is_active: newActive }).eq('id', course.id);
     setCourses((prev) =>
       prev.map((c) => (c.id === course.id ? { ...c, is_active: newActive } : c))
     );
@@ -644,13 +644,13 @@ export default function AdminDashboard() {
     const sub = subscriptions.find((s) => s.student_id === studentId && s.status === 'active');
     if (sub) {
       const stages = [...new Set([...sub.unlocked_stages, stageNum])].sort();
-      await supabase.from('academy_subscriptions').update({ unlocked_stages: stages }).eq('id', sub.id);
+      await createClient().from('academy_subscriptions').update({ unlocked_stages: stages }).eq('id', sub.id);
       setSubscriptions((prev) =>
         prev.map((s) => (s.id === sub.id ? { ...s, unlocked_stages: stages } : s))
       );
     } else {
       // Create a new subscription with this stage unlocked
-      const { data } = await supabase
+      const { data } = await createClient()
         .from('academy_subscriptions')
         .insert({
           student_id: studentId,
@@ -670,7 +670,7 @@ export default function AdminDashboard() {
     const sub = subscriptions.find((s) => s.student_id === studentId && s.status === 'active');
     if (sub) {
       const stages = sub.unlocked_stages.filter((n) => n !== stageNum);
-      await supabase.from('academy_subscriptions').update({ unlocked_stages: stages }).eq('id', sub.id);
+      await createClient().from('academy_subscriptions').update({ unlocked_stages: stages }).eq('id', sub.id);
       setSubscriptions((prev) =>
         prev.map((s) => (s.id === sub.id ? { ...s, unlocked_stages: stages } : s))
       );
@@ -680,7 +680,7 @@ export default function AdminDashboard() {
   const createOrganization = async () => {
     if (!newOrgName || !newOrgSlug || !newOrgCountry || !newOrgEmail || !newOrgContact) return;
     const inviteCode = `${newOrgSlug.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
-    const { data, error } = await supabase
+    const { data, error } = await createClient()
       .from('academy_schools')
       .insert({
         name: newOrgName,
@@ -712,11 +712,11 @@ export default function AdminDashboard() {
   const deleteOrganization = async (school: SchoolData) => {
     if (!confirm(`Delete organization "${school.name}"? All members will become individual students.`)) return;
     // Remove all members from this org
-    await supabase
+    await createClient()
       .from('academy_students')
       .update({ school_id: null, org_role: null, tier: 'free' })
       .eq('school_id', school.id);
-    await supabase.from('academy_schools').delete().eq('id', school.id);
+    await createClient().from('academy_schools').delete().eq('id', school.id);
     setSchools((prev) => prev.filter((s) => s.id !== school.id));
     setAllStudents((prev) =>
       prev.map((s) =>
@@ -728,14 +728,14 @@ export default function AdminDashboard() {
   /* ─── Report actions ─────────────────────────────── */
 
   const updateReportStatus = async (reportId: string, status: ReportData['status']) => {
-    await supabase.from('academy_reports').update({ status }).eq('id', reportId);
+    await createClient().from('academy_reports').update({ status }).eq('id', reportId);
     setReports((prev) => prev.map((r) => (r.id === reportId ? { ...r, status } : r)));
   };
 
   const respondToReport = async (reportId: string) => {
     if (!replyText.trim()) return;
     const now = new Date().toISOString();
-    await supabase
+    await createClient()
       .from('academy_reports')
       .update({
         admin_response: replyText.trim(),
@@ -755,7 +755,7 @@ export default function AdminDashboard() {
   };
 
   const deleteReport = async (reportId: string) => {
-    await supabase.from('academy_reports').delete().eq('id', reportId);
+    await createClient().from('academy_reports').delete().eq('id', reportId);
     setReports((prev) => prev.filter((r) => r.id !== reportId));
   };
 
@@ -1726,13 +1726,13 @@ export default function AdminDashboard() {
         id: 'org-invite',
         name: 'Organization Invitation',
         subject: 'You\'ve been invited to join {{org}} on ADD Academy',
-        body: `Hi {{name}},\n\nYou've been invited to join {{org}} on ADD Academy.\n\nUse this invite code to join: {{code}}\n\nAs a member, you'll get full access to all courses and materials.\n\nGet started at: https://add-academy.vercel.app\n\nBest regards,\nThe ADD Academy Team`,
+        body: `Hi {{name}},\n\nYou've been invited to join {{org}} on ADD Academy.\n\nUse this invite code to join: {{code}}\n\nAs a member, you'll get full access to all courses and materials.\n\nGet started at: https://academy.add-individual-solutions.com\n\nBest regards,\nThe ADD Academy Team`,
       },
       {
         id: 'course-launch',
         name: 'New Course Announcement',
         subject: 'New Course Available: {{course}}',
-        body: `Hi {{name}},\n\nWe're thrilled to announce a new course on ADD Academy:\n\n{{course}}\n\n{{description}}\n\nStart learning now at: https://add-academy.vercel.app\n\nBest regards,\nThe ADD Academy Team`,
+        body: `Hi {{name}},\n\nWe're thrilled to announce a new course on ADD Academy:\n\n{{course}}\n\n{{description}}\n\nStart learning now at: https://academy.add-individual-solutions.com\n\nBest regards,\nThe ADD Academy Team`,
       },
       {
         id: 'renewal',
@@ -1844,7 +1844,7 @@ export default function AdminDashboard() {
           </p>
           <div className="space-y-2">
             {schools.map((school) => {
-              const inviteUrl = `https://add-academy.vercel.app/school/apply?code=${school.invite_code}`;
+              const inviteUrl = `https://academy.add-individual-solutions.com/school/apply?code=${school.invite_code}`;
               return (
                 <div key={school.id} className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/30 p-3">
                   <div className="min-w-0">
@@ -1917,7 +1917,7 @@ export default function AdminDashboard() {
                       size="sm"
                       className="text-red-500 hover:text-red-600 hover:bg-red-500/10 shrink-0"
                       onClick={async () => {
-                        await supabase.from('academy_announcements').delete().eq('id', ann.id);
+                        await createClient().from('academy_announcements').delete().eq('id', ann.id);
                         setAnnouncements((prev) => prev.filter((a) => a.id !== ann.id));
                       }}
                     >
@@ -2443,7 +2443,7 @@ export default function AdminDashboard() {
       if (!announcementTitle.trim() || !announcementBody.trim() || !user) return;
       setAnnouncementPublishing(true);
 
-      const { error } = await supabase.from('academy_announcements').insert({
+      const { error } = await createClient().from('academy_announcements').insert({
         title: announcementTitle.trim(),
         content: announcementBody.trim(),
         priority: announcementPriority,
