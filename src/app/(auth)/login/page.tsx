@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Mail, Lock, Eye, EyeOff, Building2 } from 'lucide-react';
@@ -10,6 +10,14 @@ import { ADDLogo } from '@/components/brand/add-logo';
 type LoginTab = 'email' | 'organization';
 
 export default function LoginPage() {
+    return (
+          <Suspense fallback={null}>
+                  <LoginPageInner />
+          </Suspense>
+        );
+}
+
+function LoginPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { signInWithEmail, signInWithGoogle, signInWithOrgCode } = useAuth();
