@@ -156,6 +156,10 @@ function createContentTeaser(content: any): any {
     teaser[lang] = teaserHtml;
   }
 
+  // Also strip the codeBlocks JSON array — these contain the actual
+  // Python/code content that students pay for.
+  teaser.codeBlocks = [];
+
   return teaser;
 }
 
