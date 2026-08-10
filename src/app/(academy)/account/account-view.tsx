@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/auth-provider';
 import { useAcademyStore } from '@/lib/store/academy-store';
-import type { Language } from '@/types';
-import { STAGES } from '@/types';
 import { getIcon } from '@/lib/icons';
 import {
   User,
@@ -26,160 +24,50 @@ import {
   ArrowRight,
   CreditCard,
   FileText,
-  Settings,
   LogOut,
-  Lock,
   Package,
   ShoppingCart,
   Gift,
-  Tag,
-  ImageIcon,
-  Video,
-  FileEdit,
-  ScanSearch,
-  FileSearch,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
 
 /* ═══════════════════════════════════════════════════════════
-   Pricing data — mock until Stripe integration
-   All prices in EUR. 3-month access window.
+   Pricing — pure recurring subscription (All-Access).
+   All prices in EUR. Subscriptions renew; cancel anytime.
    ═══════════════════════════════════════════════════════════ */
 
-interface StageProduct {
-  id: string;
-  stageNumber: number;
-  name: Record<string, string>;
-  lectures: number;
-  price: number; // EUR
-  features: string[];
-  icon: string;
-  color: string;
-}
+const MONTHLY_PRICE = 12;
+const ANNUAL_PRICE = 99;
+const ANNUAL_MONTHLY_EQUIV = (ANNUAL_PRICE / 12).toFixed(2); // ≈ 8.25
+const STUDENT_MONTHLY = MONTHLY_PRICE / 2; // €6
+const STUDENT_ANNUAL = Math.round(ANNUAL_PRICE / 2); // €50 (advertised ~€49)
+const ORG_SEATS = 20;
+const CONTACT_EMAIL = 'contact@add-individual-solutions.com';
 
-interface GenAIProduct {
-  id: string;
-  name: Record<string, string>;
-  description: Record<string, string>;
-  price: number;
-  icon: React.ElementType;
-  comingSoon: boolean;
-}
-
-const STAGE_PRODUCTS: StageProduct[] = [
-  {
-    id: 'stage-2',
-    stageNumber: 2,
-    name: { en: 'Tokenization & Data', ro: 'Date & Tokenizare', el: 'Tokenization & Δεδομένα' },
-    lectures: 6,
-    price: 19,
-    features: ['6 interactive lectures', 'BPE Tokenizer from scratch', 'DataLoader & Embeddings', 'Code sandbox access'],
-    icon: 'Binary',
-    color: '#8b5cf6',
-  },
-  {
-    id: 'stage-3',
-    stageNumber: 3,
-    name: { en: 'Attention Mechanism', ro: 'Mecanismul Atenției', el: 'Μηχανισμός Προσοχής' },
-    lectures: 6,
-    price: 29,
-    features: ['6 interactive lectures', 'Self-Attention from scratch', 'Multi-Head Attention', 'Capstone project'],
-    icon: 'ScanSearch',
-    color: '#ec4899',
-  },
-  {
-    id: 'stage-4',
-    stageNumber: 4,
-    name: { en: 'LLM Architecture', ro: 'Arhitectura LLM', el: 'Αρχιτεκτονική LLM' },
-    lectures: 6,
-    price: 29,
-    features: ['6 interactive lectures', 'GELU, LayerNorm, Residuals', 'Transformer Block assembly', 'Code GPT-2 (124M)'],
-    icon: 'Blocks',
-    color: '#f59e0b',
-  },
-  {
-    id: 'stage-5',
-    stageNumber: 5,
-    name: { en: 'Pretraining', ro: 'Pre-antrenare', el: 'Προεκπαίδευση' },
-    lectures: 8,
-    price: 39,
-    features: ['8 interactive lectures', 'Training loop & optimization', 'Temperature & Top-k sampling', 'Load GPT-2 weights'],
-    icon: 'BarChart3',
-    color: '#10b981',
-  },
-  {
-    id: 'stage-6',
-    stageNumber: 6,
-    name: { en: 'Fine-tuning', ro: 'Ajustare Fină', el: 'Μικρορύθμιση' },
-    lectures: 11,
-    price: 39,
-    features: ['11 interactive lectures', 'LoRA, RLHF, DPO', 'RAG & Chatbot building', 'Domain-specific LLMs'],
-    icon: 'GraduationCap',
-    color: '#ef4444',
-  },
+const ALL_ACCESS_FEATURES = [
+  'Full LLM course — all stages, ~67 lectures',
+  'All 5 GenAI SaaS product courses',
+  'Live in-browser Python — no setup',
+  'Deployable NeuralForge LLM + product downloads',
+  'AI Tutor access',
+  'Completion certificate',
+  'All future courses included',
 ];
 
-const GENAI_PRODUCTS: GenAIProduct[] = [
-  {
-    id: 'genai-1',
-    name: { en: 'Image Generation SaaS', ro: 'SaaS Generare Imagini', el: 'SaaS Δημιουργίας Εικόνων' },
-    description: { en: 'Build a production image generation app', ro: 'Construiește o aplicație de generare de imagini', el: 'Κατασκευή εφαρμογής δημιουργίας εικόνων' },
-    price: 19,
-    icon: ImageIcon,
-    comingSoon: true,
-  },
-  {
-    id: 'genai-2',
-    name: { en: 'Video Generation SaaS', ro: 'SaaS Generare Video', el: 'SaaS Δημιουργίας Βίντεο' },
-    description: { en: 'Build a video generation pipeline', ro: 'Construiește un pipeline de generare video', el: 'Κατασκευή pipeline δημιουργίας βίντεο' },
-    price: 19,
-    icon: Video,
-    comingSoon: true,
-  },
-  {
-    id: 'genai-3',
-    name: { en: 'Text Composition & Rewriting', ro: 'Compunere & Rescriere Text', el: 'Σύνθεση & Αναδιατύπωση Κειμένου' },
-    description: { en: 'Build an AI writing assistant SaaS', ro: 'Construiește un SaaS de asistență la scriere', el: 'Κατασκευή SaaS βοηθού γραφής' },
-    price: 19,
-    icon: FileEdit,
-    comingSoon: true,
-  },
-  {
-    id: 'genai-4',
-    name: { en: 'Plagiarism & AI Detection', ro: 'Detecție Plagiat & IA', el: 'Ανίχνευση Λογοκλοπής & AI' },
-    description: { en: 'Build a plagiarism & AI text detector', ro: 'Construiește un detector de plagiat', el: 'Κατασκευή ανιχνευτή λογοκλοπής' },
-    price: 19,
-    icon: ScanSearch,
-    comingSoon: true,
-  },
-  {
-    id: 'genai-5',
-    name: { en: 'OCR & Document Intelligence', ro: 'OCR & Inteligență Documente', el: 'OCR & Νοημοσύνη Εγγράφων' },
-    description: { en: 'Build an OCR & document analysis SaaS', ro: 'Construiește un SaaS de analiză documente', el: 'Κατασκευή SaaS ανάλυσης εγγράφων' },
-    price: 19,
-    icon: FileSearch,
-    comingSoon: true,
-  },
+const COMPARISON_ROWS: { feature: string; add: string; udemy: string; coursera: string; bootcamp: string }[] = [
+  { feature: 'Build an LLM from scratch', add: 'Yes', udemy: 'Rarely', coursera: 'Partial', bootcamp: 'Sometimes' },
+  { feature: 'Live in-browser Python (no setup)', add: 'Yes', udemy: 'No', coursera: 'No', bootcamp: 'No' },
+  { feature: 'Deployable SaaS products you keep', add: '6 products', udemy: 'No', coursera: 'No', bootcamp: 'No' },
+  { feature: 'Certificate', add: 'Yes', udemy: 'Yes', coursera: 'Yes', bootcamp: 'Yes' },
+  { feature: 'Free for schools', add: 'Yes', udemy: 'No', coursera: 'No', bootcamp: 'No' },
+  { feature: 'All future courses included', add: 'Yes', udemy: 'No', coursera: 'No', bootcamp: 'No' },
+  { feature: 'Price', add: '€12/mo', udemy: '~€15–130/course', coursera: '~$49/mo', bootcamp: '$500–2,000' },
 ];
 
-const INDIVIDUAL_STAGES_TOTAL = STAGE_PRODUCTS.reduce((s, p) => s + p.price, 0); // €155
-const COURSE_BUNDLE_PRICE = 89;
-const COURSE_BUNDLE_SAVING = Math.round((1 - COURSE_BUNDLE_PRICE / INDIVIDUAL_STAGES_TOTAL) * 100);
-
-const INDIVIDUAL_GENAI_TOTAL = GENAI_PRODUCTS.reduce((s, p) => s + p.price, 0); // €95
-const GENAI_BUNDLE_PRICE = 49;
-const GENAI_BUNDLE_SAVING = Math.round((1 - GENAI_BUNDLE_PRICE / INDIVIDUAL_GENAI_TOTAL) * 100);
-
-const EVERYTHING_INDIVIDUAL_TOTAL = INDIVIDUAL_STAGES_TOTAL + INDIVIDUAL_GENAI_TOTAL; // €250
-const EVERYTHING_BUNDLE_PRICE = 119;
-const EVERYTHING_BUNDLE_SAVING = Math.round((1 - EVERYTHING_BUNDLE_PRICE / EVERYTHING_INDIVIDUAL_TOTAL) * 100);
-
-/* Mock purchased stages — will come from Supabase/Stripe */
-const MOCK_PURCHASED: string[] = []; // e.g. ['stage-2', 'genai-1']
+/* Mock invoices — will come from Supabase/Stripe */
 const MOCK_INVOICES: any[] = [];
 
 /* ═══════════════════════════════════════════════════════════ */
@@ -188,10 +76,9 @@ export default function AccountView() {
   const { user, signOut, loading } = useAuth();
   const { language, getCompletionPercentage, progress, quizScores, xp, streak, totalCodeBlocksRun } = useAcademyStore();
   const router = useRouter();
-  const lang = language as string;
 
   const [activeTab, setActiveTab] = useState<'overview' | 'courses' | 'invoices'>('overview');
-  const [cart, setCart] = useState<string[]>([]);
+  const [billing, setBilling] = useState<'monthly' | 'annual'>('annual');
 
   if (loading) {
     return (
@@ -220,23 +107,6 @@ export default function AccountView() {
   const hoursSpent = Math.floor(totalTime / 3600);
   const minutesSpent = Math.floor((totalTime % 3600) / 60);
 
-  const isPurchased = (id: string) => MOCK_PURCHASED.includes(id);
-  const isInCart = (id: string) => cart.includes(id);
-  const toggleCart = (id: string) => {
-    setCart(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
-  };
-
-  const cartTotal = cart.reduce((sum, id) => {
-    const stage = STAGE_PRODUCTS.find(s => s.id === id);
-    if (stage) return sum + stage.price;
-    const genai = GENAI_PRODUCTS.find(g => g.id === id);
-    if (genai) return sum + genai.price;
-    if (id === 'bundle-course') return sum + COURSE_BUNDLE_PRICE;
-    if (id === 'bundle-genai') return sum + GENAI_BUNDLE_PRICE;
-    if (id === 'bundle-everything') return sum + EVERYTHING_BUNDLE_PRICE;
-    return sum;
-  }, 0);
-
   return (
     <div className="space-y-8 pb-12">
       {/* Page header */}
@@ -245,7 +115,7 @@ export default function AccountView() {
           My Account
         </h1>
         <p className="mt-1 text-muted-foreground">
-          Manage your profile, courses, and learning progress.
+          Manage your profile, subscription, and learning progress.
         </p>
       </div>
 
@@ -253,7 +123,7 @@ export default function AccountView() {
       <div className="flex gap-1 rounded-lg bg-muted p-1">
         {[
           { id: 'overview' as const, label: 'Overview', icon: User },
-          { id: 'courses' as const, label: 'Courses & Pricing', icon: ShoppingCart },
+          { id: 'courses' as const, label: 'Subscription', icon: ShoppingCart },
           { id: 'invoices' as const, label: 'Invoices', icon: FileText },
         ].map(tab => (
           <button
@@ -271,9 +141,7 @@ export default function AccountView() {
         ))}
       </div>
 
-      {/* ═══════════════════════════════════════════════
-          TAB: Overview
-          ═══════════════════════════════════════════════ */}
+      {/* ═══════════════ TAB: Overview ═══════════════ */}
       {activeTab === 'overview' && (
         <div className="space-y-6">
           {/* Profile card */}
@@ -296,7 +164,7 @@ export default function AccountView() {
                   <div className="mt-2 flex items-center gap-2">
                     <Badge className="bg-primary/10 text-primary border-primary/20">
                       <BookOpen className="mr-1 h-3 w-3" />
-                      {MOCK_PURCHASED.length === 0 ? 'Free Tier' : `${MOCK_PURCHASED.length} course${MOCK_PURCHASED.length > 1 ? 's' : ''} active`}
+                      Free Tier
                     </Badge>
                   </div>
                 </div>
@@ -353,14 +221,13 @@ export default function AccountView() {
             </div>
           </div>
 
-          {/* Purchased stages overview */}
+          {/* Subscription status */}
           <div className="rounded-xl border bg-card p-6">
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <Package className="h-4 w-4" />
-              My Courses
+              My Subscription
             </h3>
             <div className="space-y-2">
-              {/* Free stages always shown */}
               <div className="flex items-center justify-between rounded-lg bg-green-500/10 p-3">
                 <div className="flex items-center gap-3">
                   <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500/15">
@@ -376,47 +243,27 @@ export default function AccountView() {
                 </Badge>
               </div>
 
-              {/* Paid stages */}
-              {STAGE_PRODUCTS.map(stage => {
-                const purchased = isPurchased(stage.id);
-                return (
-                  <div key={stage.id} className={cn(
-                    'flex items-center justify-between rounded-lg p-3',
-                    purchased ? 'bg-green-500/10' : 'bg-muted/50'
-                  )}>
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-lg" style={{ backgroundColor: `${stage.color}15` }}>
-                        {(() => { const I = getIcon(stage.icon); return <I className="h-4 w-4" style={{ color: stage.color }} />; })()}
-                      </span>
-                      <div>
-                        <p className="text-sm font-medium">Stage {stage.stageNumber}: {stage.name[lang] || stage.name.en}</p>
-                        <p className="text-xs text-muted-foreground">{stage.lectures} lectures</p>
-                      </div>
-                    </div>
-                    {purchased ? (
-                      <Badge className="bg-green-500/20 text-green-700 dark:text-green-400 border-0">
-                        <Check className="mr-1 h-3 w-3" /> Active
-                      </Badge>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <Lock className="h-3.5 w-3.5 text-muted-foreground" />
-                        <span className="text-xs text-muted-foreground">€{stage.price}</span>
-                      </div>
-                    )}
+              <div className="flex items-center justify-between rounded-lg bg-muted/50 p-3">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/15">
+                    <Crown className="h-4 w-4 text-primary" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-medium">All-Access</p>
+                    <p className="text-xs text-muted-foreground">Everything unlocked — €12/mo or €99/yr</p>
                   </div>
-                );
-              })}
+                </div>
+                <span className="text-xs text-muted-foreground">Not subscribed</span>
+              </div>
             </div>
 
-            {MOCK_PURCHASED.length === 0 && (
-              <Button
-                className="mt-4 w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold"
-                onClick={() => setActiveTab('courses')}
-              >
-                <ArrowUpRight className="mr-2 h-4 w-4" />
-                Browse Courses & Pricing
-              </Button>
-            )}
+            <Button
+              className="mt-4 w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold"
+              onClick={() => setActiveTab('courses')}
+            >
+              <ArrowUpRight className="mr-2 h-4 w-4" />
+              View subscription plans
+            </Button>
           </div>
 
           {/* Quick actions */}
@@ -428,8 +275,8 @@ export default function AccountView() {
               <div className="flex items-center gap-3">
                 <ShoppingCart className="h-5 w-5 text-muted-foreground" />
                 <div>
-                  <p className="text-sm font-medium">Courses & Pricing</p>
-                  <p className="text-xs text-muted-foreground">Buy individual stages or bundles</p>
+                  <p className="text-sm font-medium">Subscription & Pricing</p>
+                  <p className="text-xs text-muted-foreground">One plan unlocks everything</p>
                 </div>
               </div>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
@@ -450,20 +297,106 @@ export default function AccountView() {
           </div>
         </div>
       )}
-
-      {/* ═══════════════════════════════════════════════
-          TAB: Courses & Pricing
-          ═══════════════════════════════════════════════ */}
+     {/* ═══════════════ TAB: Subscription & Pricing ═══════════════ */}
       {activeTab === 'courses' && (
-        <div className="space-y-8">
+        <div className="space-y-10">
 
-          {/* ── Free tier info ── */}
-          <div className="rounded-xl border-2 border-green-500/30 bg-green-500/5 p-5">
+          {/* Hero */}
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold" style={{ fontFamily: 'var(--font-heading)' }}>
+              Learn AI. Build real products. Fund free education.
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              One subscription unlocks everything — and every euro helps keep AI education free for students and schools.
+            </p>
+            <p className="mt-2 text-sm font-medium">€12/month · €99/year · Cancel anytime</p>
+          </div>
+
+          {/* Billing toggle */}
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => setBilling('monthly')}
+              className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${billing === 'monthly' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setBilling('annual')}
+              className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${billing === 'annual' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}
+            >
+              Annual <span className="text-green-500 font-semibold">· 2 months free</span>
+            </button>
+          </div>
+
+          {/* Plans */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 max-w-3xl mx-auto">
+            {/* All-Access */}
+            <div className="relative rounded-xl border-2 border-[hsl(38_80%_55%)] bg-card p-6 shadow-lg shadow-[hsl(38_80%_55%/0.08)]">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <Badge className="bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] font-bold text-xs px-3 shadow-md">
+                  <Star className="mr-1 h-3 w-3" /> ALL-ACCESS
+                </Badge>
+              </div>
+              <div className="pt-2">
+                <h4 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>All-Access</h4>
+                <p className="text-xs text-muted-foreground mt-0.5 mb-4">Everything, plus every future course</p>
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="text-4xl font-bold tabular-nums">€{billing === 'annual' ? ANNUAL_PRICE : MONTHLY_PRICE}</span>
+                  <span className="text-sm text-muted-foreground">/ {billing === 'annual' ? 'year' : 'month'}</span>
+                </div>
+                <p className="text-xs text-green-600 dark:text-green-400 font-semibold mb-4">
+                  {billing === 'annual' ? `Just €${ANNUAL_MONTHLY_EQUIV}/mo billed yearly — 2 months free` : 'Switch to annual and get 2 months free'}
+                </p>
+                <ul className="space-y-1.5 mb-5">
+                  {ALL_ACCESS_FEATURES.map(f => (
+                    <li key={f} className="flex items-center gap-2 text-sm">
+                      <Check className="h-3.5 w-3.5 shrink-0 text-green-500" /> {f}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  className="w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold shadow-md"
+                  onClick={() => {/* Stripe checkout — wired in Stripe step */}}
+                >
+                  Subscribe <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Button>
+                <p className="mt-2 text-center text-[10px] text-muted-foreground">Renews automatically · cancel anytime</p>
+              </div>
+            </div>
+
+            {/* Students */}
+            <div className="rounded-xl border-2 border-border bg-card p-6 hover:border-primary/30 transition-colors">
+              <h4 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>Students — 50% off</h4>
+              <p className="text-xs text-muted-foreground mt-0.5 mb-4">Same All-Access, half the price</p>
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-4xl font-bold tabular-nums">€{billing === 'annual' ? STUDENT_ANNUAL : STUDENT_MONTHLY}</span>
+                <span className="text-sm text-muted-foreground">/ {billing === 'annual' ? 'year' : 'month'}</span>
+              </div>
+              <p className="text-xs text-muted-foreground mb-4">
+                Subscribe, then verify your student status (student email, ID, or enrolment letter) and we&apos;ll apply your discount.
+              </p>
+              <ul className="space-y-1.5 mb-5">
+                {['Everything in All-Access', '50% student discount', 'Verified manually by our team'].map(f => (
+                  <li key={f} className="flex items-center gap-2 text-sm">
+                    <Check className="h-3.5 w-3.5 shrink-0 text-green-500" /> {f}
+                  </li>
+                ))}
+              </ul>
+              <Button
+                variant="outline"
+                className="w-full font-semibold"
+                onClick={() => {/* Stripe checkout — wired in Stripe step */}}
+              >
+                Get student rate <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Free tier */}
+          <div className="rounded-xl border-2 border-green-500/30 bg-green-500/5 p-5 max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-2">
               <Gift className="h-5 w-5 text-green-600 dark:text-green-400" />
-              <h3 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
-                Free — Getting Started + Stage 1
-              </h3>
+              <h3 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>Free forever — Getting Started + Stage 1</h3>
             </div>
             <p className="text-sm text-muted-foreground mb-3">
               7 lectures covering LLM fundamentals, Transformers, GPT architecture overview, and your Python sandbox setup. Free forever, no credit card needed.
@@ -477,316 +410,115 @@ export default function AccountView() {
             </div>
           </div>
 
-          {/* ── BUNDLES — the anchoring section ── */}
-          <div>
-            <h3 className="text-xl font-bold mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
-              Bundles — Best Value
-            </h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              3-month access from purchase date. One-time payment, no subscription.
+          {/* Mission / Fund */}
+          <div className="rounded-xl border bg-gradient-to-br from-[hsl(240_95%_10%)] to-[hsl(240_60%_18%)] p-6 text-white max-w-3xl mx-auto">
+            <div className="flex items-center gap-3 mb-2">
+              <Trophy className="h-5 w-5 text-[hsl(38_80%_55%)]" />
+              <h3 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>Your subscription builds the next free course</h3>
+            </div>
+            <p className="text-sm text-white/80">
+              Revenue from subscriptions goes into a dedicated Education Fund that pays for building new courses — many released free to students and schools. When you subscribe, you help the next learner build their first LLM for free.
             </p>
+          </div>
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              {/* Course Bundle */}
-              <div className="relative rounded-xl border-2 border-[hsl(38_80%_55%)] bg-card p-6 shadow-lg shadow-[hsl(38_80%_55%/0.08)]">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <Badge className="bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] font-bold text-xs px-3 shadow-md">
-                    <Star className="mr-1 h-3 w-3" /> MOST POPULAR
-                  </Badge>
-                </div>
-                <div className="pt-2">
-                  <h4 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
-                    Full Course Bundle
-                  </h4>
-                  <p className="text-xs text-muted-foreground mt-0.5 mb-4">
-                    Stages 2–6: Tokenization through Fine-tuning
-                  </p>
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-sm text-muted-foreground line-through">€{INDIVIDUAL_STAGES_TOTAL}</span>
-                    <span className="text-4xl font-bold tabular-nums">€{COURSE_BUNDLE_PRICE}</span>
-                  </div>
-                  <p className="text-xs text-green-600 dark:text-green-400 font-semibold mb-4">
-                    Save {COURSE_BUNDLE_SAVING}% — you save €{INDIVIDUAL_STAGES_TOTAL - COURSE_BUNDLE_PRICE}
-                  </p>
-                  <ul className="space-y-1.5 mb-5">
-                    {['37 interactive lectures', 'All code sandboxes', 'All quizzes & capstones', 'AI Tutor access', 'Completion certificate', '3-month access'].map(f => (
-                      <li key={f} className="flex items-center gap-2 text-sm">
-                        <Check className="h-3.5 w-3.5 shrink-0 text-green-500" /> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    className="w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold shadow-md"
-                    onClick={() => {/* Stripe checkout */}}
-                  >
-                    Get Full Course <ArrowRight className="ml-1.5 h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-
-              {/* GenAI Bundle */}
-              <div className="rounded-xl border-2 border-border bg-card p-6 hover:border-primary/30 transition-colors">
-                <h4 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
-                  GenAI Bundle
-                </h4>
-                <p className="text-xs text-muted-foreground mt-0.5 mb-4">
-                  All 5 GenAI SaaS product courses
-                </p>
-                <div className="flex items-baseline gap-2 mb-1">
-                  <span className="text-sm text-muted-foreground line-through">€{INDIVIDUAL_GENAI_TOTAL}</span>
-                  <span className="text-4xl font-bold tabular-nums">€{GENAI_BUNDLE_PRICE}</span>
-                </div>
-                <p className="text-xs text-green-600 dark:text-green-400 font-semibold mb-4">
-                  Save {GENAI_BUNDLE_SAVING}% — you save €{INDIVIDUAL_GENAI_TOTAL - GENAI_BUNDLE_PRICE}
-                </p>
-                <ul className="space-y-1.5 mb-5">
-                  {['5 SaaS product courses', 'Image, Video, Text, OCR, AI Detection', 'Production-ready code', '3-month access'].map(f => (
-                    <li key={f} className="flex items-center gap-2 text-sm">
-                      <Check className="h-3.5 w-3.5 shrink-0 text-green-500" /> {f}
-                    </li>
+          {/* Competitor comparison */}
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-xl font-bold mb-1 text-center" style={{ fontFamily: 'var(--font-heading)' }}>How we compare</h3>
+            <p className="text-sm text-muted-foreground mb-4 text-center">Bootcamp depth. Streaming-service price.</p>
+            <div className="overflow-x-auto rounded-xl border">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b bg-muted/50 text-left">
+                    <th className="p-3 font-medium"></th>
+                    <th className="p-3 font-semibold text-primary">ADD Academy</th>
+                    <th className="p-3 font-medium text-muted-foreground">Udemy</th>
+                    <th className="p-3 font-medium text-muted-foreground">Coursera</th>
+                    <th className="p-3 font-medium text-muted-foreground">Bootcamps</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {COMPARISON_ROWS.map(row => (
+                    <tr key={row.feature} className="border-b last:border-0">
+                      <td className="p-3 font-medium">{row.feature}</td>
+                      <td className="p-3 font-semibold text-green-600 dark:text-green-400">{row.add}</td>
+                      <td className="p-3 text-muted-foreground">{row.udemy}</td>
+                      <td className="p-3 text-muted-foreground">{row.coursera}</td>
+                      <td className="p-3 text-muted-foreground">{row.bootcamp}</td>
+                    </tr>
                   ))}
-                </ul>
-                <Button
-                  variant="outline"
-                  className="w-full font-semibold"
-                  onClick={() => {/* Stripe checkout */}}
-                >
-                  Get GenAI Bundle <ArrowRight className="ml-1.5 h-4 w-4" />
-                </Button>
-              </div>
-
-              {/* Everything Bundle */}
-              <div className="relative rounded-xl border-2 border-primary/40 bg-gradient-to-br from-[hsl(240_95%_10%)] to-[hsl(240_60%_18%)] p-6 text-white">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <Badge className="bg-primary text-primary-foreground font-bold text-xs px-3 shadow-md">
-                    <Crown className="mr-1 h-3 w-3" /> BEST VALUE
-                  </Badge>
-                </div>
-                <div className="pt-2">
-                  <h4 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
-                    Everything Bundle
-                  </h4>
-                  <p className="text-xs text-white/60 mt-0.5 mb-4">
-                    Full Course + All GenAI Products
-                  </p>
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-sm text-white/40 line-through">€{EVERYTHING_INDIVIDUAL_TOTAL}</span>
-                    <span className="text-4xl font-bold tabular-nums">€{EVERYTHING_BUNDLE_PRICE}</span>
-                  </div>
-                  <p className="text-xs text-green-400 font-semibold mb-4">
-                    Save {EVERYTHING_BUNDLE_SAVING}% — you save €{EVERYTHING_INDIVIDUAL_TOTAL - EVERYTHING_BUNDLE_PRICE}
-                  </p>
-                  <ul className="space-y-1.5 mb-5">
-                    {['Everything in Course Bundle', 'All 5 GenAI SaaS products', 'AI Tutor + Certificate', 'Only €30 more than Course alone', '3-month access'].map(f => (
-                      <li key={f} className="flex items-center gap-2 text-sm text-white/90">
-                        <Check className="h-3.5 w-3.5 shrink-0 text-[hsl(38_80%_55%)]" /> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    className="w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold shadow-lg"
-                    onClick={() => {/* Stripe checkout */}}
-                  >
-                    Get Everything <ArrowRight className="ml-1.5 h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
+                </tbody>
+              </table>
             </div>
+            <p className="mt-2 text-[10px] text-muted-foreground text-center">Competitor figures are indicative market ranges and may vary.</p>
           </div>
 
-          {/* ── Individual Stages ── */}
-          <div>
-            <h3 className="text-xl font-bold mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
-              Individual Stages
-            </h3>
+          {/* Free for schools & organisations */}
+          <div className="rounded-xl border-2 border-primary/30 bg-primary/5 p-6 max-w-3xl mx-auto">
+            <div className="flex items-center gap-3 mb-2">
+              <Gift className="h-5 w-5 text-primary" />
+              <h3 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>Free for every classroom</h3>
+            </div>
             <p className="text-sm text-muted-foreground mb-4">
-              Buy only what you need. Each stage includes 3-month access.
+              Every student deserves real AI education — not just those who can pay. ADD Academy is 100% free for accredited schools, universities and educational organisations: the full library, deployable products and certificates, at no cost.
             </p>
-
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {STAGE_PRODUCTS.map(stage => {
-                const purchased = isPurchased(stage.id);
-                return (
-                  <div
-                    key={stage.id}
-                    className={cn(
-                      'rounded-xl border bg-card p-5 transition-all',
-                      purchased && 'border-green-500/30 bg-green-500/5'
-                    )}
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <span className="flex h-9 w-9 items-center justify-center rounded-xl" style={{ backgroundColor: `${stage.color}15` }}>
-                          {(() => { const I = getIcon(stage.icon); return <I className="h-5 w-5" style={{ color: stage.color }} />; })()}
-                        </span>
-                        <div>
-                          <p className="text-xs text-muted-foreground font-medium">Stage {stage.stageNumber}</p>
-                          <h4 className="font-semibold text-sm">{stage.name[lang] || stage.name.en}</h4>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-xl font-bold tabular-nums">€{stage.price}</span>
-                      </div>
-                    </div>
-
-                    <ul className="space-y-1 mb-4">
-                      {stage.features.map(f => (
-                        <li key={f} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                          <Check className="h-3 w-3 shrink-0 text-green-500" /> {f}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="flex items-center gap-2 text-[10px] text-muted-foreground mb-3">
-                      <Clock className="h-3 w-3" /> 3-month access
-                    </div>
-
-                    {purchased ? (
-                      <Button variant="outline" size="sm" className="w-full" disabled>
-                        <Check className="mr-1.5 h-3.5 w-3.5" /> Purchased
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full font-medium"
-                        onClick={() => {/* Stripe checkout */}}
-                      >
-                        Buy Stage {stage.stageNumber} <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                      </Button>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Savings hint */}
-            <div className="mt-3 rounded-lg bg-[hsl(38_80%_55%/0.08)] border border-[hsl(38_80%_55%/0.2)] p-3 flex items-center gap-3">
-              <Tag className="h-5 w-5 text-[hsl(38_80%_55%)] shrink-0" />
-              <p className="text-sm">
-                <span className="font-semibold">Save {COURSE_BUNDLE_SAVING}%</span> — buy all 5 stages as the{' '}
-                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-primary underline underline-offset-2 font-medium">
-                  Full Course Bundle for €{COURSE_BUNDLE_PRICE}
-                </button>{' '}
-                instead of €{INDIVIDUAL_STAGES_TOTAL} individually.
-              </p>
-            </div>
+            <ol className="space-y-2 mb-4 text-sm">
+              {[
+                'Sign up as an Organisation. The person who registers becomes the Organisation Admin (or nominates a colleague as Org Admin).',
+                'Members join and log in using their valid organisation email.',
+                'The Org Admin receives an invitation code to add members.',
+                `Each organisation includes up to ${ORG_SEATS} registered students at no cost.`,
+                `Need more than ${ORG_SEATS} seats? Contact ${CONTACT_EMAIL} and our team will extend your organisation's capacity.`,
+              ].map((step, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-[11px] font-bold text-primary">{i + 1}</span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+            <a href={`mailto:${CONTACT_EMAIL}?subject=Organisation%20access%20request`}>
+              <Button className="font-semibold">
+                Apply as an organisation <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Button>
+            </a>
           </div>
 
-          {/* ── GenAI Products ── */}
-          <div>
-            <h3 className="text-xl font-bold mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
-              GenAI SaaS Products
-            </h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Build production-ready AI SaaS applications. Each product is a standalone course.
-            </p>
-
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {GENAI_PRODUCTS.map(product => {
-                const purchased = isPurchased(product.id);
-                const ProductIcon = product.icon;
-                return (
-                  <div
-                    key={product.id}
-                    className={cn(
-                      'rounded-xl border bg-card p-5 transition-all',
-                      purchased && 'border-green-500/30 bg-green-500/5'
-                    )}
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                        <ProductIcon className="h-5 w-5 text-primary" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-sm">{product.name[lang] || product.name.en}</h4>
-                        <p className="text-xs text-muted-foreground">{product.description[lang] || product.description.en}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-xl font-bold tabular-nums">€{product.price}</span>
-                      <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-                        <Clock className="h-3 w-3" /> 3-month access
-                      </div>
-                    </div>
-
-                    {product.comingSoon ? (
-                      <Button variant="outline" size="sm" className="w-full" disabled>
-                        Coming Soon
-                      </Button>
-                    ) : purchased ? (
-                      <Button variant="outline" size="sm" className="w-full" disabled>
-                        <Check className="mr-1.5 h-3.5 w-3.5" /> Purchased
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full font-medium"
-                        onClick={() => {/* Stripe checkout */}}
-                      >
-                        Buy Course <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                      </Button>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* GenAI savings hint */}
-            <div className="mt-3 rounded-lg bg-[hsl(38_80%_55%/0.08)] border border-[hsl(38_80%_55%/0.2)] p-3 flex items-center gap-3">
-              <Tag className="h-5 w-5 text-[hsl(38_80%_55%)] shrink-0" />
-              <p className="text-sm">
-                <span className="font-semibold">Save {GENAI_BUNDLE_SAVING}%</span> — get all 5 GenAI products as a{' '}
-                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-primary underline underline-offset-2 font-medium">
-                  bundle for €{GENAI_BUNDLE_PRICE}
-                </button>{' '}
-                instead of €{INDIVIDUAL_GENAI_TOTAL} individually.
-              </p>
-            </div>
-          </div>
-
-          {/* ── Trust signals ── */}
+          {/* Trust strip */}
           <div className="text-center space-y-2 py-4">
-            <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1"><Gift className="h-3.5 w-3.5" /> Free for schools</span>
+              <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> Cancel anytime</span>
+              <span className="flex items-center gap-1"><ArrowUpRight className="h-3.5 w-3.5" /> New courses added regularly</span>
               <span className="flex items-center gap-1"><Shield className="h-3.5 w-3.5" /> Secure payment via Stripe</span>
-              <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> 3-month access</span>
-              <span className="flex items-center gap-1"><Unlock className="h-3.5 w-3.5" /> Instant access</span>
             </div>
-            <p className="text-xs text-muted-foreground">
-              One-time payment. No recurring charges. No auto-renewal.
-            </p>
+            <p className="text-xs text-muted-foreground">Every subscription funds free education.</p>
           </div>
 
-          {/* ── FAQ-style clarification ── */}
-          <div className="rounded-xl border bg-card p-6">
+          {/* How it works */}
+          <div className="rounded-xl border bg-card p-6 max-w-3xl mx-auto">
             <h4 className="font-semibold mb-3">How it works</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="font-medium mb-0.5">One-time payment</p>
-                <p className="text-xs text-muted-foreground">No subscriptions, no auto-renewal. Pay once, learn at your pace within 3 months.</p>
+                <p className="font-medium mb-0.5">One subscription, everything unlocked</p>
+                <p className="text-xs text-muted-foreground">All-Access includes the full LLM course, all GenAI products, and every future course.</p>
               </div>
               <div>
-                <p className="font-medium mb-0.5">3-month access window</p>
-                <p className="text-xs text-muted-foreground">Your access starts the moment you purchase. Complete the content within 3 months.</p>
+                <p className="font-medium mb-0.5">Cancel anytime</p>
+                <p className="text-xs text-muted-foreground">No lock-in. Manage or cancel your subscription whenever you like.</p>
               </div>
               <div>
-                <p className="font-medium mb-0.5">Keep your progress forever</p>
-                <p className="text-xs text-muted-foreground">Your XP, badges, quiz scores, and completion certificate never expire.</p>
+                <p className="font-medium mb-0.5">Keep your progress</p>
+                <p className="text-xs text-muted-foreground">Your XP, badges, quiz scores, and completion certificate stay with your account.</p>
               </div>
               <div>
-                <p className="font-medium mb-0.5">Future courses separate</p>
-                <p className="text-xs text-muted-foreground">New courses we release are priced independently. You only pay for what you want.</p>
+                <p className="font-medium mb-0.5">Students & schools</p>
+                <p className="text-xs text-muted-foreground">Students get 50% off after verification; accredited organisations get full access free.</p>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* ═══════════════════════════════════════════════
-          TAB: Invoices
-          ═══════════════════════════════════════════════ */}
+      {/* ═══════════════ TAB: Invoices ═══════════════ */}
       {activeTab === 'invoices' && (
         <div className="space-y-6">
           <div className="rounded-xl border bg-card p-6">
@@ -800,7 +532,7 @@ export default function AccountView() {
                 <FileText className="h-10 w-10 text-muted-foreground/30 mb-3" />
                 <p className="font-medium text-muted-foreground">No invoices yet</p>
                 <p className="text-sm text-muted-foreground/60 mt-1">
-                  Invoices will appear here once you purchase a course or bundle.
+                  Invoices will appear here once you start a subscription.
                 </p>
                 <Button
                   variant="outline"
@@ -808,7 +540,7 @@ export default function AccountView() {
                   className="mt-4"
                   onClick={() => setActiveTab('courses')}
                 >
-                  Browse Courses
+                  View subscription plans
                 </Button>
               </div>
             ) : (
