@@ -1,23 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { z } from 'zod';
+import Stripe from 'stripe';
 
-const VALID_PLAN_IDS = ['individual_monthly', 'individual_annual', 'school_monthly', 'school_annual'] as const;
+const PRICE_MAP: Record<string, string | undefined> = {
+  'all-access-monthly': process.env.STRIPE_PRICE_MONTHLY,
+  'all-access-annual': process.env.STRIPE_PRICE_ANNUAL,
+};
 
 const CheckoutSchema = z.object({
-  planId: z.enum(VALID_PLAN_IDS, {
-    message: `planId must be one of: ${VALID_PLAN_IDS.join(', ')}`,
-  }),
-  schoolId: z.string().uuid().optional(),
+  planId: z.enum(['all-access-monthly', 'all-access-annual']),
 });
 
 /**
  * POST /api/checkout
- *
  * Creates a Stripe Checkout session for the given plan.
- * Requires STRIPE_SECRET_KEY env var.
- *
- * TODO: Wire up Stripe SDK when keys are configured.
  */
 export async function POST(request: NextRequest) {
   try {
@@ -27,20 +24,14 @@ export async function POST(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (!user) {
-      return NextResponse.json(
-        { error: 'Authentication required' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
     let body: unknown;
     try {
       body = await request.json();
     } catch {
-      return NextResponse.json(
-        { error: 'Invalid JSON body' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
     }
 
     const parsed = CheckoutSchema.safeParse(body);
@@ -67,26 +58,42 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Create Stripe Checkout Session
-    // const stripe = new Stripe(stripeKey);
-    // const session = await stripe.checkout.sessions.create({
-    //   customer_email: user.email,
-    //   mode: 'subscription',
-    //   line_items: [{ price: PRICE_MAP[planId], quantity: 1 }],
-    //   success_url: `${request.headers.get('origin')}/account?checkout=success`,
-    //   cancel_url: `${request.headers.get('origin')}/pricing?checkout=cancelled`,
-    // });
-    // return NextResponse.json({ url: session.url });
+    const priceId = PRICE_MAP[planId];
+    if (!priceId) {
+      return NextResponse.json(
+        { error: `No Stripe price configured for plan "${planId}".` },
+        { status: 503 }
+      );
+    }
 
-    return NextResponse.json(
-      { error: 'Checkout not yet implemented', planId },
-      { status: 501 }
-    );
+    const stripe = new Stripe(stripeKey);
+    const origin = request.headers.get('origin') || 'https://academy.add-individual-solutions.com';
+
+    // Reuse an existing Stripe customer if we have one on the student record
+    const { data: student } = await supabase
+      .from('academy_students')
+      .select('stripe_customer_id')
+      .eq('id', user.id)
+      .single();
+
+    const session = await stripe.checkout.sessions.create({
+      mode: 'subscription',
+      line_items: [{ price: priceId, quantity: 1 }],
+      customer: (student?.stripe_customer_id as string | undefined) || undefined,
+      customer_email: student?.stripe_customer_id ? undefined : user.email,
+      client_reference_id: user.id,
+      metadata: { supabase_user_id: user.id, plan_id: planId },
+      subscription_data: {
+        metadata: { supabase_user_id: user.id, plan_id: planId },
+      },
+      allow_promotion_codes: true,
+      success_url: `${origin}/account?checkout=success`,
+      cancel_url: `${origin}/pricing?checkout=cancelled`,
+    });
+
+    return NextResponse.json({ url: session.url });
   } catch (error) {
     console.error('Checkout error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
