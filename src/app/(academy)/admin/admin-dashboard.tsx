@@ -84,6 +84,7 @@ import {
 } from '@/lib/subscriptions/plans';
 import { computeRevenue, computeCustomerStats } from '@/lib/admin/metrics';
 import { formatEuro, formatPercent, formatCount } from '@/lib/admin/format';
+import { toCsv, downloadCsv } from '@/lib/admin/csv';
 
 /* ─── Types ─────────────────────────────────────────── */
 
@@ -343,6 +344,13 @@ export default function AdminDashboard() {
   const [subSearch, setSubSearch] = useState('');
   const [studentFilter, setStudentFilter] = useState<'all' | 'free' | 'paid' | 'org'>('all');
   const [subFilter, setSubFilter] = useState<'all' | 'active' | 'canceled' | 'past_due'>('all');
+
+  // Pagination (rows per page for Students & Subscriptions tables)
+  const ADMIN_PAGE_SIZE = 25;
+  const [studentPage, setStudentPage] = useState(1);
+  const [subPage, setSubPage] = useState(1);
+  useEffect(() => { setStudentPage(1); }, [studentSearch, studentFilter]);
+  useEffect(() => { setSubPage(1); }, [subSearch, subFilter]);
   const [reportSearch, setReportSearch] = useState('');
   const [reportFilter, setReportFilter] = useState<'all' | 'open' | 'in_progress' | 'resolved' | 'closed'>('all');
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
@@ -1170,10 +1178,48 @@ export default function AdminDashboard() {
         <p className="text-xs text-muted-foreground">
           {t(`Showing ${filteredStudents.length} of ${totalStudents} students`, `Se afișează ${filteredStudents.length} din ${totalStudents} studenți`)}
         </p>
-        <Button variant="outline" size="sm" onClick={() => setEmailDialogOpen(true)}>
-          <Mail className="h-3.5 w-3.5" />
-          {t('Email All', 'Email tuturor')}
-        </Button>
+        <div className="flex gap-1.5">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() =>
+              downloadCsv(
+                'students',
+                toCsv(
+                  filteredStudents.map((m) => ({
+                    id: m.id,
+                    email: m.email,
+                    name: memberName(m),
+                    tier: m.tier,
+                    org_role: m.org_role ?? '',
+                    school_id: m.school_id ?? '',
+                    preferred_language: m.preferred_language ?? '',
+                    created_at: m.created_at,
+                    last_active_at: m.last_active_at ?? '',
+                  })),
+                  [
+                    { key: 'id', header: 'ID' },
+                    { key: 'email', header: 'Email' },
+                    { key: 'name', header: 'Name' },
+                    { key: 'tier', header: 'Tier' },
+                    { key: 'org_role', header: 'Org Role' },
+                    { key: 'school_id', header: 'School ID' },
+                    { key: 'preferred_language', header: 'Language' },
+                    { key: 'created_at', header: 'Created' },
+                    { key: 'last_active_at', header: 'Last Active' },
+                  ],
+                ),
+              )
+            }
+          >
+            <Download className="h-3.5 w-3.5" />
+            {t('Export CSV', 'Export CSV')}
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => setEmailDialogOpen(true)}>
+            <Mail className="h-3.5 w-3.5" />
+            {t('Email All', 'Email tuturor')}
+          </Button>
+        </div>
       </div>
 
       {/* Students list */}
@@ -1184,13 +1230,28 @@ export default function AdminDashboard() {
             <p className="mt-2 text-sm text-muted-foreground">{t('No students found.', 'Niciun student găsit.')}</p>
           </div>
         ) : (
-          filteredStudents.map((member) => (
+          filteredStudents.slice((studentPage - 1) * ADMIN_PAGE_SIZE, studentPage * ADMIN_PAGE_SIZE).map((member) => (
             <div key={member.id} className="px-4">
               <MemberRow member={member} canManage={platformAdmin} showOrg />
             </div>
           ))
         )}
       </div>
+      {filteredStudents.length > ADMIN_PAGE_SIZE && (
+        <div className="flex items-center justify-between pt-1">
+          <p className="text-xs text-muted-foreground">
+            {t(`Page ${studentPage} of ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`, `Pagina ${studentPage} din ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`)}
+          </p>
+          <div className="flex gap-1.5">
+            <Button variant="outline" size="sm" disabled={studentPage <= 1} onClick={() => setStudentPage((p) => Math.max(1, p - 1))}>
+              {t('Previous', 'Anterior')}
+            </Button>
+            <Button variant="outline" size="sm" disabled={studentPage >= Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)} onClick={() => setStudentPage((p) => p + 1)}>
+              {t('Next', 'Următor')}
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 
@@ -1449,6 +1510,49 @@ export default function AdminDashboard() {
             </button>
           ))}
         </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() =>
+            downloadCsv(
+              'subscriptions',
+              toCsv(
+                filteredSubscriptions.map((s) => {
+                  const st = allStudents.find((x) => x.id === s.student_id);
+                  return {
+                    id: s.id,
+                    student_email: st?.email ?? '',
+                    student_name: st ? memberName(st) : '',
+                    tier: s.tier,
+                    status: s.status,
+                    discount_percent: s.discount_percent,
+                    auto_renew: s.auto_renew,
+                    cancel_at_period_end: s.cancel_at_period_end,
+                    current_period_start: s.current_period_start ?? '',
+                    current_period_end: s.current_period_end ?? '',
+                    created_at: s.created_at,
+                  };
+                }),
+                [
+                  { key: 'id', header: 'ID' },
+                  { key: 'student_email', header: 'Student Email' },
+                  { key: 'student_name', header: 'Student Name' },
+                  { key: 'tier', header: 'Tier' },
+                  { key: 'status', header: 'Status' },
+                  { key: 'discount_percent', header: 'Discount %' },
+                  { key: 'auto_renew', header: 'Auto Renew' },
+                  { key: 'cancel_at_period_end', header: 'Cancels At Period End' },
+                  { key: 'current_period_start', header: 'Period Start' },
+                  { key: 'current_period_end', header: 'Period End' },
+                  { key: 'created_at', header: 'Created' },
+                ],
+              ),
+            )
+          }
+        >
+          <Download className="h-3.5 w-3.5" />
+          {t('Export CSV', 'Export CSV')}
+        </Button>
       </div>
 
       {/* Subscription list */}
@@ -1460,7 +1564,7 @@ export default function AdminDashboard() {
           </div>
         ) : (
           <div className="divide-y divide-border">
-            {filteredSubscriptions.map((sub) => {
+            {filteredSubscriptions.slice((subPage - 1) * ADMIN_PAGE_SIZE, subPage * ADMIN_PAGE_SIZE).map((sub) => {
               const student = allStudents.find((s) => s.id === sub.student_id);
               return (
                 <div key={sub.id} className="p-4 hover:bg-muted/30 transition-colors">
@@ -1544,6 +1648,22 @@ export default function AdminDashboard() {
           </div>
         )}
       </div>
+
+      {filteredSubscriptions.length > ADMIN_PAGE_SIZE && (
+        <div className="flex items-center justify-between pt-1">
+          <p className="text-xs text-muted-foreground">
+            {t(`Page ${subPage} of ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`, `Pagina ${subPage} din ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`)}
+          </p>
+          <div className="flex gap-1.5">
+            <Button variant="outline" size="sm" disabled={subPage <= 1} onClick={() => setSubPage((p) => Math.max(1, p - 1))}>
+              {t('Previous', 'Anterior')}
+            </Button>
+            <Button variant="outline" size="sm" disabled={subPage >= Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)} onClick={() => setSubPage((p) => p + 1)}>
+              {t('Next', 'Următor')}
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* Pricing plans reference */}
       <div className="rounded-xl border border-border bg-card p-4">
