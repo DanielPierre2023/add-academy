@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { useAuth } from '@/components/auth/auth-provider';
 import { t } from '@/lib/i18n';
-import { getMySchool, getSchoolStudents } from '@/lib/school/actions';
+import { getMySchool, getSchoolStudents, inviteSchoolMember } from '@/lib/school/actions';
 import { formatTime } from '@/lib/utils';
 import {
   School,
@@ -17,12 +17,15 @@ import {
   Trophy,
   Clock,
   AlertCircle,
+  UserPlus,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import type { Language } from '@/types';
 
 interface SchoolData {
@@ -63,6 +66,12 @@ export default function SchoolDashboardPage() {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
 
+  // Invite panel state
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteName, setInviteName] = useState('');
+  const [inviting, setInviting] = useState(false);
+  const [inviteMsg, setInviteMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
   const loadData = useCallback(async () => {
     const schoolData = await getMySchool();
     if (!schoolData) {
@@ -100,6 +109,21 @@ export default function SchoolDashboardPage() {
     await navigator.clipboard.writeText(school.invite_code || school.id);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  }
+
+  async function handleInvite(e: React.FormEvent) {
+    e.preventDefault();
+    setInviting(true);
+    setInviteMsg(null);
+    const res = await inviteSchoolMember({ email: inviteEmail, fullName: inviteName || undefined });
+    setInviting(false);
+    if (res?.error) {
+      setInviteMsg({ ok: false, text: res.error });
+    } else {
+      setInviteMsg({ ok: true, text: t('school_invite_sent', language) || `Invitation sent to ${res.email}.` });
+      setInviteEmail('');
+      setInviteName('');
+    }
   }
 
   if (authLoading || loading) {
@@ -174,6 +198,55 @@ export default function SchoolDashboardPage() {
               )}
             </Button>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Invite a Member Card */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <UserPlus className="h-5 w-5" />
+            {t('school_invite_member', language) || 'Invite a member'}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleInvite} className="space-y-4">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="invite-name">{t('auth_name', language)}</Label>
+                <Input
+                  id="invite-name"
+                  value={inviteName}
+                  onChange={(e) => setInviteName(e.target.value)}
+                  placeholder={t('auth_name', language)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="invite-email">{t('auth_email', language)}</Label>
+                <Input
+                  id="invite-email"
+                  type="email"
+                  required
+                  value={inviteEmail}
+                  onChange={(e) => setInviteEmail(e.target.value)}
+                  placeholder="member@example.com"
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Button type="submit" disabled={inviting} className="gap-2">
+                <UserPlus className="h-4 w-4" />
+                {inviting
+                  ? (t('school_invite_sending', language) || 'Sending…')
+                  : (t('school_invite_send', language) || 'Send invitation')}
+              </Button>
+              {inviteMsg && (
+                <span className={inviteMsg.ok ? 'text-sm text-green-600 dark:text-green-400' : 'text-sm text-red-600 dark:text-red-400'}>
+                  {inviteMsg.text}
+                </span>
+              )}
+            </div>
+          </form>
         </CardContent>
       </Card>
 
