@@ -105,7 +105,11 @@ const translations: Record<Language, Record<string, string>> = {
     school_last_active: 'Last Active',
     school_student_count: 'Students',
     school_max_students: 'Max Capacity',
-
+    school_invite_member: 'Invite a member',
+    school_invite_send: 'Send invitation',
+    school_invite_sending: 'Sending…',
+    school_invite_sent: 'Invitation sent.',
+    
     // Dashboard
     dash_title: 'Your Learning Dashboard',
     dash_progress: 'Overall Progress',
@@ -230,6 +234,10 @@ const translations: Record<Language, Record<string, string>> = {
     school_last_active: 'Ultima Activitate',
     school_student_count: 'Elevi',
     school_max_students: 'Capacitate Maximă',
+    school_invite_member: 'Invită un membru',
+    school_invite_send: 'Trimite invitația',
+    school_invite_sending: 'Se trimite…',
+    school_invite_sent: 'Invitație trimisă.',
 
     dash_title: 'Panoul Tău de Învățare',
     dash_progress: 'Progres General',
@@ -351,6 +359,10 @@ const translations: Record<Language, Record<string, string>> = {
     school_last_active: 'Τελευταία Δραστηριότητα',
     school_student_count: 'Μαθητές',
     school_max_students: 'Μέγιστη Χωρητικότητα',
+    school_invite_member: 'Πρόσκληση μέλους',
+    school_invite_send: 'Αποστολή πρόσκλησης',
+    school_invite_sending: 'Αποστολή…',
+    school_invite_sent: 'Η πρόσκληση στάλθηκε.',
 
     dash_title: 'Πίνακας Μάθησης',
     dash_progress: 'Συνολική Πρόοδος',
