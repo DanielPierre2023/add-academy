@@ -532,7 +532,7 @@ export default function HomePage() {
                             {stage.name[language]}
                           </h3>
                           <p className="text-xs text-muted-foreground">
-                            {t('course_stage', language)} {stage.number} · {stageLectures.length} {t('course_lecture', language)}s
+                            {t('course_stage', language)} {stage.number} · {stageLectures.length} {stageLectures.length === 1 ? t('course_lecture_singular', language) : t('course_lecture_plural', language)}
                           </p>
                         </div>
                         <ChevronRight className="h-4 w-4 text-muted-foreground/40 transition-all group-hover:text-foreground group-hover:translate-x-0.5" />
