@@ -578,6 +578,87 @@
   margin: 0;
 }
 
+/* ---------- Home hero (lectures/home) ---------- */
+.hero {
+  background: linear-gradient(145deg, hsl(240 60% 12%), hsl(258 55% 22%));
+  border-radius: 24px;
+  padding: 56px 48px;
+  margin: 0 0 40px;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  color: #ffffff;
+}
+
+.hero-content > p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 auto 32px;
+  max-width: 640px;
+}
+
+.cta-btn {
+  padding: 14px 32px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  color: hsl(240 95% 10%);
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(245, 158, 11, 0.4);
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.hero-stat {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.hero-stat-num {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+  color: hsl(38 80% 55%);
+}
+
+.hero-stat-label {
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 /* ---------- Exercise box ---------- */
 .exercise-box {
   background: linear-gradient(145deg, #FEFEFE, #F7F7FB);
