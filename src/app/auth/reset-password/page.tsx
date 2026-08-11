@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { acceptInvitation } from '@/lib/school/actions';
 import { Lock, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -37,6 +38,9 @@ function ResetPasswordInner() {
 
   // 'checking' -> verifying the recovery link; 'ready' -> valid session; 'invalid' -> bad/expired link
   const [sessionState, setSessionState] = useState<'checking' | 'ready' | 'invalid'>('checking');
+
+  // Whether this visit is an invited-member welcome flow (?welcome=1)
+  const isWelcome = searchParams.get('welcome') === '1';
 
   useEffect(() => {
     const supabase = createClient();
@@ -118,6 +122,20 @@ function ResetPasswordInner() {
         return;
       }
 
+      // Invited-member welcome flow: finalise enrollment into their school.
+      // Only runs when arriving via an invite link (?welcome=1); normal resets are unaffected.
+      if (isWelcome) {
+        const { data: { user } } = await supabase.auth.getUser();
+        const inviteToken = (user?.user_metadata as { invite_token?: string } | undefined)?.invite_token;
+        if (inviteToken) {
+          await acceptInvitation(inviteToken).catch(() => {});
+        }
+        // Do NOT sign out other sessions here — the member has just signed in.
+        setSuccess(true);
+        setTimeout(() => router.push('/school/dashboard'), 2000);
+        return;
+      }
+
       // Optional hardening: sign out any other active sessions after a password change.
       await supabase.auth.signOut({ scope: 'others' }).catch(() => {});
 
@@ -168,10 +186,12 @@ function ResetPasswordInner() {
           <CheckCircle2 className="h-8 w-8 text-green-500" />
         </div>
         <h1 className="font-heading text-2xl font-bold text-foreground">
-          Password updated
+          {isWelcome ? 'Welcome aboard' : 'Password updated'}
         </h1>
         <p className="mt-2 text-muted-foreground">
-          Your password has been reset successfully. Redirecting you now…
+          {isWelcome
+            ? 'Your password is set and your account is ready. Redirecting you now…'
+            : 'Your password has been reset successfully. Redirecting you now…'}
         </p>
       </div>
     );
@@ -185,10 +205,10 @@ function ResetPasswordInner() {
             <Lock className="h-7 w-7 text-primary" />
           </div>
           <h1 className="font-heading text-2xl font-bold text-foreground">
-            Set new password
+            {isWelcome ? 'Create your password' : 'Set new password'}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Enter your new password below
+            {isWelcome ? 'Choose a password to finish setting up your account' : 'Enter your new password below'}
           </p>
         </div>
 
