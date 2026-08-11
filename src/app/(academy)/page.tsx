@@ -77,7 +77,7 @@ export default function HomePage() {
   const nextLecture = index.lectures.find((l) => !progress[l.id]?.completed);
 
   const stats = [
-    { value: 49, suffix: '', label: t('home_stats_lectures', language), icon: BookOpen },
+    { value: index.lectures.filter((l) => l.id !== 'home').length, suffix: '', label: t('home_stats_lectures', language), icon: BookOpen },
     { value: 5, suffix: '', label: 'SaaS Products', icon: Layers },
     { value: 100, suffix: '+', label: t('home_stats_exercises', language), icon: Terminal },
     { value: 3, suffix: '', label: t('home_stats_languages', language), icon: Globe },
