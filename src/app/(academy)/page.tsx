@@ -92,12 +92,12 @@ export default function HomePage() {
       glowColor: 'rgba(59, 130, 246, 0.25)',
       title: language === 'ro' ? 'Teoria LLM' : language === 'el' ? 'Θεωρία LLM' : 'LLM Theory',
       desc: language === 'ro'
-        ? 'Intelege transformerele, mecanismele de atentie, embedding-urile si matematica din spatele modelelor de limbaj moderne.'
+        ? 'Înțelege transformerele, mecanismele de atenție, embedding-urile și matematica din spatele modelelor de limbaj moderne.'
         : language === 'el'
           ? 'Κατανοήστε τους transformers, τους μηχανισμούς προσοχής, τα embeddings και τα μαθηματικά πίσω από τα σύγχρονα γλωσσικά μοντέλα.'
           : 'Understand transformers, attention mechanisms, embeddings and the math behind modern language models.',
       highlights: language === 'ro'
-        ? ['Transformers', 'Atentie', 'Embeddings']
+        ? ['Transformers', 'Atenție', 'Embeddings']
         : language === 'el'
           ? ['Transformers', 'Προσοχή', 'Embeddings']
           : ['Transformers', 'Attention', 'Embeddings'],
@@ -110,7 +110,7 @@ export default function HomePage() {
       glowColor: 'rgba(212, 160, 23, 0.3)',
       title: language === 'ro' ? 'Cod Practic' : language === 'el' ? 'Πρακτικός Κώδικας' : 'Hands-On Code',
       desc: language === 'ro'
-        ? 'Construieste fiecare componenta de la zero in Python — tokenizere, straturi de atentie, blocuri transformer si intreaga arhitectura GPT-2.'
+        ? 'Construiește fiecare componentă de la zero în Python — tokenizere, straturi de atenție, blocuri transformer și întreaga arhitectură GPT-2.'
         : language === 'el'
           ? 'Κατασκευάστε κάθε component από το μηδέν σε Python — tokenizers, στρώματα προσοχής, transformer blocks και ολόκληρη την αρχιτεκτονική GPT-2.'
           : 'Build every component from scratch in Python — tokenizers, attention layers, transformer blocks and the full GPT-2 architecture.',
@@ -124,7 +124,7 @@ export default function HomePage() {
       glowColor: 'rgba(16, 185, 129, 0.25)',
       title: language === 'ro' ? 'Antrenare & Implementare' : language === 'el' ? 'Εκπαίδευση & Ανάπτυξη' : 'Training & Deployment',
       desc: language === 'ro'
-        ? 'Pre-antreneaza pe seturi de date reale, implementeaza scalarea temperaturii, esantionarea top-k si incarca intreaga arhitectura GPT-2.'
+        ? 'Pre-antrenează pe seturi de date reale, implementează scalarea temperaturii, eșantionarea top-k și încarcă întreaga arhitectură GPT-2.'
         : language === 'el'
           ? 'Προεκπαιδεύστε σε πραγματικά datasets, υλοποιήστε temperature scaling, top-k sampling και φορτώστε ολόκληρη την αρχιτεκτονική GPT-2.'
           : 'Pretrain on real datasets, implement temperature scaling, top-k sampling and load the full GPT-2 architecture.',
@@ -140,25 +140,25 @@ export default function HomePage() {
     {
       num: '01',
       title: language === 'ro' ? 'Fundamentele' : language === 'el' ? 'Θεμέλια' : 'Foundations',
-      desc: language === 'ro' ? 'Intelege cum functioneaza LLM-urile' : language === 'el' ? 'Κατανοήστε πώς λειτουργούν τα LLMs' : 'Understand how LLMs work',
+      desc: language === 'ro' ? 'Înțelege cum funcționează LLM-urile' : language === 'el' ? 'Κατανοήστε πώς λειτουργούν τα LLMs' : 'Understand how LLMs work',
       icon: BookOpen,
     },
     {
       num: '02',
-      title: language === 'ro' ? 'Construieste' : language === 'el' ? 'Κατασκευή' : 'Build',
-      desc: language === 'ro' ? 'Codeaza GPT-2 de la zero' : language === 'el' ? 'Κωδικοποιήστε GPT-2 από το μηδέν' : 'Code GPT-2 from scratch',
+      title: language === 'ro' ? 'Construiește' : language === 'el' ? 'Κατασκευή' : 'Build',
+      desc: language === 'ro' ? 'Codează GPT-2 de la zero' : language === 'el' ? 'Κωδικοποιήστε GPT-2 από το μηδέν' : 'Code GPT-2 from scratch',
       icon: Code2,
     },
     {
       num: '03',
-      title: language === 'ro' ? 'Antreneaza' : language === 'el' ? 'Εκπαίδευση' : 'Train',
+      title: language === 'ro' ? 'Antrenează' : language === 'el' ? 'Εκπαίδευση' : 'Train',
       desc: language === 'ro' ? 'Pre-antrenare pe date reale' : language === 'el' ? 'Προεκπαίδευση σε πραγματικά δεδομένα' : 'Pretrain on real data',
       icon: Cpu,
     },
     {
       num: '04',
-      title: language === 'ro' ? 'Livreaza' : language === 'el' ? 'Παράδοση' : 'Ship',
-      desc: language === 'ro' ? 'Produse SaaS gata de productie' : language === 'el' ? 'Έτοιμα SaaS προϊόντα' : 'Production-ready SaaS products',
+      title: language === 'ro' ? 'Livrează' : language === 'el' ? 'Παράδοση' : 'Ship',
+      desc: language === 'ro' ? 'Produse SaaS gata de producție' : language === 'el' ? 'Έτοιμα SaaS προϊόντα' : 'Production-ready SaaS products',
       icon: Layers,
     },
   ];
@@ -223,7 +223,7 @@ export default function HomePage() {
                   href="/lectures/1"
                   className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-medium text-primary-foreground/80 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-primary-foreground"
                 >
-                  {language === 'ro' ? 'Exploreaza cursul' : language === 'el' ? 'Εξερευνήστε' : 'Explore curriculum'}
+                  {language === 'ro' ? 'Explorează cursul' : language === 'el' ? 'Εξερευνήστε' : 'Explore curriculum'}
                 </Link>
               </motion.div>
             </div>
@@ -316,7 +316,7 @@ export default function HomePage() {
             <span className="font-heading text-lg font-bold text-foreground/70">ADD Individual Solutions</span>
             <span className="hidden sm:inline text-muted-foreground/40">|</span>
             <span className="hidden sm:inline text-sm text-muted-foreground/50">
-              {language === 'ro' ? 'Consultanti AI din Transilvania' : language === 'el' ? 'Σύμβουλοι AI από την Τρανσυλβανία' : 'AI Consultants from Transylvania'}
+              {language === 'ro' ? 'Consultant AI din Cipru' : language === 'el' ? 'Σύμβουλοι AI από την Κύπρο' : 'AI Consultants from Cyprus'}
             </span>
           </div>
         </div>
@@ -332,7 +332,7 @@ export default function HomePage() {
               {language === 'ro' ? 'Curriculum' : language === 'el' ? 'Πρόγραμμα Σπουδών' : 'Curriculum'}
             </p>
             <h2 className="text-3xl font-bold font-heading sm:text-4xl">
-              {language === 'ro' ? 'Ce Vei Invata' : language === 'el' ? 'Τι Θα Μάθετε' : "What You'll Learn"}
+              {language === 'ro' ? 'Ce Vei Învăța' : language === 'el' ? 'Τι Θα Μάθετε' : "What You'll Learn"}
             </h2>
           </div>
         </ScrollReveal>
@@ -371,10 +371,10 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="text-center mb-14">
               <p className="text-xs uppercase tracking-widest text-secondary font-semibold mb-3">
-                {language === 'ro' ? 'Parcursul tau' : language === 'el' ? 'Η πορεία σας' : 'Your journey'}
+                {language === 'ro' ? 'Parcursul tău' : language === 'el' ? 'Η πορεία σας' : 'Your journey'}
               </p>
               <h2 className="text-3xl font-bold font-heading sm:text-4xl">
-                {language === 'ro' ? 'De la Teorie la Productie' : language === 'el' ? 'Από τη Θεωρία στην Παραγωγή' : 'From Theory to Production'}
+                {language === 'ro' ? 'De la Teorie la Producție' : language === 'el' ? 'Από τη Θεωρία στην Παραγωγή' : 'From Theory to Production'}
               </h2>
             </div>
           </ScrollReveal>
@@ -416,14 +416,14 @@ export default function HomePage() {
             <div className="flex-1">
               <h3 className="text-base font-bold text-foreground mb-1">
                 {language === 'ro'
-                  ? 'Descarca produse gata de deployment'
+                  ? 'Descarcă produse gata de deployment'
                   : language === 'el'
                     ? 'Κατεβάστε έτοιμα προϊόντα ανάπτυξης'
                     : 'Download deployment-ready products'}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {language === 'ro'
-                  ? 'Finalizeaza cel putin 80% dintr-un curs pentru a debloca NeuralForge LLM sau produsele GenAI SaaS ca ZIP-uri gata de deployment.'
+                  ? 'Finalizează cel puțin 80% dintr-un curs pentru a debloca NeuralForge LLM sau produsele GenAI SaaS ca ZIP-uri gata de deployment.'
                   : language === 'el'
                     ? 'Ολοκληρώστε τουλάχιστον 80% ενός μαθήματος για να ξεκλειδώσετε το NeuralForge LLM ή τα GenAI SaaS ως ZIP αρχεία έτοιμα για ανάπτυξη.'
                     : 'Complete at least 80% of a course to unlock the NeuralForge LLM or GenAI SaaS products as deployment-ready ZIP downloads.'}
@@ -570,11 +570,11 @@ export default function HomePage() {
           <div className="relative">
             <Award className="mx-auto h-10 w-10 text-secondary mb-4" />
             <h2 className="text-2xl font-bold font-heading mb-3 sm:text-3xl">
-              {language === 'ro' ? 'Incepe sa construiesti astazi' : language === 'el' ? 'Ξεκινήστε σήμερα' : 'Start building today'}
+              {language === 'ro' ? 'Începe să construiești astăzi' : language === 'el' ? 'Ξεκινήστε σήμερα' : 'Start building today'}
             </h2>
             <p className="text-primary-foreground/60 mb-6 max-w-lg mx-auto">
               {language === 'ro'
-                ? 'Etapele 0 si 1 sunt gratuite. Nici macar cont nu ai nevoie.'
+                ? 'Etapele 0 și 1 sunt gratuite. Nici măcar cont nu ai nevoie.'
                 : language === 'el'
                   ? 'Τα Στάδια 0 & 1 είναι δωρεάν. Δεν χρειάζεται λογαριασμός.'
                   : 'Stages 0 & 1 are free forever. No account required.'}
