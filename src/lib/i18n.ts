@@ -194,6 +194,7 @@ const translations: Record<Language, Record<string, string>> = {
     reg_enrollment_ph: 'e.g. school-abc123',
     reg_subtitle: 'Start your journey into AI & LLMs',
     reg_password_policy: 'Password must be at least 8 characters and include lowercase, uppercase, a number and a symbol.',
+    reg_failed: 'Registration failed. Please try again in a moment.',
   },
   ro: {
     nav_home: 'Acasă',
@@ -376,6 +377,7 @@ const translations: Record<Language, Record<string, string>> = {
     reg_enrollment_ph: 'ex. scoala-abc123',
     reg_subtitle: 'Începe-ți parcursul în AI și LLM-uri',
     reg_password_policy: 'Parola trebuie să aibă cel puțin 8 caractere și să includă litere mici, litere mari, o cifră și un simbol.',
+    reg_failed: 'Înregistrarea a eșuat. Te rugăm să încerci din nou într-un moment.',
   },
   el: {
     nav_home: 'Αρχική',
@@ -558,6 +560,7 @@ const translations: Record<Language, Record<string, string>> = {
     reg_enrollment_ph: 'π.χ. school-abc123',
     reg_subtitle: 'Ξεκίνησε το ταξίδι σου στο AI & τα LLMs',
     reg_password_policy: 'Ο κωδικός πρέπει να έχει τουλάχιστον 8 χαρακτήρες και να περιλαμβάνει πεζά, κεφαλαία, έναν αριθμό και ένα σύμβολο.',
+    reg_failed: 'Η εγγραφή απέτυχε. Παρακαλώ δοκιμάστε ξανά σε λίγο.',
   },
 };
 
