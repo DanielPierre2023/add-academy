@@ -1,6 +1,6 @@
 {
-  "name": "ADD Academy — Build LLMs from Scratch",
-  "short_name": "ADD Academy",
+  "name": "ADD Academica — Build LLMs from Scratch",
+  "short_name": "ADD Academica",
   "description": "Interactive course: build large language models from scratch. Lectures, code blocks, and quizzes across 3 languages.",
   "start_url": "/",
   "display": "standalone",
