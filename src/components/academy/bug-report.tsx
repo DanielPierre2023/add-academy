@@ -116,7 +116,7 @@ export function BugReportButton() {
                   {t('Report an Issue', 'Raportează o Problemă')}
                 </h3>
                 <p className="mt-0.5 text-xs text-muted-foreground">
-                  {t('Help us improve ADD Academy by reporting bugs or issues.', 'Ajută-ne să îmbunătățim ADD Academy raportând probleme.')}
+                  {t('Help us improve ADD Academica by reporting bugs or issues.', 'Ajută-ne să îmbunătățim ADD Academica raportând probleme.')}
                 </p>
 
                 <div className="mt-4 space-y-3">
