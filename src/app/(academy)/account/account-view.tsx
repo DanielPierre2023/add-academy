@@ -156,7 +156,7 @@ export default function AccountView() {
                   )}
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold">{user.displayName || 'Academy Student'}</h2>
+                  <h2 className="text-xl font-semibold">{user.displayName || 'Academica Student'}</h2>
                   <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
                     <Mail className="h-3.5 w-3.5" />
                     {user.email}
@@ -430,7 +430,7 @@ export default function AccountView() {
                 <thead>
                   <tr className="border-b bg-muted/50 text-left">
                     <th className="p-3 font-medium"></th>
-                    <th className="p-3 font-semibold text-primary">ADD Academy</th>
+                    <th className="p-3 font-semibold text-primary">ADD Academica</th>
                     <th className="p-3 font-medium text-muted-foreground">Udemy</th>
                     <th className="p-3 font-medium text-muted-foreground">Coursera</th>
                     <th className="p-3 font-medium text-muted-foreground">Bootcamps</th>
@@ -459,7 +459,7 @@ export default function AccountView() {
               <h3 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>Free for every classroom</h3>
             </div>
             <p className="text-sm text-muted-foreground mb-4">
-              Every student deserves real AI education — not just those who can pay. ADD Academy is 100% free for accredited schools, universities and educational organisations: the full library, deployable products and certificates, at no cost.
+              Every student deserves real AI education — not just those who can pay. ADD Academica is 100% free for accredited schools, universities and educational organisations: the full library, deployable products and certificates, at no cost.
             </p>
             <ol className="space-y-2 mb-4 text-sm">
               {[
@@ -591,7 +591,7 @@ export default function AccountView() {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium">Sign out</p>
-          <p className="text-xs text-muted-foreground">Sign out of your ADD Academy account</p>
+          <p className="text-xs text-muted-foreground">Sign out of your ADD Academica account</p>
         </div>
         <Button
           variant="outline"
