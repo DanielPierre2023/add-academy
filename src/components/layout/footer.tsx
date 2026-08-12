@@ -96,12 +96,12 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://add-individual-solutions.com/privacy/privacy.html" target="_blank" rel="noopener noreferrer" className="text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
+                <a href="https://add-individual-solutions.com/privacy" target="_blank" rel="noopener noreferrer" className="text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
                   {language === 'ro' ? 'Politica de Confidențialitate' : language === 'el' ? 'Πολιτική Απορρήτου' : 'Privacy Policy'}
                 </a>
               </li>
               <li>
-                <a href="https://add-individual-solutions.com/privacy/terms.html" target="_blank" rel="noopener noreferrer" className="text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
+                <a href="https://add-individual-solutions.com/terms" target="_blank" rel="noopener noreferrer" className="text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
                   {language === 'ro' ? 'Termeni și Condiții' : language === 'el' ? 'Όροι & Προϋποθέσεις' : 'Terms & Conditions'}
                 </a>
               </li>
