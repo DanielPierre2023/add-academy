@@ -18,7 +18,7 @@ export function Footer() {
                 ADD
               </span>
               <span className="text-lg text-primary-foreground/90">
-                Academy
+                Academica
               </span>
             </Link>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
