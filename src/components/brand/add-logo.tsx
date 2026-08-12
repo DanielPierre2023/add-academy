@@ -22,7 +22,7 @@ const SIZES = {
  *
  * - `mark`    — just the logo image (for compact spaces)
  * - `full`    — logo image at full width
- * - `academy` — logo image + "Academy" branded text (default)
+ * - `academy` — logo image + "Academica" branded text (default)
  */
 export function ADDLogo({ variant = 'academy', className, size = 'md' }: ADDLogoProps) {
   const s = SIZES[size];
@@ -53,7 +53,7 @@ export function ADDLogo({ variant = 'academy', className, size = 'md' }: ADDLogo
     );
   }
 
-  // academy variant: logo + "Academy" text
+  // academy variant: logo + "Academica" text
   return (
     <span className={cn('inline-flex items-center gap-3', className)}>
       <Image
@@ -71,7 +71,7 @@ export function ADDLogo({ variant = 'academy', className, size = 'md' }: ADDLogo
             s.text
           )}
         >
-          Academy
+          Academica
         </span>
         <span
           className={cn(
