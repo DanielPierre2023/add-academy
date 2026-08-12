@@ -1,0 +1,33 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# ADD Academica — Python environment reference
+#
+# IMPORTANT: This file is for DOCUMENTATION and LOCAL reproduction only.
+# The live platform does NOT install these with pip. All lesson Python runs
+# in the browser via Pyodide v0.26.4 (see src/lib/pyodide-runner.ts), which
+# supplies its own prebuilt versions of these packages. The web app itself is
+# a Next.js/TypeScript project built from package.json — there is no Python
+# server component in this repo.
+#
+# The versions below MATCH the packages bundled with Pyodide 0.26.4, so a local
+# virtual environment behaves as closely as possible to what learners see in
+# the browser playground.
+#
+#   Setup for local use:
+#     python -m venv .venv
+#     source .venv/bin/activate      # Windows: .venv\Scripts\activate
+#     pip install -r requirements.txt
+#
+# To confirm the exact version the browser is actually using, run inside a
+# lesson code block:  import numpy; print(numpy.__version__)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Packages available in the in-browser playground (Pyodide 0.26.4 allowlist)
+numpy==2.0.2
+scipy==1.14.1
+matplotlib==3.8.4
+pandas==2.2.3
+scikit-learn==1.5.2
+sympy==1.13.3
+networkx==3.3
+pillow==10.4.0
+regex==2024.9.11
