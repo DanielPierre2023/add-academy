@@ -1844,32 +1844,32 @@ export default function AdminDashboard() {
       {
         id: 'welcome',
         name: 'Welcome Email',
-        subject: 'Welcome to ADD Academy! 🎓',
-        body: `Hi {{name}},\n\nWelcome to ADD Academy! We're excited to have you on board.\n\nYour journey into AI and Machine Learning starts now. Here's what you can do:\n\n• Explore free lectures in Stages 0 & 1\n• Try our interactive AI Tutor\n• Earn XP and climb the leaderboard\n\nBest regards,\nThe ADD Academy Team`,
+        subject: 'Welcome to ADD Academica! 🎓',
+        body: `Hi {{name}},\n\nWelcome to ADD Academica! We're excited to have you on board.\n\nYour journey into AI and Machine Learning starts now. Here's what you can do:\n\n• Explore free lectures in Stages 0 & 1\n• Try our interactive AI Tutor\n• Earn XP and climb the leaderboard\n\nBest regards,\nThe ADD Academica Team`,
       },
       {
         id: 'org-invite',
         name: 'Organization Invitation',
-        subject: 'You\'ve been invited to join {{org}} on ADD Academy',
-        body: `Hi {{name}},\n\nYou've been invited to join {{org}} on ADD Academy.\n\nUse this invite code to join: {{code}}\n\nAs a member, you'll get full access to all courses and materials.\n\nGet started at: https://academy.add-individual-solutions.com\n\nBest regards,\nThe ADD Academy Team`,
+        subject: 'You\'ve been invited to join {{org}} on ADD Academica',
+        body: `Hi {{name}},\n\nYou've been invited to join {{org}} on ADD Academica.\n\nUse this invite code to join: {{code}}\n\nAs a member, you'll get full access to all courses and materials.\n\nGet started at: https://academy.add-individual-solutions.com\n\nBest regards,\nThe ADD Academica Team`,
       },
       {
         id: 'course-launch',
         name: 'New Course Announcement',
         subject: 'New Course Available: {{course}}',
-        body: `Hi {{name}},\n\nWe're thrilled to announce a new course on ADD Academy:\n\n{{course}}\n\n{{description}}\n\nStart learning now at: https://academy.add-individual-solutions.com\n\nBest regards,\nThe ADD Academy Team`,
+        body: `Hi {{name}},\n\nWe're thrilled to announce a new course on ADD Academica:\n\n{{course}}\n\n{{description}}\n\nStart learning now at: https://academy.add-individual-solutions.com\n\nBest regards,\nThe ADD Academica Team`,
       },
       {
         id: 'renewal',
         name: 'Subscription Renewal',
-        subject: 'Your ADD Academy subscription is renewing soon',
-        body: `Hi {{name}},\n\nYour {{plan}} subscription will renew on {{date}}.\n\nCurrent plan: {{plan}}\nPrice: €{{price}}/quarter\n\nIf you have any questions, reply to this email.\n\nBest regards,\nThe ADD Academy Team`,
+        subject: 'Your ADD Academica subscription is renewing soon',
+        body: `Hi {{name}},\n\nYour {{plan}} subscription will renew on {{date}}.\n\nCurrent plan: {{plan}}\nPrice: €{{price}}/quarter\n\nIf you have any questions, reply to this email.\n\nBest regards,\nThe ADD Academica Team`,
       },
       {
         id: 'discount',
         name: 'Special Discount',
         subject: '🎉 Special offer: {{discount}}% off your next subscription',
-        body: `Hi {{name}},\n\nWe'd like to offer you a special {{discount}}% discount on your next ADD Academy subscription.\n\nUse code: {{code}}\n\nThis offer expires on {{expiry}}.\n\nBest regards,\nThe ADD Academy Team`,
+        body: `Hi {{name}},\n\nWe'd like to offer you a special {{discount}}% discount on your next ADD Academica subscription.\n\nUse code: {{code}}\n\nThis offer expires on {{expiry}}.\n\nBest regards,\nThe ADD Academica Team`,
       },
     ];
 
