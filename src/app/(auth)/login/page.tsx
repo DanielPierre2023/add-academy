@@ -45,7 +45,7 @@ function LoginPageInner() {
     setError(null);
     const { error: err } = await signInWithEmail(email, password);
     if (err) {
-      setError(err);
+      setError(err && err !== '{}' ? err : 'Authentication failed. Please try again.');
       setLoading(false);
     } else {
       router.push('/');
@@ -57,7 +57,7 @@ function LoginPageInner() {
     setError(null);
     const { error: err } = await signInWithGoogle();
     if (err) {
-      setError(err);
+      setError(err && err !== '{}' ? err : 'Authentication failed. Please try again.');
       setLoading(false);
     }
   };
@@ -74,7 +74,7 @@ function LoginPageInner() {
     setLoading(false);
     // Neutral message on purpose — never reveal whether an account exists (anti-enumeration).
     if (err) {
-      setError(err);
+      setError(err && err !== '{}' ? err : 'Authentication failed. Please try again.');
     } else {
       setInfo('If an account exists for that email, a password-reset link is on its way. Check your inbox.');
     }
@@ -86,7 +86,7 @@ function LoginPageInner() {
     setError(null);
     const { error: err } = await signInWithOrgCode(orgCode, email, password);
     if (err) {
-      setError(err);
+      setError(err && err !== '{}' ? err : 'Authentication failed. Please try again.');
       setLoading(false);
     } else {
       router.push('/');
