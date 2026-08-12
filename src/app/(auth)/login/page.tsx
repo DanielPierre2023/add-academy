@@ -6,6 +6,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Mail, Lock, Eye, EyeOff, Building2 } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { ADDLogo } from '@/components/brand/add-logo';
+import { useAcademyStore } from '@/lib/store/academy-store';
+import { t } from '@/lib/i18n';
+import type { Language } from '@/types';
 
 type LoginTab = 'email' | 'organization';
 
@@ -19,6 +22,7 @@ export default function LoginPage() {
 
 function LoginPageInner() {
   const router = useRouter();
+  const language = useAcademyStore((s) => s.language) as Language;
   const searchParams = useSearchParams();
   const { signInWithEmail, signInWithGoogle, signInWithOrgCode, resetPassword } = useAuth();
 
@@ -35,7 +39,7 @@ function LoginPageInner() {
   useEffect(() => {
     const errorParam = searchParams.get('error');
     if (errorParam === 'auth_callback_error') {
-      setError('Authentication failed. Please try again.');
+      setError(t('auth_callback_error', language));
     }
   }, [searchParams]);
 
