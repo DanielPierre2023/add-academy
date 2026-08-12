@@ -39,8 +39,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: 'ADD Academy — Build LLMs from Scratch',
-      template: '%s | ADD Academy',
+      default: 'ADD Academica — Build LLMs from Scratch',
+      template: '%s | ADD Academica',
     },
     description:
       'An interactive course that takes you from zero to building large language models from scratch. Learn transformers, attention, tokenization, training, and deployment — with hands-on code in every lecture.',
@@ -58,21 +58,21 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       locale: 'en_US',
       url: 'https://academy.add-individual-solutions.com',
-      siteName: 'ADD Academy',
-      title: 'ADD Academy — Build LLMs from Scratch',
+      siteName: 'ADD Academica',
+      title: 'ADD Academica — Build LLMs from Scratch',
       description: `Interactive course: build large language models from scratch. ${statsLine}.`,
       images: [
         {
           url: '/og-image.png',
           width: 1200,
           height: 630,
-          alt: 'ADD Academy — Build LLMs from Scratch',
+          alt: 'ADD Academica — Build LLMs from Scratch',
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'ADD Academy — Build LLMs from Scratch',
+      title: 'ADD Academica — Build LLMs from Scratch',
       description: `Interactive course: build large language models from scratch. ${statsLine}.`,
       images: ['/og-image.png'],
     },
