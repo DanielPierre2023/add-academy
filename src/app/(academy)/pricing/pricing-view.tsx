@@ -400,7 +400,7 @@ export default function PricingView() {
           <div className="divide-y divide-border">
             <div className="grid grid-cols-3 gap-2 px-6 py-3 text-sm font-semibold text-muted-foreground">
               <span />
-              <span className="text-center text-primary">ADD Academy</span>
+              <span className="text-center text-primary">ADD Academica</span>
               <span className="text-center">{tt(language, 'Others', 'Alții', 'Άλλοι')}</span>
             </div>
             {COMPARISON.map((row) => (
