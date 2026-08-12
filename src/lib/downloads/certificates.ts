@@ -1,5 +1,5 @@
 /**
- * Client-side PDF certificate generator for ADD Academy.
+ * Client-side PDF certificate generator for ADD Academica.
  *
  * Uses the browser Canvas API to draw a branded completion certificate,
  * then converts it to a downloadable PDF-like image.
@@ -73,11 +73,11 @@ export async function generateCertificate(data: CertificateData): Promise<Blob> 
     ctx.fillText('ADD', CERT_WIDTH / 2, 125);
   }
 
-  // "Academy" under logo
+  // "Academica" under logo
   ctx.fillStyle = '#E8A731';
   ctx.font = 'bold 22px "Manrope", "Helvetica Neue", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('Academy', CERT_WIDTH / 2, 195);
+  ctx.fillText('Academica', CERT_WIDTH / 2, 195);
 
   // ─── Title ───────────────────────────────────────────
   ctx.fillStyle = '#0504AA';
@@ -221,7 +221,7 @@ export async function downloadCertificate(data: CertificateData): Promise<void> 
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `ADD-Academy-Certificate-${data.courseName.replace(/\s+/g, '-')}.png`;
+  a.download = `ADD-Academica-Certificate-${data.courseName.replace(/\s+/g, '-')}.png`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
