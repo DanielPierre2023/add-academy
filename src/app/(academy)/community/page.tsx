@@ -27,13 +27,13 @@ export default function CommunityPage() {
         'Access community-curated resources, code snippets, and project examples shared by students and instructors.',
       eventsTitle: 'Events & Workshops',
       eventsDesc:
-        'Join live workshops, webinars, and study groups organized by the ADD Academy community.',
+        'Join live workshops, webinars, and study groups organized by the ADD Academica community.',
       globalTitle: 'Global Network',
       globalDesc:
         'Connect with AI learners from Romania, Greece, and beyond. Our multilingual community spans multiple countries.',
       comingSoon: 'Coming Soon',
       comingSoonDesc:
-        'We are building a vibrant community space for ADD Academy students. Stay tuned for discussion forums, study groups, and collaborative learning features.',
+        'We are building a vibrant community space for ADD Academica students. Stay tuned for discussion forums, study groups, and collaborative learning features.',
       startLearning: 'Start Learning',
     },
     ro: {
@@ -47,13 +47,13 @@ export default function CommunityPage() {
         'Acceseaza resurse curate de comunitate, fragmente de cod si exemple de proiecte.',
       eventsTitle: 'Evenimente si Ateliere',
       eventsDesc:
-        'Participa la ateliere live, webinarii si grupuri de studiu organizate de comunitatea ADD Academy.',
+        'Participa la ateliere live, webinarii si grupuri de studiu organizate de comunitatea ADD Academica.',
       globalTitle: 'Retea Globala',
       globalDesc:
         'Conecteaza-te cu studenti AI din Romania, Grecia si nu numai. Comunitatea noastra multilingva se intinde in mai multe tari.',
       comingSoon: 'In Curand',
       comingSoonDesc:
-        'Construim un spatiu de comunitate vibrant pentru studentii ADD Academy. Ramai la curent pentru forumuri, grupuri de studiu si functii de invatare colaborativa.',
+        'Construim un spatiu de comunitate vibrant pentru studentii ADD Academica. Ramai la curent pentru forumuri, grupuri de studiu si functii de invatare colaborativa.',
       startLearning: 'Incepe sa Inveti',
     },
     el: {
@@ -73,7 +73,7 @@ export default function CommunityPage() {
         'Συνδεθείτε με μαθητές AI από τη Ρουμανία, την Ελλάδα και πέρα.',
       comingSoon: 'Έρχεται Σύντομα',
       comingSoonDesc:
-        'Χτίζουμε έναν ζωντανό χώρο κοινότητας για τους φοιτητές του ADD Academy.',
+        'Χτίζουμε έναν ζωντανό χώρο κοινότητας για τους φοιτητές του ADD Academica.',
       startLearning: 'Ξεκινήστε τη Μάθηση',
     },
   };
