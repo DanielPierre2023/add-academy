@@ -36,7 +36,7 @@ export default function CertificatePage() {
       // Generate a simple certificate as a downloadable HTML file
       const certDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       const certHtml = `<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>ADD Academy Certificate</title>
+<html><head><meta charset="utf-8"><title>ADD Academica Certificate</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Manrope:wght@400;600&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -53,7 +53,7 @@ h1{font-family:'Fraunces',serif;font-size:36px;color:#c8942a;margin-bottom:8px}
 .date{font-size:13px;color:#777;margin-top:32px}
 </style></head><body>
 <div class="cert">
-<h1>ADD Academy</h1>
+<h1>ADD Academica</h1>
 <p class="subtitle">Certificate of Completion</p>
 <p class="certifies">This certifies that</p>
 <p class="student-name">${name.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
@@ -70,7 +70,7 @@ h1{font-family:'Fraunces',serif;font-size:36px;color:#c8942a;margin-bottom:8px}
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `ADD-Academy-Certificate-${name.replace(/\s+/g, '-')}.html`;
+      a.download = `ADD-Academica-Certificate-${name.replace(/\s+/g, '-')}.html`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -122,7 +122,7 @@ h1{font-family:'Fraunces',serif;font-size:36px;color:#c8942a;margin-bottom:8px}
                 Eligible
               </Badge>
               <CardTitle className="text-xl">
-                ADD Academy — Build LLMs from Scratch
+                ADD Academica — Build LLMs from Scratch
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -133,7 +133,7 @@ h1{font-family:'Fraunces',serif;font-size:36px;color:#c8942a;margin-bottom:8px}
                   {name || t('cert_name', language)}
                 </p>
                 <p className="text-sm text-muted-foreground mb-4">
-                  has successfully completed the ADD Academy course
+                  has successfully completed the ADD Academica course
                 </p>
                 <p className="text-lg font-semibold text-primary">
                   &ldquo;Building Large Language Models from Scratch&rdquo;
