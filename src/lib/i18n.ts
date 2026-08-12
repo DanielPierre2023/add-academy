@@ -86,7 +86,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // School
     school_apply_title: 'Apply for Free School Access',
-    school_apply_desc: 'Register your high school to give students free access to the entire LLM Academy course.',
+    school_apply_desc: 'Register your high school to give students free access to the entire LLM Academica course.',
     school_name: 'School Name',
     school_country: 'Country',
     school_city: 'City',
@@ -274,7 +274,7 @@ const translations: Record<Language, Record<string, string>> = {
     auth_my_account: 'Contul Meu',
 
     school_apply_title: 'Aplică pentru Acces Școlar Gratuit',
-    school_apply_desc: 'Înregistrează liceul tău pentru a oferi elevilor acces gratuit la întregul curs LLM Academy.',
+    school_apply_desc: 'Înregistrează liceul tău pentru a oferi elevilor acces gratuit la întregul curs LLM Academica.',
     school_name: 'Numele Școlii',
     school_country: 'Țara',
     school_city: 'Orașul',
@@ -458,7 +458,7 @@ const translations: Record<Language, Record<string, string>> = {
     auth_my_account: 'Ο Λογαριασμός Μου',
 
     school_apply_title: 'Αίτηση για Δωρεάν Σχολική Πρόσβαση',
-    school_apply_desc: 'Εγγράψτε το σχολείο σας για να δώσετε στους μαθητές δωρεάν πρόσβαση στο πλήρες μάθημα LLM Academy.',
+    school_apply_desc: 'Εγγράψτε το σχολείο σας για να δώσετε στους μαθητές δωρεάν πρόσβαση στο πλήρες μάθημα LLM Academica.',
     school_name: 'Όνομα Σχολείου',
     school_country: 'Χώρα',
     school_city: 'Πόλη',
