@@ -2853,36 +2853,36 @@ export default function AdminDashboard() {
         </TabsList>
 
         <TabsContent value="overview">
-          <OverviewTab />
+          {OverviewTab()}
         </TabsContent>
         <TabsContent value="students">
-          <StudentsTab />
+          {StudentsTab()}
         </TabsContent>
         <TabsContent value="organizations">
-          <OrganizationsTab />
+          {OrganizationsTab()}
         </TabsContent>
         <TabsContent value="subscriptions">
-          <SubscriptionsTab />
+          {SubscriptionsTab()}
         </TabsContent>
         <TabsContent value="courses">
-          <CoursesTab />
+          {CoursesTab()}
         </TabsContent>
         <TabsContent value="communications">
-          <CommunicationsTab />
+          {CommunicationsTab()}
         </TabsContent>
         <TabsContent value="analytics">
-          <AnalyticsTab />
+          {AnalyticsTab()}
         </TabsContent>
         <TabsContent value="reports">
-          <ReportsTab />
+          {ReportsTab()}
         </TabsContent>
       </Tabs>
 
       {/* All dialogs */}
-      <EmailDialog />
-      <DiscountDialog />
-      <AnnouncementDialog />
-      <NewOrgDialog />
+      {EmailDialog()}
+      {DiscountDialog()}
+      {AnnouncementDialog()}
+      {NewOrgDialog()}
     </div>
   );
 }
