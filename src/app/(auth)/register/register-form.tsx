@@ -78,7 +78,7 @@ export default function RegisterForm() {
       });
 
       if (authError) {
-        setError(authError.message);
+        setError(authError.message?.trim() && authError.message !== '{}' ? authError.message : t('reg_failed', language));
         setLoading(false);
         return;
       }
@@ -110,7 +110,7 @@ export default function RegisterForm() {
       },
     });
     if (authError) {
-      setError(authError.message);
+      setError(authError.message?.trim() && authError.message !== '{}' ? authError.message : t('reg_failed', language));
     }
   }
 
