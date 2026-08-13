@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo, memo } from 'react';
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { useAuth } from '@/lib/auth/auth-context';
 import { t } from '@/lib/i18n';
+import { getLectureTitle } from '@/lib/lectures';
 import { cn } from '@/lib/utils';
 import type { Language } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,8 @@ import {
   Wrench,
   Loader2,
   AlertTriangle,
+  Copy,
+  Check,
 } from 'lucide-react';
 import type { AIMessage } from '@/types';
 
@@ -32,7 +35,7 @@ const MODE_CONFIG = {
   build: { icon: Wrench, color: 'text-blue-500', bg: 'bg-blue-500/10' },
 } as const;
 
-/** Translated preset questions keyed by language */
+/** Fallback preset questions (used on Home / when no lecture is active). */
 const SUGGESTIONS: Record<Language, string[]> = {
   en: [
     'What is attention mechanism?',
@@ -50,6 +53,271 @@ const SUGGESTIONS: Record<Language, string[]> = {
     'Πώς φτιάχνω έναν tokenizer;',
   ],
 };
+
+/**
+ * Build lecture-aware starter questions from the active lecture's own title,
+ * so suggestions are relevant on every lecture without editing content files.
+ */
+function suggestionsForLecture(lectureId: string | undefined, language: Language): string[] {
+  if (!lectureId || lectureId === 'home') {
+    return SUGGESTIONS[language] || SUGGESTIONS.en;
+  }
+  const title = getLectureTitle(lectureId, language);
+  switch (language) {
+    case 'ro':
+      return [
+        `Explică simplu ideea principală din „${title}”`,
+        'M-am blocat — ajută-mă să depanez codul',
+        'Verifică-mă: am înțeles corect această lecție?',
+      ];
+    case 'el':
+      return [
+        `Εξήγησε απλά την κύρια ιδέα του «${title}»`,
+        'Κόλλησα — βοήθησέ με να διορθώσω τον κώδικα',
+        'Έλεγξέ με: κατάλαβα σωστά αυτό το μάθημα;',
+      ];
+    default:
+      return [
+        `Explain the main idea of "${title}" simply`,
+        "I'm stuck — help me debug my code",
+        'Quick check: did I understand this lecture?',
+      ];
+  }
+}
+
+// ─── Lightweight, dependency-free markdown rendering ────────────────────────
+// Renders to React nodes (never dangerouslySetInnerHTML), so it is XSS-safe by
+// construction. Supports fenced code (with copy), inline code, bold, italics,
+// links, headings and bullet/numbered lists — the subset the tutor emits.
+
+const PY_KEYWORDS = new Set([
+  'False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class',
+  'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global',
+  'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return',
+  'try', 'while', 'with', 'yield', 'self', 'print', 'range', 'len',
+]);
+const JS_KEYWORDS = new Set([
+  'const', 'let', 'var', 'function', 'return', 'if', 'else', 'for', 'while', 'do', 'switch',
+  'case', 'break', 'continue', 'new', 'class', 'extends', 'import', 'from', 'export', 'default',
+  'async', 'await', 'try', 'catch', 'finally', 'throw', 'typeof', 'instanceof', 'this', 'null',
+  'undefined', 'true', 'false', 'void', 'yield',
+]);
+
+function keywordsFor(lang: string): Set<string> {
+  const l = (lang || '').toLowerCase();
+  if (l.startsWith('js') || l.startsWith('ts') || l === 'javascript' || l === 'typescript') return JS_KEYWORDS;
+  return PY_KEYWORDS; // default to Python (the course language)
+}
+
+/** Tokenize a code line into colored spans. Best-effort; falls back to plain. */
+function highlightCode(code: string, lang: string): React.ReactNode[] {
+  const keywords = keywordsFor(lang);
+  const nodes: React.ReactNode[] = [];
+  const master =
+    /(#[^\n]*|\/\/[^\n]*)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)|(\b\d+(?:\.\d+)?\b)|([A-Za-z_]\w*)/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  let key = 0;
+  try {
+    while ((m = master.exec(code)) !== null) {
+      if (m.index > last) nodes.push(code.slice(last, m.index));
+      if (m[1]) {
+        nodes.push(<span key={key++} className="text-zinc-500 italic">{m[1]}</span>);
+      } else if (m[2]) {
+        nodes.push(<span key={key++} className="text-emerald-400">{m[2]}</span>);
+      } else if (m[3]) {
+        nodes.push(<span key={key++} className="text-amber-400">{m[3]}</span>);
+      } else if (m[4]) {
+        if (keywords.has(m[4])) {
+          nodes.push(<span key={key++} className="text-sky-400 font-medium">{m[4]}</span>);
+        } else {
+          nodes.push(m[4]);
+        }
+      }
+      last = m.index + m[0].length;
+    }
+    if (last < code.length) nodes.push(code.slice(last));
+    return nodes;
+  } catch {
+    return [code];
+  }
+}
+
+function CodeBlock({ code, lang }: { code: string; lang: string }) {
+  const [copied, setCopied] = useState(false);
+  const lines = code.replace(/\n$/, '').split('\n');
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* clipboard unavailable */
+    }
+  }, [code]);
+
+  return (
+    <div className="my-2 overflow-hidden rounded-md border border-zinc-700 bg-zinc-900">
+      <div className="flex items-center justify-between border-b border-zinc-700 px-3 py-1">
+        <span className="text-[10px] font-medium uppercase tracking-wide text-zinc-400">
+          {lang || 'code'}
+        </span>
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="flex items-center gap-1 text-[10px] text-zinc-400 transition-colors hover:text-zinc-100"
+          aria-label="Copy code"
+        >
+          {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+          {copied ? 'Copied' : 'Copy'}
+        </button>
+      </div>
+      <pre className="overflow-x-auto px-3 py-2 text-xs leading-relaxed">
+        <code className="font-mono text-zinc-100">
+          {lines.map((line, i) => (
+            <span key={i} className="block">
+              {line.length ? highlightCode(line, lang) : ' '}
+            </span>
+          ))}
+        </code>
+      </pre>
+    </div>
+  );
+}
+
+/** Parse inline markdown (code, bold, italic, links) into React nodes. */
+function parseInline(text: string, keyPrefix = ''): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  const RE = /(`[^`]+`)|(\*\*[^*]+\*\*)|(\*[^*\n]+\*|_[^_\n]+_)|(\[[^\]]+\]\([^)\s]+\))/;
+  let rest = text;
+  let key = 0;
+  while (rest.length > 0) {
+    const m = RE.exec(rest);
+    if (!m || m.index === undefined) {
+      nodes.push(rest);
+      break;
+    }
+    if (m.index > 0) nodes.push(rest.slice(0, m.index));
+    const token = m[0];
+    if (m[1]) {
+      nodes.push(
+        <code key={`${keyPrefix}c${key++}`} className="rounded bg-muted-foreground/20 px-1 py-0.5 font-mono text-[0.85em]">
+          {token.slice(1, -1)}
+        </code>
+      );
+    } else if (m[2]) {
+      nodes.push(<strong key={`${keyPrefix}b${key++}`}>{parseInline(token.slice(2, -2), `${keyPrefix}b${key}`)}</strong>);
+    } else if (m[3]) {
+      nodes.push(<em key={`${keyPrefix}i${key++}`}>{token.slice(1, -1)}</em>);
+    } else if (m[4]) {
+      const linkMatch = /\[([^\]]+)\]\(([^)\s]+)\)/.exec(token);
+      if (linkMatch) {
+        nodes.push(
+          <a
+            key={`${keyPrefix}l${key++}`}
+            href={linkMatch[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline underline-offset-2"
+          >
+            {linkMatch[1]}
+          </a>
+        );
+      } else {
+        nodes.push(token);
+      }
+    }
+    rest = rest.slice(m.index + token.length);
+  }
+  return nodes;
+}
+
+const TutorMarkdown = memo(function TutorMarkdown({ content }: { content: string }) {
+  const blocks = useMemo(() => {
+    const out: React.ReactNode[] = [];
+    const fence = /```(\w*)\n?([\s\S]*?)```/g;
+    let last = 0;
+    let m: RegExpExecArray | null;
+    let key = 0;
+
+    const renderProse = (text: string) => {
+      const lines = text.split('\n');
+      let i = 0;
+      while (i < lines.length) {
+        const line = lines[i];
+        if (line.trim() === '') { i++; continue; }
+
+        const h = /^(#{1,6})\s+(.*)$/.exec(line);
+        if (h) {
+          const level = h[1].length;
+          out.push(
+            <p key={`h${key++}`} className={cn('font-semibold', level <= 2 ? 'text-sm' : 'text-[0.95em]')}>
+              {parseInline(h[2], `h${key}`)}
+            </p>
+          );
+          i++;
+          continue;
+        }
+
+        if (/^\s*[-*]\s+/.test(line)) {
+          const items: string[] = [];
+          while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+            items.push(lines[i].replace(/^\s*[-*]\s+/, ''));
+            i++;
+          }
+          out.push(
+            <ul key={`ul${key++}`} className="my-1 list-disc space-y-0.5 pl-5">
+              {items.map((it, j) => <li key={j}>{parseInline(it, `ul${key}-${j}`)}</li>)}
+            </ul>
+          );
+          continue;
+        }
+
+        if (/^\s*\d+\.\s+/.test(line)) {
+          const items: string[] = [];
+          while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+            items.push(lines[i].replace(/^\s*\d+\.\s+/, ''));
+            i++;
+          }
+          out.push(
+            <ol key={`ol${key++}`} className="my-1 list-decimal space-y-0.5 pl-5">
+              {items.map((it, j) => <li key={j}>{parseInline(it, `ol${key}-${j}`)}</li>)}
+            </ol>
+          );
+          continue;
+        }
+
+        const para: string[] = [];
+        while (
+          i < lines.length &&
+          lines[i].trim() !== '' &&
+          !/^(#{1,6})\s+/.test(lines[i]) &&
+          !/^\s*[-*]\s+/.test(lines[i]) &&
+          !/^\s*\d+\.\s+/.test(lines[i])
+        ) {
+          para.push(lines[i]);
+          i++;
+        }
+        out.push(
+          <p key={`p${key++}`} className="whitespace-pre-wrap break-words leading-relaxed">
+            {parseInline(para.join('\n'), `p${key}`)}
+          </p>
+        );
+      }
+    };
+
+    while ((m = fence.exec(content)) !== null) {
+      if (m.index > last) renderProse(content.slice(last, m.index));
+      out.push(<CodeBlock key={`code${key++}`} code={m[2]} lang={m[1]} />);
+      last = m.index + m[0].length;
+    }
+    if (last < content.length) renderProse(content.slice(last));
+
+    return out;
+  }, [content]);
+
+  return <div className="space-y-2 text-sm">{blocks}</div>;
+});
 
 export function AITutor() {
   const {
@@ -76,12 +344,17 @@ export function AITutor() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Reset conversation ID when switching lectures
-  useEffect(() => {
+  const lang = language as Language;
+
+  // Reset conversation state when switching lectures (render-time pattern —
+  // applies before paint and avoids an effect-triggered cascading render).
+  const [prevLecture, setPrevLecture] = useState(currentLecture);
+  if (currentLecture !== prevLecture) {
+    setPrevLecture(currentLecture);
     setConversationId(null);
     setRateLimited(false);
     setRateLimitInfo(null);
-  }, [currentLecture]);
+  }
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -129,7 +402,7 @@ export function AITutor() {
       });
 
       if (response.status === 429) {
-        const data = await response.json();
+        const data = await response.json().catch(() => ({}));
         setRateLimited(true);
         setRateLimitInfo({ limit: data.limit, used: data.used });
         addTutorMessage({
@@ -185,7 +458,19 @@ export function AITutor() {
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading, rateLimited, currentLecture, tutorMode, language, tutorMessages, conversationId, tutorQuestionsAsked, addTutorMessage, awardXP]);
+  }, [
+    isLoading,
+    rateLimited,
+    currentLecture,
+    tutorMode,
+    language,
+    tutorMessages,
+    conversationId,
+    tutorQuestionsAsked,
+    addTutorMessage,
+    awardXP,
+    session,
+  ]);
 
   const handleSend = () => sendMessage(input);
 
@@ -208,6 +493,11 @@ export function AITutor() {
   const handleSuggestionClick = (suggestion: string) => {
     sendMessage(suggestion);
   };
+
+  const suggestions = useMemo(
+    () => suggestionsForLecture(currentLecture, lang),
+    [currentLecture, lang]
+  );
 
   const lectureLabel =
     language === 'ro' ? 'Lecția' : language === 'el' ? 'Μάθημα' : 'Lecture';
@@ -312,12 +602,12 @@ export function AITutor() {
               </p>
               <Separator className="my-2" />
               <div className="grid gap-2 w-full">
-                {(SUGGESTIONS[language as Language] || SUGGESTIONS.en).map((suggestion) => (
+                {suggestions.map((suggestion) => (
                   <Button
                     key={suggestion}
                     variant="outline"
                     size="sm"
-                    className="justify-start text-xs h-auto py-2 px-3 text-left"
+                    className="justify-start text-xs h-auto py-2 px-3 text-left whitespace-normal"
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
                     <Lightbulb className="mr-2 h-3 w-3 shrink-0 text-yellow-500" />
@@ -343,13 +633,17 @@ export function AITutor() {
               )}
               <div
                 className={cn(
-                  'max-w-[80%] rounded-lg px-3 py-2 text-sm',
+                  'max-w-[85%] rounded-lg px-3 py-2 text-sm',
                   msg.role === 'user'
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-muted'
                 )}
               >
-                <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+                {msg.role === 'assistant' ? (
+                  <TutorMarkdown content={msg.content} />
+                ) : (
+                  <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+                )}
                 {msg.lectureContext && msg.role === 'user' && (
                   <Badge variant="secondary" className="mt-1 text-[10px]">
                     {lectureLabel} {msg.lectureContext}
