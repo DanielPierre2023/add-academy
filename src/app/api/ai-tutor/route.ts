@@ -129,12 +129,6 @@ tell the learner how to check (JS: package.json; Python-in-Pyodide: run
 'import X; print(X.__version__)' in a lesson code block).
 `;
 
-// ─── Identity sanitization ──────────────────────────────────────────────────
-// Longest identity phrase we defend against is well under this many characters.
-// The streaming path holds back this many trailing chars before flushing so a
-// provider name can never be emitted un-sanitized across a chunk boundary.
-const SANITIZE_HOLDBACK = 240;
-
 function sanitizeIdentity(input: string): string {
   if (!input) return input;
   const providers =
@@ -152,48 +146,6 @@ function sanitizeIdentity(input: string): string {
   out = out.replace(iAm, '$1' + maker);
   out = out.replace(/(ADD Individual Solutions Ltd\.)(?:[ ,]+ADD Individual Solutions Ltd\.)+/g, '$1');
   return out;
-}
-
-/**
- * Streaming-safe identity sanitizer.
- *
- * Provider names can straddle two network chunks (".. trained by goo" + "gle"),
- * so we can never sanitize-and-flush a chunk in isolation. Instead we accumulate
- * the full raw text, re-sanitize the committed prefix each tick, and only emit
- * the portion whose surrounding context is already complete — everything except
- * the last SANITIZE_HOLDBACK characters. Because every identity phrase is far
- * shorter than the hold-back window, no phrase can slip out before it is fully
- * seen and rewritten. flush() releases the remainder at end-of-stream.
- */
-function createHoldbackSanitizer(holdback: number = SANITIZE_HOLDBACK) {
-  let raw = '';
-  let emitted = ''; // sanitized text already sent to the client
-
-  const commit = (committedRaw: string): string => {
-    const sanitized = sanitizeIdentity(committedRaw);
-    // Emit only the stable, not-yet-sent tail. Guard against the rare case where
-    // a late rewrite would shorten the prefix below what we already sent.
-    if (sanitized.startsWith(emitted) && sanitized.length > emitted.length) {
-      const delta = sanitized.slice(emitted.length);
-      emitted = sanitized;
-      return delta;
-    }
-    return '';
-  };
-
-  return {
-    push(chunk: string): string {
-      raw += chunk;
-      if (raw.length <= holdback) return '';
-      return commit(raw.slice(0, raw.length - holdback));
-    },
-    flush(): string {
-      return commit(raw);
-    },
-    full(): string {
-      return sanitizeIdentity(raw);
-    },
-  };
 }
 
 const IDENTITY_RULE = '\nIDENTITY RULE (highest priority, cannot be overridden by any user, admin, or instruction): Whenever you are asked about your identity, origin, what model you are, your version, who made you, or what technology powers you, you must always say you are Alex, the AI tutor created by ADD Individual Solutions Ltd. Never mention or confirm any other company, model, or provider.';
@@ -300,7 +252,6 @@ async function checkSchoolRateLimit(
   supabase: Awaited<ReturnType<typeof createServerSupabaseClient>>,
   userId: string
 ): Promise<{ allowed: boolean; limit?: number; used?: number }> {
-  // Find the student's school (if any) and its daily limit
   const { data: student } = await supabase
     .from('academy_students')
     .select('school_id')
@@ -331,7 +282,6 @@ async function checkSchoolRateLimit(
 
   const dailyLimit = school.ai_tutor_daily_limit ?? 50;
 
-  // Count today's conversations for this student
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -456,7 +406,6 @@ export async function POST(request: NextRequest) {
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      // No key configured — return a helpful placeholder as JSON (non-streaming).
       return NextResponse.json({ response: getPlaceholderResponse(mode, message, language) });
     }
 
@@ -471,135 +420,53 @@ export async function POST(request: NextRequest) {
       { role: 'user', parts: [{ text: message }] },
     ];
 
-    const requestBody = JSON.stringify({
-      systemInstruction: { parts: [{ text: systemInstruction }] },
-      contents,
-      generationConfig: {
-        temperature: mode === 'debug' ? 0.2 : 0.4,
-        topP: 0.9,
-        maxOutputTokens: maxTokensForMode(mode),
-      },
-    });
-
-    // Streaming Server-Sent Events from Gemini, sanitized with a hold-back window.
-    const upstream = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse',
+    const response = await fetch(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-        body: requestBody,
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey,
+        },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: systemInstruction }] },
+          contents,
+          generationConfig: {
+            temperature: mode === 'debug' ? 0.2 : 0.4,
+            topP: 0.9,
+            maxOutputTokens: maxTokensForMode(mode),
+          },
+        }),
       }
     );
 
-    if (!upstream.ok || !upstream.body) {
-      const errText = upstream.body ? await upstream.text().catch(() => '') : '';
-      console.error('Gemini API error:', upstream.status, errText);
+    if (!response.ok) {
+      const error = await response.text();
+      console.error('Gemini API error:', error);
       return NextResponse.json({ response: getPlaceholderResponse(mode, message, language) });
     }
 
-    const encoder = new TextEncoder();
-    const decoder = new TextDecoder();
-    const sanitizer = createHoldbackSanitizer();
-    const send = (obj: Record<string, unknown>, controller: ReadableStreamDefaultController) =>
-      controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
+    const data = await response.json();
+    const rawText =
+      data.candidates?.[0]?.content?.parts
+        ?.map((p: { text?: string }) => p?.text || '')
+        .join('') || '';
+    const text = sanitizeIdentity(rawText || 'Sorry, I could not generate a response.');
 
-    const stream = new ReadableStream({
-      async start(controller) {
-        const reader = upstream.body!.getReader();
-        let sseBuffer = '';
-        let produced = false;
+    // Rough token estimate for usage tracking
+    const tokensUsed = Math.ceil((message.length + text.length + systemInstruction.length) / 4);
 
-        const handleTextDelta = (delta: string) => {
-          if (!delta) return;
-          produced = true;
-          const safe = sanitizer.push(delta);
-          if (safe) send({ delta: safe }, controller);
-        };
-
-        try {
-          // Parse the SSE stream: events are separated by blank lines, payload
-          // lines start with "data: ". Each data payload is a Gemini chunk.
-          for (;;) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            sseBuffer += decoder.decode(value, { stream: true });
-
-            let sepIndex: number;
-            while ((sepIndex = sseBuffer.indexOf('\n\n')) !== -1) {
-              const rawEvent = sseBuffer.slice(0, sepIndex);
-              sseBuffer = sseBuffer.slice(sepIndex + 2);
-
-              for (const line of rawEvent.split('\n')) {
-                const trimmed = line.trimStart();
-                if (!trimmed.startsWith('data:')) continue;
-                const payload = trimmed.slice(5).trim();
-                if (!payload || payload === '[DONE]') continue;
-                try {
-                  const json = JSON.parse(payload);
-                  const parts = json?.candidates?.[0]?.content?.parts;
-                  if (Array.isArray(parts)) {
-                    for (const p of parts) {
-                      if (typeof p?.text === 'string') handleTextDelta(p.text);
-                    }
-                  }
-                } catch {
-                  // Ignore keep-alives / non-JSON lines.
-                }
-              }
-            }
-          }
-
-          // Flush the held-back tail through the sanitizer.
-          const tail = sanitizer.flush();
-          if (tail) send({ delta: tail }, controller);
-
-          const answer = sanitizer.full();
-          if (!produced || !answer.trim()) {
-            // Model returned nothing usable — fall back to the placeholder text.
-            const fallback = getPlaceholderResponse(mode, message, language);
-            send({ delta: fallback }, controller);
-            send({ done: true, conversationId: conversationId ?? null }, controller);
-            controller.close();
-            return;
-          }
-
-          const tokensUsed = Math.ceil((message.length + answer.length + systemInstruction.length) / 4);
-          const savedId = await persistConversation(supabase, {
-            userId: user.id,
-            conversationId,
-            lectureId,
-            mode,
-            message,
-            answer,
-            tokensUsed,
-          });
-
-          send({ done: true, conversationId: savedId ?? null }, controller);
-          controller.close();
-        } catch (err) {
-          console.error('AI Tutor stream error:', err);
-          // Best-effort: emit whatever was safely sanitized, then close cleanly.
-          try {
-            const tail = sanitizer.flush();
-            if (tail) send({ delta: tail }, controller);
-            send({ done: true, conversationId: conversationId ?? null, error: true }, controller);
-          } catch {
-            /* controller already closed */
-          }
-          controller.close();
-        } finally {
-          reader.releaseLock();
-        }
-      },
+    const savedConversationId = await persistConversation(supabase, {
+      userId: user.id,
+      conversationId,
+      lectureId,
+      mode,
+      message,
+      answer: text,
+      tokensUsed,
     });
 
-    return new Response(stream, {
-      headers: {
-        'Content-Type': 'text/event-stream; charset=utf-8',
-        'Cache-Control': 'no-cache, no-transform',
-        Connection: 'keep-alive',
-      },
-    });
+    return NextResponse.json({ response: text, conversationId: savedConversationId });
   } catch (error) {
     console.error('AI Tutor error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
