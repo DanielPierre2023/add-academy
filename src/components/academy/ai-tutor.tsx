@@ -346,6 +346,90 @@ export function AITutor() {
 
   const lang = language as Language;
 
+  // ─── Draggable + resizable floating panel ───
+  // `box` is null until the user first moves/resizes; while null the panel uses
+  // its default bottom-right CSS placement. Once set, it is fully controlled.
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [box, setBox] = useState<{ x: number; y: number; w: number; h: number } | null>(null);
+  const dragRef = useRef<{ px: number; py: number; ox: number; oy: number } | null>(null);
+  const resizeRef = useRef<{ px: number; py: number; ow: number; oh: number } | null>(null);
+
+  const clampBox = useCallback((b: { x: number; y: number; w: number; h: number }) => {
+    const maxW = window.innerWidth;
+    const maxH = window.innerHeight;
+    const w = Math.min(b.w, maxW - 8);
+    const h = Math.min(b.h, maxH - 8);
+    const x = Math.min(Math.max(b.x, 0), Math.max(0, maxW - w));
+    const y = Math.min(Math.max(b.y, 0), Math.max(0, maxH - h));
+    return { x, y, w, h };
+  }, []);
+
+  /** Read the panel's current on-screen rect (or a sensible default) and take control of it. */
+  const ensureBox = useCallback(() => {
+    const rect = panelRef.current?.getBoundingClientRect();
+    const base =
+      rect && rect.width
+        ? { x: rect.left, y: rect.top, w: rect.width, h: rect.height }
+        : {
+            w: 384,
+            h: Math.min(640, Math.round(window.innerHeight * 0.7)),
+            x: Math.max(8, window.innerWidth - 384 - 16),
+            y: Math.max(8, window.innerHeight - 640 - 24),
+          };
+    const clamped = clampBox(base);
+    setBox(clamped);
+    return clamped;
+  }, [clampBox]);
+
+  const onHeaderPointerDown = useCallback((e: React.PointerEvent) => {
+    // Don't start a drag when the user taps the header's action buttons.
+    if ((e.target as HTMLElement).closest('button')) return;
+    const b = box ?? ensureBox();
+    dragRef.current = { px: e.clientX, py: e.clientY, ox: b.x, oy: b.y };
+    try { (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId); } catch { /* noop */ }
+  }, [box, ensureBox]);
+
+  const onHeaderPointerMove = useCallback((e: React.PointerEvent) => {
+    const d = dragRef.current;
+    if (!d) return;
+    const dx = e.clientX - d.px;
+    const dy = e.clientY - d.py;
+    setBox((prev) => (prev ? clampBox({ ...prev, x: d.ox + dx, y: d.oy + dy }) : prev));
+  }, [clampBox]);
+
+  const endHeaderPointer = useCallback((e: React.PointerEvent) => {
+    dragRef.current = null;
+    try { (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId); } catch { /* noop */ }
+  }, []);
+
+  const onResizePointerDown = useCallback((e: React.PointerEvent) => {
+    e.stopPropagation();
+    const b = box ?? ensureBox();
+    resizeRef.current = { px: e.clientX, py: e.clientY, ow: b.w, oh: b.h };
+    try { (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId); } catch { /* noop */ }
+  }, [box, ensureBox]);
+
+  const onResizePointerMove = useCallback((e: React.PointerEvent) => {
+    const r = resizeRef.current;
+    if (!r) return;
+    const w = Math.max(300, r.ow + (e.clientX - r.px));
+    const h = Math.max(320, r.oh + (e.clientY - r.py));
+    setBox((prev) => (prev ? clampBox({ ...prev, w, h }) : prev));
+  }, [clampBox]);
+
+  const endResizePointer = useCallback((e: React.PointerEvent) => {
+    resizeRef.current = null;
+    try { (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId); } catch { /* noop */ }
+  }, []);
+
+  // Keep a moved/resized panel inside the viewport when the window changes size.
+  useEffect(() => {
+    if (!box) return;
+    const onResize = () => setBox((prev) => (prev ? clampBox(prev) : prev));
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [box, clampBox]);
+
   // Reset conversation state when switching lectures (render-time pattern —
   // applies before paint and avoids an effect-triggered cascading render).
   const [prevLecture, setPrevLecture] = useState(currentLecture);
@@ -530,11 +614,23 @@ export function AITutor() {
         </button>
       )}
 
-      {/* ═══ Floating Panel ═══ */}
+      {/* ═══ Floating Panel (draggable + resizable) ═══ */}
       {!tutorOpen ? null : (
-      <div className="fixed bottom-6 right-4 z-50 flex h-[70vh] max-h-[640px] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border bg-background shadow-2xl sm:right-6">
-      {/* Header */}
-      <div className="flex items-center justify-between border-b px-4 py-3 shrink-0">
+      <div
+        ref={panelRef}
+        className={cn(
+          'fixed z-50 flex flex-col overflow-hidden rounded-2xl border bg-background shadow-2xl',
+          !box && 'bottom-6 right-4 h-[70vh] max-h-[640px] w-[calc(100vw-2rem)] max-w-sm sm:right-6'
+        )}
+        style={box ? { left: box.x, top: box.y, width: box.w, height: box.h } : undefined}
+      >
+      {/* Header — drag handle */}
+      <div
+        className="flex items-center justify-between border-b px-4 py-3 shrink-0 cursor-move touch-none select-none"
+        onPointerDown={onHeaderPointerDown}
+        onPointerMove={onHeaderPointerMove}
+        onPointerUp={endHeaderPointer}
+        onPointerCancel={endHeaderPointer}>
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
             <Bot className="h-4 w-4 text-primary" />
@@ -698,6 +794,19 @@ export function AITutor() {
             <Send className="h-4 w-4" />
           </Button>
         </div>
+      </div>
+
+      {/* Resize grip — drag to make the panel wider / taller */}
+      <div
+        role="separator"
+        aria-label="Resize tutor panel"
+        onPointerDown={onResizePointerDown}
+        onPointerMove={onResizePointerMove}
+        onPointerUp={endResizePointer}
+        onPointerCancel={endResizePointer}
+        className="absolute bottom-0 right-0 z-10 flex h-5 w-5 cursor-nwse-resize touch-none items-end justify-end p-1"
+      >
+        <span className="pointer-events-none block h-2.5 w-2.5 border-b-2 border-r-2 border-muted-foreground/50" />
       </div>
     </div>
       )}
