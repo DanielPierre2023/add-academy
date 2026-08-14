@@ -19,7 +19,8 @@
         "en": "Vision Transformer (ViT) Patch Embedding from Scratch",
         "ro": "Vision Transformer (ViT) - Embedding de Patch-uri de la Zero",
         "el": "Vision Transformer (ViT) - Patch Embedding από την Αρχή"
-      }
+      },
+      "runnable": false
     },
     {
       "id": "code-54-2",
@@ -29,7 +30,8 @@
         "en": "CLIP-Style Contrastive Loss Implementation",
         "ro": "Implementarea Pierderii Contrastive în Stilul CLIP",
         "el": "Υλοποίηση Αντιπαραθετικής Απώλειας Στυλ CLIP"
-      }
+      },
+      "runnable": false
     },
     {
       "id": "code-54-3",
@@ -39,7 +41,8 @@
         "en": "Cross-Attention Multimodal Fusion Layer",
         "ro": "Strat de Fuziune Multimodală prin Atenție Încrucișată",
         "el": "Στρώμα Πολυτροπικής Σύντηξης μέσω Cross-Attention"
-      }
+      },
+      "runnable": false
     },
     {
       "id": "code-54-4",
@@ -49,7 +52,8 @@
         "en": "Simple Image Captioning Pipeline",
         "ro": "Conductă Simplă de Subtitrare a Imaginilor",
         "el": "Απλή Διαδικασία Δημιουργίας Λεζαντών Εικόνας"
-      }
+      },
+      "runnable": false
     }
   ]
 }

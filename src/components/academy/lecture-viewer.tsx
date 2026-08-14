@@ -25,13 +25,6 @@ import { Confetti } from '@/components/gamification/confetti';
 import { showXPToast } from '@/components/gamification/xp-toast';
 import { XP_VALUES } from '@/types';
 
-declare global {
-  interface Window {
-    loadPyodide: any;
-    pyodide: any;
-  }
-}
-
 interface LectureContent {
   id: string;
   title: Record<string, string>;
@@ -45,12 +38,22 @@ interface LectureContent {
   }>;
 }
 
+/** Shape of a quiz question as stored in src/content/quizzes/*.json. */
+interface QuizQuestion {
+  index: number;
+  text: string;
+  options: string[];
+  correct: number[];
+  explanation: string;
+  isMulti: boolean;
+}
+
 interface QuizData {
   lectureId: string;
-  en: { questions: Array<any> };
-  ro: { questions: Array<any> };
-  el: { questions: Array<any> };
-  [key: string]: any;
+  en: { questions: QuizQuestion[] };
+  ro: { questions: QuizQuestion[] };
+  el: { questions: QuizQuestion[] };
+  [key: string]: unknown;
 }
 
 interface LectureViewerProps {
@@ -72,7 +75,7 @@ const PYODIDE_PACKAGES = new Set([
 const loadedPackages = new Set<string>();
 
 /** Load Pyodide runtime (shared singleton) */
-async function ensurePyodide(): Promise<any> {
+async function ensurePyodide(): Promise<PyodideInterface> {
   if (window.pyodide) return window.pyodide;
 
   // Load the script if not present
@@ -102,7 +105,7 @@ async function ensurePyodide(): Promise<any> {
 }
 
 /** Scan code for import statements and load any needed Pyodide packages */
-async function ensurePackages(pyodide: any, code: string): Promise<void> {
+async function ensurePackages(pyodide: PyodideInterface, code: string): Promise<void> {
   // Match "import X" and "from X import ..."
   const importRegex = /(?:^|\n)\s*(?:import|from)\s+(\w+)/g;
   let match;
@@ -138,13 +141,13 @@ sys.stderr = StringIO()
   let caughtError = '';
   try {
     await pyodide.runPythonAsync(code);
-  } catch (err: any) {
+  } catch (err) {
     // Capture the Python traceback from the JS error
-    caughtError = err.message || String(err);
+    caughtError = (err instanceof Error ? err.message : String(err)) || String(err);
   }
 
-  const stdout = pyodide.runPython('sys.stdout.getvalue()');
-  const stderr = pyodide.runPython('sys.stderr.getvalue()');
+  const stdout = String(pyodide.runPython('sys.stdout.getvalue()') ?? '');
+  const stderr = String(pyodide.runPython('sys.stderr.getvalue()') ?? '');
 
   pyodide.runPython(`
 sys.stdout = sys.__stdout__
@@ -159,7 +162,7 @@ sys.stderr = sys.__stderr__
 
 // Expose runPyodideCode globally so inline onclick attributes in lecture HTML work
 if (typeof window !== 'undefined') {
-  (window as any).runPyodideCode = async function runPyodideCode(button: HTMLButtonElement) {
+  (window as unknown as { runPyodideCode: (b: HTMLButtonElement) => Promise<void> }).runPyodideCode = async function runPyodideCode(button: HTMLButtonElement) {
     const wrapper = button.closest('.code-block');
     if (!wrapper) return;
 
@@ -189,9 +192,9 @@ if (typeof window !== 'undefined') {
         outputDiv.classList.remove('error');
         outputDiv.textContent = result.stdout || '(no output)';
       }
-    } catch (err: any) {
+    } catch (err) {
       outputDiv.classList.add('error');
-      outputDiv.textContent = err.message || 'Error running code';
+      outputDiv.textContent = (err instanceof Error ? err.message : String(err)) || 'Error running code';
     }
 
     button.textContent = '▶ Run';
@@ -253,25 +256,39 @@ function CodeBlockRunner({
           levelUp: result.leveledUp ? result.newLevel : undefined,
         });
       }
-    } catch (err: any) {
+    } catch (err) {
       setIsError(true);
-      setOutput(err.message || 'Error running code');
+      setOutput((err instanceof Error ? err.message : String(err)) || 'Error running code');
     }
 
     setIsRunning(false);
   };
 
+  // W2.1 — `runnable` is now derived by ACTUALLY EXECUTING every block in CI,
+  // not by the old ±200-character proximity guess. Only show a Run button when
+  // the block genuinely runs in the browser: previously every block got one,
+  // including bash, yaml, html and Dockerfiles, so clicking Run on a Dockerfile
+  // produced a Python traceback.
+  const isRunnable = block.runnable === true && (block.language || 'python') === 'python';
+  const langLabel = (block.language || 'python').toUpperCase();
+
   return (
     <div className="code-block" data-block-id={block.id || `codeblock-${index}`}>
       <div className="code-block-header">
-        <span>{title || `Python — Code Block ${index + 1}`}</span>
-        <button
-          className="run-btn"
-          onClick={handleRun}
-          disabled={isRunning}
-        >
-          {isRunning ? '⏳ Running...' : '▶ Run'}
-        </button>
+        <span>{title || `${langLabel} — Code Block ${index + 1}`}</span>
+        {isRunnable ? (
+          <button
+            className="run-btn"
+            onClick={handleRun}
+            disabled={isRunning}
+          >
+            {isRunning ? '⏳ Running...' : '▶ Run'}
+          </button>
+        ) : (
+          <span className="text-xs text-muted-foreground" title="This example needs packages the in-browser Python runtime does not provide.">
+            {(block.language || 'python') === 'python' ? 'reference only' : langLabel}
+          </span>
+        )}
       </div>
       <pre>
         <code className={`language-${block.language || 'python'}`}>
@@ -465,9 +482,9 @@ export function LectureViewer({
               levelUp: result.leveledUp ? result.newLevel : undefined,
             });
           }
-        } catch (err: any) {
+        } catch (err) {
           outputDiv.classList.add('error');
-          outputDiv.textContent = err.message || 'Error running code';
+          outputDiv.textContent = (err instanceof Error ? err.message : String(err)) || 'Error running code';
         }
 
         button.textContent = '▶ Run';

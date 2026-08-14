@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -103,12 +105,12 @@ export default function CommunityPage() {
           <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-4">
             {txt.comingSoonDesc}
           </p>
-          <a href="/lectures/0">
+          <Link href="/lectures/0">
             <Button variant="default" className="gap-2">
               <BookOpen className="h-4 w-4" />
               {txt.startLearning}
             </Button>
-          </a>
+          </Link>
         </CardContent>
       </Card>
 

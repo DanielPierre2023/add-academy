@@ -3,13 +3,6 @@
  * Manages the Pyodide singleton and package loading.
  */
 
-declare global {
-  interface Window {
-    loadPyodide: any;
-    pyodide: any;
-  }
-}
-
 const PYODIDE_PACKAGES = new Set([
   'numpy', 'scipy', 'matplotlib', 'pandas', 'scikit-learn',
   'sympy', 'networkx', 'pillow', 'regex',
@@ -17,7 +10,7 @@ const PYODIDE_PACKAGES = new Set([
 
 const loadedPackages = new Set<string>();
 
-async function ensurePyodide(): Promise<any> {
+async function ensurePyodide(): Promise<PyodideInterface> {
   if (typeof window === 'undefined') throw new Error('Pyodide requires a browser environment');
 
   if (window.pyodide) return window.pyodide;
@@ -46,7 +39,7 @@ async function ensurePyodide(): Promise<any> {
   return window.pyodide;
 }
 
-async function ensurePackages(pyodide: any, code: string): Promise<void> {
+async function ensurePackages(pyodide: PyodideInterface, code: string): Promise<void> {
   const importRegex = /(?:^|\n)\s*(?:import|from)\s+(\w+)/g;
   let match;
   const needed: string[] = [];
@@ -80,12 +73,12 @@ sys.stderr = StringIO()
   let caughtError = '';
   try {
     await pyodide.runPythonAsync(code);
-  } catch (err: any) {
-    caughtError = err.message || String(err);
+  } catch (err) {
+    caughtError = err instanceof Error ? err.message : String(err);
   }
 
-  const stdout = pyodide.runPython('sys.stdout.getvalue()');
-  const stderr = pyodide.runPython('sys.stderr.getvalue()');
+  const stdout = String(pyodide.runPython('sys.stdout.getvalue()') ?? '');
+  const stderr = String(pyodide.runPython('sys.stderr.getvalue()') ?? '');
 
   pyodide.runPython(`
 sys.stdout = sys.__stdout__

@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 /**
  * Global error boundary — catches unhandled errors in the root layout.
  * Must provide its own <html> and <body> since the root layout may have failed.
@@ -53,8 +55,7 @@ export default function GlobalError({
             >
               Try again
             </button>
-            <a
-              href="/"
+            <Link href="/"
               style={{
                 padding: '0.625rem 1.5rem',
                 borderRadius: '0.5rem',
@@ -67,7 +68,7 @@ export default function GlobalError({
               }}
             >
               Go home
-            </a>
+            </Link>
           </div>
         </div>
       </body>

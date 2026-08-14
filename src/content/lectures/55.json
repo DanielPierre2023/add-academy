@@ -19,7 +19,8 @@
         "en": "LLM Call Logger with Structured Metrics",
         "ro": "Logger de apeluri LLM cu metrici structurate",
         "el": "Καταγραφέας Κλήσεων LLM με Δομημένες Μετρικές"
-      }
+      },
+      "runnable": true
     },
     {
       "id": "code-55-2",
@@ -29,7 +30,8 @@
         "en": "Embedding-Based Drift Detection System",
         "ro": "Sistem de detecție a derivei bazat pe embeddings",
         "el": "Σύστημα Ανίχνευσης Μετατόπισης βάσει Embeddings"
-      }
+      },
+      "runnable": true
     },
     {
       "id": "code-55-3",
@@ -39,7 +41,8 @@
         "en": "Cost Tracking and Budget Alerting",
         "ro": "Urmărirea costurilor și alertarea bugetară",
         "el": "Παρακολούθηση Κόστους και Ειδοποιήσεις Προϋπολογισμού"
-      }
+      },
+      "runnable": true
     },
     {
       "id": "code-55-4",
@@ -49,7 +52,8 @@
         "en": "Health Dashboard Data Collector",
         "ro": "Colector de date pentru tabloul de sănătate",
         "el": "Συλλέκτης Δεδομένων Πίνακα Υγείας"
-      }
+      },
+      "runnable": true
     }
   ]
 }

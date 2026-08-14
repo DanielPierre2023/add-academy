@@ -6,13 +6,6 @@ import { Play, RotateCcw, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-declare global {
-  interface Window {
-    loadPyodide: any;
-    pyodide: any;
-  }
-}
-
 interface CodeBlockProps {
   id: string;
   title: string;
@@ -92,13 +85,13 @@ sys.stderr = StringIO()
 
       try {
         await window.pyodide.runPythonAsync(code);
-      } catch (pyErr: any) {
-        setError(pyErr.message || String(pyErr));
+      } catch (pyErr) {
+        setError((pyErr instanceof Error ? pyErr.message : String(pyErr)) || String(pyErr));
       }
 
       // Capture stdout
-      const stdout = window.pyodide.runPython('sys.stdout.getvalue()');
-      const stderr = window.pyodide.runPython('sys.stderr.getvalue()');
+      const stdout = String(window.pyodide.runPython('sys.stdout.getvalue()') ?? '');
+      const stderr = String(window.pyodide.runPython('sys.stderr.getvalue()') ?? '');
 
       // Reset stdout/stderr
       window.pyodide.runPython(`
@@ -108,8 +101,8 @@ sys.stderr = sys.__stderr__
 
       if (stdout) setOutput(stdout);
       if (stderr && !error) setError(stderr);
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while running the code.');
+    } catch (err) {
+      setError(err instanceof Error ? (err instanceof Error ? err.message : String(err)) : 'An error occurred while running the code.');
     } finally {
       setIsRunning(false);
     }

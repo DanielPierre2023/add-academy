@@ -19,7 +19,8 @@
         "en": "Simple Prompt Injection Detector",
         "ro": "Detector simplu de injecție de prompt",
         "el": "Απλός ανιχνευτής έγχυσης prompt"
-      }
+      },
+      "runnable": true
     },
     {
       "id": "code-52-2",
@@ -29,7 +30,8 @@
         "en": "Input Sanitization Pipeline",
         "ro": "Pipeline de sanitizare a intrărilor",
         "el": "Αγωγός εξυγίανσης εισόδου"
-      }
+      },
+      "runnable": true
     },
     {
       "id": "code-52-3",
@@ -39,7 +41,8 @@
         "en": "Output Guardrails Filter",
         "ro": "Filtru de protecție pentru ieșiri",
         "el": "Φίλτρο προστατευτικών κιγκλιδωμάτων εξόδου"
-      }
+      },
+      "runnable": true
     },
     {
       "id": "code-52-4",
@@ -49,7 +52,8 @@
         "en": "Token-Level Anomaly Detector",
         "ro": "Detector de anomalii la nivel de token",
         "el": "Ανιχνευτής ανωμαλιών σε επίπεδο token"
-      }
+      },
+      "runnable": true
     }
   ]
 }
