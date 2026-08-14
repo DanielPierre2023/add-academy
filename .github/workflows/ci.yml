@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # npm ci previously failed outright: package-lock.json was missing
+      # `stripe` entirely and pinned zod v4 against a package.json asking for
+      # v3. Keep this first so a desynced lockfile can never ship again.
+      - run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Lint (ratchet — errors must not exceed the recorded budget)
+        run: npm run lint:budget
+
+      - name: Content integrity
+        run: node scripts/verify-content.mjs
+
+      - name: Build
+        run: npx next build
+
+  # Executes every lecture code block and asserts the capstone still learns.
+  # Slow (~10 min), so it does not gate every push.
+  content-python:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy
+      - name: Execute every code block + capstone assertions
+        run: python3 scripts/verify-python.py
