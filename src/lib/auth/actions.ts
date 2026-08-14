@@ -31,12 +31,15 @@ export async function signUpWithEmail(formData: FormData) {
   // If enrollment code provided, verify it's a valid school
   let schoolId: string | null = null;
   if (enrollmentCode) {
+    // Safe projection view — verified schools only, no invite_code/contact_email.
+    // See 004_fix_entitlement_rls.sql. handle_academy_signup() ignores school_id
+    // in metadata, so this validates the code for UX only; membership is granted
+    // exclusively by enrollInSchool().
     const { data: school } = await supabase
-      .from('academy_schools')
+      .from('academy_schools_public')
       .select('id, verified')
       .eq('id', enrollmentCode)
-      .eq('verified', true)
-      .single();
+      .maybeSingle();
 
     if (!school) {
       return { error: 'Invalid or unverified enrollment code.' };

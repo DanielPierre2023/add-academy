@@ -15,6 +15,8 @@ export interface LectureIndexEntry {
   next: string | null;
   codeBlockCount: number;
   hasQuiz: boolean;
+  /** Present in _index.json for every entry; used by completion criteria (W1.1). */
+  estimatedMinutes?: number;
 }
 
 export interface LectureIndex {

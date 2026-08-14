@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient, createServiceRoleClient } from '@/lib/supabase/server';
 import { getQuizData } from '@/lib/lectures';
+import { evaluateLectureCompletion } from '@/lib/store/completion-actions';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { z } from 'zod';
 
@@ -140,6 +141,10 @@ export async function POST(request: NextRequest) {
       },
       { onConflict: 'student_id,lecture_id', ignoreDuplicates: false }
     );
+    // W1.1 — the score is now written, so completion can be (re)evaluated
+    // server-side. This is the only place a passing quiz can mark a lecture
+    // complete; the client never asserts completion.
+    await evaluateLectureCompletion(lectureId);
   } catch (err) {
     // Log but don't fail the response — score recording is best-effort
     console.error('[quiz] Failed to record submission:', err);

@@ -247,49 +247,58 @@ function maxTokensForMode(mode: string): number {
   return mode === 'debug' ? 1536 : 2048;
 }
 
-/** Check whether a school-enrolled student has exceeded their daily AI tutor limit */
+/**
+ * Check whether the student has exceeded their daily AI tutor limit.
+ *
+ * The school's limit is read through the current_school_context() SECURITY
+ * DEFINER RPC. academy_schools is no longer directly readable by ordinary
+ * members (004_fix_entitlement_rls.sql) because it carries invite_code — and
+ * the previous direct read would have started returning null, hitting the
+ * `if (!school) return { allowed: true }` branch and granting every school
+ * user UNLIMITED Gemini spend.
+ *
+ * This now fails CLOSED: any failure resolving the limit falls back to the
+ * general default rather than to "allowed".
+ *
+ * KNOWN GAP (W1.5): this counts conversation ROWS, not messages. Because
+ * persistConversation() appends to an existing row when conversationId is
+ * supplied, a client that reuses one conversationId never increments the
+ * count. W1.5 replaces this with per-message/token accounting.
+ */
 async function checkSchoolRateLimit(
   supabase: Awaited<ReturnType<typeof createServerSupabaseClient>>,
   userId: string
-): Promise<{ allowed: boolean; limit?: number; used?: number }> {
-  const { data: student } = await supabase
-    .from('academy_students')
-    .select('school_id')
-    .eq('id', userId)
-    .single();
+): Promise<{ allowed: boolean; limit: number; used: number }> {
+  const GENERAL_DAILY_LIMIT = 100;
+  const SCHOOL_DEFAULT_LIMIT = 50;
 
-  if (!student?.school_id) {
-    // General rate limit for non-school users: 100 conversations/day
-    const GENERAL_DAILY_LIMIT = 100;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const { count } = await supabase
-      .from('academy_ai_conversations')
-      .select('id', { count: 'exact', head: true })
-      .eq('student_id', userId)
-      .gte('created_at', today.toISOString());
-    const used = count ?? 0;
-    return { allowed: used < GENERAL_DAILY_LIMIT, limit: GENERAL_DAILY_LIMIT, used };
+  let dailyLimit = GENERAL_DAILY_LIMIT;
+
+  try {
+    const { data: schoolCtx } = await supabase.rpc('current_school_context');
+    const school = Array.isArray(schoolCtx) ? schoolCtx[0] : schoolCtx;
+    if (school?.school_id) {
+      dailyLimit = school.ai_tutor_daily_limit ?? SCHOOL_DEFAULT_LIMIT;
+    }
+  } catch {
+    // Fail closed to the stricter school default rather than granting access.
+    dailyLimit = SCHOOL_DEFAULT_LIMIT;
   }
-
-  const { data: school } = await supabase
-    .from('academy_schools')
-    .select('ai_tutor_daily_limit')
-    .eq('id', student.school_id)
-    .single();
-
-  if (!school) return { allowed: true };
-
-  const dailyLimit = school.ai_tutor_daily_limit ?? 50;
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const { count } = await supabase
+  const { count, error } = await supabase
     .from('academy_ai_conversations')
     .select('id', { count: 'exact', head: true })
     .eq('student_id', userId)
     .gte('created_at', today.toISOString());
+
+  if (error) {
+    // Cannot establish usage — deny rather than hand out unmetered API spend.
+    console.error('AI tutor usage lookup failed:', error);
+    return { allowed: false, limit: dailyLimit, used: dailyLimit };
+  }
 
   const used = count ?? 0;
   return { allowed: used < dailyLimit, limit: dailyLimit, used };

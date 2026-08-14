@@ -49,12 +49,19 @@ export default function RegisterForm() {
 
       let schoolId: string | null = null;
       if (enrollmentCode.trim()) {
+        // Reads the safe projection view: verified schools only, and it never
+        // exposes invite_code or contact_email. academy_schools itself is no
+        // longer readable by ordinary users (004_fix_entitlement_rls.sql).
+        //
+        // NOTE: handle_academy_signup() deliberately ignores school_id in user
+        // metadata and always creates a 'free' individual account. Organisation
+        // membership is granted ONLY by enrollInSchool(). This lookup therefore
+        // just validates the code for UX; it does not itself grant access.
         const { data: school } = await supabase
-          .from('academy_schools')
+          .from('academy_schools_public')
           .select('id, verified')
           .eq('id', enrollmentCode.trim())
-          .eq('verified', true)
-          .single();
+          .maybeSingle();
 
         if (!school) {
           setError(t('reg_enrollment_invalid', language));

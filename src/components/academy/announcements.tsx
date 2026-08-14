@@ -76,7 +76,10 @@ export function AnnouncementBell() {
   const [readIds, setReadIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
 
-  const t = (en: string, ro: string) => (language === 'ro' ? ro : en);
+  // W4.1 — this helper previously took only (en, ro), so EVERY Greek user
+  // silently saw English. Greek is now required, not optional.
+  const t = (en: string, ro: string, el: string) =>
+    language === 'ro' ? ro : language === 'el' ? el : en;
 
   const fetchAnnouncements = useCallback(async () => {
     if (!user) return;
@@ -155,7 +158,7 @@ export function AnnouncementBell() {
           fetchAnnouncements();
         }}
         className="relative rounded-full p-1.5 text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground transition-colors"
-        aria-label={t('Announcements', 'Anunțuri')}
+        aria-label={t('Announcements', 'Anunțuri', 'Ανακοινώσεις')}
       >
         <Bell className="h-4 w-4" />
         {unreadCount > 0 && (
@@ -181,11 +184,11 @@ export function AnnouncementBell() {
               <div className="flex items-center gap-2">
                 <Bell className="h-4 w-4 text-primary" />
                 <h2 className="font-heading text-sm font-bold text-foreground">
-                  {t('Announcements', 'Anunțuri')}
+                  {t('Announcements', 'Anunțuri', 'Ανακοινώσεις')}
                 </h2>
                 {unreadCount > 0 && (
                   <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold text-primary-foreground">
-                    {unreadCount} {t('new', 'noi')}
+                    {unreadCount} {t('new', 'noi', 'νέα')}
                   </span>
                 )}
               </div>
@@ -195,7 +198,7 @@ export function AnnouncementBell() {
                     onClick={markAllAsRead}
                     className="rounded-md px-2 py-1 text-[11px] font-medium text-primary hover:bg-muted transition-colors"
                   >
-                    {t('Mark all read', 'Marchează citite')}
+                    {t('Mark all read', 'Marchează citite', 'Σήμανση όλων ως αναγνωσμένων')}
                   </button>
                 )}
                 <button
@@ -217,7 +220,7 @@ export function AnnouncementBell() {
                 <div className="py-12 text-center">
                   <Megaphone className="mx-auto h-10 w-10 text-muted-foreground/30" />
                   <p className="mt-3 text-sm text-muted-foreground">
-                    {t('No announcements yet', 'Niciun anunț încă')}
+                    {t('No announcements yet', 'Niciun anunț încă', 'Δεν υπάρχουν ανακοινώσεις ακόμη')}
                   </p>
                 </div>
               ) : (

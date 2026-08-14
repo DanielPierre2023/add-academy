@@ -333,7 +333,9 @@ export const useAcademyStore = create<AcademyState>()(
       quizAttempts: [],
       addQuizAttempt: (attempt) =>
         set((state) => ({
-          quizAttempts: [...state.quizAttempts.slice(-200), attempt],
+          // slice AFTER appending — the previous order (slice then append)
+          // let the array settle at 201 entries instead of the intended 200.
+          quizAttempts: [...state.quizAttempts, attempt].slice(-200),
         })),
       getDifficultyLevel: () => {
         const { quizAttempts } = get();

@@ -14,6 +14,10 @@ import { createServerSupabaseClient, createServiceRoleClient } from '@/lib/supab
 interface ProgressEntry {
   lectureId: string;
   timeSpent: number;
+  /** Monotonic: once true it is never unset, and alone it grants nothing. */
+  scrolledToBottom?: boolean;
+  /** Count of distinct code blocks executed — a weak engagement signal. */
+  codeBlocksRun?: number;
 }
 
 /**
@@ -59,12 +63,21 @@ export async function syncProgress(entries: ProgressEntry[]): Promise<{ error: s
     // Only time-spent is client-supplied and safe to persist. Completion and
     // quiz scores are written server-side (see /api/quiz) and are omitted here
     // so they cannot be overwritten by forged client input.
-    const rows = validEntries.map((p) => ({
-      student_id: user.id,
-      lecture_id: p.lectureId,
-      time_spent_seconds: Math.min(Math.max(Math.round(p.timeSpent), 0), 86400), // clamp 0..24h
-      updated_at: new Date().toISOString(),
-    }));
+    const rows = validEntries.map((p) => {
+      const row: Record<string, unknown> = {
+        student_id: user.id,
+        lecture_id: p.lectureId,
+        time_spent_seconds: Math.min(Math.max(Math.round(p.timeSpent), 0), 86400), // clamp 0..24h
+        updated_at: new Date().toISOString(),
+      };
+      // Only ever set scrolled_to_bottom to TRUE — never write false, or a
+      // stale client could un-set a signal the server already recorded.
+      if (p.scrolledToBottom === true) row.scrolled_to_bottom = true;
+      if (typeof p.codeBlocksRun === 'number') {
+        row.code_blocks_run = Math.min(Math.max(Math.round(p.codeBlocksRun), 0), 1000);
+      }
+      return row;
+    });
 
     // Use service role to bypass read-only RLS (user already verified above).
     // onConflict updates ONLY the provided columns, preserving server-written

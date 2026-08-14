@@ -56,7 +56,23 @@ export interface AppUser {
   displayName: string | null;
   avatarUrl: string | null;
   schoolId: string | null;
-  orgRole: 'admin' | 'member' | null;
+  /**
+   * Whether the user's organisation is VERIFIED.
+   *
+   * SECURITY: org entitlement must depend on this, never on schoolId alone.
+   * Read via the current_school_context() RPC — academy_schools is not
+   * directly readable by ordinary members because it carries invite_code.
+   */
+  schoolVerified: boolean;
+  /**
+   * Organisation role. Values are constrained by academy_students_org_role_check
+   * to 'admin' | 'teacher' | 'student' (or NULL).
+   *
+   * NOTE: this previously included 'member', which the CHECK constraint rejects —
+   * every write of 'member' failed, so org enrollment never succeeded. Fixed in
+   * src/lib/auth/enroll-school.ts.
+   */
+  orgRole: 'admin' | 'teacher' | 'student' | null;
   subscription: Subscription | null;
   createdAt: string;
 }
@@ -65,9 +81,10 @@ interface AuthContextValue {
   user: AppUser | null;
   session: Session | null;
   loading: boolean;
+  /** True only for members of a VERIFIED organisation. */
   isOrgUser: boolean;
   isAdmin: boolean;
-  /** Current subscription tier (org users get full_access) */
+  /** Current subscription tier (verified org users get full_access) */
   effectiveTier: SubscriptionTier;
   /** Check if user can access a specific stage */
   canAccessStage: (stageNumber: number) => boolean;
@@ -136,7 +153,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .eq('user_id', supabaseUser.id)
         .single();
 
-      const trustedRole = roleRow?.role === 'admin' ? 'admin' : (student?.org_role as string | null) === 'member' ? 'member' : null;
+      // Platform admin comes ONLY from the trusted academy_roles table.
+      // Otherwise fall back to the organisation role on the student record,
+      // accepting only values the CHECK constraint permits.
+      const rawOrgRole = student?.org_role as string | null | undefined;
+      const trustedRole: AppUser['orgRole'] =
+        roleRow?.role === 'admin'
+          ? 'admin'
+          : rawOrgRole === 'admin' || rawOrgRole === 'teacher' || rawOrgRole === 'student'
+            ? rawOrgRole
+            : null;
 
       if (!student) {
         // Student record not found — the handle_academy_signup trigger
@@ -147,10 +173,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           displayName: supabaseUser.user_metadata?.full_name || supabaseUser.user_metadata?.name || null,
           avatarUrl: supabaseUser.user_metadata?.avatar_url || null,
           schoolId: null,
-          orgRole: trustedRole as 'admin' | 'member' | null,
+          schoolVerified: false,
+          orgRole: trustedRole,
           subscription: null,
           createdAt: new Date().toISOString(),
         };
+      }
+
+      // Resolve organisation verification status.
+      // Only meaningful when the student actually belongs to a school; skip the
+      // round-trip otherwise. Defaults to FALSE on any failure — org access
+      // must fail closed.
+      let schoolVerified = false;
+      if (student.school_id) {
+        const { data: schoolCtx } = await supabase.rpc('current_school_context');
+        const ctx = Array.isArray(schoolCtx) ? schoolCtx[0] : schoolCtx;
+        schoolVerified = ctx?.verified === true;
       }
 
       // Map the active subscription (most recent active one)
@@ -182,7 +220,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         displayName: (student.display_name || student.full_name) as string | null,
         avatarUrl: student.avatar_url as string | null,
         schoolId: student.school_id as string | null,
-        orgRole: trustedRole as 'admin' | 'member' | null,
+        schoolVerified,
+        orgRole: trustedRole,
         subscription,
         createdAt: student.created_at as string,
       };
@@ -194,6 +233,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         displayName: supabaseUser.user_metadata?.full_name || null,
         avatarUrl: supabaseUser.user_metadata?.avatar_url || null,
         schoolId: null,
+        schoolVerified: false,
         orgRole: null,
         subscription: null,
         createdAt: new Date().toISOString(),
@@ -242,7 +282,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   /* ─── Computed ─────────────────────────────────── */
 
-  const isOrgUser = !!user?.schoolId;
+  // SECURITY: membership in an UNVERIFIED organisation grants nothing.
+  // Any authenticated user can create a school row (constrained to
+  // verified = false by 004_fix_entitlement_rls.sql); only a platform admin
+  // can flip `verified`. Gating on schoolId alone was a full paywall bypass.
+  const isOrgUser = !!user?.schoolId && user.schoolVerified === true;
   const isAdmin = user?.orgRole === 'admin';
 
   const effectiveTier: SubscriptionTier = isOrgUser
@@ -255,8 +299,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (isOrgUser) return true;
       if (!user?.subscription) return false;
 
+      // A null periodEnd means no billing period was ever recorded.
+      // Treat it as EXPIRED, not unlimited — mirrors the server-side gate in
+      // src/app/(academy)/lectures/[id]/page.tsx.
+      if (!user.subscription.periodEnd) return false;
       const now = new Date().toISOString();
-      if (user.subscription.periodEnd && user.subscription.periodEnd < now) return false;
+      if (user.subscription.periodEnd < now) return false;
 
       switch (user.subscription.tier) {
         case 'full_access':
@@ -276,8 +324,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (isOrgUser) return true;
       if (!user?.subscription) return false;
 
+      if (!user.subscription.periodEnd) return false;
       const now = new Date().toISOString();
-      if (user.subscription.periodEnd && user.subscription.periodEnd < now) return false;
+      if (user.subscription.periodEnd < now) return false;
 
       switch (user.subscription.tier) {
         case 'full_access':
@@ -324,7 +373,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signInWithOrgCode = useCallback(async (code: string, email: string, password: string) => {
     const supabase = createClient();
 
-    // Sign up (the handle_academy_signup trigger will create the student record)
+    // Sign up (the handle_academy_signup trigger will create the student record).
+    // NOTE: the trigger deliberately hardcodes school_id = NULL and tier = 'free'
+    // and ignores user metadata — organisation membership is granted ONLY by
+    // enrollInSchool() below, which validates the invite code server-side.
     const { error: authError } = await supabase.auth.signUp({
       email,
       password,

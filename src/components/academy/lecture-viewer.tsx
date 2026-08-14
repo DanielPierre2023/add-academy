@@ -3,6 +3,10 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import Link from 'next/link';
 import { useAcademyStore } from '@/lib/store/academy-store';
+import {
+  markScrolledToBottom,
+  evaluateLectureCompletion,
+} from '@/lib/store/completion-actions';
 import { t } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import type { Language } from '@/types';
@@ -491,12 +495,19 @@ export function LectureViewer({
       el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
     if (atBottom && !scrolledToBottom) {
       setScrolledToBottom(true);
+      // W1.1 — persist the signal server-side. Completion is decided by the
+      // server from the database, never asserted by this component.
+      void markScrolledToBottom(lectureId);
     }
-  }, [scrolledToBottom, setScrolledToBottom]);
+  }, [scrolledToBottom, setScrolledToBottom, lectureId]);
 
   const handleMarkComplete = () => {
     if (!isCompleted) {
+      // Optimistic local update for immediate feedback. The server decides
+      // the authoritative value; loadProgressFromSupabase reconciles on the
+      // next load, and the server never revokes a completion it granted.
       markCompleted(lectureId);
+      void evaluateLectureCompletion(lectureId);
       const result = awardXP('lecture', XP_VALUES.LECTURE_COMPLETE, lectureId);
       showXPToast({
         amount: XP_VALUES.LECTURE_COMPLETE,

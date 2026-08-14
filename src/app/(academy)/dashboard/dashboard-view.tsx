@@ -77,8 +77,10 @@ export default function DashboardView() {
   const xpProgress = getXPProgress();
   const completion = getCompletionPercentage();
 
-  const t = (en: string, ro: string, el?: string) =>
-    language === 'ro' ? ro : language === 'el' ? (el || en) : en;
+  // W4.1 — `el` was optional, so 18 of 21 strings fell back to English for
+  // Greek users. It is now required.
+  const t = (en: string, ro: string, el: string) =>
+    language === 'ro' ? ro : language === 'el' ? el : en;
 
   const daysLeft = useMemo(() => {
     if (!user?.subscription?.periodEnd) return null;
@@ -96,19 +98,16 @@ export default function DashboardView() {
           </div>
         </div>
         <h2 className="mt-6 font-heading text-2xl font-bold text-foreground">
-          {t('Sign in to view your dashboard', 'Autentifică-te pentru a vedea panoul de control')}
+          {t('Sign in to view your dashboard', 'Autentifică-te pentru a vedea panoul de control', 'Συνδεθείτε για να δείτε τον πίνακά σας')}
         </h2>
         <p className="mt-2 text-sm text-muted-foreground max-w-sm">
-          {t(
-            'Track your progress, manage your subscription, and access premium content.',
-            'Urmărește-ți progresul, gestionează abonamentul și accesează conținut premium.'
-          )}
+          {t('Track your progress, manage your subscription, and access premium content.', 'Urmărește-ți progresul, gestionează abonamentul și accesează conținut premium.', 'Παρακολουθήστε την πρόοδό σας, διαχειριστείτε τη συνδρομή σας και αποκτήστε πρόσβαση σε premium περιεχόμενο.')}
         </p>
         <Link
           href="/login"
           className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
         >
-          {t('Sign in', 'Autentificare')}
+          {t('Sign in', 'Autentificare', 'Σύνδεση')}
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
@@ -157,7 +156,7 @@ export default function DashboardView() {
               {isOrgUser && (
                 <span className="inline-flex items-center gap-1.5 rounded-lg bg-secondary/10 px-2.5 py-1 text-xs font-medium text-secondary">
                   <Building2 className="h-3 w-3" />
-                  {t('Organization', 'Organizație')}
+                  {t('Organization', 'Organizație', 'Οργανισμός')}
                   {isAdmin && (
                     <span className="ml-0.5 rounded bg-secondary px-1.5 py-0.5 text-[9px] font-bold text-secondary-foreground">
                       Admin
@@ -177,7 +176,7 @@ export default function DashboardView() {
         <div className="mt-5">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="text-muted-foreground font-medium">
-              {t('Level', 'Nivel')} {level}
+              {t('Level', 'Nivel', 'Επίπεδο')} {level}
             </span>
             <span className="text-muted-foreground">
               {xpProgress.current} / {xpProgress.needed} XP
@@ -204,15 +203,15 @@ export default function DashboardView() {
             card.key === 'progress' ? `${completion}%` :
             stats.perfectQuizzes;
           const statLabel =
-            card.key === 'level' ? t('Level', 'Nivel') :
-            card.key === 'streak' ? t('Day Streak', 'Serie de zile') :
-            card.key === 'progress' ? t('Completed', 'Completat') :
-            t('Perfect Quizzes', 'Quiz-uri perfecte');
+            card.key === 'level' ? t('Level', 'Nivel', 'Επίπεδο') :
+            card.key === 'streak' ? t('Day Streak', 'Serie de zile', 'Σερί Ημερών') :
+            card.key === 'progress' ? t('Completed', 'Completat', 'Ολοκληρωμένα') :
+            t('Perfect Quizzes', 'Quiz-uri perfecte', 'Τέλεια Κουίζ');
           const statSub =
             card.key === 'level' ? `${stats.xp} XP` :
-            card.key === 'streak' ? t('consecutive days', 'zile consecutive') :
-            card.key === 'progress' ? `${stats.lecturesCompleted} / 49 ${t('lectures', 'lecții')}` :
-            t('flawless scores', 'scoruri perfecte');
+            card.key === 'streak' ? t('consecutive days', 'zile consecutive', 'συνεχόμενες ημέρες') :
+            card.key === 'progress' ? `${stats.lecturesCompleted} / 49 ${t('lectures', 'lecții', 'μαθήματα')}` :
+            t('flawless scores', 'scoruri perfecte', 'άψογες βαθμολογίες');
 
           return (
             <motion.div
@@ -331,7 +330,7 @@ export default function DashboardView() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
                 <CreditCard className="h-4 w-4 text-primary" />
               </div>
-              {t('Subscription', 'Abonament')}
+              {t('Subscription', 'Abonament', 'Συνδρομή')}
             </h2>
           </div>
 
@@ -346,7 +345,7 @@ export default function DashboardView() {
                   {daysLeft !== null && (
                     <span className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock className="h-4 w-4" />
-                      {daysLeft} {t('days remaining', 'zile rămase')}
+                      {daysLeft} {t('days remaining', 'zile rămase', 'ημέρες απομένουν')}
                     </span>
                   )}
                 </div>
@@ -355,7 +354,7 @@ export default function DashboardView() {
                 <div>
                   <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    {t('Unlocked access:', 'Acces deblocat:')}
+                    {t('Unlocked access:', 'Acces deblocat:', 'Ξεκλειδωμένη πρόσβαση:')}
                   </h4>
                   <div className="grid gap-2 sm:grid-cols-2">
                     {[2, 3, 4, 5, 6].map((stage) => (
@@ -402,23 +401,20 @@ export default function DashboardView() {
                   href="/pricing"
                   className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                 >
-                  {t('Change plan', 'Schimbă planul')}
+                  {t('Change plan', 'Schimbă planul', 'Αλλαγή πλάνου')}
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             ) : (
               <div className="space-y-4">
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  {t(
-                    'You have free access to Stages 0 & 1. Subscribe to unlock more content and deployment-ready downloads.',
-                    'Ai acces gratuit la Etapele 0 și 1. Abonează-te pentru a debloca mai mult conținut și descărcări.'
-                  )}
+                  {t('You have free access to Stages 0 & 1. Subscribe to unlock more content and deployment-ready downloads.', 'Ai acces gratuit la Etapele 0 și 1. Abonează-te pentru a debloca mai mult conținut și descărcări.', 'Έχετε δωρεάν πρόσβαση στα Στάδια 0 και 1. Εγγραφείτε για να ξεκλειδώσετε περισσότερο περιεχόμενο και έτοιμα προς ανάπτυξη αρχεία.')}
                 </p>
                 <Link
                   href="/pricing"
                   className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-secondary to-secondary/90 px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-md shadow-secondary/20 hover:shadow-lg hover:shadow-secondary/30 transition-all"
                 >
-                  {t('View plans', 'Vezi planurile')}
+                  {t('View plans', 'Vezi planurile', 'Δείτε τα πλάνα')}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -442,19 +438,16 @@ export default function DashboardView() {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-secondary/10">
                 <Building2 className="h-5 w-5 text-secondary" />
               </div>
-              {t('Organization Admin', 'Administrare organizație')}
+              {t('Organization Admin', 'Administrare organizație', 'Διαχειριστής Οργανισμού')}
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              {t(
-                'Manage organization members, invite codes, and settings.',
-                'Gestionează membrii organizației, coduri de invitare și setări.'
-              )}
+              {t('Manage organization members, invite codes, and settings.', 'Gestionează membrii organizației, coduri de invitare și setări.', 'Διαχειριστείτε μέλη, κωδικούς πρόσκλησης και ρυθμίσεις του οργανισμού.')}
             </p>
             <Link
               href="/admin"
               className="mt-4 inline-flex items-center gap-2 rounded-xl bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground hover:bg-secondary/90 shadow-md shadow-secondary/20 transition-all"
             >
-              {t('Admin Panel', 'Panou de administrare')}
+              {t('Admin Panel', 'Panou de administrare', 'Πίνακας Διαχείρισης')}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

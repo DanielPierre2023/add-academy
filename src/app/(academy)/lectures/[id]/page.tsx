@@ -27,6 +27,9 @@ export async function generateMetadata({
   return {
     title,
     description: `${stageLabel} — ${title}. Interactive lecture with ${entry.codeBlockCount} code blocks${entry.hasQuiz ? ' and quiz' : ''}. Part of ADD Academy's LLM course.`,
+    alternates: {
+      canonical: `${BASE_URL}/lectures/${id}`,
+    },
     openGraph: {
       title: `${title} | ADD Academy`,
       description: `${stageLabel} — Learn ${title.toLowerCase()} with hands-on code examples and interactive exercises.`,
@@ -43,15 +46,22 @@ export async function generateMetadata({
 }
 
 /**
- * Server-side auth check — best-effort only.
+ * Server-side entitlement check — best-effort only.
  * Returns true when the user is authenticated AND has access to the given stage.
  * Returns false when unauthenticated, unsubscribed, or when cookie-based auth
  * is unavailable (common with PKCE flow). A false result does NOT mean the user
- * is unauthorized — ContentGate performs the authoritative client-side check.
+ * is unauthorized — ContentGate performs the client-side check as well.
  *
- * Now that the OAuth callback route properly sets cookies, this check is
- * reliable for users who signed in via Google OAuth. It remains best-effort
- * for edge cases where cookies are unavailable.
+ * SECURITY (004_fix_entitlement_rls.sql): org access requires a VERIFIED school.
+ * Previously this returned true for any non-null school_id, which — combined
+ * with a permissive UPDATE policy that let users set their own school_id, and
+ * an INSERT policy that let them create a school with verified=true — handed
+ * the entire paid catalogue to any free account. Membership in a self-created
+ * organisation must never be an entitlement.
+ *
+ * `verified` is read through the current_school_context() SECURITY DEFINER RPC
+ * rather than a join, because academy_schools is deliberately no longer
+ * readable by ordinary members (it carries invite_code, a bearer secret).
  */
 async function isAuthenticatedForStage(stageNumber: number): Promise<boolean> {
   if (stageNumber <= 1) return true;
@@ -61,14 +71,10 @@ async function isAuthenticatedForStage(stageNumber: number): Promise<boolean> {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return false;
 
-    // Org users get full access
-    const { data: student } = await supabase
-      .from('academy_students')
-      .select('school_id, org_role')
-      .eq('id', user.id)
-      .single();
-
-    if (student?.school_id) return true;
+    // Org users get full access — but ONLY if their organisation is verified.
+    const { data: schoolCtx } = await supabase.rpc('current_school_context');
+    const school = Array.isArray(schoolCtx) ? schoolCtx[0] : schoolCtx;
+    if (school?.school_id && school.verified === true) return true;
 
     // Check active subscription
     const { data: subs } = await supabase
@@ -82,7 +88,11 @@ async function isAuthenticatedForStage(stageNumber: number): Promise<boolean> {
     const sub = subs?.[0];
     if (!sub) return false;
 
-    if (sub.current_period_end && sub.current_period_end < new Date().toISOString()) return false;
+    // A null current_period_end means the webhook never recorded a period.
+    // Treat that as EXPIRED, not unlimited — otherwise a cancelled subscription
+    // whose status update also failed would grant perpetual access.
+    if (!sub.current_period_end) return false;
+    if (sub.current_period_end < new Date().toISOString()) return false;
 
     switch (sub.tier) {
       case 'full_access':
@@ -123,8 +133,7 @@ function stripQuizAnswers(quiz: any): any {
 
 /**
  * Create a content teaser from full lecture HTML.
- * Extracts the first ~800 characters, cutting at a paragraph boundary,
- * preserving the lecture header structure for consistent layout.
+ * Extracts the header and first paragraph only, preserving layout structure.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function createContentTeaser(content: any): any {

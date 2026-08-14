@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { z } from 'zod';
 import Stripe from 'stripe';
+import { rateLimit, getClientIp } from '@/lib/rate-limit';
 
 const PRICE_MAP: Record<string, string | undefined> = {
   'all-access-monthly': process.env.STRIPE_PRICE_MONTHLY,
@@ -17,6 +18,12 @@ const CheckoutSchema = z.object({
  * Creates a Stripe Checkout session for the given plan.
  */
 export async function POST(request: NextRequest) {
+  // Unbounded Checkout session creation was possible per account.
+  const rl = rateLimit(`checkout:${getClientIp(request)}`, 10, 60_000);
+  if (!rl.success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   try {
     const supabase = await createServerSupabaseClient();
     const {
@@ -67,7 +74,13 @@ export async function POST(request: NextRequest) {
     }
 
     const stripe = new Stripe(stripeKey);
-    const origin = request.headers.get('origin') || 'https://academy.add-individual-solutions.com';
+    // SECURITY: never derive redirect URLs from the client Origin header.
+    // An attacker could POST with Origin: https://evil.example and mint a real
+    // Checkout session for this product that returns the payer to their own
+    // site — a convincing "payment failed, re-enter your card" phishing flow
+    // wearing your Stripe branding.
+    const origin =
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://academy.add-individual-solutions.com';
 
     // Reuse an existing Stripe customer if we have one on the student record
     const { data: student } = await supabase

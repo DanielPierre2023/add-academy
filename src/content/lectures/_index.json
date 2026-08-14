@@ -304,7 +304,7 @@
       "prev": "14",
       "next": "15",
       "codeBlockCount": 4,
-      "hasQuiz": true,
+      "hasQuiz": false,
       "estimatedMinutes": 35
     },
     {
@@ -1019,7 +1019,7 @@
       "prev": "genai-0",
       "next": "genai-2",
       "codeBlockCount": 17,
-      "hasQuiz": false,
+      "hasQuiz": true,
       "estimatedMinutes": 50
     },
     {
@@ -1036,7 +1036,7 @@
       "prev": "genai-1",
       "next": "genai-3",
       "codeBlockCount": 18,
-      "hasQuiz": false,
+      "hasQuiz": true,
       "estimatedMinutes": 50
     },
     {
@@ -1053,7 +1053,7 @@
       "prev": "genai-2",
       "next": "genai-4",
       "codeBlockCount": 17,
-      "hasQuiz": false,
+      "hasQuiz": true,
       "estimatedMinutes": 50
     },
     {
@@ -1070,7 +1070,7 @@
       "prev": "genai-3",
       "next": "genai-5",
       "codeBlockCount": 17,
-      "hasQuiz": false,
+      "hasQuiz": true,
       "estimatedMinutes": 50
     },
     {
@@ -1087,7 +1087,7 @@
       "prev": "genai-4",
       "next": "52",
       "codeBlockCount": 18,
-      "hasQuiz": false,
+      "hasQuiz": true,
       "estimatedMinutes": 50
     },
     {

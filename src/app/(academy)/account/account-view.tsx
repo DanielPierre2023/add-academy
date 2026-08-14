@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/auth-provider';
 import { useAcademyStore } from '@/lib/store/academy-store';
@@ -28,11 +28,16 @@ import {
   Package,
   ShoppingCart,
   Gift,
+  AlertTriangle,
+  Loader2,
+  ExternalLink,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/client';
+import { markNotificationRead } from '@/lib/notifications/actions';
 
 /* ═══════════════════════════════════════════════════════════
    Pricing — pure recurring subscription (All-Access).
@@ -67,8 +72,32 @@ const COMPARISON_ROWS: { feature: string; add: string; udemy: string; coursera: 
   { feature: 'Price', add: '€12/mo', udemy: '~€15–130/course', coursera: '~$49/mo', bootcamp: '$500–2,000' },
 ];
 
-/* Mock invoices — will come from Supabase/Stripe */
-const MOCK_INVOICES: any[] = [];
+/* Real invoices come from GET /api/billing/invoices (Stripe).
+   This previously read `const MOCK_INVOICES: any[] = []`, so the Invoices tab
+   showed an empty state for every user forever — including paying ones. */
+interface BillingInvoice {
+  id: string;
+  number: string | null;
+  date: string;
+  description: string;
+  amount: number;
+  currency: string;
+  status: string;
+  refunded: boolean;
+  amountRefunded: number;
+  pdfUrl: string | null;
+  hostedUrl: string | null;
+}
+
+interface AccountNotification {
+  id: string;
+  kind: string;
+  severity: 'info' | 'warning' | 'critical';
+  title_en: string; title_ro: string; title_el: string;
+  body_en: string; body_ro: string; body_el: string;
+  read_at: string | null;
+  created_at: string;
+}
 
 /* ═══════════════════════════════════════════════════════════ */
 
@@ -78,6 +107,88 @@ export default function AccountView() {
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState<'overview' | 'courses' | 'invoices'>('overview');
+
+  // --- Real billing data (replaces the empty MOCK_INVOICES array) ---
+  const [invoices, setInvoices] = useState<BillingInvoice[]>([]);
+  const [invoicesLoading, setInvoicesLoading] = useState(false);
+  const [invoicesError, setInvoicesError] = useState<string | null>(null);
+  const [portalLoading, setPortalLoading] = useState(false);
+
+  // --- Billing notifications (refund / dispute / failed payment) ---
+  const [notifications, setNotifications] = useState<AccountNotification[]>([]);
+
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+
+    // State updates live inside the async function, not synchronously in the
+    // effect body — a synchronous setState here triggers a cascading render
+    // (react-hooks/set-state-in-effect).
+    const load = async () => {
+      if (cancelled) return;
+      setInvoicesLoading(true);
+      setInvoicesError(null);
+      try {
+        const res = await fetch('/api/billing/invoices');
+        if (!res.ok) throw new Error(String(res.status));
+        const data = await res.json();
+        if (!cancelled) setInvoices(data.invoices ?? []);
+      } catch {
+        if (!cancelled) setInvoicesError('Could not load your billing history.');
+      } finally {
+        if (!cancelled) setInvoicesLoading(false);
+      }
+    };
+
+    void load();
+    return () => { cancelled = true; };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+
+    const load = async () => {
+      const { data } = await createClient()
+        .from('academy_notifications')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(10);
+      if (!cancelled && data) setNotifications(data as AccountNotification[]);
+    };
+
+    void load();
+    return () => { cancelled = true; };
+  }, [user]);
+
+  const pick = useCallback(
+    (n: AccountNotification, field: 'title' | 'body') => {
+      const key = `${field}_${language}` as keyof AccountNotification;
+      return (n[key] as string) || (n[`${field}_en` as keyof AccountNotification] as string);
+    },
+    [language]
+  );
+
+  const dismissNotification = useCallback(async (id: string) => {
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+    // Server action: only read_at is writable, and ownership is checked
+    // server-side. There is deliberately no client UPDATE policy on this table.
+    await markNotificationRead(id);
+  }, []);
+
+  const openBillingPortal = useCallback(async () => {
+    setPortalLoading(true);
+    try {
+      const res = await fetch('/api/billing/portal', { method: 'POST' });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+      else setInvoicesError(data.error || 'Could not open the billing portal.');
+    } catch {
+      setInvoicesError('Could not open the billing portal.');
+    } finally {
+      setPortalLoading(false);
+    }
+  }, []);
   const [billing, setBilling] = useState<'monthly' | 'annual'>('annual');
 
   if (loading) {
@@ -118,6 +229,53 @@ export default function AccountView() {
           Manage your profile, subscription, and learning progress.
         </p>
       </div>
+
+      {/* Billing notifications — refunds, disputes, failed renewals.
+          The repo has no email provider, so this is how a user actually learns
+          that their payment was refunded and access ended. */}
+      {notifications.filter((n) => !n.read_at).map((n) => (
+        <div
+          key={n.id}
+          role="status"
+          className={
+            'rounded-xl border p-4 flex items-start gap-3 ' +
+            (n.severity === 'critical'
+              ? 'border-red-500/40 bg-red-500/5'
+              : n.severity === 'warning'
+                ? 'border-amber-500/40 bg-amber-500/5'
+                : 'border-blue-500/40 bg-blue-500/5')
+          }
+        >
+          <AlertTriangle
+            className={
+              'h-5 w-5 shrink-0 mt-0.5 ' +
+              (n.severity === 'critical'
+                ? 'text-red-500'
+                : n.severity === 'warning'
+                  ? 'text-amber-500'
+                  : 'text-blue-500')
+            }
+          />
+          <div className="flex-1 min-w-0">
+            <p className="font-semibold text-sm">{pick(n, 'title')}</p>
+            <p className="text-sm text-muted-foreground mt-1">{pick(n, 'body')}</p>
+            <p className="text-xs text-muted-foreground/70 mt-2">
+              {new Date(n.created_at).toLocaleDateString(undefined, {
+                year: 'numeric', month: 'short', day: 'numeric',
+              })}
+            </p>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-7 text-xs shrink-0"
+            onClick={() => dismissNotification(n.id)}
+            aria-label="Dismiss notification"
+          >
+            Dismiss
+          </Button>
+        </div>
+      ))}
 
       {/* Tab navigation */}
       <div className="flex gap-1 rounded-lg bg-muted p-1">
@@ -527,7 +685,21 @@ export default function AccountView() {
               Billing History
             </h3>
 
-            {MOCK_INVOICES.length === 0 ? (
+            {invoicesLoading ? (
+              <div className="flex items-center justify-center py-12 text-muted-foreground">
+                <Loader2 className="h-5 w-5 animate-spin mr-2" />
+                Loading your billing history...
+              </div>
+            ) : invoicesError ? (
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <AlertTriangle className="h-10 w-10 text-amber-500/60 mb-3" />
+                <p className="font-medium text-muted-foreground">{invoicesError}</p>
+                <Button variant="outline" size="sm" className="mt-4"
+                        onClick={() => window.location.reload()}>
+                  Try again
+                </Button>
+              </div>
+            ) : invoices.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 text-center">
                 <FileText className="h-10 w-10 text-muted-foreground/30 mb-3" />
                 <p className="font-medium text-muted-foreground">No invoices yet</p>
@@ -555,21 +727,72 @@ export default function AccountView() {
                   </tr>
                 </thead>
                 <tbody>
-                  {MOCK_INVOICES.map((inv: any) => (
+                  {invoices.map((inv) => (
                     <tr key={inv.id} className="border-b last:border-0">
-                      <td className="py-3">{inv.date}</td>
-                      <td className="py-3">{inv.description}</td>
-                      <td className="py-3 text-right tabular-nums">€{inv.amount}</td>
-                      <td className="py-3 text-right">
-                        <Badge variant="secondary" className="text-xs">{inv.status}</Badge>
+                      <td className="py-3">
+                        {new Date(inv.date).toLocaleDateString(undefined, {
+                          year: 'numeric', month: 'short', day: 'numeric',
+                        })}
+                      </td>
+                      <td className="py-3">
+                        {inv.description}
+                        {inv.number && (
+                          <span className="block text-xs text-muted-foreground">#{inv.number}</span>
+                        )}
+                      </td>
+                      <td className="py-3 text-right tabular-nums">
+                        {inv.currency === 'EUR' ? '\u20AC' : inv.currency + ' '}
+                        {inv.amount.toFixed(2)}
+                        {inv.refunded && (
+                          <span className="block text-xs text-amber-600 dark:text-amber-500">
+                            &minus;{inv.currency === 'EUR' ? '\u20AC' : ''}
+                            {inv.amountRefunded.toFixed(2)} refunded
+                          </span>
+                        )}
                       </td>
                       <td className="py-3 text-right">
-                        <Button variant="ghost" size="sm" className="h-7 text-xs">PDF</Button>
+                        <Badge
+                          variant={inv.refunded ? 'outline' : 'secondary'}
+                          className={
+                            inv.refunded
+                              ? 'text-xs border-amber-500/40 text-amber-600 dark:text-amber-500'
+                              : 'text-xs'
+                          }
+                        >
+                          {inv.refunded ? 'Refunded' : inv.status}
+                        </Badge>
+                      </td>
+                      <td className="py-3 text-right">
+                        {inv.pdfUrl ? (
+                          <a href={inv.pdfUrl} target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost" size="sm" className="h-7 text-xs gap-1">
+                              PDF <ExternalLink className="h-3 w-3" />
+                            </Button>
+                          </a>
+                        ) : inv.hostedUrl ? (
+                          <a href={inv.hostedUrl} target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost" size="sm" className="h-7 text-xs gap-1">
+                              View <ExternalLink className="h-3 w-3" />
+                            </Button>
+                          </a>
+                        ) : null}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+            )}
+
+            {invoices.length > 0 && (
+              <div className="mt-4 flex justify-end">
+                <Button variant="outline" size="sm" className="gap-1.5"
+                        onClick={openBillingPortal} disabled={portalLoading}>
+                  {portalLoading
+                    ? <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    : <CreditCard className="h-3.5 w-3.5" />}
+                  Manage billing in Stripe
+                </Button>
+              </div>
             )}
           </div>
 

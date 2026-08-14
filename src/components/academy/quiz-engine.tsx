@@ -28,8 +28,20 @@ interface QuizEngineProps {
 }
 
 export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
-  const { language, quizScores, setQuizScore, updateProgress, awardXP } =
-    useAcademyStore();
+  const {
+    language,
+    quizScores,
+    setQuizScore,
+    updateProgress,
+    awardXP,
+    // W3.1 — these three were fully implemented in academy-store.ts and called
+    // from nowhere. Wiring them here activates spaced repetition (/review),
+    // adaptive difficulty ("Your Level") and weak-topic detection
+    // ("Areas to Improve"), all of which were permanently inert.
+    addQuizAttempt,
+    addToReviewQueue,
+    getDifficultyLevel,
+  } = useAcademyStore();
   const lang = language as Language;
 
   const [selectedAnswers, setSelectedAnswers] = useState<
@@ -77,6 +89,12 @@ export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
     let correct = 0;
     const total = quiz.questions.length;
 
+    // Difficulty is sampled ONCE, before this attempt is recorded, so the
+    // label describes the learner's level going in rather than being skewed
+    // by the answers we are about to add.
+    const difficulty = getDifficultyLevel();
+    const timestamp = new Date().toISOString();
+
     quiz.questions.forEach((question) => {
       const selected = selectedAnswers[question.index] || [];
       const expected = question.correct;
@@ -87,6 +105,22 @@ export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
         expected.every((e) => selected.includes(e));
 
       if (isCorrect) correct++;
+
+      // One QuizAttempt PER QUESTION — getWeakTopics() and getDifficultyLevel()
+      // both treat `correct` as a per-question boolean.
+      addQuizAttempt({
+        lectureId,
+        questionIndex: question.index,
+        correct: isCorrect,
+        timestamp,
+        difficulty,
+      });
+
+      // Every missed question enters the SM-2 spaced-repetition queue.
+      // addToReviewQueue is idempotent per (lectureId, questionIndex).
+      if (!isCorrect) {
+        addToReviewQueue(lectureId, question.index);
+      }
     });
 
     const calculatedScore = Math.round((correct / total) * 100);
@@ -132,6 +166,9 @@ export function QuizEngine({ quiz, lectureId }: QuizEngineProps) {
     setQuizScore,
     updateProgress,
     awardXP,
+    addQuizAttempt,
+    addToReviewQueue,
+    getDifficultyLevel,
   ]);
 
   const handleReset = useCallback(() => {
