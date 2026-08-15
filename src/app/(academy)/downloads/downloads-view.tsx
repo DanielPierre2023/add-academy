@@ -336,13 +336,15 @@ export default function DownloadsView() {
                     </Link>
                   ) : !meetsThreshold ? (
                     null
-                  ) : download.downloadUrl === null ? (
+                  ) : !download.available ? (
                     <div className="rounded-xl border border-dashed border-border bg-muted/30 px-4 py-3">
                       <p className="text-xs font-medium text-muted-foreground">{txt.notAvailable}</p>
                       <p className="text-[11px] text-muted-foreground/80 mt-0.5">{txt.notAvailableDesc}</p>
                     </div>
                   ) : (
-                    <a href={download.downloadUrl} download={download.fileName}>
+                    // Hits the gated route, which re-verifies entitlement +
+                    // completion server-side and redirects to a signed URL.
+                    <a href={`/api/downloads/${download.id}`}>
                       <Button size="sm" className="gap-2 rounded-xl shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all">
                         <Download className="h-3.5 w-3.5" />
                         {txt.download}

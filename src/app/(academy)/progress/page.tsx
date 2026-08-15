@@ -32,8 +32,13 @@ export default function ProgressPage() {
   const language = useAcademyStore((s) => s.language) as Language;
   const progress = useAcademyStore((s) => s.progress);
   const quizScores = useAcademyStore((s) => s.quizScores);
-  const stats = useAcademyStore((s) => s.getGamificationStats());
-  const xpProgress = useAcademyStore((s) => s.getXPProgress());
+  // Select stable function refs and call them in the body — returning a fresh
+  // object from the selector can trigger the React #185 infinite-loop crash
+  // (the same failure that previously hit /review).
+  const getGamificationStats = useAcademyStore((s) => s.getGamificationStats);
+  const getXPProgress = useAcademyStore((s) => s.getXPProgress);
+  const stats = getGamificationStats();
+  const xpProgress = getXPProgress();
   const completion = useAcademyStore((s) => s.getCompletionPercentage());
   const lectureIndex = getLectureIndex();
 

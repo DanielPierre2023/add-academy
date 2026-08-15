@@ -18,7 +18,11 @@ import type { Language } from '@/types';
 
 export default function LeaderboardPage() {
   const language = useAcademyStore((s) => s.language) as Language;
-  const stats = useAcademyStore((s) => s.getGamificationStats());
+  // Select the stable function ref and call it in the render body — returning a
+  // fresh object straight from the selector destabilises useSyncExternalStore
+  // and can trigger the React #185 infinite-loop crash (see /review fix).
+  const getGamificationStats = useAcademyStore((s) => s.getGamificationStats);
+  const stats = getGamificationStats();
   const { user } = useAuth();
 
   const texts = {

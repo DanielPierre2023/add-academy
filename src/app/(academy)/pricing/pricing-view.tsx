@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Check, Crown, ArrowRight, Sparkles, Shield, GraduationCap, Building2, HeartHandshake } from 'lucide-react';
 import { useAcademyStore } from '@/lib/store/academy-store';
@@ -442,13 +443,13 @@ export default function PricingView() {
                 'Στάδιο 0 (Εισαγωγή) και Στάδιο 1 (Θεμέλια LLM) — δωρεάν, χωρίς λογαριασμό.'
               )}
             </p>
-            <a
-              href="/course"
+            <Link
+              href="/lectures/0"
               className="mt-5 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 transition-all hover:shadow-lg"
             >
               {tt(language, 'Start free', 'Începe gratuit', 'Ξεκίνα δωρεάν')}
               <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

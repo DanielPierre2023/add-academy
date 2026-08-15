@@ -11,8 +11,11 @@
  *    - Paid for DocMind only → download DocMind ZIP only
  *    - Paid for all 5 → download all 5 ZIPs
  *
- * Download URLs point to Supabase Storage (or any CDN).
- * Set to null until the actual ZIP files are uploaded.
+ * Files live in a PRIVATE Supabase Storage bucket ("product-downloads").
+ * They are NEVER served by a public URL — the browser hits the gated route
+ * /api/downloads/[id], which re-verifies entitlement + course completion on the
+ * server and returns a short-lived signed URL. `storagePath` is the object path
+ * inside that bucket; `available` is flipped to true once the ZIP is uploaded.
  */
 
 export interface ProductDownload {
@@ -25,8 +28,10 @@ export interface ProductDownload {
   description: Record<string, string>;
   icon: string;
   fileName: string;
-  /** Download URL — Supabase Storage or CDN. null = not yet uploaded. */
-  downloadUrl: string | null;
+  /** Object path inside the private "product-downloads" bucket. */
+  storagePath: string;
+  /** true once the ZIP has been uploaded to the bucket (flip on after upload). */
+  available: boolean;
   fileSize: string;
   /** What's inside the ZIP */
   contents: Record<string, string>;
@@ -52,7 +57,8 @@ export const NEURALFORGE_DOWNLOAD: ProductDownload = {
   },
   icon: '🧠',
   fileName: 'NeuralForge-LLM-Deploy.zip',
-  downloadUrl: null,
+  storagePath: 'neuralforge-llm/NeuralForge-LLM-Deploy.zip',
+  available: false,
   fileSize: '~250 MB',
   contents: {
     en: 'Trained model weights, tokenizer, inference server (FastAPI), Docker configuration, deployment scripts, environment templates, README with setup instructions',
@@ -78,7 +84,8 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '🎨',
     fileName: 'PixelForge-SaaS-Deploy.zip',
-    downloadUrl: null,
+    storagePath: 'saas/PixelForge-SaaS-Deploy.zip',
+    available: false,
     fileSize: '~45 MB',
     contents: {
       en: 'Next.js app, Replicate/Stability AI integration, image editor UI, gallery system, Supabase schema, Stripe billing, Vercel deployment config',
@@ -98,7 +105,8 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '🎬',
     fileName: 'ClipCraft-SaaS-Deploy.zip',
-    downloadUrl: null,
+    storagePath: 'saas/ClipCraft-SaaS-Deploy.zip',
+    available: false,
     fileSize: '~40 MB',
     contents: {
       en: 'Next.js app, RunwayML/Luma video generation, timeline editor, export system, Supabase schema, Stripe billing, Docker config',
@@ -118,7 +126,8 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '✍️',
     fileName: 'ProseAI-SaaS-Deploy.zip',
-    downloadUrl: null,
+    storagePath: 'saas/ProseAI-SaaS-Deploy.zip',
+    available: false,
     fileSize: '~35 MB',
     contents: {
       en: 'Next.js app, OpenAI/Anthropic streaming, rich text editor, templates system, SEO tools, Supabase schema, Stripe billing, Vercel config',
@@ -138,7 +147,8 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '🔍',
     fileName: 'TruthLens-SaaS-Deploy.zip',
-    downloadUrl: null,
+    storagePath: 'saas/TruthLens-SaaS-Deploy.zip',
+    available: false,
     fileSize: '~38 MB',
     contents: {
       en: 'Next.js app, RAG pipeline with embeddings, web search integration, claim analysis engine, source scoring, Supabase schema + pgvector, Stripe billing, Docker config',
@@ -158,7 +168,8 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '📄',
     fileName: 'DocMind-SaaS-Deploy.zip',
-    downloadUrl: null,
+    storagePath: 'saas/DocMind-SaaS-Deploy.zip',
+    available: false,
     fileSize: '~42 MB',
     contents: {
       en: 'Next.js app, PDF/image OCR pipeline, structured data extraction, template matching, export to CSV/JSON, Supabase schema, Stripe billing, Vercel config',

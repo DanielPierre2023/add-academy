@@ -53,7 +53,7 @@ const ORG_SEATS = 20;
 const CONTACT_EMAIL = 'contact@add-individual-solutions.com';
 
 const ALL_ACCESS_FEATURES = [
-  'Full LLM course — all stages, ~67 lectures',
+  'Full LLM course — all stages, 68 lectures',
   'All 5 GenAI SaaS product courses',
   'Live in-browser Python — no setup',
   'Deployable NeuralForge LLM + product downloads',
@@ -514,7 +514,7 @@ export default function AccountView() {
                 </ul>
                 <Button
                   className="w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold shadow-md"
-                  onClick={() => {/* Stripe checkout — wired in Stripe step */}}
+                  onClick={() => router.push('/pricing')}
                 >
                   Subscribe <ArrowRight className="ml-1.5 h-4 w-4" />
                 </Button>
@@ -543,7 +543,7 @@ export default function AccountView() {
               <Button
                 variant="outline"
                 className="w-full font-semibold"
-                onClick={() => {/* Stripe checkout — wired in Stripe step */}}
+                onClick={() => router.push('/pricing')}
               >
                 Get student rate <ArrowRight className="ml-1.5 h-4 w-4" />
               </Button>

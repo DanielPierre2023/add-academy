@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
+import { getLectureIndex } from '@/lib/lectures';
 import { SAAS_PRODUCTS, BILLING_CYCLE_MONTHS } from '@/lib/subscriptions/plans';
 import { getIcon } from '@/lib/icons';
 import { cn } from '@/lib/utils';
@@ -210,7 +211,7 @@ export default function DashboardView() {
           const statSub =
             card.key === 'level' ? `${stats.xp} XP` :
             card.key === 'streak' ? t('consecutive days', 'zile consecutive', 'συνεχόμενες ημέρες') :
-            card.key === 'progress' ? `${stats.lecturesCompleted} / 49 ${t('lectures', 'lecții', 'μαθήματα')}` :
+            card.key === 'progress' ? `${stats.lecturesCompleted} / ${getLectureIndex().totalLectures} ${t('lectures', 'lecții', 'μαθήματα')}` :
             t('flawless scores', 'scoruri perfecte', 'άψογες βαθμολογίες');
 
           return (
