@@ -20,6 +20,10 @@ import {
   Shield,
   Download,
   Lock,
+  BarChart3,
+  Repeat,
+  Award,
+  Bookmark,
 } from 'lucide-react';
 import type { Language } from '@/types';
 import { STAGES } from '@/types';
@@ -216,6 +220,50 @@ export function CourseSidebar() {
                   >
                     <LayoutDashboard className="h-3.5 w-3.5 text-primary" />
                     <span>{language === 'ro' ? 'Panou de control' : language === 'el' ? 'Πίνακας Ελέγχου' : 'Dashboard'}</span>
+                  </Link>
+                )}
+
+                {user && (
+                  <Link
+                    href="/progress"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <BarChart3 className="h-3.5 w-3.5 text-cyan-500" />
+                    <span>{language === 'ro' ? 'Progres' : language === 'el' ? 'Πρόοδος' : 'Progress'}</span>
+                  </Link>
+                )}
+
+                {user && (
+                  <Link
+                    href="/review"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <Repeat className="h-3.5 w-3.5 text-violet-500" />
+                    <span>{language === 'ro' ? 'Recapitulare' : language === 'el' ? 'Επανάληψη' : 'Review'}</span>
+                  </Link>
+                )}
+
+                {user && (
+                  <Link
+                    href="/achievements"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <Award className="h-3.5 w-3.5 text-yellow-500" />
+                    <span>{language === 'ro' ? 'Realizări' : language === 'el' ? 'Επιτεύγματα' : 'Achievements'}</span>
+                  </Link>
+                )}
+
+                {user && (
+                  <Link
+                    href="/bookmarks"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <Bookmark className="h-3.5 w-3.5 text-pink-500" />
+                    <span>{language === 'ro' ? 'Marcaje' : language === 'el' ? 'Σελιδοδείκτες' : 'Bookmarks'}</span>
                   </Link>
                 )}
 

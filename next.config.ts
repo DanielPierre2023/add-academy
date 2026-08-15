@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // W4.3 — don't advertise the framework/version in a response header.
+  poweredByHeader: false,
   async headers() {
     return [
       {
@@ -23,7 +25,9 @@ const nextConfig: NextConfig = {
               // Fonts: self + Google Fonts CDN
               "font-src 'self' https://fonts.gstatic.com",
               // Connect: self + Supabase + Pyodide packages + Stripe + Gemini API
-              "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net https://api.stripe.com https://generativelanguage.googleapis.com https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.ingest.sentry.io",
+              // GA4 posts to regional collection hosts (e.g. region1.google-analytics.com),
+              // so the wildcard is required — the exact www host alone silently drops beacons.
+              "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net https://api.stripe.com https://generativelanguage.googleapis.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.ingest.sentry.io",
               // Workers: Pyodide uses web workers
               "worker-src 'self' blob:",
               // Frames: none except Stripe checkout iframe
