@@ -7,10 +7,10 @@
         "index": 0,
         "text": "Why is Layer Normalization preferred over Batch Normalization in transformers?",
         "options": [
-          "Layer Norm uses fewer parameters",
-          "Layer Norm normalizes across features within a single sample, independent of batch size",
-          "Layer Norm is faster to compute",
-          "Layer Norm does not require any learnable parameters"
+          "Layer Norm uses fewer parameters than Batch Norm does",
+          "Layer Norm normalizes per sample, independent of batch size",
+          "Layer Norm is significantly faster to compute on modern hardware",
+          "Layer Norm requires no learnable parameters of any kind"
         ],
         "correct": [
           1
@@ -23,9 +23,9 @@
         "text": "What are the learnable parameters in Layer Normalization?",
         "options": [
           "Gamma (γ) for scaling and Beta (β) for shifting",
-          "Mean (μ) and variance (σ²)",
-          "Query, Key, and Value matrices",
-          "Learning rate and epsilon"
+          "The batch mean (μ) and the batch variance (σ²)",
+          "The Query, Key, and Value projection weight matrices",
+          "The learning rate and the epsilon constant value"
         ],
         "correct": [
           0
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What is the difference between pre-norm and post-norm in transformers?",
         "options": [
-          "Pre-norm applies normalization after the sublayer",
-          "Post-norm applies normalization before the sublayer",
+          "Pre-norm applies the normalization only after the sublayer runs",
+          "Post-norm applies the normalization strictly before the sublayer, unlike pre-norm",
           "Pre-norm: x + Sublayer(LayerNorm(x)); Post-norm: LayerNorm(x + Sublayer(x))",
-          "They are identical in practice"
+          "They are effectively identical in practice"
         ],
         "correct": [
           2
@@ -52,9 +52,9 @@
         "index": 3,
         "text": "Which of the following are true about RMSNorm?Select all that apply",
         "options": [
-          "It requires computing both mean and variance",
-          "It only normalizes by the root mean square, skipping mean centering",
-          "It is slower than Layer Norm",
+          "It requires computing both the mean and the full variance",
+          "It normalizes by the RMS, skipping mean centering",
+          "It is noticeably slower to run than Layer Norm",
           "It is used in LLaMA and other modern architectures"
         ],
         "correct": [
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "What does the epsilon (ε) value in Layer Norm prevent?",
         "options": [
-          "Division by zero when variance is very small",
-          "Overflow in the mean calculation",
-          "Negative values in the output",
-          "Gradients from becoming too large"
+          "Division by zero when the variance is very small",
+          "Arithmetic overflow during the mean calculation step",
+          "Negative values from appearing in the output",
+          "Gradients from growing far too large"
         ],
         "correct": [
           0
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "De ce este preferată Layer Normalization față de Batch Normalization în transformer-e?",
         "options": [
-          "Layer Norm folosește mai puțini parametri",
-          "Layer Norm normalizează pe dimensiunea caracteristicilor în cadrul unui singur eșantion, independent de dimensiunea lotului",
-          "Layer Norm este mai rapidă de calculat",
-          "Layer Norm nu necesită parametri care pot fi învățați"
+          "Layer Norm folosește mai puțini parametri decât Batch Norm",
+          "Layer Norm normalizează per eșantion, indiferent de lot",
+          "Layer Norm este semnificativ mai rapidă de calculat pe hardware modern",
+          "Layer Norm nu necesită deloc parametri care pot fi învățați"
         ],
         "correct": [
           1
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "Care sunt parametrii care pot fi învățați în Layer Normalization?",
         "options": [
-          "Gamma (gamma) pentru scalare și Beta (beta) pentru deplasare",
-          "Media (mu) și varianța (sigma^2)",
-          "Matricele Query, Key și Value",
-          "Rata de învățare și epsilon"
+          "Gamma (γ) pentru scalare și Beta (β) pentru deplasare",
+          "Media lotului (μ) și varianța lotului (σ²)",
+          "Matricele de proiecție de ponderi pentru Query, Key și Value",
+          "Rata de învățare și valoarea constantei epsilon"
         ],
         "correct": [
           0
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Care este diferența dintre pre-norm și post-norm în transformer-e?",
         "options": [
-          "Pre-norm aplică normalizarea după sub-strat",
-          "Post-norm aplică normalizarea înainte de sub-strat",
+          "Pre-norm aplică normalizarea doar după ce rulează sub-stratul",
+          "Post-norm aplică normalizarea strict înainte de sub-strat, spre deosebire de pre-norm",
           "Pre-norm: x + Substrat(LayerNorm(x)); Post-norm: LayerNorm(x + Substrat(x))",
-          "Sunt identice în practică"
+          "Sunt practic identice în utilizare"
         ],
         "correct": [
           2
@@ -133,9 +133,9 @@
         "index": 3,
         "text": "Care dintre următoarele sunt adevărate despre RMSNorm? Selectați toate răspunsurile corecte",
         "options": [
-          "Necesită calcularea atât a mediei cât și a varianței",
-          "Normalizează doar prin media pătratică, omițând centrarea pe medie",
-          "Este mai lent decât Layer Norm",
+          "Necesită calcularea atât a mediei cât și a întregii varianțe",
+          "Normalizează prin RMS, omițând centrarea pe medie",
+          "Este vizibil mai lent de rulat decât Layer Norm",
           "Este folosit în LLaMA și alte arhitecturi moderne"
         ],
         "correct": [
@@ -150,9 +150,9 @@
         "text": "Ce previne valoarea epsilon (epsilon) în Layer Norm?",
         "options": [
           "Împărțirea la zero când varianța este foarte mică",
-          "Depășirea în calculul mediei",
-          "Valorile negative în ieșire",
-          "Gradienții devenind prea mari"
+          "Depășirea aritmetică în timpul pasului de calcul al mediei",
+          "Apariția valorilor negative în ieșire",
+          "Gradienții să crească mult prea mari"
         ],
         "correct": [
           0
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Γιατί προτιμάται η Layer Normalization έναντι της Batch Normalization στους transformers;",
         "options": [
-          "Η Layer Norm χρησιμοποιεί λιγότερες παραμέτρους",
-          "Η Layer Norm κανονικοποιεί κατά μήκος των χαρακτηριστικών μέσα σε ένα μόνο δείγμα, ανεξάρτητα από το μέγεθος παρτίδας",
-          "Η Layer Norm είναι πιο γρήγορη στον υπολογισμό",
-          "Η Layer Norm δεν απαιτεί εκπαιδεύσιμες παραμέτρους"
+          "Η Layer Norm χρησιμοποιεί λιγότερες παραμέτρους από τη Batch Norm",
+          "Η Layer Norm κανονικοποιεί ανά δείγμα, ανεξάρτητα από την παρτίδα",
+          "Η Layer Norm είναι σημαντικά πιο γρήγορη στον υπολογισμό σε σύγχρονο υλικό",
+          "Η Layer Norm δεν απαιτεί καθόλου εκπαιδεύσιμες παραμέτρους"
         ],
         "correct": [
           1
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Ποιες είναι οι εκπαιδεύσιμες παράμετροι στη Layer Normalization;",
         "options": [
-          "Gamma (gamma) για κλιμάκωση και Beta (beta) για μετατόπιση",
-          "Μέσος (mu) και διακύμανση (sigma^2)",
-          "Πίνακες Query, Key και Value",
-          "Ρυθμός εκμάθησης και epsilon"
+          "Gamma (γ) για κλιμάκωση, Beta (β) για μετατόπιση",
+          "Ο μέσος (μ) και η διακύμανση (σ²) της παρτίδας",
+          "Οι πίνακες βαρών προβολής για τα Query, Key και Value",
+          "Ο ρυθμός εκμάθησης και η σταθερά epsilon"
         ],
         "correct": [
           0
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποια είναι η διαφορά μεταξύ pre-norm και post-norm στους transformers;",
         "options": [
-          "Το pre-norm εφαρμόζει κανονικοποίηση μετά το υποεπίπεδο",
-          "Το post-norm εφαρμόζει κανονικοποίηση πριν το υποεπίπεδο",
+          "Το pre-norm εφαρμόζει την κανονικοποίηση μόνο μετά το υποεπίπεδο",
+          "Το post-norm εφαρμόζει την κανονικοποίηση αυστηρά πριν το υποεπίπεδο, σε αντίθεση με το pre-norm",
           "Pre-norm: x + Υποεπίπεδο(LayerNorm(x)); Post-norm: LayerNorm(x + Υποεπίπεδο(x))",
-          "Είναι ταυτόσημα στην πράξη"
+          "Είναι ουσιαστικά ταυτόσημα στην πράξη"
         ],
         "correct": [
           2
@@ -214,9 +214,9 @@
         "index": 3,
         "text": "Ποια από τα ακόλουθα ισχύουν για το RMSNorm; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Απαιτεί υπολογισμό τόσο μέσου όσο και διακύμανσης",
-          "Κανονικοποιεί μόνο βάσει τετραγωνικής ρίζας μέσου τετραγώνου, παραλείποντας τον κεντρισμό μέσου",
-          "Είναι πιο αργό από τη Layer Norm",
+          "Απαιτεί τον υπολογισμό τόσο του μέσου όσο και της πλήρους διακύμανσης",
+          "Κανονικοποιεί βάσει RMS, παραλείποντας τον κεντρισμό μέσου",
+          "Είναι αισθητά πιο αργό στην εκτέλεση από τη Layer Norm",
           "Χρησιμοποιείται στο LLaMA και σε άλλες σύγχρονες αρχιτεκτονικές"
         ],
         "correct": [
@@ -231,9 +231,9 @@
         "text": "Τι αποτρέπει η τιμή epsilon (epsilon) στη Layer Norm;",
         "options": [
           "Διαίρεση με το μηδέν όταν η διακύμανση είναι πολύ μικρή",
-          "Υπερχείλιση στον υπολογισμό μέσου",
-          "Αρνητικές τιμές στην έξοδο",
-          "Κλίσεις που γίνονται πολύ μεγάλες"
+          "Αριθμητική υπερχείλιση κατά το βήμα υπολογισμού του μέσου",
+          "Εμφάνιση αρνητικών τιμών στην έξοδο",
+          "Οι κλίσεις να γίνουν υπερβολικά μεγάλες"
         ],
         "correct": [
           0

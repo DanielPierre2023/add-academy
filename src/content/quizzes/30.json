@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is the main limitation of greedy decoding for text generation?",
         "options": [
-          "It requires too much memory",
-          "It cannot process long sequences",
-          "It always picks the highest-probability token, producing repetitive and predictable text",
-          "It requires a special tokenizer"
+          "It requires far too much GPU memory to run",
+          "It is fundamentally unable to process long input sequences beyond a few dozen tokens at a time",
+          "It always takes the highest-probability token, yielding repetitive text",
+          "It requires a special dedicated tokenizer to work"
         ],
         "correct": [
           2
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "How does the temperature parameter affect the softmax distribution during generation?",
         "options": [
-          "Higher temperature makes the distribution sharper (more confident)",
-          "Higher temperature flattens the distribution, increasing randomness and diversity",
-          "Temperature only affects the first token in a sequence",
-          "Temperature controls the maximum sequence length"
+          "Higher temperature makes the distribution sharper and far more confident about the top token",
+          "Higher temperature flattens the distribution, adding randomness",
+          "Temperature only affects the very first token in a sequence",
+          "Temperature sets the maximum sequence length that can be generated"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What does top-p (nucleus) sampling do differently from top-k sampling?",
         "options": [
-          "Top-p always selects exactly p tokens",
-          "Top-p ignores the probability distribution entirely",
-          "Top-p uses a fixed number of candidates regardless of distribution shape",
-          "Top-p dynamically adjusts the candidate set size based on cumulative probability, adapting to distribution shape"
+          "Top-p always selects exactly p candidate tokens",
+          "Top-p ignores the probability distribution entirely when sampling",
+          "Top-p relies on a fixed, preset number of candidate tokens no matter how the distribution is shaped",
+          "Top-p sizes the candidate set dynamically by cumulative probability"
         ],
         "correct": [
           3
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Which strategies can help reduce repetition in generated text?Select all that apply",
         "options": [
-          "Repetition penalty that reduces the probability of previously generated tokens",
-          "Setting temperature to 0",
-          "Using only greedy decoding",
-          "Increasing temperature or using nucleus sampling to introduce diversity"
+          "A repetition penalty lowering the probability of already-used tokens",
+          "Setting the sampling temperature all the way to zero",
+          "Relying exclusively on greedy decoding that always selects the single most likely next token",
+          "Raising temperature or using nucleus sampling to add diversity"
         ],
         "correct": [
           0,
@@ -69,9 +69,9 @@
         "text": "In beam search with beam width B, how many candidate sequences are maintained at each step?",
         "options": [
           "B sequences, keeping the top-B by cumulative log-probability",
-          "B² sequences, squaring the beam width each step",
-          "All possible sequences are kept and pruned at the end",
-          "Only 1 sequence, but B tokens are sampled per step"
+          "B squared sequences, squaring the beam width each step",
+          "Every possible sequence is kept in memory and only pruned once at the very end",
+          "Only 1 sequence, but B tokens are sampled at each step"
         ],
         "correct": [
           0
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Care este principala limitare a decodării greedy pentru generarea de text?",
         "options": [
-          "Necesită prea multă memorie",
-          "Nu poate procesa secvențe lungi",
-          "Alege întotdeauna token-ul cu probabilitatea cea mai mare, producând text repetitiv și previzibil",
-          "Necesită un tokenizer special"
+          "Necesită mult prea multă memorie GPU pentru a rula",
+          "Este fundamental incapabilă să proceseze secvențe de intrare lungi dincolo de câteva zeci de token-uri odată",
+          "Alege mereu token-ul cu probabilitatea cea mai mare, producând text repetitiv",
+          "Necesită un tokenizer special dedicat pentru a funcționa"
         ],
         "correct": [
           2
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "Cum afectează parametrul de temperatură distribuția softmax în timpul generării?",
         "options": [
-          "Temperatura mai mare face distribuția mai ascuțită (mai sigură)",
-          "Temperatura mai mare aplatizează distribuția, crescând aleatorismul și diversitatea",
+          "Temperatura mai mare face distribuția mai ascuțită și mult mai sigură pe token-ul de top",
+          "Temperatura mai mare aplatizează distribuția, adăugând aleatorism",
           "Temperatura afectează doar primul token dintr-o secvență",
-          "Temperatura controlează lungimea maximă a secvenței"
+          "Temperatura stabilește lungimea maximă a secvenței ce poate fi generată"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Ce face eșantionarea top-p (nucleus) diferit de eșantionarea top-k?",
         "options": [
-          "Top-p selectează întotdeauna exact p token-uri",
-          "Top-p ignoră complet distribuția de probabilitate",
-          "Top-p folosește un număr fix de candidați indiferent de forma distribuției",
-          "Top-p ajustează dinamic dimensiunea setului de candidați pe baza probabilității cumulative, adaptându-se la forma distribuției"
+          "Top-p selectează întotdeauna exact p token-uri candidat",
+          "Top-p ignoră complet distribuția de probabilitate la eșantionare",
+          "Top-p se bazează pe un număr fix, prestabilit de token-uri candidat indiferent de forma distribuției",
+          "Top-p dimensionează dinamic setul de candidați după probabilitatea cumulativă"
         ],
         "correct": [
           3
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Ce strategii pot ajuta la reducerea repetițiilor în textul generat? Selectați toate răspunsurile corecte",
         "options": [
-          "Penalizare de repetiție care reduce probabilitatea token-urilor generate anterior",
-          "Setarea temperaturii la 0",
-          "Folosirea doar a decodării greedy",
-          "Creșterea temperaturii sau folosirea eșantionării nucleus pentru a introduce diversitate"
+          "O penalizare de repetiție care scade probabilitatea token-urilor deja folosite",
+          "Setarea temperaturii de eșantionare direct la zero",
+          "Bazarea exclusivă pe decodarea greedy care alege mereu singurul token următor cel mai probabil",
+          "Creșterea temperaturii sau folosirea eșantionării nucleus pentru diversitate"
         ],
         "correct": [
           0,
@@ -150,9 +150,9 @@
         "text": "În căutarea beam cu lățime B, câte secvențe candidat sunt menținute la fiecare pas?",
         "options": [
           "B secvențe, păstrând primele B după log-probabilitatea cumulativă",
-          "B^2 secvențe, ridicând la pătrat lățimea beam-ului la fiecare pas",
-          "Toate secvențele posibile sunt păstrate și eliminate la final",
-          "Doar 1 secvență, dar B token-uri sunt eșantionate per pas"
+          "B la pătrat secvențe, ridicând la pătrat lățimea beam la fiecare pas",
+          "Fiecare secvență posibilă este păstrată în memorie și eliminată o singură dată la final",
+          "Doar 1 secvență, dar B token-uri sunt eșantionate la fiecare pas"
         ],
         "correct": [
           0
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Ποιος είναι ο κύριος περιορισμός της άπληστης αποκωδικοποίησης για δημιουργία κειμένου;",
         "options": [
-          "Απαιτεί πάρα πολλή μνήμη",
-          "Δεν μπορεί να επεξεργαστεί μεγάλες ακολουθίες",
-          "Επιλέγει πάντα το token με την υψηλότερη πιθανότητα, παράγοντας επαναλαμβανόμενο και προβλέψιμο κείμενο",
-          "Απαιτεί ειδικό tokenizer"
+          "Απαιτεί υπερβολικά πολλή μνήμη GPU για να τρέξει",
+          "Είναι θεμελιωδώς ανίκανη να επεξεργαστεί μεγάλες ακολουθίες εισόδου πέρα από μερικές δεκάδες tokens κάθε φορά",
+          "Επιλέγει πάντα το token υψηλότερης πιθανότητας, παράγοντας επαναλαμβανόμενο κείμενο",
+          "Απαιτεί έναν ειδικό αποκλειστικό tokenizer για να λειτουργήσει"
         ],
         "correct": [
           2
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Πώς επηρεάζει η παράμετρος θερμοκρασίας την κατανομή softmax κατά τη δημιουργία;",
         "options": [
-          "Υψηλότερη θερμοκρασία κάνει την κατανομή πιο αιχμηρή (πιο σίγουρη)",
-          "Υψηλότερη θερμοκρασία ισοπεδώνει την κατανομή, αυξάνοντας την τυχαιότητα και ποικιλομορφία",
+          "Υψηλότερη θερμοκρασία κάνει την κατανομή πιο αιχμηρή και πολύ πιο σίγουρη για το κορυφαίο token",
+          "Υψηλότερη θερμοκρασία ισοπεδώνει την κατανομή, προσθέτοντας τυχαιότητα",
           "Η θερμοκρασία επηρεάζει μόνο το πρώτο token σε μια ακολουθία",
-          "Η θερμοκρασία ελέγχει το μέγιστο μήκος ακολουθίας"
+          "Η θερμοκρασία ορίζει το μέγιστο μήκος ακολουθίας που μπορεί να παραχθεί"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Τι κάνει η δειγματοληψία top-p (πυρήνα) διαφορετικά από τη δειγματοληψία top-k;",
         "options": [
-          "Η top-p επιλέγει πάντα ακριβώς p tokens",
-          "Η top-p αγνοεί εντελώς την κατανομή πιθανότητας",
-          "Η top-p χρησιμοποιεί σταθερό αριθμό υποψηφίων ανεξάρτητα από το σχήμα κατανομής",
-          "Η top-p προσαρμόζει δυναμικά το μέγεθος του συνόλου υποψηφίων βάσει αθροιστικής πιθανότητας, προσαρμοζόμενη στο σχήμα κατανομής"
+          "Η top-p επιλέγει πάντα ακριβώς p υποψήφια tokens",
+          "Η top-p αγνοεί εντελώς την κατανομή πιθανότητας κατά τη δειγματοληψία",
+          "Η top-p βασίζεται σε σταθερό, προκαθορισμένο αριθμό υποψήφιων tokens ανεξάρτητα από το σχήμα της κατανομής",
+          "Η top-p διαστασιολογεί δυναμικά το σύνολο υποψηφίων βάσει αθροιστικής πιθανότητας"
         ],
         "correct": [
           3
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποιες στρατηγικές μπορούν να βοηθήσουν στη μείωση επαναλήψεων στο δημιουργημένο κείμενο; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Ποινή επανάληψης που μειώνει την πιθανότητα ήδη δημιουργημένων tokens",
-          "Ρύθμιση θερμοκρασίας σε 0",
-          "Χρήση μόνο άπληστης αποκωδικοποίησης",
-          "Αύξηση θερμοκρασίας ή χρήση δειγματοληψίας πυρήνα για εισαγωγή ποικιλομορφίας"
+          "Ποινή επανάληψης που μειώνει την πιθανότητα ήδη χρησιμοποιημένων tokens",
+          "Ρύθμιση της θερμοκρασίας δειγματοληψίας κατευθείαν στο μηδέν",
+          "Αποκλειστική εξάρτηση από άπληστη αποκωδικοποίηση που επιλέγει πάντα το μοναδικό πιο πιθανό επόμενο token",
+          "Αύξηση θερμοκρασίας ή χρήση δειγματοληψίας πυρήνα για ποικιλομορφία"
         ],
         "correct": [
           0,
@@ -231,9 +231,9 @@
         "text": "Στην αναζήτηση δέσμης με πλάτος B, πόσες υποψήφιες ακολουθίες διατηρούνται σε κάθε βήμα;",
         "options": [
           "B ακολουθίες, κρατώντας τις κορυφαίες B κατά αθροιστική log-πιθανότητα",
-          "B^2 ακολουθίες, υψώνοντας στο τετράγωνο το πλάτος δέσμης σε κάθε βήμα",
-          "Όλες οι πιθανές ακολουθίες διατηρούνται και κλαδεύονται στο τέλος",
-          "Μόνο 1 ακολουθία, αλλά B tokens δειγματοληπτούνται ανά βήμα"
+          "B στο τετράγωνο ακολουθίες, υψώνοντας στο τετράγωνο το πλάτος δέσμης κάθε βήμα",
+          "Κάθε πιθανή ακολουθία διατηρείται στη μνήμη και κλαδεύεται μόνο μία φορά στο τέλος",
+          "Μόνο 1 ακολουθία, αλλά B tokens δειγματοληπτούνται σε κάθε βήμα"
         ],
         "correct": [
           0

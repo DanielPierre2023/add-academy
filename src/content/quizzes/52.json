@@ -7,12 +7,14 @@
         "index": 0,
         "text": "What is a direct prompt injection attack?",
         "options": [
-          "Injecting malicious code into the model's source code",
-          "Crafting input text that manipulates the model into ignoring its instructions and following the attacker's intent",
-          "Physically tampering with GPU memory during inference",
-          "Sending too many API requests to overload the server"
+          "Injecting malicious code directly into the model's underlying source code and configuration files",
+          "Crafting input that makes the model ignore its instructions and follow the attacker",
+          "Physically tampering with the GPU memory chips during the inference process",
+          "Sending far too many API requests at once to overload the server"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "A direct prompt injection attack involves crafting input that tricks the model into ignoring its system prompt or safety guidelines and instead following attacker-controlled instructions embedded in the user input.",
         "isMulti": false
       },
@@ -20,12 +22,16 @@
         "index": 1,
         "text": "Which of the following are effective defenses against jailbreaking attempts? Select all that apply.",
         "options": [
-          "Input filtering and output validation layers",
+          "Input filtering combined with output validation layers",
           "System prompt hardening with clear boundary instructions",
-          "Making the model larger so it becomes immune to attacks",
+          "Simply making the model much larger so that it eventually becomes fully immune to any attack",
           "Using a secondary classifier to detect adversarial prompts"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Effective jailbreaking defenses include input/output filtering, hardening system prompts with explicit boundaries, and deploying secondary classifiers to flag adversarial inputs. Simply making a model larger does not make it immune to prompt attacks.",
         "isMulti": true
       },
@@ -33,12 +39,14 @@
         "index": 2,
         "text": "What is data poisoning in the context of LLM security?",
         "options": [
-          "Encrypting training data so the model cannot learn from it",
-          "Intentionally introducing malicious or biased examples into training data to compromise model behavior",
-          "Removing all sensitive information from the training dataset",
-          "Converting training data into a format incompatible with the tokenizer"
+          "Encrypting the training data so that the model can never learn anything useful from it at all",
+          "Intentionally adding malicious or biased examples to training data to corrupt the model",
+          "Removing all sensitive information from the training dataset before use",
+          "Converting the training data into a format incompatible with the tokenizer"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Data poisoning involves injecting carefully crafted malicious or biased examples into the training data, causing the model to learn harmful behaviors, produce biased outputs, or create hidden backdoors that can be exploited later.",
         "isMulti": false
       },
@@ -46,12 +54,14 @@
         "index": 3,
         "text": "What is the primary role of guardrails in an LLM application?",
         "options": [
-          "To speed up inference by reducing the number of tokens generated",
-          "To enforce safety policies by filtering, validating, or blocking inputs and outputs that violate defined rules",
-          "To compress the model so it uses less memory",
-          "To automatically retrain the model when it produces errors"
+          "To speed up inference by reducing the total number of tokens the model generates each time",
+          "To enforce safety policies by filtering or blocking inputs and outputs that break rules",
+          "To compress the model so that it uses noticeably less memory at runtime",
+          "To automatically retrain the model from scratch whenever it produces any errors"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Guardrails act as a safety layer around an LLM, enforcing policies by inspecting and filtering both inputs and outputs. They can block harmful content, prevent data leakage, and ensure outputs comply with application-specific rules.",
         "isMulti": false
       },
@@ -59,12 +69,14 @@
         "index": 4,
         "text": "How does Constitutional AI (CAI) differ from RLHF in aligning model behavior?",
         "options": [
-          "CAI uses human labelers for every response while RLHF is fully automated",
-          "CAI replaces human preference feedback with a set of written principles that guide the model to self-critique and revise its outputs",
-          "RLHF is a newer and more advanced technique than CAI",
-          "CAI trains the model without any fine-tuning step"
+          "CAI uses human labelers for every single response, while RLHF is instead fully automated end to end",
+          "CAI swaps human feedback for written principles the model uses to self-critique",
+          "RLHF is a much newer and more advanced technique than CAI in every respect",
+          "CAI trains the model without any fine-tuning step whatsoever"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Constitutional AI reduces reliance on human feedback by providing the model with a set of explicit principles (a constitution). The model uses these principles to critique and revise its own outputs, whereas RLHF relies on human evaluators to rank outputs and train a reward model.",
         "isMulti": false
       }
@@ -77,12 +89,14 @@
         "index": 0,
         "text": "Ce este un atac direct de injectare a promptului?",
         "options": [
-          "Injectarea de cod malitios in codul sursa al modelului",
-          "Crearea unui text de intrare care manipuleaza modelul sa ignore instructiunile si sa urmeze intentia atacatorului",
-          "Manipularea fizica a memoriei GPU in timpul inferentei",
-          "Trimiterea prea multor cereri API pentru a supraincarca serverul"
+          "Injectarea de cod malitios direct in codul sursa de baza al modelului si in fisierele de configurare",
+          "Crearea unui input care face modelul sa ignore instructiunile si sa urmeze atacatorul",
+          "Manipularea fizica a cipurilor de memorie GPU in timpul procesului de inferenta",
+          "Trimiterea prea multor cereri API deodata pentru a supraincarca serverul"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Un atac direct de injectare a promptului implica crearea unui input care pacaleste modelul sa ignore promptul de sistem sau regulile de siguranta si sa urmeze in schimb instructiunile controlate de atacator, incluse in inputul utilizatorului.",
         "isMulti": false
       },
@@ -90,12 +104,16 @@
         "index": 1,
         "text": "Care dintre urmatoarele sunt aparari eficiente impotriva tentativelor de jailbreaking? Selectati toate variantele corecte.",
         "options": [
-          "Filtrarea inputului si straturi de validare a outputului",
+          "Filtrarea inputului combinata cu straturi de validare a outputului",
           "Intarirea promptului de sistem cu instructiuni clare de delimitare",
-          "Marirea modelului pentru a deveni imun la atacuri",
+          "Simpla marire mult mai mare a modelului astfel incat sa devina complet imun la orice atac",
           "Utilizarea unui clasificator secundar pentru detectarea prompturilor adversariale"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Apararile eficiente impotriva jailbreaking-ului includ filtrarea input/output, intarirea prompturilor de sistem cu limite explicite si implementarea clasificatoarelor secundare pentru a semnala inputurile adversariale. Simpla marire a unui model nu il face imun la atacuri de tip prompt.",
         "isMulti": true
       },
@@ -103,12 +121,14 @@
         "index": 2,
         "text": "Ce este otravirile datelor in contextul securitatii LLM?",
         "options": [
-          "Criptarea datelor de antrenament astfel incat modelul sa nu poata invata din ele",
-          "Introducerea intentionata a exemplelor malitioase sau partinitoare in datele de antrenament pentru a compromite comportamentul modelului",
-          "Eliminarea tuturor informatiilor sensibile din setul de date de antrenament",
+          "Criptarea datelor de antrenament astfel incat modelul sa nu poata invata nimic util din ele vreodata",
+          "Introducerea intentionata de exemple malitioase sau partinitoare in date pentru a corupe modelul",
+          "Eliminarea tuturor informatiilor sensibile din setul de date de antrenament inainte de utilizare",
           "Convertirea datelor de antrenament intr-un format incompatibil cu tokenizer-ul"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Otravirea datelor implica injectarea de exemple malitioase sau partinitoare, atent elaborate, in datele de antrenament, determinand modelul sa invete comportamente daunatoare, sa produca rezultate partinitoare sau sa creeze vulnerabilitati ascunse.",
         "isMulti": false
       },
@@ -116,12 +136,14 @@
         "index": 3,
         "text": "Care este rolul principal al parapetelor de siguranta intr-o aplicatie LLM?",
         "options": [
-          "Sa accelereze inferenta prin reducerea numarului de tokeni generati",
-          "Sa aplice politici de siguranta prin filtrarea, validarea sau blocarea inputurilor si outputurilor care incalca regulile definite",
-          "Sa comprime modelul pentru a folosi mai putina memorie",
-          "Sa reantreneze automat modelul cand produce erori"
+          "Sa accelereze inferenta reducand numarul total de tokeni pe care modelul ii genereaza de fiecare data",
+          "Sa aplice politici de siguranta filtrand sau blocand inputurile si outputurile interzise",
+          "Sa comprime modelul astfel incat sa foloseasca vizibil mai putina memorie la rulare",
+          "Sa reantreneze automat modelul de la zero ori de cate ori produce erori"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Parapetele de siguranta actioneaza ca un strat de protectie in jurul unui LLM, aplicand politici prin inspectarea si filtrarea atat a inputurilor cat si a outputurilor. Ele pot bloca continutul daunator, preveni scurgerile de date si asigura conformitatea outputurilor cu regulile specifice aplicatiei.",
         "isMulti": false
       },
@@ -129,12 +151,14 @@
         "index": 4,
         "text": "Cum difera Constitutional AI (CAI) de RLHF in alinierea comportamentului modelului?",
         "options": [
-          "CAI foloseste evaluatori umani pentru fiecare raspuns, in timp ce RLHF este complet automatizat",
-          "CAI inlocuieste feedbackul bazat pe preferintele umane cu un set de principii scrise care ghideaza modelul sa se auto-critice si sa isi revizuiasca outputurile",
-          "RLHF este o tehnica mai noua si mai avansata decat CAI",
-          "CAI antreneaza modelul fara niciun pas de fine-tuning"
+          "CAI foloseste evaluatori umani pentru fiecare raspuns in parte, in timp ce RLHF este complet automatizat de la cap la coada",
+          "CAI inlocuieste feedbackul uman cu principii scrise pe care modelul le foloseste pentru a se auto-critica",
+          "RLHF este o tehnica mult mai noua si mai avansata decat CAI din toate punctele de vedere",
+          "CAI antreneaza modelul fara niciun pas de fine-tuning, absolut deloc"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Constitutional AI reduce dependenta de feedbackul uman oferind modelului un set de principii explicite (o constitutie). Modelul foloseste aceste principii pentru a-si critica si revizui propriile outputuri, in timp ce RLHF se bazeaza pe evaluatori umani care clasifica outputurile si antreneaza un model de recompensa.",
         "isMulti": false
       }
@@ -147,12 +171,14 @@
         "index": 0,
         "text": "Ti einai mia amesi epithesi enesis prompt (direct prompt injection)?",
         "options": [
-          "Eisagogi kakovoyloy kodika ston pigaio kodika toy monteloy",
-          "Dimiourgia keimenou eisodou pou cheiragoigei to montelo na agnoisi tis odigies tou kai na akolouthisi tin prothesi tou epithetikoy",
-          "Fysiki paremvasi sti mnimi GPU kata tin exagogi symperasmaton",
-          "Apostoli ypervolikoy arithmou aitematon API gia yperfortosi tou server"
+          "Eisagogi kakovoulou kodika apeftheias ston vasiko pigaio kodika tou montelou kai sta arxeia rythmiseon",
+          "Dimiourgia eisodou pou kanei to montelo na agnoisei tis odigies kai na akolouthisei ton epithemeno",
+          "Fysiki paremvasi sta tsip mnimis GPU kata ti diadikasia exagogis symperasmaton",
+          "Apostoli para pollon aitimaton API mazi gia yperfortosi tou diakomisti"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Mia amesi epithesi enesis prompt perilamvanei ti dimiourgia eisodou pou exapatai to montelo na agnoisi to system prompt i tous kanones asfaleias kai na akolouthisi antithetiaka odigies pou periechontai stin eisodo tou christi.",
         "isMulti": false
       },
@@ -160,12 +186,16 @@
         "index": 1,
         "text": "Poia apo ta parakatoi einai apotelesmatikes amynes enantion apopeiron jailbreaking? Epilexte oles tis sostes apantiseis.",
         "options": [
-          "Filtrarrisma eisodou kai epipeda epikyrosis exodou",
-          "Enischysi tou system prompt me safeis odigies oriothetisis",
-          "Afxisi tou megethous tou montelou oste na ginei aprosblito se epitheseis",
-          "Chrisi deftereuous taxinomiti gia anichneusi antipalikon prompts"
+          "Filtrarisma eisodou se syndyasmo me epipeda epikyrosis exodou",
+          "Enisxysi tou system prompt me safeis odigies oriothetisis",
+          "Apla kanontas to montelo poly megalytero oste na ginei kapoia stigmi enteloos aprosvlito se kathe epithesi",
+          "Xrisi deftereuontos taxinomiti gia anixneusi antipalikon prompts"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Oi apotelesmatikes amynes enantion jailbreaking perilamvanoun filtrarrisma eisodou/exodou, enischysi ton system prompts me safeis oriotheseis kai anaptyksi deftereuonton taxinomiton gia ton entopismo antipalikon eisodon. I apli afxisi tou megethous enos montelou den to kathista aprosblito se epitheseis prompt.",
         "isMulti": true
       },
@@ -173,12 +203,14 @@
         "index": 2,
         "text": "Ti einai i dilitiriasi dedomenon sto plaisio tis asfaleias LLM?",
         "options": [
-          "Kryptografisi ton dedomenon ekpaideysis oste to montelo na min borei na mathei apo ayta",
-          "Skopimi eisagogi kakovoylon i meroliptikon paradeigmaton sta dedomena ekpaideysis gia tin paravasi tis symperiforas tou montelou",
-          "Afairesi olon ton euthraston pliroforion apo to synolo dedomenon ekpaideysis",
+          "Kryptografisi ton dedomenon ekpaideysis oste to montelo na min borei pote na mathei tipota xrisimo apo afta",
+          "Skopimi eisagogi kakovoulon i meroliptikon paradeigmaton sta dedomena gia na diaftharei to montelo",
+          "Afairesi olon ton euaisthiton pliroforion apo to synolo dedomenon prin ti xrisi",
           "Metatropi ton dedomenon ekpaideysis se morfi mi symvati me ton tokenizer"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "I dilitiriasi dedomenon perilamvanei tin enesi prosektika kataskeyasmenon kakovoylon i meroliptikon paradeigmaton sta dedomena ekpaideysis, prokalointas to montelo na mathei vlaptikes symperifores, na paragei meroliptika apotelesmata i na dimioyrgisei kryfa kena asfaleias.",
         "isMulti": false
       },
@@ -186,12 +218,14 @@
         "index": 3,
         "text": "Poios einai o kyrios rolos ton prostateytikon mechanismon se mia efarmogi LLM?",
         "options": [
-          "Na epitachynei tin exagogi symperasmaton meionointas ton arithmo ton paragomenon tokens",
-          "Na efarmosei politikes asfaleias filtrarointas, epikyroinointas i mplokairointas eisodous kai exodous pou paraviazoun kathrismenous kanones",
-          "Na sympiesi to montelo oste na chrisimopoiei ligotero mnimi",
-          "Na epanekpaideyei aytomata to montelo otan paragei sfalmata"
+          "Na epitaxynei tin exagogi symperasmaton meionontas ton synoliko arithmo ton tokens pou paragei kathe fora",
+          "Na efarmosei politikes asfaleias mplokarontas eisodous kai exodous pou paraviazoun kanones",
+          "Na sympiesei to montelo oste na xrisimopoiei aisthita ligoteri mnimi kata tin ektelesi",
+          "Na epanekpaideyei aftomata to montelo apo tin arxi kathe fora pou paragei sfalmata"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Oi prostateytikoi mechanismoi leitourgoun os epipedo asfaleias gyro apo ena LLM, efarmozontas politikes me elegcho kai filtrarrisma eisodon kai exodon. Mporoun na mplokairoun vlaptiko periechomeno, na apotrepsoun diarroies dedomenon kai na diasfalisoun ti symmorfoisi ton exodon me tous kanonismous tis efarmogis.",
         "isMulti": false
       },
@@ -199,12 +233,14 @@
         "index": 4,
         "text": "Pos diaferrei to Constitutional AI (CAI) apo to RLHF stin euthygramisi tis symperiforas tou montelou?",
         "options": [
-          "To CAI chrisimopoiei anthropinous axiologites gia kathe apantisi enoi to RLHF einai pliros aytomatopoiimeno",
-          "To CAI antikathista tin anathrofodotisi vasismeni se anthropines protimiseis me ena synolo graptikoin archon pou kathodigoun to montelo na aftokrinetai kai na anatheoritei tis exodous tou",
-          "To RLHF einai mia neotiri kai pio proigmeni techniki apo to CAI",
-          "To CAI ekpaideyei to montelo choris kanena vima fine-tuning"
+          "To CAI xrisimopoiei anthropinous axiologites gia kathe mia apantisi, eno to RLHF einai pliros aftomatopoiimeno apo tin arxi os to telos",
+          "To CAI antikathista tin anthropini anatrofodotisi me graptes arxes pou to montelo xrisimopoiei gia aftokritiki",
+          "To RLHF einai mia poly neoteri kai pio proigmeni texniki apo to CAI apo kathe apopsi",
+          "To CAI ekpaideyei to montelo xoris kanena vima fine-tuning, apolytos kanena"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "To Constitutional AI meionei tin exartisi apo tin anthropini anathrofodotisi parechointas sto montelo ena synolo safon archon (ena syntagma). To montelo chrisimopoiei aytes tis arches gia na krinetai kai na anatheoritei tis dikes tou exodous, enoi to RLHF vasizetai se anthropinous axiologites pou katatasson tis exodous kai ekpaideyoun ena montelo amoivis.",
         "isMulti": false
       }

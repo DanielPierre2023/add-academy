@@ -7,10 +7,10 @@
         "index": 0,
         "text": "Why does TruthLens use MinHash signatures instead of comparing full shingle sets directly?",
         "options": [
-          "MinHash produces more accurate similarity scores than exact Jaccard",
-          "MinHash signatures are fixed-size, making comparison O(k) regardless of document length",
-          "MinHash can detect AI-generated text while shingle comparison cannot",
-          "MinHash requires less memory to store the original document text"
+          "MinHash produces strictly more accurate similarity scores than exact Jaccard",
+          "Signatures are fixed-size, making comparison O(k) regardless of length",
+          "MinHash can also directly detect AI-generated text, whereas plain shingle comparison simply cannot",
+          "MinHash needs far less memory to store the original document text"
         ],
         "correct": [
           1
@@ -38,7 +38,7 @@
         "text": "Which are vocabulary richness metrics used in AI text detection?",
         "options": [
           "Yule’s K — measures word repetition in a text",
-          "Jaccard index — measures overlap between two shingle sets",
+          "Jaccard index — measures the overlap between two different shingle sets from separate documents",
           "Hapax legomena ratio — fraction of words appearing exactly once",
           "Type-token ratio — unique words divided by total words"
         ],
@@ -59,10 +59,10 @@
         "index": 0,
         "text": "De ce folosește TruthLens semnături MinHash în loc să compare seturi complete de shingle-uri direct?",
         "options": [
-          "MinHash produce scoruri de similaritate mai precise decât Jaccard exact",
-          "Semnăturile MinHash au dimensiune fixă, făcând comparația O(k) indiferent de lungimea documentului",
-          "MinHash poate detecta textul generat de AI în timp ce comparația de shingle-uri nu poate",
-          "MinHash necesită mai puțină memorie pentru a stoca textul original al documentului"
+          "MinHash produce scoruri de similaritate strict mai precise decât Jaccard exact",
+          "Semnăturile au dimensiune fixă, făcând comparația O(k) indiferent de lungime",
+          "MinHash poate detecta direct și textul generat de AI, în timp ce simpla comparație de shingle-uri pur și simplu nu poate",
+          "MinHash necesită mult mai puțină memorie pentru a stoca textul original"
         ],
         "correct": [
           1
@@ -90,7 +90,7 @@
         "text": "Care sunt metrici de bogăție a vocabularului folosite în detecția textului AI? Selectați toate răspunsurile corecte",
         "options": [
           "Yule's K — măsoară repetiția cuvintelor într-un text",
-          "Indicele Jaccard — măsoară suprapunerea între două seturi de shingle-uri",
+          "Indicele Jaccard — măsoară suprapunerea dintre două seturi diferite de shingle-uri din documente separate",
           "Raportul hapax legomena — fracțiunea cuvintelor care apar exact o dată",
           "Raportul type-token — cuvinte unice împărțite la totalul cuvintelor"
         ],
@@ -111,10 +111,10 @@
         "index": 0,
         "text": "Γιατί το TruthLens χρησιμοποιεί υπογραφές MinHash αντί να συγκρίνει πλήρη σύνολα shingles απευθείας;",
         "options": [
-          "Το MinHash παράγει ακριβέστερα σκορ ομοιότητας από τον ακριβή Jaccard",
-          "Οι υπογραφές MinHash έχουν σταθερό μέγεθος, κάνοντας τη σύγκριση O(k) ανεξαρτήτως μήκους εγγράφου",
-          "Το MinHash μπορεί να ανιχνεύσει κείμενο δημιουργημένο από AI ενώ η σύγκριση shingles δεν μπορεί",
-          "Το MinHash απαιτεί λιγότερη μνήμη για αποθήκευση του αρχικού κειμένου"
+          "Το MinHash παράγει αυστηρά ακριβέστερα σκορ ομοιότητας από τον ακριβή Jaccard",
+          "Οι υπογραφές έχουν σταθερό μέγεθος, κάνοντας τη σύγκριση O(k) ανεξαρτήτως μήκους",
+          "Το MinHash μπορεί επίσης να ανιχνεύσει άμεσα κείμενο AI, ενώ η απλή σύγκριση shingles απλώς δεν μπορεί",
+          "Το MinHash χρειάζεται πολύ λιγότερη μνήμη για να αποθηκεύσει το αρχικό κείμενο"
         ],
         "correct": [
           1
@@ -142,9 +142,9 @@
         "text": "Ποιες είναι μετρικές πλούτου λεξιλογίου που χρησιμοποιούνται στην ανίχνευση κειμένου AI; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
           "Yule's K — μετρά την επανάληψη λέξεων σε ένα κείμενο",
-          "Δείκτης Jaccard — μετρά την επικάλυψη μεταξύ δύο συνόλων shingles",
+          "Δείκτης Jaccard — μετρά την επικάλυψη μεταξύ δύο διαφορετικών συνόλων shingles από ξεχωριστά έγγραφα",
           "Λόγος hapax legomena — κλάσμα λέξεων που εμφανίζονται ακριβώς μία φορά",
-          "Λόγος type-token — μοναδικές λέξεις διαιρεμένες με το σύνολο λέξεων"
+          "Λόγος type-token — μοναδικές λέξεις διά του συνόλου των λέξεων"
         ],
         "correct": [
           0,

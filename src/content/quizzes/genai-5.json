@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What does Otsu’s method determine in an OCR pipeline?",
         "options": [
-          "The font size of characters in the image",
-          "The optimal threshold to separate foreground (text) from background",
-          "The reading order of text blocks on the page",
-          "The language of the document"
+          "The font size of the characters in the image",
+          "The optimal threshold separating foreground text from background",
+          "The correct reading order of every text block arranged across the whole page",
+          "The primary language the document is written in"
         ],
         "correct": [
           1
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "Why is document layout analysis performed before information extraction?",
         "options": [
-          "It reduces the file size of the uploaded document",
-          "It translates the document into English",
-          "It identifies zones (headers, tables, body) so extractors can apply the right rules to each region",
-          "It encrypts sensitive fields for security"
+          "It significantly reduces the overall file size of the uploaded source document before processing",
+          "It automatically translates the whole document into English",
+          "It identifies zones (headers, tables, body) so extractors apply the right rules",
+          "It encrypts the sensitive fields in the document for security"
         ],
         "correct": [
           2
@@ -38,7 +38,7 @@
         "text": "Which techniques does DocMind’s Q&A pipeline use to answer questions about a document?",
         "options": [
           "Text chunking with overlap to preserve context at boundaries",
-          "Training a neural network on each uploaded document",
+          "Training a brand-new neural network from scratch on each individual uploaded document at query time",
           "Query keyword expansion using synonym dictionaries",
           "Scoring chunks by keyword match count and data-presence heuristics"
         ],
@@ -60,9 +60,9 @@
         "text": "Ce determină metoda lui Otsu într-un pipeline OCR?",
         "options": [
           "Dimensiunea fontului caracterelor din imagine",
-          "Pragul optim pentru separarea primului plan (text) de fundal",
-          "Ordinea de citire a blocurilor de text pe pagină",
-          "Limba documentului"
+          "Pragul optim care separă textul din prim-plan de fundal",
+          "Ordinea corectă de citire a fiecărui bloc de text aranjat pe întreaga pagină",
+          "Limba principală în care este scris documentul"
         ],
         "correct": [
           1
@@ -74,10 +74,10 @@
         "index": 1,
         "text": "De ce se efectuează analiza layout-ului documentului înainte de extragerea informațiilor?",
         "options": [
-          "Reduce dimensiunea fișierului documentului încărcat",
-          "Traduce documentul în engleză",
-          "Identifică zonele (anteturi, tabele, corp) astfel încât extractoarele pot aplica regulile potrivite fiecărei regiuni",
-          "Criptează câmpurile sensibile pentru securitate"
+          "Reduce semnificativ dimensiunea totală a fișierului documentului sursă încărcat înainte de procesare",
+          "Traduce automat întregul document în engleză",
+          "Identifică zonele (anteturi, tabele, corp) astfel încât extractoarele aplică regulile potrivite",
+          "Criptează câmpurile sensibile din document pentru securitate"
         ],
         "correct": [
           2
@@ -90,9 +90,9 @@
         "text": "Ce tehnici folosește pipeline-ul Q&A al DocMind pentru a răspunde la întrebări despre un document? Selectați toate răspunsurile corecte",
         "options": [
           "Fragmentarea textului cu suprapunere pentru a păstra contextul la granițe",
-          "Antrenarea unei rețele neuronale pe fiecare document încărcat",
+          "Antrenarea unei rețele neuronale complet noi de la zero pe fiecare document încărcat în momentul interogării",
           "Expansiunea cuvintelor cheie ale interogării folosind dicționare de sinonime",
-          "Scorarea fragmentelor prin numărul de potriviri de cuvinte cheie și euristici de prezență a datelor"
+          "Scorarea fragmentelor după numărul de potriviri și euristici de prezență a datelor"
         ],
         "correct": [
           0,
@@ -112,9 +112,9 @@
         "text": "Τι καθορίζει η μέθοδος Otsu σε ένα pipeline OCR;",
         "options": [
           "Το μέγεθος γραμματοσειράς των χαρακτήρων στην εικόνα",
-          "Το βέλτιστο κατώφλι για διαχωρισμό πρώτου πλάνου (κείμενο) από φόντο",
-          "Τη σειρά ανάγνωσης των μπλοκ κειμένου στη σελίδα",
-          "Τη γλώσσα του εγγράφου"
+          "Το βέλτιστο κατώφλι που χωρίζει το κείμενο πρώτου πλάνου από το φόντο",
+          "Η σωστή σειρά ανάγνωσης κάθε μπλοκ κειμένου που εκτείνεται σε ολόκληρη τη σελίδα",
+          "Η κύρια γλώσσα στην οποία είναι γραμμένο το έγγραφο"
         ],
         "correct": [
           1
@@ -126,10 +126,10 @@
         "index": 1,
         "text": "Γιατί εκτελείται η ανάλυση διάταξης εγγράφου πριν από την εξαγωγή πληροφοριών;",
         "options": [
-          "Μειώνει το μέγεθος αρχείου του μεταφορτωμένου εγγράφου",
-          "Μεταφράζει το έγγραφο στα αγγλικά",
-          "Αναγνωρίζει ζώνες (επικεφαλίδες, πίνακες, σώμα) ώστε οι εξαγωγείς να εφαρμόζουν τους σωστούς κανόνες σε κάθε περιοχή",
-          "Κρυπτογραφεί ευαίσθητα πεδία για ασφάλεια"
+          "Μειώνει σημαντικά το συνολικό μέγεθος αρχείου του μεταφορτωμένου εγγράφου πηγής πριν από την επεξεργασία",
+          "Μεταφράζει αυτόματα ολόκληρο το έγγραφο στα αγγλικά",
+          "Αναγνωρίζει ζώνες (επικεφαλίδες, πίνακες, σώμα) ώστε οι εξαγωγείς να εφαρμόζουν σωστούς κανόνες",
+          "Κρυπτογραφεί τα ευαίσθητα πεδία του εγγράφου για ασφάλεια"
         ],
         "correct": [
           2
@@ -142,9 +142,9 @@
         "text": "Ποιες τεχνικές χρησιμοποιεί το pipeline Q&A του DocMind για να απαντά σε ερωτήσεις σχετικά με ένα έγγραφο; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
           "Τεμαχισμός κειμένου με επικάλυψη για διατήρηση πλαισίου στα όρια",
-          "Εκπαίδευση νευρωνικού δικτύου σε κάθε μεταφορτωμένο έγγραφο",
-          "Επέκταση λέξεων-κλειδιών ερωτήματος χρησιμοποιώντας λεξικά συνωνύμων",
-          "Βαθμολόγηση τεμαχίων βάσει αριθμού αντιστοιχιών λέξεων-κλειδιών και ευρετικών παρουσίας δεδομένων"
+          "Εκπαίδευση ενός ολοκαίνουργιου νευρωνικού δικτύου από το μηδέν σε κάθε μεταφορτωμένο έγγραφο κατά την ερώτηση",
+          "Επέκταση λέξεων-κλειδιών ερωτήματος με λεξικά συνωνύμων",
+          "Βαθμολόγηση τεμαχίων βάσει αντιστοιχιών και ευρετικών παρουσίας δεδομένων"
         ],
         "correct": [
           0,

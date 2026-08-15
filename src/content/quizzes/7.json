@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is the primary purpose of tokenization in an LLM pipeline?",
         "options": [
-          "Compressing text to save memory",
-          "Converting text into integer IDs that neural networks can process",
-          "Removing stop words from the input",
-          "Splitting text into sentences for parallel processing"
+          "Compressing raw text so it uses less storage memory",
+          "Converting text into integer IDs a network can process",
+          "Removing common stop words from the input text",
+          "Splitting the text into separate sentences for parallel processing on multiple cores"
         ],
         "correct": [
           1
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "In a character-level tokenizer, what determines the vocabulary?",
         "options": [
-          "The most frequent words in the corpus",
-          "A predefined dictionary of English words",
+          "The most frequently occurring whole words found across the entire corpus",
+          "A predefined dictionary of standard English words",
           "Every unique character found in the training text",
-          "The ASCII character set (128 characters)"
+          "The fixed ASCII character set of 128 symbols"
         ],
         "correct": [
           2
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What is the main disadvantage of character-level tokenization compared to subword methods?",
         "options": [
-          "Sequences become very long (4-5x longer), making training slower and harder",
-          "It cannot handle punctuation marks",
-          "It requires a GPU to run",
-          "The vocabulary is too large to fit in memory"
+          "Sequences get much longer (4-5x), slowing training",
+          "It cannot correctly handle the punctuation marks or symbols in the text",
+          "It requires a dedicated GPU in order to run",
+          "The vocabulary becomes too large to fit in memory"
         ],
         "correct": [
           0
@@ -52,8 +52,8 @@
         "index": 3,
         "text": "What are special tokens used for in tokenization?Select all that apply",
         "options": [
-          "Marking the end of a text sequence so the model knows where to stop",
-          "Increasing the vocabulary size for better performance",
+          "Marking where a text sequence ends so the model stops",
+          "Increasing the total vocabulary size to squeeze out better model performance",
           "Handling unknown or out-of-vocabulary characters gracefully",
           "Compressing common words into single tokens"
         ],
@@ -69,9 +69,9 @@
         "text": "What does the decode() method of a tokenizer do?",
         "options": [
           "Splits raw text into individual characters",
-          "Builds the vocabulary from a corpus",
+          "Builds the vocabulary from a training corpus by scanning every document",
           "Applies byte pair encoding merges",
-          "Converts a list of token IDs back into human-readable text"
+          "Converts a list of token IDs back into readable text"
         ],
         "correct": [
           3
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Care este scopul principal al tokenizării în pipeline-ul unui LLM?",
         "options": [
-          "Comprimarea textului pentru a economisi memorie",
-          "Conversia textului în ID-uri întregi pe care rețelele neuronale le pot procesa",
-          "Eliminarea cuvintelor de legătură din input",
-          "Împărțirea textului în propoziții pentru procesare paralelă"
+          "Comprimarea textului brut pentru a folosi mai puțină memorie",
+          "Conversia textului în ID-uri întregi pe care rețeaua le procesează",
+          "Eliminarea cuvintelor de legătură frecvente din input",
+          "Împărțirea textului în propoziții separate pentru procesare paralelă pe mai multe nuclee"
         ],
         "correct": [
           1
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "Într-un tokenizer la nivel de caracter, ce determină vocabularul?",
         "options": [
-          "Cele mai frecvente cuvinte din corpus",
-          "Un dicționar predefinit de cuvinte englezești",
+          "Cele mai frecvente cuvinte întregi care apar în întregul corpus de text",
+          "Un dicționar predefinit de cuvinte standard",
           "Fiecare caracter unic găsit în textul de antrenare",
-          "Setul de caractere ASCII (128 caractere)"
+          "Setul fix de caractere ASCII (128 simboluri)"
         ],
         "correct": [
           2
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Care este principalul dezavantaj al tokenizării la nivel de caracter comparativ cu metodele subword?",
         "options": [
-          "Secvențele devin foarte lungi (de 4-5 ori), făcând antrenarea mai lentă și dificilă",
-          "Nu poate gestiona semnele de punctuație",
-          "Necesită un GPU pentru a rula",
-          "Vocabularul este prea mare pentru a încăpea în memorie"
+          "Secvențele devin mult mai lungi (4-5x), încetinind antrenarea",
+          "Nu poate gestiona corect semnele de punctuație sau simbolurile din text",
+          "Necesită un GPU dedicat pentru a putea rula",
+          "Vocabularul devine prea mare pentru a încăpea în memorie"
         ],
         "correct": [
           0
@@ -133,8 +133,8 @@
         "index": 3,
         "text": "La ce sunt folosite tokenurile speciale?Selectați toate variantele corecte",
         "options": [
-          "Marcarea sfârșitului unei secvențe de text",
-          "Creșterea dimensiunii vocabularului pentru performanță mai bună",
+          "Marcarea locului unde se termină o secvență de text",
+          "Creșterea dimensiunii totale a vocabularului pentru performanță mai bună a modelului",
           "Gestionarea caracterelor necunoscute sau din afara vocabularului",
           "Comprimarea cuvintelor comune în tokeni unici"
         ],
@@ -150,7 +150,7 @@
         "text": "Ce face metoda decode() a unui tokenizer?",
         "options": [
           "Împarte textul brut în caractere individuale",
-          "Construiește vocabularul dintr-un corpus",
+          "Construiește vocabularul dintr-un corpus de antrenare scanând fiecare document",
           "Aplică îmbinări byte pair encoding",
           "Convertește o listă de ID-uri de token înapoi în text lizibil"
         ],
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Ποιος είναι ο κύριος σκοπός της tokenization σε ένα LLM pipeline;",
         "options": [
-          "Συμπίεση κειμένου για εξοικονόμηση μνήμης",
-          "Μετατροπή κειμένου σε ακέραια IDs που μπορούν να επεξεργαστούν τα νευρωνικά δίκτυα",
-          "Αφαίρεση λέξεων-κλειδιών από την είσοδο",
-          "Διαχωρισμός κειμένου σε προτάσεις για παράλληλη επεξεργασία"
+          "Συμπίεση κειμένου για εξοικονόμηση μνήμης αποθήκευσης",
+          "Μετατροπή κειμένου σε ακέραια IDs που επεξεργάζεται το δίκτυο",
+          "Αφαίρεση συχνών λέξεων-κλειδιών από την είσοδο",
+          "Διαχωρισμός του κειμένου σε ξεχωριστές προτάσεις για παράλληλη επεξεργασία σε πολλούς πυρήνες"
         ],
         "correct": [
           1
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Σε έναν tokenizer επιπέδου χαρακτήρων, τι καθορίζει το λεξιλόγιο;",
         "options": [
-          "Οι πιο συχνές λέξεις στο corpus",
+          "Οι πιο συχνά εμφανιζόμενες ολόκληρες λέξεις μέσα σε όλο το σώμα κειμένου",
           "Ένα προκαθορισμένο λεξικό αγγλικών λέξεων",
-          "Κάθε μοναδικός χαρακτήρας που βρίσκεται στο κείμενο εκπαίδευσης",
-          "Το σύνολο χαρακτήρων ASCII (128 χαρακτήρες)"
+          "Κάθε μοναδικός χαρακτήρας στο κείμενο εκπαίδευσης",
+          "Το σταθερό σύνολο χαρακτήρων ASCII (128 σύμβολα)"
         ],
         "correct": [
           2
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποιο είναι το κύριο μειονέκτημα της tokenization επιπέδου χαρακτήρων;",
         "options": [
-          "Οι ακολουθίες γίνονται πολύ μακριές (4-5 φορές), κάνοντας την εκπαίδευση πιο αργή",
-          "Δεν μπορεί να χειριστεί σημεία στίξης",
-          "Απαιτεί GPU για εκτέλεση",
-          "Το λεξιλόγιο είναι πολύ μεγάλο για τη μνήμη"
+          "Οι ακολουθίες γίνονται πολύ μακρύτερες (4-5x), επιβραδύνοντας",
+          "Δεν μπορεί να χειριστεί σωστά τα σημεία στίξης ή τα σύμβολα του κειμένου",
+          "Απαιτεί ειδικό GPU για να μπορέσει να εκτελεστεί",
+          "Το λεξιλόγιο γίνεται πολύ μεγάλο για τη μνήμη"
         ],
         "correct": [
           0
@@ -214,8 +214,8 @@
         "index": 3,
         "text": "Σε τι χρησιμεύουν τα ειδικά tokens;Επιλέξτε όλα όσα ισχύουν",
         "options": [
-          "Σημείωση του τέλους μιας ακολουθίας κειμένου",
-          "Αύξηση μεγέθους λεξιλογίου για καλύτερη απόδοση",
+          "Σήμανση του σημείου όπου τελειώνει μια ακολουθία κειμένου",
+          "Αύξηση του συνολικού μεγέθους του λεξιλογίου για καλύτερη απόδοση του μοντέλου",
           "Χειρισμός άγνωστων χαρακτήρων εκτός λεξιλογίου",
           "Συμπίεση κοινών λέξεων σε μεμονωμένα tokens"
         ],
@@ -231,7 +231,7 @@
         "text": "Τι κάνει η μέθοδος decode() ενός tokenizer;",
         "options": [
           "Χωρίζει ακατέργαστο κείμενο σε χαρακτήρες",
-          "Χτίζει το λεξιλόγιο από ένα corpus",
+          "Χτίζει το λεξιλόγιο από ένα corpus σαρώνοντας κάθε έγγραφο του συνόλου",
           "Εφαρμόζει συγχωνεύσεις byte pair encoding",
           "Μετατρέπει λίστα ακέραιων IDs πίσω σε αναγνώσιμο κείμενο"
         ],

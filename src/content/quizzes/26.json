@@ -7,9 +7,9 @@
         "index": 0,
         "text": "What is the purpose of a sliding window in a text DataLoader for language models?",
         "options": [
-          "To randomly sample tokens from the corpus",
+          "To randomly sample individual tokens from across the entire training corpus",
           "To compress the vocabulary size",
-          "To create overlapping input-target pairs by shifting one position at a time through the text",
+          "To make overlapping input-target pairs by shifting one position each time",
           "To apply attention masking during inference"
         ],
         "correct": [
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "In next-token prediction, if the input sequence is [A, B, C, D], what is the target sequence?",
         "options": [
-          "[D, C, B, A]",
+          "Reversed order, [D, C, B, A]",
           "[B, C, D, E]",
-          "[A, B, C, D]",
-          "[B, C, D, A]"
+          "Identical to the input, [A, B, C, D]",
+          "Shifted with wraparound, [B, C, D, A]"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What is the primary purpose of gradient clipping during training?",
         "options": [
-          "To increase the learning rate over time",
-          "To reduce model size by pruning small gradients",
-          "To ensure the loss is always decreasing",
-          "To prevent exploding gradients by capping the gradient norm to a maximum value"
+          "To gradually increase the learning rate as training goes on",
+          "To reduce model size by pruning away the smallest gradients",
+          "To guarantee the loss always keeps decreasing every step",
+          "To cap the gradient norm and prevent exploding gradients"
         ],
         "correct": [
           3
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Which of the following are essential components of a standard LLM training loop?Select all that apply",
         "options": [
-          "Applying dropout to the target labels",
+          "Applying dropout directly to the target labels",
           "Forward pass, loss computation, backward pass, optimizer step",
-          "Recomputing the tokenizer vocabulary each epoch",
-          "Zeroing gradients before each forward pass to avoid accumulation from previous steps"
+          "Recomputing the entire tokenizer vocabulary from scratch at the start of every epoch",
+          "Zeroing gradients before each step to prevent cross-step accumulation"
         ],
         "correct": [
           1,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "Why is a stride smaller than the context length used in the sliding window DataLoader?",
         "options": [
-          "It creates overlapping windows so every token appears with different amounts of preceding context",
-          "It reduces the total number of training examples",
-          "It speeds up the DataLoader significantly",
-          "It is required by the tokenizer"
+          "Overlapping windows let each token appear with varied preceding context",
+          "It reduces the total number of training examples that get produced",
+          "It speeds up the DataLoader by a significant margin",
+          "It is strictly required by the underlying tokenizer implementation itself"
         ],
         "correct": [
           0
@@ -88,9 +88,9 @@
         "index": 0,
         "text": "Care este scopul unei ferestre glisante într-un DataLoader de text pentru modele de limbaj?",
         "options": [
-          "Eșantionarea aleatorie a token-urilor din corpus",
+          "Eșantionarea aleatorie a token-urilor individuale din întregul corpus de antrenare",
           "Comprimarea dimensiunii vocabularului",
-          "Crearea perechilor suprapuse intrare-țintă prin deplasarea cu o poziție odată prin text",
+          "Crearea perechilor suprapuse intrare-țintă prin deplasarea cu o poziție odată",
           "Aplicarea mascării de attention în timpul inferenței"
         ],
         "correct": [
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "În predicția token-ului următor, dacă secvența de intrare este [A, B, C, D], care este secvența țintă?",
         "options": [
-          "[D, C, B, A]",
+          "Ordine inversată, [D, C, B, A]",
           "[B, C, D, E]",
-          "[A, B, C, D]",
-          "[B, C, D, A]"
+          "Identică cu intrarea, [A, B, C, D]",
+          "Deplasată cu revenire circulară, [B, C, D, A]"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Care este scopul principal al decupării gradienților în timpul antrenării?",
         "options": [
-          "Creșterea ratei de învățare în timp",
-          "Reducerea dimensiunii modelului prin eliminarea gradienților mici",
-          "Asigurarea că pierderea scade mereu",
-          "Prevenirea exploziei gradienților prin limitarea normei gradientului la o valoare maximă"
+          "Creșterea treptată a ratei de învățare pe măsură ce antrenarea avansează",
+          "Reducerea dimensiunii modelului prin eliminarea celor mai mici gradienți",
+          "Garantarea că pierderea continuă mereu să scadă la fiecare pas",
+          "Limitarea normei gradientului pentru a preveni explozia gradienților"
         ],
         "correct": [
           3
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Care dintre următoarele sunt componente esențiale ale unei bucle standard de antrenare LLM? Selectați toate răspunsurile corecte",
         "options": [
-          "Aplicarea dropout pe etichetele țintă",
+          "Aplicarea dropout direct pe etichetele țintă",
           "Pasul forward, calculul pierderii, pasul backward, pasul optimizatorului",
-          "Recalcularea vocabularului tokenizer-ului la fiecare epocă",
-          "Resetarea gradienților înainte de fiecare pas forward pentru a evita acumularea din pașii anteriori"
+          "Recalcularea completă a vocabularului tokenizer-ului de la zero la începutul fiecărei epoci",
+          "Resetarea gradienților înainte de fiecare pas pentru a evita acumularea între pași"
         ],
         "correct": [
           1,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "De ce se folosește un pas mai mic decât lungimea contextului în DataLoader-ul cu fereastră glisantă?",
         "options": [
-          "Creează ferestre suprapuse astfel încât fiecare token apare cu diferite cantități de context precedent",
-          "Reduce numărul total de exemple de antrenare",
-          "Accelerează semnificativ DataLoader-ul",
-          "Este necesar de către tokenizer"
+          "Ferestrele suprapuse permit fiecărui token context precedent variat",
+          "Reduce numărul total de exemple de antrenare produse",
+          "Accelerează DataLoader-ul cu o marjă semnificativă",
+          "Este strict necesar de către implementarea subiacentă a tokenizer-ului însuși"
         ],
         "correct": [
           0
@@ -169,9 +169,9 @@
         "index": 0,
         "text": "Ποιος είναι ο σκοπός ενός συρόμενου παραθύρου σε ένα DataLoader κειμένου για γλωσσικά μοντέλα;",
         "options": [
-          "Τυχαία δειγματοληψία tokens από το σώμα κειμένου",
+          "Τυχαία δειγματοληψία μεμονωμένων tokens από ολόκληρο το σώμα κειμένου εκπαίδευσης",
           "Συμπίεση του μεγέθους λεξιλογίου",
-          "Δημιουργία αλληλεπικαλυπτόμενων ζευγών εισόδου-στόχου μετακινούμενος μία θέση κάθε φορά μέσα στο κείμενο",
+          "Δημιουργία αλληλεπικαλυπτόμενων ζευγών εισόδου-στόχου, μία θέση τη φορά",
           "Εφαρμογή μάσκας attention κατά την εξαγωγή συμπερασμάτων"
         ],
         "correct": [
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Στην πρόβλεψη επόμενου token, αν η ακολουθία εισόδου είναι [A, B, C, D], ποια είναι η ακολουθία στόχος;",
         "options": [
-          "[D, C, B, A]",
+          "Αντίστροφη σειρά, [D, C, B, A]",
           "[B, C, D, E]",
-          "[A, B, C, D]",
-          "[B, C, D, A]"
+          "Ίδια με την είσοδο, [A, B, C, D]",
+          "Μετατοπισμένη με αναδίπλωση, [B, C, D, A]"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποιος είναι ο κύριος σκοπός της αποκοπής κλίσεων κατά την εκπαίδευση;",
         "options": [
-          "Αύξηση του ρυθμού εκμάθησης με τον χρόνο",
-          "Μείωση μεγέθους μοντέλου κλαδεύοντας μικρές κλίσεις",
-          "Εξασφάλιση ότι η απώλεια μειώνεται πάντα",
-          "Αποτροπή εκρηγνυόμενων κλίσεων περιορίζοντας τη νόρμα κλίσης σε μέγιστη τιμή"
+          "Σταδιακή αύξηση του ρυθμού εκμάθησης καθώς προχωρά η εκπαίδευση",
+          "Μείωση του μεγέθους του μοντέλου κλαδεύοντας τις μικρότερες κλίσεις",
+          "Εγγύηση ότι η απώλεια συνεχίζει πάντα να μειώνεται σε κάθε βήμα",
+          "Περιορισμός της νόρμας κλίσης για αποτροπή εκρηγνυόμενων κλίσεων"
         ],
         "correct": [
           3
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποια από τα ακόλουθα είναι βασικά συστατικά ενός τυπικού βρόχου εκπαίδευσης LLM; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Εφαρμογή dropout στις ετικέτες στόχου",
+          "Εφαρμογή dropout απευθείας στις ετικέτες στόχου",
           "Forward pass, υπολογισμός απώλειας, backward pass, βήμα βελτιστοποιητή",
-          "Επαναϋπολογισμός λεξιλογίου tokenizer κάθε εποχή",
-          "Μηδενισμός κλίσεων πριν από κάθε forward pass για αποφυγή συσσώρευσης από προηγούμενα βήματα"
+          "Επαναϋπολογισμός ολόκληρου του λεξιλογίου tokenizer από την αρχή σε κάθε εποχή",
+          "Μηδενισμός κλίσεων πριν από κάθε βήμα για αποφυγή συσσώρευσης μεταξύ βημάτων"
         ],
         "correct": [
           1,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Γιατί χρησιμοποιείται βήμα μικρότερο από το μήκος πλαισίου στο DataLoader με συρόμενο παράθυρο;",
         "options": [
-          "Δημιουργεί αλληλεπικαλυπτόμενα παράθυρα ώστε κάθε token να εμφανίζεται με διαφορετικές ποσότητες προηγούμενου πλαισίου",
-          "Μειώνει τον συνολικό αριθμό παραδειγμάτων εκπαίδευσης",
-          "Επιταχύνει σημαντικά τον DataLoader",
-          "Απαιτείται από τον tokenizer"
+          "Τα αλληλεπικαλυπτόμενα παράθυρα δίνουν σε κάθε token ποικίλο πλαίσιο",
+          "Μειώνει τον συνολικό αριθμό των παραγόμενων παραδειγμάτων εκπαίδευσης",
+          "Επιταχύνει σημαντικά τον DataLoader κατά ένα μεγάλο περιθώριο",
+          "Απαιτείται αυστηρά από την ίδια την υποκείμενη υλοποίηση του tokenizer"
         ],
         "correct": [
           0

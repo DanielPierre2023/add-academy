@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is conversational memory in a RAG chatbot?",
         "options": [
-          "The total number of parameters in the model",
-          "A separate database that stores user passwords",
-          "The GPU memory used during inference",
-          "A mechanism that retains prior turns of dialogue so the model can reference earlier context"
+          "The total number of trainable parameters found inside the model",
+          "A completely separate external database whose sole role is to securely store user login passwords",
+          "The GPU memory that is consumed by the model during inference",
+          "A mechanism that keeps prior dialogue turns so the model can reference earlier context"
         ],
         "correct": [
           3
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "Why is query rewriting important in a conversational RAG system?",
         "options": [
-          "It translates all queries into English before retrieval",
-          "It reformulates ambiguous follow-up questions into self-contained queries for better retrieval",
-          "It removes all stop words from the query",
-          "It shortens queries to save API costs"
+          "It first translates every user query into English before any retrieval happens against the index",
+          "It reformulates ambiguous follow-up questions into self-contained queries",
+          "It strips out all stop words that appear in the query",
+          "It shortens the query text in order to save on API costs"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What happens when conversation history exceeds the LLM’s context window?",
         "options": [
-          "Older messages must be truncated or summarized to fit within the token limit",
-          "The model automatically expands its context window",
-          "The model starts a new training run to accommodate more tokens",
-          "Nothing happens; all models have unlimited context"
+          "Older messages must be truncated or summarized to fit the token limit",
+          "The model automatically expands its own context window on demand",
+          "The model immediately starts a brand-new training run in order to accommodate the extra tokens",
+          "Nothing happens at all, because every model has unlimited context"
         ],
         "correct": [
           0
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Which techniques help manage long conversation histories?Select all that apply",
         "options": [
-          "Doubling the model’s parameter count",
-          "Summarizing older turns into a condensed paragraph",
+          "Doubling the total parameter count of the underlying model so it can remember far more turns",
+          "Summarizing older turns into a single condensed paragraph",
           "Using a sliding window that keeps only the most recent N turns",
-          "Removing the system prompt"
+          "Removing the system prompt from the conversation"
         ],
         "correct": [
           1,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "In a RAG chatbot, when should retrieved documents be injected into the prompt?",
         "options": [
-          "Only during the initial system prompt, never again",
-          "After the model generates its answer, as a post-processing step",
-          "Before each generation step, with fresh retrieval results based on the current query",
-          "Documents should never be included in the prompt"
+          "Only during the initial system prompt and then never again afterwards",
+          "After the model has finished generating its answer, purely as a post-processing cleanup step",
+          "Before each generation step, using fresh retrieval results for the current query",
+          "Documents should never be included anywhere in the prompt"
         ],
         "correct": [
           2
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Ce este memoria conversațională într-un chatbot RAG?",
         "options": [
-          "Numărul total de parametri ai modelului",
-          "O bază de date separată care stochează parolele utilizatorilor",
-          "Memoria GPU folosită în timpul inferenței",
-          "Un mecanism care reține turele anterioare de dialog astfel încât modelul să poată face referire la contextul anterior"
+          "Numărul total de parametri antrenabili conținuți în model",
+          "O bază de date complet separată al cărei singur rol este stocarea parolelor de conectare ale utilizatorilor",
+          "Memoria GPU consumată de model în timpul inferenței",
+          "Un mecanism care reține turele anterioare de dialog pentru a referi contextul"
         ],
         "correct": [
           3
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "De ce este importantă rescrierea interogărilor într-un sistem RAG conversațional?",
         "options": [
-          "Traduce toate interogările în engleză înainte de recuperare",
-          "Reformulează întrebările ambigue de urmărire în interogări autonome pentru o recuperare mai bună",
-          "Elimină toate cuvintele funcționale din interogare",
-          "Scurtează interogările pentru a economisi costurile API"
+          "Traduce mai întâi fiecare interogare a utilizatorului în engleză înainte ca recuperarea din index să aibă loc",
+          "Reformulează întrebările ambigue de urmărire în interogări autonome",
+          "Elimină toate cuvintele funcționale care apar în interogare",
+          "Scurtează textul interogării pentru a economisi costurile API"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Ce se întâmplă când istoricul conversației depășește fereastra de context a LLM-ului?",
         "options": [
-          "Mesajele mai vechi trebuie trunchiate sau rezumate pentru a se încadra în limita de token-uri",
-          "Modelul își extinde automat fereastra de context",
-          "Modelul începe o nouă antrenare pentru a acomoda mai multe token-uri",
-          "Nu se întâmplă nimic; toate modelele au context nelimitat"
+          "Mesajele mai vechi trebuie trunchiate sau rezumate pentru a încăpea în limita de token-uri",
+          "Modelul își extinde automat propria fereastră de context la cerere",
+          "Modelul pornește imediat o antrenare complet nouă pentru a acomoda token-urile suplimentare care apar",
+          "Nu se întâmplă absolut nimic, deoarece orice model are context nelimitat"
         ],
         "correct": [
           0
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Ce tehnici ajută la gestionarea istoricelor lungi de conversație? Selectați toate răspunsurile corecte",
         "options": [
-          "Dublarea numărului de parametri ai modelului",
-          "Rezumarea turelor mai vechi într-un paragraf condensat",
+          "Dublarea numărului total de parametri ai modelului de bază pentru a putea reține mult mai multe ture",
+          "Rezumarea turelor mai vechi într-un singur paragraf condensat",
           "Folosirea unei ferestre glisante care păstrează doar cele mai recente N ture",
-          "Eliminarea promptului de sistem"
+          "Eliminarea promptului de sistem din conversație"
         ],
         "correct": [
           1,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "Într-un chatbot RAG, când ar trebui injectate documentele recuperate în prompt?",
         "options": [
-          "Doar în timpul promptului inițial de sistem, niciodată din nou",
-          "După ce modelul generează răspunsul, ca pas de post-procesare",
-          "Înainte de fiecare pas de generare, cu rezultate proaspete de recuperare bazate pe interogarea curentă",
-          "Documentele nu ar trebui incluse niciodată în prompt"
+          "Doar în timpul promptului inițial de sistem și apoi niciodată din nou",
+          "După ce modelul a terminat de generat răspunsul, pur și simplu ca pas de curățare post-procesare",
+          "Înainte de fiecare pas de generare, folosind rezultate proaspete pentru interogarea curentă",
+          "Documentele nu ar trebui incluse niciodată nicăieri în prompt"
         ],
         "correct": [
           2
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Τι είναι η συνομιλιακή μνήμη σε ένα chatbot RAG;",
         "options": [
-          "Ο συνολικός αριθμός παραμέτρων μοντέλου",
-          "Ξεχωριστή βάση δεδομένων που αποθηκεύει κωδικούς χρηστών",
-          "Η μνήμη GPU κατά εξαγωγή συμπερασμάτων",
-          "Μηχανισμός που διατηρεί προηγούμενες σειρές διαλόγου ώστε το μοντέλο να αναφέρεται σε προηγούμενο πλαίσιο"
+          "Ο συνολικός αριθμός εκπαιδεύσιμων παραμέτρων που περιέχει το μοντέλο",
+          "Μια εντελώς ξεχωριστή βάση δεδομένων της οποίας μοναδικός ρόλος είναι η αποθήκευση κωδικών σύνδεσης χρηστών",
+          "Η μνήμη GPU που καταναλώνεται από το μοντέλο κατά την εξαγωγή συμπερασμάτων",
+          "Μηχανισμός που διατηρεί προηγούμενες σειρές διαλόγου για αναφορά στο πλαίσιο"
         ],
         "correct": [
           3
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Γιατί είναι σημαντική η επαναδιατύπωση ερωτημάτων σε συνομιλιακό σύστημα RAG;",
         "options": [
-          "Μεταφράζει όλα τα ερωτήματα στα αγγλικά πριν ανάκτηση",
-          "Επαναδιατυπώνει ασαφείς ερωτήσεις παρακολούθησης σε αυτοτελή ερωτήματα για καλύτερη ανάκτηση",
-          "Αφαιρεί όλες τις λειτουργικές λέξεις από ερώτημα",
-          "Μικραίνει ερωτήματα για εξοικονόμηση κόστους API"
+          "Μεταφράζει πρώτα κάθε ερώτημα χρήστη στα αγγλικά προτού πραγματοποιηθεί οποιαδήποτε ανάκτηση από το ευρετήριο",
+          "Επαναδιατυπώνει ασαφείς ερωτήσεις παρακολούθησης σε αυτοτελή ερωτήματα",
+          "Αφαιρεί όλες τις λειτουργικές λέξεις που εμφανίζονται στο ερώτημα",
+          "Μικραίνει το κείμενο του ερωτήματος για εξοικονόμηση κόστους API"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Τι συμβαίνει όταν το ιστορικό συνομιλίας υπερβαίνει το παράθυρο πλαισίου του LLM;",
         "options": [
-          "Παλαιότερα μηνύματα πρέπει να περικοπούν ή συνοψιστούν για να χωρέσουν στο όριο tokens",
-          "Το μοντέλο επεκτείνει αυτόματα το παράθυρο πλαισίου",
-          "Το μοντέλο ξεκινά νέα εκπαίδευση για περισσότερα tokens",
-          "Τίποτα δεν συμβαίνει· όλα τα μοντέλα έχουν απεριόριστο πλαίσιο"
+          "Παλαιότερα μηνύματα πρέπει να περικοπούν ή να συνοψιστούν για να χωρέσουν στο όριο tokens",
+          "Το μοντέλο επεκτείνει αυτόματα το δικό του παράθυρο πλαισίου κατ' απαίτηση",
+          "Το μοντέλο ξεκινά αμέσως μια εντελώς νέα εκπαίδευση για να χωρέσει τα επιπλέον tokens που προκύπτουν",
+          "Δεν συμβαίνει τίποτα, επειδή κάθε μοντέλο διαθέτει απεριόριστο πλαίσιο"
         ],
         "correct": [
           0
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποιες τεχνικές βοηθούν στη διαχείριση μακρών ιστορικών συνομιλίας; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Διπλασιασμός αριθμού παραμέτρων μοντέλου",
-          "Σύνοψη παλαιότερων σειρών σε συμπυκνωμένη παράγραφο",
+          "Διπλασιασμός του συνολικού αριθμού παραμέτρων του βασικού μοντέλου ώστε να θυμάται πολύ περισσότερες σειρές",
+          "Σύνοψη των παλαιότερων σειρών σε μία συμπυκνωμένη παράγραφο",
           "Χρήση συρόμενου παραθύρου που κρατά μόνο τις πιο πρόσφατες N σειρές",
-          "Αφαίρεση system prompt"
+          "Αφαίρεση του system prompt από τη συνομιλία"
         ],
         "correct": [
           1,
@@ -230,9 +230,9 @@
         "index": 4,
         "text": "Σε chatbot RAG, πότε πρέπει τα ανακτημένα έγγραφα να εισαχθούν στο prompt;",
         "options": [
-          "Μόνο στο αρχικό system prompt, ποτέ ξανά",
-          "Μετά τη δημιουργία απάντησης μοντέλου, ως βήμα μετα-επεξεργασίας",
-          "Πριν κάθε βήμα δημιουργίας, με φρέσκα αποτελέσματα ανάκτησης βάσει τρέχοντος ερωτήματος",
+          "Μόνο κατά το αρχικό system prompt και έπειτα ποτέ ξανά στη συνέχεια",
+          "Αφού το μοντέλο ολοκληρώσει τη δημιουργία της απάντησης, καθαρά ως βήμα μετα-επεξεργασίας και καθαρισμού",
+          "Πριν από κάθε βήμα δημιουργίας, με φρέσκα αποτελέσματα για το τρέχον ερώτημα",
           "Τα έγγραφα δεν πρέπει ποτέ να συμπεριλαμβάνονται στο prompt"
         ],
         "correct": [

@@ -7,12 +7,14 @@
         "index": 0,
         "text": "Why does training with NumPy alone result in only ~8% of parameters being updated?",
         "options": [
-          "NumPy cannot store floating-point numbers with enough precision",
-          "NumPy lacks automatic differentiation, so gradients must be computed manually for a limited subset of weights",
-          "NumPy is written in Python, which is too slow for any matrix operations",
-          "NumPy randomly skips parameters to save memory"
+          "NumPy cannot store floating-point numbers with sufficient precision",
+          "NumPy has no autodiff, so gradients must be computed manually for a subset of weights",
+          "NumPy is written purely in Python, which is far too slow to handle any matrix operations at all",
+          "NumPy randomly skips some parameters in order to save memory"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "NumPy does not have an autograd system. Without automatic differentiation, you must manually derive and code gradient formulas, which in practice means only a small fraction of weights get updated.",
         "isMulti": false
       },
@@ -20,12 +22,14 @@
         "index": 1,
         "text": "What is the role of the computation graph in PyTorch's autograd system?",
         "options": [
-          "It visualises the model architecture as a diagram for documentation",
-          "It records every operation on tensors so gradients can be computed automatically via backpropagation",
+          "It visualises the entire model architecture as a diagram intended purely for human documentation",
+          "It records tensor operations so gradients can be computed automatically via backpropagation",
           "It compresses the model weights for faster storage on disk",
-          "It converts Python code into C++ for faster execution"
+          "It converts the Python code into C++ for faster execution"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "PyTorch's computation graph dynamically records every tensor operation during the forward pass. During backpropagation, it traverses this graph in reverse to compute gradients for every parameter automatically.",
         "isMulti": false
       },
@@ -33,12 +37,15 @@
         "index": 2,
         "text": "Which of the following are benefits of using the AdamW optimiser over plain SGD for LLM training? Select all that apply.",
         "options": [
-          "AdamW maintains per-parameter adaptive learning rates using first and second moment estimates",
+          "AdamW keeps per-parameter adaptive learning rates via first and second moment estimates",
           "AdamW applies weight decay correctly decoupled from the gradient update",
-          "AdamW eliminates the need for a learning rate entirely",
-          "AdamW guarantees zero training loss in all cases"
+          "AdamW completely eliminates the need for a learning rate",
+          "AdamW guarantees exactly zero training loss in every possible case without any exceptions at all"
         ],
-        "correct": [0, 1],
+        "correct": [
+          0,
+          1
+        ],
         "explanation": "AdamW combines adaptive learning rates (from Adam's moment estimates) with properly decoupled weight decay regularisation. It does not eliminate the need for a learning rate, and no optimiser guarantees zero loss.",
         "isMulti": true
       },
@@ -46,12 +53,14 @@
         "index": 3,
         "text": "What problem does gradient clipping solve during LLM training?",
         "options": [
-          "It prevents the model from underfitting by increasing gradient magnitudes",
-          "It caps gradient magnitudes to prevent exploding gradients that destabilise training",
+          "It prevents the model from underfitting by artificially increasing the gradient magnitudes",
+          "It caps gradient magnitudes to prevent exploding gradients",
           "It removes all gradients below a threshold to speed up training",
           "It automatically selects the best learning rate"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Gradient clipping limits the maximum norm of gradients. Without it, occasional very large gradients (exploding gradients) can cause parameter updates so large that the model's loss spikes and training becomes unstable.",
         "isMulti": false
       },
@@ -59,12 +68,14 @@
         "index": 4,
         "text": "What does weight tying mean in a Transformer-based language model?",
         "options": [
-          "Using the same weight matrix for both the token embedding layer and the output projection layer",
-          "Freezing all weights so they cannot change during training",
+          "Using the same weight matrix for the token embedding and the output projection layer",
+          "Freezing every single weight so that none of them can change at all during the training process",
           "Tying the learning rates of different layers together",
           "Connecting the attention weights across all Transformer blocks"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "Weight tying shares the same weight matrix between the input token embedding and the output language modelling head. This reduces parameter count and improves generalisation because both layers operate in the same semantic space.",
         "isMulti": false
       }
@@ -78,11 +89,13 @@
         "text": "De ce antrenamentul doar cu NumPy rezultă în actualizarea a doar ~8% din parametri?",
         "options": [
           "NumPy nu poate stoca numere în virgulă mobilă cu suficientă precizie",
-          "NumPy nu are diferențiere automată, deci gradienții trebuie calculați manual pentru un subset limitat de ponderi",
-          "NumPy este scris în Python, care este prea lent pentru orice operații cu matrice",
-          "NumPy omite aleatoriu parametri pentru a economisi memorie"
+          "NumPy nu are diferențiere automată, deci gradienții se calculează manual pentru un subset de ponderi",
+          "NumPy este scris exclusiv în Python, care este mult prea lent pentru a gestiona orice operații cu matrice",
+          "NumPy omite aleatoriu unii parametri pentru a economisi memorie"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Explicație: NumPy nu are un sistem autograd. Fără diferențiere automată, trebuie să derivezi și să codifici manual formulele de gradient, ceea ce în practică înseamnă că doar o fracțiune mică din ponderi sunt actualizate.",
         "isMulti": false
       },
@@ -90,12 +103,14 @@
         "index": 1,
         "text": "Care este rolul grafului de calcul în sistemul autograd al PyTorch?",
         "options": [
-          "Vizualizează arhitectura modelului ca o diagramă pentru documentație",
-          "Înregistrează fiecare operație pe tensori astfel încât gradienții pot fi calculați automat prin backpropagation",
+          "Vizualizează întreaga arhitectură a modelului sub formă de diagramă destinată exclusiv documentației",
+          "Înregistrează operațiile pe tensori ca să se calculeze automat gradienții prin backpropagation",
           "Comprimă ponderile modelului pentru stocare mai rapidă pe disc",
           "Convertește codul Python în C++ pentru execuție mai rapidă"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Explicație: Graful de calcul al PyTorch înregistrează dinamic fiecare operație pe tensori în timpul trecerii înainte. În timpul backpropagation-ului, parcurge acest graf în ordine inversă pentru a calcula automat gradienții pentru fiecare parametru.",
         "isMulti": false
       },
@@ -103,12 +118,15 @@
         "index": 2,
         "text": "Care dintre următoarele sunt beneficii ale utilizării optimizatorului AdamW față de SGD simplu pentru antrenamentul LLM? Selectează toate variantele corecte.",
         "options": [
-          "AdamW menține rate de învățare adaptive per parametru folosind estimări de moment de ordinul întâi și al doilea",
+          "AdamW menține rate de învățare adaptive per parametru prin estimări de moment de ordinul întâi și doi",
           "AdamW aplică decăderea ponderilor corect decuplată de actualizarea gradientului",
           "AdamW elimină complet nevoia unei rate de învățare",
-          "AdamW garantează pierdere zero la antrenament în toate cazurile"
+          "AdamW garantează exact pierdere zero la antrenament în absolut fiecare caz posibil, fără nicio excepție"
         ],
-        "correct": [0, 1],
+        "correct": [
+          0,
+          1
+        ],
         "explanation": "✅ Explicație: AdamW combină rate de învățare adaptive (din estimările de moment ale lui Adam) cu regularizarea prin decăderea ponderilor corect decuplată. Nu elimină nevoia unei rate de învățare și niciun optimizator nu garantează pierdere zero.",
         "isMulti": true
       },
@@ -116,12 +134,14 @@
         "index": 3,
         "text": "Ce problemă rezolvă tăierea gradienților (gradient clipping) în timpul antrenamentului LLM?",
         "options": [
-          "Previne subajustarea modelului prin creșterea magnitudinilor gradienților",
-          "Limitează magnitudinile gradienților pentru a preveni gradienții explozivi care destabilizează antrenamentul",
+          "Previne subajustarea modelului prin creșterea artificială a magnitudinilor gradienților",
+          "Limitează magnitudinile gradienților pentru a preveni gradienții explozivi",
           "Elimină toți gradienții sub un prag pentru a accelera antrenamentul",
           "Selectează automat cea mai bună rată de învățare"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Explicație: Tăierea gradienților limitează norma maximă a gradienților. Fără aceasta, gradienți ocazionali foarte mari (gradienți explozivi) pot cauza actualizări ale parametrilor atât de mari încât pierderea modelului crește brusc și antrenamentul devine instabil.",
         "isMulti": false
       },
@@ -129,12 +149,14 @@
         "index": 4,
         "text": "Ce înseamnă legarea ponderilor (weight tying) într-un model de limbaj bazat pe Transformer?",
         "options": [
-          "Utilizarea aceleiași matrice de ponderi atât pentru stratul de embedding de token-uri cât și pentru stratul de proiecție de ieșire",
-          "Înghețarea tuturor ponderilor pentru a nu se putea schimba în timpul antrenamentului",
+          "Utilizarea aceleiași matrice de ponderi pentru embedding-ul de token-uri și proiecția de ieșire",
+          "Înghețarea fiecărei ponderi astfel încât niciuna să nu se poată schimba în timpul procesului de antrenament",
           "Legarea ratelor de învățare ale diferitelor straturi între ele",
           "Conectarea ponderilor de atenție între toate blocurile Transformer"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "✅ Explicație: Legarea ponderilor partajează aceeași matrice de ponderi între embedding-ul de token-uri de intrare și capul de modelare a limbajului de ieșire. Aceasta reduce numărul de parametri și îmbunătățește generalizarea deoarece ambele straturi operează în același spațiu semantic.",
         "isMulti": false
       }
@@ -148,11 +170,13 @@
         "text": "Γιατί η εκπαίδευση μόνο με NumPy έχει ως αποτέλεσμα την ενημέρωση μόνο ~8% των παραμέτρων;",
         "options": [
           "Η NumPy δεν μπορεί να αποθηκεύσει αριθμούς κινητής υποδιαστολής με αρκετή ακρίβεια",
-          "Η NumPy δεν διαθέτει αυτόματη διαφοροποίηση, επομένως οι κλίσεις πρέπει να υπολογιστούν χειροκίνητα για ένα περιορισμένο υποσύνολο βαρών",
-          "Η NumPy είναι γραμμένη σε Python, που είναι πολύ αργή για οποιεσδήποτε πράξεις πινάκων",
-          "Η NumPy παραλείπει τυχαία παραμέτρους για εξοικονόμηση μνήμης"
+          "Η NumPy δεν έχει αυτόματη διαφοροποίηση, οπότε οι κλίσεις υπολογίζονται χειροκίνητα για ένα υποσύνολο βαρών",
+          "Η NumPy είναι γραμμένη αποκλειστικά σε Python, που είναι πάρα πολύ αργή για να χειριστεί οποιεσδήποτε πράξεις πινάκων",
+          "Η NumPy παραλείπει τυχαία ορισμένες παραμέτρους για εξοικονόμηση μνήμης"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Εξήγηση: Η NumPy δεν διαθέτει σύστημα autograd. Χωρίς αυτόματη διαφοροποίηση, πρέπει να υπολογίσετε και να κωδικοποιήσετε χειροκίνητα τους τύπους κλίσης, πράγμα που στην πράξη σημαίνει ότι ενημερώνεται μόνο ένα μικρό κλάσμα των βαρών.",
         "isMulti": false
       },
@@ -160,12 +184,14 @@
         "index": 1,
         "text": "Ποιος είναι ο ρόλος του γράφου υπολογισμών στο σύστημα autograd του PyTorch;",
         "options": [
-          "Οπτικοποιεί την αρχιτεκτονική του μοντέλου ως διάγραμμα για τεκμηρίωση",
-          "Καταγράφει κάθε πράξη σε τανυστές ώστε οι κλίσεις να μπορούν να υπολογιστούν αυτόματα μέσω οπισθοδιάδοσης",
-          "Συμπιέζει τα βάρη του μοντέλου για ταχύτερη αποθήκευση στο δίσκο",
+          "Οπτικοποιεί ολόκληρη την αρχιτεκτονική του μοντέλου ως διάγραμμα προορισμένο αποκλειστικά για τεκμηρίωση",
+          "Καταγράφει τις πράξεις σε τανυστές ώστε οι κλίσεις να υπολογίζονται αυτόματα μέσω οπισθοδιάδοσης",
+          "Συμπιέζει τα βάρη του μοντέλου για ταχύτερη αποθήκευση στον δίσκο",
           "Μετατρέπει τον κώδικα Python σε C++ για ταχύτερη εκτέλεση"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Εξήγηση: Ο γράφος υπολογισμών του PyTorch καταγράφει δυναμικά κάθε πράξη τανυστή κατά το πρόσθιο πέρασμα. Κατά την οπισθοδιάδοση, διασχίζει αυτόν τον γράφο αντίστροφα για να υπολογίσει αυτόματα τις κλίσεις για κάθε παράμετρο.",
         "isMulti": false
       },
@@ -173,12 +199,15 @@
         "index": 2,
         "text": "Ποια από τα ακόλουθα είναι πλεονεκτήματα της χρήσης του βελτιστοποιητή AdamW σε σχέση με τον απλό SGD για εκπαίδευση LLM; Επιλέξτε όλα τα σωστά.",
         "options": [
-          "Ο AdamW διατηρεί προσαρμοστικούς ρυθμούς μάθησης ανά παράμετρο χρησιμοποιώντας εκτιμήσεις πρώτης και δεύτερης ροπής",
+          "Ο AdamW διατηρεί προσαρμοστικούς ρυθμούς μάθησης ανά παράμετρο μέσω εκτιμήσεων πρώτης και δεύτερης ροπής",
           "Ο AdamW εφαρμόζει σωστά αποσυνδεδεμένη φθορά βαρών από την ενημέρωση κλίσης",
           "Ο AdamW εξαλείφει εντελώς την ανάγκη ρυθμού μάθησης",
-          "Ο AdamW εγγυάται μηδενική απώλεια εκπαίδευσης σε όλες τις περιπτώσεις"
+          "Ο AdamW εγγυάται ακριβώς μηδενική απώλεια εκπαίδευσης σε απολύτως κάθε δυνατή περίπτωση, χωρίς καμία εξαίρεση"
         ],
-        "correct": [0, 1],
+        "correct": [
+          0,
+          1
+        ],
         "explanation": "✅ Εξήγηση: Ο AdamW συνδυάζει προσαρμοστικούς ρυθμούς μάθησης (από τις εκτιμήσεις ροπής του Adam) με σωστά αποσυνδεδεμένη κανονικοποίηση φθοράς βαρών. Δεν εξαλείφει την ανάγκη ρυθμού μάθησης και κανένας βελτιστοποιητής δεν εγγυάται μηδενική απώλεια.",
         "isMulti": true
       },
@@ -186,12 +215,14 @@
         "index": 3,
         "text": "Τι πρόβλημα λύνει η αποκοπή κλίσεων (gradient clipping) κατά την εκπαίδευση LLM;",
         "options": [
-          "Αποτρέπει την υποπροσαρμογή του μοντέλου αυξάνοντας τα μεγέθη κλίσεων",
-          "Περιορίζει τα μεγέθη κλίσεων για να αποτρέψει τις εκρηκτικές κλίσεις που αποσταθεροποιούν την εκπαίδευση",
+          "Αποτρέπει την υποπροσαρμογή του μοντέλου αυξάνοντας τεχνητά τα μεγέθη των κλίσεων",
+          "Περιορίζει τα μεγέθη κλίσεων για να αποτρέψει τις εκρηκτικές κλίσεις",
           "Αφαιρεί όλες τις κλίσεις κάτω από ένα κατώφλι για επιτάχυνση της εκπαίδευσης",
           "Επιλέγει αυτόματα τον καλύτερο ρυθμό μάθησης"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Εξήγηση: Η αποκοπή κλίσεων περιορίζει τη μέγιστη νόρμα των κλίσεων. Χωρίς αυτήν, περιστασιακά πολύ μεγάλες κλίσεις (εκρηκτικές κλίσεις) μπορούν να προκαλέσουν τόσο μεγάλες ενημερώσεις παραμέτρων που η απώλεια του μοντέλου εκτινάσσεται και η εκπαίδευση γίνεται ασταθής.",
         "isMulti": false
       },
@@ -199,12 +230,14 @@
         "index": 4,
         "text": "Τι σημαίνει η δέσμευση βαρών (weight tying) σε ένα γλωσσικό μοντέλο βασισμένο σε Transformer;",
         "options": [
-          "Χρήση του ίδιου πίνακα βαρών τόσο για το στρώμα ενσωμάτωσης tokens όσο και για το στρώμα προβολής εξόδου",
-          "Πάγωμα όλων των βαρών ώστε να μην μπορούν να αλλάξουν κατά την εκπαίδευση",
+          "Χρήση του ίδιου πίνακα βαρών για το στρώμα ενσωμάτωσης tokens και το στρώμα προβολής εξόδου",
+          "Πάγωμα κάθε βάρους ώστε κανένα από αυτά να μην μπορεί να αλλάξει κατά τη διάρκεια της εκπαίδευσης",
           "Σύνδεση των ρυθμών μάθησης διαφορετικών στρωμάτων μεταξύ τους",
           "Σύνδεση των βαρών προσοχής σε όλα τα μπλοκ Transformer"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "✅ Εξήγηση: Η δέσμευση βαρών μοιράζεται τον ίδιο πίνακα βαρών μεταξύ της ενσωμάτωσης tokens εισόδου και της κεφαλής γλωσσικής μοντελοποίησης εξόδου. Αυτό μειώνει τον αριθμό παραμέτρων και βελτιώνει τη γενίκευση επειδή και τα δύο στρώματα λειτουργούν στον ίδιο σημασιολογικό χώρο.",
         "isMulti": false
       }

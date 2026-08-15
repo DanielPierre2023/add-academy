@@ -7,12 +7,16 @@
         "index": 0,
         "text": "Which of the following are key metrics to monitor for an LLM in production? Select all that apply.",
         "options": [
-          "Latency (time to first token and total response time)",
-          "Token throughput and cost per request",
-          "The color scheme of the monitoring dashboard",
+          "Latency, including time to first token and total response time",
+          "Token throughput and the cost incurred per request",
+          "The overall color scheme and visual theme chosen for the monitoring dashboard interface",
           "Error rates and response quality scores"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Key LLM production metrics include latency (time to first token and total response time), token throughput, cost per request, error rates, and response quality scores. The visual appearance of a dashboard is a UI concern, not a model performance metric.",
         "isMulti": true
       },
@@ -20,12 +24,14 @@
         "index": 1,
         "text": "What does drift detection identify in an LLM system?",
         "options": [
-          "Physical movement of the servers running the model",
-          "Changes in input data distributions or model output quality over time that deviate from expected baselines",
-          "The speed at which new model versions are deployed",
-          "Network latency between the client and the API endpoint"
+          "The physical movement of the servers that are actually running the model in the datacenter",
+          "Shifts in input data distributions or output quality that drift from baselines",
+          "The speed at which brand-new model versions get deployed to production",
+          "Network latency measured between the client and the API endpoint"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Drift detection monitors for shifts in the statistical properties of incoming data (data drift) or degradation in model performance (model drift) compared to established baselines. This helps identify when a model needs retraining or when user behavior has changed significantly.",
         "isMulti": false
       },
@@ -33,12 +39,14 @@
         "index": 2,
         "text": "Why is prompt versioning important in LLM applications?",
         "options": [
-          "It allows teams to track changes to prompts over time, compare performance across versions, and roll back to previous versions if a new prompt degrades output quality",
-          "It is only needed for regulatory compliance and has no practical engineering benefit",
-          "It automatically improves the model's accuracy without any human intervention",
-          "It reduces the token count of every prompt by compressing text"
+          "It lets teams track prompt changes, compare versions, and roll back if a new prompt hurts quality",
+          "It is only needed for strict regulatory compliance and offers no practical engineering benefit at all",
+          "It automatically improves the model's accuracy without any human intervention needed",
+          "It reduces the token count of every prompt by aggressively compressing the text"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "Prompt versioning enables teams to maintain a history of prompt changes, run A/B tests to compare effectiveness, attribute performance changes to specific prompt edits, and quickly roll back if a new version causes regressions. It is a practical engineering practice essential for reliable LLM operations.",
         "isMulti": false
       },
@@ -46,12 +54,14 @@
         "index": 3,
         "text": "What should a comprehensive LLM logging strategy capture?",
         "options": [
-          "Only the final output text, nothing else",
-          "The full request (prompt, parameters, metadata), the response, latency, token usage, and any errors or guardrail triggers",
-          "Only error messages when the model fails",
-          "Only the model name and timestamp"
+          "Only the final output text and absolutely nothing else at all, beyond that one single field",
+          "The full request, response, latency, token usage, and any errors or guardrail triggers",
+          "Only the error messages that appear whenever the model happens to fail",
+          "Only the model name together with the request timestamp and nothing else"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "A comprehensive logging strategy captures the full request context (prompt, system message, parameters, user metadata), the complete response, performance metrics (latency, token counts), cost data, and any safety or guardrail events. This enables debugging, auditing, and continuous improvement.",
         "isMulti": false
       },
@@ -59,12 +69,14 @@
         "index": 4,
         "text": "Which of the following is a best practice for alerting in LLM observability?",
         "options": [
-          "Send an alert for every single request to ensure nothing is missed",
-          "Never set up alerts because they create too much noise",
-          "Define threshold-based alerts for critical metrics like error rate spikes, latency increases, and cost anomalies, with appropriate severity levels to avoid alert fatigue",
-          "Only alert when the model is completely offline and ignore all degradation signals"
+          "Send an alert for every single request in order to make sure that absolutely nothing is ever missed",
+          "Never set up any alerts at all because they always create far too much unnecessary noise",
+          "Define threshold alerts on key metrics like error spikes, latency, and cost, with severity tiers",
+          "Only alert when the model is completely offline and ignore every degradation signal along the way"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Effective alerting uses well-defined thresholds on critical metrics with appropriate severity tiers. Alerting on every request creates noise and fatigue, while no alerts leaves the team blind to issues. The best approach balances sensitivity with actionability, escalating based on impact severity.",
         "isMulti": false
       }
@@ -77,12 +89,16 @@
         "index": 0,
         "text": "Care dintre urmatoarele sunt metrici cheie de monitorizat pentru un LLM in productie? Selectati toate variantele corecte.",
         "options": [
-          "Latenta (timpul pana la primul token si timpul total de raspuns)",
-          "Debitul de tokeni si costul per cerere",
-          "Schema de culori a tabloului de bord de monitorizare",
+          "Latenta, incluzand timpul pana la primul token si timpul total de raspuns",
+          "Debitul de tokeni si costul suportat per cerere",
+          "Schema de culori generala si tema vizuala aleasa pentru interfata tabloului de monitorizare",
           "Ratele de eroare si scorurile de calitate a raspunsurilor"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Metricile cheie de productie pentru LLM includ latenta (timpul pana la primul token si timpul total de raspuns), debitul de tokeni, costul per cerere, ratele de eroare si scorurile de calitate a raspunsurilor. Aspectul vizual al unui tablou de bord este o preocupare de interfata, nu o metrica de performanta a modelului.",
         "isMulti": true
       },
@@ -90,12 +106,14 @@
         "index": 1,
         "text": "Ce identifica detectia derivei intr-un sistem LLM?",
         "options": [
-          "Miscarea fizica a serverelor care ruleaza modelul",
-          "Modificari in distributiile datelor de intrare sau in calitatea outputului modelului in timp, care deviaza de la nivelurile de baza asteptate",
-          "Viteza cu care sunt implementate noi versiuni ale modelului",
-          "Latenta retelei intre client si endpoint-ul API"
+          "Miscarea fizica a serverelor care ruleaza efectiv modelul in centrul de date al companiei",
+          "Schimbari in distributia datelor sau calitatea outputului fata de nivelurile de baza",
+          "Viteza cu care noile versiuni de model sunt implementate in productie",
+          "Latenta retelei masurata intre client si endpoint-ul API"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Detectia derivei monitorizeaza schimbarile in proprietatile statistice ale datelor de intrare (deriva datelor) sau degradarea performantei modelului (deriva modelului) fata de nivelurile de baza stabilite. Aceasta ajuta la identificarea momentului cand un model necesita reantrenare sau cand comportamentul utilizatorilor s-a schimbat semnificativ.",
         "isMulti": false
       },
@@ -103,12 +121,14 @@
         "index": 2,
         "text": "De ce este important versionarea prompturilor in aplicatiile LLM?",
         "options": [
-          "Permite echipelor sa urmareasca modificarile prompturilor in timp, sa compare performanta intre versiuni si sa revina la versiuni anterioare daca un prompt nou degradeaza calitatea outputului",
-          "Este necesara doar pentru conformitatea reglementara si nu are niciun beneficiu practic de inginerie",
-          "Imbunatateste automat acuratetea modelului fara nicio interventie umana",
-          "Reduce numarul de tokeni al fiecarui prompt prin comprimarea textului"
+          "Permite echipelor sa urmareasca modificarile, sa compare versiuni si sa revina la cele vechi",
+          "Este necesara doar pentru conformitatea reglementara stricta si nu ofera niciun beneficiu practic de inginerie",
+          "Imbunatateste automat acuratetea modelului fara nicio interventie umana necesara",
+          "Reduce numarul de tokeni al fiecarui prompt prin comprimarea agresiva a textului"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "Versionarea prompturilor permite echipelor sa mentina un istoric al modificarilor, sa ruleze teste A/B pentru a compara eficacitatea, sa atribuie schimbarile de performanta unor editari specifice ale prompturilor si sa revina rapid daca o noua versiune cauzeaza regresii. Este o practica de inginerie esentiala pentru operatiunile fiabile cu LLM.",
         "isMulti": false
       },
@@ -116,12 +136,14 @@
         "index": 3,
         "text": "Ce ar trebui sa capteze o strategie cuprinzatoare de logare pentru LLM?",
         "options": [
-          "Doar textul final de output, nimic altceva",
-          "Cererea completa (prompt, parametri, metadate), raspunsul, latenta, utilizarea tokenilor si orice erori sau declansari ale parapetelor de siguranta",
-          "Doar mesajele de eroare cand modelul esueaza",
-          "Doar numele modelului si marcajul temporal"
+          "Doar textul final de output si absolut nimic altceva dincolo de acel singur camp de date",
+          "Cererea completa, raspunsul, latenta, tokenii folositi si orice erori sau declansari",
+          "Doar mesajele de eroare care apar ori de cate ori modelul esueaza",
+          "Doar numele modelului impreuna cu marcajul temporal al cererii, nimic mai mult"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "O strategie cuprinzatoare de logare capteaza contextul complet al cererii (prompt, mesaj de sistem, parametri, metadate utilizator), raspunsul complet, metricile de performanta (latenta, numarul de tokeni), datele de cost si orice evenimente de siguranta sau ale parapetelor. Aceasta permite depanarea, auditul si imbunatatirea continua.",
         "isMulti": false
       },
@@ -129,12 +151,14 @@
         "index": 4,
         "text": "Care dintre urmatoarele este o buna practica pentru alertare in observabilitatea LLM?",
         "options": [
-          "Trimiterea unei alerte pentru fiecare cerere individuala pentru a nu rata nimic",
-          "Sa nu configurezi niciodata alerte deoarece creeaza prea mult zgomot",
-          "Definirea alertelor bazate pe praguri pentru metrici critice precum cresteri bruste ale ratei de eroare, cresteri de latenta si anomalii de cost, cu niveluri de severitate adecvate pentru a evita oboseala de alerte",
-          "Alertarea doar cand modelul este complet offline si ignorarea tuturor semnalelor de degradare"
+          "Trimiterea unei alerte pentru fiecare cerere in parte pentru a te asigura ca absolut nimic nu este ratat vreodata",
+          "Sa nu configurezi niciodata alerte deoarece creeaza mereu mult prea mult zgomot inutil",
+          "Definirea alertelor pe praguri pentru metrici cheie precum erori, latenta si cost, cu niveluri de severitate",
+          "Alertarea doar cand modelul este complet offline si ignorarea fiecarui semnal de degradare pe parcurs"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Alertarea eficienta foloseste praguri bine definite pentru metricile critice cu niveluri de severitate adecvate. Alertarea la fiecare cerere creeaza zgomot si oboseala, in timp ce absenta alertelor lasa echipa oarba la probleme. Cea mai buna abordare echilibreaza sensibilitatea cu posibilitatea de actiune, escaladand pe baza severitatii impactului.",
         "isMulti": false
       }
@@ -147,12 +171,16 @@
         "index": 0,
         "text": "Poia apo ta parakatoi einai vasikes metrikes gia tin parakoloythisi enos LLM stin paragogi? Epilexte oles tis sostes apantiseis.",
         "options": [
-          "Kathisteriisi (chronos mechri to proto token kai synolikos chronos apantisis)",
-          "Rythmapodosi token kai kostos ana aitima",
-          "To chromatiko schema tou pinaka parakoloythisis",
-          "Pososta sfalmaton kai vathmologiies poiotitas apantiseon"
+          "Kathisterisi, symperilamvanomenou tou xronou mexri to proto token kai tou synolikou xronou",
+          "Rythmapodosi token kai to kostos ana aitima",
+          "To geniko xromatiko sxima kai to optiko thema pou epilegetai gia ti diepafi tou pinaka parakolouthisis",
+          "Pososta sfalmaton kai vathmologies poiotitas apantiseon"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Oi vasikes metrikes paragogis LLM perilamvanoun tin kathisteriisi (chronos mechri to proto token kai synolikos chronos apantisis), ti rythmapodosi token, to kostos ana aitima, ta pososta sfalmaton kai tis vathmologiies poiotitas apantiseon. I optiki emfanisi enos pinaka einai thema diepaphis, ochi metriiki apodosis montelou.",
         "isMulti": true
       },
@@ -160,12 +188,14 @@
         "index": 1,
         "text": "Ti entopizzei i anichneusi ektropis se ena systima LLM?",
         "options": [
-          "Ti fysiki metakinisi ton server pou ekteloun to montelo",
-          "Allages stis katanomes dedomenon eisodou i stin poiotita exodou tou montelou me ton kairo pou parekkllinoun apo ta anamennomena vasika epipeda",
-          "Tin tachytita me tin opoia anaptyssontai nees ekdoseis montelou",
-          "Tin kathisteriisi diktyou metaxy tou pelati kai tou telikoy simeiou API"
+          "I fysiki metakinisi ton diakomiston pou ekteloun pragmatika to montelo mesa ston kentro dedomenon",
+          "Allages stis katanomes eisodou i stin poiotita exodou pou parekklinoun apo ta vasika epipeda",
+          "I taxytita me tin opoia nees ekdoseis montelou anaptyssontai stin paragogi",
+          "I kathisterisi diktyou metaxy tou pelati kai tou telikou simeiou API"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "I anichneusi ektropis parakolouthei tis metavoles stis statistikes idiiotites ton eiserchhomenon dedomenon (ektropi dedomenon) i tin ypovathmisi tis apodosis tou montelou (ektropi montelou) se sygkrisi me ta kathieromenna vasika epipeda. Ayto voithai ston entopismo tou pote ena montelo chreiazzzetai epaanekpaideysi i pote i symperifora ton christon echei allaxei simantika.",
         "isMulti": false
       },
@@ -173,12 +203,14 @@
         "index": 2,
         "text": "Giati einai simantiki i ekdosiopoiisi prompton stis efarmogeis LLM?",
         "options": [
-          "Epitrepei stis omades na parakolouthoun tis allages sta prompts me ton kairo, na sygkrrinoun tin apodosi metaxy ekdoseon kai na epistrefoun se proigoumenes ekdoseis an ena neo prompt ypovathmizei tin poiotita exodou",
-          "Chreiazzetai mono gia tin kanonistiki symmorfoosi kai den echei kanena praktiko ofelos michanikis",
-          "Veltionei aytomata tin akrivia tou montelou choris kamia anthropini paremvasi",
-          "Meionei ton arithmo token kathe prompt sympiezzointas to keimeno"
+          "Epitrepei stis omades na parakolouthoun allages, na sygkrinoun ekdoseis kai na epistrefoun se palaies",
+          "Xreiazetai mono gia austiri kanonistiki symmorfosi kai den prosferei kanena praktiko ofelos michanikis kathoolou",
+          "Veltionei aftomata tin akriveia tou montelou xoris kamia anthropini paremvasi aparaititi",
+          "Meionei ton arithmo token kathe prompt me epithetiki sympiesi tou keimenou"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "I ekdosiopoiisi prompton epitrepei stis omades na diatiroun ena istoriko allagon, na ekteloun dokimes A/B gia sygkrisi apotelesmatikotitas, na apodiidoun allages apodosis se sygkekrimenes epexergasies prompton kai na epistrefoun grigora an mia nea ekdosi prokalei palindromiseis. Einai mia praktiki michanikis apaiaitiiti gia axiopistes leitougies LLM.",
         "isMulti": false
       },
@@ -186,12 +218,14 @@
         "index": 3,
         "text": "Ti prepei na katachrafei mia periektiki stratigiki katachorissis LLM?",
         "options": [
-          "Mono to teliko keimeno exodou, tipota allo",
-          "To plires aitima (prompt, parametrous, metadedomena), tin apantisi, tin kathisteriisi, tin chrisi token kai opoiadipote sfalmata i enerrgopoiiseis prostateytikon mechanismon",
-          "Mono ta minimata sfalmaton otan to montelo apotyganei",
-          "Mono to onoma tou montelou kai tin chronosfragida"
+          "Mono to teliko keimeno exodou kai apolytos tipota allo pera apo afto to ena monadiko pedio",
+          "To plires aitima, tin apantisi, tin kathisterisi, ti xrisi token kai tyxon sfalmata",
+          "Mono ta minimata sfalmaton pou emfanizontai kathe fora pou to montelo apotygxanei",
+          "Mono to onoma tou montelou mazi me ti xronosfragida tou aitimatos kai tipota allo"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Mia periektiki stratigiki katachorissis katachrafei to plires plaisio tou aitimatos (prompt, minima systimatos, parametrous, metadedomena christi), tin pliri apantisi, tis metrikes apodosis (kathisteriisi, arithmo token), ta dedomena kostous kai opoiadipote gegonota asfaleias. Ayto epitrepei tin aposfalmadosi, ton elengcho kai ti synechi veltioosi.",
         "isMulti": false
       },
@@ -199,12 +233,14 @@
         "index": 4,
         "text": "Poia apo tis parakatoi einai mia kalii praktiki gia tin eidopoiisi stin parakoloythisi LLM?",
         "options": [
-          "Apostoli eidopoiisis gia kathe xechoristo aitima gia na min chathei tipota",
-          "Na min rythmisete pote eidopoiiseis epidi dimiourgoun ypervolliko thoruvo",
-          "Orismos eidopoiiseon vasismeon se katoflia gia kritikes metrikes opos apotomes ayxiseis tou posostou sfalmaton, ayxiseis kathisteriisis kai anomalies kostous, me katallila epipeda sfodrotitas gia tin apofygi tis kourasis apo eidopoiiseis",
-          "Eidopoiisi mono otan to montelo einai pliros ektos syntontismou kai agnoissi olon ton simatoon ypovathmiisis"
+          "Apostoli eidopoiisis gia kathe xexoristo aitima oste na diasfalistei oti apolytos tipota den xanetai pote",
+          "Na min rythmisete pote kamia eidopoiisi epeidi dimiourgoun panta para poly perisso thoryvo axristo",
+          "Orismos eidopoiiseon vasei katofliou gia kritikes metrikes, me katallila epipeda sfodrotitas",
+          "Eidopoiisi mono otan to montelo einai pliros ektos leitourgias kai agnoisi kathe simatos ypovathmisis"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "I apotelesmatiki eidopoiisi chrisimopoiei kaloa orismenoa kaatoflia se kritikes metrikes me katallila epipeda svvarotitas. I eidopoiisi se kathe aitima dimioyrgei thoruvo kai koyrasi, enoi i apoysia eidopoiiseon afinei tin omada tyfli sta problimata. I kalyyteri proseggisi exissorrroopei tin evaisthhisia me ti dynatotita drasis, klimakonointas vaasei tis sfoodrotitas ton epidraseon.",
         "isMulti": false
       }

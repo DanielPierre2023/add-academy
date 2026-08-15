@@ -7,7 +7,7 @@
         "index": 0,
         "text": "In an end-to-end fine-tuned LLM system, what is the correct order of the pipeline stages?",
         "options": [
-          "Deployment → Fine-tuning → Data collection → Evaluation",
+          "Deployment → Monitoring → Evaluation → Fine-tuning → Preprocessing → Data collection",
           "Data collection → Preprocessing → Fine-tuning → Evaluation → Deployment",
           "Fine-tuning → Data collection → Deployment → Preprocessing",
           "Evaluation → Deployment → Fine-tuning → Data collection"
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "Why is evaluation on a held-out test set critical before deploying a fine-tuned model?",
         "options": [
-          "It reduces the model’s parameter count",
-          "It speeds up inference at deployment time",
-          "It automatically fixes any bugs in the model",
-          "It reveals whether the model generalizes beyond the training data and catches overfitting"
+          "It permanently reduces the model's total parameter count",
+          "It noticeably speeds up inference at deployment time",
+          "It automatically finds and fixes any bugs that might be present in the trained model without human help",
+          "It reveals whether the model generalizes beyond training data and catches overfitting"
         ],
         "correct": [
           3
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What role does data preprocessing play in a fine-tuning pipeline?",
         "options": [
-          "It cleans, formats, and structures raw data into the format the model expects for training",
-          "It replaces the model’s tokenizer with a new one",
-          "It increases the model’s context window automatically",
-          "It deploys the model to a production server"
+          "It cleans, formats, and structures raw data into the format the model expects",
+          "It completely replaces the model's tokenizer with a brand-new one before training",
+          "It automatically increases the model's context window size",
+          "It deploys the finished model onto a production server"
         ],
         "correct": [
           0
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Which components are typically part of a complete fine-tuned LLM deployment?Select all that apply",
         "options": [
-          "A dedicated pretraining cluster running 24/7",
+          "A dedicated pretraining cluster that runs 24/7",
           "An inference server with the fine-tuned model loaded and an API endpoint",
           "Monitoring and logging to track model performance in production",
-          "A manual copy-paste workflow for each user request"
+          "A manual copy-paste workflow performed by hand for each and every user request that arrives"
         ],
         "correct": [
           1,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "What is the benefit of combining fine-tuning with RAG in a capstone system?",
         "options": [
-          "It eliminates the need for any training data",
-          "It makes the model smaller and faster to load",
-          "Fine-tuning adapts the model’s style and domain knowledge, while RAG provides access to current external information",
-          "It removes the need for a context window"
+          "It completely eliminates the need for any training data whatsoever during the entire process end to end",
+          "It makes the resulting model smaller and faster to load",
+          "Fine-tuning adapts the model's style and domain, while RAG adds external information",
+          "It removes the need for a context window entirely"
         ],
         "correct": [
           2
@@ -88,7 +88,7 @@
         "index": 0,
         "text": "Într-un sistem LLM fine-tuned end-to-end, care este ordinea corectă a etapelor pipeline-ului?",
         "options": [
-          "Implementare → Fine-tuning → Colectarea datelor → Evaluare",
+          "Implementare → Monitorizare → Evaluare → Fine-tuning → Preprocesare → Colectarea datelor",
           "Colectarea datelor → Preprocesare → Fine-tuning → Evaluare → Implementare",
           "Fine-tuning → Colectarea datelor → Implementare → Preprocesare",
           "Evaluare → Implementare → Fine-tuning → Colectarea datelor"
@@ -103,9 +103,9 @@
         "index": 1,
         "text": "De ce este evaluarea pe un set de test separat esențială înainte de implementarea unui model fine-tuned?",
         "options": [
-          "Reduce numărul de parametri ai modelului",
-          "Accelerează inferența la momentul implementării",
-          "Repară automat orice erori din model",
+          "Reduce permanent numărul total de parametri ai modelului",
+          "Accelerează considerabil inferența la momentul implementării",
+          "Găsește și repară automat orice erori care ar putea fi prezente în modelul antrenat, fără ajutor uman",
           "Relevă dacă modelul generalizează dincolo de datele de antrenare și detectează supraadaptarea"
         ],
         "correct": [
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Ce rol joacă preprocesarea datelor într-un pipeline de fine-tuning?",
         "options": [
-          "Curăță, formatează și structurează datele brute în formatul pe care modelul îl așteaptă pentru antrenare",
-          "Înlocuiește tokenizer-ul modelului cu unul nou",
-          "Mărește automat fereastra de context a modelului",
-          "Implementează modelul pe un server de producție"
+          "Curăță, formatează și structurează datele brute în formatul așteptat de model",
+          "Înlocuiește complet tokenizer-ul modelului cu unul nou-nouț chiar înainte de antrenare",
+          "Mărește automat dimensiunea ferestrei de context a modelului",
+          "Implementează modelul finalizat pe un server de producție"
         ],
         "correct": [
           0
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Ce componente fac parte de obicei dintr-o implementare completă a unui LLM fine-tuned? Selectați toate răspunsurile corecte",
         "options": [
-          "Un cluster dedicat de preantrenare care rulează 24/7",
+          "Un cluster dedicat de preantrenare care rulează non-stop 24/7",
           "Un server de inferență cu modelul fine-tuned încărcat și un endpoint API",
           "Monitorizare și logare pentru urmărirea performanței modelului în producție",
-          "Un flux de lucru manual de copiere-lipire pentru fiecare cerere a utilizatorului"
+          "Un flux de lucru manual de copiere-lipire efectuat de mână pentru fiecare cerere a utilizatorului care sosește"
         ],
         "correct": [
           1,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "Care este avantajul combinării fine-tuning-ului cu RAG într-un sistem capstone?",
         "options": [
-          "Elimină necesitatea oricăror date de antrenare",
-          "Face modelul mai mic și mai rapid de încărcat",
-          "Fine-tuning-ul adaptează stilul și cunoștințele de domeniu ale modelului, în timp ce RAG oferă acces la informații externe actuale",
-          "Elimină necesitatea unei ferestre de context"
+          "Elimină complet necesitatea oricăror date de antrenare pe tot parcursul întregului proces desfășurat",
+          "Face modelul rezultat mai mic și mai rapid de încărcat",
+          "Fine-tuning-ul adaptează stilul și domeniul modelului, iar RAG adaugă informații externe actuale",
+          "Elimină complet necesitatea unei ferestre de context"
         ],
         "correct": [
           2
@@ -169,7 +169,7 @@
         "index": 0,
         "text": "Σε ένα σύστημα LLM fine-tuned από άκρη σε άκρη, ποια είναι η σωστή σειρά των σταδίων του pipeline;",
         "options": [
-          "Ανάπτυξη → Fine-tuning → Συλλογή δεδομένων → Αξιολόγηση",
+          "Ανάπτυξη → Παρακολούθηση → Αξιολόγηση → Fine-tuning → Προεπεξεργασία → Συλλογή δεδομένων",
           "Συλλογή δεδομένων → Προεπεξεργασία → Fine-tuning → Αξιολόγηση → Ανάπτυξη",
           "Fine-tuning → Συλλογή δεδομένων → Ανάπτυξη → Προεπεξεργασία",
           "Αξιολόγηση → Ανάπτυξη → Fine-tuning → Συλλογή δεδομένων"
@@ -184,9 +184,9 @@
         "index": 1,
         "text": "Γιατί είναι κρίσιμη η αξιολόγηση σε ξεχωριστό σύνολο δοκιμής πριν την ανάπτυξη ενός fine-tuned μοντέλου;",
         "options": [
-          "Μειώνει τον αριθμό παραμέτρων του μοντέλου",
-          "Επιταχύνει την εξαγωγή συμπερασμάτων κατά την ανάπτυξη",
-          "Διορθώνει αυτόματα τυχόν σφάλματα στο μοντέλο",
+          "Μειώνει μόνιμα τον συνολικό αριθμό παραμέτρων του μοντέλου",
+          "Επιταχύνει αισθητά την εξαγωγή συμπερασμάτων κατά την ανάπτυξη",
+          "Βρίσκει και διορθώνει αυτόματα τυχόν σφάλματα που μπορεί να υπάρχουν στο εκπαιδευμένο μοντέλο χωρίς ανθρώπινη βοήθεια",
           "Αποκαλύπτει αν το μοντέλο γενικεύει πέρα από τα δεδομένα εκπαίδευσης και εντοπίζει υπερπροσαρμογή"
         ],
         "correct": [
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποιον ρόλο παίζει η προεπεξεργασία δεδομένων σε ένα pipeline fine-tuning;",
         "options": [
-          "Καθαρίζει, μορφοποιεί και δομεί τα ακατέργαστα δεδομένα στη μορφή που αναμένει το μοντέλο για εκπαίδευση",
-          "Αντικαθιστά τον tokenizer του μοντέλου με νέο",
-          "Αυξάνει αυτόματα το παράθυρο πλαισίου του μοντέλου",
-          "Αναπτύσσει το μοντέλο σε διακομιστή παραγωγής"
+          "Καθαρίζει και δομεί τα ακατέργαστα δεδομένα στη μορφή που αναμένει το μοντέλο",
+          "Αντικαθιστά εντελώς τον tokenizer του μοντέλου με έναν ολοκαίνουργιο πριν την εκπαίδευση",
+          "Αυξάνει αυτόματα το μέγεθος του παραθύρου πλαισίου του μοντέλου",
+          "Αναπτύσσει το ολοκληρωμένο μοντέλο σε έναν διακομιστή παραγωγής"
         ],
         "correct": [
           0
@@ -215,9 +215,9 @@
         "text": "Ποια στοιχεία αποτελούν συνήθως μέρος μιας πλήρους ανάπτυξης fine-tuned LLM; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
           "Ένα αποκλειστικό cluster προεκπαίδευσης που λειτουργεί 24/7",
-          "Ένας διακομιστής εξαγωγής συμπερασμάτων με το fine-tuned μοντέλο φορτωμένο και ένα API endpoint",
+          "Ένας διακομιστής εξαγωγής συμπερασμάτων με το fine-tuned μοντέλο φορτωμένο και API endpoint",
           "Παρακολούθηση και καταγραφή για την ανίχνευση της απόδοσης του μοντέλου στην παραγωγή",
-          "Μια χειροκίνητη ροή εργασίας αντιγραφής-επικόλλησης για κάθε αίτημα χρήστη"
+          "Μια χειροκίνητη ροή εργασίας αντιγραφής-επικόλλησης που εκτελείται με το χέρι για κάθε αίτημα χρήστη που φτάνει"
         ],
         "correct": [
           1,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Ποιο είναι το πλεονέκτημα του συνδυασμού fine-tuning με RAG σε ένα capstone σύστημα;",
         "options": [
-          "Εξαλείφει την ανάγκη για οποιαδήποτε δεδομένα εκπαίδευσης",
-          "Κάνει το μοντέλο μικρότερο και πιο γρήγορο στη φόρτωση",
-          "Το fine-tuning προσαρμόζει το στυλ και τη γνώση τομέα του μοντέλου, ενώ το RAG παρέχει πρόσβαση σε τρέχουσες εξωτερικές πληροφορίες",
-          "Εξαλείφει την ανάγκη για παράθυρο πλαισίου"
+          "Εξαλείφει εντελώς την ανάγκη για οποιαδήποτε δεδομένα εκπαίδευσης καθ' όλη τη διάρκεια ολόκληρης της διαδικασίας",
+          "Κάνει το μοντέλο που προκύπτει μικρότερο και πιο γρήγορο στη φόρτωση",
+          "Το fine-tuning προσαρμόζει το στυλ και τον τομέα του μοντέλου, ενώ το RAG προσθέτει εξωτερικές πληροφορίες",
+          "Εξαλείφει εντελώς την ανάγκη για παράθυρο πλαισίου"
         ],
         "correct": [
           2

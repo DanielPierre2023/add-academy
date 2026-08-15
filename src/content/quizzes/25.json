@@ -8,9 +8,9 @@
         "text": "What does cross-entropy loss measure in a language model?",
         "options": [
           "The Euclidean distance between predicted and target embeddings",
-          "The negative log-probability assigned by the model to the correct next token",
+          "The negative log-probability of the correct next token",
           "The mean squared error between logits and one-hot labels",
-          "The cosine similarity between predicted and actual token vectors"
+          "The cosine similarity between the predicted and actual token vectors"
         ],
         "correct": [
           1
@@ -22,9 +22,9 @@
         "index": 1,
         "text": "If a language model has a cross-entropy loss of 3.0, what is its perplexity?",
         "options": [
-          "3.0",
-          "9.0",
-          "8.0",
+          "Exactly 3.0, the same as the loss",
+          "About 9.0",
+          "Roughly 8.0",
           "e³ ≈ 20.09"
         ],
         "correct": [
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What does it typically indicate when training loss keeps decreasing but validation loss starts increasing?",
         "options": [
-          "The learning rate is too low",
-          "The model is underfitting",
-          "The model is overfitting to the training data",
-          "The batch size is too large"
+          "The learning rate is set far too low",
+          "The model is underfitting the data",
+          "The model is overfitting the training data",
+          "The batch size has been set far too large for this dataset"
         ],
         "correct": [
           2
@@ -53,9 +53,9 @@
         "text": "Which of the following are valid evaluation metrics for language models?Select all that apply",
         "options": [
           "Perplexity on a held-out test set",
-          "R-squared score on the logits",
-          "F1 score of individual token probabilities",
-          "Downstream task accuracy (e.g., question answering benchmarks)"
+          "R-squared goodness-of-fit score computed directly on the raw logits",
+          "F1 score of the individual token probabilities",
+          "Downstream task accuracy on QA benchmarks"
         ],
         "correct": [
           0,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "Why is cross-entropy preferred over mean squared error (MSE) for training language models?",
         "options": [
-          "Cross-entropy produces stronger gradients for confident wrong predictions, speeding up correction",
-          "MSE cannot be computed on discrete tokens",
-          "Cross-entropy uses fewer floating point operations",
-          "MSE requires labels to be continuous values"
+          "Cross-entropy gives strong gradients for confident wrong predictions",
+          "MSE simply cannot be computed on discrete tokens",
+          "Cross-entropy uses fewer floating-point operations per step",
+          "MSE requires that all of the training labels be continuous real-valued numbers"
         ],
         "correct": [
           0
@@ -89,9 +89,9 @@
         "text": "Ce măsoară pierderea cross-entropy într-un model de limbaj?",
         "options": [
           "Distanța euclidiană între embedding-urile prezise și cele țintă",
-          "Logaritmul negativ al probabilității atribuite de model token-ului corect următor",
+          "Logaritmul negativ al probabilității token-ului corect următor",
           "Eroarea medie pătratică între logit-uri și etichete one-hot",
-          "Similaritatea cosinus între vectorii de token-uri prezise și reale"
+          "Similaritatea cosinus între vectorii de token-uri prezise și cele reale"
         ],
         "correct": [
           1
@@ -103,9 +103,9 @@
         "index": 1,
         "text": "Dacă un model de limbaj are o pierdere cross-entropy de 3.0, care este perplexitatea sa?",
         "options": [
-          "3.0",
-          "9.0",
-          "8.0",
+          "Exact 3.0, la fel ca pierderea",
+          "Aproximativ 9.0",
+          "Cam 8.0",
           "e^3 aprox. 20.09"
         ],
         "correct": [
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Ce indică de obicei când pierderea de antrenare continuă să scadă dar pierderea de validare începe să crească?",
         "options": [
-          "Rata de învățare este prea mică",
-          "Modelul este sub-antrenat",
+          "Rata de învățare este setată mult prea mică",
+          "Modelul este sub-antrenat pe date",
           "Modelul se supraadaptează la datele de antrenare",
-          "Dimensiunea lotului este prea mare"
+          "Dimensiunea lotului este setată mult prea mare pentru acest set de date"
         ],
         "correct": [
           2
@@ -134,9 +134,9 @@
         "text": "Care dintre următoarele sunt metrici de evaluare valide pentru modelele de limbaj? Selectați toate răspunsurile corecte",
         "options": [
           "Perplexitatea pe un set de test reținut",
-          "Scorul R-pătrat pe logit-uri",
+          "Scorul R-pătrat de potrivire calculat direct pe logit-urile brute",
           "Scorul F1 al probabilităților individuale ale token-urilor",
-          "Acuratețea pe sarcini downstream (ex. benchmark-uri de întrebări și răspunsuri)"
+          "Acuratețea pe sarcini downstream pe benchmark-uri QA"
         ],
         "correct": [
           0,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "De ce este preferată cross-entropy față de eroarea medie pătratică (MSE) pentru antrenarea modelelor de limbaj?",
         "options": [
-          "Cross-entropy produce gradienți mai puternici pentru predicțiile greșite cu încredere mare, accelerând corecția",
-          "MSE nu poate fi calculat pe token-uri discrete",
-          "Cross-entropy folosește mai puține operații în virgulă mobilă",
-          "MSE necesită ca etichetele să fie valori continue"
+          "Cross-entropy dă gradienți puternici pentru predicții greșite sigure",
+          "MSE pur și simplu nu poate fi calculat pe token-uri discrete",
+          "Cross-entropy folosește mai puține operații în virgulă mobilă pe pas",
+          "MSE necesită ca toate etichetele de antrenare să fie valori reale continue"
         ],
         "correct": [
           0
@@ -170,7 +170,7 @@
         "text": "Τι μετρά η απώλεια cross-entropy σε ένα γλωσσικό μοντέλο;",
         "options": [
           "Την ευκλείδεια απόσταση μεταξύ προβλεπόμενων και στοχευμένων embeddings",
-          "Τον αρνητικό λογάριθμο πιθανότητας που αποδίδει το μοντέλο στο σωστό επόμενο token",
+          "Τον αρνητικό λογάριθμο πιθανότητας του σωστού επόμενου token",
           "Το μέσο τετραγωνικό σφάλμα μεταξύ logits και ετικετών one-hot",
           "Την ομοιότητα συνημιτόνου μεταξύ προβλεπόμενων και πραγματικών διανυσμάτων token"
         ],
@@ -184,9 +184,9 @@
         "index": 1,
         "text": "Αν ένα γλωσσικό μοντέλο έχει απώλεια cross-entropy 3.0, ποια είναι η περπλοκότητά του;",
         "options": [
-          "3.0",
-          "9.0",
-          "8.0",
+          "Ακριβώς 3.0, ίδια με την απώλεια",
+          "Περίπου 9.0",
+          "Περίπου 8.0",
           "e^3 περίπου 20.09"
         ],
         "correct": [
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Τι συνήθως υποδεικνύει όταν η απώλεια εκπαίδευσης συνεχίζει να μειώνεται αλλά η απώλεια επικύρωσης αρχίζει να αυξάνεται;",
         "options": [
-          "Ο ρυθμός εκμάθησης είναι πολύ χαμηλός",
-          "Το μοντέλο υποπροσαρμόζεται",
+          "Ο ρυθμός εκμάθησης έχει τεθεί πολύ χαμηλός",
+          "Το μοντέλο υποπροσαρμόζεται στα δεδομένα",
           "Το μοντέλο υπερπροσαρμόζεται στα δεδομένα εκπαίδευσης",
-          "Το μέγεθος παρτίδας είναι πολύ μεγάλο"
+          "Το μέγεθος παρτίδας έχει τεθεί πάρα πολύ μεγάλο για αυτό το σύνολο δεδομένων"
         ],
         "correct": [
           2
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποιες από τις ακόλουθες είναι έγκυρες μετρικές αξιολόγησης γλωσσικών μοντέλων; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Περπλοκότητα σε κρατημένο σετ ελέγχου",
-          "Σκορ R-τετράγωνο στα logits",
-          "Σκορ F1 ατομικών πιθανοτήτων token",
-          "Ακρίβεια σε downstream εργασίες (π.χ. benchmarks ερωτήσεων-απαντήσεων)"
+          "Περπλοκότητα σε ένα κρατημένο σύνολο ελέγχου",
+          "Σκορ καλής προσαρμογής R-τετράγωνο υπολογισμένο απευθείας στα ακατέργαστα logits",
+          "Σκορ F1 των ατομικών πιθανοτήτων των token",
+          "Ακρίβεια σε downstream εργασίες σε benchmarks QA"
         ],
         "correct": [
           0,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Γιατί προτιμάται η cross-entropy έναντι του μέσου τετραγωνικού σφάλματος (MSE) για εκπαίδευση γλωσσικών μοντέλων;",
         "options": [
-          "Η cross-entropy παράγει ισχυρότερες κλίσεις για σίγουρες λάθος προβλέψεις, επιταχύνοντας τη διόρθωση",
-          "Το MSE δεν μπορεί να υπολογιστεί σε διακριτά tokens",
-          "Η cross-entropy χρησιμοποιεί λιγότερες πράξεις κινητής υποδιαστολής",
-          "Το MSE απαιτεί οι ετικέτες να είναι συνεχείς τιμές"
+          "Η cross-entropy δίνει ισχυρές κλίσεις για σίγουρες λανθασμένες προβλέψεις",
+          "Το MSE απλά δεν μπορεί να υπολογιστεί σε διακριτά tokens",
+          "Η cross-entropy χρησιμοποιεί λιγότερες πράξεις κινητής υποδιαστολής ανά βήμα",
+          "Το MSE απαιτεί όλες οι ετικέτες εκπαίδευσης να είναι συνεχείς πραγματικές τιμές"
         ],
         "correct": [
           0

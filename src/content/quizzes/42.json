@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is domain-specific fine-tuning?",
         "options": [
-          "Training a model from scratch on general web data",
-          "Removing layers from a pretrained model to make it smaller",
-          "Continuing training of a pretrained model on specialized data from a particular field",
-          "Translating the model interface into a specific language"
+          "Training a brand-new model completely from scratch on general web data",
+          "Removing entire layers from a pretrained model so that the resulting network becomes smaller",
+          "Continuing training of a pretrained model on specialized data from a field",
+          "Translating the model's user interface into one specific language"
         ],
         "correct": [
           2
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "What is curriculum learning in the context of fine-tuning?",
         "options": [
-          "Randomly shuffling training data at every epoch",
-          "Ordering training data from simpler to more complex examples to improve learning",
-          "Using only the hardest examples for training",
-          "A syllabus for a university course on machine learning"
+          "Randomly shuffling the entire training dataset at the start of every epoch",
+          "Ordering training data from simpler to more complex examples",
+          "Using only the very hardest examples throughout training",
+          "An official syllabus written for a university course about machine learning topics"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "How does LoRA (Low-Rank Adaptation) reduce fine-tuning cost?",
         "options": [
-          "It freezes the original weights and trains small low-rank matrices injected into each layer",
-          "It deletes half of the model’s layers before training",
-          "It uses FP64 precision for all calculations",
-          "It trains only the embedding layer and freezes everything else"
+          "It freezes the original weights and trains small low-rank matrices in each layer",
+          "It deletes fully half of the model's layers before training begins",
+          "It uses FP64 double precision for every single calculation performed",
+          "It trains only the embedding layer while keeping absolutely everything else frozen in place"
         ],
         "correct": [
           0
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "What are advantages of LoRA adapter composition?Select all that apply",
         "options": [
-          "Multiple task-specific adapters can be swapped or merged without retraining the base model",
-          "It eliminates the need for any training data",
-          "It guarantees zero loss in quality compared to full fine-tuning",
-          "Adapters are small files that can be stored and deployed independently from the base model"
+          "Multiple task adapters can be swapped or merged without retraining the base model",
+          "It completely eliminates the need for any training data at all",
+          "It absolutely guarantees zero loss in output quality compared with a full fine-tuning run every time",
+          "Adapters are small files stored and deployed independently from the base model"
         ],
         "correct": [
           0,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "What risk does domain-specific fine-tuning introduce if the dataset is too narrow?",
         "options": [
-          "The model becomes faster at inference",
-          "The model’s vocabulary automatically expands",
-          "The model improves on all general benchmarks",
-          "Catastrophic forgetting, where the model loses general capabilities it had before fine-tuning"
+          "The model becomes noticeably faster at inference time",
+          "The model's vocabulary automatically expands on its own",
+          "The model reliably improves across absolutely every single general benchmark that exists today",
+          "Catastrophic forgetting, where the model loses general capabilities it had before"
         ],
         "correct": [
           3
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Ce este fine-tuning-ul specific unui domeniu?",
         "options": [
-          "Antrenarea unui model de la zero pe date generale de pe web",
-          "Eliminarea straturilor dintr-un model preantrenat pentru a-l face mai mic",
-          "Continuarea antrenării unui model preantrenat pe date specializate dintr-un domeniu particular",
-          "Traducerea interfeței modelului într-o limbă specifică"
+          "Antrenarea unui model complet nou de la zero pe date generale de pe web",
+          "Eliminarea unor straturi întregi dintr-un model preantrenat astfel încât rețeaua rezultată să devină mai mică",
+          "Continuarea antrenării unui model preantrenat pe date specializate dintr-un domeniu",
+          "Traducerea interfeței de utilizator a modelului într-o singură limbă"
         ],
         "correct": [
           2
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "Ce este curriculum learning în contextul fine-tuning-ului?",
         "options": [
-          "Amestecarea aleatorie a datelor de antrenare la fiecare epocă",
-          "Ordonarea datelor de antrenare de la exemple mai simple la mai complexe pentru a îmbunătăți învățarea",
-          "Utilizarea doar a celor mai dificile exemple pentru antrenare",
-          "Un program de studiu pentru un curs universitar de machine learning"
+          "Amestecarea aleatorie a întregului set de date de antrenare la începutul fiecărei epoci",
+          "Ordonarea datelor de antrenare de la exemple mai simple la mai complexe",
+          "Utilizarea doar a celor mai dificile exemple pe tot parcursul antrenării",
+          "Un program de studiu oficial scris pentru un curs universitar despre subiecte de machine learning"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Cum reduce LoRA (Low-Rank Adaptation) costul fine-tuning-ului?",
         "options": [
-          "Îngheață ponderile originale și antrenează matrice mici de rang redus injectate în fiecare strat",
-          "Șterge jumătate din straturile modelului înainte de antrenare",
-          "Folosește precizie FP64 pentru toate calculele",
-          "Antrenează doar stratul de embedding și îngheață tot restul"
+          "Îngheață ponderile originale și antrenează matrice mici de rang redus în fiecare strat",
+          "Șterge complet jumătate din straturile modelului înainte de începerea antrenării",
+          "Folosește precizie dublă FP64 pentru fiecare calcul efectuat",
+          "Antrenează doar stratul de embedding în timp ce menține absolut tot restul înghețat pe loc"
         ],
         "correct": [
           0
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Care sunt avantajele compoziției adaptoarelor LoRA? Selectați toate răspunsurile corecte",
         "options": [
-          "Mai multe adaptoare specifice sarcinilor pot fi schimbate sau combinate fără reantrenarea modelului de bază",
-          "Elimină necesitatea oricăror date de antrenare",
-          "Garantează pierdere zero de calitate comparativ cu fine-tuning-ul complet",
-          "Adaptoarele sunt fișiere mici care pot fi stocate și implementate independent de modelul de bază"
+          "Mai multe adaptoare pot fi schimbate sau combinate fără reantrenarea modelului de bază",
+          "Elimină complet necesitatea oricăror date de antrenare",
+          "Garantează în mod absolut pierdere zero de calitate a rezultatelor comparativ cu o rulare completă de fine-tuning",
+          "Adaptoarele sunt fișiere mici stocate și implementate independent de modelul de bază"
         ],
         "correct": [
           0,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "Ce risc introduce fine-tuning-ul specific unui domeniu dacă setul de date este prea îngust?",
         "options": [
-          "Modelul devine mai rapid la inferență",
-          "Vocabularul modelului se extinde automat",
-          "Modelul se îmbunătățește la toate benchmark-urile generale",
-          "Uitarea catastrofică, prin care modelul pierde capacitățile generale pe care le avea înainte de fine-tuning"
+          "Modelul devine considerabil mai rapid la inferență",
+          "Vocabularul modelului se extinde automat de la sine",
+          "Modelul se îmbunătățește în mod fiabil la absolut fiecare benchmark general care există în prezent",
+          "Uitarea catastrofică, prin care modelul pierde capacitățile generale pe care le avea înainte"
         ],
         "correct": [
           3
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Τι είναι το domain-specific fine-tuning;",
         "options": [
-          "Εκπαίδευση ενός μοντέλου από το μηδέν σε γενικά δεδομένα του web",
-          "Αφαίρεση επιπέδων από ένα προεκπαιδευμένο μοντέλο για να γίνει μικρότερο",
-          "Συνέχιση της εκπαίδευσης ενός προεκπαιδευμένου μοντέλου σε εξειδικευμένα δεδομένα από ένα συγκεκριμένο πεδίο",
-          "Μετάφραση της διεπαφής του μοντέλου σε μια συγκεκριμένη γλώσσα"
+          "Εκπαίδευση ενός ολοκαίνουργιου μοντέλου από το μηδέν σε γενικά δεδομένα του web",
+          "Αφαίρεση ολόκληρων επιπέδων από ένα προεκπαιδευμένο μοντέλο ώστε το δίκτυο που προκύπτει να γίνει μικρότερο",
+          "Συνέχιση εκπαίδευσης προεκπαιδευμένου μοντέλου σε εξειδικευμένα δεδομένα ενός πεδίου",
+          "Μετάφραση της διεπαφής χρήστη του μοντέλου σε μία συγκεκριμένη γλώσσα"
         ],
         "correct": [
           2
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Τι είναι το curriculum learning στο πλαίσιο του fine-tuning;",
         "options": [
-          "Τυχαία ανακατανομή δεδομένων εκπαίδευσης σε κάθε εποχή",
-          "Ταξινόμηση δεδομένων εκπαίδευσης από απλούστερα σε πιο σύνθετα παραδείγματα για βελτίωση της μάθησης",
-          "Χρήση μόνο των πιο δύσκολων παραδειγμάτων για εκπαίδευση",
-          "Ένα πρόγραμμα σπουδών πανεπιστημιακού μαθήματος machine learning"
+          "Τυχαία ανακατανομή ολόκληρου του συνόλου δεδομένων εκπαίδευσης στην αρχή κάθε εποχής",
+          "Ταξινόμηση δεδομένων εκπαίδευσης από απλούστερα σε πιο σύνθετα παραδείγματα",
+          "Χρήση μόνο των πιο δύσκολων παραδειγμάτων καθ' όλη τη διάρκεια της εκπαίδευσης",
+          "Ένα επίσημο πρόγραμμα σπουδών γραμμένο για ένα πανεπιστημιακό μάθημα σχετικά με το machine learning"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Πώς μειώνει το LoRA (Low-Rank Adaptation) το κόστος fine-tuning;",
         "options": [
-          "Παγώνει τα αρχικά βάρη και εκπαιδεύει μικρούς πίνακες χαμηλής τάξης που εισάγονται σε κάθε επίπεδο",
-          "Διαγράφει τα μισά επίπεδα του μοντέλου πριν την εκπαίδευση",
-          "Χρησιμοποιεί ακρίβεια FP64 για όλους τους υπολογισμούς",
-          "Εκπαιδεύει μόνο το επίπεδο embedding και παγώνει τα υπόλοιπα"
+          "Παγώνει τα αρχικά βάρη και εκπαιδεύει μικρούς πίνακες χαμηλής τάξης σε κάθε επίπεδο",
+          "Διαγράφει εντελώς τα μισά επίπεδα του μοντέλου πριν ξεκινήσει η εκπαίδευση",
+          "Χρησιμοποιεί διπλή ακρίβεια FP64 για κάθε μεμονωμένο υπολογισμό που εκτελείται",
+          "Εκπαιδεύει μόνο το επίπεδο embedding διατηρώντας απολύτως όλα τα υπόλοιπα παγωμένα στη θέση τους"
         ],
         "correct": [
           0
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποια είναι τα πλεονεκτήματα της σύνθεσης adapters LoRA; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Πολλαπλοί adapters ειδικοί ανά εργασία μπορούν να εναλλάσσονται ή να συγχωνεύονται χωρίς επανεκπαίδευση του βασικού μοντέλου",
-          "Εξαλείφει την ανάγκη για οποιαδήποτε δεδομένα εκπαίδευσης",
-          "Εγγυάται μηδενική απώλεια ποιότητας σε σύγκριση με πλήρες fine-tuning",
-          "Οι adapters είναι μικρά αρχεία που μπορούν να αποθηκευτούν και να αναπτυχθούν ανεξάρτητα από το βασικό μοντέλο"
+          "Πολλοί adapters μπορούν να εναλλάσσονται ή να συγχωνεύονται χωρίς επανεκπαίδευση του βασικού μοντέλου",
+          "Εξαλείφει εντελώς την ανάγκη για οποιαδήποτε δεδομένα εκπαίδευσης",
+          "Εγγυάται απολύτως μηδενική απώλεια ποιότητας αποτελεσμάτων σε σύγκριση με μια πλήρη εκτέλεση fine-tuning κάθε φορά",
+          "Οι adapters είναι μικρά αρχεία που αποθηκεύονται και αναπτύσσονται ανεξάρτητα από το βασικό μοντέλο"
         ],
         "correct": [
           0,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Ποιον κίνδυνο εισάγει το domain-specific fine-tuning αν το σύνολο δεδομένων είναι πολύ στενό;",
         "options": [
-          "Το μοντέλο γίνεται ταχύτερο στην εξαγωγή συμπερασμάτων",
-          "Το λεξιλόγιο του μοντέλου επεκτείνεται αυτόματα",
-          "Το μοντέλο βελτιώνεται σε όλα τα γενικά benchmarks",
-          "Καταστροφική λήθη, όπου το μοντέλο χάνει γενικές ικανότητες που είχε πριν το fine-tuning"
+          "Το μοντέλο γίνεται αισθητά ταχύτερο κατά την εξαγωγή συμπερασμάτων",
+          "Το λεξιλόγιο του μοντέλου επεκτείνεται αυτόματα από μόνο του",
+          "Το μοντέλο βελτιώνεται αξιόπιστα σε απολύτως κάθε γενικό benchmark που υπάρχει σήμερα χωρίς εξαίρεση",
+          "Καταστροφική λήθη, όπου το μοντέλο χάνει γενικές ικανότητες που είχε πριν"
         ],
         "correct": [
           3

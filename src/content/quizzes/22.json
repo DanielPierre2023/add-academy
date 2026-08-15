@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What are the two sublayers inside a GPT-2 transformer block?",
         "options": [
-          "Embedding layer and output projection",
-          "Multi-head causal self-attention and feed-forward network",
-          "Encoder and decoder",
-          "Tokenizer and detokenizer"
+          "The token embedding layer and the final output projection head",
+          "Causal multi-head self-attention and a feed-forward net",
+          "A separate encoder and a separate decoder stack",
+          "The tokenizer and the detokenizer module"
         ],
         "correct": [
           1
@@ -23,9 +23,9 @@
         "text": "In GPT-2's pre-norm style, where does Layer Normalization go?",
         "options": [
           "Before each sublayer (attention and FFN)",
-          "After each sublayer",
-          "Only after the final block",
-          "Only before the first block"
+          "After each sublayer has finished its computation",
+          "Only after the final transformer block",
+          "Only before the very first block"
         ],
         "correct": [
           0
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "Why is the transformer block designed to be stackable?",
         "options": [
-          "To reduce the number of parameters",
-          "To speed up inference",
-          "Each layer builds more abstract representations; depth enables emergent capabilities",
-          "It is required by the attention mechanism"
+          "To cut down the total number of model parameters",
+          "To significantly speed up inference during generation",
+          "Deeper stacks build increasingly abstract features",
+          "It is strictly required by the attention mechanism itself"
         ],
         "correct": [
           2
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "What ensures the input and output dimensions of a transformer block are the same?Select all that apply",
         "options": [
-          "A special reshape operation at the end",
-          "Residual connections require matching dimensions (x + f(x))",
-          "Both attention output projection and FFN project back to d_model",
-          "Layer Normalization ensures matching dimensions"
+          "A special reshape operation applied at the very end of the block",
+          "Residual connections need matching dimensions (x + f(x))",
+          "Attention output and FFN both project back to d_model",
+          "Layer Normalization by itself guarantees matching dimensions"
         ],
         "correct": [
           1,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "How does information flow through a transformer block?",
         "options": [
-          "Attention and FFN operate in parallel",
-          "FFN runs first, then attention",
-          "All tokens are processed independently",
-          "Attention mixes information between positions, then FFN processes each position independently"
+          "Attention and the FFN both operate fully in parallel",
+          "The FFN runs first, and then attention runs afterward",
+          "All tokens are processed completely independently throughout",
+          "Attention mixes positions, then FFN processes each one"
         ],
         "correct": [
           3
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Care sunt cele două sub-straturi dintr-un bloc transformer GPT-2?",
         "options": [
-          "Stratul de embedding și proiecția de ieșire",
-          "Self-attention cauzal multi-head și rețeaua feed-forward",
-          "Encoder și decoder",
-          "Tokenizer și detokenizer"
+          "Stratul de embedding al token-urilor și capul final de proiecție de ieșire",
+          "Self-attention cauzal multi-head și o rețea feed-forward",
+          "Un encoder separat și un decoder separat",
+          "Tokenizer-ul și modulul de detokenizare"
         ],
         "correct": [
           1
@@ -104,8 +104,8 @@
         "text": "În stilul pre-norm al GPT-2, unde se plasează Layer Normalization?",
         "options": [
           "Înainte de fiecare sub-strat (attention și FFN)",
-          "După fiecare sub-strat",
-          "Doar după ultimul bloc",
+          "După ce fiecare sub-strat și-a terminat calculul",
+          "Doar după ultimul bloc transformer",
           "Doar înainte de primul bloc"
         ],
         "correct": [
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "De ce este blocul transformer proiectat să fie stivuibil?",
         "options": [
-          "Pentru a reduce numărul de parametri",
-          "Pentru a accelera inferența",
-          "Fiecare strat construiește reprezentări mai abstracte; adâncimea permite capabilități emergente",
-          "Este necesar din cauza mecanismului de attention"
+          "Pentru a reduce numărul total de parametri ai modelului",
+          "Pentru a accelera semnificativ inferența la generare",
+          "Stivele adânci construiesc reprezentări tot mai abstracte",
+          "Este strict impus de însuși mecanismul de attention folosit"
         ],
         "correct": [
           2
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Ce asigură că dimensiunile de intrare și ieșire ale unui bloc transformer sunt aceleași? Selectați toate răspunsurile corecte",
         "options": [
-          "O operație specială de redimensionare la final",
-          "Conexiunile reziduale necesită dimensiuni identice (x + f(x))",
-          "Atât proiecția de ieșire a attention-ului cât și FFN-ul proiectează înapoi la d_model",
-          "Layer Normalization asigură dimensiuni identice"
+          "O operație specială de redimensionare aplicată chiar la finalul blocului",
+          "Conexiunile reziduale cer dimensiuni identice (x + f(x))",
+          "Ieșirea attention și FFN se proiectează ambele la d_model",
+          "Layer Normalization singură garantează dimensiuni identice"
         ],
         "correct": [
           1,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "Cum curge informația printr-un bloc transformer?",
         "options": [
-          "Attention și FFN operează în paralel",
-          "FFN rulează primul, apoi attention",
-          "Toate token-urile sunt procesate independent",
-          "Attention amestecă informația între poziții, apoi FFN procesează fiecare poziție independent"
+          "Attention și FFN operează ambele complet în paralel",
+          "FFN rulează primul, iar apoi rulează attention după",
+          "Toate token-urile sunt procesate complet independent pe tot parcursul",
+          "Attention amestecă pozițiile, apoi FFN procesează fiecare"
         ],
         "correct": [
           3
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Ποια είναι τα δύο υποεπίπεδα μέσα σε ένα μπλοκ transformer GPT-2;",
         "options": [
-          "Επίπεδο embedding και προβολή εξόδου",
-          "Αιτιατό self-attention πολλαπλών κεφαλιών και δίκτυο feed-forward",
-          "Encoder και decoder",
-          "Tokenizer και detokenizer"
+          "Το επίπεδο embedding των token και η τελική κεφαλή προβολής εξόδου",
+          "Αιτιατό multi-head self-attention και ένα δίκτυο feed-forward",
+          "Ένας ξεχωριστός encoder και ένας decoder",
+          "Ο tokenizer και το module αποτεκμηρίωσης"
         ],
         "correct": [
           1
@@ -185,9 +185,9 @@
         "text": "Στο στυλ pre-norm του GPT-2, πού τοποθετείται η Layer Normalization;",
         "options": [
           "Πριν από κάθε υποεπίπεδο (attention και FFN)",
-          "Μετά από κάθε υποεπίπεδο",
-          "Μόνο μετά το τελευταίο μπλοκ",
-          "Μόνο πριν το πρώτο μπλοκ"
+          "Αφού κάθε υποεπίπεδο έχει ολοκληρώσει τον υπολογισμό του",
+          "Μόνο μετά το τελευταίο μπλοκ transformer",
+          "Μόνο πριν από το πρώτο μπλοκ"
         ],
         "correct": [
           0
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Γιατί το μπλοκ transformer είναι σχεδιασμένο να είναι στοιβάξιμο;",
         "options": [
-          "Για να μειώσει τον αριθμό παραμέτρων",
-          "Για να επιταχύνει την εξαγωγή συμπερασμάτων",
-          "Κάθε επίπεδο χτίζει πιο αφηρημένες αναπαραστάσεις· το βάθος επιτρέπει αναδυόμενες ικανότητες",
-          "Απαιτείται από τον μηχανισμό attention"
+          "Για να μειώσει τον συνολικό αριθμό των παραμέτρων του μοντέλου",
+          "Για να επιταχύνει σημαντικά την εξαγωγή κατά τη δημιουργία",
+          "Οι βαθιές στοίβες χτίζουν πιο αφηρημένα χαρακτηριστικά",
+          "Απαιτείται αυστηρά από τον ίδιο τον μηχανισμό attention"
         ],
         "correct": [
           2
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Τι εξασφαλίζει ότι οι διαστάσεις εισόδου και εξόδου ενός μπλοκ transformer είναι ίδιες; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Μια ειδική λειτουργία αναδιαμόρφωσης στο τέλος",
-          "Οι υπολειμματικές συνδέσεις απαιτούν ταιριαστές διαστάσεις (x + f(x))",
-          "Τόσο η προβολή εξόδου attention όσο και το FFN προβάλλουν πίσω στο d_model",
-          "Η Layer Normalization εξασφαλίζει ταιριαστές διαστάσεις"
+          "Μια ειδική λειτουργία αναδιαμόρφωσης εφαρμοσμένη στο τέλος του μπλοκ",
+          "Οι υπολειμματικές συνδέσεις απαιτούν ίδιες διαστάσεις (x + f(x))",
+          "Attention και FFN προβάλλουν και τα δύο πίσω στο d_model",
+          "Η Layer Normalization από μόνη της εγγυάται ίδιες διαστάσεις"
         ],
         "correct": [
           1,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Πώς ρέει η πληροφορία μέσα από ένα μπλοκ transformer;",
         "options": [
-          "Attention και FFN λειτουργούν παράλληλα",
-          "Το FFN τρέχει πρώτο, μετά το attention",
-          "Όλα τα tokens επεξεργάζονται ανεξάρτητα",
-          "Το attention αναμειγνύει πληροφορίες μεταξύ θέσεων, μετά το FFN επεξεργάζεται κάθε θέση ανεξάρτητα"
+          "Attention και FFN λειτουργούν και τα δύο εντελώς παράλληλα",
+          "Το FFN τρέχει πρώτο, και μετά τρέχει το attention",
+          "Όλα τα token επεξεργάζονται εντελώς ανεξάρτητα καθ' όλη τη διάρκεια",
+          "Το attention αναμειγνύει θέσεις, μετά το FFN κάθε μία ξεχωριστά"
         ],
         "correct": [
           3

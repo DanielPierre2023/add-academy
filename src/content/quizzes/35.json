@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is the core idea behind LoRA (Low-Rank Adaptation)?",
         "options": [
-          "Replacing all weight matrices with smaller random matrices",
-          "Pruning unimportant neurons to reduce model size",
-          "Freezing original weights and learning low-rank update matrices that are added to them",
-          "Training only the embedding layer while keeping all other layers fixed"
+          "Replacing all the weight matrices with smaller randomly initialized matrices",
+          "Pruning unimportant neurons to reduce the overall model size",
+          "Freeze original weights and learn low-rank updates added to them",
+          "Training only the embedding layer while keeping all others fixed"
         ],
         "correct": [
           2
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "In LoRA, a weight update is represented as W + BA, where B has shape (d x r) and A has shape (r x k). What does the rank r control?",
         "options": [
-          "The number of attention heads in the model",
-          "The expressiveness and number of trainable parameters in the low-rank update",
-          "The batch size used during training",
-          "The number of layers that are frozen"
+          "The total number of attention heads present in the model architecture",
+          "The expressiveness and number of trainable parameters in the update",
+          "The batch size that is used during the training process",
+          "The number of transformer layers that are kept frozen"
         ],
         "correct": [
           1
@@ -38,9 +38,9 @@
         "text": "Which of the following are benefits of using LoRA compared to full fine-tuning? Select all that apply",
         "options": [
           "Significantly fewer trainable parameters",
-          "It always outperforms full fine-tuning on every task",
+          "It always outperforms full fine-tuning on absolutely every single task",
           "Lower GPU memory requirements during training",
-          "Multiple LoRA adapters can be swapped without reloading the base model"
+          "Adapters can be swapped without reloading the base model"
         ],
         "correct": [
           0,
@@ -54,10 +54,10 @@
         "index": 3,
         "text": "What distinguishes QLoRA from standard LoRA?",
         "options": [
-          "QLoRA uses a higher rank for better performance",
-          "QLoRA applies LoRA only to query projection matrices",
-          "QLoRA replaces the transformer architecture with a quantized variant",
-          "QLoRA quantizes the base model to 4-bit precision and trains LoRA adapters in higher precision on top"
+          "QLoRA simply uses a higher rank to achieve better performance",
+          "QLoRA applies LoRA only to the query projection matrices",
+          "QLoRA replaces the whole transformer architecture with a quantized variant",
+          "QLoRA quantizes the base model to 4-bit and trains adapters above it"
         ],
         "correct": [
           3
@@ -89,10 +89,10 @@
         "index": 0,
         "text": "Care este ideea centrală din spatele LoRA (Low-Rank Adaptation)?",
         "options": [
-          "Înlocuirea tuturor matricelor de ponderi cu matrice aleatorii mai mici",
-          "Eliminarea neuronilor neimportanți pentru reducerea dimensiunii modelului",
-          "Înghețarea ponderilor originale și învățarea matricelor de actualizare de rang redus care sunt adăugate la acestea",
-          "Antrenarea doar a stratului de embedding păstrând toate celelalte straturi fixe"
+          "Înlocuirea tuturor matricelor de ponderi cu matrice mai mici inițializate aleatoriu",
+          "Eliminarea neuronilor neimportanți pentru a reduce dimensiunea modelului",
+          "Îngheață ponderile originale și învață actualizări de rang redus adăugate lor",
+          "Antrenarea doar a stratului de embedding păstrând restul fixe"
         ],
         "correct": [
           2
@@ -104,10 +104,10 @@
         "index": 1,
         "text": "În LoRA, o actualizare de ponderi este reprezentată ca W + BA, unde B are forma (d x r) și A are forma (r x k). Ce controlează rangul r?",
         "options": [
-          "Numărul de capete de attention din model",
-          "Expresivitatea și numărul de parametri antrenabili în actualizarea de rang redus",
-          "Dimensiunea lotului folosită în timpul antrenării",
-          "Numărul de straturi care sunt înghețate"
+          "Numărul total de capete de attention prezente în arhitectura modelului",
+          "Expresivitatea și numărul de parametri antrenabili din actualizare",
+          "Dimensiunea lotului folosită în timpul procesului de antrenare",
+          "Numărul de straturi transformer care sunt păstrate înghețate"
         ],
         "correct": [
           1
@@ -120,9 +120,9 @@
         "text": "Care dintre următoarele sunt beneficii ale folosirii LoRA comparativ cu ajustarea fină completă? Selectați toate răspunsurile corecte",
         "options": [
           "Semnificativ mai puțini parametri antrenabili",
-          "Depășește întotdeauna ajustarea fină completă pe orice sarcină",
+          "Depășește întotdeauna ajustarea fină completă pe absolut orice sarcină posibilă",
           "Cerințe mai mici de memorie GPU în timpul antrenării",
-          "Mai mulți adaptori LoRA pot fi schimbați fără reîncărcarea modelului de bază"
+          "Adaptoarele pot fi schimbate fără reîncărcarea modelului de bază"
         ],
         "correct": [
           0,
@@ -136,10 +136,10 @@
         "index": 3,
         "text": "Ce distinge QLoRA de LoRA standard?",
         "options": [
-          "QLoRA folosește un rang mai mare pentru performanțe mai bune",
+          "QLoRA folosește pur și simplu un rang mai mare pentru performanțe mai bune",
           "QLoRA aplică LoRA doar matricelor de proiecție query",
-          "QLoRA înlocuiește arhitectura transformer cu o variantă cuantizată",
-          "QLoRA cuantizează modelul de bază la precizie de 4 biți și antrenează adaptori LoRA în precizie superioară deasupra"
+          "QLoRA înlocuiește întreaga arhitectură transformer cu o variantă cuantizată",
+          "QLoRA cuantizează modelul de bază la 4 biți și antrenează adaptori LoRA"
         ],
         "correct": [
           3
@@ -171,10 +171,10 @@
         "index": 0,
         "text": "Ποια είναι η βασική ιδέα πίσω από το LoRA (Low-Rank Adaptation);",
         "options": [
-          "Αντικατάσταση όλων των πινάκων βαρών με μικρότερους τυχαίους πίνακες",
-          "Κλάδεμα ασήμαντων νευρώνων για μείωση μεγέθους μοντέλου",
-          "Πάγωμα αρχικών βαρών και εκμάθηση πινάκων ενημέρωσης χαμηλής τάξης που προστίθενται σε αυτά",
-          "Εκπαίδευση μόνο του επιπέδου embedding κρατώντας όλα τα άλλα σταθερά"
+          "Αντικατάσταση όλων των πινάκων βαρών με μικρότερους τυχαία αρχικοποιημένους πίνακες",
+          "Κλάδεμα ασήμαντων νευρώνων για μείωση του συνολικού μεγέθους μοντέλου",
+          "Πάγωμα αρχικών βαρών και εκμάθηση ενημερώσεων χαμηλής τάξης που προστίθενται",
+          "Εκπαίδευση μόνο του επιπέδου embedding κρατώντας τα υπόλοιπα σταθερά"
         ],
         "correct": [
           2
@@ -186,10 +186,10 @@
         "index": 1,
         "text": "Στο LoRA, μια ενημέρωση βαρών αναπαρίσταται ως W + BA, όπου ο B έχει σχήμα (d x r) και ο A σχήμα (r x k). Τι ελέγχει η τάξη r;",
         "options": [
-          "Τον αριθμό κεφαλιών attention στο μοντέλο",
-          "Την εκφραστικότητα και τον αριθμό εκπαιδεύσιμων παραμέτρων στην ενημέρωση χαμηλής τάξης",
-          "Το μέγεθος παρτίδας κατά την εκπαίδευση",
-          "Τον αριθμό επιπέδων που παγώνονται"
+          "Ο συνολικός αριθμός των κεφαλιών attention μέσα στην αρχιτεκτονική του μοντέλου",
+          "Η εκφραστικότητα και ο αριθμός εκπαιδεύσιμων παραμέτρων της ενημέρωσης",
+          "Το μέγεθος παρτίδας που χρησιμοποιείται κατά την εκπαίδευση",
+          "Ο αριθμός επιπέδων transformer που παραμένουν παγωμένα"
         ],
         "correct": [
           1
@@ -202,9 +202,9 @@
         "text": "Ποια από τα ακόλουθα είναι πλεονεκτήματα χρήσης LoRA σε σύγκριση με πλήρη ακριβή ρύθμιση; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
           "Σημαντικά λιγότερες εκπαιδεύσιμες παράμετροι",
-          "Ξεπερνά πάντα την πλήρη ακριβή ρύθμιση σε κάθε εργασία",
-          "Χαμηλότερες απαιτήσεις μνήμης GPU κατά εκπαίδευση",
-          "Πολλαπλοί LoRA adaptors μπορούν να εναλλαχθούν χωρίς επαναφόρτωση βασικού μοντέλου"
+          "Ξεπερνά πάντα την πλήρη ακριβή ρύθμιση σε απολύτως κάθε δυνατή εργασία",
+          "Χαμηλότερες απαιτήσεις μνήμης GPU κατά την εκπαίδευση",
+          "Οι adaptors εναλλάσσονται χωρίς επαναφόρτωση του βασικού μοντέλου"
         ],
         "correct": [
           0,
@@ -218,10 +218,10 @@
         "index": 3,
         "text": "Τι διαφοροποιεί το QLoRA από το τυπικό LoRA;",
         "options": [
-          "Το QLoRA χρησιμοποιεί υψηλότερη τάξη για καλύτερη απόδοση",
+          "Το QLoRA χρησιμοποιεί απλώς υψηλότερη τάξη για καλύτερη απόδοση",
           "Το QLoRA εφαρμόζει LoRA μόνο σε πίνακες προβολής query",
-          "Το QLoRA αντικαθιστά αρχιτεκτονική transformer με κβαντισμένη παραλλαγή",
-          "Το QLoRA κβαντίζει το βασικό μοντέλο σε ακρίβεια 4-bit και εκπαιδεύει adaptors LoRA σε υψηλότερη ακρίβεια"
+          "Το QLoRA αντικαθιστά ολόκληρη την αρχιτεκτονική transformer με κβαντισμένη παραλλαγή",
+          "Το QLoRA κβαντίζει το βασικό μοντέλο σε 4-bit και εκπαιδεύει adaptors από πάνω"
         ],
         "correct": [
           3

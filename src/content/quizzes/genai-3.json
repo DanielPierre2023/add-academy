@@ -7,10 +7,10 @@
         "index": 0,
         "text": "Why does ProseAI include a rule-based text transformation pipeline alongside LLM-based rewriting?",
         "options": [
-          "Rule-based transforms always produce better results than LLMs",
-          "They provide zero-cost fallback processing, work offline, and handle simple transformations without API calls",
-          "LLMs cannot perform text simplification",
-          "Rules are needed to train the LLM"
+          "Because rule-based transforms almost always produce noticeably better results than any LLM can",
+          "They give zero-cost fallback, run offline, and handle simple edits without API calls",
+          "Because LLMs are fundamentally unable to perform text simplification",
+          "Because the handwritten rules are required to train the LLM itself"
         ],
         "correct": [
           1
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "What is the primary benefit of streaming rewritten text to the frontend via Server-Sent Events?",
         "options": [
-          "It reduces the total processing time of the LLM",
-          "It allows the server to handle more concurrent requests",
-          "Users see the first words in under 200ms instead of waiting for the full response, improving perceived latency",
-          "It compresses the response to use less bandwidth"
+          "It reduces the total end-to-end processing time of the LLM",
+          "It lets the same server handle many more concurrent user requests at once without any extra hardware",
+          "Users see the first words in under 200ms, improving perceived latency",
+          "It compresses the response payload to use noticeably less bandwidth"
         ],
         "correct": [
           2
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "Which are effective strategies in a prompt template system for text rewriting?",
         "options": [
-          "Separate system prompt (role/persona) from user instruction (specific task)",
-          "Use the same generic prompt for all rewriting modes",
-          "Include specific constraints like target reading level or sentence length limits",
-          "Allow user-configurable parameters (summary length, grade level) that inject into the template"
+          "Separate the system prompt (role/persona) from the user instruction",
+          "Reuse one single generic prompt for every rewriting mode across the whole application regardless of task",
+          "Include constraints like a target reading level or sentence-length limit",
+          "Allow user-configurable parameters (length, grade level) injected into the template"
         ],
         "correct": [
           0,
@@ -59,10 +59,10 @@
         "index": 0,
         "text": "De ce include ProseAI un pipeline de transformare a textului bazat pe reguli alături de rescrierea bazată pe LLM?",
         "options": [
-          "Transformările bazate pe reguli produc întotdeauna rezultate mai bune decât LLM-urile",
-          "Oferă procesare de rezervă cu cost zero, funcționează offline și gestionează transformări simple fără apeluri API",
-          "LLM-urile nu pot efectua simplificarea textului",
-          "Regulile sunt necesare pentru a antrena LLM-ul"
+          "Deoarece transformările bazate pe reguli produc aproape întotdeauna rezultate vizibil mai bune decât orice LLM",
+          "Oferă rezervă cu cost zero, rulează offline și gestionează editări simple fără apeluri API",
+          "Deoarece LLM-urile sunt fundamental incapabile să efectueze simplificarea textului",
+          "Deoarece regulile scrise manual sunt necesare pentru a antrena însuși LLM-ul"
         ],
         "correct": [
           1
@@ -74,10 +74,10 @@
         "index": 1,
         "text": "Care este beneficiul principal al transmiterii textului rescris către frontend prin Server-Sent Events?",
         "options": [
-          "Reduce timpul total de procesare al LLM-ului",
-          "Permite serverului să gestioneze mai multe cereri concurente",
-          "Utilizatorii văd primele cuvinte în sub 200ms în loc să aștepte răspunsul complet, îmbunătățind latența percepută",
-          "Comprimă răspunsul pentru a utiliza mai puțină lățime de bandă"
+          "Reduce timpul total de procesare end-to-end al LLM-ului",
+          "Permite aceluiași server să gestioneze mult mai multe cereri concurente simultan, fără niciun hardware suplimentar",
+          "Utilizatorii văd primele cuvinte în sub 200ms, îmbunătățind latența percepută",
+          "Comprimă payload-ul răspunsului pentru a folosi vizibil mai puțină lățime de bandă"
         ],
         "correct": [
           2
@@ -89,10 +89,10 @@
         "index": 2,
         "text": "Care sunt strategii eficiente într-un sistem de template-uri de prompt pentru rescrierea textului? Selectați toate răspunsurile corecte",
         "options": [
-          "Separarea prompt-ului de sistem (rol/personaj) de instrucțiunea utilizatorului (sarcină specifică)",
-          "Utilizarea aceluiași prompt generic pentru toate modurile de rescriere",
-          "Includerea de constrângeri specifice precum nivelul de citire țintă sau limitele lungimii propozițiilor",
-          "Permiterea parametrilor configurabili de utilizator (lungimea rezumatului, nivelul de clasă) care se injectează în template"
+          "Separarea prompt-ului de sistem (rol/personaj) de instrucțiunea utilizatorului",
+          "Reutilizarea unui singur prompt generic pentru fiecare mod de rescriere din întreaga aplicație, indiferent de sarcină",
+          "Includerea de constrângeri precum nivelul de citire țintă sau limita lungimii propozițiilor",
+          "Permiterea parametrilor configurabili (lungime, nivel de clasă) injectați în template"
         ],
         "correct": [
           0,
@@ -111,10 +111,10 @@
         "index": 0,
         "text": "Γιατί το ProseAI περιλαμβάνει ένα pipeline μετασχηματισμού κειμένου βασισμένο σε κανόνες μαζί με την επαναγραφή βασισμένη σε LLM;",
         "options": [
-          "Οι μετασχηματισμοί βασισμένοι σε κανόνες παράγουν πάντα καλύτερα αποτελέσματα από τα LLMs",
-          "Παρέχουν εφεδρική επεξεργασία μηδενικού κόστους, λειτουργούν χωρίς σύνδεση και χειρίζονται απλούς μετασχηματισμούς χωρίς κλήσεις API",
-          "Τα LLMs δεν μπορούν να εκτελέσουν απλοποίηση κειμένου",
-          "Οι κανόνες χρειάζονται για την εκπαίδευση του LLM"
+          "Επειδή οι μετασχηματισμοί βάσει κανόνων παράγουν σχεδόν πάντα αισθητά καλύτερα αποτελέσματα από κάθε LLM",
+          "Δίνουν εφεδρεία μηδενικού κόστους, τρέχουν offline και κάνουν απλές αλλαγές χωρίς κλήσεις API",
+          "Επειδή τα LLMs είναι θεμελιωδώς ανίκανα να εκτελέσουν απλοποίηση κειμένου",
+          "Επειδή οι χειρόγραφοι κανόνες απαιτούνται για την εκπαίδευση του ίδιου του LLM"
         ],
         "correct": [
           1
@@ -126,10 +126,10 @@
         "index": 1,
         "text": "Ποιο είναι το κύριο πλεονέκτημα της ροής αναγραμμένου κειμένου προς το frontend μέσω Server-Sent Events;",
         "options": [
-          "Μειώνει τον συνολικό χρόνο επεξεργασίας του LLM",
-          "Επιτρέπει στον διακομιστή να χειρίζεται περισσότερα ταυτόχρονα αιτήματα",
-          "Οι χρήστες βλέπουν τις πρώτες λέξεις σε λιγότερο από 200ms αντί να περιμένουν την πλήρη απάντηση, βελτιώνοντας την αντιληπτή καθυστέρηση",
-          "Συμπιέζει την απάντηση για χρήση λιγότερου εύρους ζώνης"
+          "Μειώνει τον συνολικό χρόνο επεξεργασίας end-to-end του LLM",
+          "Επιτρέπει στον ίδιο διακομιστή να χειρίζεται πολύ περισσότερα ταυτόχρονα αιτήματα, χωρίς κανένα επιπλέον υλικό",
+          "Οι χρήστες βλέπουν τις πρώτες λέξεις σε λιγότερο από 200ms, με καλύτερη αντιληπτή καθυστέρηση",
+          "Συμπιέζει το payload της απόκρισης για χρήση αισθητά λιγότερου εύρους ζώνης"
         ],
         "correct": [
           2
@@ -141,10 +141,10 @@
         "index": 2,
         "text": "Ποιες είναι αποτελεσματικές στρατηγικές σε ένα σύστημα template prompt για αναγραφή κειμένου; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Διαχωρισμός του system prompt (ρόλος/περσόνα) από την οδηγία χρήστη (συγκεκριμένη εργασία)",
-          "Χρήση του ίδιου γενικού prompt για όλους τους τρόπους αναγραφής",
-          "Συμπερίληψη συγκεκριμένων περιορισμών όπως στοχευόμενο επίπεδο ανάγνωσης ή όρια μήκους προτάσεων",
-          "Επιτρέποντας παραμέτρους ρυθμιζόμενες από τον χρήστη (μήκος περίληψης, επίπεδο τάξης) που εισάγονται στο template"
+          "Διαχωρισμός του system prompt (ρόλος/περσόνα) από την οδηγία του χρήστη",
+          "Επαναχρησιμοποίηση ενός μόνο γενικού prompt για κάθε τρόπο αναγραφής σε ολόκληρη την εφαρμογή, ανεξαρτήτως εργασίας",
+          "Συμπερίληψη περιορισμών όπως στοχευόμενο επίπεδο ανάγνωσης ή όριο μήκους πρότασης",
+          "Παραμέτρους ρυθμιζόμενες από τον χρήστη (μήκος, επίπεδο) που εισάγονται στο template"
         ],
         "correct": [
           0,

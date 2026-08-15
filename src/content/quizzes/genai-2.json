@@ -7,10 +7,10 @@
         "index": 0,
         "text": "Why does a video generation SaaS require an asynchronous job queue instead of a simple request-response pattern?",
         "options": [
-          "Because video files are too large to transmit over HTTP",
-          "Because video generation takes 30 seconds to 5 minutes, which exceeds typical HTTP timeout limits",
-          "Because browsers cannot display video content directly",
-          "Because video APIs only accept WebSocket connections"
+          "Because the rendered video files are simply far too large to transmit back inside a single HTTP response",
+          "Because generation takes 30s to 5min, exceeding typical HTTP timeout limits",
+          "Because web browsers cannot display generated video content directly",
+          "Because most video APIs only accept persistent WebSocket connections"
         ],
         "correct": [
           1
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "What is the primary purpose of limiting concurrent video generation jobs in a SaaS?",
         "options": [
-          "To make the queue appear busy and create artificial demand",
-          "To improve video quality by dedicating more GPU resources per job",
-          "To control API costs and prevent runaway spending on expensive GPU-based generation",
-          "To simplify the codebase by avoiding multithreading"
+          "To make the queue look busy so the product creates a sense of artificial demand",
+          "To improve output quality by dedicating far more GPU resources and memory to each individual job",
+          "To control API costs and prevent runaway spending on GPU generation",
+          "To simplify the codebase by avoiding any use of multithreading"
         ],
         "correct": [
           2
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "Which are valid strategies for handling failed video generation jobs?",
         "options": [
-          "Automatic retry with a maximum retry count",
-          "Silently discard the job and refund the user without notification",
-          "Notify the user via webhook or polling status that the job failed",
-          "Re-queue the job with the same parameters for another attempt"
+          "Automatic retry, capped by a maximum retry count",
+          "Silently discard the failed job and quietly refund the user without ever sending any notification",
+          "Notify the user via webhook or polling that the job failed",
+          "Re-queue the job with identical parameters for one more attempt"
         ],
         "correct": [
           0,
@@ -59,10 +59,10 @@
         "index": 0,
         "text": "De ce necesită un SaaS de generare video o coadă de sarcini asincronă în loc de un simplu model cerere-răspuns?",
         "options": [
-          "Deoarece fișierele video sunt prea mari pentru a fi transmise prin HTTP",
-          "Deoarece generarea video durează 30 de secunde până la 5 minute, ceea ce depășește limitele tipice de timeout HTTP",
-          "Deoarece browserele nu pot afișa conținut video direct",
-          "Deoarece API-urile video acceptă doar conexiuni WebSocket"
+          "Deoarece fișierele video generate sunt pur și simplu mult prea mari pentru a fi transmise înapoi într-un singur răspuns HTTP",
+          "Deoarece generarea durează 30s–5min, depășind limitele tipice de timeout HTTP",
+          "Deoarece browserele web nu pot afișa direct conținutul video generat",
+          "Deoarece majoritatea API-urilor video acceptă doar conexiuni WebSocket persistente"
         ],
         "correct": [
           1
@@ -74,10 +74,10 @@
         "index": 1,
         "text": "Care este scopul principal al limitării sarcinilor concurente de generare video într-un SaaS?",
         "options": [
-          "Pentru a face coada să pară ocupată și a crea cerere artificială",
-          "Pentru a îmbunătăți calitatea video prin dedicarea mai multor resurse GPU per sarcină",
-          "Pentru a controla costurile API și a preveni cheltuielile excesive pe generarea bazată pe GPU",
-          "Pentru a simplifica codul evitând multithreading-ul"
+          "Pentru a face coada să pară ocupată, astfel încât produsul să creeze o senzație de cerere artificială",
+          "Pentru a îmbunătăți calitatea prin dedicarea a mult mai multor resurse GPU și memorie fiecărei sarcini în parte",
+          "Pentru a controla costurile API și a preveni cheltuielile excesive pe generarea GPU",
+          "Pentru a simplifica codul evitând orice utilizare a multithreading-ului"
         ],
         "correct": [
           2
@@ -89,10 +89,10 @@
         "index": 2,
         "text": "Care sunt strategii valide pentru gestionarea sarcinilor eșuate de generare video? Selectați toate răspunsurile corecte",
         "options": [
-          "Reîncercare automată cu un număr maxim de reîncercări",
-          "Eliminarea silențioasă a sarcinii și rambursarea utilizatorului fără notificare",
-          "Notificarea utilizatorului prin webhook sau stare de polling că sarcina a eșuat",
-          "Repunerea sarcinii în coadă cu aceiași parametri pentru o altă încercare"
+          "Reîncercare automată, plafonată de un număr maxim de reîncercări",
+          "Eliminarea silențioasă a sarcinii eșuate și rambursarea discretă a utilizatorului fără a trimite vreo notificare",
+          "Notificarea utilizatorului prin webhook sau polling că sarcina a eșuat",
+          "Repunerea sarcinii în coadă cu parametri identici pentru încă o încercare"
         ],
         "correct": [
           0,
@@ -111,10 +111,10 @@
         "index": 0,
         "text": "Γιατί απαιτεί ένα SaaS δημιουργίας βίντεο μια ασύγχρονη ουρά εργασιών αντί ενός απλού μοτίβου αίτησης-απάντησης;",
         "options": [
-          "Επειδή τα αρχεία βίντεο είναι πολύ μεγάλα για μετάδοση μέσω HTTP",
-          "Επειδή η δημιουργία βίντεο διαρκεί 30 δευτερόλεπτα έως 5 λεπτά, υπερβαίνοντας τα τυπικά όρια timeout HTTP",
-          "Επειδή τα προγράμματα περιήγησης δεν μπορούν να εμφανίσουν περιεχόμενο βίντεο απευθείας",
-          "Επειδή τα API βίντεο δέχονται μόνο συνδέσεις WebSocket"
+          "Επειδή τα παραγόμενα αρχεία βίντεο είναι απλώς πάρα πολύ μεγάλα για να επιστραφούν μέσα σε μία μόνο απόκριση HTTP",
+          "Επειδή η δημιουργία διαρκεί 30s–5min, υπερβαίνοντας τα τυπικά όρια timeout HTTP",
+          "Επειδή οι φυλλομετρητές δεν μπορούν να εμφανίσουν απευθείας το παραγόμενο βίντεο",
+          "Επειδή τα περισσότερα API βίντεο δέχονται μόνο μόνιμες συνδέσεις WebSocket"
         ],
         "correct": [
           1
@@ -126,10 +126,10 @@
         "index": 1,
         "text": "Ποιος είναι ο κύριος σκοπός του περιορισμού ταυτόχρονων εργασιών δημιουργίας βίντεο σε ένα SaaS;",
         "options": [
-          "Για να φαίνεται η ουρά απασχολημένη και να δημιουργηθεί τεχνητή ζήτηση",
-          "Για βελτίωση ποιότητας βίντεο αφιερώνοντας περισσότερους πόρους GPU ανά εργασία",
-          "Για τον έλεγχο κόστους API και την αποτροπή ανεξέλεγκτων δαπανών σε δημιουργία βασισμένη σε GPU",
-          "Για απλοποίηση του κώδικα αποφεύγοντας multithreading"
+          "Για να φαίνεται η ουρά απασχολημένη, ώστε το προϊόν να δημιουργεί μια αίσθηση τεχνητής ζήτησης",
+          "Για βελτίωση ποιότητας αφιερώνοντας πολύ περισσότερους πόρους GPU και μνήμη σε κάθε ξεχωριστή εργασία",
+          "Για τον έλεγχο κόστους API και την αποτροπή υπερβολικών δαπανών στη δημιουργία GPU",
+          "Για την απλοποίηση του κώδικα αποφεύγοντας οποιαδήποτε χρήση multithreading"
         ],
         "correct": [
           2
@@ -141,10 +141,10 @@
         "index": 2,
         "text": "Ποιες είναι έγκυρες στρατηγικές για τη διαχείριση αποτυχημένων εργασιών δημιουργίας βίντεο; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Αυτόματη επανάληψη με μέγιστο αριθμό προσπαθειών",
-          "Σιωπηρή απόρριψη της εργασίας και επιστροφή χρημάτων χωρίς ειδοποίηση",
-          "Ειδοποίηση του χρήστη μέσω webhook ή κατάστασης polling ότι η εργασία απέτυχε",
-          "Επαναφορά της εργασίας στην ουρά με τις ίδιες παραμέτρους για νέα προσπάθεια"
+          "Αυτόματη επανάληψη, με ανώτατο όριο αριθμού προσπαθειών",
+          "Σιωπηρή απόρριψη της αποτυχημένης εργασίας και διακριτική επιστροφή χρημάτων χωρίς καμία απολύτως ειδοποίηση",
+          "Ειδοποίηση του χρήστη μέσω webhook ή polling ότι η εργασία απέτυχε",
+          "Επαναφορά της εργασίας στην ουρά με ίδιες παραμέτρους για μία ακόμη προσπάθεια"
         ],
         "correct": [
           0,

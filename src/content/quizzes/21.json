@@ -22,10 +22,10 @@
         "index": 1,
         "text": "What problem do residual connections primarily solve?",
         "options": [
-          "Overfitting in shallow networks",
-          "Vanishing/exploding gradients in deep networks",
-          "Slow inference speed",
-          "High memory usage"
+          "Overfitting that occurs in very shallow, small networks",
+          "Vanishing or exploding gradients in deep networks",
+          "Slow inference speed during text generation",
+          "Excessively high memory consumption"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What is the \"residual stream\" perspective?",
         "options": [
-          "Each layer replaces the representation entirely",
-          "Information only flows forward, never backward",
-          "The model uses a streaming data format",
-          "A persistent vector flows through the network; each layer reads from and writes to it additively"
+          "Each layer completely replaces the previous representation",
+          "Information only ever flows forward, never backward at any point",
+          "The model uses a special streaming data format internally",
+          "A persistent vector each layer reads from and adds to"
         ],
         "correct": [
           3
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Why do residual connections require matching dimensions?Select all that apply",
         "options": [
-          "The addition x + f(x) requires both tensors to have the same shape",
-          "The model cannot learn if dimensions differ",
-          "This is why the FFN projects back to d_model after expanding to 4×d_model",
-          "Different dimensions would cause gradient explosion"
+          "The addition x + f(x) needs both tensors to share a shape",
+          "The model cannot learn anything if the dimensions differ",
+          "Why the FFN projects back to d_model after the 4× expansion",
+          "Different dimensions in the sum would cause the gradients to explode"
         ],
         "correct": [
           0,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "In the GPT-2 transformer block, what is the full pattern with residual connections?",
         "options": [
-          "Attention → LayerNorm → FFN → LayerNorm",
-          "x + Attention(LayerNorm(x)) → then + FFN(LayerNorm(...))",
-          "LayerNorm(Attention(x) + FFN(x))",
-          "FFN → Attention → LayerNorm → residual"
+          "Attention, then LayerNorm, then FFN, then a final LayerNorm",
+          "x + Attention(LayerNorm(x)), then + FFN(LayerNorm(...))",
+          "LayerNorm applied to (Attention(x) + FFN(x)) together",
+          "FFN → Attention → LayerNorm → then residual"
         ],
         "correct": [
           1
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "Ce problemă rezolvă în principal conexiunile reziduale?",
         "options": [
-          "Supraînvățarea în rețele superficiale",
-          "Gradienți care dispar/explodează în rețele adânci",
-          "Viteză de inferență lentă",
-          "Utilizare mare a memoriei"
+          "Supraînvățarea care apare în rețele foarte superficiale și mici",
+          "Gradienți care dispar sau explodează în rețele adânci",
+          "Viteză de inferență lentă la generarea textului",
+          "Consum excesiv de memorie"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Ce este perspectiva «fluxului rezidual»?",
         "options": [
-          "Fiecare strat înlocuiește complet reprezentarea",
-          "Informația curge doar înainte, niciodată înapoi",
-          "Modelul folosește un format de date de tip streaming",
-          "Un vector persistent curge prin rețea; fiecare strat citește din el și scrie în el aditiv"
+          "Fiecare strat înlocuiește complet reprezentarea anterioară",
+          "Informația curge doar înainte, niciodată înapoi în vreun moment",
+          "Modelul folosește intern un format special de date streaming",
+          "Un vector persistent din care fiecare strat citește și adaugă"
         ],
         "correct": [
           3
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "De ce necesită conexiunile reziduale dimensiuni identice? Selectați toate răspunsurile corecte",
         "options": [
-          "Adunarea x + f(x) necesită ca ambii tensori să aibă aceeași formă",
-          "Modelul nu poate învăța dacă dimensiunile diferă",
-          "De aceea FFN-ul se proiectează înapoi la d_model după expansiunea la 4xd_model",
-          "Dimensiuni diferite ar cauza explozia gradienților"
+          "Adunarea x + f(x) cere ca ambii tensori să aibă aceeași formă",
+          "Modelul nu poate învăța nimic dacă dimensiunile diferă",
+          "De aceea FFN-ul se proiectează la d_model după expansiunea 4×",
+          "Dimensiuni diferite în suma finală ar cauza explozia gradienților"
         ],
         "correct": [
           0,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "În blocul transformer GPT-2, care este tiparul complet cu conexiuni reziduale?",
         "options": [
-          "Attention -> LayerNorm -> FFN -> LayerNorm",
-          "x + Attention(LayerNorm(x)) -> apoi + FFN(LayerNorm(...))",
-          "LayerNorm(Attention(x) + FFN(x))",
-          "FFN -> Attention -> LayerNorm -> rezidual"
+          "Attention, apoi LayerNorm, apoi FFN, apoi un LayerNorm final",
+          "x + Attention(LayerNorm(x)), apoi + FFN(LayerNorm(...))",
+          "LayerNorm aplicat pe (Attention(x) + FFN(x)) împreună",
+          "FFN → Attention → LayerNorm → apoi rezidual"
         ],
         "correct": [
           1
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Ποιο πρόβλημα λύνουν κυρίως οι υπολειμματικές συνδέσεις;",
         "options": [
-          "Υπερπροσαρμογή σε ρηχά δίκτυα",
-          "Εξαφανιζόμενες/εκρηγνυόμενες κλίσεις σε βαθιά δίκτυα",
-          "Αργή ταχύτητα εξαγωγής συμπερασμάτων",
-          "Υψηλή χρήση μνήμης"
+          "Υπερπροσαρμογή που εμφανίζεται σε πολύ ρηχά, μικρά δίκτυα",
+          "Εξαφανιζόμενες ή εκρηγνυόμενες κλίσεις σε βαθιά δίκτυα",
+          "Αργή ταχύτητα εξαγωγής κατά τη δημιουργία κειμένου",
+          "Υπερβολικά υψηλή χρήση μνήμης"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Τι είναι η προοπτική του «υπολειμματικού ρεύματος»;",
         "options": [
-          "Κάθε επίπεδο αντικαθιστά πλήρως την αναπαράσταση",
-          "Η πληροφορία ρέει μόνο προς τα εμπρός, ποτέ προς τα πίσω",
-          "Το μοντέλο χρησιμοποιεί μορφή ροής δεδομένων",
-          "Ένα μόνιμο διάνυσμα ρέει μέσα στο δίκτυο· κάθε επίπεδο διαβάζει από αυτό και γράφει σε αυτό προσθετικά"
+          "Κάθε επίπεδο αντικαθιστά πλήρως την προηγούμενη αναπαράσταση",
+          "Η πληροφορία ρέει μόνο προς τα εμπρός, ποτέ προς τα πίσω σε καμία στιγμή",
+          "Το μοντέλο χρησιμοποιεί εσωτερικά ειδική μορφή ροής δεδομένων",
+          "Ένα μόνιμο διάνυσμα από το οποίο κάθε επίπεδο διαβάζει και προσθέτει"
         ],
         "correct": [
           3
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Γιατί οι υπολειμματικές συνδέσεις απαιτούν ταιριαστές διαστάσεις; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Η πρόσθεση x + f(x) απαιτεί και οι δύο τανυστές να έχουν ίδιο σχήμα",
-          "Το μοντέλο δεν μπορεί να μάθει αν οι διαστάσεις διαφέρουν",
-          "Γι' αυτό το FFN προβάλλεται πίσω στο d_model μετά την επέκταση σε 4xd_model",
-          "Διαφορετικές διαστάσεις θα προκαλούσαν έκρηξη κλίσεων"
+          "Η πρόσθεση x + f(x) απαιτεί οι δύο τανυστές να έχουν ίδιο σχήμα",
+          "Το μοντέλο δεν μπορεί να μάθει τίποτα αν οι διαστάσεις διαφέρουν",
+          "Γι' αυτό το FFN προβάλλεται στο d_model μετά την επέκταση 4×",
+          "Διαφορετικές διαστάσεις στο τελικό άθροισμα θα προκαλούσαν έκρηξη κλίσεων"
         ],
         "correct": [
           0,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Στο μπλοκ transformer GPT-2, ποιο είναι το πλήρες μοτίβο με υπολειμματικές συνδέσεις;",
         "options": [
-          "Attention -> LayerNorm -> FFN -> LayerNorm",
-          "x + Attention(LayerNorm(x)) -> μετά + FFN(LayerNorm(...))",
-          "LayerNorm(Attention(x) + FFN(x))",
-          "FFN -> Attention -> LayerNorm -> υπολειμματική"
+          "Attention, μετά LayerNorm, μετά FFN, μετά ένα τελικό LayerNorm",
+          "x + Attention(LayerNorm(x)), μετά + FFN(LayerNorm(...))",
+          "LayerNorm εφαρμοσμένο στο (Attention(x) + FFN(x)) μαζί",
+          "FFN → Attention → LayerNorm → μετά υπόλειμμα"
         ],
         "correct": [
           1

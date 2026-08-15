@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is the purpose of a residual (skip) connection in a transformer block?",
         "options": [
-          "To reduce the number of parameters",
-          "To help gradients flow through deep networks by adding the input directly to the output: y = x + f(x)",
-          "To replace the attention mechanism",
-          "To increase the sequence length"
+          "To reduce the number of trainable parameters",
+          "To add the input to the output: y = x + f(x)",
+          "To completely replace the self-attention mechanism in the block",
+          "To increase the maximum sequence length"
         ],
         "correct": [
           1
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "Where does Layer Normalization (pre-norm) go in a transformer block?",
         "options": [
-          "Before the attention sub-layer: y = x + Attention(LayerNorm(x))",
-          "After the entire transformer block",
-          "Only during inference",
-          "Between multi-head attention and dropout"
+          "Before the sub-layer: Attention(LayerNorm(x))",
+          "After the entire transformer block has finished computing",
+          "Only during inference, never while training",
+          "Between the multi-head attention and dropout"
         ],
         "correct": [
           0
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What does the complete AttentionBlock combine?",
         "options": [
-          "Only multi-head attention",
-          "Attention and feed-forward network only",
-          "Layer normalization, multi-head causal self-attention, dropout, and residual connection",
-          "Tokenizer and embedding layer"
+          "Only the multi-head attention computation",
+          "Attention plus the feed-forward network, and nothing else besides",
+          "LayerNorm, causal multi-head attention, dropout, residual",
+          "The tokenizer and the token embedding layer"
         ],
         "correct": [
           2
@@ -54,7 +54,7 @@
         "options": [
           "Scaled dot-product attention (L13)",
           "Causal masking (L15)",
-          "BPE tokenization (L8)",
+          "Byte-pair encoding tokenization of the raw input text (L8)",
           "Multi-head splitting (L16)"
         ],
         "correct": [
@@ -69,10 +69,10 @@
         "index": 4,
         "text": "What comes after Stage 3 (Attention) in building a GPT model?",
         "options": [
-          "Training the model immediately",
-          "Deploying the model to production",
-          "Adding more attention layers",
-          "Stage 4: Building the full Transformer architecture — adding feed-forward networks, stacking blocks, and output head"
+          "Immediately training the completed model on the dataset",
+          "Deploying the model straight to a production environment",
+          "Adding several additional attention-only layers on top of it",
+          "Stage 4: add the FFN, stack blocks, add the output head"
         ],
         "correct": [
           3
@@ -89,10 +89,10 @@
         "index": 0,
         "text": "Care este scopul unei conexiuni reziduale (skip) într-un bloc transformer?",
         "options": [
-          "Reducerea numărului de parametri",
-          "Ajutarea gradienților să curgă prin rețele adânci prin adăugarea directă a intrării la ieșire: y = x + f(x)",
-          "Înlocuirea mecanismului de attention",
-          "Creșterea lungimii secvenței"
+          "Reducerea numărului de parametri antrenabili",
+          "Adăugarea intrării la ieșire: y = x + f(x)",
+          "Înlocuirea completă a mecanismului de self-attention din bloc",
+          "Creșterea lungimii maxime a secvenței"
         ],
         "correct": [
           1
@@ -104,10 +104,10 @@
         "index": 1,
         "text": "Unde se plasează Layer Normalization (pre-norm) într-un bloc transformer?",
         "options": [
-          "Înainte de sub-stratul de attention: y = x + Attention(LayerNorm(x))",
-          "După întregul bloc transformer",
-          "Doar în timpul inferenței",
-          "Între multi-head attention și dropout"
+          "Înainte de sub-strat: Attention(LayerNorm(x))",
+          "După ce întregul bloc transformer a terminat de calculat",
+          "Doar în timpul inferenței, niciodată la antrenare",
+          "Între multi-head attention și stratul de dropout"
         ],
         "correct": [
           0
@@ -119,10 +119,10 @@
         "index": 2,
         "text": "Ce combină AttentionBlock complet?",
         "options": [
-          "Doar multi-head attention",
-          "Attention și rețea feed-forward doar",
-          "Normalizare de strat, self-attention cauzal multi-head, dropout și conexiune reziduală",
-          "Tokenizer și strat de embedding"
+          "Doar calculul de multi-head attention",
+          "Attention plus rețeaua feed-forward și nimic altceva în plus pe lângă",
+          "LayerNorm, self-attention cauzal multi-head, dropout, rezidual",
+          "Tokenizer-ul și stratul de embedding al token-urilor"
         ],
         "correct": [
           2
@@ -136,7 +136,7 @@
         "options": [
           "Attention cu produs scalar scalat (L13)",
           "Mascare cauzală (L15)",
-          "Tokenizare BPE (L8)",
+          "Tokenizare byte-pair encoding a textului brut de intrare (L8)",
           "Împărțire multi-head (L16)"
         ],
         "correct": [
@@ -151,10 +151,10 @@
         "index": 4,
         "text": "Ce urmează după Etapa 3 (Attention) în construirea unui model GPT?",
         "options": [
-          "Antrenarea imediată a modelului",
-          "Implementarea modelului în producție",
-          "Adăugarea mai multor straturi de attention",
-          "Etapa 4: Construirea arhitecturii Transformer complete — adăugarea rețelelor feed-forward, stivuirea blocurilor și capul de ieșire"
+          "Antrenarea imediată a modelului finalizat pe setul de date",
+          "Implementarea modelului direct într-un mediu de producție",
+          "Adăugarea mai multor straturi suplimentare doar de attention deasupra",
+          "Etapa 4: adaugă FFN, stivuiește blocuri, adaugă capul de ieșire"
         ],
         "correct": [
           3
@@ -171,10 +171,10 @@
         "index": 0,
         "text": "Ποιος είναι ο σκοπός μιας υπολειμματικής (skip) σύνδεσης σε ένα μπλοκ transformer;",
         "options": [
-          "Μείωση του αριθμού παραμέτρων",
-          "Βοηθά τις κλίσεις να ρέουν μέσα από βαθιά δίκτυα προσθέτοντας απευθείας την είσοδο στην έξοδο: y = x + f(x)",
-          "Αντικατάσταση του μηχανισμού attention",
-          "Αύξηση του μήκους ακολουθίας"
+          "Μείωση του αριθμού των εκπαιδεύσιμων παραμέτρων",
+          "Πρόσθεση της εισόδου στην έξοδο: y = x + f(x)",
+          "Πλήρης αντικατάσταση του μηχανισμού self-attention στο μπλοκ",
+          "Αύξηση του μέγιστου μήκους της ακολουθίας"
         ],
         "correct": [
           1
@@ -186,10 +186,10 @@
         "index": 1,
         "text": "Πού τοποθετείται η Layer Normalization (pre-norm) σε ένα μπλοκ transformer;",
         "options": [
-          "Πριν από το υποεπίπεδο attention: y = x + Attention(LayerNorm(x))",
-          "Μετά από ολόκληρο το μπλοκ transformer",
-          "Μόνο κατά την εξαγωγή συμπερασμάτων",
-          "Μεταξύ multi-head attention και dropout"
+          "Πριν το υποεπίπεδο: Attention(LayerNorm(x))",
+          "Αφού ολοκληρωθεί ο υπολογισμός ολόκληρου του μπλοκ transformer",
+          "Μόνο κατά την εξαγωγή συμπερασμάτων, ποτέ στην εκπαίδευση",
+          "Μεταξύ του multi-head attention και του dropout"
         ],
         "correct": [
           0
@@ -201,10 +201,10 @@
         "index": 2,
         "text": "Τι συνδυάζει το πλήρες AttentionBlock;",
         "options": [
-          "Μόνο multi-head attention",
-          "Attention και δίκτυο feed-forward μόνο",
-          "Κανονικοποίηση επιπέδου, αιτιατό self-attention πολλαπλών κεφαλιών, dropout και υπολειμματική σύνδεση",
-          "Tokenizer και επίπεδο embedding"
+          "Μόνο τον υπολογισμό multi-head attention",
+          "Attention και δίκτυο feed-forward και τίποτα άλλο πέρα από αυτά",
+          "LayerNorm, αιτιατό multi-head attention, dropout, υπόλειμμα",
+          "Τον tokenizer και το επίπεδο embedding των token"
         ],
         "correct": [
           2
@@ -218,7 +218,7 @@
         "options": [
           "Κλιμακωτό attention εσωτερικού γινομένου (L13)",
           "Αιτιατή μάσκα (L15)",
-          "Τεκμηρίωση BPE (L8)",
+          "Tokenization byte-pair encoding του ακατέργαστου κειμένου εισόδου (L8)",
           "Διαχωρισμός πολλαπλών κεφαλιών (L16)"
         ],
         "correct": [
@@ -233,10 +233,10 @@
         "index": 4,
         "text": "Τι ακολουθεί μετά το Στάδιο 3 (Attention) στην κατασκευή ενός μοντέλου GPT;",
         "options": [
-          "Άμεση εκπαίδευση του μοντέλου",
-          "Ανάπτυξη του μοντέλου σε παραγωγή",
-          "Προσθήκη περισσότερων επιπέδων attention",
-          "Στάδιο 4: Κατασκευή πλήρους αρχιτεκτονικής Transformer — προσθήκη δικτύων feed-forward, στοίβαξη μπλοκ και κεφαλή εξόδου"
+          "Άμεση εκπαίδευση του ολοκληρωμένου μοντέλου στο σύνολο δεδομένων",
+          "Ανάπτυξη του μοντέλου απευθείας σε περιβάλλον παραγωγής",
+          "Προσθήκη αρκετών επιπλέον επιπέδων μόνο attention από πάνω του",
+          "Στάδιο 4: προσθήκη FFN, στοίβαξη μπλοκ, προσθήκη κεφαλής εξόδου"
         ],
         "correct": [
           3

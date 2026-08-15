@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is the primary goal of instruction fine-tuning?",
         "options": [
-          "To increase the vocabulary size of the base model",
-          "To teach a pre-trained model to follow user instructions and produce helpful responses",
-          "To pre-train a model from scratch on labeled data",
-          "To compress the model for deployment on edge devices"
+          "To substantially increase the vocabulary size of the base model",
+          "Teach a pretrained model to follow instructions and respond helpfully",
+          "To pre-train a completely brand-new model from scratch using labeled data",
+          "To compress the model for deployment on small edge devices"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "Which of the following are true about the ShareGPT dataset format? Select all that apply",
         "options": [
-          "It stores conversations as a list of message turns with roles",
-          "It is limited to single-turn instruction-response pairs only",
+          "It stores conversations as message turns tagged with roles",
+          "It is strictly limited to single-turn instruction-and-response pairs only",
           "It naturally supports multi-turn dialogue data",
-          "It requires a separate tokenizer to be trained from scratch"
+          "It requires a separate tokenizer trained from scratch"
         ],
         "correct": [
           0,
@@ -53,10 +53,10 @@
         "index": 3,
         "text": "What is the purpose of a chat template during instruction fine-tuning?",
         "options": [
-          "To define the model's architecture and layer count",
-          "To control the learning rate schedule during training",
-          "To compress the dataset for faster loading",
-          "To format input messages with special tokens so the model distinguishes between roles"
+          "To define the model's architecture and its total number of layers",
+          "To control the learning rate schedule used throughout the training",
+          "To compress the dataset so it loads faster during training",
+          "Format messages with special tokens so the model separates roles"
         ],
         "correct": [
           3
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "What does loss masking achieve during instruction fine-tuning?",
         "options": [
-          "It prevents the model from generating special tokens",
-          "It excludes prompt/instruction tokens from the loss calculation so the model only learns to generate the response",
-          "It masks out random tokens to create a denoising objective",
-          "It hides the loss value from the training logs"
+          "It prevents the model from ever generating any of the reserved special tokens",
+          "Exclude prompt tokens from the loss so the model learns only the response",
+          "It masks random tokens to create a denoising training objective",
+          "It hides the loss value from the training logs entirely"
         ],
         "correct": [
           1
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Care este obiectivul principal al ajustării fine prin instrucțiuni?",
         "options": [
-          "Creșterea dimensiunii vocabularului modelului de bază",
-          "Învățarea unui model pre-antrenat să urmeze instrucțiunile utilizatorului și să producă răspunsuri utile",
-          "Pre-antrenarea unui model de la zero pe date etichetate",
-          "Comprimarea modelului pentru implementare pe dispozitive edge"
+          "Creșterea substanțială a dimensiunii vocabularului modelului de bază",
+          "Învață un model pre-antrenat să urmeze instrucțiuni și să răspundă util",
+          "Pre-antrenarea unui model complet nou de la zero folosind date deja etichetate corect",
+          "Comprimarea modelului pentru implementare pe dispozitive edge mici"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Care dintre următoarele sunt adevărate despre formatul de date ShareGPT? Selectați toate răspunsurile corecte",
         "options": [
-          "Stochează conversații ca o listă de ture de mesaje cu roluri",
-          "Este limitat doar la perechi instrucțiune-răspuns cu o singură tură",
+          "Stochează conversații ca ture de mesaje etichetate cu roluri",
+          "Este strict limitat doar la perechi instrucțiune-și-răspuns cu o singură tură",
           "Suportă natural date de dialog cu mai multe ture",
-          "Necesită antrenarea unui tokenizer separat de la zero"
+          "Necesită un tokenizer separat antrenat de la zero"
         ],
         "correct": [
           0,
@@ -134,10 +134,10 @@
         "index": 3,
         "text": "Care este scopul unui șablon de chat în timpul ajustării fine prin instrucțiuni?",
         "options": [
-          "Definirea arhitecturii modelului și a numărului de straturi",
-          "Controlul programului ratei de învățare în timpul antrenării",
-          "Comprimarea setului de date pentru încărcare mai rapidă",
-          "Formatarea mesajelor de intrare cu token-uri speciale astfel încât modelul să distingă între roluri"
+          "Definirea arhitecturii modelului și a numărului total de straturi ale sale",
+          "Controlul programului ratei de învățare folosit pe tot parcursul antrenării",
+          "Comprimarea setului de date pentru a se încărca mai rapid",
+          "Formatarea mesajelor cu token-uri speciale ca modelul să separe rolurile"
         ],
         "correct": [
           3
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "Ce realizează mascarea pierderii în timpul ajustării fine prin instrucțiuni?",
         "options": [
-          "Previne modelul de la generarea token-urilor speciale",
-          "Exclude token-urile de prompt/instrucțiune din calculul pierderii astfel încât modelul să învețe doar să genereze răspunsul",
+          "Împiedică modelul să genereze vreodată vreunul dintre token-urile speciale rezervate",
+          "Exclude token-urile de prompt din pierdere ca modelul să învețe doar răspunsul",
           "Maschează token-uri aleatorii pentru a crea un obiectiv de debruiere",
-          "Ascunde valoarea pierderii din jurnalele de antrenare"
+          "Ascunde complet valoarea pierderii din jurnalele de antrenare"
         ],
         "correct": [
           1
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Ποιος είναι ο κύριος στόχος της εκπαίδευσης ακριβούς ρύθμισης βάσει οδηγιών;",
         "options": [
-          "Αύξηση μεγέθους λεξιλογίου βασικού μοντέλου",
-          "Εκπαίδευση ενός προεκπαιδευμένου μοντέλου να ακολουθεί οδηγίες χρήστη και να παράγει χρήσιμες απαντήσεις",
-          "Προεκπαίδευση μοντέλου από την αρχή σε επισημασμένα δεδομένα",
-          "Συμπίεση μοντέλου για ανάπτυξη σε συσκευές edge"
+          "Ουσιαστική αύξηση του μεγέθους του λεξιλογίου του βασικού μοντέλου",
+          "Μάθε ένα προεκπαιδευμένο μοντέλο να ακολουθεί οδηγίες και να απαντά χρήσιμα",
+          "Προεκπαίδευση ενός εντελώς νέου μοντέλου από την αρχή με ήδη επισημασμένα δεδομένα",
+          "Συμπίεση του μοντέλου για ανάπτυξη σε μικρές συσκευές edge"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποια από τα ακόλουθα ισχύουν για τη μορφή δεδομένων ShareGPT; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Αποθηκεύει συνομιλίες ως λίστα σειρών μηνυμάτων με ρόλους",
-          "Περιορίζεται μόνο σε ζεύγη οδηγίας-απάντησης μιας σειράς",
+          "Αποθηκεύει συνομιλίες ως σειρές μηνυμάτων με ρόλους",
+          "Περιορίζεται αυστηρά μόνο σε ζεύγη οδηγίας-και-απάντησης μιας σειράς",
           "Υποστηρίζει φυσικά δεδομένα διαλόγου πολλαπλών σειρών",
-          "Απαιτεί εκπαίδευση ξεχωριστού tokenizer από την αρχή"
+          "Απαιτεί ξεχωριστό tokenizer εκπαιδευμένο από την αρχή"
         ],
         "correct": [
           0,
@@ -215,10 +215,10 @@
         "index": 3,
         "text": "Ποιος είναι ο σκοπός ενός προτύπου συνομιλίας κατά την ακριβή ρύθμιση βάσει οδηγιών;",
         "options": [
-          "Ορισμός αρχιτεκτονικής μοντέλου και αριθμού επιπέδων",
-          "Έλεγχος προγράμματος ρυθμού εκμάθησης κατά εκπαίδευση",
-          "Συμπίεση dataset για ταχύτερη φόρτωση",
-          "Μορφοποίηση μηνυμάτων εισόδου με ειδικά tokens ώστε το μοντέλο να διακρίνει τους ρόλους"
+          "Ορισμός της αρχιτεκτονικής του μοντέλου και του συνολικού αριθμού επιπέδων του",
+          "Έλεγχος του προγράμματος ρυθμού εκμάθησης καθ' όλη τη διάρκεια της εκπαίδευσης",
+          "Συμπίεση του dataset ώστε να φορτώνει ταχύτερα κατά την εκπαίδευση",
+          "Μορφοποίηση μηνυμάτων με ειδικά tokens ώστε το μοντέλο να διαχωρίζει ρόλους"
         ],
         "correct": [
           3
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Τι επιτυγχάνει η μάσκα απώλειας κατά την ακριβή ρύθμιση βάσει οδηγιών;",
         "options": [
-          "Αποτρέπει το μοντέλο από τη δημιουργία ειδικών tokens",
-          "Εξαιρεί tokens prompt/οδηγίας από τον υπολογισμό απώλειας ώστε το μοντέλο να μαθαίνει μόνο να δημιουργεί την απάντηση",
-          "Μασκάρει τυχαία tokens για δημιουργία στόχου αποθορυβοποίησης",
-          "Κρύβει την τιμή απώλειας από τα αρχεία καταγραφής εκπαίδευσης"
+          "Εμποδίζει το μοντέλο να δημιουργήσει ποτέ οποιοδήποτε από τα δεσμευμένα ειδικά tokens",
+          "Εξαιρεί tokens prompt από την απώλεια ώστε το μοντέλο να μαθαίνει μόνο την απάντηση",
+          "Μασκάρει τυχαία tokens για να δημιουργήσει στόχο αποθορυβοποίησης",
+          "Κρύβει εντελώς την τιμή απώλειας από τα αρχεία καταγραφής"
         ],
         "correct": [
           1

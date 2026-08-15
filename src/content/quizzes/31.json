@@ -7,10 +7,10 @@
         "index": 0,
         "text": "Why is data deduplication an important step in pretraining data preparation?",
         "options": [
-          "It increases the total dataset size",
-          "It prevents the model from memorizing repeated passages and improves generalization",
-          "It speeds up the tokenizer",
-          "It reduces the vocabulary size"
+          "It substantially increases the total size of the dataset the model gets to train on",
+          "It stops the model memorizing repeated passages, improving generalization",
+          "It makes the tokenizer run noticeably faster",
+          "It reduces the size of the tokenizer vocabulary"
         ],
         "correct": [
           1
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "What is the purpose of weight initialization strategies like Xavier or Kaiming for transformer models?",
         "options": [
-          "To ensure all weights start at exactly zero",
-          "To maximize the initial loss value",
-          "To maintain stable activation and gradient magnitudes across layers at the start of training",
-          "To pre-load knowledge from a previous model"
+          "To ensure every single weight in the network starts at exactly zero before the first step",
+          "To maximize the initial loss value at the start",
+          "To keep activation and gradient magnitudes stable across layers early on",
+          "To pre-load learned knowledge from a previous model"
         ],
         "correct": [
           2
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "In a complete pretraining pipeline, what is the role of the learning rate warmup phase?",
         "options": [
-          "To gradually increase the learning rate from near-zero, allowing the optimizer to adapt before taking large steps",
+          "To ramp the learning rate up from near-zero so the optimizer can adapt first",
           "To immediately set the learning rate to its maximum value",
-          "To reduce the learning rate to zero at the end of training",
-          "To skip the first few batches of data"
+          "To gradually reduce the learning rate down to zero over the final phase at the end of training",
+          "To skip over the first few batches of training data"
         ],
         "correct": [
           0
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Which components must be saved together in a training checkpoint for correct resumption?Select all that apply",
         "options": [
-          "Model weights and optimizer state (momentum, variance estimates)",
-          "The raw training text files",
-          "Current training step and learning rate scheduler state",
-          "The Python interpreter version"
+          "Model weights and optimizer state (momentum and variance)",
+          "All of the raw, untokenized training text files used to build the dataset",
+          "Current training step and the LR scheduler state",
+          "The exact Python interpreter version in use"
         ],
         "correct": [
           0,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "Why is shuffling the training data between epochs important for pretraining?",
         "options": [
-          "It changes the vocabulary used by the tokenizer",
-          "It increases the total number of training tokens",
-          "It makes the model larger",
-          "It prevents the model from learning spurious patterns based on document ordering"
+          "It changes the vocabulary that the tokenizer relies on for every batch of text",
+          "It increases the total number of training tokens seen",
+          "It makes the underlying model architecture larger",
+          "It stops the model learning spurious patterns from document order"
         ],
         "correct": [
           3
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "De ce este deduplicarea datelor un pas important în pregătirea datelor de pre-antrenare?",
         "options": [
-          "Crește dimensiunea totală a setului de date",
-          "Previne modelul de la memorarea pasajelor repetate și îmbunătățește generalizarea",
-          "Accelerează tokenizer-ul",
-          "Reduce dimensiunea vocabularului"
+          "Crește substanțial dimensiunea totală a setului de date pe care modelul ajunge să se antreneze",
+          "Împiedică modelul să memoreze pasaje repetate, îmbunătățind generalizarea",
+          "Face tokenizer-ul să ruleze considerabil mai rapid",
+          "Reduce dimensiunea vocabularului tokenizer-ului"
         ],
         "correct": [
           1
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "Care este scopul strategiilor de inițializare a ponderilor precum Xavier sau Kaiming pentru modelele transformer?",
         "options": [
-          "Asigurarea că toate ponderile încep exact la zero",
-          "Maximizarea valorii inițiale a pierderii",
-          "Menținerea magnitudinilor stabile ale activărilor și gradienților pe straturi la începutul antrenării",
-          "Pre-încărcarea cunoștințelor de la un model anterior"
+          "Asigurarea că fiecare pondere din întreaga rețea începe exact la zero înainte de primul pas de antrenare",
+          "Maximizarea valorii inițiale a pierderii la început",
+          "Menținerea stabilă a magnitudinilor activărilor și gradienților pe straturi devreme",
+          "Pre-încărcarea cunoștințelor învățate de la un model anterior"
         ],
         "correct": [
           2
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Într-un pipeline complet de pre-antrenare, care este rolul fazei de încălzire a ratei de învățare?",
         "options": [
-          "Creșterea treptată a ratei de învățare de la aproape zero, permițând optimizatorului să se adapteze înainte de a face pași mari",
-          "Setarea imediată a ratei de învățare la valoarea maximă",
-          "Reducerea ratei de învățare la zero la sfârșitul antrenării",
-          "Omiterea primelor câteva loturi de date"
+          "Creșterea ratei de învățare de la aproape zero ca optimizatorul să se adapteze întâi",
+          "Setarea imediată a ratei de învățare la valoarea sa maximă",
+          "Reducerea treptată a ratei de învățare până la zero în faza finală de la sfârșitul antrenării",
+          "Omiterea primelor câteva loturi de date de antrenare"
         ],
         "correct": [
           0
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Ce componente trebuie salvate împreună într-un checkpoint de antrenare pentru reluarea corectă? Selectați toate răspunsurile corecte",
         "options": [
-          "Ponderile modelului și starea optimizatorului (momentum, estimări de varianță)",
-          "Fișierele text brute de antrenare",
-          "Pasul curent de antrenare și starea planificatorului ratei de învățare",
-          "Versiunea interpretorului Python"
+          "Ponderile modelului și starea optimizatorului (momentum și varianță)",
+          "Toate fișierele text brute, netokenizate folosite pentru a construi setul de date",
+          "Pasul curent de antrenare și starea planificatorului LR",
+          "Versiunea exactă a interpretorului Python folosit"
         ],
         "correct": [
           0,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "De ce este importantă amestecarea datelor de antrenare între epoci pentru pre-antrenare?",
         "options": [
-          "Schimbă vocabularul folosit de tokenizer",
-          "Crește numărul total de token-uri de antrenare",
-          "Mărește modelul",
-          "Previne modelul de la învățarea tiparelor false bazate pe ordinea documentelor"
+          "Schimbă vocabularul pe care tokenizer-ul se bazează pentru fiecare lot de text",
+          "Crește numărul total de token-uri de antrenare văzute",
+          "Mărește arhitectura de bază a modelului",
+          "Împiedică modelul să învețe tipare false din ordinea documentelor"
         ],
         "correct": [
           3
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Γιατί η αφαίρεση διπλότυπων δεδομένων είναι σημαντικό βήμα στην προετοιμασία δεδομένων προεκπαίδευσης;",
         "options": [
-          "Αυξάνει το συνολικό μέγεθος dataset",
-          "Αποτρέπει το μοντέλο από την απομνημόνευση επαναλαμβανόμενων αποσπασμάτων και βελτιώνει τη γενίκευση",
-          "Επιταχύνει τον tokenizer",
-          "Μειώνει το μέγεθος λεξιλογίου"
+          "Αυξάνει ουσιαστικά το συνολικό μέγεθος του συνόλου δεδομένων στο οποίο εκπαιδεύεται το μοντέλο",
+          "Εμποδίζει το μοντέλο να απομνημονεύει επαναλαμβανόμενα αποσπάσματα, βελτιώνοντας τη γενίκευση",
+          "Κάνει τον tokenizer να τρέχει αισθητά γρηγορότερα",
+          "Μειώνει το μέγεθος του λεξιλογίου του tokenizer"
         ],
         "correct": [
           1
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Ποιος είναι ο σκοπός στρατηγικών αρχικοποίησης βαρών όπως Xavier ή Kaiming για μοντέλα transformer;",
         "options": [
-          "Εξασφάλιση ότι όλα τα βάρη ξεκινούν ακριβώς στο μηδέν",
-          "Μεγιστοποίηση αρχικής τιμής απώλειας",
-          "Διατήρηση σταθερών μεγεθών ενεργοποιήσεων και κλίσεων σε επίπεδα στην αρχή της εκπαίδευσης",
-          "Προφόρτωση γνώσης από προηγούμενο μοντέλο"
+          "Εξασφάλιση ότι κάθε μεμονωμένο βάρος στο δίκτυο ξεκινά ακριβώς στο μηδέν πριν το πρώτο βήμα",
+          "Μεγιστοποίηση της αρχικής τιμής απώλειας στην αρχή",
+          "Διατήρηση σταθερών μεγεθών ενεργοποιήσεων και κλίσεων στα επίπεδα νωρίς",
+          "Προφόρτωση μαθημένης γνώσης από ένα προηγούμενο μοντέλο"
         ],
         "correct": [
           2
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Σε μια πλήρη αγωγή προεκπαίδευσης, ποιος είναι ο ρόλος της φάσης θέρμανσης ρυθμού εκμάθησης;",
         "options": [
-          "Σταδιακή αύξηση ρυθμού εκμάθησης από σχεδόν μηδέν, επιτρέποντας στον βελτιστοποιητή να προσαρμοστεί πριν κάνει μεγάλα βήματα",
-          "Άμεση ρύθμιση ρυθμού εκμάθησης στη μέγιστη τιμή",
-          "Μείωση ρυθμού εκμάθησης σε μηδέν στο τέλος εκπαίδευσης",
-          "Παράλειψη πρώτων παρτίδων δεδομένων"
+          "Αύξηση του ρυθμού εκμάθησης από σχεδόν μηδέν ώστε ο βελτιστοποιητής να προσαρμοστεί πρώτα",
+          "Άμεση ρύθμιση του ρυθμού εκμάθησης στη μέγιστη τιμή του",
+          "Σταδιακή μείωση του ρυθμού εκμάθησης έως το μηδέν στην τελική φάση στο τέλος της εκπαίδευσης",
+          "Παράλειψη των πρώτων λίγων παρτίδων δεδομένων εκπαίδευσης"
         ],
         "correct": [
           0
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποια συστατικά πρέπει να αποθηκευτούν μαζί σε ένα checkpoint εκπαίδευσης για σωστή συνέχιση; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Βάρη μοντέλου και κατάσταση βελτιστοποιητή (ορμή, εκτιμήσεις διακύμανσης)",
-          "Τα ακατέργαστα αρχεία κειμένου εκπαίδευσης",
-          "Τρέχον βήμα εκπαίδευσης και κατάσταση χρονοπρογραμματιστή ρυθμού εκμάθησης",
-          "Η έκδοση του διερμηνέα Python"
+          "Βάρη μοντέλου και κατάσταση βελτιστοποιητή (ορμή και διακύμανση)",
+          "Όλα τα ακατέργαστα, μη-tokenized αρχεία κειμένου εκπαίδευσης του συνόλου δεδομένων",
+          "Τρέχον βήμα εκπαίδευσης και κατάσταση χρονοπρογραμματιστή LR",
+          "Η ακριβής έκδοση του διερμηνέα Python σε χρήση"
         ],
         "correct": [
           0,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Γιατί η ανακάτεμα δεδομένων εκπαίδευσης μεταξύ εποχών είναι σημαντικό για την προεκπαίδευση;",
         "options": [
-          "Αλλάζει το λεξιλόγιο που χρησιμοποιεί ο tokenizer",
-          "Αυξάνει τον συνολικό αριθμό tokens εκπαίδευσης",
-          "Κάνει το μοντέλο μεγαλύτερο",
-          "Αποτρέπει το μοντέλο από την εκμάθηση ψευδών μοτίβων βάσει σειράς εγγράφων"
+          "Αλλάζει το λεξιλόγιο στο οποίο βασίζεται ο tokenizer για κάθε παρτίδα κειμένου",
+          "Αυξάνει τον συνολικό αριθμό tokens εκπαίδευσης που βλέπει",
+          "Κάνει την υποκείμενη αρχιτεκτονική του μοντέλου μεγαλύτερη",
+          "Εμποδίζει το μοντέλο να μαθαίνει ψευδή μοτίβα από τη σειρά εγγράφων"
         ],
         "correct": [
           3

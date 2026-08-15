@@ -7,9 +7,9 @@
         "index": 0,
         "text": "What is the training objective that drives next-token prediction?",
         "options": [
-          "Maximize the distance between input and output embeddings",
+          "Maximize the distance between the input and output embeddings in vector space",
           "Given a sequence of tokens, predict the next token at each position",
-          "Classify each token as positive or negative",
+          "Classify each token as either positive or negative",
           "Reconstruct randomly masked tokens in a sentence"
         ],
         "correct": [
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "What is the \"sliding window\" technique in data loading?",
         "options": [
-          "A GUI element for scrolling through text",
-          "Training only on the last N tokens and discarding the rest",
-          "Moving a fixed-size window across the text with a stride to create overlapping input-target pairs",
-          "A type of attention mechanism"
+          "A GUI element for scrolling through text on screen",
+          "Training the model only on the last N tokens while discarding all the rest of the sequence",
+          "Sliding a fixed-size window across the text with a stride to form input-target pairs",
+          "A specialized type of attention mechanism"
         ],
         "correct": [
           2
@@ -37,9 +37,9 @@
         "index": 2,
         "text": "If stride equals context length, what happens to training data?",
         "options": [
-          "No overlap between consecutive chunks — each token appears in exactly one training example",
-          "Maximum overlap — the model sees every token many times",
-          "The data loader skips every other token",
+          "No overlap between chunks — each token appears in exactly one example",
+          "Maximum overlap, so the model ends up seeing every single token many times over",
+          "The data loader silently skips every other token",
           "Training becomes impossible due to data loss"
         ],
         "correct": [
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Why do we shuffle training examples across batches?",
         "options": [
-          "To make the training data smaller",
+          "To make the overall training dataset physically smaller on disk",
           "To reduce correlation between consecutive batches and improve generalization",
-          "To speed up the tokenization process",
-          "To avoid out-of-memory errors"
+          "To considerably speed up the initial tokenization process before training even begins",
+          "To avoid running into out-of-memory errors"
         ],
         "correct": [
           1
@@ -87,10 +87,10 @@
         "index": 0,
         "text": "Care este obiectivul de antrenare pentru predicția next-token?",
         "options": [
-          "Maximizarea distanței între embeddings de intrare și ieșire",
+          "Maximizarea distanței dintre embeddings de intrare și ieșire în spațiul vectorial",
           "Dat fiind o secvență de tokeni, prezice următorul token la fiecare poziție",
           "Clasificarea fiecărui token ca pozitiv sau negativ",
-          "Reconstrucția tokenilor mascați aleatoriu"
+          "Reconstrucția tokenilor mascați aleatoriu într-o propoziție"
         ],
         "correct": [
           1
@@ -102,10 +102,10 @@
         "index": 1,
         "text": "Ce este tehnica „ferestrei glisante\" în încărcarea datelor?",
         "options": [
-          "Un element GUI pentru derularea textului",
-          "Antrenarea doar pe ultimele N tokeni",
-          "Mutarea unei ferestre de dimensiune fixă peste text cu un pas pentru a crea perechi input-target suprapuse",
-          "Un tip de mecanism de atenție"
+          "Un element GUI pentru derularea textului pe ecran",
+          "Antrenarea modelului doar pe ultimele N tokeni, aruncând complet tot restul secvenței",
+          "Glisarea unei ferestre fixe peste text cu un pas pentru a forma perechi",
+          "Un tip specializat de mecanism de atenție"
         ],
         "correct": [
           2
@@ -117,10 +117,10 @@
         "index": 2,
         "text": "Dacă pasul egalează lungimea contextului, ce se întâmplă cu datele de antrenare?",
         "options": [
-          "Fără suprapunere — fiecare token apare într-un singur exemplu de antrenare",
-          "Suprapunere maximă — modelul vede fiecare token de multe ori",
+          "Fără suprapunere — fiecare token apare într-un singur exemplu",
+          "Suprapunere maximă, astfel încât modelul ajunge să vadă fiecare token de foarte multe ori",
           "Încărcătorul de date sare peste fiecare al doilea token",
-          "Antrenarea devine imposibilă"
+          "Antrenarea devine imposibilă din cauza pierderii de date"
         ],
         "correct": [
           0
@@ -132,10 +132,10 @@
         "index": 3,
         "text": "De ce amestecăm exemplele de antrenare între loturi?",
         "options": [
-          "Pentru a face datele mai mici",
+          "Pentru a face setul de date de antrenare mai mic pe disc",
           "Pentru a reduce corelația între loturi consecutive și a îmbunătăți generalizarea",
-          "Pentru a accelera tokenizarea",
-          "Pentru a evita erorile de memorie"
+          "Pentru a accelera considerabil procesul de tokenizare înainte ca antrenarea să înceapă",
+          "Pentru a evita erorile de memorie insuficientă"
         ],
         "correct": [
           1
@@ -167,10 +167,10 @@
         "index": 0,
         "text": "Ποιος είναι ο στόχος εκπαίδευσης για πρόβλεψη επόμενου token;",
         "options": [
-          "Μεγιστοποίηση απόστασης μεταξύ embeddings εισόδου-εξόδου",
-          "Δεδομένης μιας ακολουθίας tokens, πρόβλεψη του επόμενου σε κάθε θέση",
+          "Μεγιστοποίηση της απόστασης μεταξύ των embeddings εισόδου και εξόδου στον διανυσματικό χώρο",
+          "Δεδομένης ακολουθίας tokens, πρόβλεψη του επόμενου token σε κάθε θέση",
           "Ταξινόμηση κάθε token ως θετικό ή αρνητικό",
-          "Ανακατασκευή τυχαία μασκαρισμένων tokens"
+          "Ανακατασκευή τυχαία μασκαρισμένων tokens σε πρόταση"
         ],
         "correct": [
           1
@@ -182,10 +182,10 @@
         "index": 1,
         "text": "Τι είναι η τεχνική «συρόμενου παραθύρου» στη φόρτωση δεδομένων;",
         "options": [
-          "Στοιχείο GUI για κύλιση κειμένου",
-          "Εκπαίδευση μόνο στα τελευταία N tokens",
-          "Μετακίνηση παραθύρου σταθερού μεγέθους πάνω στο κείμενο με βήμα για δημιουργία ζευγών input-target",
-          "Τύπος μηχανισμού attention"
+          "Ένα στοιχείο GUI για κύλιση κειμένου στην οθόνη",
+          "Εκπαίδευση του μοντέλου μόνο στα τελευταία N tokens, απορρίπτοντας όλο το υπόλοιπο κείμενο",
+          "Ολίσθηση παραθύρου σταθερού μεγέθους πάνω στο κείμενο με βήμα για ζεύγη input-target",
+          "Ένας εξειδικευμένος τύπος μηχανισμού attention"
         ],
         "correct": [
           2
@@ -197,10 +197,10 @@
         "index": 2,
         "text": "Αν το βήμα ισούται με το μήκος πλαισίου, τι συμβαίνει;",
         "options": [
-          "Χωρίς επικάλυψη — κάθε token εμφανίζεται σε ένα παράδειγμα",
-          "Μέγιστη επικάλυψη — πολλές εμφανίσεις κάθε token",
-          "Ο φορτωτής παραλείπει κάθε δεύτερο token",
-          "Η εκπαίδευση γίνεται αδύνατη"
+          "Χωρίς επικάλυψη — κάθε token εμφανίζεται σε ένα μόνο παράδειγμα",
+          "Μέγιστη επικάλυψη, ώστε το μοντέλο βλέπει τελικά κάθε token πάρα πολλές φορές συνολικά",
+          "Ο φορτωτής δεδομένων παραλείπει κάθε δεύτερο token",
+          "Η εκπαίδευση γίνεται αδύνατη λόγω απώλειας δεδομένων"
         ],
         "correct": [
           0
@@ -212,10 +212,10 @@
         "index": 3,
         "text": "Γιατί ανακατεύουμε τα παραδείγματα εκπαίδευσης;",
         "options": [
-          "Για μικρότερα δεδομένα",
-          "Για μείωση συσχέτισης μεταξύ διαδοχικών παρτίδων και βελτίωση γενίκευσης",
-          "Για ταχύτερη tokenization",
-          "Για αποφυγή σφαλμάτων μνήμης"
+          "Για να γίνει το σύνολο δεδομένων εκπαίδευσης μικρότερο στον δίσκο",
+          "Για μείωση της συσχέτισης μεταξύ διαδοχικών παρτίδων και βελτίωση της γενίκευσης",
+          "Για σημαντική επιτάχυνση της διαδικασίας tokenization πριν καν ξεκινήσει η εκπαίδευση",
+          "Για την αποφυγή σφαλμάτων ανεπαρκούς μνήμης"
         ],
         "correct": [
           1

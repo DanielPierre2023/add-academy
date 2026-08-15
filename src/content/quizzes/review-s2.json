@@ -2,7 +2,9 @@
   "lectureId": "review-s2",
   "isReview": true,
   "reviewStage": 2,
-  "coversStages": [1],
+  "coversStages": [
+    1
+  ],
   "en": {
     "id": "quiz-review-s2-en",
     "title": "Stage 1 Review Quiz",
@@ -12,12 +14,14 @@
         "index": 0,
         "text": "You have completed Stage 2 on Tokenization. Let's check your recall of Stage 1 fundamentals. What is the primary role of the Transformer architecture in modern LLMs?",
         "options": [
-          "It stores training data in a compressed format for fast retrieval",
-          "It processes input sequences using self-attention and feed-forward layers, enabling parallel computation and long-range dependency modeling",
-          "It converts text into audio signals for speech recognition",
-          "It replaces the need for GPUs by running efficiently on CPUs only"
+          "It stores the entire training corpus in a highly compressed format so it can be retrieved quickly at inference time",
+          "It uses self-attention and feed-forward layers to enable parallel computation and long-range modeling",
+          "It converts input text into audio signals used for speech recognition",
+          "It removes the need for GPUs by running efficiently on ordinary CPUs"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "As covered in Lecture 4, the Transformer architecture (introduced in 'Attention Is All You Need') uses self-attention mechanisms to process all tokens in parallel, capturing long-range dependencies far more effectively than previous sequential architectures like RNNs.",
         "isMulti": false,
         "reviewReference": "Lecture 4: What Are Transformers?"
@@ -26,12 +30,14 @@
         "index": 1,
         "text": "Recall from Stage 1: What is the difference between pretraining and finetuning an LLM?",
         "options": [
-          "Pretraining uses labeled data while finetuning uses unlabeled data",
-          "Pretraining teaches general language understanding from large unlabeled corpora; finetuning adapts the pretrained model for specific tasks using smaller, task-specific datasets",
-          "Pretraining and finetuning are the same process with different names",
-          "Finetuning happens before pretraining to prepare the model architecture"
+          "Pretraining always uses carefully hand-labeled data, whereas finetuning instead relies entirely on unlabeled raw text corpora",
+          "Pretraining learns general language from large unlabeled corpora; finetuning adapts it to specific tasks",
+          "Pretraining and finetuning are really the same process under two different names",
+          "Finetuning happens before pretraining in order to prepare the model architecture"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "As discussed in Lecture 3, pretraining is the first phase where the model learns general language patterns from vast amounts of text (next-token prediction). Finetuning is the subsequent phase where this general knowledge is specialized for specific tasks like classification, instruction following, or domain-specific applications.",
         "isMulti": false,
         "reviewReference": "Lecture 3: Pretraining LLMs vs Finetuning LLMs"
@@ -40,12 +46,14 @@
         "index": 2,
         "text": "From Lecture 5 on GPT-3: Why was GPT-3 considered a breakthrough in few-shot learning?",
         "options": [
-          "Because it was the smallest model ever built",
-          "Because it could perform tasks with just a few examples in the prompt, without needing gradient updates or finetuning",
-          "Because it was the first model to use convolutions for text processing",
-          "Because it could only work with exactly three examples"
+          "Because it was by far the smallest model ever built at the time",
+          "Because it could perform tasks from a few prompt examples, with no gradient updates",
+          "Because it was the very first language model to rely on convolutional layers for all text processing",
+          "Because it could only ever work with exactly three in-context examples"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "GPT-3's scale (175B parameters) enabled remarkable few-shot and zero-shot capabilities. By simply providing a few examples in the prompt (in-context learning), the model could perform tasks it was never explicitly trained for, without updating any weights.",
         "isMulti": false,
         "reviewReference": "Lecture 5: How Does GPT-3 Really Work?"
@@ -54,12 +62,16 @@
         "index": 3,
         "text": "Thinking back to Stage 1: In the car-building analogy used throughout the course, what do the three main stages represent? Select all correct answers.",
         "options": [
-          "Stage 1 (Fundamentals) = Studying the car manual to understand how cars work",
-          "Stage 2 (Building) = Assembling the car from parts (architecture, tokenizer, data pipeline)",
-          "Stage 3 (Finetuning) = Customizing the car for a specific purpose and test-driving it",
-          "Stage 1 (Fundamentals) = Buying a car from a dealership"
+          "Stage 1 (Fundamentals) = Studying the car manual to learn how cars work",
+          "Stage 2 (Building) = Assembling the car from parts (architecture, tokenizer, data)",
+          "Stage 3 (Finetuning) = Customizing the car for a purpose and test-driving it",
+          "Stage 1 (Fundamentals) = Simply buying a fully assembled car directly from a local dealership showroom"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "The course uses a three-stage car analogy: first you study the manual (understand LLM theory), then you build the car from parts (implement the architecture), and finally you customize and test-drive it (finetune and evaluate for specific tasks).",
         "isMulti": true,
         "reviewReference": "Lecture 6: Stages of Building an LLM from Scratch"
@@ -68,12 +80,14 @@
         "index": 4,
         "text": "From your Stage 1 knowledge: What does an LLM actually predict during text generation?",
         "options": [
-          "The entire response at once as a single output",
-          "The next token (word piece) in the sequence, one at a time, based on all previous tokens",
-          "Random words from a dictionary weighted by frequency",
-          "Complete sentences selected from its training data"
+          "The entire response all at once, produced together as one single complete output block",
+          "The next token (word piece), one at a time, from all previous tokens",
+          "Random dictionary words, weighted by their overall frequency",
+          "Complete sentences selected directly from its training data"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "As covered in Lectures 2 and 5, LLMs are autoregressive models that generate text one token at a time. At each step, the model takes all previous tokens as input and produces a probability distribution over the vocabulary for the next token. This next-token prediction is the fundamental mechanism behind all LLM text generation.",
         "isMulti": false,
         "reviewReference": "Lecture 2: LLM Basics"
@@ -89,12 +103,14 @@
         "index": 0,
         "text": "Ati finalizat Etapa 2 despre Tokenizare. Sa verificam cat de bine retineti fundamentele din Etapa 1. Care este rolul principal al arhitecturii Transformer in LLM-urile moderne?",
         "options": [
-          "Stocheaza datele de antrenament intr-un format comprimat pentru recuperare rapida",
-          "Proceseaza secventele de intrare folosind self-attention si straturi feed-forward, permitand calculul paralel si modelarea dependentelor pe distante lungi",
-          "Converteste textul in semnale audio pentru recunoasterea vorbirii",
-          "Inlocuieste nevoia de GPU-uri ruland eficient doar pe CPU-uri"
+          "Stochează întregul corpus de antrenament într-un format puternic comprimat pentru a putea fi recuperat rapid la inferență",
+          "Folosește self-attention și straturi feed-forward pentru a permite calcul paralel și modelare pe distanțe lungi",
+          "Convertește textul de intrare în semnale audio folosite pentru recunoașterea vorbirii",
+          "Elimină nevoia de GPU-uri ruland eficient pe procesoare CPU obișnuite"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Asa cum s-a discutat in Lectia 4, arhitectura Transformer (introdusa in 'Attention Is All You Need') foloseste mecanisme de self-attention pentru a procesa toate token-urile in paralel, capturand dependentele pe distante lungi mult mai eficient decat arhitecturile secventiale anterioare precum RNN-urile.",
         "isMulti": false,
         "reviewReference": "Lectia 4: Ce Sunt Transformerele?"
@@ -103,12 +119,14 @@
         "index": 1,
         "text": "Reamintiti-va din Etapa 1: Care este diferenta dintre pretraining si finetuning pentru un LLM?",
         "options": [
-          "Pretraining-ul foloseste date etichetate iar finetuning-ul foloseste date neetichetate",
-          "Pretraining-ul invata intelegerea generala a limbajului din corpusuri mari neetichetate; finetuning-ul adapteaza modelul preantrenat pentru sarcini specifice folosind seturi de date mai mici, specifice sarcinii",
-          "Pretraining-ul si finetuning-ul sunt acelasi proces cu nume diferite",
-          "Finetuning-ul are loc inainte de pretraining pentru a pregati arhitectura modelului"
+          "Pretraining-ul folosește întotdeauna date etichetate manual cu atenție, în timp ce finetuning-ul se bazează în întregime pe corpusuri de text brut neetichetate",
+          "Pretraining-ul învață limbajul general din corpusuri mari neetichetate; finetuning-ul îl adaptează la sarcini specifice",
+          "Pretraining-ul și finetuning-ul sunt de fapt același proces sub două nume diferite",
+          "Finetuning-ul are loc înainte de pretraining pentru a pregăti arhitectura modelului"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Asa cum s-a discutat in Lectia 3, pretraining-ul este prima faza in care modelul invata tiparele generale ale limbajului din cantitati vaste de text (predictia urmatorului token). Finetuning-ul este faza ulterioara in care aceasta cunoastere generala este specializata pentru sarcini specifice.",
         "isMulti": false,
         "reviewReference": "Lectia 3: Pretraining vs Finetuning"
@@ -117,12 +135,14 @@
         "index": 2,
         "text": "Din Lectia 5 despre GPT-3: De ce a fost GPT-3 considerat o descoperire in invatarea few-shot?",
         "options": [
-          "Pentru ca era cel mai mic model construit vreodata",
-          "Pentru ca putea efectua sarcini cu doar cateva exemple in prompt, fara a necesita actualizari de gradient sau finetuning",
-          "Pentru ca era primul model care folosea convolutii pentru procesarea textului",
-          "Pentru ca putea lucra doar cu exact trei exemple"
+          "Pentru că era de departe cel mai mic model construit vreodată la acea vreme",
+          "Pentru că putea efectua sarcini din câteva exemple în prompt, fără actualizări de gradient",
+          "Pentru că era primul model lingvistic care se baza pe straturi convoluționale pentru întreaga procesare a textului",
+          "Pentru că putea funcționa doar cu exact trei exemple în context"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Scala GPT-3 (175 miliarde de parametri) a permis capabilitati remarcabile de few-shot si zero-shot. Furnizand pur si simplu cateva exemple in prompt (invatare in context), modelul putea efectua sarcini pentru care nu a fost niciodata antrenat explicit, fara actualizarea vreunei ponderi.",
         "isMulti": false,
         "reviewReference": "Lectia 5: Cum Functioneaza De Fapt GPT-3?"
@@ -131,12 +151,16 @@
         "index": 3,
         "text": "Ganditi-va inapoi la Etapa 1: In analogia construirii unei masini folosita pe tot parcursul cursului, ce reprezinta cele trei etape principale? Selectati toate raspunsurile corecte.",
         "options": [
-          "Etapa 1 (Fundamentele) = Studierea manualului masinii pentru a intelege cum functioneaza masinile",
-          "Etapa 2 (Construirea) = Asamblarea masinii din piese (arhitectura, tokenizer, pipeline de date)",
-          "Etapa 3 (Finetuning) = Personalizarea masinii pentru un scop specific si testarea ei pe pista",
-          "Etapa 1 (Fundamentele) = Cumpararea unei masini de la un dealer"
+          "Etapa 1 (Fundamentele) = Studierea manualului mașinii pentru a învăța cum funcționează",
+          "Etapa 2 (Construirea) = Asamblarea mașinii din piese (arhitectură, tokenizer, date)",
+          "Etapa 3 (Finetuning) = Personalizarea mașinii pentru un scop și testarea ei",
+          "Etapa 1 (Fundamentele) = Pur și simplu cumpărarea unei mașini complet asamblate direct de la un dealer local"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "Cursul foloseste o analogie cu masina in trei etape: mai intai studiezi manualul (intelegi teoria LLM), apoi construiesti masina din piese (implementezi arhitectura), si in final o personalizezi si o testezi (finetuning si evaluare pentru sarcini specifice).",
         "isMulti": true,
         "reviewReference": "Lectia 6: Etapele Construirii unui LLM de la Zero"
@@ -145,12 +169,14 @@
         "index": 4,
         "text": "Din cunostintele Etapei 1: Ce prezice de fapt un LLM in timpul generarii de text?",
         "options": [
-          "Intregul raspuns deodata ca o singura iesire",
-          "Urmatorul token (fragment de cuvant) din secventa, cate unul, bazat pe toate token-urile anterioare",
-          "Cuvinte aleatoare dintr-un dictionar ponderate dupa frecventa",
-          "Propozitii complete selectate din datele sale de antrenament"
+          "Întregul răspuns dintr-odată, produs împreună ca un singur bloc de ieșire complet și finalizat",
+          "Următorul token (fragment de cuvânt), câte unul, din toate token-urile anterioare",
+          "Cuvinte aleatoare din dicționar, ponderate după frecvența lor generală",
+          "Propoziții complete selectate direct din datele sale de antrenament"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Asa cum s-a discutat in Lectiile 2 si 5, LLM-urile sunt modele autoregresive care genereaza text cate un token. La fiecare pas, modelul ia toate token-urile anterioare ca intrare si produce o distributie de probabilitate peste vocabular pentru urmatorul token.",
         "isMulti": false,
         "reviewReference": "Lectia 2: Bazele LLM"
@@ -166,12 +192,14 @@
         "index": 0,
         "text": "Ολοκληρώσατε το Στάδιο 2 για την Tokenization. Ας ελέγξουμε τι θυμάστε από τα θεμελιώδη του Σταδίου 1. Ποιος είναι ο κύριος ρόλος της αρχιτεκτονικής Transformer στα σύγχρονα LLMs;",
         "options": [
-          "Αποθηκεύει τα δεδομένα εκπαίδευσης σε συμπιεσμένη μορφή για γρήγορη ανάκτηση",
-          "Επεξεργάζεται ακολουθίες εισόδου χρησιμοποιώντας self-attention και στρώματα feed-forward, επιτρέποντας παράλληλο υπολογισμό και μοντελοποίηση εξαρτήσεων μεγάλης εμβέλειας",
-          "Μετατρέπει κείμενο σε ηχητικά σήματα για αναγνώριση ομιλίας",
-          "Αντικαθιστά την ανάγκη για GPUs λειτουργώντας αποδοτικά μόνο σε CPUs"
+          "Αποθηκεύει ολόκληρο το corpus εκπαίδευσης σε ιδιαίτερα συμπιεσμένη μορφή ώστε να ανακτάται πολύ γρήγορα κατά την εξαγωγή",
+          "Χρησιμοποιεί self-attention και feed-forward για παράλληλο υπολογισμό και εξαρτήσεις μεγάλης εμβέλειας",
+          "Μετατρέπει το κείμενο εισόδου σε ηχητικά σήματα για αναγνώριση ομιλίας",
+          "Καταργεί την ανάγκη για GPUs λειτουργώντας αποδοτικά σε συνηθισμένες CPUs"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Όπως συζητήθηκε στη Διάλεξη 4, η αρχιτεκτονική Transformer (που εισήχθη στο 'Attention Is All You Need') χρησιμοποιεί μηχανισμούς self-attention για να επεξεργάζεται όλα τα tokens παράλληλα, αποτυπώνοντας εξαρτήσεις μεγάλης εμβέλειας πολύ πιο αποτελεσματικά από προηγούμενες σειριακές αρχιτεκτονικές όπως τα RNNs.",
         "isMulti": false,
         "reviewReference": "Διάλεξη 4: Τι Είναι τα Transformers;"
@@ -180,12 +208,14 @@
         "index": 1,
         "text": "Θυμηθείτε από το Στάδιο 1: Ποια είναι η διαφορά μεταξύ pretraining και finetuning ενός LLM;",
         "options": [
-          "Η προεκπαίδευση χρησιμοποιεί επισημασμένα δεδομένα ενώ η μικρορύθμιση χρησιμοποιεί μη επισημασμένα",
-          "Η προεκπαίδευση διδάσκει γενική κατανόηση γλώσσας από μεγάλα μη επισημασμένα corpus· η μικρορύθμιση προσαρμόζει το προεκπαιδευμένο μοντέλο για συγκεκριμένες εργασίες χρησιμοποιώντας μικρότερα, ειδικά σύνολα δεδομένων",
-          "Η προεκπαίδευση και η μικρορύθμιση είναι η ίδια διαδικασία με διαφορετικά ονόματα",
-          "Η μικρορύθμιση γίνεται πριν την προεκπαίδευση για να προετοιμάσει την αρχιτεκτονική του μοντέλου"
+          "Η προεκπαίδευση χρησιμοποιεί πάντα προσεκτικά χειροκίνητα επισημασμένα δεδομένα, ενώ η μικρορύθμιση βασίζεται εξ ολοκλήρου σε μη επισημασμένα ακατέργαστα corpus",
+          "Η προεκπαίδευση μαθαίνει γενική γλώσσα από μεγάλα μη επισημασμένα corpus· η μικρορύθμιση το προσαρμόζει σε εργασίες",
+          "Η προεκπαίδευση και η μικρορύθμιση είναι στην ουσία η ίδια διαδικασία με δύο διαφορετικά ονόματα",
+          "Η μικρορύθμιση γίνεται πριν την προεκπαίδευση για να προετοιμάσει την αρχιτεκτονική"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Όπως συζητήθηκε στη Διάλεξη 3, η προεκπαίδευση είναι η πρώτη φάση όπου το μοντέλο μαθαίνει γενικά γλωσσικά πρότυπα από τεράστιες ποσότητες κειμένου (πρόβλεψη επόμενου token). Η μικρορύθμιση είναι η επόμενη φάση όπου αυτή η γενική γνώση εξειδικεύεται για συγκεκριμένες εργασίες.",
         "isMulti": false,
         "reviewReference": "Διάλεξη 3: Στάδια Κατασκευής ενός LLM"
@@ -194,12 +224,14 @@
         "index": 2,
         "text": "Από τη Διάλεξη 5 για το GPT-3: Γιατί το GPT-3 θεωρήθηκε ρηξικέλευθο στη μάθηση few-shot;",
         "options": [
-          "Επειδή ήταν το μικρότερο μοντέλο που κατασκευάστηκε ποτέ",
-          "Επειδή μπορούσε να εκτελεί εργασίες με μόνο λίγα παραδείγματα στο prompt, χωρίς να χρειάζεται ενημερώσεις κλίσεων ή μικρορύθμιση",
-          "Επειδή ήταν το πρώτο μοντέλο που χρησιμοποίησε συνελίξεις για επεξεργασία κειμένου",
-          "Επειδή μπορούσε να λειτουργήσει μόνο με ακριβώς τρία παραδείγματα"
+          "Επειδή ήταν με διαφορά το μικρότερο μοντέλο που είχε κατασκευαστεί ποτέ τότε",
+          "Επειδή μπορούσε να εκτελεί εργασίες από λίγα παραδείγματα prompt, χωρίς ενημερώσεις κλίσεων",
+          "Επειδή ήταν το πρώτο γλωσσικό μοντέλο που βασιζόταν σε συνελικτικά στρώματα για όλη την επεξεργασία κειμένου",
+          "Επειδή μπορούσε να λειτουργήσει μόνο με ακριβώς τρία παραδείγματα εντός πλαισίου"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Η κλίμακα του GPT-3 (175 δισεκατομμύρια παράμετροι) επέτρεψε αξιοσημείωτες δυνατότητες few-shot και zero-shot. Παρέχοντας απλά μερικά παραδείγματα στο prompt (μάθηση εντός πλαισίου), το μοντέλο μπορούσε να εκτελεί εργασίες για τις οποίες δεν εκπαιδεύτηκε ποτέ ρητά.",
         "isMulti": false,
         "reviewReference": "Διάλεξη 5: Πώς Λειτουργεί Πραγματικά το GPT-3;"
@@ -208,12 +240,16 @@
         "index": 3,
         "text": "Σκεφτείτε πίσω στο Στάδιο 1: Στην αναλογία κατασκευής αυτοκινήτου που χρησιμοποιείται σε όλο το μάθημα, τι αντιπροσωπεύουν τα τρία κύρια στάδια; Επιλέξτε όλες τις σωστές απαντήσεις.",
         "options": [
-          "Στάδιο 1 (Θεμελιώδη) = Μελέτη του εγχειριδίου του αυτοκινήτου για κατανόηση λειτουργίας",
-          "Στάδιο 2 (Κατασκευή) = Συναρμολόγηση του αυτοκινήτου από εξαρτήματα (αρχιτεκτονική, tokenizer, αγωγός δεδομένων)",
-          "Στάδιο 3 (Μικρορύθμιση) = Προσαρμογή του αυτοκινήτου για συγκεκριμένο σκοπό και δοκιμαστική οδήγηση",
-          "Στάδιο 1 (Θεμελιώδη) = Αγορά αυτοκινήτου από αντιπροσωπεία"
+          "Στάδιο 1 (Θεμελιώδη) = Μελέτη του εγχειριδίου για να μάθεις πώς λειτουργεί",
+          "Στάδιο 2 (Κατασκευή) = Συναρμολόγηση από εξαρτήματα (αρχιτεκτονική, tokenizer, δεδομένα)",
+          "Στάδιο 3 (Μικρορύθμιση) = Προσαρμογή για συγκεκριμένο σκοπό και δοκιμαστική οδήγηση",
+          "Στάδιο 1 (Θεμελιώδη) = Απλώς η αγορά ενός πλήρως συναρμολογημένου αυτοκινήτου από τοπική αντιπροσωπεία"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "Το μάθημα χρησιμοποιεί αναλογία αυτοκινήτου τριών σταδίων: πρώτα μελετάτε το εγχειρίδιο (κατανοείτε τη θεωρία LLM), μετά κατασκευάζετε το αυτοκίνητο (υλοποιείτε την αρχιτεκτονική), και τελικά το προσαρμόζετε και το δοκιμάζετε (μικρορύθμιση και αξιολόγηση).",
         "isMulti": true,
         "reviewReference": "Διάλεξη 6: Στάδια Κατασκευής ενός LLM από το Μηδέν"
@@ -222,12 +258,14 @@
         "index": 4,
         "text": "Από τις γνώσεις του Σταδίου 1: Τι προβλέπει στην πραγματικότητα ένα LLM κατά τη δημιουργία κειμένου;",
         "options": [
-          "Ολόκληρη την απάντηση ταυτόχρονα ως μία μόνο έξοδο",
-          "Το επόμενο token (τμήμα λέξης) στην ακολουθία, ένα τη φορά, με βάση όλα τα προηγούμενα tokens",
-          "Τυχαίες λέξεις από ένα λεξικό σταθμισμένες κατά συχνότητα",
-          "Ολοκληρωμένες προτάσεις επιλεγμένες από τα δεδομένα εκπαίδευσής του"
+          "Ολόκληρη την απάντηση με τη μία, παραγόμενη μαζί ως ένα ενιαίο πλήρες μπλοκ εξόδου",
+          "Το επόμενο token (τμήμα λέξης), ένα τη φορά, από όλα τα προηγούμενα tokens",
+          "Τυχαίες λέξεις λεξικού, σταθμισμένες κατά τη συνολική τους συχνότητα",
+          "Ολοκληρωμένες προτάσεις επιλεγμένες απευθείας από τα δεδομένα εκπαίδευσης"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Όπως καλύφθηκε στις Διαλέξεις 2 και 5, τα LLMs είναι αυτοπαλίνδρομα μοντέλα που παράγουν κείμενο ένα token τη φορά. Σε κάθε βήμα, το μοντέλο παίρνει όλα τα προηγούμενα tokens ως είσοδο και παράγει κατανομή πιθανοτήτων πάνω στο λεξιλόγιο για το επόμενο token.",
         "isMulti": false,
         "reviewReference": "Διάλεξη 2: Βασικά στοιχεία LLM"

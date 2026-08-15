@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is the purpose of gradient accumulation?",
         "options": [
-          "To speed up the forward pass by caching intermediate activations",
-          "To reduce the model's total number of parameters",
-          "To simulate a larger effective batch size by summing gradients across multiple micro-batches before updating",
-          "To prevent vanishing gradients in deep networks"
+          "To accelerate the forward pass by caching and reusing intermediate activations across steps and layers",
+          "To reduce the model's total number of trainable parameters",
+          "To emulate a larger effective batch size by summing gradients over several micro-batches",
+          "To prevent vanishing gradients from arising in very deep networks"
         ],
         "correct": [
           2
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What is the key benefit of FP16/BF16 mixed precision training?",
         "options": [
-          "It doubles the number of model parameters",
-          "It eliminates the need for gradient clipping",
-          "It improves model accuracy by using more precise calculations",
-          "It reduces memory usage and increases throughput by using 16-bit operations for most computations"
+          "It doubles the total number of model parameters available",
+          "It removes the need for gradient clipping during training",
+          "It improves final model accuracy by performing every computation with far more precise arithmetic",
+          "It cuts memory use and boosts throughput via 16-bit ops for most computations"
         ],
         "correct": [
           3
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Which of the following are valid memory optimization techniques for LLM training?Select all that apply",
         "options": [
-          "Increasing the context length to use more memory bandwidth",
-          "Activation checkpointing (recomputing activations instead of storing them)",
-          "Gradient accumulation to reduce per-step memory requirements",
-          "Disabling the optimizer state to save memory"
+          "Increasing the context length so the model can consume more memory bandwidth per step",
+          "Activation checkpointing that recomputes activations instead of storing them",
+          "Gradient accumulation to lower per-step memory requirements",
+          "Disabling the optimizer state entirely to save memory"
         ],
         "correct": [
           1,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "Why is BF16 often preferred over FP16 for LLM training?",
         "options": [
-          "BF16 has the same exponent range as FP32, reducing overflow/underflow risks without needing loss scaling",
-          "BF16 uses only 8 bits, halving memory compared to FP16",
-          "BF16 has higher mantissa precision than FP16",
-          "BF16 is supported on all GPUs while FP16 is not"
+          "BF16 shares FP32's exponent range, avoiding overflow without loss scaling",
+          "BF16 uses only 8 bits total, halving memory compared to FP16",
+          "BF16 offers higher mantissa precision than FP16 does",
+          "BF16 is supported natively on absolutely every GPU on the market while FP16 is not"
         ],
         "correct": [
           0
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Care este scopul acumulării gradienților?",
         "options": [
-          "Accelerarea pasului forward prin memorarea activărilor intermediare",
-          "Reducerea numărului total de parametri ai modelului",
-          "Simularea unei dimensiuni efective mai mari a lotului prin însumarea gradienților pe mai multe micro-loturi înainte de actualizare",
-          "Prevenirea dispariției gradienților în rețele adânci"
+          "Pentru a accelera pasul forward prin memorarea și reutilizarea activărilor intermediare între pași și straturi",
+          "Pentru a reduce numărul total de parametri antrenabili ai modelului",
+          "Pentru a emula o dimensiune efectivă mai mare a lotului însumând gradienți pe mai multe micro-loturi",
+          "Pentru a preveni dispariția gradienților în rețele foarte adânci"
         ],
         "correct": [
           2
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Care este beneficiul cheie al antrenării cu precizie mixtă FP16/BF16?",
         "options": [
-          "Dublează numărul de parametri ai modelului",
-          "Elimină necesitatea decupării gradienților",
-          "Îmbunătățește acuratețea modelului prin calcule mai precise",
-          "Reduce utilizarea memoriei și crește debitul folosind operații pe 16 biți pentru majoritatea calculelor"
+          "Dublează numărul total de parametri disponibili ai modelului",
+          "Elimină necesitatea decupării gradienților în timpul antrenării",
+          "Îmbunătățește acuratețea finală a modelului efectuând fiecare calcul cu aritmetică mult mai precisă",
+          "Reduce memoria și crește debitul folosind operații pe 16 biți pentru majoritatea calculelor"
         ],
         "correct": [
           3
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Care dintre următoarele sunt tehnici valide de optimizare a memoriei pentru antrenarea LLM? Selectați toate răspunsurile corecte",
         "options": [
-          "Creșterea lungimii contextului pentru a utiliza mai multă lățime de bandă de memorie",
-          "Checkpointing-ul activărilor (recalcularea activărilor în loc de stocarea lor)",
-          "Acumularea gradienților pentru reducerea cerințelor de memorie per pas",
-          "Dezactivarea stării optimizatorului pentru economisirea memoriei"
+          "Creșterea lungimii contextului pentru ca modelul să consume mai multă lățime de bandă de memorie per pas",
+          "Checkpointing-ul activărilor care recalculează activările în loc să le stocheze",
+          "Acumularea gradienților pentru a reduce cerințele de memorie per pas",
+          "Dezactivarea completă a stării optimizatorului pentru a economisi memorie"
         ],
         "correct": [
           1,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "De ce este BF16 adesea preferat față de FP16 pentru antrenarea LLM?",
         "options": [
-          "BF16 are același interval de exponenți ca FP32, reducând riscurile de depășire fără a necesita scalarea pierderii",
-          "BF16 folosește doar 8 biți, înjumătățind memoria comparativ cu FP16",
-          "BF16 are precizie mai mare a mantisei decât FP16",
-          "BF16 este suportat pe toate GPU-urile în timp ce FP16 nu este"
+          "BF16 împarte intervalul de exponenți al FP32, evitând depășirea fără scalarea pierderii",
+          "BF16 folosește doar 8 biți în total, înjumătățind memoria față de FP16",
+          "BF16 oferă o precizie mai mare a mantisei decât FP16",
+          "BF16 este suportat nativ pe absolut fiecare GPU de pe piață în timp ce FP16 nu este suportat nicăieri"
         ],
         "correct": [
           0
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Ποιος είναι ο σκοπός της συσσώρευσης κλίσεων;",
         "options": [
-          "Επιτάχυνση του forward pass αποθηκεύοντας ενδιάμεσες ενεργοποιήσεις",
-          "Μείωση του συνολικού αριθμού παραμέτρων του μοντέλου",
-          "Προσομοίωση μεγαλύτερου αποτελεσματικού μεγέθους παρτίδας αθροίζοντας κλίσεις σε πολλαπλές μικρο-παρτίδες πριν την ενημέρωση",
-          "Αποτροπή εξαφανιζόμενων κλίσεων σε βαθιά δίκτυα"
+          "Για να επιταχύνει το forward pass αποθηκεύοντας και επαναχρησιμοποιώντας ενδιάμεσες ενεργοποιήσεις σε βήματα και επίπεδα",
+          "Για να μειώσει τον συνολικό αριθμό εκπαιδεύσιμων παραμέτρων του μοντέλου",
+          "Για να προσομοιώσει μεγαλύτερο αποτελεσματικό μέγεθος παρτίδας αθροίζοντας κλίσεις σε πολλές μικρο-παρτίδες",
+          "Για να αποτρέψει τις εξαφανιζόμενες κλίσεις σε πολύ βαθιά δίκτυα"
         ],
         "correct": [
           2
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποιο είναι το βασικό πλεονέκτημα της εκπαίδευσης μικτής ακρίβειας FP16/BF16;",
         "options": [
-          "Διπλασιάζει τον αριθμό παραμέτρων του μοντέλου",
-          "Εξαλείφει την ανάγκη αποκοπής κλίσεων",
-          "Βελτιώνει την ακρίβεια μοντέλου χρησιμοποιώντας πιο ακριβείς υπολογισμούς",
-          "Μειώνει τη χρήση μνήμης και αυξάνει τη διεκπεραίωση χρησιμοποιώντας πράξεις 16-bit για τους περισσότερους υπολογισμούς"
+          "Διπλασιάζει τον συνολικό αριθμό διαθέσιμων παραμέτρων του μοντέλου",
+          "Εξαλείφει την ανάγκη αποκοπής κλίσεων κατά την εκπαίδευση",
+          "Βελτιώνει την τελική ακρίβεια του μοντέλου εκτελώντας κάθε υπολογισμό με πολύ πιο ακριβή αριθμητική",
+          "Μειώνει τη μνήμη και αυξάνει τη διεκπεραίωση με πράξεις 16-bit στους περισσότερους υπολογισμούς"
         ],
         "correct": [
           3
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποιες από τις ακόλουθες είναι έγκυρες τεχνικές βελτιστοποίησης μνήμης για εκπαίδευση LLM; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Αύξηση μήκους πλαισίου για χρήση περισσότερου εύρους ζώνης μνήμης",
-          "Checkpointing ενεργοποιήσεων (επαναϋπολογισμός αντί αποθήκευσης)",
-          "Συσσώρευση κλίσεων για μείωση απαιτήσεων μνήμης ανά βήμα",
-          "Απενεργοποίηση κατάστασης βελτιστοποιητή για εξοικονόμηση μνήμης"
+          "Αύξηση του μήκους πλαισίου ώστε το μοντέλο να καταναλώνει περισσότερο εύρος ζώνης μνήμης ανά βήμα",
+          "Checkpointing ενεργοποιήσεων που τις επαναϋπολογίζει αντί να τις αποθηκεύει",
+          "Συσσώρευση κλίσεων για μείωση των απαιτήσεων μνήμης ανά βήμα",
+          "Πλήρης απενεργοποίηση της κατάστασης βελτιστοποιητή για εξοικονόμηση μνήμης"
         ],
         "correct": [
           1,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Γιατί προτιμάται συχνά το BF16 έναντι του FP16 για εκπαίδευση LLM;",
         "options": [
-          "Το BF16 έχει το ίδιο εύρος εκθέτη με το FP32, μειώνοντας κινδύνους υπερχείλισης χωρίς να χρειάζεται κλιμάκωση απώλειας",
-          "Το BF16 χρησιμοποιεί μόνο 8 bits, μειώνοντας τη μνήμη στο μισό σε σύγκριση με FP16",
-          "Το BF16 έχει μεγαλύτερη ακρίβεια mantissa από το FP16",
-          "Το BF16 υποστηρίζεται σε όλες τις GPUs ενώ το FP16 όχι"
+          "Το BF16 μοιράζεται το εύρος εκθέτη του FP32, αποφεύγοντας υπερχείλιση χωρίς κλιμάκωση απώλειας",
+          "Το BF16 χρησιμοποιεί μόνο 8 bits συνολικά, μειώνοντας τη μνήμη στο μισό έναντι FP16",
+          "Το BF16 προσφέρει μεγαλύτερη ακρίβεια mantissa από το FP16",
+          "Το BF16 υποστηρίζεται εγγενώς σε απολύτως κάθε GPU της αγοράς ενώ το FP16 δεν υποστηρίζεται πουθενά"
         ],
         "correct": [
           0

@@ -7,9 +7,9 @@
         "index": 0,
         "text": "What is the key innovation of DPO (Direct Preference Optimization) compared to RLHF?",
         "options": [
-          "DPO uses a larger reward model for better scoring",
+          "DPO relies on a much larger reward model to obtain better preference scoring at every step",
           "DPO trains the model using only positive examples",
-          "DPO eliminates the need for a separate reward model and RL training, optimizing preferences directly with a classification-like loss",
+          "DPO removes the separate reward model and RL, optimizing preferences directly",
           "DPO requires more human annotations than RLHF"
         ],
         "correct": [
@@ -22,8 +22,8 @@
         "index": 1,
         "text": "What does a DPO training example consist of?",
         "options": [
-          "A single response with a numerical quality score",
-          "A prompt paired with a chosen (preferred) response and a rejected (dispreferred) response",
+          "A single response accompanied by a numerical quality score assigned by a grader",
+          "A prompt with a chosen response and a rejected response",
           "A sequence of tokens with masked positions for prediction",
           "An instruction with multiple correct answers ranked by difficulty"
         ],
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "Which of the following are advantages of DPO over traditional RLHF? Select all that apply",
         "options": [
-          "No need to train and maintain a separate reward model",
-          "Training is more stable since it avoids RL optimization challenges",
-          "DPO does not require any human preference data",
-          "Simpler implementation with standard supervised training infrastructure"
+          "No need to train or maintain a separate reward model",
+          "More stable training that avoids RL optimization challenges",
+          "DPO requires no human preference data at all, learning purely from raw unlabeled text",
+          "Simpler implementation using standard supervised infrastructure"
         ],
         "correct": [
           0,
@@ -54,10 +54,10 @@
         "index": 3,
         "text": "In the DPO loss function, what role does the reference model play?",
         "options": [
-          "It generates new training examples during optimization",
-          "It serves as the reward model for scoring outputs",
-          "It replaces the policy model after training completes",
-          "It provides a baseline to prevent the policy from deviating too far, analogous to the KL constraint in RLHF"
+          "It continuously generates brand-new training examples throughout the optimization process",
+          "It serves as the reward model that scores outputs",
+          "It replaces the policy model once training completes",
+          "It provides a baseline preventing the policy from deviating too far"
         ],
         "correct": [
           3
@@ -69,10 +69,10 @@
         "index": 4,
         "text": "When might RLHF be preferred over DPO despite DPO's simplicity?",
         "options": [
-          "When no human preference data is available",
-          "When the model is too small for fine-tuning",
-          "When online exploration and iterative reward model improvement can yield better alignment than static preference datasets",
-          "When the training infrastructure does not support gradient computation"
+          "When no human preference data can be collected for the task",
+          "When the model is far too small to be fine-tuned in practice",
+          "When online exploration and iterative reward updates improve alignment",
+          "When the available training infrastructure cannot support gradient computation at all"
         ],
         "correct": [
           2
@@ -89,9 +89,9 @@
         "index": 0,
         "text": "Care este inovația cheie a DPO (Direct Preference Optimization) comparativ cu RLHF?",
         "options": [
-          "DPO folosește un model de recompensă mai mare pentru evaluare mai bună",
+          "DPO se bazează pe un model de recompensă mult mai mare pentru o evaluare mai bună la fiecare pas",
           "DPO antrenează modelul folosind doar exemple pozitive",
-          "DPO elimină necesitatea unui model de recompensă separat și a antrenării RL, optimizând preferințele direct cu o pierdere de tip clasificare",
+          "DPO elimină modelul de recompensă separat și RL, optimizând preferințele direct",
           "DPO necesită mai multe adnotări umane decât RLHF"
         ],
         "correct": [
@@ -104,10 +104,10 @@
         "index": 1,
         "text": "Din ce constă un exemplu de antrenare DPO?",
         "options": [
-          "Un singur răspuns cu un scor numeric de calitate",
-          "Un prompt asociat cu un răspuns ales (preferat) și un răspuns respins (nepreferat)",
+          "Un singur răspuns însoțit de un scor numeric de calitate atribuit de un evaluator",
+          "Un prompt cu un răspuns ales și un răspuns respins",
           "O secvență de token-uri cu poziții mascate pentru predicție",
-          "O instrucțiune cu mai multe răspunsuri corecte clasificate după dificultate"
+          "O instrucțiune cu mai multe răspunsuri corecte clasate după dificultate"
         ],
         "correct": [
           1
@@ -119,10 +119,10 @@
         "index": 2,
         "text": "Care dintre următoarele sunt avantaje ale DPO față de RLHF tradițional? Selectați toate răspunsurile corecte",
         "options": [
-          "Nu este nevoie să se antreneze și să se mențină un model de recompensă separat",
-          "Antrenarea este mai stabilă deoarece evită provocările optimizării RL",
-          "DPO nu necesită date de preferințe umane",
-          "Implementare mai simplă cu infrastructură standard de antrenare supervizată"
+          "Nu e nevoie să antrenezi sau să menții un model de recompensă separat",
+          "Antrenare mai stabilă care evită provocările optimizării RL",
+          "DPO nu necesită deloc date de preferințe umane, învățând pur din text brut neetichetat pe cont propriu",
+          "Implementare mai simplă folosind infrastructură standard supervizată"
         ],
         "correct": [
           0,
@@ -136,10 +136,10 @@
         "index": 3,
         "text": "În funcția de pierdere DPO, ce rol joacă modelul de referință?",
         "options": [
-          "Generează noi exemple de antrenare în timpul optimizării",
-          "Servește ca model de recompensă pentru evaluarea ieșirilor",
-          "Înlocuiește modelul de politică după finalizarea antrenării",
-          "Oferă o bază de referință pentru a preveni politica de la devierea prea mare, analog constrângerii KL din RLHF"
+          "Generează continuu exemple de antrenare complet noi pe tot parcursul procesului de optimizare",
+          "Servește ca model de recompensă care evaluează ieșirile",
+          "Înlocuiește modelul de politică odată ce antrenarea se termină",
+          "Oferă o bază care previne politica să devieze prea mult"
         ],
         "correct": [
           3
@@ -151,10 +151,10 @@
         "index": 4,
         "text": "Când ar putea fi preferat RLHF față de DPO în ciuda simplității DPO?",
         "options": [
-          "Când nu sunt disponibile date de preferințe umane",
-          "Când modelul este prea mic pentru ajustare fină",
-          "Când explorarea online și îmbunătățirea iterativă a modelului de recompensă pot produce o aliniere mai bună decât seturile statice de preferințe",
-          "Când infrastructura de antrenare nu suportă calculul gradienților"
+          "Când nu pot fi colectate date de preferințe umane pentru sarcină",
+          "Când modelul este mult prea mic pentru a fi ajustat fin în practică",
+          "Când explorarea online și actualizările iterative de recompensă îmbunătățesc alinierea",
+          "Când infrastructura de antrenare disponibilă nu poate suporta deloc calculul gradienților în întregime"
         ],
         "correct": [
           2
@@ -171,10 +171,10 @@
         "index": 0,
         "text": "Ποια είναι η βασική καινοτομία του DPO (Direct Preference Optimization) σε σύγκριση με RLHF;",
         "options": [
-          "Το DPO χρησιμοποιεί μεγαλύτερο μοντέλο ανταμοιβής για καλύτερη βαθμολόγηση",
+          "Το DPO βασίζεται σε ένα πολύ μεγαλύτερο μοντέλο ανταμοιβής για ακόμη καλύτερη βαθμολόγηση σε κάθε ένα βήμα",
           "Το DPO εκπαιδεύει το μοντέλο χρησιμοποιώντας μόνο θετικά παραδείγματα",
-          "Το DPO εξαλείφει την ανάγκη ξεχωριστού μοντέλου ανταμοιβής και εκπαίδευσης RL, βελτιστοποιώντας προτιμήσεις απευθείας με απώλεια τύπου ταξινόμησης",
-          "Το DPO απαιτεί περισσότερες ανθρώπινες σχολιασμούς από RLHF"
+          "Το DPO αφαιρεί το ξεχωριστό μοντέλο ανταμοιβής και το RL, βελτιστοποιώντας προτιμήσεις απευθείας",
+          "Το DPO απαιτεί περισσότερες ανθρώπινες σχολιάσεις από το RLHF"
         ],
         "correct": [
           2
@@ -186,10 +186,10 @@
         "index": 1,
         "text": "Από τι αποτελείται ένα παράδειγμα εκπαίδευσης DPO;",
         "options": [
-          "Μία μόνο απάντηση με αριθμητικό σκορ ποιότητας",
-          "Ένα prompt συνοδευόμενο από επιλεγμένη (προτιμώμενη) απάντηση και απορριφθείσα (μη προτιμώμενη) απάντηση",
+          "Μία μόνο απάντηση συνοδευόμενη από αριθμητικό σκορ ποιότητας που δίνει ένας αξιολογητής",
+          "Ένα prompt με μια επιλεγμένη και μια απορριφθείσα απάντηση",
           "Μια ακολουθία tokens με μασκαρισμένες θέσεις για πρόβλεψη",
-          "Μια οδηγία με πολλαπλές σωστές απαντήσεις κατατεταγμένες κατά δυσκολία"
+          "Μια οδηγία με πολλές σωστές απαντήσεις κατά δυσκολία"
         ],
         "correct": [
           1
@@ -201,10 +201,10 @@
         "index": 2,
         "text": "Ποια από τα ακόλουθα είναι πλεονεκτήματα DPO έναντι παραδοσιακού RLHF; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Δεν χρειάζεται εκπαίδευση και συντήρηση ξεχωριστού μοντέλου ανταμοιβής",
-          "Η εκπαίδευση είναι πιο σταθερή αφού αποφεύγει προκλήσεις βελτιστοποίησης RL",
-          "Το DPO δεν απαιτεί δεδομένα ανθρώπινων προτιμήσεων",
-          "Απλούστερη υλοποίηση με τυπική υποδομή εποπτευόμενης εκπαίδευσης"
+          "Δεν χρειάζεται εκπαίδευση ή συντήρηση ξεχωριστού μοντέλου ανταμοιβής",
+          "Πιο σταθερή εκπαίδευση που αποφεύγει προκλήσεις βελτιστοποίησης RL",
+          "Το DPO δεν χρειάζεται καθόλου δεδομένα ανθρώπινων προτιμήσεων, μαθαίνοντας αποκλειστικά από ακατέργαστο μη επισημασμένο κείμενο",
+          "Απλούστερη υλοποίηση με τυπική εποπτευόμενη υποδομή"
         ],
         "correct": [
           0,
@@ -218,10 +218,10 @@
         "index": 3,
         "text": "Στη συνάρτηση απώλειας DPO, ποιον ρόλο παίζει το μοντέλο αναφοράς;",
         "options": [
-          "Δημιουργεί νέα παραδείγματα εκπαίδευσης κατά τη βελτιστοποίηση",
-          "Χρησιμεύει ως μοντέλο ανταμοιβής για βαθμολόγηση εξόδων",
-          "Αντικαθιστά το μοντέλο πολιτικής μετά ολοκλήρωση εκπαίδευσης",
-          "Παρέχει βάση αναφοράς για αποτροπή υπερβολικής απόκλισης πολιτικής, ανάλογα με τον περιορισμό KL στο RLHF"
+          "Δημιουργεί συνεχώς ολοκαίνουργια παραδείγματα εκπαίδευσης καθ' όλη τη διάρκεια της βελτιστοποίησης",
+          "Χρησιμεύει ως μοντέλο ανταμοιβής που βαθμολογεί εξόδους",
+          "Αντικαθιστά το μοντέλο πολιτικής μόλις ολοκληρωθεί η εκπαίδευση",
+          "Παρέχει μια βάση που αποτρέπει την πολιτική να αποκλίνει υπερβολικά"
         ],
         "correct": [
           3
@@ -233,10 +233,10 @@
         "index": 4,
         "text": "Πότε μπορεί να προτιμηθεί το RLHF έναντι DPO παρά την απλότητα του DPO;",
         "options": [
-          "Όταν δεν υπάρχουν διαθέσιμα δεδομένα ανθρώπινων προτιμήσεων",
-          "Όταν το μοντέλο είναι πολύ μικρό για ακριβή ρύθμιση",
-          "Όταν η online εξερεύνηση και η επαναληπτική βελτίωση μοντέλου ανταμοιβής μπορούν να αποδώσουν καλύτερη ευθυγράμμιση από στατικά datasets προτιμήσεων",
-          "Όταν η υποδομή εκπαίδευσης δεν υποστηρίζει υπολογισμό κλίσεων"
+          "Όταν δεν μπορούν να συλλεχθούν δεδομένα ανθρώπινων προτιμήσεων για την εργασία",
+          "Όταν το μοντέλο είναι πάρα πολύ μικρό για να ρυθμιστεί στην πράξη",
+          "Όταν η online εξερεύνηση και οι επαναληπτικές ενημερώσεις ανταμοιβής βελτιώνουν την ευθυγράμμιση",
+          "Όταν η διαθέσιμη υποδομή εκπαίδευσης δεν μπορεί να υποστηρίξει καθόλου τον υπολογισμό των κλίσεων"
         ],
         "correct": [
           2

@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What does a sudden spike in training loss typically indicate?",
         "options": [
-          "The model has converged successfully",
-          "A possible data corruption, learning rate issue, or numerical instability",
-          "The batch size is too large",
-          "The vocabulary size needs to be increased"
+          "It is a clear sign that the model has already converged successfully to the global optimum",
+          "Possible data corruption, a learning rate issue, or numerical instability",
+          "It means the configured batch size has grown far too large",
+          "It means the tokenizer vocabulary size needs to be increased"
         ],
         "correct": [
           1
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "Why is it important to monitor gradient norms during pretraining?",
         "options": [
-          "To determine the optimal vocabulary size",
-          "To measure how quickly the model generates text",
-          "To detect exploding or vanishing gradients that prevent stable learning",
-          "To choose the number of attention heads"
+          "To determine the optimal tokenizer vocabulary size",
+          "To measure precisely how quickly the trained model can generate new output text at inference",
+          "To catch exploding or vanishing gradients that block stable learning",
+          "To choose the right number of attention heads per layer"
         ],
         "correct": [
           2
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What is the primary purpose of saving checkpoints during training?",
         "options": [
-          "To resume training from a known good state if a failure occurs",
-          "To reduce the model’s memory footprint",
-          "To speed up the forward pass",
-          "To increase the batch size automatically"
+          "To resume training from a known good state after a failure",
+          "To permanently reduce the model's memory footprint on disk and in GPU memory during training",
+          "To speed up the forward pass through cached layers",
+          "To increase the training batch size automatically over time"
         ],
         "correct": [
           0
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Which of the following are signs of anomalous training behavior?Select all that apply",
         "options": [
-          "Loss decreasing smoothly over epochs",
+          "The loss decreasing smoothly and steadily over successive epochs without any sudden jumps",
           "NaN or Inf values appearing in the loss",
-          "Gradient norms remaining in a stable range",
-          "Loss plateauing at a value near log(vocab_size) for many steps"
+          "Gradient norms staying within a stable, healthy range",
+          "Loss plateauing near log(vocab_size) for many steps"
         ],
         "correct": [
           1,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "When debugging a training run that diverged, what is the recommended first step?",
         "options": [
-          "Double the model size to add more capacity",
-          "Remove all dropout layers",
-          "Increase the learning rate to converge faster",
-          "Roll back to the last stable checkpoint and reduce the learning rate"
+          "Double the model's size to add much more capacity and let it absorb the instability on its own",
+          "Remove every dropout layer from the network",
+          "Increase the learning rate so the run converges faster",
+          "Roll back to the last stable checkpoint and lower the learning rate"
         ],
         "correct": [
           3
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Ce indică de obicei un salt brusc în pierderea de antrenare?",
         "options": [
-          "Modelul a convergat cu succes",
-          "O posibilă corupție a datelor, problemă cu rata de învățare sau instabilitate numerică",
-          "Dimensiunea lotului este prea mare",
-          "Dimensiunea vocabularului trebuie crescută"
+          "Este un semn clar că modelul a convergat deja cu succes la optimul global din spațiul parametrilor",
+          "Posibilă corupție a datelor, problemă cu rata de învățare sau instabilitate numerică",
+          "Înseamnă că dimensiunea configurată a lotului a devenit mult prea mare",
+          "Înseamnă că dimensiunea vocabularului tokenizer-ului trebuie crescută"
         ],
         "correct": [
           1
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "De ce este important să monitorizăm normele gradienților în timpul pre-antrenării?",
         "options": [
-          "Pentru a determina dimensiunea optimă a vocabularului",
-          "Pentru a măsura cât de repede generează modelul text",
-          "Pentru a detecta gradienți care explodează sau dispar și care împiedică învățarea stabilă",
-          "Pentru a alege numărul de capete de attention"
+          "Pentru a determina dimensiunea optimă a vocabularului tokenizer-ului",
+          "Pentru a măsura cu precizie cât de repede poate genera modelul antrenat text nou în timpul inferenței",
+          "Pentru a detecta gradienți care explodează sau dispar și blochează învățarea stabilă",
+          "Pentru a alege numărul potrivit de capete de attention per strat"
         ],
         "correct": [
           2
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Care este scopul principal al salvării checkpoint-urilor în timpul antrenării?",
         "options": [
-          "Reluarea antrenării de la o stare bună cunoscută dacă apare o defecțiune",
-          "Reducerea amprentei de memorie a modelului",
-          "Accelerarea pasului forward",
-          "Creșterea automată a dimensiunii lotului"
+          "Reluarea antrenării de la o stare bună cunoscută după o defecțiune",
+          "Reducerea permanentă a amprentei de memorie a modelului pe disc și în memoria GPU în timpul antrenării",
+          "Accelerarea pasului forward prin straturi memorate",
+          "Creșterea automată a dimensiunii lotului de antrenare în timp"
         ],
         "correct": [
           0
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Care dintre următoarele sunt semne de comportament anormal în antrenare? Selectați toate răspunsurile corecte",
         "options": [
-          "Pierderea scade lin pe parcursul epocilor",
+          "Pierderea care scade lin și constant pe parcursul epocilor succesive fără salturi bruște",
           "Valori NaN sau Inf apar în pierdere",
-          "Normele gradienților rămân într-un interval stabil",
-          "Pierderea stagnează la o valoare apropiată de log(vocab_size) pentru mulți pași"
+          "Normele gradienților rămân într-un interval stabil și sănătos",
+          "Pierderea stagnează lângă log(vocab_size) pentru mulți pași"
         ],
         "correct": [
           1,
@@ -149,9 +149,9 @@
         "index": 4,
         "text": "Când depanați o antrenare care a divergat, care este primul pas recomandat?",
         "options": [
-          "Dublarea dimensiunii modelului pentru a adăuga mai multă capacitate",
-          "Eliminarea tuturor straturilor de dropout",
-          "Creșterea ratei de învățare pentru a converge mai rapid",
+          "Dublarea dimensiunii modelului pentru a adăuga mult mai multă capacitate și a lăsa instabilitatea să se resoarbă singură",
+          "Eliminarea fiecărui strat de dropout din rețea",
+          "Creșterea ratei de învățare pentru ca antrenarea să convergă mai rapid",
           "Revenirea la ultimul checkpoint stabil și reducerea ratei de învățare"
         ],
         "correct": [
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Τι υποδεικνύει συνήθως μια ξαφνική αιχμή στην απώλεια εκπαίδευσης;",
         "options": [
-          "Το μοντέλο έχει συγκλίνει επιτυχώς",
+          "Είναι σαφές σημάδι ότι το μοντέλο έχει ήδη συγκλίνει επιτυχώς στο ολικό βέλτιστο του χώρου παραμέτρων",
           "Πιθανή καταστροφή δεδομένων, ζήτημα ρυθμού εκμάθησης ή αριθμητική αστάθεια",
-          "Το μέγεθος παρτίδας είναι πολύ μεγάλο",
-          "Το μέγεθος λεξιλογίου πρέπει να αυξηθεί"
+          "Σημαίνει ότι το ρυθμισμένο μέγεθος παρτίδας έχει γίνει υπερβολικά μεγάλο",
+          "Σημαίνει ότι το μέγεθος λεξιλογίου του tokenizer πρέπει να αυξηθεί"
         ],
         "correct": [
           1
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Γιατί είναι σημαντικό να παρακολουθούμε τις νόρμες κλίσεων κατά την προεκπαίδευση;",
         "options": [
-          "Για να καθορίσουμε το βέλτιστο μέγεθος λεξιλογίου",
-          "Για να μετρήσουμε πόσο γρήγορα παράγει κείμενο το μοντέλο",
-          "Για να ανιχνεύσουμε εκρηγνυόμενες ή εξαφανιζόμενες κλίσεις που εμποδίζουν σταθερή μάθηση",
-          "Για να επιλέξουμε τον αριθμό κεφαλιών attention"
+          "Για να καθορίσουμε το βέλτιστο μέγεθος λεξιλογίου του tokenizer",
+          "Για να μετρήσουμε με ακρίβεια πόσο γρήγορα το εκπαιδευμένο μοντέλο παράγει νέο κείμενο κατά την εξαγωγή",
+          "Για να εντοπίσουμε εκρηγνυόμενες ή εξαφανιζόμενες κλίσεις που εμποδίζουν σταθερή μάθηση",
+          "Για να επιλέξουμε τον σωστό αριθμό κεφαλιών attention ανά επίπεδο"
         ],
         "correct": [
           2
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποιος είναι ο κύριος σκοπός της αποθήκευσης checkpoints κατά την εκπαίδευση;",
         "options": [
-          "Συνέχιση εκπαίδευσης από γνωστή καλή κατάσταση αν συμβεί αστοχία",
-          "Μείωση αποτυπώματος μνήμης μοντέλου",
-          "Επιτάχυνση forward pass",
-          "Αυτόματη αύξηση μεγέθους παρτίδας"
+          "Συνέχιση εκπαίδευσης από γνωστή καλή κατάσταση μετά από αστοχία",
+          "Μόνιμη μείωση του αποτυπώματος μνήμης του μοντέλου στον δίσκο και στη μνήμη GPU κατά την εκπαίδευση",
+          "Επιτάχυνση του forward pass μέσω αποθηκευμένων επιπέδων",
+          "Αυτόματη αύξηση του μεγέθους παρτίδας εκπαίδευσης με τον χρόνο"
         ],
         "correct": [
           0
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποια από τα ακόλουθα είναι σημάδια ανώμαλης συμπεριφοράς εκπαίδευσης; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Η απώλεια μειώνεται ομαλά μέσω εποχών",
-          "Εμφανίζονται τιμές NaN ή Inf στην απώλεια",
-          "Οι νόρμες κλίσεων παραμένουν σε σταθερό εύρος",
-          "Η απώλεια σταθεροποιείται σε τιμή κοντά στο log(vocab_size) για πολλά βήματα"
+          "Η απώλεια μειώνεται ομαλά και σταθερά μέσω διαδοχικών εποχών χωρίς απότομα άλματα",
+          "Τιμές NaN ή Inf εμφανίζονται στην απώλεια",
+          "Οι νόρμες κλίσεων παραμένουν σε σταθερό, υγιές εύρος",
+          "Η απώλεια σταθεροποιείται κοντά στο log(vocab_size) για πολλά βήματα"
         ],
         "correct": [
           1,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Κατά τον εντοπισμό σφαλμάτων σε εκπαίδευση που απέκλινε, ποιο είναι το συνιστώμενο πρώτο βήμα;",
         "options": [
-          "Διπλασιασμός μεγέθους μοντέλου για περισσότερη χωρητικότητα",
-          "Αφαίρεση όλων των επιπέδων dropout",
-          "Αύξηση ρυθμού εκμάθησης για ταχύτερη σύγκλιση",
-          "Επαναφορά στο τελευταίο σταθερό checkpoint και μείωση ρυθμού εκμάθησης"
+          "Διπλασιασμός του μεγέθους του μοντέλου για πολύ περισσότερη χωρητικότητα ώστε να απορροφήσει μόνο του την αστάθεια",
+          "Αφαίρεση κάθε επιπέδου dropout από το δίκτυο",
+          "Αύξηση του ρυθμού εκμάθησης ώστε η εκπαίδευση να συγκλίνει ταχύτερα",
+          "Επαναφορά στο τελευταίο σταθερό checkpoint και μείωση του ρυθμού εκμάθησης"
         ],
         "correct": [
           3

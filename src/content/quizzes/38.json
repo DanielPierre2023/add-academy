@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What does MMLU primarily measure in a language model?",
         "options": [
-          "Text generation speed in tokens per second",
-          "The model’s ability to translate between languages",
-          "Multitask knowledge and reasoning across 57 academic subjects",
-          "The perplexity on a held-out corpus"
+          "Raw text generation speed measured in output tokens per second",
+          "The model's ability to translate between languages",
+          "Multitask knowledge across 57 academic subjects",
+          "The perplexity score on a held-out corpus"
         ],
         "correct": [
           2
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "What is benchmark contamination?",
         "options": [
-          "Running a benchmark on hardware that is too slow",
-          "When benchmark test data appears in the model’s training set, inflating scores",
-          "Using too many benchmarks to evaluate a single model",
-          "Mixing different model architectures in a comparison"
+          "Running a benchmark on hardware that is far too slow for the job",
+          "When benchmark test data leaks into the model's training set",
+          "Using far too many different benchmarks to evaluate a single model at once",
+          "Mixing different model architectures in one comparison"
         ],
         "correct": [
           1
@@ -37,9 +37,9 @@
         "index": 2,
         "text": "What does HellaSwag evaluate?",
         "options": [
-          "Mathematical problem-solving",
-          "Code generation accuracy",
-          "Factual recall from Wikipedia",
+          "The ability to solve multi-step mathematical problems",
+          "Code generation accuracy on programming tasks",
+          "Factual recall of information from Wikipedia",
           "Commonsense reasoning via sentence completion"
         ],
         "correct": [
@@ -53,7 +53,7 @@
         "text": "Which of the following are valid evaluation metrics for language models?Select all that apply",
         "options": [
           "Perplexity on a held-out test set",
-          "Number of parameters in the model",
+          "The total number of parameters in the model",
           "Few-shot accuracy on downstream tasks",
           "Training compute measured in FLOPs"
         ],
@@ -68,8 +68,8 @@
         "index": 4,
         "text": "Why is it risky to compare models using a single benchmark alone?",
         "options": [
-          "A model may overfit or be optimized for that specific benchmark without generalizing",
-          "Benchmarks always produce identical scores for all models",
+          "A model may overfit that specific benchmark without generalizing",
+          "Benchmarks always produce exactly identical scores for every single model",
           "Single benchmarks run faster so they are less accurate",
           "It is impossible to run the same benchmark twice"
         ],
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Ce măsoară în principal MMLU într-un model de limbaj?",
         "options": [
-          "Viteza generării de text în token-uri pe secundă",
+          "Viteza brută de generare a textului măsurată în token-uri de ieșire pe secundă",
           "Capacitatea modelului de a traduce între limbi",
-          "Cunoștințe multisarcină și raționament pe 57 de materii academice",
-          "Perplexitatea pe un corpus reținut"
+          "Cunoștințe multisarcină pe 57 de materii academice",
+          "Scorul de perplexitate pe un corpus reținut"
         ],
         "correct": [
           2
@@ -103,9 +103,9 @@
         "index": 1,
         "text": "Ce este contaminarea benchmark-urilor?",
         "options": [
-          "Rularea unui benchmark pe hardware prea lent",
-          "Când datele de test ale benchmark-ului apar în setul de antrenare al modelului, umflând scorurile",
-          "Folosirea prea multor benchmark-uri pentru a evalua un singur model",
+          "Rularea unui benchmark pe hardware mult prea lent pentru sarcină",
+          "Când datele de test ale benchmark-ului se scurg în setul de antrenare",
+          "Folosirea a mult prea multe benchmark-uri diferite pentru a evalua un singur model deodată",
           "Amestecarea diferitelor arhitecturi de model într-o comparație"
         ],
         "correct": [
@@ -118,9 +118,9 @@
         "index": 2,
         "text": "Ce evaluează HellaSwag?",
         "options": [
-          "Rezolvarea problemelor matematice",
-          "Acuratețea generării de cod",
-          "Reamintirea factuală din Wikipedia",
+          "Capacitatea de a rezolva probleme matematice în mai mulți pași",
+          "Acuratețea generării de cod pe sarcini de programare",
+          "Reamintirea factuală a informațiilor din Wikipedia",
           "Raționamentul de bun simț prin completarea propozițiilor"
         ],
         "correct": [
@@ -134,7 +134,7 @@
         "text": "Care dintre următoarele sunt metrici de evaluare valide pentru modelele de limbaj? Selectați toate răspunsurile corecte",
         "options": [
           "Perplexitatea pe un set de test reținut",
-          "Numărul de parametri ai modelului",
+          "Numărul total de parametri antrenabili ai modelului",
           "Acuratețea few-shot pe sarcini downstream",
           "Calculul de antrenare măsurat în FLOP-uri"
         ],
@@ -149,8 +149,8 @@
         "index": 4,
         "text": "De ce este riscant să comparăm modele folosind un singur benchmark?",
         "options": [
-          "Un model poate fi supraadaptat sau optimizat pentru acel benchmark specific fără a generaliza",
-          "Benchmark-urile produc întotdeauna scoruri identice pentru toate modelele",
+          "Un model poate fi supraadaptat acelui benchmark specific fără a generaliza",
+          "Benchmark-urile produc întotdeauna scoruri exact identice pentru fiecare model",
           "Benchmark-urile singulare rulează mai rapid deci sunt mai puțin precise",
           "Este imposibil să rulezi același benchmark de două ori"
         ],
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Τι μετρά κυρίως το MMLU σε ένα γλωσσικό μοντέλο;",
         "options": [
-          "Ταχύτητα δημιουργίας κειμένου σε tokens ανά δευτερόλεπτο",
-          "Ικανότητα μετάφρασης μεταξύ γλωσσών",
-          "Πολυεργασιακή γνώση και συλλογισμό σε 57 ακαδημαϊκά μαθήματα",
-          "Περπλοκότητα σε κρατημένο σώμα"
+          "Η ακατέργαστη ταχύτητα δημιουργίας κειμένου μετρημένη σε tokens εξόδου ανά δευτερόλεπτο",
+          "Η ικανότητα του μοντέλου να μεταφράζει μεταξύ γλωσσών",
+          "Πολυεργασιακή γνώση σε 57 ακαδημαϊκά μαθήματα",
+          "Το σκορ περπλοκότητας σε κρατημένο σώμα"
         ],
         "correct": [
           2
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Τι είναι η μόλυνση benchmarks;",
         "options": [
-          "Εκτέλεση benchmark σε πολύ αργό hardware",
-          "Όταν δεδομένα ελέγχου benchmark εμφανίζονται στο σετ εκπαίδευσης μοντέλου, διογκώνοντας σκορ",
-          "Χρήση πάρα πολλών benchmarks για αξιολόγηση ενός μοντέλου",
-          "Ανάμειξη διαφορετικών αρχιτεκτονικών σε σύγκριση"
+          "Εκτέλεση benchmark σε hardware πολύ αργό για τη δουλειά",
+          "Όταν δεδομένα ελέγχου benchmark διαρρέουν στο σετ εκπαίδευσης",
+          "Χρήση πάρα πολλών διαφορετικών benchmarks για αξιολόγηση ενός μοντέλου ταυτόχρονα",
+          "Ανάμειξη διαφορετικών αρχιτεκτονικών μοντέλου σε μία σύγκριση"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Τι αξιολογεί το HellaSwag;",
         "options": [
-          "Επίλυση μαθηματικών προβλημάτων",
-          "Ακρίβεια δημιουργίας κώδικα",
-          "Πραγματολογική ανάκληση από Wikipedia",
-          "Συλλογισμό κοινής λογικής μέσω συμπλήρωσης προτάσεων"
+          "Η ικανότητα επίλυσης μαθηματικών προβλημάτων πολλαπλών βημάτων",
+          "Ακρίβεια δημιουργίας κώδικα σε εργασίες προγραμματισμού",
+          "Πραγματολογική ανάκληση πληροφοριών από τη Wikipedia",
+          "Συλλογισμός κοινής λογικής μέσω συμπλήρωσης προτάσεων"
         ],
         "correct": [
           3
@@ -215,7 +215,7 @@
         "text": "Ποιες από τις ακόλουθες είναι έγκυρες μετρικές αξιολόγησης γλωσσικών μοντέλων; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
           "Περπλοκότητα σε κρατημένο σετ ελέγχου",
-          "Αριθμός παραμέτρων μοντέλου",
+          "Ο συνολικός αριθμός εκπαιδεύσιμων παραμέτρων του μοντέλου",
           "Ακρίβεια few-shot σε downstream εργασίες",
           "Υπολογιστικό κόστος εκπαίδευσης σε FLOPs"
         ],
@@ -230,8 +230,8 @@
         "index": 4,
         "text": "Γιατί είναι επικίνδυνο να συγκρίνουμε μοντέλα χρησιμοποιώντας μόνο ένα benchmark;",
         "options": [
-          "Ένα μοντέλο μπορεί να υπερπροσαρμοστεί ή να βελτιστοποιηθεί για αυτό το συγκεκριμένο benchmark χωρίς γενίκευση",
-          "Τα benchmarks παράγουν πάντα ταυτόσημα σκορ για όλα τα μοντέλα",
+          "Ένα μοντέλο μπορεί να υπερπροσαρμοστεί σε αυτό το benchmark χωρίς γενίκευση",
+          "Τα benchmarks παράγουν πάντα ακριβώς ταυτόσημα σκορ για κάθε μοντέλο ξεχωριστά",
           "Μεμονωμένα benchmarks τρέχουν πιο γρήγορα οπότε είναι λιγότερο ακριβή",
           "Είναι αδύνατο να τρέξεις το ίδιο benchmark δύο φορές"
         ],

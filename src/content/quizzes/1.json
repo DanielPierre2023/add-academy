@@ -53,7 +53,7 @@
         "text": "Which of the following are valid reasons for building an LLM from scratch rather than just using an existing API? Select all that apply.",
         "options": [
           "Understanding internals helps you diagnose why a model behaves unexpectedly",
-          "Building from scratch guarantees your model will outperform GPT-4 on every task",
+          "Building from scratch guarantees your model will outperform GPT-4 on every single task imaginable",
           "Core ideas like tokenization and attention stay stable even as tools change",
           "Companies increasingly want private, specialized models tuned to their own data"
         ],

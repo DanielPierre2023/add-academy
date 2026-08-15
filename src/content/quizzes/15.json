@@ -7,9 +7,9 @@
         "index": 0,
         "text": "Why is causal masking necessary for autoregressive language models?",
         "options": [
-          "To reduce memory usage",
-          "To speed up training",
-          "To prevent tokens from attending to future positions — the model must predict without seeing the answer",
+          "To reduce the overall memory usage of the model during both training and inference",
+          "To speed up the training process",
+          "To stop tokens from attending to future positions they must still predict",
           "To make all attention weights equal"
         ],
         "correct": [
@@ -22,8 +22,8 @@
         "index": 1,
         "text": "How is the causal mask applied in practice?",
         "options": [
-          "By setting future positions to 0 in the attention weights",
-          "By adding negative infinity to future positions BEFORE softmax, making their weights effectively zero",
+          "By directly setting the attention weights for every future position to exactly zero",
+          "By adding -infinity to future positions before softmax, zeroing their weight",
           "By removing future tokens from the input",
           "By multiplying future tokens by -1"
         ],
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What shape is the causal mask for a sequence of length T?",
         "options": [
-          "A lower-triangular matrix of shape (T, T) with ones below and on the diagonal",
+          "A lower-triangular (T, T) matrix with ones on and below the diagonal",
           "A diagonal matrix of shape (T, T)",
           "A vector of length T",
-          "An upper-triangular matrix of shape (T, T)"
+          "An upper-triangular matrix of shape (T, T) with ones on and above the diagonal"
         ],
         "correct": [
           0
@@ -52,9 +52,9 @@
         "index": 3,
         "text": "What role does dropout play in attention?Select all that apply",
         "options": [
-          "Regularization — prevents over-reliance on specific attention patterns during training",
-          "It replaces the causal mask during inference",
-          "It is disabled during inference (only active in training)",
+          "Regularization against over-reliance on fixed attention patterns",
+          "It fully replaces the causal mask during inference and blocks future positions",
+          "It is disabled during inference (active only in training)",
           "It increases the sequence length"
         ],
         "correct": [
@@ -69,9 +69,9 @@
         "text": "In causal self-attention, what can token at position 3 (0-indexed) attend to?",
         "options": [
           "Only position 3",
-          "All positions in the sequence",
+          "Every single position in the whole sequence, including future ones",
           "Positions 0, 1, 2 (not itself)",
-          "Positions 0, 1, 2, 3 (itself and all previous positions)"
+          "Positions 0, 1, 2, and 3 (itself and all earlier ones)"
         ],
         "correct": [
           3
@@ -88,9 +88,9 @@
         "index": 0,
         "text": "De ce este necesară mascarea cauzală pentru modelele de limbaj autoregresive?",
         "options": [
-          "Pentru a reduce utilizarea memoriei",
-          "Pentru a accelera antrenarea",
-          "Pentru a preveni token-urile să acorde atenție pozițiilor viitoare — modelul trebuie să prezică fără a vedea răspunsul",
+          "Pentru a reduce utilizarea totală a memoriei modelului atât la antrenare, cât și la inferență",
+          "Pentru a accelera procesul de antrenare",
+          "Pentru a împiedica token-urile să vadă poziții viitoare pe care trebuie să le prezică",
           "Pentru a face toate ponderile de attention egale"
         ],
         "correct": [
@@ -103,8 +103,8 @@
         "index": 1,
         "text": "Cum este aplicată masca cauzală în practică?",
         "options": [
-          "Setând pozițiile viitoare la 0 în ponderile de attention",
-          "Adăugând infinit negativ la pozițiile viitoare ÎNAINTE de softmax, făcând ponderile lor efectiv zero",
+          "Setând direct ponderile de attention pentru fiecare poziție viitoare la exact zero",
+          "Adăugând -infinit la pozițiile viitoare înainte de softmax, anulându-le ponderea",
           "Eliminând token-urile viitoare din intrare",
           "Multiplicând token-urile viitoare cu -1"
         ],
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Ce formă are masca cauzală pentru o secvență de lungime T?",
         "options": [
-          "O matrice triunghiulară inferioară de formă (T, T) cu unu-uri sub și pe diagonală",
+          "O matrice triunghiulară inferioară (T, T) cu unu-uri pe și sub diagonală",
           "O matrice diagonală de formă (T, T)",
           "Un vector de lungime T",
-          "O matrice triunghiulară superioară de formă (T, T)"
+          "O matrice triunghiulară superioară de formă (T, T) cu unu-uri pe și deasupra diagonalei"
         ],
         "correct": [
           0
@@ -133,9 +133,9 @@
         "index": 3,
         "text": "Ce rol joacă dropout în attention? Selectați toate răspunsurile corecte",
         "options": [
-          "Regularizare — previne dependența excesivă de tipare specifice de attention în timpul antrenării",
-          "Înlocuiește masca cauzală în timpul inferenței",
-          "Este dezactivat în timpul inferenței (activ doar în antrenare)",
+          "Regularizare împotriva dependenței excesive de tipare fixe de attention",
+          "Înlocuiește complet masca cauzală în timpul inferenței și blochează pozițiile viitoare",
+          "Este dezactivat în timpul inferenței (activ doar la antrenare)",
           "Crește lungimea secvenței"
         ],
         "correct": [
@@ -150,9 +150,9 @@
         "text": "În self-attention cauzal, la ce poate acorda atenție token-ul de la poziția 3 (indexat de la 0)?",
         "options": [
           "Doar poziția 3",
-          "Toate pozițiile din secvență",
+          "Fiecare poziție din întreaga secvență, inclusiv pozițiile viitoare",
           "Pozițiile 0, 1, 2 (nu el însuși)",
-          "Pozițiile 0, 1, 2, 3 (el însuși și toate pozițiile anterioare)"
+          "Pozițiile 0, 1, 2 și 3 (el însuși și toate cele anterioare)"
         ],
         "correct": [
           3
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Γιατί είναι απαραίτητη η αιτιατή μάσκα για τα αυτοπαλίνδρομα γλωσσικά μοντέλα;",
         "options": [
-          "Για να μειώσει τη χρήση μνήμης",
-          "Για να επιταχύνει την εκπαίδευση",
-          "Για να αποτρέψει τα tokens από το να δίνουν προσοχή σε μελλοντικές θέσεις — το μοντέλο πρέπει να προβλέψει χωρίς να βλέπει την απάντηση",
-          "Για να κάνει όλα τα βάρη attention ίσα"
+          "Για να μειωθεί η συνολική χρήση μνήμης του μοντέλου τόσο στην εκπαίδευση όσο και στην εξαγωγή",
+          "Για να επιταχυνθεί η διαδικασία εκπαίδευσης",
+          "Για να μην βλέπουν τα tokens μελλοντικές θέσεις που πρέπει να προβλέψουν",
+          "Για να γίνουν όλα τα βάρη attention ίσα"
         ],
         "correct": [
           2
@@ -184,8 +184,8 @@
         "index": 1,
         "text": "Πώς εφαρμόζεται η αιτιατή μάσκα στην πράξη;",
         "options": [
-          "Θέτοντας τις μελλοντικές θέσεις σε 0 στα βάρη attention",
-          "Προσθέτοντας αρνητικό άπειρο στις μελλοντικές θέσεις ΠΡΙΝ τη softmax, κάνοντας τα βάρη τους ουσιαστικά μηδέν",
+          "Θέτοντας απευθείας τα βάρη attention για κάθε μελλοντική θέση σε ακριβώς μηδέν μετά τη softmax",
+          "Προσθέτοντας -άπειρο στις μελλοντικές θέσεις πριν τη softmax, μηδενίζοντας το βάρος τους",
           "Αφαιρώντας τα μελλοντικά tokens από την είσοδο",
           "Πολλαπλασιάζοντας τα μελλοντικά tokens με -1"
         ],
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποιο σχήμα έχει η αιτιατή μάσκα για μια ακολουθία μήκους T;",
         "options": [
-          "Ένας κάτω τριγωνικός πίνακας σχήματος (T, T) με μονάδες κάτω και πάνω στη διαγώνιο",
+          "Ένας κάτω τριγωνικός πίνακας (T, T) με μονάδες πάνω και κάτω από τη διαγώνιο",
           "Ένας διαγώνιος πίνακας σχήματος (T, T)",
           "Ένα διάνυσμα μήκους T",
-          "Ένας άνω τριγωνικός πίνακας σχήματος (T, T)"
+          "Ένας άνω τριγωνικός πίνακας σχήματος (T, T) με μονάδες στη διαγώνιο και επάνω από αυτήν"
         ],
         "correct": [
           0
@@ -214,9 +214,9 @@
         "index": 3,
         "text": "Ποιον ρόλο παίζει το dropout στο attention; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Κανονικοποίηση — αποτρέπει την υπερεξάρτηση από συγκεκριμένα μοτίβα attention κατά την εκπαίδευση",
-          "Αντικαθιστά την αιτιατή μάσκα κατά την εξαγωγή συμπερασμάτων",
-          "Απενεργοποιείται κατά την εξαγωγή συμπερασμάτων (ενεργό μόνο κατά την εκπαίδευση)",
+          "Κανονικοποίηση ενάντια στην υπερεξάρτηση από σταθερά μοτίβα attention",
+          "Αντικαθιστά πλήρως την αιτιατή μάσκα κατά την εξαγωγή και μπλοκάρει μελλοντικές θέσεις",
+          "Απενεργοποιείται κατά την εξαγωγή συμπερασμάτων (ενεργό μόνο στην εκπαίδευση)",
           "Αυξάνει το μήκος ακολουθίας"
         ],
         "correct": [
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Στο αιτιατό self-attention, σε τι μπορεί να δώσει προσοχή το token στη θέση 3 (με δείκτη από το 0);",
         "options": [
-          "Μόνο στη θέση 3",
-          "Σε όλες τις θέσεις της ακολουθίας",
-          "Στις θέσεις 0, 1, 2 (όχι στον εαυτό του)",
-          "Στις θέσεις 0, 1, 2, 3 (στον εαυτό του και σε όλες τις προηγούμενες θέσεις)"
+          "Μόνο η θέση 3",
+          "Κάθε θέση σε ολόκληρη την ακολουθία, συμπεριλαμβανομένων των μελλοντικών",
+          "Θέσεις 0, 1, 2 (όχι ο εαυτός της)",
+          "Θέσεις 0, 1, 2 και 3 (ο εαυτός της και όλες οι προηγούμενες)"
         ],
         "correct": [
           3

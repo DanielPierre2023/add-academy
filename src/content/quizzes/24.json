@@ -8,9 +8,9 @@
         "text": "In our Mini GPT-2, what is the complete data flow from text input to output tokens?",
         "options": [
           "Text → attention → output",
-          "Text → tokenize → token+pos embed → N×(LN+Attn+Residual, LN+FFN+Residual) → LN → linear → argmax",
+          "Text → tokenize → embed → N×(LN+Attn+Res, LN+FFN+Res) → LN → linear → argmax",
           "Text → embed → RNN → softmax",
-          "Text → FFN → attention → decode"
+          "Text → feed-forward network → attention layer → decode → final output projection"
         ],
         "correct": [
           1
@@ -24,8 +24,8 @@
         "options": [
           "Only tokenizer and attention",
           "Only embeddings and transformer blocks",
-          "Tokenizer, embeddings, multi-head causal attention, GELU FFN, LayerNorm, residuals",
-          "Pre-trained GPT-2 weights"
+          "Tokenizer, embeddings, multi-head attention, GELU FFN, LayerNorm, residuals",
+          "Pre-trained GPT-2 weights downloaded directly from the original OpenAI release checkpoint"
         ],
         "correct": [
           2
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "Why does our Mini GPT-2 generate random text?",
         "options": [
-          "Because all weights are randomly initialized — it has never seen any training data",
+          "Because the weights are random and it has never seen any training data",
           "Because the architecture is wrong",
           "Because the context length is too short",
-          "Because we used NumPy instead of PyTorch"
+          "Because we relied on the NumPy library instead of the PyTorch deep-learning framework"
         ],
         "correct": [
           0
@@ -55,7 +55,7 @@
           "The model sees all tokens including future ones",
           "Causal masking prevents looking at future tokens",
           "Each generated token is appended to the input for the next step",
-          "The model generates all tokens simultaneously"
+          "The model generates all output tokens at once in a single parallel pass"
         ],
         "correct": [
           1,
@@ -70,8 +70,8 @@
         "options": [
           "Deploy to production immediately",
           "Add more transformer blocks",
-          "Replace NumPy with a different library",
-          "Stage 5: Pretraining — training the model on a large text corpus using next-token prediction"
+          "Replace NumPy with an entirely different numerical computing library and rewrite everything",
+          "Stage 5: Pretraining — train on a large corpus via next-token prediction"
         ],
         "correct": [
           3
@@ -89,9 +89,9 @@
         "text": "În Mini GPT-2-ul nostru, care este fluxul complet de date de la textul de intrare la token-urile de ieșire?",
         "options": [
           "Text -> attention -> ieșire",
-          "Text -> tokenizare -> embed token+poz -> Nx(LN+Attn+Rezidual, LN+FFN+Rezidual) -> LN -> liniar -> argmax",
+          "Text -> tokenizare -> embed -> Nx(LN+Attn+Rez, LN+FFN+Rez) -> LN -> liniar -> argmax",
           "Text -> embed -> RNN -> softmax",
-          "Text -> FFN -> attention -> decodare"
+          "Text -> rețea feed-forward -> strat de attention -> decodare -> proiecție finală de ieșire"
         ],
         "correct": [
           1
@@ -105,8 +105,8 @@
         "options": [
           "Doar tokenizer și attention",
           "Doar embedding-uri și blocuri transformer",
-          "Tokenizer, embedding-uri, attention cauzal multi-head, FFN cu GELU, LayerNorm, reziduale",
-          "Ponderi GPT-2 pre-antrenate"
+          "Tokenizer, embedding-uri, attention multi-head, FFN GELU, LayerNorm, reziduale",
+          "Ponderi GPT-2 pre-antrenate descărcate direct din checkpoint-ul original de la OpenAI"
         ],
         "correct": [
           2
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "De ce generează Mini GPT-2-ul nostru text aleatoriu?",
         "options": [
-          "Pentru că toate ponderile sunt inițializate aleatoriu — nu a văzut niciodată date de antrenare",
+          "Pentru că ponderile sunt aleatorii și nu a văzut niciodată date de antrenare",
           "Pentru că arhitectura este greșită",
           "Pentru că lungimea contextului este prea scurtă",
-          "Pentru că am folosit NumPy în loc de PyTorch"
+          "Pentru că am folosit biblioteca NumPy în loc de framework-ul de învățare PyTorch"
         ],
         "correct": [
           0
@@ -136,7 +136,7 @@
           "Modelul vede toate token-urile inclusiv cele viitoare",
           "Mascarea cauzală previne vizualizarea token-urilor viitoare",
           "Fiecare token generat este adăugat la intrare pentru pasul următor",
-          "Modelul generează toate token-urile simultan"
+          "Modelul generează toate token-urile de ieșire deodată, într-o singură trecere paralelă"
         ],
         "correct": [
           1,
@@ -151,8 +151,8 @@
         "options": [
           "Implementarea imediată în producție",
           "Adăugarea mai multor blocuri transformer",
-          "Înlocuirea NumPy cu o altă bibliotecă",
-          "Etapa 5: Pre-antrenarea — antrenarea modelului pe un corpus mare de text folosind predicția token-ului următor"
+          "Înlocuirea NumPy cu o bibliotecă de calcul numeric complet diferită și rescrierea totului",
+          "Etapa 5: Pre-antrenare — antrenare pe corpus mare prin predicția token-ului următor"
         ],
         "correct": [
           3
@@ -170,9 +170,9 @@
         "text": "Στο Mini GPT-2 μας, ποια είναι η πλήρης ροή δεδομένων από την είσοδο κειμένου στα tokens εξόδου;",
         "options": [
           "Κείμενο -> attention -> έξοδος",
-          "Κείμενο -> τεκμηρίωση -> embed token+θέσης -> Nx(LN+Attn+Υπολειμματική, LN+FFN+Υπολειμματική) -> LN -> γραμμικό -> argmax",
+          "Κείμενο -> token+θέση embed -> Nx(LN+Attn+Res, LN+FFN+Res) -> LN -> γραμμικό -> argmax",
           "Κείμενο -> embed -> RNN -> softmax",
-          "Κείμενο -> FFN -> attention -> αποκωδικοποίηση"
+          "Κείμενο -> δίκτυο feed-forward -> επίπεδο attention -> αποκωδικοποίηση -> τελική προβολή εξόδου"
         ],
         "correct": [
           1
@@ -186,8 +186,8 @@
         "options": [
           "Μόνο tokenizer και attention",
           "Μόνο embeddings και μπλοκ transformer",
-          "Tokenizer, embeddings, αιτιατό attention πολλαπλών κεφαλιών, FFN με GELU, LayerNorm, υπολειμματικές",
-          "Προεκπαιδευμένα βάρη GPT-2"
+          "Tokenizer, embeddings, αιτιατό attention, GELU FFN, LayerNorm, υπολειμματικές",
+          "Προεκπαιδευμένα βάρη GPT-2 κατεβασμένα απευθείας από το αρχικό checkpoint της OpenAI"
         ],
         "correct": [
           2
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Γιατί το Mini GPT-2 μας παράγει τυχαίο κείμενο;",
         "options": [
-          "Επειδή όλα τα βάρη αρχικοποιούνται τυχαία — δεν έχει δει ποτέ δεδομένα εκπαίδευσης",
+          "Επειδή τα βάρη αρχικοποιούνται τυχαία και δεν είδε ποτέ δεδομένα εκπαίδευσης",
           "Επειδή η αρχιτεκτονική είναι λάθος",
           "Επειδή το μήκος πλαισίου είναι πολύ μικρό",
-          "Επειδή χρησιμοποιήσαμε NumPy αντί για PyTorch"
+          "Επειδή χρησιμοποιήσαμε τη βιβλιοθήκη NumPy αντί για το framework βαθιάς μάθησης PyTorch"
         ],
         "correct": [
           0
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Τι κάνει την αυτοπαλίνδρομη δημιουργία να λειτουργεί; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Το μοντέλο βλέπει όλα τα tokens συμπεριλαμβανομένων των μελλοντικών",
+          "Το μοντέλο βλέπει όλα τα tokens, συμπεριλαμβανομένων των μελλοντικών",
           "Η αιτιατή μάσκα αποτρέπει την προβολή μελλοντικών tokens",
           "Κάθε δημιουργημένο token προστίθεται στην είσοδο για το επόμενο βήμα",
-          "Το μοντέλο δημιουργεί όλα τα tokens ταυτόχρονα"
+          "Το μοντέλο δημιουργεί όλα τα tokens εξόδου ταυτόχρονα σε ένα ενιαίο παράλληλο πέρασμα"
         ],
         "correct": [
           1,
@@ -232,8 +232,8 @@
         "options": [
           "Άμεση ανάπτυξη σε παραγωγή",
           "Προσθήκη περισσότερων μπλοκ transformer",
-          "Αντικατάσταση NumPy με άλλη βιβλιοθήκη",
-          "Στάδιο 5: Προεκπαίδευση — εκπαίδευση του μοντέλου σε μεγάλο σώμα κειμένου χρησιμοποιώντας πρόβλεψη επόμενου token"
+          "Αντικατάσταση του NumPy με μια εντελώς διαφορετική βιβλιοθήκη αριθμητικών υπολογισμών και επανεγγραφή του κώδικα",
+          "Στάδιο 5: Προεκπαίδευση — εκπαίδευση σε μεγάλο σώμα κειμένου με πρόβλεψη επόμενου token"
         ],
         "correct": [
           3

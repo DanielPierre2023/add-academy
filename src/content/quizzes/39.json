@@ -7,8 +7,8 @@
         "index": 0,
         "text": "What is the main goal of model quantization?",
         "options": [
-          "Increase the number of parameters in the model",
-          "Reduce model size and inference cost by using lower-precision number formats",
+          "Increase the total number of trainable parameters in the model",
+          "Reduce model size and inference cost with lower precision",
           "Add more training data to improve accuracy",
           "Convert the model from Python to C++"
         ],
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "What is the key difference between PTQ and QAT?",
         "options": [
-          "PTQ requires more GPU memory than QAT",
-          "QAT can only be applied to small models",
+          "PTQ always requires considerably more GPU memory than QAT during use",
+          "QAT can only be applied to very small models",
           "PTQ trains the model from scratch while QAT does not",
-          "PTQ quantizes after training is complete, while QAT simulates quantization during training"
+          "PTQ quantizes after training; QAT simulates it during training"
         ],
         "correct": [
           3
@@ -37,9 +37,9 @@
         "index": 2,
         "text": "What is the GGUF format primarily used for?",
         "options": [
-          "Storing training datasets in a compressed format",
-          "Defining model architecture in YAML",
-          "Packaging quantized models for efficient local CPU/GPU inference",
+          "Storing large training datasets in a highly compressed archive format",
+          "Defining the model architecture in YAML",
+          "Packaging quantized models for local CPU/GPU inference",
           "Encrypting model weights for secure deployment"
         ],
         "correct": [
@@ -52,9 +52,9 @@
         "index": 3,
         "text": "Which of the following are true about INT4 quantization compared to INT8?Select all that apply",
         "options": [
-          "INT4 always produces better quality outputs than INT8",
-          "INT4 uses half the bits per weight compared to INT8, yielding smaller models",
-          "INT4 requires no calibration data",
+          "INT4 always produces noticeably better quality outputs than INT8 in every case",
+          "INT4 uses half the bits per weight versus INT8, giving smaller models",
+          "INT4 requires no calibration data at all",
           "INT4 typically incurs more quality degradation than INT8"
         ],
         "correct": [
@@ -68,8 +68,8 @@
         "index": 4,
         "text": "What is a common deployment strategy for serving quantized LLMs to many users?",
         "options": [
-          "Running quantized models behind an API with batched inference on GPU servers",
-          "Emailing the model weights to each user individually",
+          "Serving quantized models behind a batched-inference GPU API",
+          "Emailing the raw model weights to each individual user one by one",
           "Running the full FP32 model on a single CPU",
           "Storing the model exclusively in browser localStorage"
         ],
@@ -88,9 +88,9 @@
         "index": 0,
         "text": "Care este obiectivul principal al cuantizării modelelor?",
         "options": [
-          "Creșterea numărului de parametri ai modelului",
-          "Reducerea dimensiunii modelului și a costului de inferență prin folosirea formatelor numerice de precizie mai mică",
-          "Adăugarea mai multor date de antrenare pentru îmbunătățirea acurateței",
+          "Creșterea numărului total de parametri antrenabili din arhitectura modelului",
+          "Reducerea dimensiunii și costului de inferență cu precizie mai mică",
+          "Adăugarea mai multor date de antrenare pentru acuratețe",
           "Convertirea modelului din Python în C++"
         ],
         "correct": [
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "Care este diferența cheie între PTQ și QAT?",
         "options": [
-          "PTQ necesită mai multă memorie GPU decât QAT",
-          "QAT poate fi aplicat doar modelelor mici",
+          "PTQ necesită întotdeauna considerabil mai multă memorie GPU decât QAT în timpul utilizării",
+          "QAT poate fi aplicat doar modelelor foarte mici",
           "PTQ antrenează modelul de la zero în timp ce QAT nu",
-          "PTQ cuantizează după finalizarea antrenării, în timp ce QAT simulează cuantizarea în timpul antrenării"
+          "PTQ cuantizează după antrenare; QAT o simulează în timpul antrenării"
         ],
         "correct": [
           3
@@ -118,9 +118,9 @@
         "index": 2,
         "text": "Pentru ce este folosit în principal formatul GGUF?",
         "options": [
-          "Stocarea seturilor de date de antrenare într-un format comprimat",
+          "Stocarea seturilor mari de date de antrenare într-un format de arhivă foarte comprimat",
           "Definirea arhitecturii modelului în YAML",
-          "Împachetarea modelelor cuantizate pentru inferență locală eficientă pe CPU/GPU",
+          "Împachetarea modelelor cuantizate pentru inferență locală CPU/GPU",
           "Criptarea ponderilor modelului pentru implementare sigură"
         ],
         "correct": [
@@ -133,9 +133,9 @@
         "index": 3,
         "text": "Care dintre următoarele sunt adevărate despre cuantizarea INT4 comparativ cu INT8? Selectați toate răspunsurile corecte",
         "options": [
-          "INT4 produce întotdeauna ieșiri de calitate mai bună decât INT8",
-          "INT4 folosește jumătate din biții per pondere comparativ cu INT8, rezultând modele mai mici",
-          "INT4 nu necesită date de calibrare",
+          "INT4 produce întotdeauna ieșiri de calitate vizibil mai bună decât INT8 în orice situație",
+          "INT4 folosește jumătate din biții per pondere față de INT8, dând modele mai mici",
+          "INT4 nu necesită deloc date de calibrare",
           "INT4 cauzează de obicei mai multă degradare a calității decât INT8"
         ],
         "correct": [
@@ -149,8 +149,8 @@
         "index": 4,
         "text": "Care este o strategie comună de implementare pentru servirea LLM-urilor cuantizate la mulți utilizatori?",
         "options": [
-          "Rularea modelelor cuantizate în spatele unui API cu inferență în loturi pe servere GPU",
-          "Trimiterea ponderilor modelului fiecărui utilizator individual prin email",
+          "Servirea modelelor cuantizate printr-un API GPU cu inferență în loturi",
+          "Trimiterea ponderilor brute ale modelului fiecărui utilizator, unul câte unul",
           "Rularea modelului FP32 complet pe un singur CPU",
           "Stocarea modelului exclusiv în localStorage-ul browserului"
         ],
@@ -169,9 +169,9 @@
         "index": 0,
         "text": "Ποιος είναι ο κύριος στόχος της κβάντισης μοντέλων;",
         "options": [
-          "Αύξηση αριθμού παραμέτρων μοντέλου",
-          "Μείωση μεγέθους μοντέλου και κόστους εξαγωγής συμπερασμάτων χρησιμοποιώντας μορφές αριθμών χαμηλότερης ακρίβειας",
-          "Προσθήκη δεδομένων εκπαίδευσης για βελτίωση ακρίβειας",
+          "Αύξηση του συνολικού αριθμού εκπαιδεύσιμων παραμέτρων στην αρχιτεκτονική του μοντέλου",
+          "Μείωση μεγέθους μοντέλου και κόστους συμπερασμάτων με χαμηλότερη ακρίβεια",
+          "Προσθήκη περισσότερων δεδομένων εκπαίδευσης για ακρίβεια",
           "Μετατροπή μοντέλου από Python σε C++"
         ],
         "correct": [
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Ποια είναι η βασική διαφορά μεταξύ PTQ και QAT;",
         "options": [
-          "Η PTQ απαιτεί περισσότερη μνήμη GPU από QAT",
-          "Η QAT εφαρμόζεται μόνο σε μικρά μοντέλα",
-          "Η PTQ εκπαιδεύει μοντέλο από αρχή ενώ η QAT όχι",
-          "Η PTQ κβαντίζει μετά ολοκλήρωση εκπαίδευσης, ενώ η QAT προσομοιώνει κβάντιση κατά εκπαίδευση"
+          "Η PTQ απαιτεί πάντα σημαντικά περισσότερη μνήμη GPU από την QAT κατά τη χρήση στην πράξη",
+          "Η QAT εφαρμόζεται μόνο σε πολύ μικρά μοντέλα",
+          "Η PTQ εκπαιδεύει το μοντέλο από την αρχή ενώ η QAT όχι",
+          "Η PTQ κβαντίζει μετά την εκπαίδευση· η QAT την προσομοιώνει κατά την εκπαίδευση"
         ],
         "correct": [
           3
@@ -199,9 +199,9 @@
         "index": 2,
         "text": "Σε τι χρησιμοποιείται κυρίως η μορφή GGUF;",
         "options": [
-          "Αποθήκευση datasets εκπαίδευσης σε συμπιεσμένη μορφή",
-          "Ορισμός αρχιτεκτονικής μοντέλου σε YAML",
-          "Πακετάρισμα κβαντισμένων μοντέλων για αποδοτική τοπική εξαγωγή συμπερασμάτων CPU/GPU",
+          "Αποθήκευση μεγάλων datasets εκπαίδευσης σε μια πολύ συμπιεσμένη μορφή αρχείου",
+          "Ορισμός της αρχιτεκτονικής του μοντέλου σε YAML",
+          "Πακετάρισμα κβαντισμένων μοντέλων για τοπική εξαγωγή CPU/GPU",
           "Κρυπτογράφηση βαρών μοντέλου για ασφαλή ανάπτυξη"
         ],
         "correct": [
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποια από τα ακόλουθα ισχύουν για κβάντιση INT4 σε σύγκριση με INT8; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Η INT4 παράγει πάντα καλύτερη ποιότητα εξόδου από INT8",
-          "Η INT4 χρησιμοποιεί τα μισά bits ανά βάρος σε σύγκριση με INT8, παράγοντας μικρότερα μοντέλα",
-          "Η INT4 δεν απαιτεί δεδομένα βαθμονόμησης",
-          "Η INT4 τυπικά επιφέρει μεγαλύτερη υποβάθμιση ποιότητας από INT8"
+          "Η INT4 παράγει πάντα αισθητά καλύτερη ποιότητα εξόδου από την INT8 σε κάθε περίπτωση",
+          "Η INT4 χρησιμοποιεί τα μισά bits ανά βάρος από την INT8, δίνοντας μικρότερα μοντέλα",
+          "Η INT4 δεν απαιτεί καθόλου δεδομένα βαθμονόμησης",
+          "Η INT4 τυπικά επιφέρει μεγαλύτερη υποβάθμιση ποιότητας από την INT8"
         ],
         "correct": [
           1,
@@ -230,9 +230,9 @@
         "index": 4,
         "text": "Ποια είναι μια κοινή στρατηγική ανάπτυξης για εξυπηρέτηση κβαντισμένων LLMs σε πολλούς χρήστες;",
         "options": [
-          "Εκτέλεση κβαντισμένων μοντέλων πίσω από API με ομαδοποιημένη εξαγωγή συμπερασμάτων σε GPU servers",
-          "Αποστολή βαρών μοντέλου σε κάθε χρήστη ατομικά μέσω email",
-          "Εκτέλεση πλήρους FP32 μοντέλου σε μόνο CPU",
+          "Εξυπηρέτηση κβαντισμένων μοντέλων μέσω API GPU με ομαδοποιημένη εξαγωγή",
+          "Αποστολή των ακατέργαστων βαρών του μοντέλου σε κάθε χρήστη έναν προς έναν",
+          "Εκτέλεση πλήρους μοντέλου FP32 σε έναν μόνο CPU",
           "Αποθήκευση μοντέλου αποκλειστικά σε browser localStorage"
         ],
         "correct": [

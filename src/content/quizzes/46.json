@@ -7,12 +7,14 @@
         "index": 0,
         "text": "What is the key mathematical idea behind LoRA (Low-Rank Adaptation)?",
         "options": [
-          "Replacing the entire weight matrix with a smaller random matrix",
-          "Decomposing the weight update into two small matrices (low-rank decomposition) instead of updating the full weight matrix",
-          "Pruning neurons with the lowest activation values",
-          "Quantising all weights to 1-bit precision"
+          "Replacing the whole pre-trained weight matrix with a brand-new smaller matrix full of random values",
+          "Decomposing the weight update into two small matrices instead of updating the full matrix",
+          "Pruning the neurons that show the lowest average activation values during training",
+          "Quantising every single weight in the network down to 1-bit precision"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "LoRA freezes the original weight matrix W and learns a low-rank update ΔW = A × B, where A and B are much smaller matrices. This drastically reduces the number of trainable parameters while preserving model quality.",
         "isMulti": false
       },
@@ -20,12 +22,14 @@
         "index": 1,
         "text": "How does full fine-tuning differ from LoRA fine-tuning?",
         "options": [
-          "Full fine-tuning only updates the embedding layer, while LoRA updates all layers",
-          "Full fine-tuning updates every parameter in the model, while LoRA freezes the original weights and trains small adapter matrices",
-          "There is no difference — they produce identical results with identical cost",
-          "Full fine-tuning is always faster because it uses fewer parameters"
+          "Full fine-tuning only ever updates the embedding layer, whereas LoRA is what actually updates all of the layers",
+          "Full fine-tuning updates every parameter, while LoRA freezes the originals and trains small adapters",
+          "There is no real difference — the two produce identical results at identical cost",
+          "Full fine-tuning is always faster because it ends up using far fewer parameters"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Full fine-tuning modifies all model parameters, requiring as much memory as original training. LoRA freezes all original weights and only trains small low-rank adapter matrices, dramatically reducing memory and compute requirements.",
         "isMulti": false
       },
@@ -33,12 +37,15 @@
         "index": 2,
         "text": "Which LoRA hyperparameters directly control the trade-off between adaptation capacity and efficiency? Select all that apply.",
         "options": [
-          "Rank (r) — determines the size of the low-rank matrices",
-          "Alpha (α) — scales the LoRA update relative to the original weights",
-          "Batch size — determines how many samples are processed together",
-          "Number of attention heads in the base model"
+          "Rank (r) — determines the size of the two low-rank matrices",
+          "Alpha (α) — scales the LoRA update against the original weights",
+          "Batch size — sets how many training samples are processed together in a single forward and backward pass",
+          "The number of attention heads in the base model"
         ],
-        "correct": [0, 1],
+        "correct": [
+          0,
+          1
+        ],
         "explanation": "Rank controls how many parameters the adapter adds (higher rank = more capacity but more memory). Alpha scales the adapter's contribution — a higher alpha/rank ratio means the adapter has more influence on the output. Batch size and attention heads are not LoRA-specific hyperparameters.",
         "isMulti": true
       },
@@ -46,12 +53,14 @@
         "index": 3,
         "text": "What is catastrophic forgetting in the context of fine-tuning?",
         "options": [
-          "When the GPU runs out of memory and crashes during training",
-          "When the model loses its previously learned general knowledge by over-adapting to the new fine-tuning data",
-          "When the training data files get accidentally deleted",
-          "When the model's tokenizer forgets how to split words into tokens"
+          "When the GPU completely runs out of available memory and the whole training process crashes partway through",
+          "When the model loses its earlier general knowledge by over-adapting to the new fine-tuning data",
+          "When the training data files are accidentally deleted from disk during the run",
+          "When the model's tokenizer suddenly forgets how to split words into tokens"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Catastrophic forgetting occurs when fine-tuning overwrites the model's pre-trained knowledge. The model becomes good at the fine-tuning task but loses its broad language understanding. LoRA mitigates this by keeping original weights frozen.",
         "isMulti": false
       },
@@ -59,12 +68,14 @@
         "index": 4,
         "text": "Which layers in a Transformer are typically targeted by LoRA adapters?",
         "options": [
-          "Only the final output layer",
-          "The query (Q), key (K), and value (V) projection matrices in the attention mechanism",
-          "Only the layer normalisation layers",
-          "The tokenizer's vocabulary lookup table"
+          "Only the single final output layer that produces the logits",
+          "The query (Q), key (K) and value (V) projection matrices in attention",
+          "Only the layer-normalisation layers inside each Transformer block",
+          "The tokenizer's fixed vocabulary lookup table that maps tokens to embeddings"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "LoRA adapters are typically applied to the Q, K, and V projection matrices in the self-attention mechanism, as these are the most impactful layers for adapting the model's behaviour while keeping the adapter size small.",
         "isMulti": false
       }
@@ -77,12 +88,14 @@
         "index": 0,
         "text": "Care este ideea matematică cheie din spatele LoRA (Low-Rank Adaptation)?",
         "options": [
-          "Înlocuirea întregii matrice de ponderi cu o matrice aleatoare mai mică",
-          "Descompunerea actualizării ponderilor în două matrice mici (descompunere de rang scăzut) în loc de actualizarea matricei complete de ponderi",
-          "Eliminarea neuronilor cu cele mai scăzute valori de activare",
-          "Cuantizarea tuturor ponderilor la precizie de 1 bit"
+          "Înlocuirea întregii matrice de ponderi pre-antrenate cu o matrice nouă mai mică plină de valori aleatoare",
+          "Descompunerea actualizării ponderilor în două matrice mici în loc de actualizarea matricei complete",
+          "Eliminarea neuronilor care arată cele mai scăzute valori medii de activare în timpul antrenamentului",
+          "Cuantizarea fiecărei ponderi din rețea la precizie de 1 bit"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Explicație: LoRA îngheață matricea originală de ponderi W și învață o actualizare de rang scăzut ΔW = A × B, unde A și B sunt matrice mult mai mici. Aceasta reduce drastic numărul de parametri antrenabili păstrând în același timp calitatea modelului.",
         "isMulti": false
       },
@@ -90,12 +103,14 @@
         "index": 1,
         "text": "Cum diferă ajustarea fină completă de ajustarea fină cu LoRA?",
         "options": [
-          "Ajustarea fină completă actualizează doar stratul de embedding, în timp ce LoRA actualizează toate straturile",
-          "Ajustarea fină completă actualizează fiecare parametru din model, în timp ce LoRA îngheață ponderile originale și antrenează matrice mici de adaptor",
-          "Nu există nicio diferență — produc rezultate identice cu costuri identice",
-          "Ajustarea fină completă este întotdeauna mai rapidă deoarece folosește mai puțini parametri"
+          "Ajustarea fină completă actualizează doar stratul de embedding, în timp ce LoRA este cea care actualizează de fapt toate straturile",
+          "Ajustarea fină completă actualizează fiecare parametru, în timp ce LoRA îngheață originalele și antrenează adaptoare mici",
+          "Nu există nicio diferență reală — cele două produc rezultate identice la cost identic",
+          "Ajustarea fină completă este întotdeauna mai rapidă deoarece ajunge să folosească mult mai puțini parametri"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Explicație: Ajustarea fină completă modifică toți parametrii modelului, necesitând la fel de multă memorie ca antrenamentul original. LoRA îngheață toate ponderile originale și antrenează doar matrice mici de adaptor de rang scăzut, reducând dramatic cerințele de memorie și calcul.",
         "isMulti": false
       },
@@ -103,12 +118,15 @@
         "index": 2,
         "text": "Care hiperparametri LoRA controlează direct compromisul între capacitatea de adaptare și eficiență? Selectează toate variantele corecte.",
         "options": [
-          "Rangul (r) — determină dimensiunea matricelor de rang scăzut",
-          "Alpha (α) — scalează actualizarea LoRA relativ la ponderile originale",
-          "Dimensiunea lotului — determină câte mostre sunt procesate împreună",
+          "Rangul (r) — determină dimensiunea celor două matrice de rang scăzut",
+          "Alpha (α) — scalează actualizarea LoRA față de ponderile originale",
+          "Dimensiunea lotului — stabilește câte mostre de antrenament sunt procesate împreună într-o singură trecere înainte și înapoi",
           "Numărul de capete de atenție din modelul de bază"
         ],
-        "correct": [0, 1],
+        "correct": [
+          0,
+          1
+        ],
         "explanation": "✅ Explicație: Rangul controlează câți parametri adaugă adaptorul (rang mai mare = mai multă capacitate dar mai multă memorie). Alpha scalează contribuția adaptorului — un raport alpha/rang mai mare înseamnă că adaptorul are mai multă influență asupra ieșirii. Dimensiunea lotului și capetele de atenție nu sunt hiperparametri specifici LoRA.",
         "isMulti": true
       },
@@ -116,12 +134,14 @@
         "index": 3,
         "text": "Ce este uitarea catastrofală în contextul ajustării fine?",
         "options": [
-          "Când GPU-ul rămâne fără memorie și se blochează în timpul antrenamentului",
-          "Când modelul își pierde cunoștințele generale învățate anterior prin supraadaptarea la noile date de ajustare fină",
-          "Când fișierele de date de antrenament sunt șterse accidental",
-          "Când tokenizer-ul modelului uită cum să împartă cuvintele în token-uri"
+          "Când GPU-ul rămâne complet fără memorie disponibilă și întregul proces de antrenament se blochează la jumătate",
+          "Când modelul își pierde cunoștințele generale anterioare prin supraadaptarea la noile date de ajustare fină",
+          "Când fișierele de date de antrenament sunt șterse accidental de pe disc în timpul rulării",
+          "Când tokenizer-ul modelului uită brusc cum să împartă cuvintele în token-uri"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Explicație: Uitarea catastrofală apare când ajustarea fină suprascrie cunoștințele pre-antrenate ale modelului. Modelul devine bun la sarcina de ajustare fină dar își pierde înțelegerea largă a limbajului. LoRA atenuează aceasta prin păstrarea ponderilor originale înghețate.",
         "isMulti": false
       },
@@ -129,12 +149,14 @@
         "index": 4,
         "text": "Ce straturi dintr-un Transformer sunt de obicei vizate de adaptorii LoRA?",
         "options": [
-          "Doar stratul final de ieșire",
-          "Matricele de proiecție query (Q), key (K) și value (V) din mecanismul de atenție",
-          "Doar straturile de normalizare",
-          "Tabelul de căutare al vocabularului tokenizer-ului"
+          "Doar singurul strat final de ieșire care produce logit-urile",
+          "Matricele de proiecție query (Q), key (K) și value (V) din atenție",
+          "Doar straturile de normalizare din interiorul fiecărui bloc Transformer",
+          "Tabelul fix de căutare al vocabularului tokenizer-ului care mapează token-urile la embedding-uri"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Explicație: Adaptorii LoRA sunt aplicați de obicei pe matricele de proiecție Q, K și V din mecanismul de auto-atenție, deoarece acestea sunt cele mai impactante straturi pentru adaptarea comportamentului modelului, menținând în același timp dimensiunea adaptorului mică.",
         "isMulti": false
       }
@@ -147,12 +169,14 @@
         "index": 0,
         "text": "Ποια είναι η βασική μαθηματική ιδέα πίσω από το LoRA (Low-Rank Adaptation);",
         "options": [
-          "Αντικατάσταση ολόκληρου του πίνακα βαρών με έναν μικρότερο τυχαίο πίνακα",
-          "Αποσύνθεση της ενημέρωσης βαρών σε δύο μικρούς πίνακες (αποσύνθεση χαμηλού βαθμού) αντί ενημέρωσης του πλήρους πίνακα βαρών",
-          "Κλάδεμα νευρώνων με τις χαμηλότερες τιμές ενεργοποίησης",
-          "Κβαντοποίηση όλων των βαρών σε ακρίβεια 1-bit"
+          "Αντικατάσταση ολόκληρου του προ-εκπαιδευμένου πίνακα βαρών με έναν ολοκαίνουργιο μικρότερο πίνακα γεμάτο τυχαίες τιμές",
+          "Αποσύνθεση της ενημέρωσης βαρών σε δύο μικρούς πίνακες αντί ενημέρωσης του πλήρους πίνακα",
+          "Κλάδεμα των νευρώνων που δείχνουν τις χαμηλότερες μέσες τιμές ενεργοποίησης κατά την εκπαίδευση",
+          "Κβαντοποίηση κάθε βάρους στο δίκτυο σε ακρίβεια 1-bit"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Εξήγηση: Το LoRA παγώνει τον αρχικό πίνακα βαρών W και μαθαίνει μια ενημέρωση χαμηλού βαθμού ΔW = A × B, όπου οι A και B είναι πολύ μικρότεροι πίνακες. Αυτό μειώνει δραστικά τον αριθμό των εκπαιδεύσιμων παραμέτρων διατηρώντας παράλληλα την ποιότητα του μοντέλου.",
         "isMulti": false
       },
@@ -160,12 +184,14 @@
         "index": 1,
         "text": "Πώς διαφέρει η πλήρης μικρορύθμιση από τη μικρορύθμιση LoRA;",
         "options": [
-          "Η πλήρης μικρορύθμιση ενημερώνει μόνο το στρώμα ενσωμάτωσης, ενώ το LoRA ενημερώνει όλα τα στρώματα",
-          "Η πλήρης μικρορύθμιση ενημερώνει κάθε παράμετρο στο μοντέλο, ενώ το LoRA παγώνει τα αρχικά βάρη και εκπαιδεύει μικρούς πίνακες προσαρμογέα",
-          "Δεν υπάρχει καμία διαφορά — παράγουν πανομοιότυπα αποτελέσματα με πανομοιότυπο κόστος",
-          "Η πλήρης μικρορύθμιση είναι πάντα ταχύτερη επειδή χρησιμοποιεί λιγότερες παραμέτρους"
+          "Η πλήρης μικρορύθμιση ενημερώνει μόνο το στρώμα ενσωμάτωσης, ενώ το LoRA είναι αυτό που στην πραγματικότητα ενημερώνει όλα τα στρώματα",
+          "Η πλήρης μικρορύθμιση ενημερώνει κάθε παράμετρο, ενώ το LoRA παγώνει τα αρχικά και εκπαιδεύει μικρούς προσαρμογείς",
+          "Δεν υπάρχει καμία πραγματική διαφορά — τα δύο παράγουν πανομοιότυπα αποτελέσματα με πανομοιότυπο κόστος",
+          "Η πλήρης μικρορύθμιση είναι πάντα ταχύτερη επειδή καταλήγει να χρησιμοποιεί πολύ λιγότερες παραμέτρους"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Εξήγηση: Η πλήρης μικρορύθμιση τροποποιεί όλες τις παραμέτρους του μοντέλου, απαιτώντας τόση μνήμη όση η αρχική εκπαίδευση. Το LoRA παγώνει όλα τα αρχικά βάρη και εκπαιδεύει μόνο μικρούς πίνακες προσαρμογέα χαμηλού βαθμού, μειώνοντας δραματικά τις απαιτήσεις μνήμης και υπολογισμού.",
         "isMulti": false
       },
@@ -173,12 +199,15 @@
         "index": 2,
         "text": "Ποιες υπερπαράμετροι LoRA ελέγχουν άμεσα τον συμβιβασμό μεταξύ ικανότητας προσαρμογής και αποδοτικότητας; Επιλέξτε όλα τα σωστά.",
         "options": [
-          "Βαθμός (r) — καθορίζει το μέγεθος των πινάκων χαμηλού βαθμού",
-          "Alpha (α) — κλιμακώνει την ενημέρωση LoRA σε σχέση με τα αρχικά βάρη",
-          "Μέγεθος παρτίδας — καθορίζει πόσα δείγματα επεξεργάζονται μαζί",
-          "Αριθμός κεφαλών προσοχής στο βασικό μοντέλο"
+          "Βαθμός (r) — καθορίζει το μέγεθος των δύο πινάκων χαμηλού βαθμού",
+          "Alpha (α) — κλιμακώνει την ενημέρωση LoRA έναντι των αρχικών βαρών",
+          "Μέγεθος παρτίδας — ορίζει πόσα δείγματα εκπαίδευσης επεξεργάζονται μαζί σε ένα μόνο πέρασμα εμπρός και πίσω",
+          "Ο αριθμός των κεφαλών προσοχής στο βασικό μοντέλο"
         ],
-        "correct": [0, 1],
+        "correct": [
+          0,
+          1
+        ],
         "explanation": "✅ Εξήγηση: Ο βαθμός ελέγχει πόσες παραμέτρους προσθέτει ο προσαρμογέας (υψηλότερος βαθμός = περισσότερη ικανότητα αλλά περισσότερη μνήμη). Το alpha κλιμακώνει τη συνεισφορά του προσαρμογέα — υψηλότερος λόγος alpha/βαθμός σημαίνει ότι ο προσαρμογέας έχει μεγαλύτερη επιρροή στην έξοδο.",
         "isMulti": true
       },
@@ -186,12 +215,14 @@
         "index": 3,
         "text": "Τι είναι η καταστροφική λήθη στο πλαίσιο της μικρορύθμισης;",
         "options": [
-          "Όταν η GPU εξαντλεί τη μνήμη και καταρρέει κατά την εκπαίδευση",
-          "Όταν το μοντέλο χάνει τις προηγουμένως μαθημένες γενικές γνώσεις του υπερ-προσαρμοζόμενο στα νέα δεδομένα μικρορύθμισης",
-          "Όταν τα αρχεία δεδομένων εκπαίδευσης διαγράφονται κατά λάθος",
-          "Όταν ο tokenizer του μοντέλου ξεχνάει πώς να χωρίζει τις λέξεις σε tokens"
+          "Όταν η GPU εξαντλεί εντελώς όλη τη διαθέσιμη μνήμη και ολόκληρη η διαδικασία εκπαίδευσης καταρρέει τελείως στα μισά της",
+          "Όταν το μοντέλο χάνει τις γενικές γνώσεις του λόγω υπερ-προσαρμογής στα νέα δεδομένα",
+          "Όταν τα αρχεία δεδομένων εκπαίδευσης διαγράφονται κατά λάθος από τον δίσκο κατά την εκτέλεση",
+          "Όταν ο tokenizer του μοντέλου ξεχνάει ξαφνικά πώς να χωρίζει τις λέξεις σε tokens"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Εξήγηση: Η καταστροφική λήθη συμβαίνει όταν η μικρορύθμιση αντικαθιστά τις προ-εκπαιδευμένες γνώσεις του μοντέλου. Το μοντέλο γίνεται καλό στην εργασία μικρορύθμισης αλλά χάνει την ευρεία κατανόηση γλώσσας. Το LoRA μετριάζει αυτό κρατώντας τα αρχικά βάρη παγωμένα.",
         "isMulti": false
       },
@@ -199,12 +230,14 @@
         "index": 4,
         "text": "Ποια στρώματα σε ένα Transformer στοχεύονται συνήθως από τους προσαρμογείς LoRA;",
         "options": [
-          "Μόνο το τελικό στρώμα εξόδου",
-          "Οι πίνακες προβολής query (Q), key (K) και value (V) στον μηχανισμό προσοχής",
-          "Μόνο τα στρώματα κανονικοποίησης",
-          "Ο πίνακας αναζήτησης λεξιλογίου του tokenizer"
+          "Μόνο το ένα τελικό στρώμα εξόδου που παράγει τα logits",
+          "Οι πίνακες προβολής query (Q), key (K) και value (V) στην προσοχή",
+          "Μόνο τα στρώματα κανονικοποίησης μέσα σε κάθε μπλοκ Transformer",
+          "Ο σταθερός πίνακας αναζήτησης λεξιλογίου του tokenizer που αντιστοιχίζει tokens σε embeddings"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Εξήγηση: Οι προσαρμογείς LoRA εφαρμόζονται συνήθως στους πίνακες προβολής Q, K και V στον μηχανισμό αυτο-προσοχής, καθώς αυτά είναι τα πιο αποτελεσματικά στρώματα για την προσαρμογή της συμπεριφοράς του μοντέλου, διατηρώντας ταυτόχρονα μικρό το μέγεθος του προσαρμογέα.",
         "isMulti": false
       }

@@ -7,8 +7,8 @@
         "index": 0,
         "text": "What is the primary advantage of wrapping an image generation API (like DALL-E or Stable Diffusion) in your own SaaS rather than having users call the API directly?",
         "options": [
-          "Lower API costs through bulk pricing",
-          "Adding business logic: prompt enhancement, billing tiers, caching, and content moderation",
+          "Lower API costs achieved purely through negotiated bulk pricing discounts on volume",
+          "Adding business logic: prompt enhancement, billing, caching, and moderation",
           "Faster image generation through parallel processing",
           "Access to better AI models not available publicly"
         ],
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "Why is response caching important for an image generation SaaS?",
         "options": [
-          "It improves image quality",
-          "It allows offline operation",
+          "It noticeably improves the overall visual quality of every single generated image",
+          "It allows the service to keep operating fully offline",
           "Identical prompts return instantly without paying for another API call",
-          "It reduces server memory usage"
+          "It reduces the server's memory usage"
         ],
         "correct": [
           2
@@ -59,8 +59,8 @@
         "index": 0,
         "text": "Care este avantajul principal al încapsulării unui API de generare de imagini (precum DALL-E sau Stable Diffusion) în propriul tău SaaS, în loc ca utilizatorii să apeleze API-ul direct?",
         "options": [
-          "Costuri mai mici ale API-ului prin prețuri de volum",
-          "Adăugarea logicii de business: îmbunătățirea prompt-urilor, niveluri de facturare, caching și moderarea conținutului",
+          "Costuri mai mici ale API-ului obținute exclusiv prin reduceri negociate pe bază de volum",
+          "Adăugarea logicii de business: prompt-uri, facturare, caching și moderare",
           "Generare mai rapidă a imaginilor prin procesare paralelă",
           "Acces la modele AI mai bune care nu sunt disponibile public"
         ],
@@ -74,8 +74,8 @@
         "index": 1,
         "text": "De ce este important caching-ul răspunsurilor pentru un SaaS de generare de imagini?",
         "options": [
-          "Îmbunătățește calitatea imaginilor",
-          "Permite funcționarea offline",
+          "Îmbunătățește considerabil calitatea vizuală a fiecărei imagini generate de model",
+          "Permite serviciului să funcționeze complet offline",
           "Prompt-urile identice returnează instant fără a plăti pentru un alt apel API",
           "Reduce utilizarea memoriei serverului"
         ],
@@ -111,8 +111,8 @@
         "index": 0,
         "text": "Ποιο είναι το κύριο πλεονέκτημα της ενθυλάκωσης ενός API δημιουργίας εικόνων (όπως DALL-E ή Stable Diffusion) στο δικό σας SaaS αντί να καλούν οι χρήστες απευθείας το API;",
         "options": [
-          "Χαμηλότερο κόστος API μέσω τιμολόγησης όγκου",
-          "Προσθήκη επιχειρηματικής λογικής: βελτίωση prompt, επίπεδα χρέωσης, caching και ελέγχου περιεχομένου",
+          "Χαμηλότερο κόστος API που επιτυγχάνεται αποκλειστικά μέσω διαπραγματευμένων εκπτώσεων όγκου",
+          "Προσθήκη επιχειρηματικής λογικής: βελτίωση prompt, χρέωση, caching και έλεγχος",
           "Ταχύτερη δημιουργία εικόνων μέσω παράλληλης επεξεργασίας",
           "Πρόσβαση σε καλύτερα μοντέλα AI που δεν είναι δημόσια διαθέσιμα"
         ],
@@ -126,8 +126,8 @@
         "index": 1,
         "text": "Γιατί είναι σημαντικό το caching απαντήσεων για ένα SaaS δημιουργίας εικόνων;",
         "options": [
-          "Βελτιώνει την ποιότητα των εικόνων",
-          "Επιτρέπει τη λειτουργία εκτός σύνδεσης",
+          "Βελτιώνει αισθητά τη συνολική οπτική ποιότητα κάθε μεμονωμένης παραγόμενης εικόνας",
+          "Επιτρέπει στην υπηρεσία να λειτουργεί πλήρως εκτός σύνδεσης",
           "Τα ίδια prompts επιστρέφουν αμέσως χωρίς πληρωμή για νέα κλήση API",
           "Μειώνει τη χρήση μνήμης του διακομιστή"
         ],

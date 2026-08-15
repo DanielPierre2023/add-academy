@@ -7,12 +7,14 @@
         "index": 0,
         "text": "How does a Vision Transformer (ViT) process an input image?",
         "options": [
-          "It applies convolutional filters layer by layer like a traditional CNN",
-          "It splits the image into fixed-size patches, linearly embeds each patch, and processes the sequence of patch embeddings with a standard Transformer encoder",
-          "It converts the image to text using OCR before processing",
-          "It processes each pixel individually as a separate token"
+          "It applies convolutional filters layer by layer, exactly like a traditional CNN network would",
+          "It splits the image into fixed patches, embeds each, and feeds them to a Transformer",
+          "It converts the image entirely into descriptive text using OCR before any processing",
+          "It processes each individual pixel separately as its own distinct input token"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "ViT divides an image into fixed-size patches (e.g., 16x16 pixels), flattens and linearly projects each patch into an embedding vector, adds positional encodings, and feeds the resulting sequence into a standard Transformer encoder, treating image patches similarly to word tokens in NLP.",
         "isMulti": false
       },
@@ -20,12 +22,14 @@
         "index": 1,
         "text": "What is the core training objective of CLIP (Contrastive Language-Image Pre-training)?",
         "options": [
-          "Generate photorealistic images from text descriptions",
-          "Classify images into a fixed set of predefined categories",
-          "Learn a shared embedding space where matching image-text pairs are close together and non-matching pairs are far apart",
-          "Translate text from one language to another using visual context"
+          "Generate fully photorealistic images directly from detailed natural-language text descriptions",
+          "Classify images into a fixed set of predefined, manually chosen categories",
+          "Learn a shared embedding space where matching image-text pairs sit close and others far apart",
+          "Translate text from one language into another using surrounding visual context"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "CLIP uses contrastive learning to train an image encoder and a text encoder jointly. Matching image-text pairs are pulled together in the shared embedding space while non-matching pairs are pushed apart, enabling powerful zero-shot classification and cross-modal retrieval.",
         "isMulti": false
       },
@@ -33,12 +37,16 @@
         "index": 2,
         "text": "Which of the following are common strategies for fusing information from multiple modalities? Select all that apply.",
         "options": [
-          "Early fusion, where raw inputs from different modalities are concatenated before any processing",
-          "Late fusion, where each modality is processed independently and outputs are combined at the decision level",
-          "Cross-attention fusion, where one modality attends to the representations of another modality",
-          "Deletion fusion, where one modality is discarded entirely in favor of the other"
+          "Early fusion, where raw inputs from different modalities are concatenated before processing",
+          "Late fusion, where each modality is processed alone and outputs merge at the decision level",
+          "Cross-attention fusion, where one modality attends to another modality's representations",
+          "Deletion fusion, where one modality is discarded entirely in favor of relying only on the other"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "Early fusion combines raw inputs before processing, late fusion merges outputs after independent processing, and cross-attention allows one modality to attend to representations of another. Deletion fusion is not a real strategy as it defeats the purpose of multimodal learning.",
         "isMulti": true
       },
@@ -46,12 +54,14 @@
         "index": 3,
         "text": "What role does the diffusion process play in text-to-image models like Stable Diffusion?",
         "options": [
-          "It trains the model to gradually add noise to images until they become random, then learns to reverse this process to generate images from noise guided by text embeddings",
-          "It compresses images into smaller file sizes for efficient storage",
-          "It converts text directly into pixel values without any intermediate steps",
-          "It uses reinforcement learning to rank generated images by quality"
+          "It learns to reverse a gradual noising process, turning noise into images guided by text",
+          "It compresses images into much smaller file sizes for more efficient long-term storage on disk",
+          "It converts the text directly into pixel values without any intermediate steps at all",
+          "It uses reinforcement learning to rank the generated images purely by their quality"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "Diffusion models work by learning to reverse a gradual noising process. During training, noise is progressively added to images. The model learns to denoise step by step, and at generation time, it starts from pure noise and iteratively denoises, guided by text embeddings to produce images matching the description.",
         "isMulti": false
       },
@@ -59,12 +69,14 @@
         "index": 4,
         "text": "What is a key challenge that audio language models like Whisper must address compared to text-only models?",
         "options": [
-          "Audio data requires no preprocessing since it is already in digital format",
-          "Audio signals are continuous and variable-length, requiring conversion into discrete representations (e.g., spectrograms or learned audio tokens) that the model can process",
-          "Audio models never need attention mechanisms because sound is inherently sequential",
-          "Audio data is always smaller than text data, making training trivially easy"
+          "Audio data requires no preprocessing at all since it already comes in a digital format",
+          "Audio is continuous and variable-length, so it must become discrete forms like spectrograms",
+          "Audio models never need attention mechanisms because sound is inherently sequential by nature",
+          "Audio data is always smaller than text data, which makes model training trivially easy every time"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Unlike text, which is naturally discrete, audio is a continuous signal with variable length and sampling rates. Models like Whisper must convert audio into suitable representations such as mel spectrograms or learned discrete tokens before processing with Transformer architectures.",
         "isMulti": false
       }
@@ -77,12 +89,14 @@
         "index": 0,
         "text": "Cum proceseaza un Vision Transformer (ViT) o imagine de intrare?",
         "options": [
-          "Aplica filtre convolutionale strat cu strat ca un CNN traditional",
-          "Imparte imaginea in patch-uri de dimensiune fixa, incorporeaza liniar fiecare patch si proceseaza secventa de incorporari cu un encoder Transformer standard",
-          "Converteste imaginea in text folosind OCR inainte de procesare",
-          "Proceseaza fiecare pixel individual ca un token separat"
+          "Aplica filtre convolutionale strat dupa strat, exact ca o retea CNN traditionala clasica",
+          "Imparte imaginea in patch-uri fixe, le incorporeaza si le da unui encoder Transformer",
+          "Converteste imaginea complet in text descriptiv folosind OCR inainte de orice procesare",
+          "Proceseaza fiecare pixel individual separat ca propriul sau token distinct de intrare"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "ViT imparte o imagine in patch-uri de dimensiune fixa (de exemplu, 16x16 pixeli), aplatizeaza si proiecteaza liniar fiecare patch intr-un vector de incorporare, adauga codificari pozitionale si alimenteaza secventa rezultata intr-un encoder Transformer standard, tratand patch-urile de imagine similar cu tokenii de cuvinte din NLP.",
         "isMulti": false
       },
@@ -90,12 +104,14 @@
         "index": 1,
         "text": "Care este obiectivul central de antrenament al CLIP (Contrastive Language-Image Pre-training)?",
         "options": [
-          "Generarea de imagini fotorealiste din descrieri textuale",
-          "Clasificarea imaginilor intr-un set fix de categorii predefinite",
-          "Invatarea unui spatiu de incorporare partajat unde perechile imagine-text potrivite sunt apropiate si perechile nepotrivite sunt departate",
-          "Traducerea textului dintr-o limba in alta folosind contextul vizual"
+          "Genereaza imagini complet fotorealiste direct din descrieri textuale detaliate in limbaj natural",
+          "Clasifica imaginile intr-un set fix de categorii predefinite, alese manual",
+          "Invata un spatiu de incorporare comun unde perechile imagine-text potrivite sunt apropiate",
+          "Traduce textul dintr-o limba in alta folosind contextul vizual inconjurator"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "CLIP foloseste invatarea contrastiva pentru a antrena un encoder de imagini si un encoder de text impreuna. Perechile imagine-text potrivite sunt aduse aproape in spatiul de incorporare partajat, in timp ce perechile nepotrivite sunt departate, permitand clasificarea zero-shot si recuperarea intre modalitati.",
         "isMulti": false
       },
@@ -103,12 +119,16 @@
         "index": 2,
         "text": "Care dintre urmatoarele sunt strategii comune pentru fuzionarea informatiilor din mai multe modalitati? Selectati toate variantele corecte.",
         "options": [
-          "Fuziunea timpurie, unde intrarile brute din diferite modalitati sunt concatenate inainte de orice procesare",
-          "Fuziunea tarzie, unde fiecare modalitate este procesata independent iar iesirile sunt combinate la nivelul deciziei",
-          "Fuziunea cu atentie incrucisata, unde o modalitate acorda atentie reprezentarilor altei modalitati",
-          "Fuziunea prin stergere, unde o modalitate este eliminata complet in favoarea celeilalte"
+          "Fuziunea timpurie, unde intrarile brute din modalitati diferite se concateneaza inainte de procesare",
+          "Fuziunea tarzie, unde fiecare modalitate e procesata singura iar iesirile se combina la decizie",
+          "Fuziunea cu atentie incrucisata, unde o modalitate atinde reprezentarile altei modalitati",
+          "Fuziunea prin stergere, unde o modalitate este eliminata complet in favoarea folosirii doar a celeilalte"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "Fuziunea timpurie combina intrarile brute inainte de procesare, fuziunea tarzie imbina iesirile dupa procesarea independenta, iar atentia incrucisata permite unei modalitati sa acorde atentie reprezentarilor celeilalte. Fuziunea prin stergere nu este o strategie reala deoarece anuleaza scopul invatarii multimodale.",
         "isMulti": true
       },
@@ -116,12 +136,14 @@
         "index": 3,
         "text": "Ce rol joaca procesul de difuzie in modelele text-la-imagine precum Stable Diffusion?",
         "options": [
-          "Antreneaza modelul sa adauge gradual zgomot imaginilor pana devin aleatoare, apoi invata sa inverseze acest proces pentru a genera imagini din zgomot ghidat de incorporari text",
-          "Comprima imaginile in dimensiuni mai mici pentru stocare eficienta",
-          "Converteste textul direct in valori de pixeli fara pasi intermediari",
-          "Foloseste invatarea prin recompensa pentru a clasifica imaginile generate dupa calitate"
+          "Invata sa inverseze treptat zgomotul, transformand zgomotul in imagini ghidat de text",
+          "Comprima imaginile in dimensiuni de fisier mult mai mici pentru o stocare mai eficienta pe disc",
+          "Converteste textul direct in valori de pixeli fara niciun pas intermediar deloc",
+          "Foloseste invatarea prin recompensa pentru a clasifica imaginile generate doar dupa calitate"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "Modelele de difuzie functioneaza invatand sa inverseze un proces gradual de adaugare a zgomotului. In timpul antrenamentului, zgomotul este adaugat progresiv imaginilor. Modelul invata sa elimine zgomotul pas cu pas, iar la generare, porneste de la zgomot pur si elimina iterativ zgomotul, ghidat de incorporarile textuale pentru a produce imagini corespunzatoare descrierii.",
         "isMulti": false
       },
@@ -129,12 +151,14 @@
         "index": 4,
         "text": "Care este o provocare cheie pe care modelele de limbaj audio precum Whisper trebuie sa o abordeze comparativ cu modelele doar-text?",
         "options": [
-          "Datele audio nu necesita preprocesare deoarece sunt deja in format digital",
-          "Semnalele audio sunt continue si de lungime variabila, necesitand conversia in reprezentari discrete (de exemplu, spectrograme sau tokeni audio invatati) pe care modelul le poate procesa",
-          "Modelele audio nu au nevoie niciodata de mecanisme de atentie deoarece sunetul este inerent secvential",
-          "Datele audio sunt intotdeauna mai mici decat datele text, facand antrenamentul trivial de usor"
+          "Datele audio nu necesita nicio preprocesare deoarece vin deja intr-un format digital",
+          "Audio-ul e continuu si de lungime variabila, deci se transforma in forme discrete precum spectrograme",
+          "Modelele audio nu au nevoie niciodata de mecanisme de atentie fiindca sunetul e inerent secvential",
+          "Datele audio sunt mereu mai mici decat textul, ceea ce face antrenarea triviala si usoara de fiecare data"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Spre deosebire de text, care este natural discret, audio-ul este un semnal continuu cu lungime si rata de esantionare variabile. Modelele precum Whisper trebuie sa converteasca audio-ul in reprezentari adecvate, cum ar fi spectrograme mel sau tokeni discreti invatati, inainte de procesarea cu arhitecturi Transformer.",
         "isMulti": false
       }
@@ -147,12 +171,14 @@
         "index": 0,
         "text": "Pos epexergazetai enas Vision Transformer (ViT) mia eikona eisodou?",
         "options": [
-          "Efarmozei syneliktika filtra stroma pros stroma opos ena paradosiako CNN",
-          "Choirizzei tin eikona se patches statheroy megethous, ensoomatonei grammika kathe patch kai epexergazetai tin akolouthia ton ensoomatoseon me enan typiko Transformer encoder",
-          "Metatrepei tin eikona se keimeno chrisimopoiointas OCR prin tin epexergasia",
-          "Epexergazetai kathe pixel xechorista os xechoristo token"
+          "Efarmozei syneliktika filtra stroma pros stroma, akrivos opos tha ekane ena paradosiako diktyo CNN",
+          "Xorizei tin eikona se statherá patches, ensomatonei to kathena kai ta dinei se enan Transformer",
+          "Metatrepei tin eikona enteloos se perigrafiko keimeno xrisimopoiontas OCR prin apo kathe epexergasia",
+          "Epexergazetai kathe pixel xexorista os to diko tou xexoristo token eisodou"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "To ViT diairei mia eikona se patches statheroy megethous (p.ch. 16x16 pixels), isopedonnei kai provallei grammika kathe patch se ena dianysma ensoomatosis, prosthetei kodikopoiseis thesis kai trofodotei tin prokyyptousa akolouthia se enan typiko Transformer encoder, antimetopizontas ta patches eikonas omoiia me ta tokens lexeon sto NLP.",
         "isMulti": false
       },
@@ -160,12 +186,14 @@
         "index": 1,
         "text": "Poios einai o vasikos stochos ekpaideysis tou CLIP (Contrastive Language-Image Pre-training)?",
         "options": [
-          "Dimiourgia fotorealistikon eikonon apo perigrafes keimenou",
-          "Taxinomisi eikonon se ena stathero synolo prokathrismenon katigorion",
-          "Ekmaathisi enos koinoy chorou ensoomatosis opou ta tairiasmena zeygari eikona-keimeno einai konta kai ta mi tairiasmena zeygari einai makria",
-          "Metafrasi keimenou apo mia glosssa se alli chrisimopoiointas optiko plaisio"
+          "Dimiourgei pliros fotorealistikes eikones apeftheias apo leptomereis perigrafes se fysiki glossa",
+          "Taxinomei tis eikones se ena stathero synolo prokathorismenon, xeirokinita epilegmenon katigorion",
+          "Mathainei enan koino xoro ensomatosis opou ta tairiasmena zeugari eikona-keimeno einai konta",
+          "Metafrazei keimeno apo mia glossa se alli xrisimopoiontas to gyro optiko plaisio"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "To CLIP chrisimopoiei antithetiiki mathisi gia na ekpaideysei enan kodikopoiiti eikonas kai enan kodikopoiiti keimenou mazii. Ta tairiasmena zeygari eikona-keimeno elkonntai konta ston koino choro ensoomatosis enoi ta mi tairiasmena zeygari apomakrynontai, epitrepontas ischyri taxinomisi zero-shot kai anazitisi metaxy tropikotiton.",
         "isMulti": false
       },
@@ -173,12 +201,16 @@
         "index": 2,
         "text": "Poies apo tis parakatoi einai koines stratigikes gia ti synthesi pliroforion apo pollapla tropikotites? Epilexte oles tis sostes apantiseis.",
         "options": [
-          "Proimi synthesi, opou oi akateergastes eisodoi apo diaforetikes tropikotites syndeontai prin apo opoiadipote epexergasia",
-          "Opsiimi synthesi, opou kathe tropikotita epexergazetai anexartita kai oi exodoi syndyazontai sto epipedo tis apofasis",
-          "Synthesi me distayrroumeni prosochi, opou mia tropikotita dinei prosochi stis anaparastaseis mias allis tropikotitas",
-          "Synthesi me diagrafi, opou mia tropikotita aporiiptetai enteloos yper tis allis"
+          "Proimi synthesi, opou oi akatergastes eisodoi apo diaforetikes tropikotites enonontai prin tin epexergasia",
+          "Opsimi synthesi, opou kathe tropikotita epexergazetai moni kai oi exodoi synenononται sti apofasi",
+          "Synthesi me diastavromeni prosoxi, opou mia tropikotita dinei prosoxi stis anaparastaseis mias allis",
+          "Synthesi me diagrafi, opou mia tropikotita aporriptetai enteloos yper tis xrisis mono tis allis tropikotitas"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "I proimi synthesi syndyazei tis akateergastes eisodous prin tin epexergasia, i opsiimi synthesi synenoonei tis exodous meta tin anexartiti epexergasia, kai i distayrroumeni prosochi epitrepei se mia tropikotita na dinei prosochi stis anaparastaseis mias allis. I synthesi me diagrafi den einai pragmatiki stratigiki kathoos akyronei ton skopo tis polytropikis mathisis.",
         "isMulti": true
       },
@@ -186,12 +218,14 @@
         "index": 3,
         "text": "Ti rolo paizei i diadikasia diachysis sta montela keimenou-se-eikona opos to Stable Diffusion?",
         "options": [
-          "Ekpaideyei to montelo na prosthetei vaathmidota thoruvo stis eikones mechri na ginoun tychain, kai meta mathainnei na antistreppsei ayti ti diadikasia gia na paragei eikones apo thoryvo kathodiigoumeno apo ensoomatoseis keimenou",
-          "Sympiezei tis eikones se mikrotero megethos gia apotelesmatiki apothikefsi",
-          "Metatrepei to keimeno apeftheias se times pixel choris endiamesa vimata",
-          "Chrisimopoiei mathisi me enischysi gia na kataxxei tis paragomenes eikones kata poiotita"
+          "Mathainei na antistrefei ti prosthiki thoryvou, ftiaxnontas eikones apo thoryvo vasei keimenou",
+          "Sympiezei tis eikones se poly mikrotera megethi arxeiou gia pio apodotiki apothikeysi ston disko",
+          "Metatrepei to keimeno apeftheias se times pixel xoris kanena endiameso vima",
+          "Xrisimopoiei mathisi me enisxysi gia na katataxei tis paragomenes eikones mono vasei poiotitas"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "Ta montela diachysis leitourgoun mathainointas na antistreppson mia vaathmidota diadikasia prosthikis thoryvou. Kata tin ekpaideysi, o thoryvos prosthetai progressiva stis eikones. To montelo mathainnei na afairei thoruvo vima pros vima, kai kata tin paragogi, xekiina apo katharo thoryvo kai afairei epanadeilptika ton thoryvo, kathodigiimeno apo ensoomatoseis keimenou gia na paragei eikones pou tairiiazoun me tin perigrafi.",
         "isMulti": false
       },
@@ -199,12 +233,14 @@
         "index": 4,
         "text": "Poia einai mia vasiki proklisi pou ta gloisika montela ichoy opos to Whisper prepei na antimetipisoun se sygkrisi me ta montela mono-keimenou?",
         "options": [
-          "Ta dedomena ichoy den apaitoun proepexergasia kathois einai idi se psifiaki morfi",
-          "Ta simata ichoy einai synechi kai metavlitou mikous, apaitointas metatropi se diakrites anaparastaseis (p.ch. fasmatogramma i mathimena tokens ichoy) pou to montelo mporei na epexergastei",
-          "Ta montela ichoy den chreiazontai pote mechanismous prosochis epidi o ichos einai eggeniis akoloythiakos",
-          "Ta dedomena ichoy einai panta mikroterra apo ta dedomena keimenou, kanointas tin ekpaideysi trivial efkoli"
+          "Ta dedomena ichou den apaitoun kamia proepexergasia afou erxontai idi se psifiaki morfi",
+          "O ichos einai synexis kai metavlitou mikous, ara prepei na ginei diakrites morfes opos fasmatogrammata",
+          "Ta montela ichou den xreiazontai pote mixanismous prosoxis epeidi o ichos einai eggeneos akolouthiakos",
+          "Ta dedomena ichou einai panta mikrotera apo ta dedomena keimenou, kanontas tin ekpaideysi trivial efkoli kathe fora"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Antithetoa me to keimeno, pou einai fysika diakrito, to icho einai ena syneches sima me metavlito mikos kai rythmous deigmatolipsias. Montela opos to Whisper prepeii na metatrepsoun to icho se katalliles anaparastaseis opos fasmatogrammata mel i mathimena diakrita tokens prin tin epexergasia me architektonikes Transformer.",
         "isMulti": false
       }

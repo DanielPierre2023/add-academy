@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What distinguishes AdamW from the original Adam optimizer?",
         "options": [
-          "AdamW uses a fixed learning rate instead of adaptive rates",
-          "AdamW removes momentum entirely",
-          "AdamW adds gradient noise for better exploration",
-          "AdamW decouples weight decay from the gradient update, applying it directly to the weights"
+          "It replaces the adaptive per-parameter learning rates entirely with one fixed global rate shared by all weights",
+          "It removes the momentum term from the optimizer entirely",
+          "It injects random gradient noise to encourage more exploration",
+          "It decouples weight decay from the gradient-based update step"
         ],
         "correct": [
           3
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "Why is learning rate warmup used at the start of training?",
         "options": [
-          "To increase model size gradually",
-          "To prevent large, unstable updates when the optimizer's moment estimates are unreliable in early steps",
-          "To pre-compute the attention masks",
-          "To reduce the vocabulary size before real training begins"
+          "To progressively grow the model's parameter count and hidden dimensions layer by layer as training proceeds",
+          "To avoid unstable updates while the optimizer's moment estimates are still unreliable",
+          "To pre-compute and cache the attention masks used by every layer",
+          "To gradually shrink the tokenizer vocabulary before real training begins"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What does cosine annealing do to the learning rate?",
         "options": [
-          "Keeps it constant throughout training",
-          "Increases it linearly until training ends",
-          "Gradually decreases it following a half-cosine curve from peak to near zero",
-          "Alternates it between high and low values every epoch"
+          "Holds it perfectly constant at the peak value from the first step to the last",
+          "Raises it linearly step after step until the training run finally ends",
+          "Smoothly lowers it along a half-cosine curve toward near zero",
+          "Alternates it between high and low values at the end of every single training epoch"
         ],
         "correct": [
           2
@@ -53,9 +53,9 @@
         "text": "Which of the following are true about weight decay in LLM training?Select all that apply",
         "options": [
           "It penalizes large weights to reduce overfitting",
-          "It is typically applied to bias terms and LayerNorm parameters",
-          "It is usually applied only to weight matrices, not biases or normalization parameters",
-          "It completely replaces dropout as a regularization technique"
+          "It is typically applied to the bias terms and the LayerNorm parameters",
+          "It is usually applied only to weight matrices, not biases or norm parameters",
+          "It completely replaces dropout and every other regularization technique used during training"
         ],
         "correct": [
           0,
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Ce distinge AdamW de optimizatorul Adam original?",
         "options": [
-          "AdamW folosește o rată de învățare fixă în loc de rate adaptive",
-          "AdamW elimină complet momentum-ul",
-          "AdamW adaugă zgomot de gradient pentru o explorare mai bună",
-          "AdamW decuplează degradarea ponderilor de actualizarea gradientului, aplicând-o direct pe ponderi"
+          "Înlocuiește complet ratele de învățare adaptive per-parametru cu o singură rată globală fixă comună tuturor ponderilor",
+          "Elimină complet termenul de momentum din optimizator",
+          "Injectează zgomot aleatoriu în gradient pentru a încuraja explorarea",
+          "Decuplează degradarea ponderilor de pasul de actualizare bazat pe gradient"
         ],
         "correct": [
           3
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "De ce se folosește încălzirea ratei de învățare la începutul antrenării?",
         "options": [
-          "Pentru a crește treptat dimensiunea modelului",
-          "Pentru a preveni actualizări mari, instabile când estimările de moment ale optimizatorului sunt nesigure în primii pași",
-          "Pentru a pre-calcula măștile de attention",
-          "Pentru a reduce dimensiunea vocabularului înainte de antrenarea reală"
+          "Pentru a crește progresiv numărul de parametri și dimensiunile ascunse ale modelului strat cu strat pe măsură ce antrenarea avansează",
+          "Pentru a evita actualizări instabile cât timp estimările de moment ale optimizatorului sunt încă nesigure",
+          "Pentru a pre-calcula și memora măștile de attention folosite de fiecare strat",
+          "Pentru a micșora treptat vocabularul tokenizer-ului înainte de antrenarea reală"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Ce face declinul cosinus cu rata de învățare?",
         "options": [
-          "O menține constantă pe tot parcursul antrenării",
-          "O crește liniar până la sfârșitul antrenării",
-          "O scade treptat urmând o curbă semi-cosinus de la vârf la aproape zero",
-          "O alternează între valori mari și mici la fiecare epocă"
+          "O menține perfect constantă la valoarea de vârf de la primul până la ultimul pas",
+          "O crește liniar pas după pas până când antrenarea se termină în final",
+          "O scade lin pe o curbă semi-cosinus spre aproape zero",
+          "O alternează între valori mari și mici la sfârșitul fiecărei epoci de antrenare"
         ],
         "correct": [
           2
@@ -135,8 +135,8 @@
         "options": [
           "Penalizează ponderile mari pentru a reduce supraadaptarea",
           "Se aplică de obicei termenilor de bias și parametrilor LayerNorm",
-          "Se aplică de obicei doar matricelor de ponderi, nu bias-urilor sau parametrilor de normalizare",
-          "Înlocuiește complet dropout-ul ca tehnică de regularizare"
+          "Se aplică de obicei doar matricelor de ponderi, nu bias-urilor sau normalizării",
+          "Înlocuiește complet dropout-ul și orice altă tehnică de regularizare folosită vreodată în antrenare"
         ],
         "correct": [
           0,
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Τι διαφοροποιεί τον AdamW από τον αρχικό βελτιστοποιητή Adam;",
         "options": [
-          "Ο AdamW χρησιμοποιεί σταθερό ρυθμό εκμάθησης αντί για προσαρμοστικούς",
-          "Ο AdamW αφαιρεί εντελώς τη ορμή",
-          "Ο AdamW προσθέτει θόρυβο κλίσης για καλύτερη εξερεύνηση",
-          "Ο AdamW αποσυνδέει τη φθορά βαρών από την ενημέρωση κλίσης, εφαρμόζοντάς την απευθείας στα βάρη"
+          "Αντικαθιστά εντελώς τους προσαρμοστικούς ρυθμούς εκμάθησης ανά παράμετρο με έναν μοναδικό σταθερό καθολικό ρυθμό κοινό για όλα τα βάρη",
+          "Αφαιρεί εντελώς τον όρο ορμής από τον βελτιστοποιητή",
+          "Εισάγει τυχαίο θόρυβο κλίσης για να ενθαρρύνει την εξερεύνηση",
+          "Αποσυνδέει τη φθορά βαρών από το βήμα ενημέρωσης βάσει κλίσης"
         ],
         "correct": [
           3
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Γιατί χρησιμοποιείται η θέρμανση ρυθμού εκμάθησης στην αρχή της εκπαίδευσης;",
         "options": [
-          "Για σταδιακή αύξηση μεγέθους μοντέλου",
-          "Για αποτροπή μεγάλων, ασταθών ενημερώσεων όταν οι εκτιμήσεις ροπών του βελτιστοποιητή είναι αναξιόπιστες στα πρώτα βήματα",
-          "Για προϋπολογισμό μασκών attention",
-          "Για μείωση μεγέθους λεξιλογίου πριν την πραγματική εκπαίδευση"
+          "Για να αυξήσει προοδευτικά τον αριθμό παραμέτρων και τις κρυφές διαστάσεις του μοντέλου επίπεδο προς επίπεδο καθώς προχωρά η εκπαίδευση",
+          "Για να αποφύγει ασταθείς ενημερώσεις όσο οι εκτιμήσεις ροπών του βελτιστοποιητή είναι ακόμα αναξιόπιστες",
+          "Για να προϋπολογίσει και να αποθηκεύσει τις μάσκες attention κάθε επιπέδου",
+          "Για να μειώσει σταδιακά το λεξιλόγιο του tokenizer πριν την πραγματική εκπαίδευση"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Τι κάνει η ημιτονοειδής μείωση στον ρυθμό εκμάθησης;",
         "options": [
-          "Τον διατηρεί σταθερό καθ' όλη την εκπαίδευση",
-          "Τον αυξάνει γραμμικά μέχρι το τέλος της εκπαίδευσης",
-          "Τον μειώνει σταδιακά ακολουθώντας μια καμπύλη ημι-συνημιτόνου από την κορυφή σε σχεδόν μηδέν",
-          "Τον εναλλάσσει μεταξύ υψηλών και χαμηλών τιμών κάθε εποχή"
+          "Την κρατά τέλεια σταθερή στην κορυφαία τιμή από το πρώτο έως το τελευταίο βήμα",
+          "Την αυξάνει γραμμικά βήμα προς βήμα μέχρι να τελειώσει τελικά η εκπαίδευση",
+          "Την μειώνει ομαλά σε καμπύλη ημι-συνημιτόνου προς σχεδόν μηδέν",
+          "Την εναλλάσσει μεταξύ υψηλών και χαμηλών τιμών στο τέλος κάθε εποχής εκπαίδευσης"
         ],
         "correct": [
           2
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποια από τα ακόλουθα ισχύουν για τη φθορά βαρών στην εκπαίδευση LLM; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Τιμωρεί τα μεγάλα βάρη για μείωση υπερπροσαρμογής",
-          "Εφαρμόζεται συνήθως στους όρους bias και τις παραμέτρους LayerNorm",
-          "Εφαρμόζεται συνήθως μόνο σε πίνακες βαρών, όχι σε bias ή παραμέτρους κανονικοποίησης",
-          "Αντικαθιστά πλήρως το dropout ως τεχνική κανονικοποίησης"
+          "Τιμωρεί τα μεγάλα βάρη για να μειώσει την υπερπροσαρμογή",
+          "Εφαρμόζεται συνήθως στους όρους bias και στις παραμέτρους LayerNorm",
+          "Εφαρμόζεται συνήθως μόνο σε πίνακες βαρών, όχι σε bias ή κανονικοποίηση",
+          "Αντικαθιστά πλήρως το dropout και κάθε άλλη τεχνική κανονικοποίησης που χρησιμοποιείται στην εκπαίδευση"
         ],
         "correct": [
           0,

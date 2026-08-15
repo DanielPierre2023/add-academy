@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is a classification head in the context of fine-tuning a language model for classification?",
         "options": [
-          "A separate pre-trained model that classifies text independently",
-          "The attention mechanism in the first transformer layer",
-          "A linear layer added on top of the transformer that maps hidden states to class logits",
-          "The tokenizer's embedding layer used for label encoding"
+          "A separate pre-trained model that classifies the input text on its own independently",
+          "The attention mechanism located in the first transformer layer",
+          "A linear layer on the transformer mapping hidden states to class logits",
+          "The tokenizer's embedding layer reused for encoding labels"
         ],
         "correct": [
           2
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "Why is layer freezing used during classification fine-tuning?",
         "options": [
-          "To increase the total number of trainable parameters",
-          "To preserve learned representations in lower layers while only updating upper layers and the classification head",
-          "To make inference faster by removing unnecessary layers",
-          "To convert the model from float32 to int8 precision"
+          "To increase the overall total number of trainable parameters in the whole model",
+          "Preserve lower-layer features while updating upper layers and the head",
+          "To make inference faster by removing several unnecessary layers",
+          "To convert the model from float32 down to int8 precision"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "In a causal (decoder-only) language model used for classification, why is the last token's hidden state typically used for prediction?",
         "options": [
-          "Because the first token has no contextual information",
-          "Because the last token always corresponds to the label",
-          "Because middle tokens contain the most important information",
-          "Because causal attention allows the last token to attend to all previous tokens, aggregating the full sequence context"
+          "Because the very first token carries no contextual information at all",
+          "Because the last token always corresponds directly to the label",
+          "Because the middle tokens contain the most important contextual information",
+          "Causal attention lets the last token attend to all previous tokens"
         ],
         "correct": [
           3
@@ -53,8 +53,8 @@
         "text": "Which of the following are advantages of fine-tuning a pre-trained LLM for classification over training a classifier from scratch? Select all that apply",
         "options": [
           "The model already has strong language understanding from pre-training",
-          "It always requires more labeled data than training from scratch",
-          "Pre-trained models cannot overfit on small datasets",
+          "It always requires far more labeled data than training a model from scratch",
+          "Pre-trained models simply cannot overfit on small datasets",
           "It typically achieves good performance with fewer labeled examples"
         ],
         "correct": [
@@ -69,9 +69,9 @@
         "text": "When fine-tuning a decoder-only model like GPT for classification, what loss function is typically applied to the classification head's output?",
         "options": [
           "Cross-entropy loss",
-          "Mean squared error",
+          "Mean squared error (MSE) loss",
           "Contrastive loss",
-          "Hinge loss"
+          "Hinge (max-margin) loss"
         ],
         "correct": [
           0
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Ce este un cap de clasificare în contextul ajustării fine a unui model de limbaj pentru clasificare?",
         "options": [
-          "Un model pre-antrenat separat care clasifică textul independent",
-          "Mecanismul de attention din primul strat transformer",
-          "Un strat liniar adăugat deasupra transformer-ului care mapează stările ascunse la logit-uri de clasă",
-          "Stratul de embedding al tokenizer-ului folosit pentru codarea etichetelor"
+          "Un model pre-antrenat separat care clasifică textul de intrare de unul singur independent",
+          "Mecanismul de attention aflat în primul strat transformer",
+          "Un strat liniar pe transformer care mapează stările ascunse la logit-uri",
+          "Stratul de embedding al tokenizer-ului reutilizat pentru etichete"
         ],
         "correct": [
           2
@@ -103,8 +103,8 @@
         "index": 1,
         "text": "De ce se folosește înghețarea straturilor în timpul ajustării fine pentru clasificare?",
         "options": [
-          "Pentru a crește numărul total de parametri antrenabili",
-          "Pentru a păstra reprezentările învățate în straturile inferioare, actualizând doar straturile superioare și capul de clasificare",
+          "Pentru a crește numărul total general de parametri antrenabili din întregul model",
+          "Păstrează reprezentările inferioare actualizând straturile superioare și capul",
           "Pentru a face inferența mai rapidă prin eliminarea straturilor inutile",
           "Pentru a converti modelul de la float32 la precizie int8"
         ],
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Într-un model de limbaj cauzal (doar decoder) folosit pentru clasificare, de ce se folosește de obicei starea ascunsă a ultimului token pentru predicție?",
         "options": [
-          "Pentru că primul token nu are informații contextuale",
-          "Pentru că ultimul token corespunde întotdeauna etichetei",
-          "Pentru că token-urile din mijloc conțin cele mai importante informații",
-          "Pentru că attention-ul cauzal permite ultimului token să acorde atenție tuturor token-urilor anterioare, agregând contextul întregii secvențe"
+          "Pentru că primul token nu poartă absolut nicio informație contextuală",
+          "Pentru că ultimul token corespunde întotdeauna direct etichetei",
+          "Pentru că token-urile din mijloc conțin cele mai importante informații contextuale",
+          "Attention-ul cauzal lasă ultimul token să vadă toate token-urile anterioare"
         ],
         "correct": [
           3
@@ -134,8 +134,8 @@
         "text": "Care dintre următoarele sunt avantaje ale ajustării fine a unui LLM pre-antrenat pentru clasificare față de antrenarea unui clasificator de la zero? Selectați toate răspunsurile corecte",
         "options": [
           "Modelul are deja o înțelegere puternică a limbajului din pre-antrenare",
-          "Necesită întotdeauna mai multe date etichetate decât antrenarea de la zero",
-          "Modelele pre-antrenate nu se pot supraadapta pe seturi mici de date",
+          "Necesită întotdeauna mult mai multe date etichetate decât antrenarea de la zero completă",
+          "Modelele pre-antrenate pur și simplu nu se pot supraadapta pe seturi mici",
           "Obține de obicei performanțe bune cu mai puține exemple etichetate"
         ],
         "correct": [
@@ -150,9 +150,9 @@
         "text": "Când se ajustează fin un model doar decoder precum GPT pentru clasificare, ce funcție de pierdere se aplică de obicei la ieșirea capului de clasificare?",
         "options": [
           "Pierdere cross-entropy",
-          "Eroare medie pătratică",
+          "Pierdere eroare medie pătratică (MSE)",
           "Pierdere contrastivă",
-          "Pierdere hinge"
+          "Pierdere hinge (max-margin)"
         ],
         "correct": [
           0
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Τι είναι μια κεφαλή ταξινόμησης στο πλαίσιο ακριβούς ρύθμισης γλωσσικού μοντέλου για ταξινόμηση;",
         "options": [
-          "Ένα ξεχωριστό προεκπαιδευμένο μοντέλο που ταξινομεί κείμενο ανεξάρτητα",
-          "Ο μηχανισμός attention στο πρώτο επίπεδο transformer",
-          "Ένα γραμμικό επίπεδο που προστίθεται πάνω στον transformer και αντιστοιχίζει κρυφές καταστάσεις σε logits κλάσεων",
-          "Το επίπεδο embedding του tokenizer για κωδικοποίηση ετικετών"
+          "Ένα ξεχωριστό προεκπαιδευμένο μοντέλο που ταξινομεί το κείμενο εισόδου εντελώς μόνο του",
+          "Ο μηχανισμός attention που βρίσκεται στο πρώτο επίπεδο transformer",
+          "Ένα γραμμικό επίπεδο στον transformer που αντιστοιχίζει κρυφές καταστάσεις σε logits",
+          "Το επίπεδο embedding του tokenizer επαναχρησιμοποιημένο για ετικέτες"
         ],
         "correct": [
           2
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Γιατί χρησιμοποιείται το πάγωμα επιπέδων κατά την ακριβή ρύθμιση ταξινόμησης;",
         "options": [
-          "Για αύξηση συνολικού αριθμού εκπαιδεύσιμων παραμέτρων",
-          "Για διατήρηση εκπαιδευμένων αναπαραστάσεων στα κατώτερα επίπεδα ενημερώνοντας μόνο ανώτερα επίπεδα και κεφαλή ταξινόμησης",
+          "Για αύξηση του συνολικού αριθμού εκπαιδεύσιμων παραμέτρων ολόκληρου του μοντέλου",
+          "Διατήρηση κατώτερων αναπαραστάσεων ενημερώνοντας ανώτερα επίπεδα και κεφαλή",
           "Για ταχύτερη εξαγωγή συμπερασμάτων αφαιρώντας περιττά επίπεδα",
-          "Για μετατροπή μοντέλου από float32 σε ακρίβεια int8"
+          "Για μετατροπή του μοντέλου από float32 σε ακρίβεια int8"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Σε ένα αιτιατό (μόνο αποκωδικοποιητής) γλωσσικό μοντέλο για ταξινόμηση, γιατί χρησιμοποιείται τυπικά η κρυφή κατάσταση του τελευταίου token για πρόβλεψη;",
         "options": [
-          "Επειδή το πρώτο token δεν έχει πληροφορίες πλαισίου",
-          "Επειδή το τελευταίο token αντιστοιχεί πάντα στην ετικέτα",
-          "Επειδή τα μεσαία tokens περιέχουν τις σημαντικότερες πληροφορίες",
-          "Επειδή το αιτιατό attention επιτρέπει στο τελευταίο token να δώσει προσοχή σε όλα τα προηγούμενα tokens, συγκεντρώνοντας πλήρες πλαίσιο ακολουθίας"
+          "Επειδή το πρώτο token δεν φέρει καμία απολύτως πληροφορία πλαισίου",
+          "Επειδή το τελευταίο token αντιστοιχεί πάντα άμεσα στην ετικέτα",
+          "Επειδή τα μεσαία tokens περιέχουν τις πιο σημαντικές πληροφορίες πλαισίου συνολικά",
+          "Το αιτιατό attention αφήνει το τελευταίο token να δει όλα τα προηγούμενα"
         ],
         "correct": [
           3
@@ -214,9 +214,9 @@
         "index": 3,
         "text": "Ποια από τα ακόλουθα είναι πλεονεκτήματα ακριβούς ρύθμισης προεκπαιδευμένου LLM για ταξινόμηση έναντι εκπαίδευσης ταξινομητή από την αρχή; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Το μοντέλο έχει ήδη ισχυρή κατανόηση γλώσσας από προεκπαίδευση",
-          "Απαιτεί πάντα περισσότερα επισημασμένα δεδομένα από εκπαίδευση από αρχή",
-          "Τα προεκπαιδευμένα μοντέλα δεν μπορούν να υπερπροσαρμοστούν σε μικρά datasets",
+          "Το μοντέλο έχει ήδη ισχυρή κατανόηση γλώσσας από την προεκπαίδευση",
+          "Απαιτεί πάντα πολύ περισσότερα επισημασμένα δεδομένα από την εκπαίδευση εντελώς από την αρχή",
+          "Τα προεκπαιδευμένα μοντέλα απλά δεν μπορούν να υπερπροσαρμοστούν σε μικρά σύνολα",
           "Επιτυγχάνει τυπικά καλή απόδοση με λιγότερα επισημασμένα παραδείγματα"
         ],
         "correct": [
@@ -231,9 +231,9 @@
         "text": "Κατά την ακριβή ρύθμιση μοντέλου μόνο αποκωδικοποιητή όπως GPT για ταξινόμηση, ποια συνάρτηση απώλειας εφαρμόζεται τυπικά στην έξοδο κεφαλής ταξινόμησης;",
         "options": [
           "Απώλεια cross-entropy",
-          "Μέσο τετραγωνικό σφάλμα",
+          "Απώλεια μέσου τετραγωνικού σφάλματος (MSE)",
           "Αντιπαραθετική απώλεια",
-          "Απώλεια hinge"
+          "Απώλεια hinge (max-margin)"
         ],
         "correct": [
           0

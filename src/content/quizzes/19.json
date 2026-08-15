@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is the key advantage of GELU over ReLU in transformers?",
         "options": [
-          "GELU is always faster to compute",
-          "GELU uses fewer parameters",
-          "GELU is smooth and differentiable everywhere, avoiding dead neurons",
-          "GELU outputs are always positive"
+          "GELU is always faster to compute than ReLU on any hardware",
+          "GELU uses noticeably fewer parameters than ReLU does",
+          "GELU is smooth everywhere, avoiding dead neurons",
+          "GELU outputs are always strictly positive values"
         ],
         "correct": [
           2
@@ -24,8 +24,8 @@
         "options": [
           "d_model → 2×d_model → d_model",
           "d_model → 4×d_model → d_model",
-          "d_model → d_model → d_model",
-          "d_model → 8×d_model → d_model"
+          "d_model → d_model → d_model (no change)",
+          "d_model → 8×d_model → d_model (twice as wide)"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "What role does the FFN play in a transformer?",
         "options": [
-          "It computes attention scores between tokens",
-          "It generates positional encodings",
-          "It tokenizes input text",
-          "It processes each token independently, acting as a learned memory that stores knowledge"
+          "It computes the attention scores between every pair of tokens",
+          "It generates the positional encodings for each token",
+          "It tokenizes the raw input text into sub-words",
+          "It processes each token independently as a learned memory"
         ],
         "correct": [
           3
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Which of the following are true about the GELU activation function?Select all that apply",
         "options": [
-          "It can output small negative values for slightly negative inputs",
-          "It has a sharp kink at zero like ReLU",
+          "It can output small negatives for slightly negative inputs",
+          "It has a sharp, non-differentiable kink at zero just like ReLU",
           "It can be approximated as x · σ(1.702x)",
-          "It always zeros out negative inputs"
+          "It always zeroes out any negative inputs completely"
         ],
         "correct": [
           0,
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "Why does the FFN have more parameters than the attention layer in most transformers?",
         "options": [
-          "Because attention uses no weight matrices",
-          "Because the 4× expansion creates large weight matrices (d×4d + 4d×d)",
-          "Because the FFN processes multiple tokens at once",
-          "Because the FFN has more layers"
+          "Because the attention layer uses no weight matrices whatsoever",
+          "Because the 4× expansion makes large matrices (d×4d + 4d×d)",
+          "Because the FFN processes many tokens at once",
+          "Because the FFN simply has more stacked layers"
         ],
         "correct": [
           1
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Care este avantajul cheie al GELU față de ReLU în transformer-e?",
         "options": [
-          "GELU este întotdeauna mai rapid de calculat",
-          "GELU folosește mai puțini parametri",
-          "GELU este netedă și diferențiabilă peste tot, evitând neuronii morți",
-          "Ieșirile GELU sunt întotdeauna pozitive"
+          "GELU este întotdeauna mai rapid de calculat decât ReLU pe orice hardware",
+          "GELU folosește vizibil mai puțini parametri decât ReLU",
+          "GELU este netedă peste tot, evitând neuronii morți",
+          "Ieșirile GELU sunt întotdeauna strict pozitive"
         ],
         "correct": [
           2
@@ -105,8 +105,8 @@
         "options": [
           "d_model -> 2xd_model -> d_model",
           "d_model -> 4xd_model -> d_model",
-          "d_model -> d_model -> d_model",
-          "d_model -> 8xd_model -> d_model"
+          "d_model -> d_model -> d_model (fără schimbare)",
+          "d_model -> 8xd_model -> d_model (de două ori mai lat)"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Ce rol joacă FFN-ul într-un transformer?",
         "options": [
-          "Calculează scoruri de attention între token-uri",
-          "Generează codări poziționale",
-          "Tokenizează textul de intrare",
-          "Procesează fiecare token independent, acționând ca o memorie învățată care stochează cunoștințe"
+          "Calculează scorurile de attention între fiecare pereche de token-uri",
+          "Generează codările poziționale pentru fiecare token",
+          "Tokenizează textul brut de intrare în sub-cuvinte",
+          "Procesează fiecare token independent, ca o memorie învățată"
         ],
         "correct": [
           3
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Care dintre următoarele sunt adevărate despre funcția de activare GELU? Selectați toate răspunsurile corecte",
         "options": [
-          "Poate produce valori negative mici pentru intrări ușor negative",
-          "Are o curbură bruscă la zero precum ReLU",
-          "Poate fi aproximată ca x * sigma(1.702x)",
-          "Anulează întotdeauna intrările negative"
+          "Poate da valori negative mici la intrări ușor negative",
+          "Are o curbură bruscă, nediferențiabilă exact la zero ca ReLU",
+          "Poate fi aproximată ca x · σ(1.702x)",
+          "Anulează complet orice intrare negativă"
         ],
         "correct": [
           0,
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "De ce are FFN-ul mai mulți parametri decât stratul de attention în cele mai multe transformer-e?",
         "options": [
-          "Pentru că attention-ul nu folosește matrice de ponderi",
-          "Pentru că expansiunea de 4x creează matrice mari de ponderi (d x 4d + 4d x d)",
-          "Pentru că FFN-ul procesează mai multe token-uri simultan",
-          "Pentru că FFN-ul are mai multe straturi"
+          "Pentru că stratul de attention nu folosește deloc matrice de ponderi",
+          "Pentru că expansiunea 4x creează matrice mari (d×4d + 4d×d)",
+          "Pentru că FFN-ul procesează multe token-uri deodată",
+          "Pentru că FFN-ul are pur și simplu mai multe straturi"
         ],
         "correct": [
           1
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Ποιο είναι το βασικό πλεονέκτημα του GELU έναντι του ReLU στους transformers;",
         "options": [
-          "Το GELU είναι πάντα πιο γρήγορο στον υπολογισμό",
-          "Το GELU χρησιμοποιεί λιγότερες παραμέτρους",
-          "Το GELU είναι ομαλό και παραγωγίσιμο παντού, αποφεύγοντας νεκρούς νευρώνες",
-          "Οι έξοδοι GELU είναι πάντα θετικές"
+          "Το GELU είναι πάντα πιο γρήγορο στον υπολογισμό από το ReLU σε κάθε υλικό",
+          "Το GELU χρησιμοποιεί αισθητά λιγότερες παραμέτρους από το ReLU",
+          "Το GELU είναι ομαλό παντού, αποφεύγοντας νεκρούς νευρώνες",
+          "Οι έξοδοι GELU είναι πάντα αυστηρά θετικές"
         ],
         "correct": [
           2
@@ -186,8 +186,8 @@
         "options": [
           "d_model -> 2xd_model -> d_model",
           "d_model -> 4xd_model -> d_model",
-          "d_model -> d_model -> d_model",
-          "d_model -> 8xd_model -> d_model"
+          "d_model -> d_model -> d_model (καμία αλλαγή)",
+          "d_model -> 8xd_model -> d_model (διπλάσιο πλάτος)"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποιον ρόλο παίζει το FFN σε ένα transformer;",
         "options": [
-          "Υπολογίζει σκορ attention μεταξύ tokens",
-          "Δημιουργεί κωδικοποιήσεις θέσης",
-          "Τεκμηριώνει το κείμενο εισόδου",
-          "Επεξεργάζεται κάθε token ανεξάρτητα, λειτουργώντας ως εκπαιδευμένη μνήμη που αποθηκεύει γνώσεις"
+          "Υπολογίζει τα σκορ attention ανάμεσα σε κάθε ζεύγος από tokens",
+          "Δημιουργεί τις κωδικοποιήσεις θέσης για κάθε token",
+          "Τεκμηριώνει το ακατέργαστο κείμενο εισόδου σε υπολέξεις",
+          "Επεξεργάζεται κάθε token ανεξάρτητα ως εκπαιδευμένη μνήμη"
         ],
         "correct": [
           3
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποια από τα ακόλουθα ισχύουν για τη συνάρτηση ενεργοποίησης GELU; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Μπορεί να παράγει μικρές αρνητικές τιμές για ελαφρώς αρνητικές εισόδους",
-          "Έχει απότομη γωνία στο μηδέν όπως το ReLU",
-          "Μπορεί να προσεγγιστεί ως x * sigma(1.702x)",
-          "Μηδενίζει πάντα τις αρνητικές εισόδους"
+          "Δίνει μικρές αρνητικές τιμές σε ελαφρώς αρνητικές εισόδους",
+          "Έχει απότομη, μη παραγωγίσιμη γωνία ακριβώς στο μηδέν όπως το ReLU",
+          "Μπορεί να προσεγγιστεί ως x · σ(1.702x)",
+          "Μηδενίζει πάντα εντελώς τις αρνητικές εισόδους"
         ],
         "correct": [
           0,
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Γιατί το FFN έχει περισσότερες παραμέτρους από το επίπεδο attention στους περισσότερους transformers;",
         "options": [
-          "Επειδή το attention δεν χρησιμοποιεί πίνακες βαρών",
-          "Επειδή η επέκταση 4x δημιουργεί μεγάλους πίνακες βαρών (d x 4d + 4d x d)",
-          "Επειδή το FFN επεξεργάζεται πολλαπλά tokens ταυτόχρονα",
-          "Επειδή το FFN έχει περισσότερα επίπεδα"
+          "Επειδή το επίπεδο attention δεν χρησιμοποιεί καθόλου πίνακες βαρών",
+          "Επειδή η επέκταση 4x δημιουργεί μεγάλους πίνακες (d×4d + 4d×d)",
+          "Επειδή το FFN επεξεργάζεται πολλά token ταυτόχρονα",
+          "Επειδή το FFN έχει απλώς περισσότερα επίπεδα"
         ],
         "correct": [
           1

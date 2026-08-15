@@ -8,8 +8,8 @@
         "text": "Why do transformers use multiple attention heads instead of one?",
         "options": [
           "To increase the vocabulary size",
-          "Each head can learn different relationship patterns — syntactic, semantic, positional",
-          "Multiple heads reduce total computation",
+          "Each head learns different relations — syntactic, semantic, positional",
+          "Using multiple heads noticeably reduces the total amount of computation required",
           "A single head cannot process batches"
         ],
         "correct": [
@@ -38,8 +38,8 @@
         "text": "What happens after all heads compute their attention outputs?",
         "options": [
           "They are averaged element-wise",
-          "Only the best head's output is used",
-          "They are concatenated and projected through a learned output matrix W_o",
+          "Only the single best-performing head's output is selected and passed forward",
+          "They are concatenated, then projected through W_o",
           "They are summed and divided by num_heads"
         ],
         "correct": [
@@ -52,9 +52,9 @@
         "index": 3,
         "text": "Does multi-head attention have more parameters than single-head attention with the same d_model?",
         "options": [
-          "Yes, significantly more due to separate W_q, W_k, W_v per head",
-          "Approximately the same — the split across heads keeps total parameters similar, plus W_o",
-          "Fewer parameters",
+          "Yes, significantly more, because each head has its own separate W_q, W_k, and W_v matrices",
+          "About the same — splitting across heads keeps totals similar, plus W_o",
+          "Fewer parameters overall",
           "It depends on the activation function"
         ],
         "correct": [
@@ -67,10 +67,10 @@
         "index": 4,
         "text": "What benefits does multi-head attention provide over single-head?Select all that apply",
         "options": [
-          "Captures different relationship types simultaneously",
+          "Captures several relationship types at once",
           "Reduces the quadratic complexity of attention",
-          "Eliminates the need for positional encodings",
-          "More stable training through ensemble-like behavior"
+          "Completely eliminates the need for any positional encodings in the model",
+          "More stable training via ensemble-like behavior"
         ],
         "correct": [
           0,
@@ -89,8 +89,8 @@
         "text": "De ce folosesc transformer-ele mai multe capete de attention în loc de unul singur?",
         "options": [
           "Pentru a crește dimensiunea vocabularului",
-          "Fiecare cap poate învăța tipare diferite de relații — sintactice, semantice, poziționale",
-          "Mai multe capete reduc calculul total",
+          "Fiecare cap învață relații diferite — sintactice, semantice, poziționale",
+          "Folosirea mai multor capete reduce considerabil cantitatea totală de calcul necesară",
           "Un singur cap nu poate procesa loturi"
         ],
         "correct": [
@@ -119,8 +119,8 @@
         "text": "Ce se întâmplă după ce toate capetele calculează ieșirile lor de attention?",
         "options": [
           "Sunt mediate element cu element",
-          "Se folosește doar ieșirea celui mai bun cap",
-          "Sunt concatenate și proiectate printr-o matrice de ieșire învățată W_o",
+          "Se selectează și se transmite mai departe doar ieșirea celui mai performant cap",
+          "Sunt concatenate, apoi proiectate prin W_o",
           "Sunt însumate și împărțite la num_heads"
         ],
         "correct": [
@@ -133,9 +133,9 @@
         "index": 3,
         "text": "Are multi-head attention mai mulți parametri decât single-head attention cu același d_model?",
         "options": [
-          "Da, semnificativ mai mulți datorită matricelor separate W_q, W_k, W_v per cap",
-          "Aproximativ la fel — împărțirea pe capete menține parametrii totali similari, plus W_o",
-          "Mai puțini parametri",
+          "Da, semnificativ mai mulți, deoarece fiecare cap are propriile matrice separate W_q, W_k și W_v",
+          "Aproximativ la fel — împărțirea pe capete menține totalul similar, plus W_o",
+          "Mai puțini parametri în total",
           "Depinde de funcția de activare"
         ],
         "correct": [
@@ -148,9 +148,9 @@
         "index": 4,
         "text": "Ce beneficii oferă multi-head attention față de single-head? Selectați toate răspunsurile corecte",
         "options": [
-          "Captează diferite tipuri de relații simultan",
+          "Captează mai multe tipuri de relații simultan",
           "Reduce complexitatea pătratică a attention-ului",
-          "Elimină necesitatea codărilor poziționale",
+          "Elimină complet necesitatea oricăror codări poziționale în model",
           "Antrenare mai stabilă prin comportament de tip ansamblu"
         ],
         "correct": [
@@ -169,9 +169,9 @@
         "index": 0,
         "text": "Γιατί οι transformers χρησιμοποιούν πολλαπλά κεφάλια attention αντί για ένα;",
         "options": [
-          "Για να αυξήσουν το μέγεθος του λεξιλογίου",
-          "Κάθε κεφάλι μπορεί να μάθει διαφορετικά μοτίβα σχέσεων — συντακτικά, σημασιολογικά, θέσης",
-          "Πολλαπλά κεφάλια μειώνουν τον συνολικό υπολογισμό",
+          "Για να αυξηθεί το μέγεθος του λεξιλογίου",
+          "Κάθε κεφάλι μαθαίνει διαφορετικές σχέσεις — συντακτικές, σημασιολογικές, θέσης",
+          "Η χρήση πολλαπλών κεφαλιών μειώνει αισθητά τη συνολική ποσότητα υπολογισμού που απαιτείται",
           "Ένα μόνο κεφάλι δεν μπορεί να επεξεργαστεί παρτίδες"
         ],
         "correct": [
@@ -200,8 +200,8 @@
         "text": "Τι συμβαίνει αφού όλα τα κεφάλια υπολογίσουν τις εξόδους attention τους;",
         "options": [
           "Υπολογίζεται ο μέσος όρος κατά στοιχείο",
-          "Χρησιμοποιείται μόνο η έξοδος του καλύτερου κεφαλιού",
-          "Συνενώνονται και προβάλλονται μέσω ενός εκπαιδευμένου πίνακα εξόδου W_o",
+          "Επιλέγεται και προωθείται μόνο η έξοδος του κεφαλιού με την καλύτερη απόδοση",
+          "Συνενώνονται και μετά προβάλλονται μέσω W_o",
           "Αθροίζονται και διαιρούνται με τον αριθμό κεφαλιών"
         ],
         "correct": [
@@ -214,9 +214,9 @@
         "index": 3,
         "text": "Έχει το multi-head attention περισσότερες παραμέτρους από το single-head attention με ίδιο d_model;",
         "options": [
-          "Ναι, σημαντικά περισσότερες λόγω ξεχωριστών W_q, W_k, W_v ανά κεφάλι",
-          "Περίπου τις ίδιες — ο διαχωρισμός σε κεφάλια διατηρεί τις παραμέτρους παρόμοιες, συν τον W_o",
-          "Λιγότερες παραμέτρους",
+          "Ναι, σημαντικά περισσότερες, επειδή κάθε κεφάλι έχει τους δικούς του ξεχωριστούς πίνακες W_q, W_k και W_v",
+          "Περίπου ίδιες — ο διαχωρισμός σε κεφάλια κρατά το σύνολο παρόμοιο, συν W_o",
+          "Λιγότερες παραμέτρους συνολικά",
           "Εξαρτάται από τη συνάρτηση ενεργοποίησης"
         ],
         "correct": [
@@ -229,9 +229,9 @@
         "index": 4,
         "text": "Ποια πλεονεκτήματα προσφέρει το multi-head attention έναντι του single-head; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Αποτυπώνει ταυτόχρονα διαφορετικούς τύπους σχέσεων",
+          "Αποτυπώνει ταυτόχρονα πολλούς τύπους σχέσεων",
           "Μειώνει την τετραγωνική πολυπλοκότητα του attention",
-          "Εξαλείφει την ανάγκη κωδικοποιήσεων θέσης",
+          "Εξαλείφει εντελώς την ανάγκη για οποιεσδήποτε κωδικοποιήσεις θέσης στο μοντέλο",
           "Πιο σταθερή εκπαίδευση μέσω συμπεριφοράς τύπου συνόλου"
         ],
         "correct": [

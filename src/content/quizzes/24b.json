@@ -7,12 +7,14 @@
         "index": 0,
         "text": "What makes the LayerNorm backward pass more complex than a simple element-wise operation?",
         "options": [
-          "It requires matrix inversion",
-          "The normalization creates dependencies between all elements in the vector through mean and variance",
+          "It requires inverting a large dense weight matrix at each backward step",
+          "Normalization couples all elements via the shared mean and variance",
           "It needs second-order derivatives",
           "LayerNorm has no learnable parameters"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "LayerNorm normalizes using the mean and variance computed across all elements, so the derivative of any output element depends on ALL input elements, not just the corresponding one.",
         "isMulti": false
       },
@@ -25,7 +27,9 @@
           "1.0",
           "Undefined"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "GELU(0) = 0 and GELU'(0) = 0.5. The tanh approximation gives the same value. This makes GELU different from ReLU (which has derivative 0 at x=0) and allows gradients to flow through zero inputs.",
         "isMulti": false
       },
@@ -33,12 +37,16 @@
         "index": 2,
         "text": "Which components require special care during backpropagation through causal self-attention? Select all that apply.",
         "options": [
-          "The softmax function (row-wise Jacobian)",
-          "The causal mask (zeroing future positions)",
-          "The scaling factor 1/sqrt(d_k)",
+          "The softmax function with its full row-wise Jacobian",
+          "The causal mask that zeroes out future positions",
+          "The constant scaling factor 1/sqrt(d_k), which needs the most careful handling of all",
           "The QKV linear projections"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Softmax has a non-diagonal Jacobian (each output depends on all inputs). The causal mask zeros out gradients for future positions. QKV projections need gradients accumulated from all heads. The scaling factor is a simple constant that passes through trivially.",
         "isMulti": true
       },
@@ -46,12 +54,14 @@
         "index": 3,
         "text": "How do residual connections affect gradient flow during backpropagation?",
         "options": [
-          "They block gradients from flowing backward",
-          "They double the gradient magnitude",
-          "They split the gradient into two paths: one through the layer and one identity shortcut",
-          "They eliminate the vanishing gradient problem entirely"
+          "They block gradients from flowing backward through the network",
+          "They double the gradient magnitude at every layer",
+          "They split the gradient into a layer path and an identity shortcut",
+          "They completely eliminate the vanishing gradient problem for very deep nets"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "At a residual connection y = x + F(x), the gradient splits: dL/dx = dL/dy + dL/dy * dF/dx. The identity path (dL/dy) ensures gradients can always flow, mitigating (but not eliminating) vanishing gradients.",
         "isMulti": false
       },
@@ -59,12 +69,14 @@
         "index": 4,
         "text": "What is the purpose of numerical gradient checking in implementing backpropagation?",
         "options": [
-          "It makes training faster by pre-computing gradients",
-          "It verifies analytical gradients are correct by comparing with finite-difference approximations",
-          "It replaces the need for chain rule derivations",
+          "It makes training run faster by precomputing all the gradients ahead of time",
+          "It checks analytical gradients via finite-difference estimates",
+          "It replaces the need for chain-rule derivations",
           "It reduces memory usage during training"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Numerical gradient checking computes (f(x+e) - f(x-e)) / 2e for each parameter and compares with the analytical gradient. If they match (relative error < 1e-5), the backward pass implementation is correct. It's too slow for training but essential for debugging.",
         "isMulti": false
       }
@@ -77,12 +89,14 @@
         "index": 0,
         "text": "Ce face trecerea inapoi (backward pass) prin LayerNorm mai complexa decat o operatie simpla element cu element?",
         "options": [
-          "Necesita inversarea matricei",
-          "Normalizarea creeaza dependente intre toate elementele vectorului prin medie si varianta",
-          "Necesita derivate de ordinul doi",
-          "LayerNorm nu are parametri invatati"
+          "Necesită inversarea unei matrice dense mari la fiecare pas înapoi",
+          "Normalizarea leagă toate elementele prin media și varianța",
+          "Necesită derivate de ordinul doi",
+          "LayerNorm nu are parametri învățați"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "LayerNorm normalizeaza folosind media si varianta calculate pe toate elementele, asa ca derivata oricarui element de iesire depinde de TOATE elementele de intrare, nu doar de cel corespunzator.",
         "isMulti": false
       },
@@ -95,7 +109,9 @@
           "1.0",
           "Nedefinita"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "GELU(0) = 0 si GELU'(0) = 0.5. Aproximarea tanh da aceeasi valoare. Aceasta face GELU diferit de ReLU (care are derivata 0 la x=0) si permite gradientilor sa curga prin intrari zero.",
         "isMulti": false
       },
@@ -103,12 +119,16 @@
         "index": 2,
         "text": "Ce componente necesita atentie speciala in timpul retropropagarii prin atentia cauzala? Selectati toate variantele corecte.",
         "options": [
-          "Functia softmax (Jacobianul pe randuri)",
-          "Masca cauzala (anularea pozitiilor viitoare)",
-          "Factorul de scalare 1/sqrt(d_k)",
-          "Proiectiile liniare QKV"
+          "Funcția softmax cu Jacobianul său complet pe rânduri",
+          "Masca cauzală care anulează pozițiile viitoare",
+          "Factorul constant de scalare 1/sqrt(d_k), care necesită cea mai atentă tratare dintre toate",
+          "Proiecțiile liniare QKV"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Softmax are un Jacobian non-diagonal (fiecare iesire depinde de toate intrarile). Masca cauzala anuleaza gradientii pentru pozitiile viitoare. Proiectiile QKV necesita gradienti acumulati din toate capetele. Factorul de scalare este o constanta simpla care trece trivial.",
         "isMulti": true
       },
@@ -116,12 +136,14 @@
         "index": 3,
         "text": "Cum afecteaza conexiunile reziduale fluxul gradientilor in timpul retropropagarii?",
         "options": [
-          "Blocheaza gradientii sa curga inapoi",
-          "Dubleaza magnitudinea gradientului",
-          "Imparte gradientul in doua cai: una prin strat si una scurtatura identitara",
-          "Elimina complet problema gradientilor care dispar"
+          "Blochează gradienții să curgă înapoi prin rețea",
+          "Dublează magnitudinea gradientului la fiecare strat",
+          "Împart gradientul într-o cale prin strat și o scurtătură identitară",
+          "Elimină complet problema gradienților care dispar pentru rețele foarte adânci"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "La o conexiune reziduala y = x + F(x), gradientul se imparte: dL/dx = dL/dy + dL/dy * dF/dx. Calea identitara (dL/dy) asigura ca gradientii pot curge intotdeauna, atenuand (dar nu eliminand) disparitia gradientilor.",
         "isMulti": false
       },
@@ -129,12 +151,14 @@
         "index": 4,
         "text": "Care este scopul verificarii numerice a gradientilor in implementarea retropropagarii?",
         "options": [
-          "Face antrenamentul mai rapid prin pre-calcularea gradientilor",
-          "Verifica ca gradientii analitici sunt corecti comparandu-i cu aproximari prin diferente finite",
-          "Inlocuieste nevoia de derivare prin regula lantului",
-          "Reduce utilizarea memoriei in timpul antrenamentului"
+          "Face antrenamentul mai rapid prin pre-calcularea tuturor gradienților dinainte",
+          "Verifică gradienții analitici prin estimări cu diferențe finite",
+          "Înlocuiește nevoia de derivare prin regula lanțului",
+          "Reduce utilizarea memoriei în timpul antrenamentului"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Verificarea numerica a gradientilor calculeaza (f(x+e) - f(x-e)) / 2e pentru fiecare parametru si compara cu gradientul analitic. Daca se potrivesc (eroare relativa < 1e-5), implementarea backward pass este corecta. Este prea lenta pentru antrenament dar esentiala pentru depanare.",
         "isMulti": false
       }
@@ -147,12 +171,14 @@
         "index": 0,
         "text": "Ti kanei to backward pass tou LayerNorm pio poliploko apo mia apli leitourgia stoicheiou-pros-stoicheio;",
         "options": [
-          "Apaitei antistrrofi mitroon",
-          "I kanonikopioisi dimioyrgei exartiseis metaxi olon ton stoicheion tou dianismatos meso mesou timis kai diasporis",
+          "Apaitei antistrofi enos megalou pyknou pinaka varon se kathe pisogyrisma",
+          "I kanonikopioisi syndeei ola ta stoicheia meso koinis mesis timis",
           "Chreinetai derivates defteris taxis",
           "To LayerNorm den echei mathisimes parametrous"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "To LayerNorm kanonikopiei chrisimopoiontas ti mesi timi kai ti diaspora poy ypologizontai se ola ta stoicheia, opote i paragogos kathe stoicheiou exodou exartatai apo OLA ta stoicheia eisodou, ochi mono apo to antistoicho.",
         "isMulti": false
       },
@@ -165,7 +191,9 @@
           "1.0",
           "Akahthoristi"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "GELU(0) = 0 kai GELU'(0) = 0.5. I prosengisi tanh dinei tin idia timi. Ayto kanei to GELU diaforetiko apo to ReLU (pou echei paragogo 0 sto x=0) kai epitrepei stous gradients na reon mesa apo midenikes eisodous.",
         "isMulti": false
       },
@@ -173,12 +201,16 @@
         "index": 2,
         "text": "Poia stoicheia apaiitoun idiateri prosochi kata tin opisthodiadosi mesa apo tin aitiaki prosochi; Epilexte ola osa ischyoun.",
         "options": [
-          "I synartisi softmax (Iacobianos kata grammi)",
-          "I aitiaki maska (midenitsi mellontikon theseon)",
-          "O synteleseis klimas 1/sqrt(d_k)",
+          "I synartisi softmax me ton pliri Iacobiano kata grammi",
+          "I aitiaki maska pou midenizei tis mellontikes theseis",
+          "O statheros syntelestis klimakas 1/sqrt(d_k), pou apaitei tin pio prosektiki metacheirisi apo oles",
           "Oi grammikes provoles QKV"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "To softmax echei enan mi-diagonno Iacobiano (kathe exodos exartatai apo oles tis eisodous). I aitiaki maska midenizetai tous gradients gia mellontikes theseis. Oi provoles QKV chreiazontai gradients syssoreymenous apo ola ta heads. O synttelestis klimas einai mia apli stathera poy perna trivially.",
         "isMulti": true
       },
@@ -186,12 +218,14 @@
         "index": 3,
         "text": "Pos epireazoun oi ypoleimmatikes syndeseis ti roi ton gradients kata tin opisthoadiadosi;",
         "options": [
-          "Empodiizoun tous gradients na reon pros ta piso",
-          "Diplasiaazoun to megethos tou gradient",
-          "Chorizoun to gradient se dyo monopatiia: ena mesa apo to epipedo kai ena monopati taftotitas",
-          "Exaleiifoun pliros to provlima ton exafanizomenon gradients"
+          "Empodizoun tous gradients na reoun pros ta piso mesa apo to diktyo",
+          "Diplasiazoun to megethos tou gradient se kathe epipedo",
+          "Chorizoun to gradient se ena monopati epipedou kai ena monopati taftotitas",
+          "Exaleifoun entelos to provlima ton exafanizomenon gradients gia poly vathia diktya"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Se mia ypoleimmatiki syndesi y = x + F(x), to gradient chorizetai: dL/dx = dL/dy + dL/dy * dF/dx. To monopati taftotitas (dL/dy) diasfalizei oti oi gradients mporoyn panta na reoyn, metriaazontas (alla mi exaleifontas) tin exafanisi ton gradients.",
         "isMulti": false
       },
@@ -199,12 +233,14 @@
         "index": 4,
         "text": "Poios einai o skopos tou arithmitikou elegchou gradient stin ylopoiisi tis opisthoadiadosis;",
         "options": [
-          "Kanei tin ekpaideusi pio grigori me proypologismo ton gradients",
-          "Epivevaionei oti oi analytikoi gradients einai sostoi sygkrinontas me prosengiseis peperasmemon diaforon",
-          "Antikathistai tin anagki gia paragogisi me ton kanona tis alysidas",
+          "Kanei tin ekpaideusi pio grigori me proypologismo olon ton gradients apo prin",
+          "Elegchei tous analytikous gradients me prosengiseis peperasmenon diaforon",
+          "Antikathista tin anagki gia paragogisi me ton kanona tis alysidas",
           "Meionei ti chrisi mnimis kata tin ekpaideusi"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "O arithmitikos elegchos gradient ypologizei to (f(x+e) - f(x-e)) / 2e gia kathe parametro kai sygkrinei me to analytiko gradient. An tairiiazoun (schetiko sfaalma < 1e-5), i ylopoiisi tou backward pass einai sosti. Einai poly argi gia ekpaideusi alla aparaititi gia aposfalmaatoisi.",
         "isMulti": false
       }

@@ -7,9 +7,9 @@
         "index": 0,
         "text": "What distinguishes self-attention from general attention?",
         "options": [
-          "Self-attention uses a fixed context vector",
-          "Queries, keys, and values all come from the same input sequence",
-          "Self-attention has no learnable parameters",
+          "Self-attention relies on a single fixed context vector shared across steps",
+          "Queries, keys, and values all come from the same sequence",
+          "Self-attention has no learnable parameters at all",
           "Self-attention only works with images"
         ],
         "correct": [
@@ -22,9 +22,9 @@
         "index": 1,
         "text": "What are the Q, K, V matrices computed from?",
         "options": [
-          "Random initialization only — they are not learned",
-          "The output of the previous transformer block only",
-          "Linear projections of the input: Q=XW_q, K=XW_k, V=XW_v with learned weight matrices",
+          "Random initialization only — they are never learned",
+          "Only the output of the previous transformer block, copied without any projection",
+          "Linear projections of the input: Q=XW_q, K=XW_k, V=XW_v",
           "Hard-coded rules based on word frequency"
         ],
         "correct": [
@@ -37,9 +37,9 @@
         "index": 2,
         "text": "What role does the Query vector play?",
         "options": [
-          "It represents \"what am I looking for?\" — the current token's search criteria",
-          "It stores the actual content to be retrieved",
-          "It serves as the position encoding",
+          "It represents what the current token is looking for",
+          "It stores the actual content that will eventually be retrieved by others",
+          "It serves as the fixed position encoding",
           "It applies dropout during training"
         ],
         "correct": [
@@ -53,7 +53,7 @@
         "text": "If input X has shape (batch, seq_len, d_model) and W_q has shape (d_model, d_k), what is the shape of Q?",
         "options": [
           "(batch, d_k)",
-          "(batch, d_model, d_k)",
+          "(batch, num_heads, seq_len, d_k)",
           "(seq_len, d_k)",
           "(batch, seq_len, d_k)"
         ],
@@ -67,10 +67,10 @@
         "index": 4,
         "text": "Why does self-attention use separate projections instead of raw inputs?",
         "options": [
-          "To reduce sequence length",
-          "Projections let the model learn different representations for searching (Q), being found (K), and information retrieval (V)",
+          "To reduce the sequence length",
+          "Projections learn distinct roles: search (Q), match (K), content (V)",
           "Raw inputs would cause numerical overflow",
-          "Projections are only used for efficiency, not expressiveness"
+          "Projections are used purely for computational efficiency, not for expressiveness"
         ],
         "correct": [
           1
@@ -87,9 +87,9 @@
         "index": 0,
         "text": "Ce distinge self-attention de attention-ul general?",
         "options": [
-          "Self-attention folosește un vector de context fix",
-          "Query-urile, key-urile și value-urile provin toate din aceeași secvență de intrare",
-          "Self-attention nu are parametri care pot fi învățați",
+          "Self-attention se bazează pe un singur vector de context fix partajat între pași",
+          "Query-urile, key-urile și value-urile provin din aceeași secvență",
+          "Self-attention nu are deloc parametri care pot fi învățați",
           "Self-attention funcționează doar cu imagini"
         ],
         "correct": [
@@ -102,9 +102,9 @@
         "index": 1,
         "text": "Din ce sunt calculate matricele Q, K, V?",
         "options": [
-          "Doar din inițializare aleatorie — nu sunt învățate",
-          "Doar din ieșirea blocului transformer anterior",
-          "Proiecții liniare ale intrării: Q=XW_q, K=XW_k, V=XW_v cu matrice de ponderi învățate",
+          "Doar inițializare aleatorie — nu sunt niciodată învățate",
+          "Doar ieșirea blocului transformer anterior, copiată fără nicio proiecție",
+          "Proiecții liniare ale intrării: Q=XW_q, K=XW_k, V=XW_v",
           "Reguli fixe bazate pe frecvența cuvintelor"
         ],
         "correct": [
@@ -117,9 +117,9 @@
         "index": 2,
         "text": "Ce rol joacă vectorul Query?",
         "options": [
-          "Reprezintă «ce caut?» — criteriile de căutare ale token-ului curent",
-          "Stochează conținutul real care urmează să fie extras",
-          "Servește ca codare pozițională",
+          "Reprezintă ceea ce caută token-ul curent",
+          "Stochează conținutul real care va fi în cele din urmă extras de alții",
+          "Servește ca și codare pozițională fixă",
           "Aplică dropout în timpul antrenării"
         ],
         "correct": [
@@ -133,7 +133,7 @@
         "text": "Dacă intrarea X are forma (batch, seq_len, d_model) și W_q are forma (d_model, d_k), care este forma lui Q?",
         "options": [
           "(batch, d_k)",
-          "(batch, d_model, d_k)",
+          "(batch, num_heads, seq_len, d_k)",
           "(seq_len, d_k)",
           "(batch, seq_len, d_k)"
         ],
@@ -148,9 +148,9 @@
         "text": "De ce folosește self-attention proiecții separate în loc de intrări brute?",
         "options": [
           "Pentru a reduce lungimea secvenței",
-          "Proiecțiile permit modelului să învețe reprezentări diferite pentru căutare (Q), a fi găsit (K) și extragerea informației (V)",
+          "Proiecțiile învață roluri distincte: căutare (Q), potrivire (K), conținut (V)",
           "Intrările brute ar cauza depășire numerică",
-          "Proiecțiile sunt folosite doar pentru eficiență, nu pentru expresivitate"
+          "Proiecțiile sunt folosite pur și simplu pentru eficiență computațională, nu pentru expresivitate"
         ],
         "correct": [
           1
@@ -167,9 +167,9 @@
         "index": 0,
         "text": "Τι διαφοροποιεί το self-attention από το γενικό attention;",
         "options": [
-          "Το self-attention χρησιμοποιεί σταθερό διάνυσμα πλαισίου",
-          "Τα queries, keys και values προέρχονται όλα από την ίδια ακολουθία εισόδου",
-          "Το self-attention δεν έχει εκπαιδεύσιμες παραμέτρους",
+          "Το self-attention βασίζεται σε ένα σταθερό διάνυσμα πλαισίου κοινό για όλα τα βήματα",
+          "Queries, keys και values προέρχονται από την ίδια ακολουθία",
+          "Το self-attention δεν έχει καθόλου εκπαιδεύσιμες παραμέτρους",
           "Το self-attention λειτουργεί μόνο με εικόνες"
         ],
         "correct": [
@@ -182,9 +182,9 @@
         "index": 1,
         "text": "Από τι υπολογίζονται οι πίνακες Q, K, V;",
         "options": [
-          "Μόνο από τυχαία αρχικοποίηση — δεν εκπαιδεύονται",
-          "Μόνο από την έξοδο του προηγούμενου μπλοκ transformer",
-          "Γραμμικές προβολές της εισόδου: Q=XW_q, K=XW_k, V=XW_v με εκπαιδευμένους πίνακες βαρών",
+          "Μόνο τυχαία αρχικοποίηση — δεν εκπαιδεύονται ποτέ",
+          "Μόνο η έξοδος του προηγούμενου μπλοκ transformer, αντιγραμμένη χωρίς καμία προβολή",
+          "Γραμμικές προβολές της εισόδου: Q=XW_q, K=XW_k, V=XW_v",
           "Σταθεροί κανόνες βασισμένοι στη συχνότητα λέξεων"
         ],
         "correct": [
@@ -197,9 +197,9 @@
         "index": 2,
         "text": "Ποιον ρόλο παίζει το διάνυσμα Query;",
         "options": [
-          "Αντιπροσωπεύει «τι ψάχνω;» — τα κριτήρια αναζήτησης του τρέχοντος token",
-          "Αποθηκεύει το πραγματικό περιεχόμενο προς ανάκτηση",
-          "Χρησιμεύει ως κωδικοποίηση θέσης",
+          "Αντιπροσωπεύει τι ψάχνει το τρέχον token",
+          "Αποθηκεύει το πραγματικό περιεχόμενο που τελικά θα ανακτηθεί από άλλους",
+          "Χρησιμεύει ως σταθερή κωδικοποίηση θέσης",
           "Εφαρμόζει dropout κατά την εκπαίδευση"
         ],
         "correct": [
@@ -213,7 +213,7 @@
         "text": "Αν η είσοδος X έχει σχήμα (batch, seq_len, d_model) και ο W_q έχει σχήμα (d_model, d_k), ποιο είναι το σχήμα του Q;",
         "options": [
           "(batch, d_k)",
-          "(batch, d_model, d_k)",
+          "(batch, num_heads, seq_len, d_k)",
           "(seq_len, d_k)",
           "(batch, seq_len, d_k)"
         ],
@@ -227,10 +227,10 @@
         "index": 4,
         "text": "Γιατί το self-attention χρησιμοποιεί ξεχωριστές προβολές αντί για ακατέργαστες εισόδους;",
         "options": [
-          "Για να μειώσει το μήκος ακολουθίας",
-          "Οι προβολές επιτρέπουν στο μοντέλο να μάθει διαφορετικές αναπαραστάσεις για αναζήτηση (Q), εύρεση (K) και ανάκτηση πληροφορίας (V)",
+          "Για να μειωθεί το μήκος της ακολουθίας",
+          "Οι προβολές μαθαίνουν ρόλους: αναζήτηση (Q), ταίριασμα (K), περιεχόμενο (V)",
           "Οι ακατέργαστες είσοδοι θα προκαλούσαν αριθμητική υπερχείλιση",
-          "Οι προβολές χρησιμοποιούνται μόνο για αποδοτικότητα, όχι για εκφραστικότητα"
+          "Οι προβολές χρησιμοποιούνται καθαρά για υπολογιστική αποδοτικότητα, όχι για εκφραστικότητα"
         ],
         "correct": [
           1

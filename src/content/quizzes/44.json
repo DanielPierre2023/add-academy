@@ -10,9 +10,11 @@
           "Quantity > Diversity > Quality",
           "Quality > Diversity > Quantity",
           "Diversity > Quantity > Quality",
-          "Quantity > Quality > Diversity"
+          "Quantity > Quality > Diversity, maximising raw volume above all else"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "The data hierarchy prioritises Quality first, then Diversity, then Quantity. A small amount of clean, well-formatted text teaches a model more than a massive dump of noisy web scrapes.",
         "isMulti": false
       },
@@ -25,7 +27,9 @@
           "It had more GPU hours during training",
           "It used a larger context window than competing models"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "LLaMA demonstrated that a smaller model trained on carefully curated data can outperform larger models trained on noisier data, proving that data quality matters more than model size.",
         "isMulti": false
       },
@@ -35,10 +39,14 @@
         "options": [
           "Tiny Shakespeare and TinyStories",
           "OpenWebText and WikiText-103",
-          "GPT-4's internal training data",
+          "GPT-4's proprietary internal training dataset",
           "Project Gutenberg and The Stack"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Tiny Shakespeare, TinyStories, OpenWebText, WikiText-103, Project Gutenberg, and The Stack are all freely available public datasets for LLM training. GPT-4's internal training data is proprietary and not publicly available.",
         "isMulti": true
       },
@@ -46,12 +54,14 @@
         "index": 3,
         "text": "What is the main purpose of data preprocessing before training?",
         "options": [
-          "To increase the file size so the model trains longer",
+          "To increase the file size so that the model ends up training for a much longer period",
           "To convert data into a format the model's tokenizer can never read",
-          "To clean, deduplicate, and filter raw text so the model learns from high-quality examples",
-          "To encrypt the data for security during training"
+          "To clean, deduplicate, and filter raw text so the model learns good examples",
+          "To encrypt the data for security during the training process"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Data preprocessing involves cleaning (removing HTML tags, fixing encoding), deduplication (removing repeated content), and filtering (removing low-quality text) to ensure the model learns from the best possible examples.",
         "isMulti": false
       },
@@ -64,7 +74,9 @@
           "Text, CSV, JSON, PDF, and DOCX files",
           "Only files downloaded from Hugging Face"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "NeuralForge's Dataset Manager supports loading custom data from multiple formats including plain text (.txt), CSV, JSON, PDF, and DOCX files, giving you flexibility to use your own documents for training.",
         "isMulti": false
       }
@@ -80,9 +92,11 @@
           "Cantitate > Diversitate > Calitate",
           "Calitate > Diversitate > Cantitate",
           "Diversitate > Cantitate > Calitate",
-          "Cantitate > Calitate > Diversitate"
+          "Cantitate > Calitate > Diversitate, maximizând volumul brut mai presus de orice"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Explicație: Ierarhia datelor prioritizează Calitatea în primul rând, apoi Diversitatea, apoi Cantitatea. O cantitate mică de text curat și bine formatat învață un model mai mult decât un volum masiv de date web zgomotoase.",
         "isMulti": false
       },
@@ -95,7 +109,9 @@
           "A avut mai multe ore GPU în timpul antrenamentului",
           "A folosit o fereastră de context mai mare decât modelele concurente"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Explicație: LLaMA a demonstrat că un model mai mic antrenat pe date atent selecționate poate depăși modele mai mari antrenate pe date mai zgomotoase, dovedind că calitatea datelor contează mai mult decât dimensiunea modelului.",
         "isMulti": false
       },
@@ -105,10 +121,14 @@
         "options": [
           "Tiny Shakespeare și TinyStories",
           "OpenWebText și WikiText-103",
-          "Datele interne de antrenament ale GPT-4",
+          "Setul de date intern și proprietar de antrenament al GPT-4",
           "Project Gutenberg și The Stack"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "✅ Explicație: Tiny Shakespeare, TinyStories, OpenWebText, WikiText-103, Project Gutenberg și The Stack sunt toate seturi de date publice disponibile gratuit pentru antrenamentul LLM. Datele interne de antrenament ale GPT-4 sunt proprietare și nu sunt disponibile public.",
         "isMulti": true
       },
@@ -116,12 +136,14 @@
         "index": 3,
         "text": "Care este scopul principal al preprocesării datelor înainte de antrenament?",
         "options": [
-          "Să crească dimensiunea fișierului pentru ca modelul să se antreneze mai mult",
-          "Să convertească datele într-un format pe care tokenizer-ul modelului nu îl poate citi niciodată",
-          "Să curețe, să dedupliceze și să filtreze textul brut pentru ca modelul să învețe din exemple de înaltă calitate",
+          "Să crească dimensiunea fișierului astfel încât modelul să se antreneze pentru mult mai mult timp",
+          "Să convertească datele într-un format pe care tokenizer-ul modelului nu îl poate citi",
+          "Să curețe, să dedupliceze și să filtreze textul brut pentru exemple de calitate",
           "Să cripteze datele pentru securitate în timpul antrenamentului"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "✅ Explicație: Preprocesarea datelor implică curățarea (eliminarea tag-urilor HTML, corectarea codificării), deduplicarea (eliminarea conținutului repetat) și filtrarea (eliminarea textului de calitate scăzută) pentru a asigura că modelul învață din cele mai bune exemple posibile.",
         "isMulti": false
       },
@@ -134,7 +156,9 @@
           "Fișiere text, CSV, JSON, PDF și DOCX",
           "Doar fișiere descărcate de pe Hugging Face"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "✅ Explicație: Managerul de seturi de date NeuralForge acceptă încărcarea datelor personalizate din mai multe formate, inclusiv text simplu (.txt), CSV, JSON, PDF și DOCX, oferindu-ți flexibilitatea de a folosi propriile documente pentru antrenament.",
         "isMulti": false
       }
@@ -150,9 +174,11 @@
           "Ποσότητα > Ποικιλία > Ποιότητα",
           "Ποιότητα > Ποικιλία > Ποσότητα",
           "Ποικιλία > Ποσότητα > Ποιότητα",
-          "Ποσότητα > Ποιότητα > Ποικιλία"
+          "Ποσότητα > Ποιότητα > Ποικιλία, μεγιστοποιώντας τον ακατέργαστο όγκο πάνω απ' όλα"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Εξήγηση: Η ιεραρχία δεδομένων δίνει προτεραιότητα πρώτα στην Ποιότητα, μετά στην Ποικιλία και τέλος στην Ποσότητα. Μια μικρή ποσότητα καθαρού, καλά μορφοποιημένου κειμένου διδάσκει ένα μοντέλο περισσότερα από έναν τεράστιο όγκο θορυβωδών δεδομένων.",
         "isMulti": false
       },
@@ -165,7 +191,9 @@
           "Είχε περισσότερες ώρες GPU κατά την εκπαίδευση",
           "Χρησιμοποίησε μεγαλύτερο παράθυρο πλαισίου από τα ανταγωνιστικά μοντέλα"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "✅ Εξήγηση: Το LLaMA απέδειξε ότι ένα μικρότερο μοντέλο εκπαιδευμένο σε προσεκτικά επιλεγμένα δεδομένα μπορεί να ξεπεράσει μεγαλύτερα μοντέλα εκπαιδευμένα σε πιο θορυβώδη δεδομένα, αποδεικνύοντας ότι η ποιότητα δεδομένων είναι πιο σημαντική από το μέγεθος του μοντέλου.",
         "isMulti": false
       },
@@ -175,10 +203,14 @@
         "options": [
           "Tiny Shakespeare και TinyStories",
           "OpenWebText και WikiText-103",
-          "Τα εσωτερικά δεδομένα εκπαίδευσης του GPT-4",
+          "Το ιδιόκτητο εσωτερικό σύνολο δεδομένων εκπαίδευσης του GPT-4",
           "Project Gutenberg και The Stack"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "✅ Εξήγηση: Τα Tiny Shakespeare, TinyStories, OpenWebText, WikiText-103, Project Gutenberg και The Stack είναι όλα δωρεάν διαθέσιμα δημόσια σύνολα δεδομένων για εκπαίδευση LLM. Τα εσωτερικά δεδομένα εκπαίδευσης του GPT-4 είναι ιδιόκτητα και δεν είναι δημόσια διαθέσιμα.",
         "isMulti": true
       },
@@ -186,12 +218,14 @@
         "index": 3,
         "text": "Ποιος είναι ο κύριος σκοπός της προεπεξεργασίας δεδομένων πριν την εκπαίδευση;",
         "options": [
-          "Να αυξήσει το μέγεθος αρχείου ώστε το μοντέλο να εκπαιδεύεται περισσότερο",
-          "Να μετατρέψει τα δεδομένα σε μορφή που ο tokenizer του μοντέλου δεν μπορεί ποτέ να διαβάσει",
-          "Να καθαρίσει, να αφαιρέσει διπλότυπα και να φιλτράρει το ακατέργαστο κείμενο ώστε το μοντέλο να μαθαίνει από παραδείγματα υψηλής ποιότητας",
+          "Να αυξήσει το μέγεθος του αρχείου ώστε το μοντέλο να εκπαιδεύεται για πολύ περισσότερο χρόνο",
+          "Να μετατρέψει τα δεδομένα σε μορφή που ο tokenizer του μοντέλου δεν μπορεί να διαβάσει",
+          "Να καθαρίσει, να αφαιρέσει διπλότυπα και να φιλτράρει το κείμενο για ποιοτικά παραδείγματα",
           "Να κρυπτογραφήσει τα δεδομένα για ασφάλεια κατά την εκπαίδευση"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "✅ Εξήγηση: Η προεπεξεργασία δεδομένων περιλαμβάνει καθαρισμό (αφαίρεση HTML tags, διόρθωση κωδικοποίησης), αφαίρεση διπλοτύπων (αφαίρεση επαναλαμβανόμενου περιεχομένου) και φιλτράρισμα (αφαίρεση κειμένου χαμηλής ποιότητας) για να εξασφαλιστεί ότι το μοντέλο μαθαίνει από τα καλύτερα δυνατά παραδείγματα.",
         "isMulti": false
       },
@@ -204,7 +238,9 @@
           "Αρχεία κειμένου, CSV, JSON, PDF και DOCX",
           "Μόνο αρχεία που κατεβάζετε από το Hugging Face"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "✅ Εξήγηση: Ο Διαχειριστής Συνόλων Δεδομένων του NeuralForge υποστηρίζει φόρτωση προσαρμοσμένων δεδομένων από πολλαπλές μορφές, συμπεριλαμβανομένων αρχείων κειμένου (.txt), CSV, JSON, PDF και DOCX, δίνοντάς σας ευελιξία να χρησιμοποιήσετε τα δικά σας έγγραφα για εκπαίδευση.",
         "isMulti": false
       }

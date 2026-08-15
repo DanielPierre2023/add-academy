@@ -104,7 +104,7 @@
         "text": "De ce este arhitectura Transformer considerata revolutionara comparativ cu RNN-urile si LSTM-urile? Selecteaza toate raspunsurile corecte.",
         "options": [
           "Transformerele procesează toate tokenurile în paralel, accelerând antrenarea",
-          "Transformerele au nevoie de seturi mult mai mici și mai puțini parametri decât RNN",
+          "Transformerele au nevoie de seturi mult mai mici și mult mai puțini parametri decât RNN-urile clasice",
           "Atenția permite oricărui cuvânt să se lege direct de altul, indiferent de distanță",
           "Transformerele au eliminat complet nevoia de orice date de antrenament acum"
         ],

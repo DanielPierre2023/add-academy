@@ -7,9 +7,9 @@
         "index": 0,
         "text": "What is the primary purpose of a RAG (Retrieval-Augmented Generation) pipeline?",
         "options": [
-          "To replace the transformer architecture entirely",
+          "To completely replace the underlying transformer architecture itself",
           "To train a new model from scratch on domain data",
-          "To ground LLM responses in external knowledge by retrieving relevant documents at query time",
+          "To ground LLM responses in retrieved external documents",
           "To compress the model into fewer parameters"
         ],
         "correct": [
@@ -22,8 +22,8 @@
         "index": 1,
         "text": "What are vector embeddings used for in a RAG system?",
         "options": [
-          "To encrypt document contents for privacy",
-          "To represent text as dense numerical vectors for semantic similarity search",
+          "To encrypt the contents of stored documents for privacy protection",
+          "To represent text as dense vectors for semantic search",
           "To tokenize text into subword units",
           "To compress images into smaller files"
         ],
@@ -37,9 +37,9 @@
         "index": 2,
         "text": "Why is chunking important when building a RAG knowledge base?",
         "options": [
-          "It splits documents into appropriately sized pieces so each chunk fits the embedding model and carries focused context",
-          "It removes all punctuation from the text",
-          "It translates documents into multiple languages automatically",
+          "It splits documents into right-sized pieces fitting the embedding model",
+          "It removes all punctuation and stopwords from the text",
+          "It automatically translates the documents into many different target languages",
           "It merges all documents into a single file"
         ],
         "correct": [
@@ -53,7 +53,7 @@
         "text": "Which of the following are common similarity metrics for vector search?Select all that apply",
         "options": [
           "Cosine similarity",
-          "Cross-entropy loss",
+          "Cross-entropy training loss",
           "Perplexity score",
           "Euclidean distance"
         ],
@@ -70,8 +70,8 @@
         "options": [
           "The embedding model runs faster",
           "The system automatically splits them further",
-          "The chunks exceed the embedding model’s token limit and retrieval quality drops",
-          "Retrieved chunks mix unrelated topics, diluting the relevant context passed to the LLM"
+          "The chunks exceed the embedding model's token limit, so retrieval quality drops sharply",
+          "Retrieved chunks mix unrelated topics, diluting the relevant context"
         ],
         "correct": [
           3
@@ -88,9 +88,9 @@
         "index": 0,
         "text": "Care este scopul principal al unui pipeline RAG (Retrieval-Augmented Generation)?",
         "options": [
-          "Înlocuirea completă a arhitecturii transformer",
+          "Înlocuirea completă a arhitecturii transformer subiacente în sine",
           "Antrenarea unui model nou de la zero pe date de domeniu",
-          "Ancorarea răspunsurilor LLM în cunoștințe externe prin recuperarea documentelor relevante la momentul interogării",
+          "Ancorarea răspunsurilor LLM în documente externe recuperate",
           "Comprimarea modelului în mai puțini parametri"
         ],
         "correct": [
@@ -103,8 +103,8 @@
         "index": 1,
         "text": "Pentru ce sunt folosite embedding-urile vectoriale într-un sistem RAG?",
         "options": [
-          "Criptarea conținutului documentelor pentru confidențialitate",
-          "Reprezentarea textului ca vectori numerici denși pentru căutarea similarității semantice",
+          "Criptarea conținutului documentelor stocate pentru protecția confidențialității",
+          "Reprezentarea textului ca vectori denși pentru căutare semantică",
           "Tokenizarea textului în unități de sub-cuvinte",
           "Comprimarea imaginilor în fișiere mai mici"
         ],
@@ -118,9 +118,9 @@
         "index": 2,
         "text": "De ce este importantă fragmentarea când se construiește o bază de cunoștințe RAG?",
         "options": [
-          "Împarte documentele în bucăți de dimensiune potrivită astfel încât fiecare fragment să se potrivească modelului de embedding și să poarte context focalizat",
-          "Elimină toate semnele de punctuație din text",
-          "Traduce documentele în mai multe limbi automat",
+          "Împarte documentele în bucăți potrivite pentru modelul de embedding",
+          "Elimină toate semnele de punctuație și cuvintele de legătură din text",
+          "Traduce automat documentele în numeroase limbi țintă diferite, toate deodată",
           "Unește toate documentele într-un singur fișier"
         ],
         "correct": [
@@ -134,7 +134,7 @@
         "text": "Care dintre următoarele sunt metrici comune de similaritate pentru căutarea vectorială? Selectați toate răspunsurile corecte",
         "options": [
           "Similaritate cosinus",
-          "Pierdere cross-entropy",
+          "Pierdere cross-entropy la antrenare",
           "Scor de perplexitate",
           "Distanță euclidiană"
         ],
@@ -151,8 +151,8 @@
         "options": [
           "Modelul de embedding rulează mai rapid",
           "Sistemul le împarte automat mai departe",
-          "Fragmentele depășesc limita de token-uri a modelului de embedding și calitatea recuperării scade",
-          "Fragmentele recuperate amestecă subiecte nerelaționate, diluând contextul relevant transmis LLM-ului"
+          "Fragmentele depășesc limita de token-uri a modelului de embedding, deci calitatea recuperării scade brusc",
+          "Fragmentele recuperate amestecă subiecte nerelaționate, diluând contextul relevant"
         ],
         "correct": [
           3
@@ -169,9 +169,9 @@
         "index": 0,
         "text": "Ποιος είναι ο κύριος σκοπός μιας αγωγής RAG (Retrieval-Augmented Generation);",
         "options": [
-          "Πλήρης αντικατάσταση αρχιτεκτονικής transformer",
-          "Εκπαίδευση νέου μοντέλου από αρχή σε δεδομένα τομέα",
-          "Αγκύρωση απαντήσεων LLM σε εξωτερική γνώση ανακτώντας σχετικά έγγραφα κατά ερώτηση",
+          "Πλήρης αντικατάσταση της ίδιας της υποκείμενης αρχιτεκτονικής transformer",
+          "Εκπαίδευση νέου μοντέλου από την αρχή σε δεδομένα τομέα",
+          "Αγκύρωση απαντήσεων LLM σε ανακτημένα εξωτερικά έγγραφα",
           "Συμπίεση μοντέλου σε λιγότερες παραμέτρους"
         ],
         "correct": [
@@ -184,8 +184,8 @@
         "index": 1,
         "text": "Σε τι χρησιμοποιούνται τα διανυσματικά embeddings σε σύστημα RAG;",
         "options": [
-          "Κρυπτογράφηση περιεχομένου εγγράφων για ιδιωτικότητα",
-          "Αναπαράσταση κειμένου ως πυκνά αριθμητικά διανύσματα για αναζήτηση σημασιολογικής ομοιότητας",
+          "Κρυπτογράφηση του περιεχομένου των αποθηκευμένων εγγράφων για προστασία ιδιωτικότητας",
+          "Αναπαράσταση κειμένου ως πυκνά διανύσματα για σημασιολογική αναζήτηση",
           "Τεκμηρίωση κειμένου σε μονάδες υπο-λέξεων",
           "Συμπίεση εικόνων σε μικρότερα αρχεία"
         ],
@@ -199,9 +199,9 @@
         "index": 2,
         "text": "Γιατί είναι σημαντικός ο τεμαχισμός κατά κατασκευή βάσης γνώσεων RAG;",
         "options": [
-          "Χωρίζει έγγραφα σε τμήματα κατάλληλου μεγέθους ώστε κάθε τμήμα να χωράει στο μοντέλο embedding και να φέρει εστιασμένο πλαίσιο",
-          "Αφαιρεί όλα τα σημεία στίξης από κείμενο",
-          "Μεταφράζει αυτόματα έγγραφα σε πολλές γλώσσες",
+          "Χωρίζει έγγραφα σε κατάλληλα τμήματα για το μοντέλο embedding",
+          "Αφαιρεί όλα τα σημεία στίξης και τις λέξεις-στοπ από το κείμενο",
+          "Μεταφράζει αυτόματα τα έγγραφα σε πολλές διαφορετικές γλώσσες-στόχους",
           "Συγχωνεύει όλα τα έγγραφα σε ένα αρχείο"
         ],
         "correct": [
@@ -215,7 +215,7 @@
         "text": "Ποιες από τις ακόλουθες είναι κοινές μετρικές ομοιότητας για διανυσματική αναζήτηση; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
           "Ομοιότητα συνημιτόνου",
-          "Απώλεια cross-entropy",
+          "Απώλεια cross-entropy εκπαίδευσης",
           "Σκορ περπλοκότητας",
           "Ευκλείδεια απόσταση"
         ],
@@ -232,8 +232,8 @@
         "options": [
           "Το μοντέλο embedding τρέχει γρηγορότερα",
           "Το σύστημα τα χωρίζει αυτόματα περαιτέρω",
-          "Τα τμήματα υπερβαίνουν όριο tokens μοντέλου embedding και ποιότητα ανάκτησης πέφτει",
-          "Τα ανακτημένα τμήματα αναμειγνύουν άσχετα θέματα, αραιώνοντας σχετικό πλαίσιο που περνά στο LLM"
+          "Τα τμήματα υπερβαίνουν το όριο tokens του μοντέλου embedding, οπότε η ποιότητα ανάκτησης πέφτει απότομα",
+          "Τα ανακτημένα τμήματα αναμειγνύουν άσχετα θέματα, αραιώνοντας το σχετικό πλαίσιο"
         ],
         "correct": [
           3

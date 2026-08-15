@@ -7,9 +7,9 @@
         "index": 0,
         "text": "What problem does the attention mechanism solve in sequence models?",
         "options": [
-          "Reducing the number of parameters",
-          "Eliminating the need for embeddings",
-          "The information bottleneck of compressing an entire sequence into a fixed-size vector",
+          "Reducing the total number of trainable parameters that the network must store",
+          "Eliminating the need for input embeddings",
+          "The bottleneck of compressing a whole sequence into one fixed vector",
           "Making models train faster"
         ],
         "correct": [
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "Why do we divide dot-product scores by sqrt(d_k) in scaled attention?",
         "options": [
-          "To make all scores positive",
-          "To prevent large dot products from pushing softmax into regions with vanishing gradients",
-          "To normalize the output to sum to 1",
-          "To reduce computation time"
+          "To make all attention scores positive",
+          "To keep large dot products from pushing softmax toward vanishing gradients",
+          "To normalize the final output vector so that all its entries sum to exactly one",
+          "To reduce the total computation time"
         ],
         "correct": [
           1
@@ -38,9 +38,9 @@
         "text": "What does the softmax function do to attention scores?",
         "options": [
           "Converts raw scores into a probability distribution that sums to 1",
-          "Applies ReLU activation",
+          "Applies a ReLU activation to each individual attention score before summing",
           "Divides by the maximum score",
-          "Zeros out negative values"
+          "Zeros out all negative values"
         ],
         "correct": [
           0
@@ -52,10 +52,10 @@
         "index": 3,
         "text": "Which of the following are true about attention weights?Select all that apply",
         "options": [
-          "They are always uniform (equal for all positions)",
+          "They are always perfectly uniform, giving equal weight to every single position",
           "They sum to 1 for each query position",
-          "They are binary (0 or 1)",
-          "Higher similarity between query and key produces a higher weight"
+          "They are strictly binary, taking only the values 0 or 1",
+          "Higher query-key similarity yields a higher weight"
         ],
         "correct": [
           1,
@@ -70,8 +70,8 @@
         "options": [
           "A single scalar score per token",
           "The original input embeddings",
-          "A weighted sum of value vectors, where weights come from query-key similarities",
-          "A binary mask indicating which tokens to attend to"
+          "A weighted sum of value vectors, weighted by query-key similarity",
+          "A binary mask that indicates exactly which tokens each position may attend to"
         ],
         "correct": [
           2
@@ -88,9 +88,9 @@
         "index": 0,
         "text": "Ce problemă rezolvă mecanismul de attention în modelele de secvențe?",
         "options": [
-          "Reducerea numărului de parametri",
-          "Eliminarea necesității embedding-urilor",
-          "Blocajul informațional al comprimării unei întregi secvențe într-un vector de dimensiune fixă",
+          "Reducerea numărului total de parametri antrenabili pe care rețeaua trebuie să îi stocheze",
+          "Eliminarea necesității embedding-urilor de intrare",
+          "Blocajul comprimării unei întregi secvențe într-un singur vector fix",
           "Accelerarea antrenării modelelor"
         ],
         "correct": [
@@ -104,9 +104,9 @@
         "text": "De ce împărțim scorurile produsului scalar la sqrt(d_k) în attention scalat?",
         "options": [
           "Pentru a face toate scorurile pozitive",
-          "Pentru a preveni ca produsele scalare mari să împingă softmax în regiuni cu gradienți care dispar",
-          "Pentru a normaliza ieșirea să aibă suma 1",
-          "Pentru a reduce timpul de calcul"
+          "Pentru a evita ca produsele scalare mari să împingă softmax spre gradienți care dispar",
+          "Pentru a normaliza vectorul final de ieșire astfel încât toate valorile sale să însumeze exact unu",
+          "Pentru a reduce timpul total de calcul"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Ce face funcția softmax cu scorurile de attention?",
         "options": [
-          "Convertește scorurile brute într-o distribuție de probabilitate care are suma 1",
-          "Aplică activarea ReLU",
+          "Convertește scorurile brute într-o distribuție de probabilitate cu suma 1",
+          "Aplică o activare ReLU fiecărui scor individual de attention înainte de însumare",
           "Împarte la scorul maxim",
-          "Anulează valorile negative"
+          "Anulează toate valorile negative"
         ],
         "correct": [
           0
@@ -133,10 +133,10 @@
         "index": 3,
         "text": "Care dintre următoarele afirmații sunt adevărate despre ponderile de attention? Selectați toate răspunsurile corecte",
         "options": [
-          "Sunt întotdeauna uniforme (egale pentru toate pozițiile)",
+          "Sunt întotdeauna perfect uniforme, dând pondere egală fiecărei poziții în parte",
           "Au suma 1 pentru fiecare poziție de query",
-          "Sunt binare (0 sau 1)",
-          "Similaritatea mai mare între query și key produce o pondere mai mare"
+          "Sunt strict binare, luând doar valorile 0 sau 1",
+          "Similaritatea mai mare query-key dă o pondere mai mare"
         ],
         "correct": [
           1,
@@ -151,8 +151,8 @@
         "options": [
           "Un singur scor scalar per token",
           "Embedding-urile originale de intrare",
-          "O sumă ponderată a vectorilor value, unde ponderile provin din similaritățile query-key",
-          "O mască binară care indică la ce token-uri să se acorde atenție"
+          "O sumă ponderată a vectorilor value, ponderată de similaritatea query-key",
+          "O mască binară care indică exact la ce token-uri poate acorda atenție fiecare poziție"
         ],
         "correct": [
           2
@@ -169,9 +169,9 @@
         "index": 0,
         "text": "Ποιο πρόβλημα λύνει ο μηχανισμός attention στα μοντέλα ακολουθιών;",
         "options": [
-          "Μείωση του αριθμού παραμέτρων",
-          "Εξάλειψη της ανάγκης για embeddings",
-          "Το πληροφοριακό στενό σημείο της συμπίεσης μιας ολόκληρης ακολουθίας σε ένα διάνυσμα σταθερού μεγέθους",
+          "Μείωση του συνολικού αριθμού εκπαιδεύσιμων παραμέτρων που πρέπει να αποθηκεύσει το δίκτυο",
+          "Εξάλειψη της ανάγκης για embeddings εισόδου",
+          "Το στενό σημείο συμπίεσης μιας ακολουθίας σε ένα σταθερό διάνυσμα",
           "Επιτάχυνση της εκπαίδευσης μοντέλων"
         ],
         "correct": [
@@ -185,9 +185,9 @@
         "text": "Γιατί διαιρούμε τα σκορ εσωτερικού γινομένου με sqrt(d_k) στο κλιμακωτό attention;",
         "options": [
           "Για να γίνουν όλα τα σκορ θετικά",
-          "Για να αποτρέψουμε τα μεγάλα εσωτερικά γινόμενα από το να σπρώξουν τη softmax σε περιοχές με εξαφανιζόμενες κλίσεις",
-          "Για να κανονικοποιήσουμε την έξοδο ώστε να αθροίζει σε 1",
-          "Για να μειώσουμε τον χρόνο υπολογισμού"
+          "Για να μην σπρώχνουν τα μεγάλα εσωτερικά γινόμενα τη softmax σε εξαφανιζόμενες κλίσεις",
+          "Για να κανονικοποιηθεί το τελικό διάνυσμα εξόδου ώστε όλες οι τιμές του να αθροίζουν ακριβώς σε ένα",
+          "Για να μειωθεί ο συνολικός χρόνος υπολογισμού"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Τι κάνει η συνάρτηση softmax στα σκορ attention;",
         "options": [
-          "Μετατρέπει τα ακατέργαστα σκορ σε κατανομή πιθανότητας που αθροίζει σε 1",
-          "Εφαρμόζει ενεργοποίηση ReLU",
+          "Μετατρέπει τα ακατέργαστα σκορ σε κατανομή πιθανότητας με άθροισμα 1",
+          "Εφαρμόζει ενεργοποίηση ReLU σε κάθε μεμονωμένο σκορ attention πριν το άθροισμα",
           "Διαιρεί με το μέγιστο σκορ",
-          "Μηδενίζει τις αρνητικές τιμές"
+          "Μηδενίζει όλες τις αρνητικές τιμές"
         ],
         "correct": [
           0
@@ -214,10 +214,10 @@
         "index": 3,
         "text": "Ποια από τα ακόλουθα ισχύουν για τα βάρη attention; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Είναι πάντα ομοιόμορφα (ίσα για όλες τις θέσεις)",
+          "Είναι πάντα απόλυτα ομοιόμορφα, δίνοντας ίσο βάρος σε κάθε ξεχωριστή θέση",
           "Αθροίζουν σε 1 για κάθε θέση query",
-          "Είναι δυαδικά (0 ή 1)",
-          "Η μεγαλύτερη ομοιότητα μεταξύ query και key παράγει μεγαλύτερο βάρος"
+          "Είναι αυστηρά δυαδικά, παίρνοντας μόνο τις τιμές 0 ή 1",
+          "Μεγαλύτερη ομοιότητα query-key δίνει μεγαλύτερο βάρος"
         ],
         "correct": [
           1,
@@ -232,8 +232,8 @@
         "options": [
           "Ένα μόνο βαθμωτό σκορ ανά token",
           "Τα αρχικά embeddings εισόδου",
-          "Ένα σταθμισμένο άθροισμα διανυσμάτων value, όπου τα βάρη προέρχονται από ομοιότητες query-key",
-          "Μια δυαδική μάσκα που υποδεικνύει σε ποια tokens να δοθεί προσοχή"
+          "Ένα σταθμισμένο άθροισμα διανυσμάτων value, με βάρη από την ομοιότητα query-key",
+          "Μια δυαδική μάσκα που δείχνει ακριβώς σε ποια tokens επιτρέπεται να δώσει προσοχή κάθε θέση"
         ],
         "correct": [
           2

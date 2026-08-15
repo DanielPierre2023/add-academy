@@ -7,12 +7,14 @@
         "index": 0,
         "text": "What is the recommended way to expose your Mini GPT-2 model as a web service?",
         "options": [
-          "Run the Python script directly and share the terminal output",
-          "Create a FastAPI server with REST endpoints (POST /generate, POST /chat, GET /health)",
-          "Upload the model weights to a static website",
-          "Use only Pyodide in the browser"
+          "Run the Python script directly and just manually share the terminal output text",
+          "Create a FastAPI server exposing REST endpoints (/generate, /chat, /health)",
+          "Upload the trained model weights onto a purely static website",
+          "Use only Pyodide running inside the user's browser"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "FastAPI provides async REST endpoints, automatic API documentation (Swagger), request validation with Pydantic, and CORS support — everything needed to serve an LLM as a production web service.",
         "isMulti": false
       },
@@ -21,11 +23,15 @@
         "text": "Which file types can the DocumentLoader class process for custom training data? Select all that apply.",
         "options": [
           ".txt (plain text files)",
-          ".md (Markdown files)",
+          ".md (Markdown formatted files)",
           ".pdf (PDF documents)",
-          ".exe (executable files)"
+          ".exe (compiled executable binary files)"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "The DocumentLoader handles .txt (direct read), .md (strip markdown syntax), and .pdf (using PyPDF2 or pdfplumber). Executable files are not text documents and cannot be used as training data.",
         "isMulti": true
       },
@@ -33,12 +39,14 @@
         "index": 2,
         "text": "What is the main advantage of a Unified LLM Provider interface?",
         "options": [
-          "It makes the model train faster",
-          "It allows switching between your own model and commercial APIs (OpenAI, Gemini, Claude) with one config variable",
-          "It reduces the model size",
-          "It eliminates the need for API keys"
+          "It makes the underlying model train substantially faster during pretraining",
+          "Switch between your own model and commercial APIs with one config variable",
+          "It automatically reduces the overall size of the trained model",
+          "It completely eliminates any need for API keys"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "A unified provider interface lets you switch between your own model (free, private) and commercial APIs (higher quality) by changing a single environment variable. This gives flexibility without changing application code.",
         "isMulti": false
       },
@@ -47,11 +55,13 @@
         "text": "Which public datasets are commonly used for LLM pretraining?",
         "options": [
           "Common Crawl, The Pile, RedPajama",
-          "MNIST, CIFAR-10, ImageNet",
-          "MovieLens, Last.fm",
-          "COCO, Pascal VOC"
+          "MNIST, CIFAR-10, Fashion-MNIST, ImageNet",
+          "MovieLens, Last.fm, Netflix Prize",
+          "COCO, Pascal VOC, ADE20K"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "Common Crawl (web text), The Pile (curated multi-source), and RedPajama (open reproduction of LLaMA data) are large text corpora used for LLM pretraining. The other options are for image classification, recommendation systems, and object detection respectively.",
         "isMulti": false
       },
@@ -59,12 +69,14 @@
         "index": 4,
         "text": "Why might you want to use BOTH your own LLM and a commercial API?",
         "options": [
-          "There is no reason to use both",
-          "Your own model is free and private but limited in quality; commercial APIs offer higher quality but cost money",
-          "Commercial APIs are always faster",
-          "Your own model cannot generate text"
+          "There is genuinely no good reason to ever use both of these approaches together",
+          "Yours is free and private but limited; commercial APIs cost but score higher",
+          "Commercial APIs are essentially always faster than a local model",
+          "Your own model is completely unable to generate any text"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Your own Mini GPT-2 is free to run and keeps data private (great for sensitive content), but a 7M parameter model cannot match GPT-4's quality. A hybrid approach uses the own model for simple tasks and commercial APIs for complex ones, balancing cost and quality.",
         "isMulti": false
       }
@@ -77,12 +89,14 @@
         "index": 0,
         "text": "Care este modalitatea recomandata de a expune modelul Mini GPT-2 ca serviciu web?",
         "options": [
-          "Rularea directa a scriptului Python si partajarea output-ului din terminal",
-          "Crearea unui server FastAPI cu endpoint-uri REST (POST /generate, POST /chat, GET /health)",
-          "Incarcarea ponderilor modelului pe un site static",
-          "Folosirea doar a Pyodide in browser"
+          "Rularea directă a scriptului Python și partajarea simplă a output-ului din terminal",
+          "Crearea unui server FastAPI cu endpoint-uri REST (/generate, /chat, /health)",
+          "Încărcarea ponderilor modelului antrenat pe un site pur static",
+          "Folosirea doar a Pyodide rulat în browserul utilizatorului"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "FastAPI ofera endpoint-uri REST asincrone, documentatie API automata (Swagger), validare a request-urilor cu Pydantic si suport CORS — tot ce este necesar pentru a servi un LLM ca serviciu web de productie.",
         "isMulti": false
       },
@@ -90,12 +104,16 @@
         "index": 1,
         "text": "Ce tipuri de fisiere poate procesa clasa DocumentLoader pentru date de antrenament personalizate? Selectati toate variantele corecte.",
         "options": [
-          ".txt (fisiere text simplu)",
-          ".md (fisiere Markdown)",
+          ".txt (fișiere text simplu)",
+          ".md (fișiere Markdown)",
           ".pdf (documente PDF)",
-          ".exe (fisiere executabile)"
+          ".exe (fișiere binare executabile compilate)"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "DocumentLoader gestioneaza .txt (citire directa), .md (eliminare sintaxa markdown) si .pdf (folosind PyPDF2 sau pdfplumber). Fisierele executabile nu sunt documente text si nu pot fi folosite ca date de antrenament.",
         "isMulti": true
       },
@@ -103,12 +121,14 @@
         "index": 2,
         "text": "Care este principalul avantaj al unei interfete unificate pentru furnizorul LLM?",
         "options": [
-          "Face modelul sa se antreneze mai rapid",
-          "Permite comutarea intre modelul propriu si API-uri comerciale (OpenAI, Gemini, Claude) cu o singura variabila de configurare",
-          "Reduce dimensiunea modelului",
-          "Elimina nevoia de chei API"
+          "Face modelul de bază să se antreneze substanțial mai rapid în timpul pre-antrenării",
+          "Comută între modelul propriu și API-uri comerciale cu o variabilă de config",
+          "Reduce automat dimensiunea generală a modelului antrenat",
+          "Elimină complet orice nevoie de chei API"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "O interfata unificata de furnizor va permite sa comutati intre modelul propriu (gratuit, privat) si API-uri comerciale (calitate superioara) schimband o singura variabila de mediu.",
         "isMulti": false
       },
@@ -117,11 +137,13 @@
         "text": "Ce seturi de date publice sunt folosite frecvent pentru pre-antrenarea LLM-urilor?",
         "options": [
           "Common Crawl, The Pile, RedPajama",
-          "MNIST, CIFAR-10, ImageNet",
-          "MovieLens, Last.fm",
-          "COCO, Pascal VOC"
+          "MNIST, CIFAR-10, Fashion-MNIST, ImageNet",
+          "MovieLens, Last.fm, Netflix Prize",
+          "COCO, Pascal VOC, ADE20K"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "Common Crawl (text web), The Pile (multi-sursa curatata) si RedPajama (reproducere deschisa a datelor LLaMA) sunt corpusuri text mari folosite pentru pre-antrenarea LLM-urilor.",
         "isMulti": false
       },
@@ -129,12 +151,14 @@
         "index": 4,
         "text": "De ce ati dori sa folositi ATAT modelul propriu CAT si un API comercial?",
         "options": [
-          "Nu exista niciun motiv sa le folositi pe amandoua",
-          "Modelul propriu este gratuit si privat dar limitat in calitate; API-urile comerciale ofera calitate superioara dar costa bani",
-          "API-urile comerciale sunt intotdeauna mai rapide",
-          "Modelul propriu nu poate genera text"
+          "Nu există cu adevărat niciun motiv bun să folosiți vreodată ambele abordări împreună",
+          "Al tău e gratuit și privat dar limitat; cele comerciale costă dar sunt mai bune",
+          "API-urile comerciale sunt practic întotdeauna mai rapide decât unul local",
+          "Modelul tău propriu nu poate genera absolut niciun text"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Mini GPT-2 propriu este gratuit si pastreaza datele private, dar un model cu 7M parametri nu poate egala calitatea GPT-4. O abordare hibrida foloseste modelul propriu pentru sarcini simple si API-uri comerciale pentru cele complexe.",
         "isMulti": false
       }
@@ -147,12 +171,14 @@
         "index": 0,
         "text": "Poios einai o systinomenos tropos gia na eksypiretiisete to Mini GPT-2 os ypiiresia web?",
         "options": [
-          "Ekttelesi tou Python script kai koinopoiisi tou output",
-          "Dimiourgia enos FastAPI server me REST endpoints (POST /generate, POST /chat, GET /health)",
-          "Anebassma ton varron tou montelou se statiki selida",
-          "Chrisi mono Pyodide ston browser"
+          "Ekttelesi tou Python script apeftheias kai apli koinopoiisi tou output tou terminal",
+          "Dimiourgia enos FastAPI server me REST endpoints (/generate, /chat, /health)",
+          "Anebasma ton ekpaideymenon varron se ena katharra statiko site",
+          "Chrisi mono tou Pyodide ston browser tou christi"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "To FastAPI parrechei asynchrrina REST endpoints, aftomati tekmiriiosi API (Swagger), epikyrosi aitimaton me Pydantic kai ypostirixi CORS — ola osa chriazontai gia na eksypiretiisete ena LLM os ypiiresia paragogis.",
         "isMulti": false
       },
@@ -163,9 +189,13 @@
           ".txt (archeia aplouou keimenou)",
           ".md (archeia Markdown)",
           ".pdf (engrafa PDF)",
-          ".exe (ektelesima archeia)"
+          ".exe (metaglottismena ektelesima archeia)"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "O DocumentLoader diacheirizzetai .txt (amesi anagnosi), .md (afairesi syntaxis markdown) kai .pdf (chrisimopoiontas PyPDF2 i pdfplumber). Ta ektelesima archeia den einai engrafa keimenou.",
         "isMulti": true
       },
@@ -173,12 +203,14 @@
         "index": 2,
         "text": "Poio einai to kyrio pleonektima mias eniaias diasyndesis parochou LLM?",
         "options": [
-          "Kanei tin ekpaideussi pio griigori",
-          "Epitrepei tin enallagi metaxi idioktiitou montelou kai emporikon APIs (OpenAI, Gemini, Claude) me mia metavolii",
-          "Meionei to megethos tou montelou",
-          "Exaleiifei tin anagki gia API keys"
+          "Kanei to montelo na ekpaideftei simantika pio griigora kata tin proekpaideftiki fasi",
+          "Enallagi metaxi tou dikou sas montelou kai emporikon APIs me mia metavliti",
+          "Meionei aftomata to synoliko megethos tou ekpaideymenou montelou",
+          "Exaleifei pliros kathe anagki gia API keys"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Mia eniaia diasyndessi parochou sas epitrepei na enallasesete metaxi tou dikou sas montelou (dorean, idiotiko) kai emporikon APIs (ypsililoteris poiotitas) allazontas mia kai moni metavolii perivallontos.",
         "isMulti": false
       },
@@ -187,11 +219,13 @@
         "text": "Poia dimosia synola dedomenon chrisimopoyountai sychna gia pro-ekpaideussi LLM?",
         "options": [
           "Common Crawl, The Pile, RedPajama",
-          "MNIST, CIFAR-10, ImageNet",
-          "MovieLens, Last.fm",
-          "COCO, Pascal VOC"
+          "MNIST, CIFAR-10, Fashion-MNIST, ImageNet",
+          "MovieLens, Last.fm, Netflix Prize",
+          "COCO, Pascal VOC, ADE20K"
         ],
-        "correct": [0],
+        "correct": [
+          0
+        ],
         "explanation": "Common Crawl (keimeno web), The Pile (pollaples piges) kai RedPajama (anoichti anaparagogi dedomenon LLaMA) einai megala corpus keimenou gia pro-ekpaideussi LLM.",
         "isMulti": false
       },
@@ -199,12 +233,14 @@
         "index": 4,
         "text": "Giati tha thelate na chrisimopoyiisete KAI to diko sas LLM KAI ena emporiko API?",
         "options": [
-          "Den ypaarchei logos na chrisimopoiisite kai ta dyo",
-          "To diko sas montelo einai dorean kai idiotiko alla periorismeno se poiotita; ta emporika APIs prosferoun ypsiliteri poiotita alla kostizoun",
-          "Ta emporika APIs einai panta pio griigora",
-          "To diko sas montelo den mporei na paragei keimeno"
+          "Den yparchei pragmatika kanenas kalos logos na chrisimopoiisete kai tis dyo proseggiseis mazi",
+          "To diko sas einai dorean kai idiotiko ma periorismeno; ta emporika kostizoun ala kalytera",
+          "Ta emporika APIs einai schedon panta pio griigora apo ena topiko montelo",
+          "To diko sas montelo den mporei na paragei kanena keimeno"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "To diko sas Mini GPT-2 einai dorean kai kratai ta dedomena idiotika, alla ena montelo me 7M parametrous den mporei na ftasei tin poiotita tou GPT-4. Mia yvridiki proseggisi chrisimopoyei to diko sas montelo gia aples ergasies kai emporika APIs gia sinthetes.",
         "isMulti": false
       }

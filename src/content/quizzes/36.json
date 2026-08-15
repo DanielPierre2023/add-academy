@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is the primary purpose of RLHF (Reinforcement Learning from Human Feedback)?",
         "options": [
-          "To pre-train language models on web-scale data",
-          "To compress models for efficient inference",
-          "To replace supervised fine-tuning entirely",
-          "To align model outputs with human preferences for helpfulness, harmlessness, and honesty"
+          "To pre-train language models from scratch on massive web-scale text corpora",
+          "To compress trained models for cheaper inference",
+          "To completely replace the supervised fine-tuning stage",
+          "To align model outputs with human preferences"
         ],
         "correct": [
           3
@@ -22,10 +22,10 @@
         "index": 1,
         "text": "In the RLHF pipeline, what is the role of the reward model?",
         "options": [
-          "To generate training data for pre-training",
-          "To score model outputs based on learned human preferences, providing a reward signal for RL training",
-          "To tokenize the input text before it enters the policy model",
-          "To select which layers to freeze during training"
+          "To generate additional synthetic data for the pre-training stage",
+          "To score model outputs using learned human preferences",
+          "To tokenize and preprocess the raw input text before it reaches the policy model",
+          "To decide which network layers should be frozen during training"
         ],
         "correct": [
           1
@@ -37,10 +37,10 @@
         "index": 2,
         "text": "Which of the following are key components of the PPO algorithm as used in RLHF? Select all that apply",
         "options": [
-          "A clipped surrogate objective to prevent large policy updates",
-          "Contrastive learning between positive and negative examples",
-          "A KL divergence penalty to keep the policy close to the reference model",
-          "Dropout regularization applied to the reward model"
+          "A clipped surrogate objective preventing large policy updates",
+          "Contrastive learning between positive and negative pairs",
+          "A KL divergence penalty keeping the policy near the reference model",
+          "Dropout regularization applied throughout every layer of the reward model network"
         ],
         "correct": [
           0,
@@ -53,10 +53,10 @@
         "index": 3,
         "text": "How is the reward model typically trained in the RLHF pipeline?",
         "options": [
-          "Using next-token prediction on a large corpus",
-          "Using reinforcement learning with environment rewards",
-          "On human comparison data where annotators rank or choose between model outputs",
-          "By distilling a larger teacher model"
+          "Using standard next-token prediction over a very large unlabeled corpus",
+          "Using reinforcement learning driven by environment rewards",
+          "On human comparison data ranking pairs of model outputs",
+          "By distilling knowledge from a larger teacher model"
         ],
         "correct": [
           2
@@ -68,10 +68,10 @@
         "index": 4,
         "text": "What is \"reward hacking\" in the context of RLHF?",
         "options": [
-          "When the policy model exploits flaws in the reward model to achieve high scores without genuinely improving quality",
-          "When the reward model is trained on too much data",
-          "When human annotators intentionally provide incorrect labels",
-          "When the learning rate is set too high during PPO training"
+          "When the policy exploits reward model flaws to get high scores",
+          "When the reward model is accidentally trained on far too much redundant data",
+          "When human annotators deliberately provide systematically incorrect preference labels",
+          "When the learning rate is set too high during PPO optimization"
         ],
         "correct": [
           0
@@ -88,10 +88,10 @@
         "index": 0,
         "text": "Care este scopul principal al RLHF (Reinforcement Learning from Human Feedback)?",
         "options": [
-          "Pre-antrenarea modelelor de limbaj pe date de scară web",
-          "Comprimarea modelelor pentru inferență eficientă",
-          "Înlocuirea completă a ajustării fine supervizate",
-          "Alinierea ieșirilor modelului cu preferințele umane pentru utilitate, inofensivitate și onestitate"
+          "Pre-antrenarea de la zero a modelelor de limbaj pe corpusuri masive de text la scară web",
+          "Comprimarea modelelor antrenate pentru inferență mai ieftină",
+          "Înlocuirea completă a etapei de ajustare fină supervizată",
+          "Alinierea ieșirilor modelului cu preferințele umane"
         ],
         "correct": [
           3
@@ -103,10 +103,10 @@
         "index": 1,
         "text": "În pipeline-ul RLHF, care este rolul modelului de recompensă?",
         "options": [
-          "Generarea datelor de antrenare pentru pre-antrenare",
-          "Evaluarea ieșirilor modelului pe baza preferințelor umane învățate, furnizând un semnal de recompensă pentru antrenarea RL",
-          "Tokenizarea textului de intrare înainte de a intra în modelul de politică",
-          "Selectarea straturilor de înghețat în timpul antrenării"
+          "Generarea de date sintetice suplimentare pentru etapa de pre-antrenare",
+          "Evaluarea ieșirilor modelului folosind preferințele umane învățate",
+          "Tokenizarea și preprocesarea textului brut de intrare înainte să ajungă la modelul de politică",
+          "Decizia asupra straturilor rețelei care ar trebui înghețate la antrenare"
         ],
         "correct": [
           1
@@ -118,10 +118,10 @@
         "index": 2,
         "text": "Care dintre următoarele sunt componente cheie ale algoritmului PPO așa cum este folosit în RLHF? Selectați toate răspunsurile corecte",
         "options": [
-          "Un obiectiv surogat decupat pentru a preveni actualizări mari de politică",
-          "Învățare contrastivă între exemple pozitive și negative",
-          "O penalizare de divergență KL pentru a menține politica aproape de modelul de referință",
-          "Regularizare dropout aplicată modelului de recompensă"
+          "Un obiectiv surogat decupat care previne actualizări mari de politică",
+          "Învățare contrastivă între perechi pozitive și negative",
+          "O penalizare de divergență KL care menține politica lângă modelul de referință",
+          "Regularizare dropout aplicată în fiecare strat al rețelei modelului de recompensă"
         ],
         "correct": [
           0,
@@ -134,10 +134,10 @@
         "index": 3,
         "text": "Cum este antrenat de obicei modelul de recompensă în pipeline-ul RLHF?",
         "options": [
-          "Folosind predicția token-ului următor pe un corpus mare",
-          "Folosind învățare prin recompensă cu recompense din mediu",
-          "Pe date de comparație umană unde adnotatorii clasifică sau aleg între ieșirile modelului",
-          "Prin distilarea unui model profesor mai mare"
+          "Folosind predicția standard a token-ului următor pe un corpus foarte mare neetichetat",
+          "Folosind învățare prin recompensă condusă de recompense din mediu",
+          "Pe date de comparație umană care clasifică perechi de ieșiri",
+          "Prin distilarea cunoștințelor de la un model profesor mai mare"
         ],
         "correct": [
           2
@@ -149,10 +149,10 @@
         "index": 4,
         "text": "Ce este «exploatarea recompensei» în contextul RLHF?",
         "options": [
-          "Când modelul de politică exploatează defectele modelului de recompensă pentru a obține scoruri mari fără a îmbunătăți cu adevărat calitatea",
-          "Când modelul de recompensă este antrenat pe prea multe date",
-          "Când adnotatorii umani furnizează intenționat etichete incorecte",
-          "Când rata de învățare este setată prea mare în timpul antrenării PPO"
+          "Când politica exploatează defectele modelului de recompensă pentru scoruri mari",
+          "Când modelul de recompensă este antrenat accidental pe prea multe date redundante",
+          "Când adnotatorii umani furnizează în mod deliberat etichete de preferință sistematic incorecte",
+          "Când rata de învățare este setată prea mare în timpul optimizării PPO"
         ],
         "correct": [
           0
@@ -169,10 +169,10 @@
         "index": 0,
         "text": "Ποιος είναι ο κύριος σκοπός του RLHF (Ενισχυτική Μάθηση από Ανθρώπινη Ανατροφοδότηση);",
         "options": [
-          "Προεκπαίδευση γλωσσικών μοντέλων σε δεδομένα κλίμακας web",
-          "Συμπίεση μοντέλων για αποδοτική εξαγωγή συμπερασμάτων",
-          "Πλήρης αντικατάσταση εποπτευόμενης ακριβούς ρύθμισης",
-          "Ευθυγράμμιση εξόδων μοντέλου με ανθρώπινες προτιμήσεις για χρησιμότητα, αβλαβότητα και ειλικρίνεια"
+          "Προεκπαίδευση γλωσσικών μοντέλων από την αρχή σε τεράστια σώματα κειμένου κλίμακας web",
+          "Συμπίεση εκπαιδευμένων μοντέλων για φθηνότερη εξαγωγή συμπερασμάτων",
+          "Πλήρης αντικατάσταση του σταδίου εποπτευόμενης ακριβούς ρύθμισης",
+          "Ευθυγράμμιση εξόδων μοντέλου με ανθρώπινες προτιμήσεις"
         ],
         "correct": [
           3
@@ -184,10 +184,10 @@
         "index": 1,
         "text": "Στην αγωγή RLHF, ποιος είναι ο ρόλος του μοντέλου ανταμοιβής;",
         "options": [
-          "Δημιουργία δεδομένων εκπαίδευσης για προεκπαίδευση",
-          "Βαθμολόγηση εξόδων μοντέλου βάσει εκπαιδευμένων ανθρώπινων προτιμήσεων, παρέχοντας σήμα ανταμοιβής για εκπαίδευση RL",
-          "Τεκμηρίωση κειμένου εισόδου πριν εισέλθει στο μοντέλο πολιτικής",
-          "Επιλογή επιπέδων για πάγωμα κατά εκπαίδευση"
+          "Δημιουργία επιπλέον συνθετικών δεδομένων για το στάδιο προεκπαίδευσης",
+          "Βαθμολόγηση εξόδων μοντέλου με βάση μαθημένες ανθρώπινες προτιμήσεις",
+          "Τεκμηρίωση και προεπεξεργασία του ακατέργαστου κειμένου εισόδου πριν φτάσει στο μοντέλο πολιτικής",
+          "Επιλογή των επιπέδων του δικτύου που πρέπει να παγώσουν κατά την εκπαίδευση"
         ],
         "correct": [
           1
@@ -199,10 +199,10 @@
         "index": 2,
         "text": "Ποια από τα ακόλουθα είναι βασικά συστατικά του αλγορίθμου PPO όπως χρησιμοποιείται στο RLHF; Επιλέξτε όλες τις σωστές απαντήσεις",
         "options": [
-          "Αποκομμένος υποκατάστατος στόχος για αποτροπή μεγάλων ενημερώσεων πολιτικής",
-          "Αντιπαραθετική μάθηση μεταξύ θετικών και αρνητικών παραδειγμάτων",
-          "Ποινή απόκλισης KL για διατήρηση πολιτικής κοντά στο μοντέλο αναφοράς",
-          "Κανονικοποίηση dropout εφαρμοσμένη στο μοντέλο ανταμοιβής"
+          "Ένας αποκομμένος υποκατάστατος στόχος που αποτρέπει μεγάλες ενημερώσεις",
+          "Αντιπαραθετική μάθηση μεταξύ θετικών και αρνητικών ζευγών",
+          "Ποινή απόκλισης KL που κρατά την πολιτική κοντά στο μοντέλο αναφοράς",
+          "Κανονικοποίηση dropout εφαρμοσμένη σε κάθε επίπεδο του δικτύου του μοντέλου ανταμοιβής"
         ],
         "correct": [
           0,
@@ -215,10 +215,10 @@
         "index": 3,
         "text": "Πώς εκπαιδεύεται τυπικά το μοντέλο ανταμοιβής στην αγωγή RLHF;",
         "options": [
-          "Χρησιμοποιώντας πρόβλεψη επόμενου token σε μεγάλο σώμα",
-          "Χρησιμοποιώντας ενισχυτική μάθηση με ανταμοιβές περιβάλλοντος",
-          "Σε δεδομένα ανθρώπινης σύγκρισης όπου σχολιαστές κατατάσσουν ή επιλέγουν μεταξύ εξόδων μοντέλου",
-          "Με απόσταξη μεγαλύτερου μοντέλου δάσκαλου"
+          "Χρησιμοποιώντας τυπική πρόβλεψη επόμενου token σε ένα πολύ μεγάλο μη επισημασμένο σώμα",
+          "Χρησιμοποιώντας ενισχυτική μάθηση με ανταμοιβές από το περιβάλλον",
+          "Σε δεδομένα ανθρώπινης σύγκρισης που κατατάσσουν ζεύγη εξόδων",
+          "Με απόσταξη γνώσης από ένα μεγαλύτερο μοντέλο δάσκαλο"
         ],
         "correct": [
           2
@@ -230,10 +230,10 @@
         "index": 4,
         "text": "Τι είναι η «εκμετάλλευση ανταμοιβής» στο πλαίσιο RLHF;",
         "options": [
-          "Όταν το μοντέλο πολιτικής εκμεταλλεύεται ελαττώματα του μοντέλου ανταμοιβής για υψηλά σκορ χωρίς πραγματική βελτίωση ποιότητας",
-          "Όταν το μοντέλο ανταμοιβής εκπαιδεύεται σε πάρα πολλά δεδομένα",
-          "Όταν ανθρώπινοι σχολιαστές παρέχουν σκόπιμα λάθος ετικέτες",
-          "Όταν ο ρυθμός εκμάθησης ρυθμίζεται πολύ υψηλά κατά εκπαίδευση PPO"
+          "Όταν η πολιτική εκμεταλλεύεται ελαττώματα του μοντέλου ανταμοιβής για υψηλά σκορ",
+          "Όταν το μοντέλο ανταμοιβής εκπαιδεύεται κατά λάθος σε πάρα πολλά πλεονάζοντα δεδομένα",
+          "Όταν οι ανθρώπινοι σχολιαστές παρέχουν σκόπιμα συστηματικά λανθασμένες ετικέτες προτίμησης",
+          "Όταν ο ρυθμός εκμάθησης ρυθμίζεται πολύ υψηλά κατά τη βελτιστοποίηση PPO"
         ],
         "correct": [
           0

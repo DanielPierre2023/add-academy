@@ -7,10 +7,10 @@
         "index": 0,
         "text": "What is the computational complexity of standard self-attention with respect to sequence length n?",
         "options": [
-          "O(n^2) — quadratic in sequence length",
-          "O(n) — linear in sequence length",
+          "O(n^2), quadratic in n",
+          "O(n), strictly linear in the sequence length n",
           "O(n log n)",
-          "O(1) — constant time"
+          "O(1), constant time"
         ],
         "correct": [
           0
@@ -23,8 +23,8 @@
         "text": "What is the key insight behind Flash Attention?",
         "options": [
           "It reduces the number of attention heads",
-          "It approximates attention with random sampling",
-          "It computes exact attention in tiles/blocks to minimize memory I/O between GPU SRAM and HBM",
+          "It approximates attention by randomly sampling a subset of key-value pairs each step",
+          "It tiles exact attention to cut memory traffic between SRAM and HBM",
           "It replaces softmax with a linear function"
         ],
         "correct": [
@@ -37,8 +37,8 @@
         "index": 2,
         "text": "How does Grouped-Query Attention (GQA) reduce computation?",
         "options": [
-          "By removing the Value projection entirely",
-          "By sharing Key and Value heads across groups of Query heads, reducing KV parameters",
+          "By removing the Value projection entirely and reusing the Key projection in its place",
+          "By sharing Key/Value heads across groups of Query heads",
           "By using only one attention head total",
           "By reducing the embedding dimension"
         ],
@@ -52,9 +52,9 @@
         "index": 3,
         "text": "What does the KV-Cache optimize during inference?",
         "options": [
-          "It stores previously computed K and V tensors so they are not recomputed for each new token",
+          "It stores past K and V tensors so they are not recomputed each step",
           "It caches the model weights on disk",
-          "It pre-computes all possible attention patterns",
+          "It pre-computes every possible attention pattern in advance and stores them all in memory",
           "It reduces the vocabulary size during generation"
         ],
         "correct": [
@@ -67,9 +67,9 @@
         "index": 4,
         "text": "What is the main advantage of sliding window attention (as used in Mistral)?",
         "options": [
-          "It produces better attention patterns than full attention",
+          "It reliably produces higher-quality attention patterns than standard full attention does",
           "It eliminates the need for causal masking",
-          "It limits each token to attend only to a fixed window of nearby tokens, reducing memory from O(n^2) to O(n*w)",
+          "Each token attends only to a nearby window, cutting memory to O(n*w)",
           "It doubles the effective context length"
         ],
         "correct": [
@@ -87,10 +87,10 @@
         "index": 0,
         "text": "Care este complexitatea computațională a self-attention-ului standard în raport cu lungimea secvenței n?",
         "options": [
-          "O(n^2) — pătratică în lungimea secvenței",
-          "O(n) — liniară în lungimea secvenței",
+          "O(n^2), pătratică în n",
+          "O(n), strict liniară în lungimea secvenței n",
           "O(n log n)",
-          "O(1) — timp constant"
+          "O(1), timp constant"
         ],
         "correct": [
           0
@@ -103,8 +103,8 @@
         "text": "Care este ideea cheie din spatele Flash Attention?",
         "options": [
           "Reduce numărul de capete de attention",
-          "Aproximează attention-ul cu eșantionare aleatorie",
-          "Calculează attention exact în dale/blocuri pentru a minimiza transferul de memorie între SRAM-ul GPU și HBM",
+          "Aproximează attention-ul eșantionând aleatoriu un subset de perechi key-value la fiecare pas",
+          "Fragmentează attention-ul exact pentru a reduce traficul de memorie între SRAM și HBM",
           "Înlocuiește softmax cu o funcție liniară"
         ],
         "correct": [
@@ -117,8 +117,8 @@
         "index": 2,
         "text": "Cum reduce Grouped-Query Attention (GQA) calculul?",
         "options": [
-          "Eliminând complet proiecția Value",
-          "Partajând capetele Key și Value între grupuri de capete Query, reducând parametrii KV",
+          "Eliminând complet proiecția Value și reutilizând proiecția Key în locul ei",
+          "Partajând capetele Key/Value între grupuri de capete Query",
           "Folosind doar un singur cap de attention în total",
           "Reducând dimensiunea embedding-ului"
         ],
@@ -132,9 +132,9 @@
         "index": 3,
         "text": "Ce optimizează KV-Cache în timpul inferenței?",
         "options": [
-          "Stochează tensorii K și V calculați anterior astfel încât să nu fie recalculați pentru fiecare token nou",
+          "Stochează tensorii K și V anteriori ca să nu fie recalculați la fiecare pas",
           "Memorează ponderile modelului pe disc",
-          "Pre-calculează toate tiparele posibile de attention",
+          "Pre-calculează în avans fiecare tipar de attention posibil și le stochează pe toate în memorie",
           "Reduce dimensiunea vocabularului în timpul generării"
         ],
         "correct": [
@@ -147,9 +147,9 @@
         "index": 4,
         "text": "Care este principalul avantaj al attention-ului cu fereastră glisantă (folosit în Mistral)?",
         "options": [
-          "Produce tipare de attention mai bune decât attention-ul complet",
+          "Produce în mod fiabil tipare de attention de calitate mai bună decât attention-ul complet standard",
           "Elimină necesitatea mascării cauzale",
-          "Limitează fiecare token să acorde atenție doar unei ferestre fixe de token-uri apropiate, reducând memoria de la O(n^2) la O(n*w)",
+          "Fiecare token acordă atenție doar unei ferestre apropiate, reducând memoria la O(n*w)",
           "Dublează lungimea efectivă a contextului"
         ],
         "correct": [
@@ -167,10 +167,10 @@
         "index": 0,
         "text": "Ποια είναι η υπολογιστική πολυπλοκότητα του τυπικού self-attention ως προς το μήκος ακολουθίας n;",
         "options": [
-          "O(n^2) — τετραγωνική ως προς το μήκος ακολουθίας",
-          "O(n) — γραμμική ως προς το μήκος ακολουθίας",
+          "O(n^2), τετραγωνική ως προς n",
+          "O(n), αυστηρά γραμμική ως προς το μήκος ακολουθίας n",
           "O(n log n)",
-          "O(1) — σταθερός χρόνος"
+          "O(1), σταθερός χρόνος"
         ],
         "correct": [
           0
@@ -182,10 +182,10 @@
         "index": 1,
         "text": "Ποια είναι η βασική ιδέα πίσω από το Flash Attention;",
         "options": [
-          "Μειώνει τον αριθμό κεφαλιών attention",
-          "Προσεγγίζει το attention με τυχαία δειγματοληψία",
-          "Υπολογίζει ακριβές attention σε πλακίδια/μπλοκ για να ελαχιστοποιήσει τη μεταφορά μνήμης μεταξύ SRAM GPU και HBM",
-          "Αντικαθιστά τη softmax με γραμμική συνάρτηση"
+          "Μειώνει τον αριθμό των κεφαλιών attention",
+          "Προσεγγίζει το attention δειγματοληπτώντας τυχαία ένα υποσύνολο ζευγών key-value κάθε βήμα",
+          "Κατακερματίζει το ακριβές attention για λιγότερη κίνηση μνήμης SRAM–HBM",
+          "Αντικαθιστά τη softmax με μια γραμμική συνάρτηση"
         ],
         "correct": [
           2
@@ -197,8 +197,8 @@
         "index": 2,
         "text": "Πώς μειώνει τον υπολογισμό το Grouped-Query Attention (GQA);",
         "options": [
-          "Αφαιρώντας εντελώς την προβολή Value",
-          "Μοιράζοντας τα κεφάλια Key και Value μεταξύ ομάδων κεφαλιών Query, μειώνοντας τις παραμέτρους KV",
+          "Αφαιρώντας εντελώς την προβολή Value και επαναχρησιμοποιώντας την προβολή Key στη θέση της",
+          "Μοιράζοντας κεφάλια Key/Value σε ομάδες κεφαλιών Query",
           "Χρησιμοποιώντας μόνο ένα κεφάλι attention συνολικά",
           "Μειώνοντας τη διάσταση embedding"
         ],
@@ -212,9 +212,9 @@
         "index": 3,
         "text": "Τι βελτιστοποιεί το KV-Cache κατά την εξαγωγή συμπερασμάτων;",
         "options": [
-          "Αποθηκεύει τους προηγουμένως υπολογισμένους τανυστές K και V ώστε να μην επαναϋπολογίζονται για κάθε νέο token",
+          "Αποθηκεύει προηγούμενους τανυστές K και V ώστε να μην επαναϋπολογίζονται κάθε βήμα",
           "Αποθηκεύει τα βάρη του μοντέλου στον δίσκο",
-          "Προϋπολογίζει όλα τα πιθανά μοτίβα attention",
+          "Προϋπολογίζει εκ των προτέρων κάθε πιθανό μοτίβο attention και τα αποθηκεύει όλα στη μνήμη",
           "Μειώνει το μέγεθος λεξιλογίου κατά τη δημιουργία"
         ],
         "correct": [
@@ -227,9 +227,9 @@
         "index": 4,
         "text": "Ποιο είναι το κύριο πλεονέκτημα του attention συρόμενου παραθύρου (όπως χρησιμοποιείται στο Mistral);",
         "options": [
-          "Παράγει καλύτερα μοτίβα attention από το πλήρες attention",
+          "Παράγει αξιόπιστα μοτίβα attention καλύτερης ποιότητας από το τυπικό πλήρες attention",
           "Εξαλείφει την ανάγκη αιτιατής μάσκας",
-          "Περιορίζει κάθε token να δίνει προσοχή μόνο σε ένα σταθερό παράθυρο κοντινών tokens, μειώνοντας τη μνήμη από O(n^2) σε O(n*w)",
+          "Κάθε token δίνει προσοχή μόνο σε κοντινό παράθυρο, μειώνοντας τη μνήμη σε O(n*w)",
           "Διπλασιάζει το αποτελεσματικό μήκος πλαισίου"
         ],
         "correct": [
