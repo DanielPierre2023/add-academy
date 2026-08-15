@@ -58,7 +58,7 @@ export const NEURALFORGE_DOWNLOAD: ProductDownload = {
   icon: '🧠',
   fileName: 'NeuralForge-LLM-Deploy.zip',
   storagePath: 'neuralforge-llm/NeuralForge-LLM-Deploy.zip',
-  available: false,
+  available: true,
   fileSize: '~250 MB',
   contents: {
     en: 'Trained model weights, tokenizer, inference server (FastAPI), Docker configuration, deployment scripts, environment templates, README with setup instructions',
@@ -85,7 +85,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     icon: '🎨',
     fileName: 'PixelForge-SaaS-Deploy.zip',
     storagePath: 'saas/PixelForge-SaaS-Deploy.zip',
-    available: false,
+    available: true,
     fileSize: '~45 MB',
     contents: {
       en: 'Next.js app, Replicate/Stability AI integration, image editor UI, gallery system, Supabase schema, Stripe billing, Vercel deployment config',
@@ -106,7 +106,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     icon: '🎬',
     fileName: 'ClipCraft-SaaS-Deploy.zip',
     storagePath: 'saas/ClipCraft-SaaS-Deploy.zip',
-    available: false,
+    available: true,
     fileSize: '~40 MB',
     contents: {
       en: 'Next.js app, RunwayML/Luma video generation, timeline editor, export system, Supabase schema, Stripe billing, Docker config',
@@ -127,7 +127,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     icon: '✍️',
     fileName: 'ProseAI-SaaS-Deploy.zip',
     storagePath: 'saas/ProseAI-SaaS-Deploy.zip',
-    available: false,
+    available: true,
     fileSize: '~35 MB',
     contents: {
       en: 'Next.js app, OpenAI/Anthropic streaming, rich text editor, templates system, SEO tools, Supabase schema, Stripe billing, Vercel config',
@@ -148,7 +148,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     icon: '🔍',
     fileName: 'TruthLens-SaaS-Deploy.zip',
     storagePath: 'saas/TruthLens-SaaS-Deploy.zip',
-    available: false,
+    available: true,
     fileSize: '~38 MB',
     contents: {
       en: 'Next.js app, RAG pipeline with embeddings, web search integration, claim analysis engine, source scoring, Supabase schema + pgvector, Stripe billing, Docker config',
@@ -169,7 +169,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     icon: '📄',
     fileName: 'DocMind-SaaS-Deploy.zip',
     storagePath: 'saas/DocMind-SaaS-Deploy.zip',
-    available: false,
+    available: true,
     fileSize: '~42 MB',
     contents: {
       en: 'Next.js app, PDF/image OCR pipeline, structured data extraction, template matching, export to CSV/JSON, Supabase schema, Stripe billing, Vercel config',
