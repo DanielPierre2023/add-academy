@@ -43,13 +43,22 @@ function loadQuiz(lectureId: string) {
 }
 
 export default function ReviewPage() {
+  // Select ONLY stable references from the store (primitives, the reviewQueue
+  // array ref, and function refs). Calling getReviewsDue()/getWeakTopics()
+  // *inside* a selector returns a fresh array every render, which makes
+  // useSyncExternalStore's snapshot never stabilise → React error #185
+  // (infinite render loop). Derive those values in the body instead.
   const language = useAcademyStore((s) => s.language) as Language;
-  const reviewsDue = useAcademyStore((s) => s.getReviewsDue());
   const reviewQueue = useAcademyStore((s) => s.reviewQueue);
   const completeReview = useAcademyStore((s) => s.completeReview);
-  const weakTopics = useAcademyStore((s) => s.getWeakTopics());
-  const difficulty = useAcademyStore((s) => s.getDifficultyLevel());
+  const getReviewsDue = useAcademyStore((s) => s.getReviewsDue);
+  const getWeakTopics = useAcademyStore((s) => s.getWeakTopics);
+  const getDifficultyLevel = useAcademyStore((s) => s.getDifficultyLevel);
   const lectureIndex = getLectureIndex();
+
+  const reviewsDue = getReviewsDue();
+  const weakTopics = getWeakTopics();
+  const difficulty = getDifficultyLevel();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
