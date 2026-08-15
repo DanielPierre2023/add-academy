@@ -8,6 +8,9 @@ import { Lock, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useAcademyStore } from '@/lib/store/academy-store';
+import { t } from '@/lib/i18n';
+import type { Language } from '@/types';
 
 /**
  * Password reset page — users land here after clicking the reset link in their email.
@@ -29,6 +32,7 @@ export default function ResetPasswordPage() {
 function ResetPasswordInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const language = useAcademyStore((s) => s.language) as Language;
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -99,12 +103,12 @@ function ResetPasswordInner() {
     setError('');
 
     if (password.length < 8) {
-      setError('Password must be at least 8 characters');
+      setError(t('reset_pw_min', language));
       return;
     }
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('reset_pw_mismatch', language));
       return;
     }
 
@@ -143,7 +147,7 @@ function ResetPasswordInner() {
       // Redirect to home after a short delay
       setTimeout(() => router.push('/'), 2000);
     } catch {
-      setError('An unexpected error occurred. Please try again.');
+      setError(t('reset_unexpected', language));
       setLoading(false);
     }
   }
@@ -153,7 +157,7 @@ function ResetPasswordInner() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center text-center px-4">
         <div className="h-6 w-6 animate-spin rounded-full border-2 border-current border-t-transparent text-primary" />
-        <p className="mt-4 text-sm text-muted-foreground">Verifying your reset link…</p>
+        <p className="mt-4 text-sm text-muted-foreground">{t('reset_verifying', language)}</p>
       </div>
     );
   }
@@ -166,13 +170,13 @@ function ResetPasswordInner() {
           <AlertCircle className="h-8 w-8 text-destructive" />
         </div>
         <h1 className="font-heading text-2xl font-bold text-foreground">
-          Reset link invalid or expired
+          {t('reset_invalid_title', language)}
         </h1>
         <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-          This password-reset link is no longer valid. Please request a new one from the login page.
+          {t('reset_invalid_desc', language)}
         </p>
         <Button className="mt-6 gap-2" onClick={() => router.push('/login')}>
-          Back to login
+          {t('reset_back_to_login', language)}
           <ArrowRight className="h-4 w-4" />
         </Button>
       </div>
@@ -186,12 +190,12 @@ function ResetPasswordInner() {
           <CheckCircle2 className="h-8 w-8 text-green-500" />
         </div>
         <h1 className="font-heading text-2xl font-bold text-foreground">
-          {isWelcome ? 'Welcome aboard' : 'Password updated'}
+          {isWelcome ? t('reset_welcome_aboard', language) : t('reset_pw_updated', language)}
         </h1>
         <p className="mt-2 text-muted-foreground">
           {isWelcome
-            ? 'Your password is set and your account is ready. Redirecting you now…'
-            : 'Your password has been reset successfully. Redirecting you now…'}
+            ? t('reset_success_welcome', language)
+            : t('reset_success_reset', language)}
         </p>
       </div>
     );
@@ -205,22 +209,22 @@ function ResetPasswordInner() {
             <Lock className="h-7 w-7 text-primary" />
           </div>
           <h1 className="font-heading text-2xl font-bold text-foreground">
-            {isWelcome ? 'Create your password' : 'Set new password'}
+            {isWelcome ? t('reset_create_title', language) : t('reset_set_title', language)}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            {isWelcome ? 'Choose a password to finish setting up your account' : 'Enter your new password below'}
+            {isWelcome ? t('reset_create_sub', language) : t('reset_set_sub', language)}
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="password">New password</Label>
+            <Label htmlFor="password">{t('reset_new_password', language)}</Label>
             <Input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="At least 8 characters"
+              placeholder={t('reset_new_password_ph', language)}
               required
               minLength={8}
               autoFocus
@@ -228,13 +232,13 @@ function ResetPasswordInner() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="confirm-password">Confirm password</Label>
+            <Label htmlFor="confirm-password">{t('reset_confirm_password', language)}</Label>
             <Input
               id="confirm-password"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Re-enter your password"
+              placeholder={t('reset_confirm_password_ph', language)}
               required
               minLength={8}
             />
@@ -253,7 +257,7 @@ function ResetPasswordInner() {
             ) : (
               <ArrowRight className="h-4 w-4" />
             )}
-            {loading ? 'Updating…' : 'Update password'}
+            {loading ? t('reset_updating', language) : t('reset_update_btn', language)}
           </Button>
         </form>
       </div>

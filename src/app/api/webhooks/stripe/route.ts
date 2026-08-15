@@ -317,6 +317,18 @@ export async function POST(request: NextRequest) {
       // ---- Money going back to the customer -------------------------------
       case 'charge.refunded': {
         const charge = event.data.object as Stripe.Charge;
+        // Only revoke on a FULL refund. A partial refund (amount_refunded <
+        // amount) must not pull a paying customer's entire access — e.g. a €1
+        // goodwill credit should leave the subscription intact.
+        const fullyRefunded =
+          charge.amount > 0 && charge.amount_refunded >= charge.amount;
+        if (!fullyRefunded) {
+          console.warn(
+            `charge.refunded ${charge.id}: partial refund ` +
+              `(${charge.amount_refunded}/${charge.amount}) — access retained.`
+          );
+          break;
+        }
         const subId = await subscriptionIdFromCharge(stripe, charge);
         if (subId) {
           await revokeAccess(supabase, subId, 'refund', 'refunded');

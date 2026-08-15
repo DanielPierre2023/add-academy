@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { createServerSupabaseClient, createServiceRoleClient } from '@/lib/supabase/server';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { getLectureContent, getLectureIndex, getStageForLecture } from '@/lib/lectures';
 import { z } from 'zod';
@@ -285,20 +285,19 @@ async function checkSchoolRateLimit(
     dailyLimit = SCHOOL_DEFAULT_LIMIT;
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const todayIso = today.toISOString();
-
-  // W1.5: count USER MESSAGES sent today, not conversation rows. The old row
-  // count could be bypassed by reusing one conversationId all day (which
-  // appends to an existing row and never increments a row count). We narrow to
-  // conversations touched today (updated_at) and count user-role messages whose
-  // per-message timestamp falls today — so reused conversations still count.
-  const { data, error } = await supabase
-    .from('academy_ai_conversations')
-    .select('messages')
+  // Security hardening: read usage from the tamper-proof ledger
+  // (academy_ai_usage), NOT from academy_ai_conversations. Students can UPDATE
+  // their own conversation rows, so a messages-scan counter was resettable by
+  // the user (strip today's messages → uncapped Gemini spend). The ledger has
+  // RLS with no client policies; only the service role can read/increment it.
+  const day = new Date().toISOString().slice(0, 10); // UTC date, matches the RPC
+  const admin = createServiceRoleClient();
+  const { data: usageRow, error } = await admin
+    .from('academy_ai_usage')
+    .select('count')
     .eq('student_id', userId)
-    .gte('updated_at', todayIso);
+    .eq('day', day)
+    .maybeSingle();
 
   if (error) {
     // Cannot establish usage — deny rather than hand out unmetered API spend.
@@ -306,21 +305,22 @@ async function checkSchoolRateLimit(
     return { allowed: false, limit: dailyLimit, used: dailyLimit };
   }
 
-  let used = 0;
-  for (const row of data ?? []) {
-    const msgs = Array.isArray(row.messages) ? row.messages : [];
-    for (const m of msgs) {
-      if (
-        m &&
-        (m as { role?: string }).role === 'user' &&
-        typeof (m as { timestamp?: string }).timestamp === 'string' &&
-        (m as { timestamp: string }).timestamp >= todayIso
-      ) {
-        used++;
-      }
-    }
-  }
+  const used = usageRow?.count ?? 0;
   return { allowed: used < dailyLimit, limit: dailyLimit, used };
+}
+
+/**
+ * Record one billable AI-tutor exchange in the tamper-proof ledger. Best-effort
+ * — a failure here must not break the chat response, but it means that request
+ * went uncounted (fail-open on accounting, never on access).
+ */
+async function recordAiTutorUsage(userId: string): Promise<void> {
+  try {
+    const admin = createServiceRoleClient();
+    await admin.rpc('bump_ai_tutor_usage', { p_student: userId });
+  } catch (e) {
+    console.error('AI tutor usage increment failed:', e);
+  }
 }
 
 /** Persist a completed exchange. Never throws — persistence must not break chat. */
@@ -483,6 +483,11 @@ export async function POST(request: NextRequest) {
 
     // Rough token estimate for usage tracking
     const tokensUsed = Math.ceil((message.length + text.length + systemInstruction.length) / 4);
+
+    // Count this billable exchange in the tamper-proof ledger. Only the real
+    // Gemini path reaches here (placeholder responses returned earlier are not
+    // counted, since they cost nothing).
+    await recordAiTutorUsage(user.id);
 
     const savedConversationId = await persistConversation(supabase, {
       userId: user.id,

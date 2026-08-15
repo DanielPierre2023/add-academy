@@ -26,17 +26,17 @@ const FRAMEWORKS = [
     name: { en: 'PyTorch', ro: 'PyTorch', el: 'PyTorch' },
     tagline: {
       en: 'Dynamic graphs, research-first',
-      ro: 'Grafuri dinamice, cercetare mai intai',
+      ro: 'Grafuri dinamice, cercetare mai întâi',
       el: 'Δυναμικά γραφήματα, πρώτα η έρευνα',
     },
     description: {
       en: 'The framework used throughout this course. PyTorch excels at research and rapid prototyping with its eager execution mode. Most LLM papers (GPT, LLaMA, Mistral) release PyTorch code first.',
-      ro: 'Cadrul utilizat in acest curs. PyTorch exceleaza in cercetare si prototipare rapida cu modul de executie eager. Majoritatea lucrarilor LLM (GPT, LLaMA, Mistral) lanseaza cod PyTorch mai intai.',
+      ro: 'Cadrul utilizat în acest curs. PyTorch excelează în cercetare și prototipare rapidă cu modul de execuție eager. Majoritatea lucrărilor LLM (GPT, LLaMA, Mistral) lansează cod PyTorch mai întâi.',
       el: 'Το framework που χρησιμοποιείται σε αυτό το μάθημα. Το PyTorch υπερέχει στην έρευνα και τη γρήγορη δημιουργία πρωτοτύπων. Τα περισσότερα LLM papers κυκλοφορούν πρώτα κώδικα PyTorch.',
     },
     strengths: {
       en: ['Eager execution — debug like normal Python', 'Dominant in academia and LLM research', 'Hugging Face ecosystem', 'CUDA/ROCm GPU support'],
-      ro: ['Executie eager — depanare ca Python normal', 'Dominant in academia si cercetare LLM', 'Ecosistemul Hugging Face', 'Suport GPU CUDA/ROCm'],
+      ro: ['Execuție eager — depanare ca Python normal', 'Dominant în mediul academic și cercetarea LLM', 'Ecosistemul Hugging Face', 'Suport GPU CUDA/ROCm'],
       el: ['Eager execution — debug σαν Python', 'Κυρίαρχο στην ακαδημία και LLM', 'Οικοσύστημα Hugging Face', 'Υποστήριξη GPU CUDA/ROCm'],
     },
     usedIn: ['GPT-2/3/4 (OpenAI)', 'LLaMA (Meta)', 'Mistral', 'Stable Diffusion'],
@@ -53,17 +53,17 @@ const FRAMEWORKS = [
     name: { en: 'JAX / Flax', ro: 'JAX / Flax', el: 'JAX / Flax' },
     tagline: {
       en: 'Functional, XLA-compiled, TPU-native',
-      ro: 'Functional, compilat XLA, nativ TPU',
+      ro: 'Funcțional, compilat XLA, nativ TPU',
       el: 'Λειτουργικό, μεταγλωττισμένο XLA, εγγενές TPU',
     },
     description: {
       en: 'Google\'s high-performance ML framework. JAX combines NumPy-like syntax with automatic differentiation and XLA compilation. Ideal for TPU training and large-scale distributed workloads. Gemini and PaLM were trained with JAX.',
-      ro: 'Cadrul ML de inalta performanta al Google. JAX combina sintaxa similara NumPy cu diferentiere automata si compilare XLA. Ideal pentru antrenare TPU si sarcini distribuite la scara larga.',
+      ro: 'Cadrul ML de înaltă performanță al Google. JAX combină sintaxa similară NumPy cu diferențiere automată și compilare XLA. Ideal pentru antrenare TPU și sarcini distribuite la scară largă.',
       el: 'Το framework ML υψηλής απόδοσης της Google. Το JAX συνδυάζει σύνταξη NumPy με αυτόματη διαφοροποίηση και μεταγλώττιση XLA. Ιδανικό για TPU.',
     },
     strengths: {
       en: ['XLA compilation for extreme speed', 'Native TPU support', 'Functional programming model', 'vmap/pmap for auto-vectorization'],
-      ro: ['Compilare XLA pentru viteza extrema', 'Suport nativ TPU', 'Model de programare functionala', 'vmap/pmap pentru auto-vectorizare'],
+      ro: ['Compilare XLA pentru viteză extremă', 'Suport nativ TPU', 'Model de programare funcțională', 'vmap/pmap pentru auto-vectorizare'],
       el: ['Μεταγλώττιση XLA για ταχύτητα', 'Εγγενής υποστήριξη TPU', 'Λειτουργικό μοντέλο', 'vmap/pmap για auto-vectorization'],
     },
     usedIn: ['Gemini (Google)', 'PaLM (Google)', 'Whisper v3', 'AlphaFold'],
@@ -80,17 +80,17 @@ const FRAMEWORKS = [
     name: { en: 'TensorFlow / Keras', ro: 'TensorFlow / Keras', el: 'TensorFlow / Keras' },
     tagline: {
       en: 'Production-grade, deployment ecosystem',
-      ro: 'Grad de productie, ecosistem de implementare',
+      ro: 'Grad de producție, ecosistem de implementare',
       el: 'Βαθμού παραγωγής, οικοσύστημα ανάπτυξης',
     },
     description: {
       en: 'Google\'s mature ML framework with the strongest deployment story. TensorFlow Serving, TFLite, and TF.js make it easy to deploy models anywhere — from servers to phones to browsers. Keras 3 now supports JAX and PyTorch backends too.',
-      ro: 'Cadrul ML matur al Google cu cea mai puternica poveste de implementare. TensorFlow Serving, TFLite si TF.js faciliteaza implementarea modelelor oriunde.',
+      ro: 'Cadrul ML matur al Google cu cea mai puternică poveste de implementare. TensorFlow Serving, TFLite și TF.js facilitează implementarea modelelor oriunde.',
       el: 'Το ώριμο ML framework της Google με την ισχυρότερη υποστήριξη ανάπτυξης. TensorFlow Serving, TFLite και TF.js.',
     },
     strengths: {
       en: ['TF Serving / TFLite / TF.js deployment', 'Keras 3 multi-backend support', 'TensorBoard visualization', 'Largest production footprint'],
-      ro: ['Implementare TF Serving / TFLite / TF.js', 'Suport multi-backend Keras 3', 'Vizualizare TensorBoard', 'Cea mai mare prezenta in productie'],
+      ro: ['Implementare TF Serving / TFLite / TF.js', 'Suport multi-backend Keras 3', 'Vizualizare TensorBoard', 'Cea mai mare prezență în producție'],
       el: ['TF Serving / TFLite / TF.js', 'Keras 3 multi-backend', 'Οπτικοποίηση TensorBoard', 'Μεγαλύτερο production footprint'],
     },
     usedIn: ['BERT (Google)', 'T5 (Google)', 'Production ML pipelines', 'Mobile/Edge AI'],
@@ -102,7 +102,7 @@ const FRAMEWORKS = [
 
 const COMPARISON_ROWS = [
   {
-    label: { en: 'Execution Mode', ro: 'Mod Executie', el: 'Τρόπος Εκτέλεσης' },
+    label: { en: 'Execution Mode', ro: 'Mod Execuție', el: 'Τρόπος Εκτέλεσης' },
     pytorch: 'Eager (dynamic)',
     jax: 'JIT compiled (XLA)',
     tensorflow: 'Eager + Graph',
@@ -114,7 +114,7 @@ const COMPARISON_ROWS = [
     tensorflow: 'GPUs / TPUs / Edge',
   },
   {
-    label: { en: 'Learning Curve', ro: 'Curba de Invatare', el: 'Καμπύλη Μάθησης' },
+    label: { en: 'Learning Curve', ro: 'Curba de Învățare', el: 'Καμπύλη Μάθησης' },
     pytorch: 'Moderate',
     jax: 'Steep (functional)',
     tensorflow: 'Easy (Keras)',
@@ -157,15 +157,15 @@ export default function FrameworksPage() {
     },
     ro: {
       title: 'Trasee Framework',
-      subtitle: 'Acest curs preda concepte independent de framework, cu exemple de cod in PyTorch. Iata cum se compara cele trei framework-uri majore.',
-      comparison: 'Comparatie Directa',
-      relatedLectures: 'Lectii Relevante',
-      viewDocs: 'Documentatie Oficiala',
-      recommended: 'Implicit in Curs',
-      usedIn: 'Utilizat In',
+      subtitle: 'Acest curs predă concepte independent de framework, cu exemple de cod în PyTorch. Iată cum se compară cele trei framework-uri majore.',
+      comparison: 'Comparație Directă',
+      relatedLectures: 'Lecții Relevante',
+      viewDocs: 'Documentație Oficială',
+      recommended: 'Implicit în Curs',
+      usedIn: 'Utilizat În',
       strengths: 'Puncte Forte',
       roadmap: 'Ghiduri de Migrare Framework',
-      roadmapDesc: 'Construim suplimente de lectii care arata cum sa traduceti fiecare exemplu de cod PyTorch in JAX si TensorFlow.',
+      roadmapDesc: 'Construim suplimente de lecții care arată cum să traduceți fiecare exemplu de cod PyTorch în JAX și TensorFlow.',
     },
     el: {
       title: 'Μονοπάτια Framework',

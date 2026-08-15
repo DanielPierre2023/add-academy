@@ -28,6 +28,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { QuizEngine } from '@/components/academy/quiz-engine';
+import { LectureDiscussion } from '@/components/academy/lecture-discussion';
 import { Confetti } from '@/components/gamification/confetti';
 import { showXPToast } from '@/components/gamification/xp-toast';
 import { XP_VALUES } from '@/types';
@@ -658,6 +659,9 @@ export function LectureViewer({
           )}
 
           <Separator />
+
+          {/* Per-lecture community discussion (self-contained, fails soft) */}
+          <LectureDiscussion lectureId={lectureId} />
 
           {/* Bottom Navigation */}
           <div className="flex items-center justify-between py-6">

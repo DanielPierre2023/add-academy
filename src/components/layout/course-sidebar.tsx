@@ -24,6 +24,7 @@ import {
   Repeat,
   Award,
   Bookmark,
+  MessagesSquare,
 } from 'lucide-react';
 import type { Language } from '@/types';
 import { STAGES } from '@/types';
@@ -269,12 +270,34 @@ export function CourseSidebar() {
 
                 {user && (
                   <Link
+                    href="/community"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <MessagesSquare className="h-3.5 w-3.5 text-teal-500" />
+                    <span>{language === 'ro' ? 'Comunitate' : language === 'el' ? 'Κοινότητα' : 'Community'}</span>
+                  </Link>
+                )}
+
+                {user && isAdmin && (
+                  <Link
+                    href="/community/moderation"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <Shield className="h-3.5 w-3.5 text-teal-600" />
+                    <span>{language === 'ro' ? 'Moderare' : language === 'el' ? 'Εποπτεία' : 'Moderation'}</span>
+                  </Link>
+                )}
+
+                {user && (
+                  <Link
                     href="/downloads"
                     onClick={() => setSidebarOpen(false)}
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <Download className="h-3.5 w-3.5 text-amber-500" />
-                    <span>{language === 'ro' ? 'Descarcari' : language === 'el' ? 'Λήψεις' : 'Downloads'}</span>
+                    <span>{language === 'ro' ? 'Descărcări' : language === 'el' ? 'Λήψεις' : 'Downloads'}</span>
                   </Link>
                 )}
 

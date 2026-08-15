@@ -1,137 +1,170 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-
 import { useAcademyStore } from '@/lib/store/academy-store';
-import { Card, CardContent } from '@/components/ui/card';
+import { useAuth } from '@/lib/auth/auth-context';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  Users,
-  MessageSquare,
-  BookOpen,
-  Globe,
-  ExternalLink,
-} from 'lucide-react';
+import { Users, MessagesSquare, Plus, ChevronRight, Pin, Lock } from 'lucide-react';
 import type { Language } from '@/types';
+import {
+  listCategories,
+  listThreads,
+  type ForumCategory,
+  type ForumThreadSummary,
+} from '@/lib/forum/actions';
+import { relativeTime, categoryName, categoryDesc } from '@/lib/forum/format';
 
 export default function CommunityPage() {
   const language = useAcademyStore((s) => s.language) as Language;
+  const { user } = useAuth();
 
-  const texts = {
-    en: {
-      title: 'Community',
-      subtitle: 'Connect with fellow AI learners and practitioners',
-      discussTitle: 'Discussion Forum',
-      discussDesc:
-        'Ask questions, share insights, and collaborate with other students on AI topics. Our community forum is coming soon.',
-      resourcesTitle: 'Shared Resources',
-      resourcesDesc:
-        'Access community-curated resources, code snippets, and project examples shared by students and instructors.',
-      eventsTitle: 'Events & Workshops',
-      eventsDesc:
-        'Join live workshops, webinars, and study groups organized by the ADD Academica community.',
-      globalTitle: 'Global Network',
-      globalDesc:
-        'Connect with AI learners from Romania, Greece, and beyond. Our multilingual community spans multiple countries.',
-      comingSoon: 'Coming Soon',
-      comingSoonDesc:
-        'We are building a vibrant community space for ADD Academica students. Stay tuned for discussion forums, study groups, and collaborative learning features.',
-      startLearning: 'Start Learning',
-    },
-    ro: {
-      title: 'Comunitate',
-      subtitle: 'Conecteaza-te cu alti studenti si practicieni AI',
-      discussTitle: 'Forum de Discutii',
-      discussDesc:
-        'Pune intrebari, impartaseste idei si colaboreaza cu alti studenti pe teme de AI. Forumul nostru vine in curand.',
-      resourcesTitle: 'Resurse Partajate',
-      resourcesDesc:
-        'Acceseaza resurse curate de comunitate, fragmente de cod si exemple de proiecte.',
-      eventsTitle: 'Evenimente si Ateliere',
-      eventsDesc:
-        'Participa la ateliere live, webinarii si grupuri de studiu organizate de comunitatea ADD Academica.',
-      globalTitle: 'Retea Globala',
-      globalDesc:
-        'Conecteaza-te cu studenti AI din Romania, Grecia si nu numai. Comunitatea noastra multilingva se intinde in mai multe tari.',
-      comingSoon: 'In Curand',
-      comingSoonDesc:
-        'Construim un spatiu de comunitate vibrant pentru studentii ADD Academica. Ramai la curent pentru forumuri, grupuri de studiu si functii de invatare colaborativa.',
-      startLearning: 'Incepe sa Inveti',
-    },
-    el: {
-      title: 'Κοινότητα',
-      subtitle: 'Συνδεθείτε με συμφοιτητές και επαγγελματίες AI',
-      discussTitle: 'Φόρουμ Συζητήσεων',
-      discussDesc:
-        'Κάντε ερωτήσεις, μοιραστείτε ιδέες και συνεργαστείτε με άλλους φοιτητές. Το φόρουμ μας έρχεται σύντομα.',
-      resourcesTitle: 'Κοινοί Πόροι',
-      resourcesDesc:
-        'Αποκτήστε πρόσβαση σε πόρους, αποσπάσματα κώδικα και παραδείγματα έργων.',
-      eventsTitle: 'Εκδηλώσεις & Εργαστήρια',
-      eventsDesc:
-        'Συμμετέχετε σε ζωντανά εργαστήρια, webinars και ομάδες μελέτης.',
-      globalTitle: 'Παγκόσμιο Δίκτυο',
-      globalDesc:
-        'Συνδεθείτε με μαθητές AI από τη Ρουμανία, την Ελλάδα και πέρα.',
-      comingSoon: 'Έρχεται Σύντομα',
-      comingSoonDesc:
-        'Χτίζουμε έναν ζωντανό χώρο κοινότητας για τους φοιτητές του ADD Academica.',
-      startLearning: 'Ξεκινήστε τη Μάθηση',
-    },
-  };
+  const [categories, setCategories] = useState<ForumCategory[]>([]);
+  const [recent, setRecent] = useState<ForumThreadSummary[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const txt = texts[language] || texts.en;
+  const t = (en: string, ro: string, el: string) =>
+    language === 'ro' ? ro : language === 'el' ? el : en;
 
-  const features = [
-    { icon: MessageSquare, title: txt.discussTitle, desc: txt.discussDesc },
-    { icon: BookOpen, title: txt.resourcesTitle, desc: txt.resourcesDesc },
-    { icon: Globe, title: txt.eventsTitle, desc: txt.eventsDesc },
-    { icon: Users, title: txt.globalTitle, desc: txt.globalDesc },
-  ];
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    const load = async () => {
+      const [cats, threads] = await Promise.all([
+        listCategories(),
+        listThreads({ limit: 10 }),
+      ]);
+      if (cancelled) return;
+      setCategories(cats.categories);
+      setRecent(threads.threads);
+      setLoading(false);
+    };
+    void load();
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
 
   return (
     <div className="space-y-8 pb-16">
-      {/* Header */}
       <div className="text-center">
-        <Users className="mx-auto h-16 w-16 text-secondary mb-4" />
-        <h1 className="text-3xl font-bold font-heading mb-2">{txt.title}</h1>
-        <p className="text-muted-foreground">{txt.subtitle}</p>
+        <MessagesSquare className="mx-auto h-16 w-16 text-secondary mb-4" />
+        <h1 className="text-3xl font-bold font-heading mb-2">
+          {t('Community', 'Comunitate', 'Κοινότητα')}
+        </h1>
+        <p className="text-muted-foreground">
+          {t(
+            'Ask questions, share what you built, and help fellow learners.',
+            'Pune întrebări, arată ce ai construit și ajută-i pe ceilalți cursanți.',
+            'Κάντε ερωτήσεις, μοιραστείτε τι φτιάξατε και βοηθήστε συμμαθητές.'
+          )}
+        </p>
       </div>
 
-      {/* Coming Soon Banner */}
-      <Card className="border-secondary/50 bg-secondary/5">
-        <CardContent className="pt-6 text-center">
-          <h2 className="font-semibold text-xl mb-2">{txt.comingSoon}</h2>
-          <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-4">
-            {txt.comingSoonDesc}
-          </p>
-          <Link href="/lectures/0">
-            <Button variant="default" className="gap-2">
-              <BookOpen className="h-4 w-4" />
-              {txt.startLearning}
-            </Button>
-          </Link>
-        </CardContent>
-      </Card>
+      {!user && (
+        <Card className="border-secondary/30">
+          <CardContent className="pt-6 text-center">
+            <Users className="h-10 w-10 mx-auto text-muted-foreground mb-3" />
+            <p className="text-sm text-muted-foreground">
+              {t(
+                'Sign in to join the discussion.',
+                'Autentifică-te pentru a te alătura discuției.',
+                'Συνδεθείτε για να συμμετάσχετε στη συζήτηση.'
+              )}
+            </p>
+          </CardContent>
+        </Card>
+      )}
 
-      {/* Feature Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {features.map((feature) => (
-          <Card key={feature.title} className="border-muted">
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/10">
-                  <feature.icon className="h-5 w-5 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.desc}</p>
-                </div>
+      {user && (
+        <>
+          {/* Categories */}
+          <div>
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="text-lg font-semibold">
+                {t('Categories', 'Categorii', 'Κατηγορίες')}
+              </h2>
+            </div>
+            {loading ? (
+              <p className="text-sm text-muted-foreground">{t('Loading…', 'Se încarcă…', 'Φόρτωση…')}</p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {categories.map((c) => (
+                  <Link key={c.id} href={`/community/category/${c.slug}`}>
+                    <Card className="h-full border-muted transition-colors hover:border-secondary/50">
+                      <CardContent className="pt-6">
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <h3 className="font-semibold mb-1">{categoryName(c, language)}</h3>
+                            <p className="text-sm text-muted-foreground">{categoryDesc(c, language)}</p>
+                          </div>
+                          <Badge variant="secondary" className="shrink-0">
+                            {c.threadCount}
+                          </Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
               </div>
+            )}
+          </div>
+
+          {/* Recent threads */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <MessagesSquare className="h-4 w-4 text-primary" />
+                {t('Recent discussions', 'Discuții recente', 'Πρόσφατες συζητήσεις')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {recent.length === 0 ? (
+                <p className="py-4 text-center text-sm text-muted-foreground">
+                  {t('No discussions yet.', 'Încă nu există discuții.', 'Δεν υπάρχουν συζητήσεις ακόμη.')}
+                </p>
+              ) : (
+                <ul className="divide-y divide-border/60">
+                  {recent.map((th) => (
+                    <li key={th.id}>
+                      <Link
+                        href={`/community/thread/${th.id}`}
+                        className="flex items-center gap-3 py-3 transition-colors hover:text-primary"
+                      >
+                        <div className="min-w-0 flex-1">
+                          <span className="flex items-center gap-1.5 font-medium">
+                            {th.pinned && <Pin className="h-3.5 w-3.5 text-secondary" />}
+                            {th.locked && <Lock className="h-3.5 w-3.5 text-muted-foreground" />}
+                            <span className="truncate">{th.title}</span>
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            {th.authorName} · {relativeTime(th.lastPostAt, language)} ·{' '}
+                            {th.postCount}{' '}
+                            {t('posts', 'postări', 'αναρτήσεις')}
+                          </span>
+                        </div>
+                        <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </CardContent>
           </Card>
-        ))}
-      </div>
+
+          {/* New thread affordance */}
+          <div className="flex justify-center">
+            <Link href={`/community/category/${categories[0]?.slug ?? 'general'}`}>
+              <Button className="gap-2">
+                <Plus className="h-4 w-4" />
+                {t('New thread', 'Discuție nouă', 'Νέα συζήτηση')}
+              </Button>
+            </Link>
+          </div>
+        </>
+      )}
     </div>
   );
 }

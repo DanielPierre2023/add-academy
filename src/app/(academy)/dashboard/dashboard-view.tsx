@@ -291,18 +291,18 @@ export default function DashboardView() {
           </div>
           <div>
             <p className="text-sm font-semibold text-foreground">
-              {t('Deployment Downloads', 'Descarcari de deployment', 'Λήψεις ανάπτυξης')}
+              {t('Deployment Downloads', 'Descărcări de deployment', 'Λήψεις ανάπτυξης')}
             </p>
             <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
               {completion >= 80
                 ? t(
                     'You\'ve reached the 80% threshold! Check your downloads page.',
-                    'Ai atins pragul de 80%! Verifica pagina de descarcari.',
+                    'Ai atins pragul de 80%! Verifică pagina de descărcări.',
                     'Φτάσατε το όριο 80%! Ελέγξτε τις λήψεις σας.'
                   )
                 : t(
                     `Complete at least 80% of a course to unlock ZIP downloads. Your progress: ${completion}%.`,
-                    `Finalizeaza cel putin 80% din curs pentru a debloca descarcarile ZIP. Progresul tau: ${completion}%.`,
+                    `Finalizează cel puțin 80% din curs pentru a debloca descărcările ZIP. Progresul tău: ${completion}%.`,
                     `Ολοκληρώστε τουλάχιστον 80% για λήψεις ZIP. Πρόοδος: ${completion}%.`
                   )}
             </p>
@@ -310,7 +310,7 @@ export default function DashboardView() {
               href="/downloads"
               className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-amber-500/10 px-3 py-1.5 text-sm font-medium text-amber-600 hover:bg-amber-500/20 transition-colors dark:text-amber-400"
             >
-              {t('Downloads page', 'Pagina descarcari', 'Σελίδα λήψεων')}
+              {t('Downloads page', 'Pagina descărcări', 'Σελίδα λήψεων')}
               <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
