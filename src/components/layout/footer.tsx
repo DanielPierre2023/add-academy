@@ -134,7 +134,12 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-10 border-t border-white/10 pt-6 text-center">
           <p className="text-xs text-primary-foreground/50">
-            &copy; {new Date().getFullYear()} ADD Individual Solutions Ltd. All rights reserved.
+            &copy; {new Date().getFullYear()} ADD Individual Solutions Ltd.{' '}
+            {language === 'ro'
+              ? 'Toate drepturile rezervate.'
+              : language === 'el'
+                ? 'Με επιφύλαξη παντός δικαιώματος.'
+                : 'All rights reserved.'}
           </p>
         </div>
       </div>
