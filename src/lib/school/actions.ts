@@ -295,8 +295,8 @@ export async function acceptInvitation(token: string) {
         email: invitation.email,
         full_name: invitation.full_name,
         school_id: invitation.school_id,
-        org_role: 'member',
-        tier: 'org',
+        org_role: 'student', // CHECK: 'admin' | 'teacher' | 'student' — 'member' violated it
+        tier: 'school', // CHECK: 'free'|'pro'|'team'|'enterprise'|'school' — 'org' violated it
       },
       { onConflict: 'id' }
     );

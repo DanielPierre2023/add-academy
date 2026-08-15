@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useAcademyStore } from '@/lib/store/academy-store';
+import { hasMasteredPreviousStages } from '@/lib/mastery';
 import { STAGES } from '@/types';
-import { Lock, LogIn } from 'lucide-react';
+import { Lock, LogIn, Info, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 function findStageForLecture(lectureId: string): number {
@@ -27,6 +29,9 @@ interface ContentGateProps {
 export function ContentGate({ lectureId, children }: ContentGateProps) {
   const { user, loading, canAccessStage } = useAuth();
   const language = useAcademyStore((s) => s.language);
+  const progress = useAcademyStore((s) => s.progress);
+  const quizScores = useAcademyStore((s) => s.quizScores);
+  const [advisoryDismissed, setAdvisoryDismissed] = useState(false);
   const stageNumber = findStageForLecture(lectureId);
 
   // While auth is loading, show nothing (avoids flash of locked content)
@@ -100,6 +105,33 @@ export function ContentGate({ lectureId, children }: ContentGateProps) {
     );
   }
 
-  // Access granted
-  return <>{children}</>;
+  // Access granted. W3.3: show a NON-BLOCKING advisory nudge if the learner
+  // hasn't mastered the prior stages (hard-gating a paid course annoys people).
+  const mastery = hasMasteredPreviousStages(stageNumber, progress, quizScores);
+  const showAdvisory = !mastery.ready && !!mastery.blockingStage && !advisoryDismissed;
+
+  return (
+    <>
+      {showAdvisory && mastery.blockingStage && (
+        <div className="mb-4 flex items-start gap-3 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-sm">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
+          <p className="flex-1 text-foreground">
+            {language === 'ro'
+              ? `Poți continua, dar nu ai stăpânit încă Etapa ${mastery.blockingStage.stageNumber} — o scurtă recapitulare te-ar ajuta.`
+              : language === 'el'
+                ? `Μπορείτε να συνεχίσετε, αλλά δεν έχετε κατακτήσει ακόμη το Στάδιο ${mastery.blockingStage.stageNumber} — μια σύντομη επανάληψη θα βοηθούσε.`
+                : `You can keep going, but you haven't mastered Stage ${mastery.blockingStage.stageNumber} yet — a quick review would help.`}
+          </p>
+          <button
+            onClick={() => setAdvisoryDismissed(true)}
+            aria-label={language === 'ro' ? 'Închide' : language === 'el' ? 'Κλείσιμο' : 'Dismiss'}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+      {children}
+    </>
+  );
 }

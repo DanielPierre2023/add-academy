@@ -14,6 +14,7 @@
 
 import { STAGES } from '@/types';
 import type { LectureProgress } from '@/types';
+import { getLectureIndex } from './lectures';
 
 /** Minimum percentage of lectures that must be completed */
 const LECTURE_COMPLETION_THRESHOLD = 0.8;
@@ -76,14 +77,26 @@ export function evaluateStageMastery(
       ? Math.round(quizScoreValues.reduce((a, b) => a + b, 0) / quizScoreValues.length)
       : null;
 
-  // Count lectures where at least one code block was run
+  // Informational only — reported in the summary but NOT part of the mastery
+  // decision (in-browser code runs are a weak, easily-skipped signal). Kept so
+  // the overview can show engagement without pretending it gates progress.
   const lecturesWithCodeRun = lectures.filter(
     (id) => (progress[id]?.codeBlocksRun?.length ?? 0) > 0
   ).length;
 
-  // Evaluate mastery
+  // W3.3: a stage "expects" quizzes if any of its lectures has one. If it does,
+  // skipping every quiz (averageQuizScore === null) must NOT count as mastery.
+  // The old `averageQuizScore === null || …` short-circuit let a learner
+  // "master" a stage without ever taking a single quiz.
+  const idx = getLectureIndex();
+  const expectsQuiz = lectures.some(
+    (id) => idx.lectures.find((l) => l.id === id)?.hasQuiz === true
+  );
+
   const lecturesMet = lectureCompletion >= LECTURE_COMPLETION_THRESHOLD;
-  const quizMet = averageQuizScore === null || averageQuizScore >= QUIZ_SCORE_THRESHOLD;
+  const quizMet = expectsQuiz
+    ? averageQuizScore !== null && averageQuizScore >= QUIZ_SCORE_THRESHOLD
+    : true;
 
   const mastered = lecturesMet && quizMet;
 
@@ -92,6 +105,8 @@ export function evaluateStageMastery(
   if (!lecturesMet) {
     const needed = Math.ceil(totalLectures * LECTURE_COMPLETION_THRESHOLD) - completedCount;
     nextStep = `Complete ${needed} more lecture${needed === 1 ? '' : 's'} in this stage`;
+  } else if (expectsQuiz && averageQuizScore === null) {
+    nextStep = 'Take at least one quiz in this stage to confirm mastery';
   } else if (!quizMet && averageQuizScore !== null) {
     nextStep = `Improve quiz average to ${QUIZ_SCORE_THRESHOLD}% (currently ${averageQuizScore}%)`;
   }

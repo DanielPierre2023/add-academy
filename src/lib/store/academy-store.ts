@@ -96,8 +96,17 @@ interface AcademyState {
 // Dynamically compute total lectures from STAGES to stay in sync
 const TOTAL_LECTURES = STAGES.reduce((sum, stage) => sum + stage.lectures.length, 0);
 
+// W4.6: streak dates must be in the LEARNER'S LOCAL timezone. Using
+// toISOString() (UTC) means a learner in, say, UTC+13 studying in their evening
+// is already "tomorrow" in UTC and silently loses their streak — and streaks are
+// the core retention mechanic.
+function localDateString(d: Date): string {
+  const p = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
 function todayString(): string {
-  return new Date().toISOString().split('T')[0];
+  return localDateString(new Date());
 }
 
 export const useAcademyStore = create<AcademyState>()(
@@ -216,7 +225,7 @@ export const useAcademyStore = create<AcademyState>()(
         if (state.lastActiveDate !== today) {
           const yesterday = new Date();
           yesterday.setDate(yesterday.getDate() - 1);
-          const yesterdayStr = yesterday.toISOString().split('T')[0];
+          const yesterdayStr = localDateString(yesterday);
 
           if (state.lastActiveDate === yesterdayStr) {
             newStreak = state.streak + 1;
@@ -250,14 +259,19 @@ export const useAcademyStore = create<AcademyState>()(
           }
         }
 
-        set({
+        // W4.6: functional set so appends read CURRENT state, not the snapshot
+        // captured ~50 lines above (which loses events under any async caller).
+        set((s) => ({
           xp: newXP,
           streak: newStreak,
           lastActiveDate: today,
           totalCodeBlocksRun: newCodeBlocks,
-          unlockedAchievements: [...state.unlockedAchievements, ...newAchievements],
-          xpEvents: [event, ...state.xpEvents].slice(0, 50),
-        });
+          unlockedAchievements: [
+            ...s.unlockedAchievements,
+            ...newAchievements.filter((a) => !s.unlockedAchievements.includes(a)),
+          ],
+          xpEvents: [event, ...s.xpEvents].slice(0, 50),
+        }));
 
         return {
           xpGained: amount,
@@ -274,7 +288,7 @@ export const useAcademyStore = create<AcademyState>()(
 
         const yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = yesterday.toISOString().split('T')[0];
+        const yesterdayStr = localDateString(yesterday);
 
         if (state.lastActiveDate === yesterdayStr) {
           // Continue streak
@@ -427,6 +441,27 @@ export const useAcademyStore = create<AcademyState>()(
         bookmarks: state.bookmarks,
         reviewQueue: state.reviewQueue,
       }),
+      // W4.6: version + migrate so a future shape change never reads stale
+      // localStorage with undefined fields. migrate backfills any missing keys
+      // with safe defaults.
+      version: 1,
+      migrate: (persisted, _version) => {
+        const p = (persisted ?? {}) as Record<string, unknown>;
+        return {
+          ...p,
+          progress: p.progress ?? {},
+          quizScores: p.quizScores ?? {},
+          xp: p.xp ?? 0,
+          streak: p.streak ?? 0,
+          lastActiveDate: p.lastActiveDate ?? null,
+          unlockedAchievements: p.unlockedAchievements ?? [],
+          xpEvents: p.xpEvents ?? [],
+          totalCodeBlocksRun: p.totalCodeBlocksRun ?? 0,
+          quizAttempts: p.quizAttempts ?? [],
+          bookmarks: p.bookmarks ?? [],
+          reviewQueue: p.reviewQueue ?? [],
+        } as AcademyState;
+      },
     }
   )
 );

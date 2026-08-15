@@ -356,6 +356,11 @@
   margin: 24px 0;
   overflow: hidden;
 }
+/* W2.6 — host div where an editable/runnable playground is mounted in place of
+   the original inline <pre>. Keep the same vertical rhythm as .code-block. */
+.lecture-code-host {
+  margin: 24px 0;
+}
 .code-header {
   display: flex;
   align-items: center;

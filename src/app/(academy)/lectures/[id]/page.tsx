@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getLectureContent, getQuizData, getLectureIndex, getStageForLecture } from '@/lib/lectures';
 import { LectureViewer } from '@/components/academy/lecture-viewer';
 import { ContentGate } from '@/components/academy/content-gate';
+import { JsonLd } from '@/components/seo/json-ld';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import { STAGES } from '@/types';
@@ -197,8 +198,39 @@ export default async function LecturePage({ params }: { params: Promise<{ id: st
   const safeContent = (stageNumber <= 1 || hasServerAuth) ? content : createContentTeaser(content);
   const safeQuiz = hasServerAuth ? quiz : stripQuizAnswers(quiz);
 
+  // W4.4 — per-lecture structured data: a LearningResource that is part of the
+  // overall Course, plus a BreadcrumbList (Home › Stage › Lecture) for the
+  // breadcrumb rich result. Additive; no effect on the rendered UI.
+  const lectureTitle = entry.title.en || `Lecture ${entry.number}`;
+  const stageLabel = entry.stageName || `Stage ${stageNumber}`;
+  const lectureUrl = `${BASE_URL}/lectures/${id}`;
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'LearningResource',
+      '@id': `${lectureUrl}#lecture`,
+      name: lectureTitle,
+      url: lectureUrl,
+      inLanguage: ['en', 'ro', 'el'],
+      learningResourceType: 'Lecture',
+      educationalLevel: stageLabel,
+      isPartOf: { '@id': `${BASE_URL}/#course` },
+      provider: { '@id': `${BASE_URL}/#organization` },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+        { '@type': 'ListItem', position: 2, name: stageLabel },
+        { '@type': 'ListItem', position: 3, name: lectureTitle, item: lectureUrl },
+      ],
+    },
+  ];
+
   return (
     <ContentGate lectureId={id}>
+      <JsonLd data={structuredData} />
       <LectureViewer
         lectureId={id}
         content={safeContent}

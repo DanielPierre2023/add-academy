@@ -19,12 +19,6 @@ import {
 } from 'lucide-react';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { CodePlayground } from '@/components/academy/code-playground';
-import { createRoot, type Root } from 'react-dom/client';
-import {
-  collectAndReplaceCodeBlocks,
-  decodeEntities,
-  normalizeCode,
-} from '@/lib/lecture-code-upgrade';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { QuizEngine } from '@/components/academy/quiz-engine';
@@ -213,64 +207,6 @@ if (typeof window !== 'undefined') {
  * Interactive code block rendered from the codeBlocks JSON data.
  * Used for lectures where code is stored separately (not inline in HTML).
  */
-/** Award the code-run XP once per (lecture, block). */
-function awardCodeXp(lectureId: string, blockId: string) {
-  const latest = useAcademyStore.getState().progress;
-  const current = latest[lectureId]?.codeBlocksRun || [];
-  if (current.includes(blockId)) return;
-  useAcademyStore.getState().updateProgress(lectureId, {
-    codeBlocksRun: [...current, blockId],
-  });
-  const result = useAcademyStore.getState().awardXP('code', XP_VALUES.CODE_BLOCK_RUN, lectureId);
-  showXPToast({
-    amount: XP_VALUES.CODE_BLOCK_RUN,
-    type: 'code',
-    achievements: result.newAchievements,
-    levelUp: result.leveledUp ? result.newLevel : undefined,
-  });
-}
-
-/** Read-only reference block (non-Python or non-runnable code). */
-function ReadOnlyCodeBlock({ code, language, title }: { code: string; language: string; title?: string }) {
-  const label = (language || 'python').toUpperCase();
-  return (
-    <div className="code-block">
-      <div className="code-block-header">
-        <span>{title || label}</span>
-        <span className="text-xs text-muted-foreground">
-          {language === 'python' ? 'reference only' : label}
-        </span>
-      </div>
-      <pre>
-        <code className={`language-${language}`}>{code}</code>
-      </pre>
-    </div>
-  );
-}
-
-/** Editable, runnable Python playground mounted inline in the prose (W2.6). */
-function InlineRunnable({
-  code,
-  title,
-  lectureId,
-  blockId,
-}: {
-  code: string;
-  title?: string;
-  lectureId: string;
-  blockId: string;
-}) {
-  const onRun = useCallback(
-    async (src: string) => {
-      const { stdout, stderr } = await runPythonCode(src);
-      if (!stderr) awardCodeXp(lectureId, blockId);
-      return { stdout, stderr };
-    },
-    [lectureId, blockId]
-  );
-  return <CodePlayground initialCode={code} language="python" title={title} editable onRun={onRun} />;
-}
-
 function CodeBlockRunner({
   block,
   lang,
@@ -379,7 +315,6 @@ export function LectureViewer({
   const [showConfetti, setShowConfetti] = useState(false);
 
   const contentRef = useRef<HTMLDivElement>(null);
-  const proseRef = useRef<HTMLDivElement>(null);
   const timeRef = useRef<number>(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -393,21 +328,6 @@ export function LectureViewer({
 
   const lang = language as Language;
   const lectureHtml = content.content[lang] || content.content['en'] || '';
-
-  // W2.6 — the bottom fallback list must show ONLY codeBlocks that are NOT
-  // already rendered inline in the prose (otherwise every embedded block shows
-  // twice — the double-render bug). A block is "inline" if the prose contains
-  // an empty placeholder for its id, or the block's code appears in the prose
-  // text. Empty-code blocks are dropped entirely.
-  const decodedProse = normalizeCode(decodeEntities(lectureHtml));
-  const bottomBlocks = (content.codeBlocks || [])
-    .map((block, i) => ({ block, i }))
-    .filter(({ block }) => {
-      if (block.id && lectureHtml.includes(`data-block-id="${block.id}"`)) return false;
-      const key = normalizeCode(block.code).slice(0, 60);
-      if (key.length === 0) return false;
-      return !decodedProse.includes(key);
-    });
   // Fall back to EN if translated quiz questions have empty text
   const rawQuizQuestions = quiz
     ? (quiz[lang]?.questions ?? quiz['en']?.questions ?? [])
@@ -439,85 +359,134 @@ export function LectureViewer({
     };
   }, [lectureId, updateProgress]);
 
-  // W2.6 — upgrade every code block embedded in the lecture prose into an
-  // editable/runnable playground IN PLACE (next to the text that explains it),
-  // replacing the old dead-`onclick` run buttons. Read-only reference blocks
-  // (non-Python or non-runnable) render as a static, styled block. The bottom
-  // fallback list below only renders codeBlocks that DON'T already appear here,
-  // so nothing is shown twice.
+  // Wire up inline Run buttons for Pyodide code blocks.
+  // Handles three patterns:
+  //   A) Existing .run-btn elements in lecture HTML (lectures 0, 7-10, etc.)
+  //   B) <pre><code class="language-python"> blocks without a run button (lecture 54)
+  //   C) Placeholder "# See Code Block N" references (lectures 52-53, 55) —
+  //      these are replaced by the codeBlocks React rendering below.
   useEffect(() => {
-    const container = proseRef.current;
-    if (!container) return;
+    if (!contentRef.current) return;
 
-    // Index the JSON codeBlocks so we can (a) resolve empty placeholders and
-    // (b) honour the CI-verified `runnable` flag when the same code is inline.
-    const blocks = content.codeBlocks || [];
-    const jsonByCode = new Map<string, LectureContent['codeBlocks'][number]>();
-    const jsonById = new Map<string, LectureContent['codeBlocks'][number]>();
-    for (const b of blocks) {
-      jsonByCode.set(normalizeCode(b.code), b);
-      if (b.id) jsonById.set(b.id, b);
-    }
-    const titleFor = (b: LectureContent['codeBlocks'][number] | undefined): string => {
-      if (!b) return '';
-      if (typeof b.title === 'object' && b.title) {
-        const rec = b.title as Record<string, string>;
-        return rec[lang] || rec.en || '';
-      }
-      return (b.title as string) || '';
-    };
+    const container = contentRef.current;
 
-    const isRunnable = (code: string, cbLang: string): boolean => {
-      if (cbLang !== 'python') return false;
-      const j = jsonByCode.get(normalizeCode(code));
-      // Inline python with no JSON entry is best-effort runnable; when it has a
-      // JSON entry, honour the verified flag (bash/torch/etc. stay read-only).
-      return j ? j.runnable === true : true;
-    };
-    const resolvePlaceholder = (blockId: string) => {
-      const b = jsonById.get(blockId);
-      return b
-        ? { code: b.code, language: b.language, runnable: b.runnable, title: titleFor(b) }
-        : undefined;
-    };
+    // Pattern B: Inject run buttons for bare Python code blocks that lack one.
+    // Find all <pre> elements inside .code-block wrappers (or standalone)
+    // whose <code> has class language-python but no sibling .run-btn.
+    container.querySelectorAll('pre > code.language-python').forEach((codeEl) => {
+      const pre = codeEl.parentElement;
+      if (!pre) return;
+      // Walk up to the .code-block wrapper, or use the <pre> itself
+      const wrapper = pre.closest('.code-block') || pre.parentElement;
+      if (!wrapper) return;
+      // Skip if a run button already exists
+      if (wrapper.querySelector('.run-btn')) return;
 
-    const sites = collectAndReplaceCodeBlocks(container, isRunnable, resolvePlaceholder);
-    const roots: Root[] = [];
+      // Create a header bar with a run button
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+      header.innerHTML = '<span>Python</span>';
+      const runBtn = document.createElement('button');
+      runBtn.className = 'run-btn';
+      runBtn.textContent = '▶ Run';
+      header.appendChild(runBtn);
 
-    sites.forEach((site, i) => {
-      const j = jsonByCode.get(normalizeCode(site.code));
-      const blockId = j?.id || `inline-${i}`;
-      const title = site.title || titleFor(j);
-      const root = createRoot(site.host);
-      roots.push(root);
-      if (site.runnable) {
-        root.render(
-          <InlineRunnable
-            code={site.code}
-            title={title}
-            lectureId={lectureId}
-            blockId={blockId}
-          />
-        );
+      // Create output div
+      const outputDiv = document.createElement('div');
+      outputDiv.className = 'output';
+
+      // Insert header before <pre> and output after <pre>
+      pre.parentNode?.insertBefore(header, pre);
+      if (pre.nextSibling) {
+        pre.parentNode?.insertBefore(outputDiv, pre.nextSibling);
       } else {
-        root.render(
-          <ReadOnlyCodeBlock code={site.code} language={site.language} title={title} />
-        );
+        pre.parentNode?.appendChild(outputDiv);
       }
     });
 
-    // Defer unmount: React forbids synchronously unmounting a root while it may
-    // be rendering (during the same commit). setTimeout(…,0) lets the current
-    // work settle first, avoiding the "unmount while rendering" warning.
+    // Now attach handlers to ALL .run-btn elements (both original and injected)
+    const runButtons = container.querySelectorAll('.run-btn');
+    const handlers: Array<{ btn: Element; handler: (e: Event) => void }> = [];
+
+    runButtons.forEach((btn) => {
+      const handler = async (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const button = btn as HTMLButtonElement;
+        // Walk up to find the code: check .code-block wrapper, or sibling <pre>
+        const wrapper = button.closest('.code-block') || button.closest('.code-block-header')?.parentElement;
+        if (!wrapper) return;
+
+        const codeEl = wrapper.querySelector('pre code');
+        if (!codeEl) return;
+        const code = codeEl.textContent || '';
+
+        // Find or create output div
+        let outputDiv = wrapper.querySelector('.output, .code-output') as HTMLDivElement;
+        if (!outputDiv) {
+          outputDiv = document.createElement('div');
+          outputDiv.className = 'output';
+          wrapper.appendChild(outputDiv);
+        }
+
+        // Show loading state
+        button.textContent = '⏳ Running...';
+        button.disabled = true;
+        outputDiv.classList.add('visible');
+        outputDiv.classList.remove('error');
+        outputDiv.textContent = 'Loading Python runtime...';
+
+        try {
+          const { stdout, stderr } = await runPythonCode(code);
+          if (stderr) {
+            outputDiv.classList.add('error');
+            outputDiv.textContent = stderr;
+          } else {
+            outputDiv.classList.remove('error');
+            outputDiv.textContent = stdout || '(no output)';
+          }
+
+          // Award XP for running code
+          const allBlocks = container.querySelectorAll('.code-block, .code-block-header');
+          const blockIndex = Array.from(allBlocks).indexOf(
+            (wrapper.classList.contains('code-block') ? wrapper : button.closest('.code-block-header')) as Element
+          );
+          const blockId = wrapper.getAttribute('data-block-id') || `block-${blockIndex}`;
+          const latestProgress = useAcademyStore.getState().progress;
+          const currentBlocks = latestProgress[lectureId]?.codeBlocksRun || [];
+          if (!currentBlocks.includes(blockId)) {
+            useAcademyStore.getState().updateProgress(lectureId, {
+              codeBlocksRun: [...currentBlocks, blockId],
+            });
+            const result = useAcademyStore.getState().awardXP('code', XP_VALUES.CODE_BLOCK_RUN, lectureId);
+            showXPToast({
+              amount: XP_VALUES.CODE_BLOCK_RUN,
+              type: 'code',
+              achievements: result.newAchievements,
+              levelUp: result.leveledUp ? result.newLevel : undefined,
+            });
+          }
+        } catch (err) {
+          outputDiv.classList.add('error');
+          outputDiv.textContent = (err instanceof Error ? err.message : String(err)) || 'Error running code';
+        }
+
+        button.textContent = '▶ Run';
+        button.disabled = false;
+      };
+
+      btn.addEventListener('click', handler);
+      handlers.push({ btn, handler });
+    });
+
+    // Cleanup
     return () => {
-      const toUnmount = roots;
-      setTimeout(() => {
-        toUnmount.forEach((r) => r.unmount());
-      }, 0);
+      handlers.forEach(({ btn, handler }) => {
+        btn.removeEventListener('click', handler);
+      });
     };
-    // Re-run when the prose (language/lecture) changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lectureHtml, lang, lectureId]);
+  }, [lectureHtml]);
 
   // Scroll tracking
   const handleScroll = useCallback(() => {
@@ -592,22 +561,17 @@ export function LectureViewer({
             )}
           </div>
 
-          {/* Lecture HTML Content — styled by globals.css lecture classes.
-              The effect above upgrades every <pre> in here into an inline
-              playground, so code sits next to the prose that explains it. */}
+          {/* Lecture HTML Content — styled by globals.css lecture classes */}
           <div
-            ref={proseRef}
             className="content"
             dangerouslySetInnerHTML={{ __html: lectureHtml }}
           />
 
-          {/* Bottom fallback list — only the codeBlocks that DON'T already
-              appear inline in the prose above (placeholder-only lectures, or
-              blocks whose code isn't embedded in the HTML). This is what kills
-              the old double-render: a block shown inline is filtered out here. */}
-          {bottomBlocks.length > 0 && (
+          {/* Render codeBlocks from JSON data (for lectures that use placeholder
+              references like "See Code Block 1: ..." instead of inline HTML) */}
+          {content.codeBlocks && content.codeBlocks.length > 0 && (
             <div className="content space-y-6">
-              {bottomBlocks.map(({ block, i }) => (
+              {content.codeBlocks.map((block, i) => (
                 <CodeBlockRunner
                   key={block.id || `cb-${i}`}
                   block={block}

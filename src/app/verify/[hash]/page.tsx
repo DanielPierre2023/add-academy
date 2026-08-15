@@ -41,6 +41,7 @@ export default async function VerifyCertificatePage({
 
   return (
     <main
+      id="main-content"
       style={{
         minHeight: '100vh',
         display: 'flex',

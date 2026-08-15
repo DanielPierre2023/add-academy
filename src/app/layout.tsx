@@ -8,7 +8,10 @@ import { XPToastContainer } from '@/components/gamification/xp-toast';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { HtmlLangSync } from '@/components/i18n/html-lang-sync';
 import { ProgressSyncProvider } from '@/components/academy/progress-sync-provider';
+import { JsonLd } from '@/components/seo/json-ld';
 import { getLectureIndex } from '@/lib/lectures';
+
+const SITE_URL = 'https://academy.add-individual-solutions.com';
 
 const manrope = Manrope({
   variable: '--font-manrope',
@@ -104,6 +107,55 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // W4.4 — site-wide structured data (Organization + WebSite + Course). Counts
+  // come from the same _index.json source of truth used for metadata, so they
+  // never drift. Purely additive; renders no visible UI.
+  const index = getLectureIndex();
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'ADD Individual Solutions',
+      url: SITE_URL,
+      logo: `${SITE_URL}/apple-touch-icon.png`,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: 'ADD Academica',
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      inLanguage: ['en', 'ro', 'el'],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Course',
+      '@id': `${SITE_URL}/#course`,
+      name: 'Build LLMs from Scratch',
+      description:
+        'An interactive course that takes you from zero to building large language models from scratch — transformers, attention, tokenization, training, and deployment, with hands-on code in every lecture.',
+      url: SITE_URL,
+      provider: { '@id': `${SITE_URL}/#organization` },
+      inLanguage: ['en', 'ro', 'el'],
+      teaches: [
+        'Transformers', 'Attention mechanism', 'Tokenization',
+        'Neural network training', 'Fine-tuning', 'LLM deployment',
+      ],
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'online',
+        courseWorkload: `${index.totalLectures} lectures, ${index.totalCodeBlocks} code blocks`,
+      },
+      offers: {
+        '@type': 'Offer',
+        category: 'Free',
+        availability: 'https://schema.org/InStock',
+      },
+    },
+  ];
+
   return (
     <html
       lang="en"
@@ -111,6 +163,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        <JsonLd data={structuredData} />
         {/* Skip to content link for keyboard/screen-reader users */}
         <a
           href="#main-content"
