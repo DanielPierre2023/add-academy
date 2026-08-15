@@ -25,7 +25,7 @@ const QuizSubmissionSchema = z.object({
 export async function POST(request: NextRequest) {
   // Rate limit: 30 quiz submissions per minute per IP
   const ip = getClientIp(request);
-  const rl = rateLimit(`quiz:${ip}`, 30, 60_000);
+  const rl = await rateLimit(`quiz:${ip}`, 30, 60_000);
   if (!rl.success) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again shortly.' },

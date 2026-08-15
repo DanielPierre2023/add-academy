@@ -41,10 +41,9 @@ export async function enrollInSchool(inviteCode: string): Promise<{ error: strin
   }
 
   // Best-effort brute-force protection on a secret code.
-  // NOTE: rate-limit.ts is in-memory and therefore per-instance on serverless.
-  // W1.5 replaces it with a durable store; until then this only slows a
-  // single-instance attacker. Keyed by user so it cannot be evaded by IP rotation.
-  const rl = rateLimit(`enroll:${user.id}`, 5, 60 * 60 * 1000);
+  // W1.5: durable when Upstash is configured, in-memory fallback otherwise.
+  // Keyed by user so it cannot be evaded by IP rotation.
+  const rl = await rateLimit(`enroll:${user.id}`, 5, 60 * 60 * 1000);
   if (!rl.success) {
     return { error: 'Too many attempts. Please try again later.' };
   }

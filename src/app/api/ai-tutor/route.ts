@@ -287,12 +287,18 @@ async function checkSchoolRateLimit(
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  const todayIso = today.toISOString();
 
-  const { count, error } = await supabase
+  // W1.5: count USER MESSAGES sent today, not conversation rows. The old row
+  // count could be bypassed by reusing one conversationId all day (which
+  // appends to an existing row and never increments a row count). We narrow to
+  // conversations touched today (updated_at) and count user-role messages whose
+  // per-message timestamp falls today — so reused conversations still count.
+  const { data, error } = await supabase
     .from('academy_ai_conversations')
-    .select('id', { count: 'exact', head: true })
+    .select('messages')
     .eq('student_id', userId)
-    .gte('created_at', today.toISOString());
+    .gte('updated_at', todayIso);
 
   if (error) {
     // Cannot establish usage — deny rather than hand out unmetered API spend.
@@ -300,7 +306,20 @@ async function checkSchoolRateLimit(
     return { allowed: false, limit: dailyLimit, used: dailyLimit };
   }
 
-  const used = count ?? 0;
+  let used = 0;
+  for (const row of data ?? []) {
+    const msgs = Array.isArray(row.messages) ? row.messages : [];
+    for (const m of msgs) {
+      if (
+        m &&
+        (m as { role?: string }).role === 'user' &&
+        typeof (m as { timestamp?: string }).timestamp === 'string' &&
+        (m as { timestamp: string }).timestamp >= todayIso
+      ) {
+        used++;
+      }
+    }
+  }
   return { allowed: used < dailyLimit, limit: dailyLimit, used };
 }
 
@@ -366,7 +385,7 @@ async function persistConversation(
 export async function POST(request: NextRequest) {
   // Rate limit: 10 AI tutor requests per minute per IP
   const ip = getClientIp(request);
-  const rl = rateLimit(`ai-tutor:${ip}`, 10, 60_000);
+  const rl = await rateLimit(`ai-tutor:${ip}`, 10, 60_000);
   if (!rl.success) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again shortly.' },

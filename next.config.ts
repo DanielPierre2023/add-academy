@@ -46,4 +46,24 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// W0.4 — wrap with Sentry ONLY when Sentry env is present. With no Sentry env,
+// the config (and CSP) is returned untouched, so the build is identical to
+// before Sentry was added. Source-map upload runs only when SENTRY_AUTH_TOKEN
+// is set (i.e. in CI/Vercel), never locally.
+import { withSentryConfig } from '@sentry/nextjs';
+
+const sentryEnabled = Boolean(
+  process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
+);
+
+export default sentryEnabled
+  ? withSentryConfig(nextConfig, {
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+      silent: !process.env.CI,
+      widenClientFileUpload: true,
+      disableLogger: true,
+      // Only attempt source-map upload when an auth token is available.
+      sourcemaps: { disable: !process.env.SENTRY_AUTH_TOKEN },
+    })
+  : nextConfig;

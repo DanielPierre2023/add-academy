@@ -37,6 +37,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       valid: true,
       certificateName: cert.certificate_name,
+      courseName: cert.course_name ?? null,
       completionDate: cert.completion_date,
       lecturesCompleted: cert.lectures_completed,
     });

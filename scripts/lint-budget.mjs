@@ -12,7 +12,7 @@
  */
 import { execSync } from 'node:child_process';
 
-const BUDGET = 15;
+const BUDGET = 12;
 
 let out = '';
 try {

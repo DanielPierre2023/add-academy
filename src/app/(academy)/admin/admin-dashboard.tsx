@@ -44,8 +44,6 @@ import {
   CheckCircle2,
   XCircle,
   MoreHorizontal,
-  ArrowUpRight,
-  ArrowDownRight,
   Plus,
   Megaphone,
   Bug,
@@ -85,240 +83,25 @@ import {
 import { computeRevenue, computeCustomerStats } from '@/lib/admin/metrics';
 import { formatEuro, formatPercent, formatCount } from '@/lib/admin/format';
 import { toCsv, downloadCsv } from '@/lib/admin/csv';
-
-/* ─── Types ─────────────────────────────────────────── */
-
-interface SchoolMember {
-  id: string;
-  email: string;
-  display_name: string | null;
-  full_name: string | null;
-  org_role: 'admin' | 'member' | null;
-  tier: string;
-  created_at: string;
-  last_active_at: string | null;
-  school_id: string | null;
-  preferred_language: string | null;
-}
-
-interface SchoolData {
-  id: string;
-  name: string;
-  slug: string;
-  country: string;
-  city: string | null;
-  domain: string | null;
-  invite_code: string | null;
-  contact_email: string;
-  contact_name: string;
-  verified: boolean;
-  max_students: number;
-  current_students: number;
-  ai_tutor_daily_limit: number;
-  logo_url: string | null;
-  created_at: string;
-}
-
-interface SubscriptionData {
-  id: string;
-  student_id: string;
-  tier: string;
-  status: string;
-  current_period_start: string | null;
-  current_period_end: string | null;
-  cancel_at_period_end: boolean;
-  unlocked_stages: number[];
-  unlocked_products: string[];
-  discount_percent: number;
-  auto_renew: boolean;
-  created_at: string;
-  stripe_subscription_id: string | null;
-}
-
-interface CourseData {
-  id: string;
-  slug: string;
-  name: string;
-  description: string;
-  icon: string | null;
-  category: string;
-  is_active: boolean;
-  sort_order: number;
-}
-
-interface ReportData {
-  id: string;
-  student_id: string;
-  student_email: string;
-  student_name: string;
-  category: string;
-  priority: string;
-  title: string;
-  description: string;
-  page_url: string;
-  user_agent: string;
-  status: 'open' | 'in_progress' | 'resolved' | 'closed';
-  admin_response: string | null;
-  responded_at: string | null;
-  created_at: string;
-  updated_at: string;
-}
-
-interface AnnouncementData {
-  id: string;
-  title: string;
-  content: string;
-  priority: 'normal' | 'important' | 'urgent';
-  target_audience: 'all' | 'free' | 'paid' | 'org';
-  target_school_id: string | null;
-  created_by: string;
-  published_at: string;
-  expires_at: string | null;
-  created_at: string;
-  updated_at: string;
-}
-
-/* ─── Helpers ───────────────────────────────────────── */
-
-function isPlatformAdmin(schoolId: string | null | undefined, isAdmin: boolean): boolean {
-  return isAdmin && !schoolId;
-}
-
-function memberName(m: SchoolMember): string {
-  return m.display_name || m.full_name || m.email.split('@')[0];
-}
-
-function formatDate(date: string | null): string {
-  if (!date) return '—';
-  return new Date(date).toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  });
-}
-
-function formatDateShort(date: string | null): string {
-  if (!date) return '—';
-  return new Date(date).toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: 'short',
-  });
-}
-
-function timeAgo(date: string | null): string {
-  if (!date) return 'Never';
-  const diff = Date.now() - new Date(date).getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 60) return `${mins}m ago`;
-  const hours = Math.floor(mins / 60);
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  if (days < 7) return `${days}d ago`;
-  return formatDateShort(date);
-}
-
-function tierColor(tier: string): string {
-  switch (tier) {
-    case 'enterprise':
-    case 'full_access':
-      return 'bg-violet-500/10 text-violet-500';
-    case 'llm_course':
-      return 'bg-blue-500/10 text-blue-500';
-    case 'saas_bundle':
-      return 'bg-emerald-500/10 text-emerald-500';
-    default:
-      return 'bg-muted text-muted-foreground';
-  }
-}
-
-function statusColor(status: string): string {
-  switch (status) {
-    case 'active':
-      return 'bg-green-500/10 text-green-500';
-    case 'trialing':
-      return 'bg-blue-500/10 text-blue-500';
-    case 'past_due':
-      return 'bg-amber-500/10 text-amber-500';
-    case 'canceled':
-    case 'unpaid':
-      return 'bg-red-500/10 text-red-500';
-    default:
-      return 'bg-muted text-muted-foreground';
-  }
-}
-
-/* ─── Stat Card ─────────────────────────────────────── */
-
-function StatCard({
-  icon: Icon,
-  label,
-  value,
-  subValue,
-  trend,
-  trendLabel,
-  color = 'text-primary',
-}: {
-  icon: React.ElementType;
-  label: string;
-  value: string | number;
-  subValue?: string;
-  trend?: 'up' | 'down' | 'neutral';
-  trendLabel?: string;
-  color?: string;
-}) {
-  return (
-    <div className="rounded-xl border border-border bg-card p-4 hover:border-border/80 transition-colors">
-      <div className="flex items-center justify-between">
-        <div className={cn('flex items-center gap-2 text-xs font-medium', color)}>
-          <Icon className="h-4 w-4" />
-          {label}
-        </div>
-        {trend && (
-          <div
-            className={cn(
-              'flex items-center gap-0.5 text-[10px] font-medium',
-              trend === 'up' ? 'text-green-500' : trend === 'down' ? 'text-red-500' : 'text-muted-foreground'
-            )}
-          >
-            {trend === 'up' ? (
-              <ArrowUpRight className="h-3 w-3" />
-            ) : trend === 'down' ? (
-              <ArrowDownRight className="h-3 w-3" />
-            ) : null}
-            {trendLabel}
-          </div>
-        )}
-      </div>
-      <div className="mt-2 text-2xl font-bold text-foreground">{value}</div>
-      {subValue && <div className="mt-0.5 text-xs text-muted-foreground">{subValue}</div>}
-    </div>
-  );
-}
-
-/* ─── Search & Filter bar ──────────────────────────── */
-
-function SearchBar({
-  value,
-  onChange,
-  placeholder,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-}) {
-  return (
-    <div className="relative">
-      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder || 'Search...'}
-        className="h-9 w-full rounded-lg border border-border bg-background pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"
-      />
-    </div>
-  );
-}
+import type {
+  SchoolMember,
+  SchoolData,
+  SubscriptionData,
+  CourseData,
+  ReportData,
+  AnnouncementData,
+} from './types';
+import {
+  isPlatformAdmin,
+  memberName,
+  formatDate,
+  timeAgo,
+  tierColor,
+  statusColor,
+  makeInviteCode,
+} from './utils';
+import { StatCard } from './components/stat-card';
+import { SearchBar } from './components/search-bar';
 
 /* ─── Component ─────────────────────────────────────── */
 
@@ -349,8 +132,12 @@ export default function AdminDashboard() {
   const ADMIN_PAGE_SIZE = 25;
   const [studentPage, setStudentPage] = useState(1);
   const [subPage, setSubPage] = useState(1);
-  useEffect(() => { setStudentPage(1); }, [studentSearch, studentFilter]);
-  useEffect(() => { setSubPage(1); }, [subSearch, subFilter]);
+  // Reset to page 1 when the search/filter changes — done in the setter wrappers
+  // below (not an effect) so pagination stays in sync without a render cascade.
+  const changeStudentSearch = (v: string) => { setStudentSearch(v); setStudentPage(1); };
+  const changeStudentFilter = (f: 'all' | 'free' | 'paid' | 'org') => { setStudentFilter(f); setStudentPage(1); };
+  const changeSubSearch = (v: string) => { setSubSearch(v); setSubPage(1); };
+  const changeSubFilter = (f: 'all' | 'active' | 'canceled' | 'past_due') => { setSubFilter(f); setSubPage(1); };
   const [reportSearch, setReportSearch] = useState('');
   const [reportFilter, setReportFilter] = useState<'all' | 'open' | 'in_progress' | 'resolved' | 'closed'>('all');
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
@@ -541,7 +328,7 @@ export default function AdminDashboard() {
   };
 
   const regenerateCode = async (school: SchoolData) => {
-    const newCode = `${school.slug.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
+    const newCode = makeInviteCode(school.slug);
     await createClient().from('academy_schools').update({ invite_code: newCode }).eq('id', school.id);
     setSchools((prev) => prev.map((s) => (s.id === school.id ? { ...s, invite_code: newCode } : s)));
   };
@@ -692,7 +479,7 @@ export default function AdminDashboard() {
 
   const createOrganization = async () => {
     if (!newOrgName || !newOrgSlug || !newOrgCountry || !newOrgEmail || !newOrgContact) return;
-    const inviteCode = `${newOrgSlug.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
+    const inviteCode = makeInviteCode(newOrgSlug);
     const { data, error } = await createClient()
       .from('academy_schools')
       .insert({
@@ -1142,7 +929,7 @@ export default function AdminDashboard() {
         <div className="flex-1">
           <SearchBar
             value={studentSearch}
-            onChange={setStudentSearch}
+            onChange={changeStudentSearch}
             placeholder={t('Search students by name or email...', 'Caută studenți...')}
           />
         </div>
@@ -1150,7 +937,7 @@ export default function AdminDashboard() {
           {(['all', 'free', 'paid', 'org'] as const).map((f) => (
             <button
               key={f}
-              onClick={() => setStudentFilter(f)}
+              onClick={() => changeStudentFilter(f)}
               className={cn(
                 'rounded-lg px-3 py-1.5 text-xs font-medium transition-colors',
                 studentFilter === f
@@ -1490,7 +1277,7 @@ export default function AdminDashboard() {
         <div className="flex-1">
           <SearchBar
             value={subSearch}
-            onChange={setSubSearch}
+            onChange={changeSubSearch}
             placeholder={t('Search by student or tier...', 'Caută după student sau plan...')}
           />
         </div>
@@ -1498,7 +1285,7 @@ export default function AdminDashboard() {
           {(['all', 'active', 'canceled', 'past_due'] as const).map((f) => (
             <button
               key={f}
-              onClick={() => setSubFilter(f)}
+              onClick={() => changeSubFilter(f)}
               className={cn(
                 'rounded-lg px-3 py-1.5 text-xs font-medium transition-colors',
                 subFilter === f

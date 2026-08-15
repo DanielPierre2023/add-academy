@@ -19,7 +19,7 @@ const CheckoutSchema = z.object({
  */
 export async function POST(request: NextRequest) {
   // Unbounded Checkout session creation was possible per account.
-  const rl = rateLimit(`checkout:${getClientIp(request)}`, 10, 60_000);
+  const rl = await rateLimit(`checkout:${getClientIp(request)}`, 10, 60_000);
   if (!rl.success) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }

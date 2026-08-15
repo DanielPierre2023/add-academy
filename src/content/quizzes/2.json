@@ -7,12 +7,14 @@
         "index": 0,
         "text": "When an LLM processes the sentence 'What is the capital of France?', what is the correct order of the processing pipeline?",
         "options": [
-          "Prediction → Embedding → Tokenization → Transformer → Output",
+          "Prediction → Embedding → Tokenization → Transformer layers → Output stage",
           "Tokenization → Embedding → Transformer layers → Prediction → Output",
-          "Embedding → Tokenization → Prediction → Transformer → Output",
-          "Transformer → Tokenization → Embedding → Output → Prediction"
+          "Embedding → Tokenization → Prediction → Transformer → Output stage",
+          "Transformer → Tokenization → Embedding → Output → Prediction step"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "The LLM pipeline follows a specific order: first the text is split into tokens (tokenization), then each token is converted into a numerical vector (embedding), then these vectors pass through multiple Transformer layers that refine understanding, then the model predicts probabilities for the next token, and finally the selected token is converted back to text.",
         "isMulti": false
       },
@@ -20,12 +22,15 @@
         "index": 1,
         "text": "Why is the Transformer architecture considered revolutionary compared to RNNs and LSTMs? Select all that apply.",
         "options": [
-          "Transformers process all tokens in parallel rather than one at a time, making training much faster",
-          "Transformers use smaller datasets and fewer parameters than RNNs",
-          "The attention mechanism allows any word to directly relate to any other word regardless of distance",
-          "Transformers completely eliminated the need for training data"
+          "Transformers process all tokens in parallel, making training much faster",
+          "Transformers need much smaller datasets and far fewer parameters than RNNs",
+          "Attention lets any word relate directly to any other, regardless of distance",
+          "Transformers completely eliminated the need for any training data whatsoever now"
         ],
-        "correct": [0, 2],
+        "correct": [
+          0,
+          2
+        ],
         "explanation": "The Transformer solved two critical problems with RNNs: sequential processing (RNNs had to process one token at a time, while Transformers process all tokens simultaneously using GPUs) and long-range dependencies (RNNs struggled to connect distant words, while the attention mechanism lets any token directly attend to any other token in a single step). Transformers actually require more data and parameters, not fewer.",
         "isMulti": true
       },
@@ -33,12 +38,14 @@
         "index": 2,
         "text": "A colleague claims that ChatGPT is 'just AI.' How would you more precisely classify it using the nested hierarchy covered in this lecture?",
         "options": [
-          "ChatGPT is AI but not Machine Learning",
-          "ChatGPT is AI, Machine Learning, Deep Learning, Generative AI, and an LLM — all five categories",
-          "ChatGPT is only Generative AI, not related to Machine Learning",
-          "ChatGPT is Deep Learning but not Generative AI"
+          "It is AI but does not count as Machine Learning in any meaningful way here",
+          "It's AI, ML, Deep Learning, Generative AI, and an LLM — all five at once",
+          "It is only Generative AI and is unrelated to Machine Learning entirely",
+          "It is Deep Learning but is not a form of Generative AI at all, really"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "These categories are nested like Russian dolls. ChatGPT is an LLM (it processes language at scale), which makes it Generative AI (it creates new content), which is a subset of Deep Learning (it uses neural networks with many layers), which is a subset of Machine Learning (it learns from data), which is a subset of AI (it performs tasks requiring intelligence). Every LLM belongs to all five categories.",
         "isMulti": false
       },
@@ -46,12 +53,14 @@
         "index": 3,
         "text": "Why do LLMs sometimes 'hallucinate' — confidently stating incorrect information as if it were fact?",
         "options": [
-          "Because they are programmed to lie occasionally to test users",
-          "Because they have a faulty database that contains wrong facts",
-          "Because they optimize for producing fluent, probable-sounding text, not for factual accuracy — when training data is insufficient, they fill gaps with plausible but invented content",
-          "Because their internet connection drops and they cannot verify facts"
+          "They are deliberately programmed to lie from time to time to test their users",
+          "They rely on a faulty internal database that happens to store wrong facts",
+          "They optimize for fluent, probable text, not facts, filling gaps with invention",
+          "Their live internet connection drops, so they simply cannot verify facts in time"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Hallucinations occur because LLMs are fundamentally next-token predictors optimized for fluency, not truth databases. They generate text that sounds plausible based on statistical patterns. When encountering topics with sparse training data, they produce confident-sounding but fabricated details. They have no internal fact-checking mechanism and no concept of truth versus falsehood.",
         "isMulti": false
       },
@@ -59,12 +68,14 @@
         "index": 4,
         "text": "What practical advantage does a decoder-only model (like GPT) have over an encoder-only model (like BERT)?",
         "options": [
-          "Decoder-only models are always smaller and faster",
-          "Decoder-only models can both understand and generate text, while encoder-only models can only understand text without generating new content",
-          "Encoder-only models cannot process any text at all",
-          "Decoder-only models do not need any training data"
+          "Decoder-only models are always strictly smaller and faster than encoder models",
+          "Decoder-only models can understand AND generate; encoder-only only understand",
+          "Encoder-only models cannot process any input text whatsoever, at all, ever",
+          "Decoder-only models require no training data of any kind in order to work"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Encoder-only models like BERT excel at understanding tasks (classification, sentiment analysis, search) because they read text bidirectionally, but they cannot generate new text. Decoder-only models like GPT generate text one token at a time and, at sufficient scale, can also perform understanding tasks. This versatility — both understanding and generation — is why decoder-only architectures dominate modern LLMs.",
         "isMulti": false
       }
@@ -77,12 +88,14 @@
         "index": 0,
         "text": "Cand un LLM proceseaza propozitia 'Care este capitala Frantei?', care este ordinea corecta a pipeline-ului de procesare?",
         "options": [
-          "Predictie → Embedding → Tokenizare → Transformer → Iesire",
-          "Tokenizare → Embedding → Straturi Transformer → Predictie → Iesire",
-          "Embedding → Tokenizare → Predictie → Transformer → Iesire",
-          "Transformer → Tokenizare → Embedding → Iesire → Predictie"
+          "Predicție → Embedding → Tokenizare → Straturi Transformer → Etapa de ieșire",
+          "Tokenizare → Embedding → Straturi Transformer → Predicție → Ieșire",
+          "Embedding → Tokenizare → Predicție → Transformer → Etapa de ieșire",
+          "Transformer → Tokenizare → Embedding → Ieșire → Pasul de predicție"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Pipeline-ul LLM urmeaza o ordine specifica: mai intai textul este impartit in token-uri (tokenizare), apoi fiecare token este convertit intr-un vector numeric (embedding), apoi acesti vectori trec prin mai multe straturi Transformer care rafineaza intelegerea, apoi modelul prezice probabilitati pentru urmatorul token, si in final token-ul selectat este convertit inapoi in text.",
         "isMulti": false
       },
@@ -90,12 +103,15 @@
         "index": 1,
         "text": "De ce este arhitectura Transformer considerata revolutionara comparativ cu RNN-urile si LSTM-urile? Selecteaza toate raspunsurile corecte.",
         "options": [
-          "Transformer-ele proceseaza toate token-urile in paralel in loc de unul pe rand, facand antrenamentul mult mai rapid",
-          "Transformer-ele folosesc seturi de date mai mici si mai putini parametri decat RNN-urile",
-          "Mecanismul de attention permite oricarui cuvant sa se raporteze direct la orice alt cuvant, indiferent de distanta",
-          "Transformer-ele au eliminat complet necesitatea datelor de antrenament"
+          "Transformerele procesează toate tokenurile în paralel, accelerând antrenarea",
+          "Transformerele au nevoie de seturi mult mai mici și mai puțini parametri decât RNN",
+          "Atenția permite oricărui cuvânt să se lege direct de altul, indiferent de distanță",
+          "Transformerele au eliminat complet nevoia de orice date de antrenament acum"
         ],
-        "correct": [0, 2],
+        "correct": [
+          0,
+          2
+        ],
         "explanation": "Transformer-ul a rezolvat doua probleme critice ale RNN-urilor: procesarea secventiala (RNN-urile trebuiau sa proceseze cate un token pe rand, in timp ce Transformer-ele proceseaza toate token-urile simultan) si dependentele pe distante lungi (mecanismul de attention permite oricarui token sa se raporteze direct la orice alt token intr-un singur pas).",
         "isMulti": true
       },
@@ -103,12 +119,14 @@
         "index": 2,
         "text": "Un coleg sustine ca ChatGPT este 'doar AI.' Cum l-ai clasifica mai precis folosind ierarhia imbricata acoperita in aceasta lectie?",
         "options": [
-          "ChatGPT este AI dar nu Machine Learning",
-          "ChatGPT este AI, Machine Learning, Deep Learning, AI Generativ si un LLM — toate cele cinci categorii",
-          "ChatGPT este doar AI Generativ, fara legatura cu Machine Learning",
-          "ChatGPT este Deep Learning dar nu AI Generativ"
+          "Este AI, dar nu se califică drept Machine Learning în niciun sens real aici",
+          "Este AI, ML, Deep Learning, Generative AI și un LLM — toate cinci deodată",
+          "Este doar Generative AI și nu are legătură cu Machine Learning deloc",
+          "Este Deep Learning, dar nu este o formă de Generative AI deloc, de fapt"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Aceste categorii sunt imbricate ca papusile rusesti. ChatGPT este un LLM (proceseaza limbajul la scara), ceea ce il face AI Generativ (creeaza continut nou), care este un subset al Deep Learning (foloseste retele neuronale cu multe straturi), care este un subset al Machine Learning (invata din date), care este un subset al AI (realizeaza sarcini care necesita inteligenta).",
         "isMulti": false
       },
@@ -116,12 +134,14 @@
         "index": 3,
         "text": "De ce LLM-urile uneori 'halucineaza' — afirmand cu incredere informatii incorecte ca si cum ar fi adevarate?",
         "options": [
-          "Pentru ca sunt programate sa minta ocazional pentru a testa utilizatorii",
-          "Pentru ca au o baza de date defecta care contine fapte gresite",
-          "Pentru ca optimizeaza producerea de text fluent si plauzibil, nu acuratetea factuala — cand datele de antrenament sunt insuficiente, completeaza golurile cu continut plauzibil dar inventat",
-          "Pentru ca conexiunea lor la internet se intrerupe si nu pot verifica faptele"
+          "Sunt programate intenționat să mintă din când în când pentru a testa utilizatorii",
+          "Se bazează pe o bază internă defectuoasă care stochează fapte greșite",
+          "Optimizează pentru text fluent și probabil, nu pentru fapte, umplând golurile inventând",
+          "Conexiunea lor la internet cade, deci pur și simplu nu pot verifica faptele la timp"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Halucinatiile apar pentru ca LLM-urile sunt fundamental predictoare de token-uri urmatoare optimizate pentru fluenta, nu baze de date de fapte. Genereaza text care suna plauzibil pe baza tiparelor statistice. Nu au niciun mecanism intern de verificare a faptelor.",
         "isMulti": false
       },
@@ -129,12 +149,14 @@
         "index": 4,
         "text": "Ce avantaj practic are un model doar-decoder (precum GPT) fata de un model doar-encoder (precum BERT)?",
         "options": [
-          "Modelele doar-decoder sunt intotdeauna mai mici si mai rapide",
-          "Modelele doar-decoder pot atat sa inteleaga cat si sa genereze text, in timp ce modelele doar-encoder pot doar sa inteleaga textul fara a genera continut nou",
-          "Modelele doar-encoder nu pot procesa deloc text",
-          "Modelele doar-decoder nu au nevoie de date de antrenament"
+          "Modelele decoder-only sunt întotdeauna strict mai mici și mai rapide decât encoder",
+          "Modelele decoder-only pot înțelege ȘI genera; encoder-only doar înțeleg",
+          "Modelele encoder-only nu pot procesa niciun text de intrare, deloc, niciodată",
+          "Modelele decoder-only nu au nevoie de niciun fel de date de antrenament ca să funcționeze"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Modelele doar-encoder precum BERT exceleaza la sarcini de intelegere (clasificare, analiza sentimentelor, cautare), dar nu pot genera text nou. Modelele doar-decoder precum GPT genereaza text token cu token si, la o scara suficienta, pot realiza si sarcini de intelegere. Aceasta versatilitate este motivul pentru care arhitecturile doar-decoder domina LLM-urile moderne.",
         "isMulti": false
       }
@@ -147,12 +169,14 @@
         "index": 0,
         "text": "Οταν ενα LLM επεξεργαζεται την προταση 'Ποια ειναι η πρωτευουσα της Γαλλιας;', ποια ειναι η σωστη σειρα του pipeline επεξεργασιας;",
         "options": [
-          "Προβλεψη → Embedding → Tokenization → Transformer → Εξοδος",
-          "Tokenization → Embedding → Στρωματα Transformer → Προβλεψη → Εξοδος",
-          "Embedding → Tokenization → Προβλεψη → Transformer → Εξοδος",
-          "Transformer → Tokenization → Embedding → Εξοδος → Προβλεψη"
+          "Πρόβλεψη → Embedding → Tokenization → Στρώματα Transformer → Στάδιο εξόδου",
+          "Tokenization → Embedding → Στρώματα Transformer → Πρόβλεψη → Έξοδος",
+          "Embedding → Tokenization → Πρόβλεψη → Transformer → Στάδιο εξόδου",
+          "Transformer → Tokenization → Embedding → Έξοδος → Βήμα πρόβλεψης"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Το pipeline του LLM ακολουθει συγκεκριμενη σειρα: πρωτα το κειμενο χωριζεται σε tokens (tokenization), μετα καθε token μετατρεπεται σε αριθμητικο διανυσμα (embedding), μετα αυτα τα διανυσματα περνουν απο πολλαπλα στρωματα Transformer, μετα το μοντελο προβλεπει πιθανοτητες για το επομενο token, και τελος το επιλεγμενο token μετατρεπεται σε κειμενο.",
         "isMulti": false
       },
@@ -160,12 +184,15 @@
         "index": 1,
         "text": "Γιατι η αρχιτεκτονικη Transformer θεωρειται επαναστατικη σε σχεση με τα RNNs και LSTMs; Επελεξε ολες τις σωστες απαντησεις.",
         "options": [
-          "Τα Transformers επεξεργαζονται ολα τα tokens παραλληλα αντι για ενα τη φορα, κανοντας την εκπαιδευση πολυ ταχυτερη",
-          "Τα Transformers χρησιμοποιουν μικροτερα σετ δεδομενων και λιγοτερες παραμετρους απο τα RNNs",
-          "Ο μηχανισμος attention επιτρεπει σε καθε λεξη να σχετιζεται αμεσα με οποιαδηποτε αλλη λεξη ανεξαρτητως αποστασης",
-          "Τα Transformers εξαλειψαν πληρως την αναγκη για δεδομενα εκπαιδευσης"
+          "Τα Transformers επεξεργάζονται όλα τα tokens παράλληλα, επιταχύνοντας την εκπαίδευση",
+          "Τα Transformers χρειάζονται πολύ μικρότερα σύνολα και λιγότερες παραμέτρους από RNN",
+          "Το attention επιτρέπει σε κάθε λέξη να συνδέεται άμεσα με άλλη, ανεξαρτήτως απόστασης",
+          "Τα Transformers εξάλειψαν εντελώς την ανάγκη για οποιαδήποτε δεδομένα εκπαίδευσης"
         ],
-        "correct": [0, 2],
+        "correct": [
+          0,
+          2
+        ],
         "explanation": "Το Transformer ελυσε δυο κρισιμα προβληματα των RNNs: τη σειριακη επεξεργασια (τα RNNs επρεπε να επεξεργαζονται ενα token τη φορα, ενω τα Transformers επεξεργαζονται ολα τα tokens ταυτοχρονα) και τις μακροπροθεσμες εξαρτησεις (ο μηχανισμος attention επιτρεπει σε καθε token να σχετιστει αμεσα με οποιοδηποτε αλλο token).",
         "isMulti": true
       },
@@ -173,12 +200,14 @@
         "index": 2,
         "text": "Ενας συναδελφος ισχυριζεται οτι το ChatGPT ειναι 'απλα AI.' Πως θα το ταξινομουσες πιο ακριβως χρησιμοποιωντας την ενθετη ιεραρχια που καλυφθηκε σε αυτη τη διαλεξη;",
         "options": [
-          "Το ChatGPT ειναι AI αλλα οχι Machine Learning",
-          "Το ChatGPT ειναι AI, Machine Learning, Deep Learning, Generative AI και ενα LLM — και οι πεντε κατηγοριες",
-          "Το ChatGPT ειναι μονο Generative AI, χωρις σχεση με Machine Learning",
-          "Το ChatGPT ειναι Deep Learning αλλα οχι Generative AI"
+          "Είναι AI αλλά δεν μετρά ως Machine Learning με κανέναν ουσιαστικό τρόπο εδώ",
+          "Είναι AI, ML, Deep Learning, Generative AI και LLM — και τα πέντε μαζί",
+          "Είναι μόνο Generative AI και δεν σχετίζεται καθόλου με το Machine Learning",
+          "Είναι Deep Learning αλλά δεν είναι μορφή Generative AI καθόλου, στην ουσία"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Αυτες οι κατηγοριες ειναι ενθετες σαν ρωσικες κουκλες. Το ChatGPT ειναι ενα LLM (επεξεργαζεται γλωσσα σε κλιμακα), που το κανει Generative AI (δημιουργει νεο περιεχομενο), που ειναι υποσυνολο του Deep Learning, που ειναι υποσυνολο του Machine Learning, που ειναι υποσυνολο του AI.",
         "isMulti": false
       },
@@ -186,12 +215,14 @@
         "index": 3,
         "text": "Γιατι τα LLMs μερικες φορες 'παραισθαινουν' — δηλωνοντας με σιγουρια εσφαλμενες πληροφοριες σαν να ηταν αληθεια;",
         "options": [
-          "Επειδη ειναι προγραμματισμενα να ψευδονται περιστασιακα για να δοκιμασουν τους χρηστες",
-          "Επειδη εχουν μια ελαττωματικη βαση δεδομενων που περιεχει λαθος γεγονοτα",
-          "Επειδη βελτιστοποιουν την παραγωγη ευφραδους, πιθανοφανους κειμενου, οχι την τεκμηριωμενη ακριβεια — οταν τα δεδομενα εκπαιδευσης ειναι ανεπαρκη, γεμιζουν τα κενα με πιθανοφανες αλλα επινοημενο περιεχομενο",
-          "Επειδη η συνδεση τους στο διαδικτυο πεφτει και δεν μπορουν να επαληθευσουν γεγονοτα"
+          "Είναι σκόπιμα προγραμματισμένα να λένε ψέματα πού και πού για να δοκιμάζουν χρήστες",
+          "Βασίζονται σε μια ελαττωματική εσωτερική βάση που αποθηκεύει λάθος γεγονότα",
+          "Βελτιστοποιούν για ρέον, πιθανό κείμενο, όχι γεγονότα, γεμίζοντας κενά με επινοήσεις",
+          "Η σύνδεσή τους στο ίντερνετ πέφτει, οπότε δεν μπορούν να επαληθεύσουν γεγονότα εγκαίρως"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Οι παραισθησεις συμβαινουν επειδη τα LLMs ειναι βασικα προβλεπτες επομενου token βελτιστοποιημενοι για ευφραδεια, οχι βασεις δεδομενων γεγονοτων. Δημιουργουν κειμενο που ακουγεται πιθανοφανες βασισμενο σε στατιστικα μοτιβα. Δεν εχουν εσωτερικο μηχανισμο ελεγχου αληθειας.",
         "isMulti": false
       },
@@ -199,12 +230,14 @@
         "index": 4,
         "text": "Ποιο πρακτικο πλεονεκτημα εχει ενα μοντελο μονο-αποκωδικοποιητη (οπως το GPT) εναντι ενος μοντελου μονο-κωδικοποιητη (οπως το BERT);",
         "options": [
-          "Τα μοντελα μονο-αποκωδικοποιητη ειναι παντα μικροτερα και ταχυτερα",
-          "Τα μοντελα μονο-αποκωδικοποιητη μπορουν τοσο να κατανοουν οσο και να δημιουργουν κειμενο, ενω τα μοντελα μονο-κωδικοποιητη μπορουν μονο να κατανοουν κειμενο χωρις να δημιουργουν νεο περιεχομενο",
-          "Τα μοντελα μονο-κωδικοποιητη δεν μπορουν να επεξεργαστουν καθολου κειμενο",
-          "Τα μοντελα μονο-αποκωδικοποιητη δεν χρειαζονται δεδομενα εκπαιδευσης"
+          "Τα decoder-only είναι πάντα αυστηρά μικρότερα και ταχύτερα από τα encoder",
+          "Τα decoder-only καταλαβαίνουν ΚΑΙ παράγουν· τα encoder-only μόνο καταλαβαίνουν",
+          "Τα encoder-only δεν μπορούν να επεξεργαστούν κανένα κείμενο εισόδου, καθόλου, ποτέ",
+          "Τα decoder-only δεν χρειάζονται κανενός είδους δεδομένα εκπαίδευσης για να δουλέψουν"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Τα μοντελα μονο-κωδικοποιητη οπως το BERT υπερεχουν σε εργασιες κατανοησης αλλα δεν μπορουν να δημιουργησουν νεο κειμενο. Τα μοντελα μονο-αποκωδικοποιητη οπως το GPT δημιουργουν κειμενο token-token και, σε επαρκη κλιμακα, μπορουν επισης να εκτελεσουν εργασιες κατανοησης. Αυτη η ευελιξια ειναι ο λογος που οι αρχιτεκτονικες μονο-αποκωδικοποιητη κυριαρχουν στα μοντερνα LLMs.",
         "isMulti": false
       }

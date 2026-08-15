@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, Suspense, use } from 'react';
 import { useAcademyStore } from '@/lib/store/academy-store';
-import { getLectureIndex } from '@/lib/lectures';
+import { getLectureIndex, getQuizData } from '@/lib/lectures';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 import {
   BookOpen,
   CheckCircle2,
@@ -17,6 +18,29 @@ import {
   Eye,
 } from 'lucide-react';
 import type { Language } from '@/types';
+
+interface QuizQuestion {
+  index: number;
+  text: string;
+  options: string[];
+  correct: number[];
+  explanation: string;
+  isMulti: boolean;
+}
+
+// Module-level cache so the promise passed to `use()` is stable across renders
+// (a fresh promise every render would suspend forever). One entry per lecture;
+// each holds all three languages, so switching language does not reload.
+const quizCache = new Map<string, Promise<Record<string, { questions: QuizQuestion[] }> | null>>();
+function loadQuiz(lectureId: string) {
+  if (!quizCache.has(lectureId)) {
+    quizCache.set(
+      lectureId,
+      getQuizData(lectureId) as Promise<Record<string, { questions: QuizQuestion[] }> | null>
+    );
+  }
+  return quizCache.get(lectureId)!;
+}
 
 export default function ReviewPage() {
   const language = useAcademyStore((s) => s.language) as Language;
@@ -39,12 +63,17 @@ export default function ReviewPage() {
       difficulty: 'Your Level',
       weakAreas: 'Areas to Improve',
       noReviews: 'No reviews due right now! Come back later or attempt more quizzes to build your review queue.',
+      recallPrompt: 'Recall the answer, then reveal it and grade yourself honestly.',
       showAnswer: 'Show Answer',
+      correctLabel: 'Correct answer',
+      explanationLabel: 'Why',
       gotIt: 'Got It Right',
       needsWork: 'Needs More Work',
       nextReview: 'Next review in',
       days: 'days',
       completed: 'All caught up! Great work.',
+      unavailable: 'This question is no longer available — grade to reschedule.',
+      loading: 'Loading question…',
       difficultyLabels: { easy: 'Building Foundation', medium: 'On Track', hard: 'Advanced' },
     },
     ro: {
@@ -55,12 +84,17 @@ export default function ReviewPage() {
       difficulty: 'Nivelul Tau',
       weakAreas: 'Zone de Imbunatatit',
       noReviews: 'Nicio revizuire de facut acum! Revino mai tarziu sau incearca mai multe quiz-uri.',
+      recallPrompt: 'Amintește-ți răspunsul, apoi dezvăluie-l și evaluează-te corect.',
       showAnswer: 'Arata Raspunsul',
+      correctLabel: 'Răspuns corect',
+      explanationLabel: 'De ce',
       gotIt: 'Am Nimerit',
       needsWork: 'Mai Am de Lucru',
       nextReview: 'Urmatoarea revizuire in',
       days: 'zile',
       completed: 'La zi cu toate! Bravo.',
+      unavailable: 'Această întrebare nu mai este disponibilă — evaluează pentru reprogramare.',
+      loading: 'Se încarcă întrebarea…',
       difficultyLabels: { easy: 'Fundament', medium: 'Pe Drum', hard: 'Avansat' },
     },
     el: {
@@ -71,12 +105,17 @@ export default function ReviewPage() {
       difficulty: 'Επίπεδό σας',
       weakAreas: 'Τομείς Βελτίωσης',
       noReviews: 'Δεν υπάρχουν επαναλήψεις τώρα! Δοκιμάστε περισσότερα quiz.',
+      recallPrompt: 'Θυμηθείτε την απάντηση, μετά αποκαλύψτε την και βαθμολογηθείτε ειλικρινά.',
       showAnswer: 'Εμφάνιση Απάντησης',
+      correctLabel: 'Σωστή απάντηση',
+      explanationLabel: 'Γιατί',
       gotIt: 'Σωστά',
       needsWork: 'Χρειάζεται Δουλειά',
       nextReview: 'Επόμενη επανάληψη σε',
       days: 'μέρες',
       completed: 'Ολοκληρώσατε! Μπράβο.',
+      unavailable: 'Αυτή η ερώτηση δεν είναι πλέον διαθέσιμη — βαθμολογήστε για επαναπρογραμματισμό.',
+      loading: 'Φόρτωση ερώτησης…',
       difficultyLabels: { easy: 'Θεμέλια', medium: 'Σωστά', hard: 'Προχωρημένο' },
     },
   };
@@ -142,7 +181,7 @@ export default function ReviewPage() {
             <div className="flex flex-wrap gap-2">
               {weakTopics.map((id) => {
                 const entry = lectureIndex.lectures.find((l) => l.id === id);
-                const title = entry ? (entry.title[language] || entry.title.en) : `Lecture ${id}`;
+                const title = entry ? entry.title[language] || entry.title.en : `Lecture ${id}`;
                 return (
                   <Badge key={id} variant="secondary" className="text-xs">
                     {title}
@@ -169,7 +208,9 @@ export default function ReviewPage() {
               <CardTitle className="text-base">
                 {(() => {
                   const entry = lectureIndex.lectures.find((l) => l.id === currentReview.lectureId);
-                  return entry ? (entry.title[language] || entry.title.en) : `Lecture ${currentReview.lectureId}`;
+                  return entry
+                    ? entry.title[language] || entry.title.en
+                    : `Lecture ${currentReview.lectureId}`;
                 })()}
               </CardTitle>
               <Badge variant="outline" className="text-xs">
@@ -178,9 +219,27 @@ export default function ReviewPage() {
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               {txt.nextReview}: {Math.round(currentReview.interval)} {txt.days}
             </p>
+
+            <Suspense
+              fallback={<p className="text-sm text-muted-foreground py-6 text-center">{txt.loading}</p>}
+            >
+              <ReviewQuestion
+                key={`${currentReview.lectureId}:${currentReview.questionIndex}`}
+                lectureId={currentReview.lectureId}
+                questionIndex={currentReview.questionIndex}
+                language={language}
+                showAnswer={showAnswer}
+                labels={{
+                  recallPrompt: txt.recallPrompt,
+                  correctLabel: txt.correctLabel,
+                  explanationLabel: txt.explanationLabel,
+                  unavailable: txt.unavailable,
+                }}
+              />
+            </Suspense>
 
             {!showAnswer ? (
               <Button onClick={() => setShowAnswer(true)} className="w-full gap-2">
@@ -215,6 +274,63 @@ export default function ReviewPage() {
             <p className="text-muted-foreground">{txt.completed}</p>
           </CardContent>
         </Card>
+      )}
+    </div>
+  );
+}
+
+function ReviewQuestion({
+  lectureId,
+  questionIndex,
+  language,
+  showAnswer,
+  labels,
+}: {
+  lectureId: string;
+  questionIndex: number;
+  language: Language;
+  showAnswer: boolean;
+  labels: { recallPrompt: string; correctLabel: string; explanationLabel: string; unavailable: string };
+}) {
+  const quiz = use(loadQuiz(lectureId));
+  const byLang = quiz?.[language] ?? quiz?.en;
+  const question = byLang?.questions?.[questionIndex];
+
+  if (!question) {
+    return <p className="text-sm text-amber-600">{labels.unavailable}</p>;
+  }
+
+  return (
+    <div className="space-y-3">
+      <p className="text-base font-medium">{question.text}</p>
+      <ul className="space-y-2">
+        {question.options.map((opt, i) => {
+          const isCorrect = question.correct.includes(i);
+          return (
+            <li
+              key={i}
+              className={cn(
+                'rounded-md border px-3 py-2 text-sm flex items-center gap-2',
+                showAnswer && isCorrect
+                  ? 'border-green-500/50 bg-green-500/10 text-green-700 dark:text-green-400 font-medium'
+                  : 'border-border'
+              )}
+            >
+              {showAnswer && isCorrect && <CheckCircle2 className="h-4 w-4 shrink-0 text-green-600" />}
+              <span>{opt}</span>
+            </li>
+          );
+        })}
+      </ul>
+      {!showAnswer ? (
+        <p className="text-xs text-muted-foreground italic">{labels.recallPrompt}</p>
+      ) : (
+        question.explanation && (
+          <div className="rounded-md bg-muted/50 px-3 py-2 text-sm">
+            <span className="font-semibold">{labels.explanationLabel}: </span>
+            {question.explanation}
+          </div>
+        )
       )}
     </div>
   );

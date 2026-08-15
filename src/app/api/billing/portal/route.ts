@@ -22,7 +22,7 @@ const SITE_URL =
  */
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  const rl = rateLimit(`billing-portal:${ip}`, 10, 60_000);
+  const rl = await rateLimit(`billing-portal:${ip}`, 10, 60_000);
   if (!rl.success) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }

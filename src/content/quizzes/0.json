@@ -12,7 +12,9 @@
           "8 GB",
           "40 GB"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "LoRA fine-tuning a 7B model requires approximately 8 GB VRAM due to efficient parameter freezing. Full fine-tuning would need 40+ GB.",
         "isMulti": false
       },
@@ -20,12 +22,14 @@
         "index": 1,
         "text": "Why does this course use both a browser sandbox AND real Python environments?",
         "options": [
-          "The browser sandbox is faster than local Python",
-          "Browser sandbox teaches concepts quickly; real environments are needed for GPU training and deployment",
-          "Local Python cannot run numpy",
-          "The browser sandbox supports PyTorch natively"
+          "The browser sandbox runs real model-training jobs much faster than any local Python setup",
+          "The sandbox is instant for concepts; real Python is needed for GPU work and deploys",
+          "Local Python cannot import numpy or the other core scientific libraries",
+          "The browser sandbox can execute PyTorch and CUDA GPU kernels natively in-tab"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Pyodide (browser Python) is perfect for quick numpy experiments and concept visualization, but cannot run PyTorch, access GPUs, or deploy real services.",
         "isMulti": false
       },
@@ -38,7 +42,9 @@
           "virtualenv --create llm-env",
           "python -m venv llm-env"
         ],
-        "correct": [3],
+        "correct": [
+          3
+        ],
         "explanation": "python -m venv is the standard library way to create virtual environments. It creates an isolated Python installation in the llm-env directory.",
         "isMulti": false
       },
@@ -46,12 +52,16 @@
         "index": 3,
         "text": "Which files should be in your .gitignore for an ML project? Select all that apply",
         "options": [
-          ".env (API keys)",
-          "requirements.txt",
-          "checkpoints/*.pt (model weights)",
-          "data/ (large training datasets)"
+          ".env holding secret API keys",
+          "requirements.txt, the pinned dependency list that belongs in version control",
+          "checkpoints/*.pt binary model weights",
+          "data/ holding large training datasets"
         ],
-        "correct": [0, 2, 3],
+        "correct": [
+          0,
+          2,
+          3
+        ],
         "explanation": ".env contains secrets, model checkpoints are large binary files, and training data is too big for Git. requirements.txt should be committed so others can reproduce your environment.",
         "isMulti": true
       },
@@ -59,12 +69,14 @@
         "index": 4,
         "text": "What are the 5 GenAI SaaS products you will build by the end of this course?",
         "options": [
-          "Social media bot, speech-to-text, video editor, game AI, email generator",
-          "Database manager, file converter, web scraper, email client, calculator",
-          "Image Generation, Video Generation, Text Composition & Rewriting, Plagiarism & AI Detection, OCR & Document Intelligence",
-          "Search engine, recommendation system, fraud detector, sentiment analyzer, spam filter"
+          "A social media bot, speech-to-text tool, video editor, game AI, and email writer",
+          "Database manager, file converter, web scraper, email client, and a calculator",
+          "Image generation, video generation, text rewriting, AI-text detection, and OCR",
+          "Search engine, recommender, fraud detector, sentiment analyzer, and spam filter"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "These 5 SaaS products cover real market verticals: visual content creation (image & video), text processing (rewriting & plagiarism detection), and document intelligence (OCR). Each can be deployed and offered commercially.",
         "isMulti": false
       }
@@ -82,7 +94,9 @@
           "8 GB",
           "40 GB"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Fine-tuning-ul LoRA al unui model 7B necesită aproximativ 8 GB VRAM datorită înghețării eficiente a parametrilor. Fine-tuning-ul complet ar necesita 40+ GB.",
         "isMulti": false
       },
@@ -90,12 +104,14 @@
         "index": 1,
         "text": "De ce folosește acest curs atât un sandbox în browser CÂT ȘI medii Python reale?",
         "options": [
-          "Sandbox-ul din browser este mai rapid decât Python local",
-          "Sandbox-ul din browser predă concepte rapid; mediile reale sunt necesare pentru antrenament GPU și deployment",
-          "Python local nu poate rula numpy",
-          "Sandbox-ul din browser suportă PyTorch nativ"
+          "Sandbox-ul din browser rulează antrenarea reală a modelelor mai rapid decât Python local",
+          "Sandbox-ul e instant pentru concepte; Python real e necesar pentru GPU și deploy",
+          "Python-ul local nu poate importa numpy sau celelalte biblioteci științifice",
+          "Sandbox-ul din browser poate executa nuclee GPU PyTorch și CUDA nativ în filă"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Pyodide (Python în browser) este perfect pentru experimente rapide cu numpy și vizualizarea conceptelor, dar nu poate rula PyTorch, accesa GPU-uri sau deploya servicii reale.",
         "isMulti": false
       },
@@ -108,7 +124,9 @@
           "virtualenv --create llm-env",
           "python -m venv llm-env"
         ],
-        "correct": [3],
+        "correct": [
+          3
+        ],
         "explanation": "python -m venv este metoda standard din biblioteca standard pentru a crea medii virtuale. Creează o instalare Python izolată în directorul llm-env.",
         "isMulti": false
       },
@@ -116,12 +134,16 @@
         "index": 3,
         "text": "Ce fișiere ar trebui să fie în .gitignore pentru un proiect ML? Selectați toate variantele corecte",
         "options": [
-          ".env (chei API)",
-          "requirements.txt",
-          "checkpoints/*.pt (ponderi model)",
-          "data/ (seturi mari de date de antrenament)"
+          ".env care conține chei API secrete",
+          "requirements.txt, lista de dependențe fixate care trebuie versionată",
+          "checkpoints/*.pt greutăți binare ale modelului",
+          "data/ care conține seturi mari de antrenament"
         ],
-        "correct": [0, 2, 3],
+        "correct": [
+          0,
+          2,
+          3
+        ],
         "explanation": ".env conține secrete, checkpoint-urile modelului sunt fișiere binare mari, iar datele de antrenament sunt prea mari pentru Git. requirements.txt ar trebui comis pentru ca alții să poată reproduce mediul tău.",
         "isMulti": true
       },
@@ -129,12 +151,14 @@
         "index": 4,
         "text": "Care sunt cele 5 produse GenAI SaaS pe care le vei construi până la sfârșitul acestui curs?",
         "options": [
-          "Bot social media, speech-to-text, editor video, AI pentru jocuri, generator email",
-          "Manager bază de date, convertor fișiere, web scraper, client email, calculator",
-          "Generare de Imagini, Generare Video, Compunere & Rescriere Text, Detecție Plagiat & AI, OCR & Inteligență Documentară",
-          "Motor de căutare, sistem de recomandări, detector de fraudă, analizor de sentimente, filtru spam"
+          "Un bot social, unealtă speech-to-text, editor video, AI de joc și scriitor de emailuri",
+          "Manager de baze de date, convertor fișiere, web scraper, client email și calculator",
+          "Generare imagini, generare video, rescriere text, detecție text-AI și OCR",
+          "Motor căutare, recomandări, detector fraudă, analiză sentiment și filtru spam"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Aceste 5 produse SaaS acoperă verticale reale de piață: crearea de conținut vizual (imagini și video), procesarea textului (rescriere și detecția plagiatului) și inteligența documentară (OCR). Fiecare poate fi implementat și oferit comercial.",
         "isMulti": false
       }
@@ -152,7 +176,9 @@
           "8 GB",
           "40 GB"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Το LoRA fine-tuning ενός μοντέλου 7B απαιτεί περίπου 8 GB VRAM λόγω αποδοτικού παγώματος παραμέτρων. Το πλήρες fine-tuning θα χρειαζόταν 40+ GB.",
         "isMulti": false
       },
@@ -160,12 +186,14 @@
         "index": 1,
         "text": "Γιατί αυτό το μάθημα χρησιμοποιεί τόσο sandbox στο browser ΟΣΟ ΚΑΙ πραγματικά περιβάλλοντα Python;",
         "options": [
-          "Το sandbox του browser είναι πιο γρήγορο από τοπική Python",
-          "Το sandbox του browser διδάσκει έννοιες γρήγορα· πραγματικά περιβάλλοντα χρειάζονται για εκπαίδευση GPU και deployment",
-          "Η τοπική Python δεν μπορεί να τρέξει numpy",
-          "Το sandbox του browser υποστηρίζει PyTorch εγγενώς"
+          "Το sandbox του browser τρέχει την πραγματική εκπαίδευση μοντέλων πιο γρήγορα από τοπική Python",
+          "Το sandbox είναι άμεσο για έννοιες· η πραγματική Python χρειάζεται για GPU και deploy",
+          "Η τοπική Python δεν μπορεί να εισάγει numpy ή τις άλλες επιστημονικές βιβλιοθήκες",
+          "Το sandbox του browser εκτελεί πυρήνες GPU PyTorch και CUDA εγγενώς στην καρτέλα"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Το Pyodide (Python στο browser) είναι ιδανικό για γρήγορα πειράματα numpy και οπτικοποίηση εννοιών, αλλά δεν μπορεί να τρέξει PyTorch, να χρησιμοποιήσει GPU ή να κάνει deploy πραγματικές υπηρεσίες.",
         "isMulti": false
       },
@@ -178,7 +206,9 @@
           "virtualenv --create llm-env",
           "python -m venv llm-env"
         ],
-        "correct": [3],
+        "correct": [
+          3
+        ],
         "explanation": "Η python -m venv είναι ο τυπικός τρόπος δημιουργίας εικονικών περιβαλλόντων. Δημιουργεί μια απομονωμένη εγκατάσταση Python στον κατάλογο llm-env.",
         "isMulti": false
       },
@@ -186,12 +216,16 @@
         "index": 3,
         "text": "Ποια αρχεία πρέπει να είναι στο .gitignore ενός ML project; Επιλέξτε όλα όσα ισχύουν",
         "options": [
-          ".env (κλειδιά API)",
-          "requirements.txt",
-          "checkpoints/*.pt (βάρη μοντέλου)",
-          "data/ (μεγάλα σύνολα δεδομένων εκπαίδευσης)"
+          ".env που κρατά μυστικά κλειδιά API",
+          "requirements.txt, η λίστα εξαρτήσεων που ανήκει στο version control",
+          "checkpoints/*.pt δυαδικά βάρη μοντέλου",
+          "data/ που κρατά μεγάλα σύνολα εκπαίδευσης"
         ],
-        "correct": [0, 2, 3],
+        "correct": [
+          0,
+          2,
+          3
+        ],
         "explanation": "Το .env περιέχει μυστικά, τα checkpoint μοντέλων είναι μεγάλα δυαδικά αρχεία και τα δεδομένα εκπαίδευσης είναι πολύ μεγάλα για Git. Το requirements.txt πρέπει να γίνει commit ώστε άλλοι να αναπαράγουν το περιβάλλον σας.",
         "isMulti": true
       },
@@ -199,12 +233,14 @@
         "index": 4,
         "text": "Ποια είναι τα 5 GenAI SaaS προϊόντα που θα φτιάξετε μέχρι το τέλος αυτού του μαθήματος;",
         "options": [
-          "Bot κοινωνικών δικτύων, speech-to-text, επεξεργαστής βίντεο, AI παιχνιδιών, γεννήτρια email",
-          "Διαχειριστής βάσης δεδομένων, μετατροπέας αρχείων, web scraper, email client, αριθμομηχανή",
-          "Δημιουργία Εικόνων, Δημιουργία Βίντεο, Σύνθεση & Αναδιατύπωση Κειμένου, Ανίχνευση Λογοκλοπής & AI, OCR & Νοημοσύνη Εγγράφων",
-          "Μηχανή αναζήτησης, σύστημα συστάσεων, ανιχνευτής απάτης, αναλυτής συναισθημάτων, φίλτρο spam"
+          "Ένα social bot, εργαλείο speech-to-text, video editor, AI παιχνιδιού και συγγραφέας email",
+          "Διαχειριστής βάσης, μετατροπέας αρχείων, web scraper, πελάτης email και αριθμομηχανή",
+          "Δημιουργία εικόνας, δημιουργία βίντεο, αναδιατύπωση κειμένου, ανίχνευση AI-κειμένου και OCR",
+          "Μηχανή αναζήτησης, συστάσεις, ανιχνευτής απάτης, ανάλυση συναισθήματος και φίλτρο spam"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Αυτά τα 5 SaaS προϊόντα καλύπτουν πραγματικές αγορές: δημιουργία οπτικού περιεχομένου (εικόνες & βίντεο), επεξεργασία κειμένου (αναδιατύπωση & ανίχνευση λογοκλοπής) και νοημοσύνη εγγράφων (OCR). Κάθε ένα μπορεί να αναπτυχθεί και να προσφερθεί εμπορικά.",
         "isMulti": false
       }
