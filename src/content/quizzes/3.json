@@ -7,12 +7,14 @@
         "index": 0,
         "text": "A startup wants to build a customer support chatbot. They have a limited budget of $5,000. Which approach would you recommend and why?",
         "options": [
-          "Pretrain a new LLM from scratch — it will be perfectly tailored to their needs",
-          "Take an existing pretrained model and finetune it on their customer support data — this leverages existing language knowledge while being affordable",
-          "Write hand-coded rules for every possible customer question",
-          "Skip both pretraining and finetuning and use the raw pretrained model as-is"
+          "Pretrain a brand-new LLM completely from scratch so it is perfectly and fully tailored to their exact needs",
+          "Finetune an existing pretrained model on their support data — affordable and reuses language skills",
+          "Hand-code explicit if-then rules for every possible customer question",
+          "Ship the raw pretrained base model as-is, with no finetuning"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Finetuning is the practical choice for this scenario. Pretraining from scratch costs millions of dollars and requires massive compute resources, far exceeding a $5,000 budget. Finetuning takes an already-pretrained model (which already understands language) and adapts it for customer support using curated examples — this can be done for hundreds to a few thousand dollars. Hand-coded rules would be brittle and incomplete. A raw pretrained model would not know how to act as a support agent.",
         "isMulti": false
       },
@@ -20,12 +22,14 @@
         "index": 1,
         "text": "Why is self-supervised learning considered 'brilliant' for pretraining LLMs?",
         "options": [
-          "Because it requires hiring thousands of human labelers to tag every training example",
-          "Because the text itself provides the training signal — hide a word, predict it — so virtually unlimited training data is available without human labeling",
-          "Because it only works with very small datasets",
-          "Because it eliminates the need for any computational resources"
+          "Because it needs to hire thousands of paid human labelers to hand-tag every single training example first",
+          "The text itself is the label — hide a word, predict it — so training data is effectively unlimited",
+          "Because it only works on very small, carefully curated datasets",
+          "Because it removes the need for any computing resources at all"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Self-supervised learning is transformative because it turns any text into a training example automatically. Take a sentence, mask the last word, and the correct answer is already there — no human needs to label it. This means every book, article, and webpage ever written becomes free training data. By contrast, supervised learning requires expensive human labeling for every single example.",
         "isMulti": false
       },
@@ -33,12 +37,14 @@
         "index": 2,
         "text": "If you type 'What is the capital of France?' into a raw pretrained GPT-3 (before any finetuning), what is the most likely behavior?",
         "options": [
-          "It would answer 'Paris' clearly and helpfully like ChatGPT",
-          "It would crash and produce an error message",
-          "It might continue with more questions like 'What is the capital of Germany? What is the capital of Spain?' because it learned to complete text patterns, not follow instructions",
-          "It would refuse to answer due to safety filters"
+          "It answers 'Paris' clearly and helpfully, exactly like the polished ChatGPT assistant you know and use",
+          "It crashes and returns an error because the input happens to be a question",
+          "It may keep listing more questions ('...of Germany?') — it completes patterns, not instructions",
+          "It refuses to answer because built-in safety filters block the question"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "A raw pretrained model is a text completer, not an assistant. In its training data, questions often appear in lists (like quizzes or study guides), so it may continue the pattern with more questions rather than answering. Instruction finetuning (SFT + RLHF) is what transformed GPT-3 from a text completer into the helpful ChatGPT assistant that answers questions directly.",
         "isMulti": false
       },
@@ -46,12 +52,15 @@
         "index": 3,
         "text": "What makes LoRA (Low-Rank Adaptation) a game-changer for finetuning? Select all that apply.",
         "options": [
-          "It freezes the original model parameters and only trains a small set of new parameters (less than 1% of the total)",
-          "It makes the model larger and more powerful than the original",
-          "It enables individuals and small companies to finetune large models on consumer hardware",
-          "It completely replaces the pretrained model with a new one"
+          "It freezes the original weights and trains only a small set of new parameters (under 1%)",
+          "It makes the resulting model significantly larger and far more powerful than the original base model",
+          "It lets individuals and small teams finetune large models on ordinary consumer hardware",
+          "It fully replaces the pretrained model with an entirely new one"
         ],
-        "correct": [0, 2],
+        "correct": [
+          0,
+          2
+        ],
         "explanation": "LoRA is significant because it freezes the billions of original parameters and adds a small number of trainable adapter parameters (typically less than 1%). This dramatically reduces memory and compute requirements, making it possible to finetune a 7-billion-parameter model on a single consumer GPU with 24GB of memory. It does not make the model larger or replace it — it adds efficient task-specific adaptations on top of the existing knowledge.",
         "isMulti": true
       },
@@ -59,12 +68,14 @@
         "index": 4,
         "text": "During pretraining, the model sees the text 'It was raining heavily, so she grabbed her ___' and must predict 'umbrella.' What type of knowledge does this single example help the model learn?",
         "options": [
-          "Only vocabulary — that the word 'umbrella' exists",
-          "Only grammar — the correct part of speech after 'her'",
-          "Cause-and-effect reasoning — that rain leads people to grab umbrellas — along with grammar and common-sense associations",
-          "Nothing useful — a single example cannot teach anything"
+          "Only vocabulary — merely that the word 'umbrella' happens to exist in the language",
+          "Only grammar — purely the correct part of speech that must grammatically follow the word 'her'",
+          "Cause and effect — that rain makes people grab umbrellas — plus grammar and common sense",
+          "Nothing useful at all, since one single example can never teach a model anything"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Each next-word prediction during pretraining teaches multiple layers of knowledge simultaneously. This example teaches cause-and-effect (rain causes people to seek protection), common-sense associations (umbrellas are used in rain), grammar (a noun follows 'her'), and vocabulary. Multiplied across billions of such predictions on diverse text, the model builds remarkably rich internal representations of language and world knowledge.",
         "isMulti": false
       }
@@ -77,12 +88,14 @@
         "index": 0,
         "text": "Un startup vrea sa construiasca un chatbot de suport clienti. Au un buget limitat de 5.000$. Ce abordare ai recomanda si de ce?",
         "options": [
-          "Sa faca pretraining la un LLM nou de la zero — va fi perfect adaptat nevoilor lor",
-          "Sa ia un model pretrenat existent si sa faca finetuning pe datele lor de suport clienti — aceasta valorifica cunostintele lingvistice existente fiind in acelasi timp accesibila",
-          "Sa scrie reguli codificate manual pentru fiecare intrebare posibila a clientilor",
-          "Sa sara atat pretraining-ul cat si finetuning-ul si sa foloseasca modelul pretrenat asa cum este"
+          "Antrenează de la zero un LLM complet nou, perfect și integral adaptat exact la nevoile lor specifice",
+          "Ajustează un model preantrenat pe datele lor de suport — ieftin și refolosește abilități",
+          "Scrie reguli explicite if-then pentru fiecare întrebare posibilă a clienților",
+          "Livrează modelul preantrenat brut ca atare, fără finetuning"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Finetuning-ul este alegerea practica pentru acest scenariu. Pretraining-ul de la zero costa milioane de dolari, depasind cu mult un buget de 5.000$. Finetuning-ul ia un model deja pretrenat (care intelege deja limbajul) si il adapteaza pentru suport clienti — acest lucru se poate face cu sute pana la cateva mii de dolari.",
         "isMulti": false
       },
@@ -90,12 +103,14 @@
         "index": 1,
         "text": "De ce este invatarea auto-supervizata considerata 'geniala' pentru pretraining-ul LLM-urilor?",
         "options": [
-          "Pentru ca necesita angajarea a mii de etichetatori umani pentru a marca fiecare exemplu de antrenament",
-          "Pentru ca textul insusi ofera semnalul de antrenament — ascunde un cuvant, prezice-l — asa incat date de antrenament practic nelimitate sunt disponibile fara etichetare umana",
-          "Pentru ca functioneaza doar cu seturi de date foarte mici",
-          "Pentru ca elimina nevoia oricaror resurse computationale"
+          "Pentru că necesită mii de etichetatori umani plătiți care să eticheteze manual fiecare exemplu întâi",
+          "Textul însuși e eticheta — ascunzi un cuvânt, îl prezici — deci datele sunt practic nelimitate",
+          "Pentru că funcționează doar pe seturi de date foarte mici și atent selectate",
+          "Pentru că elimină complet nevoia de resurse de calcul"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Invatarea auto-supervizata este transformatoare pentru ca transforma orice text intr-un exemplu de antrenament automat. Ia o propozitie, mascheaza ultimul cuvant, si raspunsul corect este deja acolo — niciun om nu trebuie sa-l eticheteze. Aceasta inseamna ca fiecare carte si articol devine date de antrenament gratuite.",
         "isMulti": false
       },
@@ -103,12 +118,14 @@
         "index": 2,
         "text": "Daca scrii 'Care este capitala Frantei?' intr-un GPT-3 brut pretrenat (inainte de orice finetuning), care este cel mai probabil comportament?",
         "options": [
-          "Ar raspunde 'Paris' clar si util, ca ChatGPT",
-          "S-ar bloca si ar produce un mesaj de eroare",
-          "Ar putea continua cu mai multe intrebari precum 'Care este capitala Germaniei? Care este capitala Spaniei?' deoarece a invatat sa completeze tipare de text, nu sa urmeze instructiuni",
-          "Ar refuza sa raspunda din cauza filtrelor de siguranta"
+          "Răspunde 'Paris' clar și util, exact ca asistentul șlefuit ChatGPT pe care îl știi și folosești",
+          "Se blochează și dă eroare pentru că intrarea este o întrebare",
+          "Poate continua cu alte întrebări ('...Germaniei?') — completează tipare, nu instrucțiuni",
+          "Refuză să răspundă pentru că filtrele de siguranță blochează întrebarea"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Un model brut pretrenat este un completor de text, nu un asistent. In datele sale de antrenament, intrebarile apar adesea in liste (ca in teste sau ghiduri de studiu), asa ca ar putea continua tiparul cu mai multe intrebari. Finetuning-ul de instructiuni (SFT + RLHF) este ceea ce a transformat GPT-3 intr-un asistent care raspunde la intrebari.",
         "isMulti": false
       },
@@ -116,12 +133,15 @@
         "index": 3,
         "text": "Ce face LoRA (Low-Rank Adaptation) o schimbare de joc pentru finetuning? Selecteaza toate raspunsurile corecte.",
         "options": [
-          "Ingheata parametrii originali ai modelului si antreneaza doar un set mic de parametri noi (mai putin de 1% din total)",
-          "Face modelul mai mare si mai puternic decat originalul",
-          "Permite persoanelor fizice si companiilor mici sa faca finetuning la modele mari pe hardware de consum",
-          "Inlocuieste complet modelul pretrenat cu unul nou"
+          "Îngheață greutățile originale și antrenează doar un set mic de parametri noi (sub 1%)",
+          "Face modelul rezultat semnificativ mai mare și mult mai puternic decât modelul de bază original",
+          "Permite indivizilor și echipelor mici să ajusteze modele mari pe hardware obișnuit de consum",
+          "Înlocuiește complet modelul preantrenat cu unul complet nou"
         ],
-        "correct": [0, 2],
+        "correct": [
+          0,
+          2
+        ],
         "explanation": "LoRA este semnificativ pentru ca ingheata miliardele de parametri originali si adauga un numar mic de parametri adaptori antrenabili (de obicei mai putin de 1%). Aceasta reduce dramatic cerintele de memorie si calcul, facand posibil finetuning-ul unui model de 7 miliarde de parametri pe un singur GPU de consum.",
         "isMulti": true
       },
@@ -129,12 +149,14 @@
         "index": 4,
         "text": "In timpul pretraining-ului, modelul vede textul 'Ploua torential, asa ca ea si-a luat ___' si trebuie sa prezica 'umbrela.' Ce tip de cunostinte ajuta acest singur exemplu modelul sa invete?",
         "options": [
-          "Doar vocabular — ca exista cuvantul 'umbrela'",
-          "Doar gramatica — partea de vorbire corecta dupa 'si-a luat'",
-          "Rationament de cauza-efect — ca ploaia ii determina pe oameni sa ia umbrele — impreuna cu gramatica si asociatiile de bun simt",
-          "Nimic util — un singur exemplu nu poate invata nimic"
+          "Doar vocabular — pur și simplu că cuvântul 'umbrelă' există în limbă",
+          "Doar gramatică — exact partea de vorbire care trebuie gramatical să urmeze după cuvântul potrivit",
+          "Cauză și efect — că ploaia îi face pe oameni să ia umbrele — plus gramatică și bun-simț",
+          "Nimic util, pentru că un singur exemplu nu poate învăța niciodată un model"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Fiecare predictie de cuvant urmator in timpul pretraining-ului invata simultan mai multe straturi de cunostinte. Acest exemplu invata cauza-efect (ploaia determina oamenii sa caute protectie), asociatii de bun simt (umbrelele se folosesc pe ploaie), gramatica si vocabular. Inmultit cu miliarde de astfel de predictii, modelul construieste reprezentari interne remarcabil de bogate.",
         "isMulti": false
       }
@@ -147,12 +169,14 @@
         "index": 0,
         "text": "Μια startup θελει να φτιαξει ενα chatbot υποστηριξης πελατων. Εχουν περιορισμενο προυπολογισμο 5.000$. Ποια προσεγγιση θα συνιστουσες και γιατι;",
         "options": [
-          "Να κανουν pretraining σε ενα νεο LLM απο το μηδεν — θα ειναι τελεια προσαρμοσμενο στις αναγκες τους",
-          "Να παρουν ενα υπαρχον pretrained μοντελο και να κανουν finetuning στα δεδομενα υποστηριξης πελατων τους — αυτο αξιοποιει τις υπαρχουσες γλωσσικες γνωσεις ενω ειναι προσιτο",
-          "Να γραψουν χειρογραφους κανονες για καθε πιθανη ερωτηση πελατη",
-          "Να παρακαμψουν τοσο το pretraining οσο και το finetuning και να χρησιμοποιησουν το ωμο pretrained μοντελο ως εχει"
+          "Εκπαίδευσε από το μηδέν ένα ολοκαίνουριο LLM ώστε να ταιριάζει απόλυτα και πλήρως στις ακριβείς ανάγκες τους",
+          "Κάνε finetune ένα προεκπαιδευμένο μοντέλο στα δεδομένα τους — φθηνό, επαναχρησιμοποιεί δεξιότητες",
+          "Γράψε ρητούς κανόνες if-then για κάθε πιθανή ερώτηση πελάτη",
+          "Δώσε το ωμό προεκπαιδευμένο μοντέλο ως έχει, χωρίς finetuning"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Το finetuning ειναι η πρακτικη επιλογη. Το pretraining απο το μηδεν κοστιζει εκατομμυρια δολαρια, ξεπερνωντας κατα πολυ εναν προυπολογισμο 5.000$. Το finetuning παιρνει ενα ηδη pretrained μοντελο και το προσαρμοζει — μπορει να γινει με εκατονταδες εως λιγες χιλιαδες δολαρια.",
         "isMulti": false
       },
@@ -160,12 +184,14 @@
         "index": 1,
         "text": "Γιατι η αυτο-εποπτευομενη μαθηση θεωρειται 'λαμπρη' για το pretraining των LLMs;",
         "options": [
-          "Επειδη απαιτει την προσληψη χιλιαδων ανθρωπινων επισημειωτων",
-          "Επειδη το ιδιο το κειμενο παρεχει το σημα εκπαιδευσης — κρυψε μια λεξη, προβλεψε τη — ετσι πρακτικα απεριοριστα δεδομενα εκπαιδευσης ειναι διαθεσιμα χωρις ανθρωπινη επισημειωση",
-          "Επειδη λειτουργει μονο με πολυ μικρα σετ δεδομενων",
-          "Επειδη εξαλειφει την αναγκη για υπολογιστικους πορους"
+          "Επειδή απαιτεί χιλιάδες πληρωμένους ανθρώπινους annotators να ετικετάρουν κάθε παράδειγμα πρώτα",
+          "Το ίδιο το κείμενο είναι η ετικέτα — κρύβεις μια λέξη, την προβλέπεις — άρα άπειρα δεδομένα",
+          "Επειδή δουλεύει μόνο σε πολύ μικρά, προσεκτικά επιλεγμένα σύνολα δεδομένων",
+          "Επειδή εξαλείφει εντελώς την ανάγκη για υπολογιστικούς πόρους"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Η αυτο-εποπτευομενη μαθηση ειναι μετασχηματιστικη επειδη μετατρεπει οποιοδηποτε κειμενο σε παραδειγμα εκπαιδευσης αυτοματα. Παρε μια προταση, μασκαρε την τελευταια λεξη, και η σωστη απαντηση ειναι ηδη εκει — κανενας ανθρωπος δεν χρειαζεται να την επισημειωσει.",
         "isMulti": false
       },
@@ -173,12 +199,14 @@
         "index": 2,
         "text": "Αν πληκτρολογησεις 'Ποια ειναι η πρωτευουσα της Γαλλιας;' σε ενα ωμο pretrained GPT-3 (πριν απο οποιοδηποτε finetuning), ποια ειναι η πιο πιθανη συμπεριφορα;",
         "options": [
-          "Θα απαντουσε 'Παρισι' ξεκαθαρα και χρησιμα οπως το ChatGPT",
-          "Θα καταρρεε και θα εμφανιζε μηνυμα σφαλματος",
-          "Μπορει να συνεχιζε με περισσοτερες ερωτησεις οπως 'Ποια ειναι η πρωτευουσα της Γερμανιας;' επειδη εμαθε να συμπληρωνει μοτιβα κειμενου, οχι να ακολουθει οδηγιες",
-          "Θα αρνιοταν να απαντησει λογω φιλτρων ασφαλειας"
+          "Απαντά 'Παρίσι' καθαρά και χρήσιμα, ακριβώς όπως ο γυαλισμένος βοηθός ChatGPT που ήδη ξέρεις και χρησιμοποιείς",
+          "Καταρρέει και επιστρέφει σφάλμα επειδή η είσοδος τυχαίνει να είναι ερώτηση",
+          "Μπορεί να συνεχίσει με κι άλλες ερωτήσεις ('...Γερμανίας;') — συμπληρώνει μοτίβα, όχι εντολές",
+          "Αρνείται να απαντήσει επειδή τα φίλτρα ασφαλείας μπλοκάρουν την ερώτηση"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Ενα ωμο pretrained μοντελο ειναι ενας συμπληρωτης κειμενου, οχι ενας βοηθος. Στα δεδομενα εκπαιδευσης του, οι ερωτησεις εμφανιζονται συχνα σε λιστες, οποτε μπορει να συνεχισει το μοτιβο με περισσοτερες ερωτησεις. Το instruction finetuning (SFT + RLHF) ειναι αυτο που μετεμορφωσε το GPT-3 σε χρησιμο βοηθο.",
         "isMulti": false
       },
@@ -186,12 +214,15 @@
         "index": 3,
         "text": "Τι κανει το LoRA (Low-Rank Adaptation) τοσο σημαντικο για το finetuning; Επελεξε ολες τις σωστες απαντησεις.",
         "options": [
-          "Παγωνει τις αρχικες παραμετρους του μοντελου και εκπαιδευει μονο ενα μικρο σετ νεων παραμετρων (λιγοτερο απο 1% του συνολου)",
-          "Κανει το μοντελο μεγαλυτερο και πιο ισχυρο απο το αρχικο",
-          "Επιτρεπει σε ατομα και μικρες εταιρειες να κανουν finetuning σε μεγαλα μοντελα σε καταναλωτικο hardware",
-          "Αντικαθιστα πληρως το pretrained μοντελο με ενα νεο"
+          "Παγώνει τα αρχικά βάρη και εκπαιδεύει μόνο ένα μικρό σύνολο νέων παραμέτρων (κάτω από 1%)",
+          "Κάνει το τελικό μοντέλο σημαντικά μεγαλύτερο και πολύ πιο ισχυρό από ό,τι είναι το αρχικό βασικό μοντέλο",
+          "Επιτρέπει σε άτομα και μικρές ομάδες να κάνουν finetune μεγάλα μοντέλα σε συνηθισμένο hardware",
+          "Αντικαθιστά πλήρως το προεκπαιδευμένο μοντέλο με ένα εντελώς νέο"
         ],
-        "correct": [0, 2],
+        "correct": [
+          0,
+          2
+        ],
         "explanation": "Το LoRA ειναι σημαντικο επειδη παγωνει τα δισεκατομμυρια αρχικων παραμετρων και προσθετει εναν μικρο αριθμο εκπαιδευσιμων παραμετρων προσαρμογεα (συνηθως λιγοτερο απο 1%). Αυτο μειωνει δραματικα τις απαιτησεις μνημης και υπολογισμου.",
         "isMulti": true
       },
@@ -199,12 +230,14 @@
         "index": 4,
         "text": "Κατα τη διαρκεια του pretraining, το μοντελο βλεπει το κειμενο 'Εβρεχε δυνατα, ετσι αρπαξε την ___' και πρεπει να προβλεψει 'ομπρελα.' Τι ειδους γνωση βοηθα αυτο το μεμονωμενο παραδειγμα το μοντελο να μαθει;",
         "options": [
-          "Μονο λεξιλογιο — οτι υπαρχει η λεξη 'ομπρελα'",
-          "Μονο γραμματικη — το σωστο μερος του λογου",
-          "Συλλογισμο αιτιας-αποτελεσματος — οτι η βροχη οδηγει τους ανθρωπους να παρουν ομπρελα — μαζι με γραμματικη και συνειρμους κοινης λογικης",
-          "Τιποτα χρησιμο — ενα μεμονωμενο παραδειγμα δεν μπορει να διδαξει τιποτα"
+          "Μόνο λεξιλόγιο — απλώς ότι η λέξη 'ομπρέλα' τυχαίνει να υπάρχει στη γλώσσα",
+          "Μόνο γραμματική — ακριβώς και μόνο το μέρος του λόγου που πρέπει γραμματικά να ακολουθεί τη λέξη αυτή",
+          "Αιτία και αποτέλεσμα — ότι η βροχή κάνει τους ανθρώπους να παίρνουν ομπρέλες — και κοινή λογική",
+          "Τίποτα χρήσιμο, αφού ένα μόνο παράδειγμα δεν διδάσκει ποτέ ένα μοντέλο"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Καθε προβλεψη επομενης λεξης κατα το pretraining διδασκει ταυτοχρονα πολλαπλα επιπεδα γνωσης. Αυτο το παραδειγμα διδασκει αιτια-αποτελεσμα, συνειρμους κοινης λογικης, γραμματικη και λεξιλογιο. Πολλαπλασιασμενο με δισεκατομμυρια τετοιων προβλεψεων, το μοντελο χτιζει εντυπωσιακα πλουσιες εσωτερικες αναπαραστασεις.",
         "isMulti": false
       }

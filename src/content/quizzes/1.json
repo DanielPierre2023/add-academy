@@ -119,7 +119,7 @@
         "index": 2,
         "text": "Ce s-ar intampla daca ai antrena un LLM doar pe povesti pentru copii in loc de internetul larg?",
         "options": [
-          "Devine mai inteligent pentru că poveștile pentru copii sunt mai clare",
+          "Devine mai inteligent pentru că poveștile pentru copii sunt mult mai clare și mai simple",
           "Funcționează identic cu GPT-3 pentru că arhitectura este neschimbată",
           "Scrie bine text de tip poveste, dar nu știe știință, cod sau actualități",
           "Devine complet incapabil să genereze vreun text coerent după aceea"
@@ -135,7 +135,7 @@
         "text": "Care dintre urmatoarele sunt motive valide pentru a construi un LLM de la zero in loc sa folosesti pur si simplu un API existent? Selecteaza toate raspunsurile corecte.",
         "options": [
           "Înțelegerea interiorului ajută la diagnosticarea comportamentului neașteptat",
-          "Construirea de la zero garantează că modelul va depăși GPT-4 la orice sarcină",
+          "Construirea de la zero garantează că modelul tău va depăși GPT-4 la absolut orice sarcină dată",
           "Ideile de bază precum tokenizarea și atenția rămân stabile chiar când uneltele se schimbă",
           "Companiile vor tot mai mult modele private, specializate, adaptate datelor lor"
         ],
@@ -151,7 +151,7 @@
         "index": 4,
         "text": "Lectia compara software-ul traditional cu LLM-urile. Daca o aplicatie de calculator traditionala si un LLM raspund ambele '2 + 2 = 4', de ce este natura raspunsurilor lor fundamental diferita?",
         "options": [
-          "Calculatorul consumă pur și simplu mai mult curent decât modelul lingvistic",
+          "Calculatorul consumă pur și simplu mult mai mult curent electric decât modelul lingvistic mare",
           "Calculatorul rulează o regulă explicită; LLM-ul prezice '4' ca fiind cel mai probabil",
           "Nu există nicio diferență reală — ambele folosesc exact aceeași matematică",
           "LLM-ul este întotdeauna strict mai precis decât o aplicație de calculator"
@@ -173,7 +173,7 @@
         "options": [
           "Σωστό — τα LLM κατανοούν τη γλώσσα ακριβώς όπως ο ανθρώπινος εγκέφαλος",
           "Τα LLM προβλέπουν στατιστικά τις επόμενες λέξεις από μοτίβα σε τεράστια κείμενα",
-          "Τα LLM αναζητούν απαντήσεις σε μια τεράστια βάση ερωτήσεων και απαντήσεων",
+          "Τα LLM αναζητούν απαντήσεις σε μια τεράστια αποθηκευμένη βάση ερωτήσεων και απαντήσεων",
           "Τα LLM ακολουθούν χειρόγραφους κανόνες για κάθε πιθανή ερώτηση"
         ],
         "correct": [
@@ -201,7 +201,7 @@
         "index": 2,
         "text": "Τι θα συνεβαινε αν εκπαιδευες ενα LLM μονο σε παιδικα παραμυθια αντι για το ευρυ διαδικτυο;",
         "options": [
-          "Γίνεται πιο έξυπνο επειδή τα παιδικά βιβλία χρησιμοποιούν πιο καθαρή γλώσσα",
+          "Γίνεται πιο έξυπνο επειδή τα παιδικά βιβλία χρησιμοποιούν πολύ πιο καθαρή και απλή γλώσσα",
           "Λειτουργεί ίδια με το GPT-3 επειδή η αρχιτεκτονική είναι αμετάβλητη",
           "Γράφει καλά κείμενο τύπου ιστορίας αλλά αγνοεί επιστήμη, κώδικα, επικαιρότητα",
           "Γίνεται εντελώς ανίκανο να παραγάγει οποιοδήποτε συνεκτικό κείμενο"
@@ -217,7 +217,7 @@
         "text": "Ποιοι απο τους παρακατω ειναι εγκυροι λογοι για να χτισεις ενα LLM απο το μηδεν αντι να χρησιμοποιησεις απλα ενα υπαρχον API; Επελεξε ολες τις σωστες απαντησεις.",
         "options": [
           "Η κατανόηση του εσωτερικού βοηθά να διαγνώσεις γιατί ένα μοντέλο συμπεριφέρεται παράξενα",
-          "Η κατασκευή από το μηδέν εγγυάται ότι το μοντέλο θα ξεπεράσει το GPT-4 παντού",
+          "Η κατασκευή από το μηδέν εγγυάται ότι το μοντέλο σου θα ξεπεράσει το GPT-4 σε απολύτως κάθε εργασία",
           "Βασικές ιδέες όπως tokenization και attention μένουν σταθερές ακόμη κι όταν αλλάζουν τα εργαλεία",
           "Οι εταιρείες θέλουν όλο και πιο ιδιωτικά, εξειδικευμένα μοντέλα στα δικά τους δεδομένα"
         ],

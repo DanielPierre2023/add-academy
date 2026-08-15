@@ -7,12 +7,14 @@
         "index": 0,
         "text": "GPT-3 has 175 billion parameters while GPT-1 had 117 million — a 1,500x increase. Yet the fundamental architecture barely changed. What does this tell us about the Transformer design?",
         "options": [
-          "The Transformer is a bad architecture that needs constant redesign",
-          "The Transformer scales remarkably well — making it bigger with more data consistently produces better results without architectural changes",
-          "Parameter count does not matter at all for model quality",
-          "GPT-3 uses a completely different architecture than GPT-1"
+          "The Transformer is a fundamentally poor architecture that needs constant redesign to keep working",
+          "It scales remarkably — more size and data reliably give better results, no redesign needed",
+          "Parameter count actually does not matter at all for a model's final quality or ability",
+          "GPT-3 secretly uses a completely different architecture than the earlier GPT-1 did"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "One of the most remarkable properties of the Transformer is its scaling behavior. The same decoder-only Transformer design from GPT-1 was simply scaled up — more layers, more parameters, more training data — to create GPT-2, GPT-3, and GPT-4. This predictable scaling (described by scaling laws) is why companies continue to invest in larger models: the architecture does not break at scale, it consistently improves.",
         "isMulti": false
       },
@@ -20,12 +22,14 @@
         "index": 1,
         "text": "A user sets the temperature to 0.1 when asking GPT for a factual answer, and temperature to 1.5 when brainstorming creative story ideas. Why do these different settings make sense for these tasks?",
         "options": [
-          "Temperature controls the model's internet access speed",
-          "Low temperature makes the model always pick the most probable token (ideal for factual accuracy), while high temperature gives unlikely tokens a real chance of being selected (ideal for creative, unexpected outputs)",
-          "Temperature has no effect on the output",
-          "High temperature makes the model more factual, low temperature makes it more creative"
+          "Temperature actually just controls the model's own internet connection and its access speed",
+          "Low temperature picks the most probable token (factual); high temperature lets unlikely ones through",
+          "High temperature makes the model far more factual, while low temperature actually makes it much more creative instead",
+          "Temperature has no measurable effect whatsoever on the model's generated output text"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Temperature reshapes the probability distribution over tokens. At low temperature (near 0), probabilities become sharply peaked — the most likely token gets selected almost every time, producing deterministic, factual outputs. At high temperature, the distribution flattens — unusual tokens get a meaningful chance of selection, producing more diverse, creative, and sometimes surprising (but less reliable) outputs. Matching temperature to the task is a key practical skill.",
         "isMulti": false
       },
@@ -33,12 +37,14 @@
         "index": 2,
         "text": "What is 'few-shot learning' and why was it considered GPT-3's most important breakthrough?",
         "options": [
-          "Few-shot learning means the model was trained on very few examples total",
-          "Few-shot learning means the model can learn new tasks from a few examples provided directly in the prompt, without any retraining — turning the prompt into a kind of programming language",
-          "Few-shot learning means the model can only answer a few questions per day",
-          "Few-shot learning means the model forgets everything after a few uses"
+          "Few-shot learning means the model was originally trained on only a very small number of examples total",
+          "The model learns a new task from a few examples in the prompt — no retraining needed at all",
+          "Few-shot learning means the model can only answer a small number of questions each day",
+          "Few-shot learning means the model quickly forgets everything after just a few uses"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Before GPT-3, adapting a model to a new task required collecting labeled data and retraining. GPT-3 showed that you could provide a few examples directly in the prompt (e.g., 'Translate: Hello = Bonjour, Goodbye = Au revoir, Thank you = ?') and the model would recognize and continue the pattern. This turned prompts into a programming interface — you could 'program' the model to do almost anything by demonstrating the pattern with examples, no retraining required.",
         "isMulti": false
       },
@@ -46,12 +52,16 @@
         "index": 3,
         "text": "Why does GPT use subword tokenization (BPE) instead of splitting text into whole words? Select all that apply.",
         "options": [
-          "Whole-word tokenization would require an impossibly large vocabulary to cover all words, misspellings, names, and technical terms across all languages",
-          "Subword tokenization allows the model to handle never-before-seen words by breaking them into known sub-pieces",
-          "Subword tokenization lets related words like 'run', 'running', and 'runner' share common components",
-          "Whole-word tokenization is actually better but GPT chose BPE by mistake"
+          "A huge whole-word vocabulary would be needed to cover all words, names, and misspellings",
+          "Subword units let the model handle never-before-seen words by breaking them into known pieces",
+          "Related words like 'run', 'running', 'runner' can share common subword components",
+          "Whole-word tokenization is actually strictly better, but GPT chose BPE purely by mistake somehow"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "Subword tokenization (BPE) solves three problems: vocabulary explosion (whole words would need millions of entries), unknown words (rare words can be assembled from known sub-pieces, like 'un'+'believ'+'able'), and morphological sharing (related words share common tokens, helping the model recognize their connections). GPT-3 uses just 50,257 tokens to represent all possible text.",
         "isMulti": true
       },
@@ -59,12 +69,14 @@
         "index": 4,
         "text": "GPT-3 can write Python code, even though nobody specifically trained it to program. How is this possible?",
         "options": [
-          "GPT-3 has a built-in Python interpreter",
-          "GPT-3's training data included billions of lines of open-source code from GitHub, so it learned programming patterns as part of next-word prediction — code generation is an emergent ability from learning to predict code tokens",
-          "GPT-3 copies code directly from the internet in real time",
-          "GPT-3 cannot actually write code — it only generates random characters that look like code"
+          "GPT-3 simply has a built-in Python interpreter that runs the code it is asked about",
+          "Its training data included billions of lines of GitHub code, so coding emerged from prediction",
+          "GPT-3 copies the code directly from the public internet in real time as you ask it",
+          "GPT-3 cannot really write working code — it only emits random characters that vaguely look like code"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "GPT-3's training data included substantial amounts of code from GitHub and programming documentation. Through next-token prediction on this code, the model learned programming syntax, patterns, common algorithms, and even documentation conventions. Code generation was never a specific training objective — it emerged as a side effect of the model becoming very good at predicting the next token in code files. This is a prime example of emergent abilities.",
         "isMulti": false
       }
@@ -77,12 +89,14 @@
         "index": 0,
         "text": "GPT-3 are 175 de miliarde de parametri in timp ce GPT-1 avea 117 milioane — o crestere de 1.500x. Totusi arhitectura fundamentala abia s-a schimbat. Ce ne spune acest lucru despre designul Transformer?",
         "options": [
-          "Transformer-ul este o arhitectura slaba care necesita redesign constant",
-          "Transformer-ul se scaleaza remarcabil de bine — marirea lui cu mai multe date produce constant rezultate mai bune fara schimbari arhitecturale",
-          "Numarul de parametri nu conteaza deloc pentru calitatea modelului",
-          "GPT-3 foloseste o arhitectura complet diferita fata de GPT-1"
+          "Transformer e o arhitectură fundamental slabă care are nevoie de reproiectare constantă ca să meargă",
+          "Se scalează remarcabil — mai multă dimensiune și date dau rezultate mai bune, fără reproiectare",
+          "Numărul de parametri chiar nu contează deloc pentru calitatea sau abilitatea finală a modelului",
+          "GPT-3 folosește pe ascuns o arhitectură complet diferită de cea a GPT-1"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Una dintre cele mai remarcabile proprietati ale Transformer-ului este comportamentul sau de scalare. Acelasi design Transformer decoder-only de la GPT-1 a fost pur si simplu marit — mai multe straturi, mai multi parametri, mai multe date de antrenament. Aceasta scalare previzibila este motivul pentru care companiile continua sa investeasca in modele mai mari.",
         "isMulti": false
       },
@@ -90,12 +104,14 @@
         "index": 1,
         "text": "Un utilizator seteaza temperature la 0.1 cand cere GPT-ului un raspuns factual, si temperature la 1.5 cand face brainstorming de idei creative de povesti. De ce au sens aceste setari diferite pentru aceste sarcini?",
         "options": [
-          "Temperature controleaza viteza de acces la internet a modelului",
-          "Temperature scazuta face modelul sa aleaga mereu cel mai probabil token (ideal pentru acuratete factuala), in timp ce temperature ridicata da token-urilor improbabile o sansa reala de selectie (ideal pentru rezultate creative, neasteptate)",
-          "Temperature nu are niciun efect asupra rezultatului",
-          "Temperature ridicata face modelul mai factual, temperature scazuta il face mai creativ"
+          "Temperatura controlează de fapt doar conexiunea la internet și viteza de acces a modelului însuși, atât",
+          "Temperatura mică alege tokenul cel mai probabil (factual); cea mare lasă să treacă cele improbabile",
+          "Temperatura mare face modelul mult mai factual, iar cea mică îl face mult mai creativ",
+          "Temperatura nu are absolut niciun efect măsurabil asupra textului generat de model"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Temperature reformuleaza distributia de probabilitate peste token-uri. La temperature scazuta, probabilitatile devin ascutite — cel mai probabil token este selectat aproape de fiecare data, producand rezultate deterministe. La temperature ridicata, distributia se aplatizeaza — token-urile neobisnuite primesc o sansa semnificativa de selectie.",
         "isMulti": false
       },
@@ -103,12 +119,14 @@
         "index": 2,
         "text": "Ce este 'few-shot learning' si de ce a fost considerat cea mai importanta descoperire a GPT-3?",
         "options": [
-          "Few-shot learning inseamna ca modelul a fost antrenat pe foarte putine exemple in total",
-          "Few-shot learning inseamna ca modelul poate invata sarcini noi din cateva exemple furnizate direct in prompt, fara nicio reantrenare — transformand prompt-ul intr-un fel de limbaj de programare",
-          "Few-shot learning inseamna ca modelul poate raspunde doar la cateva intrebari pe zi",
-          "Few-shot learning inseamna ca modelul uita totul dupa cateva utilizari"
+          "Few-shot înseamnă că modelul a fost antrenat inițial pe doar un număr foarte mic de exemple în total",
+          "Modelul învață o sarcină nouă din câteva exemple din prompt — fără reantrenare deloc",
+          "Few-shot înseamnă că modelul poate răspunde doar la câteva întrebări în fiecare zi",
+          "Few-shot înseamnă că modelul uită repede totul după doar câteva utilizări"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Inainte de GPT-3, adaptarea unui model la o sarcina noua necesita colectarea de date etichetate si reantrenare. GPT-3 a aratat ca poti furniza cateva exemple direct in prompt si modelul recunoaste si continua tiparul. Aceasta a transformat prompt-urile intr-o interfata de programare.",
         "isMulti": false
       },
@@ -116,12 +134,16 @@
         "index": 3,
         "text": "De ce foloseste GPT tokenizare la nivel de subcuvant (BPE) in loc sa imparta textul in cuvinte intregi? Selecteaza toate raspunsurile corecte.",
         "options": [
-          "Tokenizarea pe cuvinte intregi ar necesita un vocabular imposibil de mare pentru a acoperi toate cuvintele, greselile de ortografie, numele si termenii tehnici din toate limbile",
-          "Tokenizarea pe subcuvinte permite modelului sa gestioneze cuvinte niciodata vazute inainte, descompunandu-le in sub-piese cunoscute",
-          "Tokenizarea pe subcuvinte permite cuvintelor inrudite precum 'alerga', 'alergand' si 'alergator' sa imparta componente comune",
-          "Tokenizarea pe cuvinte intregi este de fapt mai buna, dar GPT a ales BPE din greseala"
+          "Ar fi nevoie de un vocabular uriaș de cuvinte întregi pentru toate cuvintele, numele și greșelile",
+          "Unitățile subword permit modelului să gestioneze cuvinte nevăzute descompunându-le în bucăți știute",
+          "Cuvinte înrudite ca 'run', 'running', 'runner' pot împărtăși componente subword comune",
+          "Tokenizarea pe cuvinte întregi e de fapt strict mai bună, dar GPT a ales BPE pur și simplu din greșeală"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "Tokenizarea pe subcuvinte (BPE) rezolva trei probleme: explozia vocabularului, cuvintele necunoscute (cuvintele rare pot fi asamblate din sub-piese cunoscute) si partajarea morfologica (cuvintele inrudite impart token-uri comune). GPT-3 foloseste doar 50.257 de token-uri pentru a reprezenta tot textul posibil.",
         "isMulti": true
       },
@@ -129,12 +151,14 @@
         "index": 4,
         "text": "GPT-3 poate scrie cod Python, desi nimeni nu l-a antrenat specific sa programeze. Cum este posibil acest lucru?",
         "options": [
-          "GPT-3 are un interpretor Python incorporat",
-          "Datele de antrenament ale GPT-3 au inclus miliarde de linii de cod open-source de pe GitHub, asa ca a invatat tiparele de programare ca parte a predictiei urmatorul-cuvant — generarea de cod este o abilitate emergenta din invatarea de a prezice token-uri de cod",
-          "GPT-3 copiaza cod direct de pe internet in timp real",
-          "GPT-3 nu poate scrie de fapt cod — genereaza doar caractere aleatorii care arata ca si cod"
+          "GPT-3 pur și simplu are un interpretor Python încorporat care rulează codul despre care e întrebat",
+          "Datele lui includeau miliarde de linii de cod GitHub, deci programarea a emers din predicție",
+          "GPT-3 copiază codul direct de pe internetul public în timp real, pe măsură ce îl întrebi",
+          "GPT-3 nu poate scrie cod funcțional — doar emite caractere aleatorii care par vag a fi cod"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Datele de antrenament ale GPT-3 au inclus cantitati substantiale de cod de pe GitHub. Prin predictia next-token pe acest cod, modelul a invatat sintaxa de programare, tipare, algoritmi comuni si conventii de documentatie. Generarea de cod nu a fost niciodata un obiectiv specific de antrenament — a aparut ca un efect secundar al modelului devenind foarte bun la prezicerea urmatorului token in fisierele de cod.",
         "isMulti": false
       }
@@ -147,12 +171,14 @@
         "index": 0,
         "text": "Το GPT-3 εχει 175 δισεκατομμυρια παραμετρους ενω το GPT-1 ειχε 117 εκατομμυρια — μια αυξηση 1.500x. Ωστοσο η θεμελιωδης αρχιτεκτονικη μολις αλλαξε. Τι μας λεει αυτο για τον σχεδιασμο Transformer;",
         "options": [
-          "Το Transformer ειναι μια κακη αρχιτεκτονικη που χρειαζεται συνεχη επανασχεδιασμο",
-          "Το Transformer κλιμακωνεται εξαιρετικα καλα — η μεγεθυνση του με περισσοτερα δεδομενα παραγει σταθερα καλυτερα αποτελεσματα χωρις αρχιτεκτονικες αλλαγες",
-          "Ο αριθμος παραμετρων δεν εχει καμια σημασια για την ποιοτητα του μοντελου",
-          "Το GPT-3 χρησιμοποιει μια εντελως διαφορετικη αρχιτεκτονικη απο το GPT-1"
+          "Ο Transformer είναι θεμελιωδώς κακή αρχιτεκτονική που χρειάζεται συνεχή επανασχεδίαση για να δουλεύει",
+          "Κλιμακώνεται εντυπωσιακά — περισσότερο μέγεθος και δεδομένα δίνουν καλύτερα αποτελέσματα",
+          "Ο αριθμός παραμέτρων δεν έχει καμία απολύτως σημασία για την τελική ποιότητα του μοντέλου",
+          "Το GPT-3 κρυφά χρησιμοποιεί εντελώς διαφορετική αρχιτεκτονική από το GPT-1"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Μια απο τις πιο αξιοσημειωτες ιδιοτητες του Transformer ειναι η συμπεριφορα κλιμακωσης του. Ο ιδιος σχεδιασμος decoder-only Transformer απο το GPT-1 απλα μεγεθυνθηκε — περισσοτερα στρωματα, περισσοτερες παραμετροι, περισσοτερα δεδομενα εκπαιδευσης. Αυτη η προβλεψιμη κλιμακωση ειναι ο λογος που οι εταιρειες συνεχιζουν να επενδυουν σε μεγαλυτερα μοντελα.",
         "isMulti": false
       },
@@ -160,12 +186,14 @@
         "index": 1,
         "text": "Ενας χρηστης ρυθμιζει τη θερμοκρασια στο 0.1 οταν ζητα μια τεκμηριωμενη απαντηση, και στο 1.5 οταν κανει brainstorming για δημιουργικες ιδεες ιστοριων. Γιατι εχουν νοημα αυτες οι διαφορετικες ρυθμισεις;",
         "options": [
-          "Η θερμοκρασια ελεγχει την ταχυτητα προσβασης στο διαδικτυο του μοντελου",
-          "Χαμηλη θερμοκρασια κανει το μοντελο να επιλεγει παντα το πιο πιθανο token (ιδανικο για τεκμηριωμενη ακριβεια), ενω υψηλη θερμοκρασια δινει στα απιθανα tokens πραγματικη ευκαιρια επιλογης (ιδανικο για δημιουργικα, απροσδοκητα αποτελεσματα)",
-          "Η θερμοκρασια δεν εχει καμια επιδραση στην εξοδο",
-          "Υψηλη θερμοκρασια κανει το μοντελο πιο τεκμηριωμενο, χαμηλη θερμοκρασια πιο δημιουργικο"
+          "Η θερμοκρασία στην ουσία ελέγχει μόνο τη σύνδεση στο ίντερνετ και την ταχύτητα του ίδιου του μοντέλου",
+          "Χαμηλή θερμοκρασία διαλέγει το πιο πιθανό token (factual)· υψηλή αφήνει τα απίθανα να περάσουν",
+          "Η υψηλή θερμοκρασία κάνει το μοντέλο πολύ πιο factual, ενώ η χαμηλή πολύ πιο δημιουργικό",
+          "Η θερμοκρασία δεν έχει κανένα μετρήσιμο αποτέλεσμα στο παραγόμενο κείμενο"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Η θερμοκρασια αναδιαμορφωνει την κατανομη πιθανοτητων. Σε χαμηλη θερμοκρασια, οι πιθανοτητες γινονται αιχμηρες — το πιο πιθανο token επιλεγεται σχεδον καθε φορα. Σε υψηλη θερμοκρασια, η κατανομη ισοπεδωνεται — ασυνηθιστα tokens παιρνουν σημαντικη ευκαιρια επιλογης.",
         "isMulti": false
       },
@@ -173,12 +201,14 @@
         "index": 2,
         "text": "Τι ειναι το 'few-shot learning' και γιατι θεωρηθηκε η σημαντικοτερη ανακαλυψη του GPT-3;",
         "options": [
-          "Few-shot learning σημαινει οτι το μοντελο εκπαιδευτηκε σε πολυ λιγα παραδειγματα συνολικα",
-          "Few-shot learning σημαινει οτι το μοντελο μπορει να μαθει νεες εργασιες απο λιγα παραδειγματα που παρεχονται απευθειας στο prompt, χωρις καμια επανεκπαιδευση — μετατρεποντας το prompt σε ενα ειδος γλωσσας προγραμματισμου",
-          "Few-shot learning σημαινει οτι το μοντελο μπορει να απαντησει μονο σε λιγες ερωτησεις την ημερα",
-          "Few-shot learning σημαινει οτι το μοντελο ξεχνα τα παντα μετα απο λιγες χρησεις"
+          "Το few-shot σημαίνει ότι το μοντέλο εκπαιδεύτηκε αρχικά μόνο σε πολύ μικρό αριθμό παραδειγμάτων συνολικά",
+          "Το μοντέλο μαθαίνει νέα εργασία από λίγα παραδείγματα στο prompt — χωρίς καμία επανεκπαίδευση",
+          "Το few-shot σημαίνει ότι το μοντέλο απαντά μόνο σε λίγες ερωτήσεις κάθε μέρα",
+          "Το few-shot σημαίνει ότι το μοντέλο ξεχνά γρήγορα τα πάντα μετά από λίγες χρήσεις"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Πριν απο το GPT-3, η προσαρμογη ενος μοντελου σε μια νεα εργασια απαιτουσε συλλογη δεδομενων και επανεκπαιδευση. Το GPT-3 εδειξε οτι μπορεις να παρεχεις λιγα παραδειγματα στο prompt και το μοντελο αναγνωριζει και συνεχιζει το μοτιβο. Αυτο μετεμορφωσε τα prompts σε διεπαφη προγραμματισμου.",
         "isMulti": false
       },
@@ -186,12 +216,16 @@
         "index": 3,
         "text": "Γιατι το GPT χρησιμοποιει tokenization υπολεξεων (BPE) αντι να χωριζει το κειμενο σε ολοκληρες λεξεις; Επελεξε ολες τις σωστες απαντησεις.",
         "options": [
-          "Η tokenization ολοκληρων λεξεων θα απαιτουσε ενα αδυνατα μεγαλο λεξιλογιο για να καλυψει ολες τις λεξεις, ορθογραφικα λαθη, ονοματα και τεχνικους ορους σε ολες τις γλωσσες",
-          "Η tokenization υπολεξεων επιτρεπει στο μοντελο να χειριστει λεξεις που δεν εχει ξαναδει, σπαζοντας τες σε γνωστα υπο-κομματια",
-          "Η tokenization υπολεξεων επιτρεπει σε σχετικες λεξεις να μοιραζονται κοινα συστατικα",
-          "Η tokenization ολοκληρων λεξεων ειναι στην πραγματικοτητα καλυτερη αλλα το GPT επελεξε BPE κατα λαθος"
+          "Θα χρειαζόταν τεράστιο λεξιλόγιο ολόκληρων λέξεων για όλες τις λέξεις, ονόματα και ορθογραφικά λάθη",
+          "Οι subword μονάδες επιτρέπουν στο μοντέλο να χειρίζεται άγνωστες λέξεις σπάζοντάς τες σε γνωστά κομμάτια",
+          "Συγγενείς λέξεις όπως 'run', 'running', 'runner' μοιράζονται κοινά subword συστατικά",
+          "Η tokenization ολόκληρων λέξεων είναι στην ουσία αυστηρά καλύτερη, μα το GPT διάλεξε το BPE καθαρά κατά λάθος"
         ],
-        "correct": [0, 1, 2],
+        "correct": [
+          0,
+          1,
+          2
+        ],
         "explanation": "Η tokenization υπολεξεων (BPE) λυνει τρια προβληματα: εκρηξη λεξιλογιου, αγνωστες λεξεις (σπανιες λεξεις μπορουν να συναρμολογηθουν απο γνωστα υπο-κομματια) και μορφολογικη κοινοχρησια (σχετικες λεξεις μοιραζονται κοινα tokens). Το GPT-3 χρησιμοποιει μονο 50.257 tokens.",
         "isMulti": true
       },
@@ -199,12 +233,14 @@
         "index": 4,
         "text": "Το GPT-3 μπορει να γραψει κωδικα Python, παρολο που κανεις δεν το εκπαιδευσε συγκεκριμενα να προγραμματιζει. Πως ειναι αυτο δυνατο;",
         "options": [
-          "Το GPT-3 εχει ενσωματωμενο διερμηνεα Python",
-          "Τα δεδομενα εκπαιδευσης του GPT-3 περιελαμβαναν δισεκατομμυρια γραμμες κωδικα ανοιχτου κωδικα απο το GitHub, ετσι εμαθε μοτιβα προγραμματισμου ως μερος της προβλεψης επομενης λεξης — η δημιουργια κωδικα ειναι μια αναδυομενη ικανοτητα",
-          "Το GPT-3 αντιγραφει κωδικα απευθειας απο το διαδικτυο σε πραγματικο χρονο",
-          "Το GPT-3 δεν μπορει πραγματικα να γραψει κωδικα — δημιουργει μονο τυχαιους χαρακτηρες που μοιαζουν με κωδικα"
+          "Το GPT-3 απλώς έχει ενσωματωμένο διερμηνέα Python που τρέχει τον κώδικα για τον οποίο ρωτιέται",
+          "Τα δεδομένα του είχαν δισεκατομμύρια γραμμές κώδικα GitHub, άρα ο κώδικας προέκυψε από πρόβλεψη",
+          "Το GPT-3 αντιγράφει τον κώδικα απευθείας από το δημόσιο ίντερνετ σε πραγματικό χρόνο",
+          "Το GPT-3 δεν γράφει πραγματικά κώδικα — βγάζει τυχαίους χαρακτήρες που μοιάζουν αόριστα με κώδικα"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Τα δεδομενα εκπαιδευσης του GPT-3 περιελαμβαναν σημαντικες ποσοτητες κωδικα απο το GitHub. Μεσω της προβλεψης next-token σε αυτον τον κωδικα, το μοντελο εμαθε συνταξη προγραμματισμου, μοτιβα και κοινους αλγοριθμους. Η δημιουργια κωδικα αναδυθηκε ως παρενεργεια.",
         "isMulti": false
       }

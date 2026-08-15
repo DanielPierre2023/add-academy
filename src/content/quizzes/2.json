@@ -137,7 +137,7 @@
           "Sunt programate intenționat să mintă din când în când pentru a testa utilizatorii",
           "Se bazează pe o bază internă defectuoasă care stochează fapte greșite",
           "Optimizează pentru text fluent și probabil, nu pentru fapte, umplând golurile inventând",
-          "Conexiunea lor la internet cade, deci pur și simplu nu pot verifica faptele la timp"
+          "Conexiunea lor la internet cade mereu, deci pur și simplu nu pot verifica faptele la timp deloc"
         ],
         "correct": [
           2
@@ -185,7 +185,7 @@
         "text": "Γιατι η αρχιτεκτονικη Transformer θεωρειται επαναστατικη σε σχεση με τα RNNs και LSTMs; Επελεξε ολες τις σωστες απαντησεις.",
         "options": [
           "Τα Transformers επεξεργάζονται όλα τα tokens παράλληλα, επιταχύνοντας την εκπαίδευση",
-          "Τα Transformers χρειάζονται πολύ μικρότερα σύνολα και λιγότερες παραμέτρους από RNN",
+          "Τα Transformers χρειάζονται πολύ μικρότερα σύνολα δεδομένων και λιγότερες παραμέτρους από τα RNN",
           "Το attention επιτρέπει σε κάθε λέξη να συνδέεται άμεσα με άλλη, ανεξαρτήτως απόστασης",
           "Τα Transformers εξάλειψαν εντελώς την ανάγκη για οποιαδήποτε δεδομένα εκπαίδευσης"
         ],

@@ -7,12 +7,14 @@
         "index": 0,
         "text": "In the sentence 'The cat sat on the mat because it was tired,' how does the Transformer's attention mechanism determine that 'it' refers to 'the cat' rather than 'the mat'?",
         "options": [
-          "It follows a grammatical rule that pronouns always refer to the first noun",
-          "It randomly assigns attention to nearby words",
-          "During pretraining, the model learned that 'tired' is an animate property, so the Query vector of 'it' produces high attention scores with the Key vector of 'cat' (animate) rather than 'mat' (inanimate)",
-          "It looks up the answer in a pronoun resolution database"
+          "It follows a fixed grammar rule that pronouns always refer to the first noun in the whole sentence",
+          "It just randomly assigns its attention to whichever words happen to be nearby",
+          "The model learned 'tired' is an animate trait, so 'it' attends strongly to 'cat', not 'mat'",
+          "It looks the answer up in a built-in pronoun-resolution database of examples"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "The attention mechanism uses learned Query and Key vectors to compute relevance scores. Through pretraining on millions of sentences, the model's Q and K vectors were shaped so that pronouns followed by animate properties (like 'tired', 'hungry', 'happy') produce high attention scores with animate nouns. Mats do not get tired, cats do — the model learned this statistical pattern from the data, not from explicit rules.",
         "isMulti": false
       },
@@ -20,12 +22,14 @@
         "index": 1,
         "text": "Why did the Transformer's 'Attention Is All You Need' paper (2017) have such a massive impact on the field?",
         "options": [
-          "It introduced a minor improvement to existing RNN architectures",
-          "It proved that hand-written grammar rules are the best approach for NLP",
-          "It demonstrated that attention alone — without any recurrence — could process sequences in parallel, solve long-range dependencies, and achieve state-of-the-art results, fundamentally replacing the dominant RNN/LSTM paradigm",
-          "It was the first paper ever written about artificial intelligence"
+          "It introduced a small, incremental improvement to the existing RNN architectures of the time",
+          "It proved that carefully hand-written grammar rules are still the best approach for NLP tasks",
+          "It showed attention alone, without recurrence, can process sequences in parallel — replacing RNNs",
+          "It was, historically, the very first research paper ever written on the topic of artificial intelligence"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "The 2017 paper was revolutionary because it showed that recurrence was unnecessary. By relying solely on attention mechanisms, Transformers could process all tokens simultaneously (enabling massive GPU parallelism), directly connect any two tokens regardless of distance (solving long-range dependencies), and achieve better results than RNNs. Within two years, virtually every state-of-the-art NLP result used Transformers, and the architecture spread to vision, audio, and protein folding.",
         "isMulti": false
       },
@@ -33,12 +37,14 @@
         "index": 2,
         "text": "In the library analogy for the attention mechanism, what do Query (Q), Key (K), and Value (V) represent?",
         "options": [
-          "Q = the book's price, K = the book's weight, V = the book's color",
-          "Q = your question ('what information do I need?'), K = book titles ('what does this book contain?'), V = book contents ('the actual information to share')",
-          "Q = the librarian, K = the library card, V = the late fees",
-          "Q, K, and V all represent the same thing — the word's meaning"
+          "Q = the book's price, K = the book's weight on the shelf, and V = the book's cover color",
+          "Q = your question, K = the book titles you scan, V = the actual contents you read",
+          "Q = the librarian, K = your library membership card, V = the overdue late fees you owe",
+          "Q, K, and V all represent exactly the same thing — just the word's meaning, nothing more"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "In the attention mechanism: the Query represents what a token is looking for (like walking into a library with a question), the Key represents what each token advertises about itself (like book titles on spines), and the Value is the actual information content (like the book's contents). The Query is compared against all Keys to find relevant matches, and then the corresponding Values are combined based on relevance scores.",
         "isMulti": false
       },
@@ -46,12 +52,16 @@
         "index": 3,
         "text": "What is the difference between a Transformer and an LLM? Select all correct statements.",
         "options": [
-          "A Transformer is an architecture (a blueprint), while an LLM is a specific trained model built using that architecture",
+          "A Transformer is an architecture (a blueprint); an LLM is a trained model built with it",
           "All modern LLMs use the Transformer architecture, but not all Transformers are LLMs",
-          "A Transformer and an LLM are exactly the same thing",
-          "A small Transformer model trained for sentiment analysis with 10 million parameters is a Transformer but not an LLM"
+          "A Transformer and an LLM are exactly the same thing, just two entirely different names for it",
+          "A 10M-parameter Transformer trained for sentiment analysis is a Transformer but not an LLM"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "The Transformer is a design pattern — a set of architectural principles (self-attention, feedforward layers, residual connections, etc.). An LLM is a concrete, trained model with specific parameter values learned from large-scale text data. All modern LLMs (GPT, Claude, LLaMA) are built on the Transformer architecture, but a small Transformer used for a specific task like sentiment analysis would not qualify as 'large' and therefore is not an LLM.",
         "isMulti": true
       },
@@ -59,12 +69,14 @@
         "index": 4,
         "text": "Why does a Transformer decoder use 'causal masking' (preventing tokens from seeing future tokens)?",
         "options": [
-          "To save memory by reducing the number of computations",
-          "Because during text generation, future tokens do not exist yet — the model must generate each token using only the tokens that came before it",
-          "To make the model run slower for safety reasons",
-          "Because looking at future tokens would make the model too accurate"
+          "It mainly saves memory by cutting down on the number of computations performed",
+          "During generation, future tokens don't exist yet, so each token uses only earlier ones",
+          "It deliberately makes the model run slower for added safety during text generation",
+          "Because letting it peek at future tokens would make the model far too accurate to be useful"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Causal masking is essential for autoregressive generation. When the model generates the fifth word, only words 1 through 4 exist — word 6 has not been created yet. If the model could see future tokens during training, it would learn to 'cheat' by copying the answer instead of learning to predict. The mask ensures training matches the actual generation process, where the model must predict each next token based solely on what precedes it.",
         "isMulti": false
       }
@@ -77,12 +89,14 @@
         "index": 0,
         "text": "In propozitia 'Pisica a stat pe covoras pentru ca era obosita,' cum determina mecanismul de attention al Transformer-ului ca 'era' se refera la 'pisica' si nu la 'covoras'?",
         "options": [
-          "Urmeaza o regula gramaticala ca pronumele se refera intotdeauna la primul substantiv",
-          "Atribuie aleatoriu attention cuvintelor apropiate",
-          "In timpul pretraining-ului, modelul a invatat ca 'obosita' este o proprietate a fiintelor, asa ca vectorul Query al pronumelui produce scoruri mari de attention cu vectorul Key al 'pisica' (animat) si nu al 'covoras' (inanimat)",
-          "Cauta raspunsul intr-o baza de date de rezolutie a pronumelor"
+          "Urmează o regulă fixă că pronumele se referă mereu la primul substantiv din întreaga propoziție",
+          "Pur și simplu atribuie atenția aleatoriu cuvintelor care se află în apropiere",
+          "Modelul a învățat că 'obosit' e o trăsătură animată, deci 'it' se leagă de 'cat', nu 'mat'",
+          "Caută răspunsul într-o bază de date încorporată de rezolvare a pronumelor"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Mecanismul de attention foloseste vectori invatati Query si Key pentru a calcula scoruri de relevanta. Prin pretraining pe milioane de propozitii, vectorii Q si K ai modelului au fost modelati astfel incat pronumele urmate de proprietati animate produc scoruri mari de attention cu substantive animate. Covorasele nu obosesc, pisicile da.",
         "isMulti": false
       },
@@ -90,12 +104,14 @@
         "index": 1,
         "text": "De ce a avut articolul 'Attention Is All You Need' (2017) un impact atat de masiv asupra domeniului?",
         "options": [
-          "A introdus o imbunatatire minora a arhitecturilor RNN existente",
-          "A dovedit ca regulile gramaticale scrise manual sunt cea mai buna abordare pentru NLP",
-          "A demonstrat ca attention-ul singur — fara recurenta — poate procesa secvente in paralel, rezolva dependentele pe distante lungi si atinge rezultate de varf, inlocuind fundamental paradigma dominanta RNN/LSTM",
-          "A fost primul articol scris vreodata despre inteligenta artificiala"
+          "A introdus o îmbunătățire mică, incrementală, a arhitecturilor RNN existente la acea vreme",
+          "A dovedit că regulile gramaticale scrise manual rămân cea mai bună abordare pentru NLP",
+          "A arătat că atenția singură, fără recurență, procesează secvențe în paralel — înlocuind RNN",
+          "A fost, istoric, prima lucrare de cercetare scrisă vreodată pe tema inteligenței artificiale întregi"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Articolul din 2017 a fost revolutionar pentru ca a demonstrat ca recurenta este inutila. Bazandu-se exclusiv pe mecanisme de attention, Transformer-ele pot procesa toate token-urile simultan, conecta direct orice doua token-uri indiferent de distanta si obtine rezultate mai bune decat RNN-urile.",
         "isMulti": false
       },
@@ -103,12 +119,14 @@
         "index": 2,
         "text": "In analogia bibliotecii pentru mecanismul de attention, ce reprezinta Query (Q), Key (K) si Value (V)?",
         "options": [
-          "Q = pretul cartii, K = greutatea cartii, V = culoarea cartii",
-          "Q = intrebarea ta ('ce informatii am nevoie?'), K = titlurile cartilor ('ce contine aceasta carte?'), V = continutul cartilor ('informatia efectiva de impartasit')",
-          "Q = bibliotecarul, K = legitimatia de biblioteca, V = penalitatile de intarziere",
-          "Q, K si V reprezinta toate acelasi lucru — sensul cuvantului"
+          "Q = prețul cărții, K = greutatea cărții pe raft, iar V = culoarea copertei cărții",
+          "Q = întrebarea ta, K = titlurile cărților pe care le scanezi, V = conținutul citit",
+          "Q = bibliotecarul, K = cardul tău de membru, V = taxele de întârziere pe care le datorezi",
+          "Q, K și V reprezintă exact același lucru — doar sensul cuvântului, nimic mai mult"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "In mecanismul de attention: Query-ul reprezinta ce cauta un token (ca atunci cand intri intr-o biblioteca cu o intrebare), Key-ul reprezinta ce anunta fiecare token despre sine (ca titlurile de pe cotorul cartilor), iar Value-ul este continutul informational real (ca si continutul cartilor).",
         "isMulti": false
       },
@@ -116,12 +134,16 @@
         "index": 3,
         "text": "Care este diferenta dintre un Transformer si un LLM? Selecteaza toate afirmatiile corecte.",
         "options": [
-          "Un Transformer este o arhitectura (un plan), in timp ce un LLM este un model specific antrenat construit folosind acea arhitectura",
-          "Toate LLM-urile moderne folosesc arhitectura Transformer, dar nu toate Transformer-ele sunt LLM-uri",
-          "Un Transformer si un LLM sunt exact acelasi lucru",
-          "Un model Transformer mic antrenat pentru analiza sentimentelor cu 10 milioane de parametri este un Transformer dar nu un LLM"
+          "Un Transformer e o arhitectură (un plan); un LLM e un model antrenat construit cu ea",
+          "Toate LLM-urile moderne folosesc arhitectura Transformer, dar nu toate Transformerele sunt LLM",
+          "Un Transformer și un LLM sunt exact același lucru, doar două nume complet diferite pentru exact același el",
+          "Un Transformer de 10M parametri antrenat pentru sentiment e Transformer, dar nu LLM"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Transformer-ul este un tipar de design — un set de principii arhitecturale. Un LLM este un model concret, antrenat, cu valori specifice ale parametrilor invatate din date text la scara larga. Toate LLM-urile moderne sunt construite pe arhitectura Transformer, dar un Transformer mic folosit pentru o sarcina specifica nu s-ar califica drept 'mare'.",
         "isMulti": true
       },
@@ -129,12 +151,14 @@
         "index": 4,
         "text": "De ce foloseste un decoder Transformer 'mascare cauzala' (prevenind token-urile sa vada token-urile viitoare)?",
         "options": [
-          "Pentru a economisi memorie reducand numarul de calcule",
-          "Pentru ca in timpul generarii de text, token-urile viitoare nu exista inca — modelul trebuie sa genereze fiecare token folosind doar token-urile care au venit inaintea lui",
-          "Pentru a face modelul sa ruleze mai lent din motive de siguranta",
-          "Pentru ca a privi token-urile viitoare ar face modelul prea precis"
+          "Economisește în principal memorie reducând numărul de calcule efectuate",
+          "În timpul generării, tokenii viitori încă nu există, deci fiecare token îi folosește pe cei anteriori",
+          "Face în mod deliberat modelul să ruleze mai lent pentru siguranță în timpul generării",
+          "Pentru că a-i lăsa cumva să vadă tokenii viitori ar face modelul mult prea precis și puternic ca să fie util"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Mascarea cauzala este esentiala pentru generarea autoregresiva. Cand modelul genereaza al cincilea cuvant, doar cuvintele 1 pana la 4 exista. Daca modelul ar putea vedea token-urile viitoare in timpul antrenamentului, ar invata sa 'triseze' copiind raspunsul. Masca asigura ca antrenamentul corespunde procesului real de generare.",
         "isMulti": false
       }
@@ -147,12 +171,14 @@
         "index": 0,
         "text": "Στην προταση 'Η γατα καθοταν στο χαλι γιατι ηταν κουρασμενη,' πως ο μηχανισμος attention του Transformer καθοριζει οτι το 'ηταν' αναφερεται στη 'γατα' και οχι στο 'χαλι';",
         "options": [
-          "Ακολουθει εναν γραμματικο κανονα οτι οι αντωνυμιες αναφερονται παντα στο πρωτο ουσιαστικο",
-          "Αναθετει τυχαια attention σε κοντινες λεξεις",
-          "Κατα τη διαρκεια του pretraining, το μοντελο εμαθε οτι 'κουρασμενη' ειναι ιδιοτητα εμψυχου, ετσι το διανυσμα Query παραγει υψηλα σκορ attention με το διανυσμα Key του 'γατα' (εμψυχο) αντι του 'χαλι' (αψυχο)",
-          "Αναζητα την απαντηση σε μια βαση δεδομενων επιλυσης αντωνυμιων"
+          "Ακολουθεί σταθερό κανόνα ότι οι αντωνυμίες αναφέρονται πάντα στο πρώτο ουσιαστικό όλης της πρότασης",
+          "Απλώς αναθέτει την προσοχή τυχαία σε όποιες λέξεις τυχαίνει να είναι κοντά",
+          "Το μοντέλο έμαθε ότι το 'κουρασμένο' είναι έμψυχο, άρα το 'it' δείχνει στο 'cat', όχι 'mat'",
+          "Ψάχνει την απάντηση σε ενσωματωμένη βάση δεδομένων επίλυσης αντωνυμιών"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Ο μηχανισμος attention χρησιμοποιει εκπαιδευμενα διανυσματα Query και Key. Μεσω pretraining σε εκατομμυρια προτασεις, τα διανυσματα Q και K διαμορφωθηκαν ωστε οι αντωνυμιες που ακολουθουνται απο ιδιοτητες εμψυχων να παραγουν υψηλα σκορ attention με εμψυχα ουσιαστικα.",
         "isMulti": false
       },
@@ -160,12 +186,14 @@
         "index": 1,
         "text": "Γιατι το αρθρο 'Attention Is All You Need' (2017) ειχε τοσο τεραστιο αντικτυπο στον τομεα;",
         "options": [
-          "Εισηγαγε μια μικρη βελτιωση στις υπαρχουσες αρχιτεκτονικες RNN",
-          "Απεδειξε οτι οι χειρογραφοι γραμματικοι κανονες ειναι η καλυτερη προσεγγιση για NLP",
-          "Απεδειξε οτι το attention μονο του — χωρις καμια αναδρομη — μπορει να επεξεργαστει ακολουθιες παραλληλα, να λυσει μακροπροθεσμες εξαρτησεις και να πετυχει αποτελεσματα αιχμης, αντικαθιστωντας θεμελιωδως το κυριαρχο παραδειγμα RNN/LSTM",
-          "Ηταν το πρωτο αρθρο που γραφτηκε ποτε για τεχνητη νοημοσυνη"
+          "Εισήγαγε μια μικρή, σταδιακή βελτίωση στις υπάρχουσες αρχιτεκτονικές RNN της εποχής",
+          "Απέδειξε ότι οι χειρόγραφοι γραμματικοί κανόνες παραμένουν η καλύτερη προσέγγιση για NLP",
+          "Έδειξε ότι η προσοχή μόνη, χωρίς αναδρομή, επεξεργάζεται ακολουθίες παράλληλα — αντικαθιστώντας RNN",
+          "Ήταν ιστορικά η πρώτη ερευνητική εργασία που γράφτηκε ποτέ για το ευρύτερο θέμα της τεχνητής νοημοσύνης συνολικά"
         ],
-        "correct": [2],
+        "correct": [
+          2
+        ],
         "explanation": "Το αρθρο του 2017 ηταν επαναστατικο επειδη εδειξε οτι η αναδρομη ηταν περιττη. Βασιζομενα αποκλειστικα σε μηχανισμους attention, τα Transformers μπορουσαν να επεξεργαστουν ολα τα tokens ταυτοχρονα και να πετυχουν καλυτερα αποτελεσματα απο τα RNNs.",
         "isMulti": false
       },
@@ -173,12 +201,14 @@
         "index": 2,
         "text": "Στην αναλογια της βιβλιοθηκης για τον μηχανισμο attention, τι αντιπροσωπευουν τα Query (Q), Key (K) και Value (V);",
         "options": [
-          "Q = η τιμη του βιβλιου, K = το βαρος του βιβλιου, V = το χρωμα του βιβλιου",
-          "Q = η ερωτηση σου ('τι πληροφοριες χρειαζομαι;'), K = τιτλοι βιβλιων ('τι περιεχει αυτο το βιβλιο;'), V = περιεχομενα βιβλιων ('η πραγματικη πληροφορια προς κοινοποιηση')",
-          "Q = ο βιβλιοθηκαριος, K = η καρτα βιβλιοθηκης, V = τα προστιμα καθυστερησης",
-          "Τα Q, K και V αντιπροσωπευουν ολα το ιδιο πραγμα — τη σημασια της λεξης"
+          "Q = η τιμή του βιβλίου, K = το βάρος του στο ράφι, και V = το χρώμα του εξωφύλλου",
+          "Q = η ερώτησή σου, K = οι τίτλοι που σαρώνεις, V = το πραγματικό περιεχόμενο που διαβάζεις",
+          "Q = ο βιβλιοθηκάριος, K = η κάρτα μέλους της βιβλιοθήκης σου, V = τα πρόστιμα καθυστέρησης που χρωστάς",
+          "Q, K και V αναπαριστούν ακριβώς το ίδιο πράγμα — μόνο τη σημασία της λέξης"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Στον μηχανισμο attention: το Query αντιπροσωπευει τι ψαχνει ενα token, το Key αντιπροσωπευει τι διαφημιζει καθε token για τον εαυτο του, και το Value ειναι το πραγματικο πληροφοριακο περιεχομενο.",
         "isMulti": false
       },
@@ -186,12 +216,16 @@
         "index": 3,
         "text": "Ποια ειναι η διαφορα μεταξυ ενος Transformer και ενος LLM; Επελεξε ολες τις σωστες δηλωσεις.",
         "options": [
-          "Ενα Transformer ειναι μια αρχιτεκτονικη (ενα σχεδιο), ενω ενα LLM ειναι ενα συγκεκριμενο εκπαιδευμενο μοντελο χτισμενο χρησιμοποιωντας αυτη την αρχιτεκτονικη",
-          "Ολα τα μοντερνα LLMs χρησιμοποιουν την αρχιτεκτονικη Transformer, αλλα δεν ειναι ολα τα Transformers LLMs",
-          "Ενα Transformer και ενα LLM ειναι ακριβως το ιδιο πραγμα",
-          "Ενα μικρο μοντελο Transformer εκπαιδευμενο για αναλυση συναισθηματος με 10 εκατομμυρια παραμετρους ειναι Transformer αλλα οχι LLM"
+          "Ένας Transformer είναι αρχιτεκτονική (σχέδιο)· ένα LLM είναι εκπαιδευμένο μοντέλο με αυτήν",
+          "Όλα τα σύγχρονα LLM χρησιμοποιούν Transformer, αλλά δεν είναι όλοι οι Transformers LLM",
+          "Ένας Transformer κι ένα LLM είναι ακριβώς το ίδιο πράγμα, απλώς δύο εντελώς διαφορετικά ονόματα",
+          "Ένας Transformer 10Μ παραμέτρων για ανάλυση συναισθήματος είναι Transformer, όχι LLM"
         ],
-        "correct": [0, 1, 3],
+        "correct": [
+          0,
+          1,
+          3
+        ],
         "explanation": "Το Transformer ειναι ενα σχεδιαστικο μοτιβο. Ενα LLM ειναι ενα συγκεκριμενο, εκπαιδευμενο μοντελο με συγκεκριμενες τιμες παραμετρων. Ολα τα μοντερνα LLMs ειναι χτισμενα στην αρχιτεκτονικη Transformer, αλλα ενα μικρο Transformer για συγκεκριμενη εργασια δεν πληροι τα κριτηρια για 'μεγαλο'.",
         "isMulti": true
       },
@@ -199,12 +233,14 @@
         "index": 4,
         "text": "Γιατι ενας decoder Transformer χρησιμοποιει 'αιτιακη μασκα' (εμποδιζοντας τα tokens να βλεπουν μελλοντικα tokens);",
         "options": [
-          "Για να εξοικονομησει μνημη μειωνοντας τον αριθμο υπολογισμων",
-          "Επειδη κατα τη δημιουργια κειμενου, τα μελλοντικα tokens δεν υπαρχουν ακομα — το μοντελο πρεπει να δημιουργησει καθε token χρησιμοποιωντας μονο τα tokens που ηρθαν πριν απο αυτο",
-          "Για να κανει το μοντελο να τρεχει πιο αργα για λογους ασφαλειας",
-          "Επειδη το να βλεπει μελλοντικα tokens θα εκανε το μοντελο πολυ ακριβες"
+          "Εξοικονομεί κυρίως μνήμη μειώνοντας τον αριθμό των υπολογισμών",
+          "Κατά τη γένεση, τα μελλοντικά tokens δεν υπάρχουν ακόμη, οπότε κάθε token χρησιμοποιεί τα προηγούμενα",
+          "Κάνει σκόπιμα το μοντέλο πιο αργό για επιπλέον ασφάλεια κατά τη γένεση",
+          "Επειδή το να του επιτρέπαμε να βλέπει μελλοντικά tokens θα έκανε το μοντέλο υπερβολικά ακριβές για να είναι χρήσιμο"
         ],
-        "correct": [1],
+        "correct": [
+          1
+        ],
         "explanation": "Η αιτιακη μασκα ειναι απαραιτητη για την αυτοπαλινδρομικη παραγωγη. Οταν το μοντελο δημιουργει την πεμπτη λεξη, μονο οι λεξεις 1 εως 4 υπαρχουν. Αν το μοντελο μπορουσε να δει μελλοντικα tokens κατα την εκπαιδευση, θα μαθαινε να 'εξαπατα' αντιγραφοντας την απαντηση.",
         "isMulti": false
       }
