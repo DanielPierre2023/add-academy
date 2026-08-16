@@ -59,11 +59,11 @@ export const NEURALFORGE_DOWNLOAD: ProductDownload = {
   fileName: 'NeuralForge-LLM-Deploy.zip',
   storagePath: 'neuralforge-llm/NeuralForge-LLM-Deploy.zip',
   available: true,
-  fileSize: '~250 MB',
+  fileSize: '~1 MB source · GPT-2 weights (~500 MB) fetched at setup',
   contents: {
-    en: 'Trained model weights, tokenizer, inference server (FastAPI), Docker configuration, deployment scripts, environment templates, README with setup instructions',
-    ro: 'Ponderi model antrenat, tokenizer, server de inferenta (FastAPI), configuratie Docker, scripturi de deployment, template-uri de mediu, README cu instructiuni de instalare',
-    el: 'Βάρη εκπαιδευμένου μοντέλου, tokenizer, server εξαγωγής (FastAPI), ρυθμίσεις Docker, scripts ανάπτυξης, πρότυπα περιβάλλοντος, README με οδηγίες εγκατάστασης',
+    en: 'GPT-2 model (NumPy + PyTorch) + training script, official GPT-2 weights loader (fetched at setup), BPE tokenizer, FastAPI inference server with streaming, Docker + Vercel deploy config, environment templates, README with setup instructions',
+    ro: 'Model GPT-2 (NumPy + PyTorch) + script de antrenare, loader pentru ponderile oficiale GPT-2 (descărcate la instalare), tokenizer BPE, server de inferență FastAPI cu streaming, configurație Docker + Vercel, template-uri de mediu, README cu instrucțiuni de instalare',
+    el: 'Μοντέλο GPT-2 (NumPy + PyTorch) + script εκπαίδευσης, loader για τα επίσημα βάρη GPT-2 (λήψη κατά την εγκατάσταση), BPE tokenizer, διακομιστής inference FastAPI με streaming, ρυθμίσεις Docker + Vercel, πρότυπα περιβάλλοντος, README με οδηγίες εγκατάστασης',
   },
 };
 
@@ -86,11 +86,11 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     fileName: 'PixelForge-SaaS-Deploy.zip',
     storagePath: 'saas/PixelForge-SaaS-Deploy.zip',
     available: true,
-    fileSize: '~45 MB',
+    fileSize: '~0.4 MB source',
     contents: {
-      en: 'Next.js app, Replicate/Stability AI integration, image editor UI, gallery system, Supabase schema, Stripe billing, Vercel deployment config',
-      ro: 'Aplicatie Next.js, integrare Replicate/Stability AI, editor imagini, sistem galerie, schema Supabase, facturare Stripe, configuratie Vercel',
-      el: 'Εφαρμογή Next.js, ενσωμάτωση Replicate/Stability AI, επεξεργαστής εικόνων, σύστημα gallery, σχήμα Supabase, τιμολόγηση Stripe, ρυθμίσεις Vercel',
+      en: 'FastAPI app, Replicate/Stability AI integration, image editor UI, gallery system, Supabase schema, Stripe billing, Vercel deployment config',
+      ro: 'Aplicație FastAPI, integrare Replicate/Stability AI, editor imagini, sistem galerie, schema Supabase, facturare Stripe, configuratie Vercel',
+      el: 'Εφαρμογή FastAPI, ενσωμάτωση Replicate/Stability AI, επεξεργαστής εικόνων, σύστημα gallery, σχήμα Supabase, τιμολόγηση Stripe, ρυθμίσεις Vercel',
     },
   },
   {
@@ -107,11 +107,11 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     fileName: 'ClipCraft-SaaS-Deploy.zip',
     storagePath: 'saas/ClipCraft-SaaS-Deploy.zip',
     available: true,
-    fileSize: '~40 MB',
+    fileSize: '~0.4 MB source',
     contents: {
-      en: 'Next.js app, RunwayML/Luma video generation, timeline editor, export system, Supabase schema, Stripe billing, Docker config',
-      ro: 'Aplicatie Next.js, generare video RunwayML/Luma, editor timeline, sistem export, schema Supabase, facturare Stripe, configuratie Docker',
-      el: 'Εφαρμογή Next.js, δημιουργία βίντεο RunwayML/Luma, επεξεργαστής timeline, σύστημα εξαγωγής, σχήμα Supabase, τιμολόγηση Stripe, ρυθμίσεις Docker',
+      en: 'FastAPI app, RunwayML/Luma video generation, timeline editor, export system, Supabase schema, Stripe billing, Docker config',
+      ro: 'Aplicație FastAPI, generare video RunwayML/Luma, editor timeline, sistem export, schema Supabase, facturare Stripe, configuratie Docker',
+      el: 'Εφαρμογή FastAPI, δημιουργία βίντεο RunwayML/Luma, επεξεργαστής timeline, σύστημα εξαγωγής, σχήμα Supabase, τιμολόγηση Stripe, ρυθμίσεις Docker',
     },
   },
   {
@@ -128,11 +128,11 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     fileName: 'ProseAI-SaaS-Deploy.zip',
     storagePath: 'saas/ProseAI-SaaS-Deploy.zip',
     available: true,
-    fileSize: '~35 MB',
+    fileSize: '~0.4 MB source',
     contents: {
-      en: 'Next.js app, OpenAI/Anthropic streaming, rich text editor, templates system, SEO tools, Supabase schema, Stripe billing, Vercel config',
-      ro: 'Aplicatie Next.js, streaming OpenAI/Anthropic, editor text formatat, sistem template-uri, instrumente SEO, schema Supabase, facturare Stripe, configuratie Vercel',
-      el: 'Εφαρμογή Next.js, streaming OpenAI/Anthropic, επεξεργαστής κειμένου, σύστημα templates, εργαλεία SEO, σχήμα Supabase, τιμολόγηση Stripe, ρυθμίσεις Vercel',
+      en: 'FastAPI app, OpenAI/Anthropic streaming, rich text editor, templates system, SEO tools, Supabase schema, Stripe billing, Vercel config',
+      ro: 'Aplicație FastAPI, streaming OpenAI/Anthropic, editor text formatat, sistem template-uri, instrumente SEO, schema Supabase, facturare Stripe, configuratie Vercel',
+      el: 'Εφαρμογή FastAPI, streaming OpenAI/Anthropic, επεξεργαστής κειμένου, σύστημα templates, εργαλεία SEO, σχήμα Supabase, τιμολόγηση Stripe, ρυθμίσεις Vercel',
     },
   },
   {
@@ -149,11 +149,11 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     fileName: 'TruthLens-SaaS-Deploy.zip',
     storagePath: 'saas/TruthLens-SaaS-Deploy.zip',
     available: true,
-    fileSize: '~38 MB',
+    fileSize: '~0.5 MB source',
     contents: {
-      en: 'Next.js app, RAG pipeline with embeddings, web search integration, claim analysis engine, source scoring, Supabase schema + pgvector, Stripe billing, Docker config',
-      ro: 'Aplicatie Next.js, pipeline RAG cu embeddings, integrare cautare web, motor analiza afirmatii, scor surse, schema Supabase + pgvector, facturare Stripe, configuratie Docker',
-      el: 'Εφαρμογή Next.js, pipeline RAG με embeddings, ενσωμάτωση αναζήτησης web, μηχανή ανάλυσης ισχυρισμών, βαθμολόγηση πηγών, σχήμα Supabase + pgvector, τιμολόγηση Stripe, ρυθμίσεις Docker',
+      en: 'FastAPI app, RAG pipeline with embeddings, web search integration, claim analysis engine, source scoring, Supabase schema + pgvector, Stripe billing, Docker config',
+      ro: 'Aplicație FastAPI, pipeline RAG cu embeddings, integrare cautare web, motor analiza afirmatii, scor surse, schema Supabase + pgvector, facturare Stripe, configuratie Docker',
+      el: 'Εφαρμογή FastAPI, pipeline RAG με embeddings, ενσωμάτωση αναζήτησης web, μηχανή ανάλυσης ισχυρισμών, βαθμολόγηση πηγών, σχήμα Supabase + pgvector, τιμολόγηση Stripe, ρυθμίσεις Docker',
     },
   },
   {
@@ -170,11 +170,11 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     fileName: 'DocMind-SaaS-Deploy.zip',
     storagePath: 'saas/DocMind-SaaS-Deploy.zip',
     available: true,
-    fileSize: '~42 MB',
+    fileSize: '~0.5 MB source',
     contents: {
-      en: 'Next.js app, PDF/image OCR pipeline, structured data extraction, template matching, export to CSV/JSON, Supabase schema, Stripe billing, Vercel config',
-      ro: 'Aplicatie Next.js, pipeline OCR PDF/imagini, extractie date structurate, potrivire template-uri, export CSV/JSON, schema Supabase, facturare Stripe, configuratie Vercel',
-      el: 'Εφαρμογή Next.js, pipeline OCR PDF/εικόνων, εξαγωγή δομημένων δεδομένων, αντιστοίχιση templates, εξαγωγή CSV/JSON, σχήμα Supabase, τιμολόγηση Stripe, ρυθμίσεις Vercel',
+      en: 'FastAPI app, PDF/image OCR pipeline, structured data extraction, template matching, export to CSV/JSON, Supabase schema, Stripe billing, Vercel config',
+      ro: 'Aplicație FastAPI, pipeline OCR PDF/imagini, extractie date structurate, potrivire template-uri, export CSV/JSON, schema Supabase, facturare Stripe, configuratie Vercel',
+      el: 'Εφαρμογή FastAPI, pipeline OCR PDF/εικόνων, εξαγωγή δομημένων δεδομένων, αντιστοίχιση templates, εξαγωγή CSV/JSON, σχήμα Supabase, τιμολόγηση Stripe, ρυθμίσεις Vercel',
     },
   },
 ];
