@@ -17,7 +17,6 @@ import {
   X,
   Send,
   Trash2,
-  Bot,
   User,
   Lightbulb,
   Bug,
@@ -606,9 +605,10 @@ export function AITutor() {
           aria-label={tutorButtonLabel}
           title={tutorButtonTooltip}
         >
-          {/* Tutor avatar — friendly graduation cap image */}
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-lg">
-            🎓
+          {/* Tutor avatar */}
+          <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white/15">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/tutor-avatar.jpg" alt="AI Tutor" className="h-full w-full object-cover" />
           </span>
           <span className="text-sm font-semibold hidden sm:inline">{tutorButtonLabel}</span>
         </button>
@@ -632,8 +632,9 @@ export function AITutor() {
         onPointerUp={endHeaderPointer}
         onPointerCancel={endHeaderPointer}>
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-            <Bot className="h-4 w-4 text-primary" />
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary/10">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/tutor-avatar.jpg" alt="AI Tutor" className="h-full w-full object-cover" />
           </div>
           <div>
             <h3 className="text-sm font-semibold">{t('tutor_title', language)}</h3>
@@ -690,8 +691,9 @@ export function AITutor() {
         <div className="space-y-4 py-4">
           {tutorMessages.length === 0 && (
             <div className="flex flex-col items-center gap-3 pt-8 text-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-2xl">
-                🎓
+              <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-primary/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/tutor-avatar.jpg" alt="AI Tutor" className="h-full w-full object-cover" />
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed px-4">
                 {t('tutor_welcome', language)}
@@ -723,8 +725,9 @@ export function AITutor() {
               )}
             >
               {msg.role === 'assistant' && (
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                  <Bot className="h-3.5 w-3.5 text-primary" />
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary/10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/tutor-avatar.jpg" alt="AI Tutor" className="h-full w-full object-cover" />
                 </div>
               )}
               <div
@@ -756,8 +759,9 @@ export function AITutor() {
 
           {isLoading && (
             <div className="flex gap-3">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                <Bot className="h-3.5 w-3.5 text-primary" />
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/tutor-avatar.jpg" alt="AI Tutor" className="h-full w-full object-cover" />
               </div>
               <div className="rounded-lg bg-muted px-3 py-2">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
