@@ -151,6 +151,7 @@ export default function AdminDashboard() {
   const [emailBody, setEmailBody] = useState('');
   const [emailType, setEmailType] = useState<'individual' | 'org' | 'all'>('individual');
   const [emailSending, setEmailSending] = useState(false);
+  const [emailResult, setEmailResult] = useState<string | null>(null);
 
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
@@ -2265,12 +2266,18 @@ export default function AdminDashboard() {
             />
           </div>
         </div>
+        {emailResult && (
+          <p className="text-sm px-1 text-muted-foreground" role="status">
+            {emailResult}
+          </p>
+        )}
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
           <Button
             disabled={emailSending}
             onClick={async () => {
               setEmailSending(true);
+              setEmailResult(null);
               try {
                 const res = await sendAdminEmail({
                   type: emailType,
@@ -2279,9 +2286,9 @@ export default function AdminDashboard() {
                   body: emailBody,
                 });
                 if (res.error && res.sent === 0) {
-                  alert(t('Failed to send: ', 'Trimitere eșuată: ', 'Αποτυχία αποστολής: ') + res.error);
+                  setEmailResult(t('Failed to send: ', 'Trimitere eșuată: ', 'Αποτυχία αποστολής: ') + res.error);
                 } else {
-                  alert(
+                  setEmailResult(
                     t(
                       `Sent to ${res.sent} recipient(s).`,
                       `Trimis către ${res.sent} destinatar(i).`,
@@ -2291,8 +2298,12 @@ export default function AdminDashboard() {
                   setEmailSubject('');
                   setEmailBody('');
                   setEmailTo('');
-                  setEmailDialogOpen(false);
                 }
+              } catch (err) {
+                setEmailResult(
+                  t('Failed to send: ', 'Trimitere eșuată: ', 'Αποτυχία αποστολής: ') +
+                    (err instanceof Error ? err.message : String(err))
+                );
               } finally {
                 setEmailSending(false);
               }

@@ -64,6 +64,7 @@ async function sendViaResend(params: {
     } catch {
       /* ignore */
     }
+    console.error('[admin-email] Resend rejected:', res.status, detail);
     return { ok: false, error: detail };
   }
   return { ok: true };
@@ -75,6 +76,7 @@ export async function sendAdminEmail(input: {
   subject: string;
   body: string;
 }): Promise<{ sent: number; error: string | null }> {
+ try {
   const supabase = await createServerSupabaseClient();
   const {
     data: { user },
@@ -127,4 +129,8 @@ export async function sendAdminEmail(input: {
 
   if (sent === 0) return { sent: 0, error: errors[0] || 'Send failed.' };
   return { sent, error: errors.length ? `Partial send — ${errors.length} batch(es) failed.` : null };
+ } catch (e) {
+  console.error('[admin-email] send failed:', e);
+  return { sent: 0, error: e instanceof Error ? e.message : 'Unexpected error sending email.' };
+ }
 }
