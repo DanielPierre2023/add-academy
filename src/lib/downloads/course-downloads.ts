@@ -57,7 +57,7 @@ export const NEURALFORGE_DOWNLOAD: ProductDownload = {
   },
   icon: '🧠',
   fileName: 'NeuralForge-LLM-Deploy.zip',
-  storagePath: 'neuralforge-llm/NeuralForge-LLM-Deploy.zip',
+  storagePath: 'neuralforge-llm/NeuralForgeLLMDeploy.zip',
   available: true,
   fileSize: '~1 MB source · GPT-2 weights (~500 MB) fetched at setup',
   contents: {
@@ -84,7 +84,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '🎨',
     fileName: 'PixelForge-SaaS-Deploy.zip',
-    storagePath: 'saas/PixelForge-SaaS-Deploy.zip',
+    storagePath: 'saas/PixelForgeSaaSDeploy.zip',
     available: true,
     fileSize: '~0.4 MB source',
     contents: {
@@ -105,7 +105,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '🎬',
     fileName: 'ClipCraft-SaaS-Deploy.zip',
-    storagePath: 'saas/ClipCraft-SaaS-Deploy.zip',
+    storagePath: 'saas/ClipCraftSaaSDeploy.zip',
     available: true,
     fileSize: '~0.4 MB source',
     contents: {
@@ -126,7 +126,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '✍️',
     fileName: 'ProseAI-SaaS-Deploy.zip',
-    storagePath: 'saas/ProseAI-SaaS-Deploy.zip',
+    storagePath: 'saas/ProseAISaaSDeploy.zip',
     available: true,
     fileSize: '~0.4 MB source',
     contents: {
@@ -147,7 +147,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '🔍',
     fileName: 'TruthLens-SaaS-Deploy.zip',
-    storagePath: 'saas/TruthLens-SaaS-Deploy.zip',
+    storagePath: 'saas/TruthLensSaaSDeploy.zip',
     available: true,
     fileSize: '~0.5 MB source',
     contents: {
@@ -168,7 +168,7 @@ export const SAAS_DOWNLOADS: ProductDownload[] = [
     },
     icon: '📄',
     fileName: 'DocMind-SaaS-Deploy.zip',
-    storagePath: 'saas/DocMind-SaaS-Deploy.zip',
+    storagePath: 'saas/DocMindSaaSDeploy.zip',
     available: true,
     fileSize: '~0.5 MB source',
     contents: {
