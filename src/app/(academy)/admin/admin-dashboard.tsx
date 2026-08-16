@@ -80,6 +80,7 @@ import {
   SAAS_PLANS,
   SAAS_PRODUCTS,
 } from '@/lib/subscriptions/plans';
+import { sendAdminEmail } from '@/lib/admin/email-actions';
 import { computeRevenue, computeCustomerStats } from '@/lib/admin/metrics';
 import { formatEuro, formatPercent, formatCount } from '@/lib/admin/format';
 import { toCsv, downloadCsv } from '@/lib/admin/csv';
@@ -149,6 +150,7 @@ export default function AdminDashboard() {
   const [emailSubject, setEmailSubject] = useState('');
   const [emailBody, setEmailBody] = useState('');
   const [emailType, setEmailType] = useState<'individual' | 'org' | 'all'>('individual');
+  const [emailSending, setEmailSending] = useState(false);
 
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
@@ -2266,16 +2268,40 @@ export default function AdminDashboard() {
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
           <Button
-            onClick={() => {
-              // Copy email content to clipboard for now (email API integration pending)
-              const content = `To: ${emailType === 'all' ? 'All Students' : emailTo}\nSubject: ${emailSubject}\n\n${emailBody}`;
-              navigator.clipboard.writeText(content);
-              setEmailDialogOpen(false);
-              alert('Email content copied to clipboard. Email API integration coming soon.');
+            disabled={emailSending}
+            onClick={async () => {
+              setEmailSending(true);
+              try {
+                const res = await sendAdminEmail({
+                  type: emailType,
+                  to: emailTo,
+                  subject: emailSubject,
+                  body: emailBody,
+                });
+                if (res.error && res.sent === 0) {
+                  alert(t('Failed to send: ', 'Trimitere eșuată: ', 'Αποτυχία αποστολής: ') + res.error);
+                } else {
+                  alert(
+                    t(
+                      `Sent to ${res.sent} recipient(s).`,
+                      `Trimis către ${res.sent} destinatar(i).`,
+                      `Στάλθηκε σε ${res.sent} παραλήπτη(ες).`
+                    ) + (res.error ? ` (${res.error})` : '')
+                  );
+                  setEmailSubject('');
+                  setEmailBody('');
+                  setEmailTo('');
+                  setEmailDialogOpen(false);
+                }
+              } finally {
+                setEmailSending(false);
+              }
             }}
           >
             <Send className="h-3.5 w-3.5" />
-            {t('Send', 'Trimite', 'Αποστολή')}
+            {emailSending
+              ? t('Sending…', 'Se trimite…', 'Αποστολή…')
+              : t('Send', 'Trimite', 'Αποστολή')}
           </Button>
         </DialogFooter>
       </DialogContent>
