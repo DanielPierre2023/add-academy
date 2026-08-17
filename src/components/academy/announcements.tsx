@@ -62,6 +62,36 @@ function timeAgo(dateStr: string, lang: string): string {
     if (hours < 24) return `acum ${hours}h`;
     return `acum ${days}z`;
   }
+  if (lang === 'el') {
+    if (minutes < 1) return 'μόλις τώρα';
+    if (minutes < 60) return `πριν από ${minutes}λ`;
+    if (hours < 24) return `πριν από ${hours}ω`;
+    return `πριν από ${days}η`;
+  }
+  if (lang === 'de') {
+    if (minutes < 1) return 'gerade eben';
+    if (minutes < 60) return `vor ${minutes}m`;
+    if (hours < 24) return `vor ${hours}h`;
+    return `vor ${days}T`;
+  }
+  if (lang === 'fr') {
+    if (minutes < 1) return "à l'instant";
+    if (minutes < 60) return `il y a ${minutes}m`;
+    if (hours < 24) return `il y a ${hours}h`;
+    return `il y a ${days}j`;
+  }
+  if (lang === 'it') {
+    if (minutes < 1) return 'proprio ora';
+    if (minutes < 60) return `${minutes}m fa`;
+    if (hours < 24) return `${hours}h fa`;
+    return `${days}g fa`;
+  }
+  if (lang === 'ar') {
+    if (minutes < 1) return 'الآن';
+    if (minutes < 60) return `منذ ${minutes}د`;
+    if (hours < 24) return `منذ ${hours}س`;
+    return `منذ ${days}ي`;
+  }
   if (minutes < 1) return 'just now';
   if (minutes < 60) return `${minutes}m ago`;
   if (hours < 24) return `${hours}h ago`;
@@ -78,8 +108,21 @@ export function AnnouncementBell() {
 
   // W4.1 — this helper previously took only (en, ro), so EVERY Greek user
   // silently saw English. Greek is now required, not optional.
-  const t = (en: string, ro: string, el: string) =>
-    language === 'ro' ? ro : language === 'el' ? el : en;
+  // W4.2 — extended to cover de/fr/it/ar so those locales stop falling back to English.
+  const t = (en: string, ro: string, el: string, de: string, fr: string, it: string, ar: string) =>
+    language === 'ro'
+      ? ro
+      : language === 'el'
+        ? el
+        : language === 'de'
+          ? de
+          : language === 'fr'
+            ? fr
+            : language === 'it'
+              ? it
+              : language === 'ar'
+                ? ar
+                : en;
 
   const fetchAnnouncements = useCallback(async () => {
     if (!user) return;
@@ -158,7 +201,7 @@ export function AnnouncementBell() {
           fetchAnnouncements();
         }}
         className="relative rounded-full p-1.5 text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground transition-colors"
-        aria-label={t('Announcements', 'Anunțuri', 'Ανακοινώσεις')}
+        aria-label={t('Announcements', 'Anunțuri', 'Ανακοινώσεις', 'Ankündigungen', 'Annonces', 'Annunci', 'الإعلانات')}
       >
         <Bell className="h-4 w-4" />
         {unreadCount > 0 && (
@@ -184,11 +227,11 @@ export function AnnouncementBell() {
               <div className="flex items-center gap-2">
                 <Bell className="h-4 w-4 text-primary" />
                 <h2 className="font-heading text-sm font-bold text-foreground">
-                  {t('Announcements', 'Anunțuri', 'Ανακοινώσεις')}
+                  {t('Announcements', 'Anunțuri', 'Ανακοινώσεις', 'Ankündigungen', 'Annonces', 'Annunci', 'الإعلانات')}
                 </h2>
                 {unreadCount > 0 && (
                   <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold text-primary-foreground">
-                    {unreadCount} {t('new', 'noi', 'νέα')}
+                    {unreadCount} {t('new', 'noi', 'νέα', 'neu', 'nouveau', 'nuovo', 'جديد')}
                   </span>
                 )}
               </div>
@@ -198,7 +241,15 @@ export function AnnouncementBell() {
                     onClick={markAllAsRead}
                     className="rounded-md px-2 py-1 text-[11px] font-medium text-primary hover:bg-muted transition-colors"
                   >
-                    {t('Mark all read', 'Marchează citite', 'Σήμανση όλων ως αναγνωσμένων')}
+                    {t(
+                      'Mark all read',
+                      'Marchează citite',
+                      'Σήμανση όλων ως αναγνωσμένων',
+                      'Alle als gelesen markieren',
+                      'Tout marquer comme lu',
+                      'Segna tutto come letto',
+                      'تحديد الكل كمقروء'
+                    )}
                   </button>
                 )}
                 <button
@@ -220,7 +271,15 @@ export function AnnouncementBell() {
                 <div className="py-12 text-center">
                   <Megaphone className="mx-auto h-10 w-10 text-muted-foreground/30" />
                   <p className="mt-3 text-sm text-muted-foreground">
-                    {t('No announcements yet', 'Niciun anunț încă', 'Δεν υπάρχουν ανακοινώσεις ακόμη')}
+                    {t(
+                      'No announcements yet',
+                      'Niciun anunț încă',
+                      'Δεν υπάρχουν ανακοινώσεις ακόμη',
+                      'Noch keine Ankündigungen',
+                      'Aucune annonce pour le moment',
+                      'Nessun annuncio ancora',
+                      'لا توجد إعلانات بعد'
+                    )}
                   </p>
                 </div>
               ) : (

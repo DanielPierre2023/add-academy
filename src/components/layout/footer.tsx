@@ -58,7 +58,7 @@ export function Footer() {
           {/* Quick Links */}
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-secondary">
-              {language === 'ro' ? 'Linkuri Rapide' : language === 'el' ? 'Γρήγοροι Σύνδεσμοι' : 'Quick Links'}
+              {language === 'ro' ? 'Linkuri Rapide' : language === 'el' ? 'Γρήγοροι Σύνδεσμοι' : language === 'de' ? 'Schnelllinks' : language === 'fr' ? 'Liens Rapides' : language === 'it' ? 'Link Rapidi' : language === 'ar' ? 'روابط سريعة' : 'Quick Links'}
             </h3>
             <ul className="space-y-2.5">
               <li>
@@ -87,7 +87,7 @@ export function Footer() {
           {/* Company */}
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-secondary">
-              {language === 'ro' ? 'Compania' : language === 'el' ? 'Εταιρεία' : 'Company'}
+              {language === 'ro' ? 'Compania' : language === 'el' ? 'Εταιρεία' : language === 'de' ? 'Unternehmen' : language === 'fr' ? 'Entreprise' : language === 'it' ? 'Azienda' : language === 'ar' ? 'الشركة' : 'Company'}
             </h3>
             <ul className="space-y-2.5">
               <li>
@@ -97,12 +97,12 @@ export function Footer() {
               </li>
               <li>
                 <a href="https://add-individual-solutions.com/privacy" target="_blank" rel="noopener noreferrer" className="text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
-                  {language === 'ro' ? 'Politica de Confidențialitate' : language === 'el' ? 'Πολιτική Απορρήτου' : 'Privacy Policy'}
+                  {language === 'ro' ? 'Politica de Confidențialitate' : language === 'el' ? 'Πολιτική Απορρήτου' : language === 'de' ? 'Datenschutzrichtlinie' : language === 'fr' ? 'Politique de Confidentialité' : language === 'it' ? 'Informativa sulla Privacy' : language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
                 </a>
               </li>
               <li>
                 <a href="https://add-individual-solutions.com/terms" target="_blank" rel="noopener noreferrer" className="text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
-                  {language === 'ro' ? 'Termeni și Condiții' : language === 'el' ? 'Όροι & Προϋποθέσεις' : 'Terms & Conditions'}
+                  {language === 'ro' ? 'Termeni și Condiții' : language === 'el' ? 'Όροι & Προϋποθέσεις' : language === 'de' ? 'Allgemeine Geschäftsbedingungen' : language === 'fr' ? 'Conditions Générales' : language === 'it' ? 'Termini e Condizioni' : language === 'ar' ? 'الشروط والأحكام' : 'Terms & Conditions'}
                 </a>
               </li>
             </ul>
@@ -111,7 +111,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-secondary">
-              {language === 'ro' ? 'Contact' : language === 'el' ? 'Επικοινωνία' : 'Contact'}
+              {language === 'ro' ? 'Contact' : language === 'el' ? 'Επικοινωνία' : language === 'de' ? 'Kontakt' : language === 'fr' ? 'Contact' : language === 'it' ? 'Contatti' : language === 'ar' ? 'اتصل بنا' : 'Contact'}
             </h3>
             <ul className="space-y-2.5">
               <li className="text-sm text-primary-foreground/70">
@@ -139,7 +139,15 @@ export function Footer() {
               ? 'Toate drepturile rezervate.'
               : language === 'el'
                 ? 'Με επιφύλαξη παντός δικαιώματος.'
-                : 'All rights reserved.'}
+                : language === 'de'
+                  ? 'Alle Rechte vorbehalten.'
+                  : language === 'fr'
+                    ? 'Tous droits réservés.'
+                    : language === 'it'
+                      ? 'Tutti i diritti riservati.'
+                      : language === 'ar'
+                        ? 'جميع الحقوق محفوظة.'
+                        : 'All rights reserved.'}
           </p>
         </div>
       </div>

@@ -39,8 +39,20 @@ export function LectureDiscussion({ lectureId }: { lectureId: string }) {
   const [body, setBody] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  const t = (en: string, ro: string, el: string) =>
-    language === 'ro' ? ro : language === 'el' ? el : en;
+  const t = (en: string, ro: string, el: string, de: string, fr: string, it: string, ar: string) =>
+    language === 'ro'
+      ? ro
+      : language === 'el'
+      ? el
+      : language === 'de'
+      ? de
+      : language === 'fr'
+      ? fr
+      : language === 'it'
+      ? it
+      : language === 'ar'
+      ? ar
+      : en;
 
   const loadThread = useCallback(async (id: string) => {
     const res = await getThread(id);
@@ -85,7 +97,15 @@ export function LectureDiscussion({ lectureId }: { lectureId: string }) {
       // Create the lecture thread lazily with the first post as its body.
       const res = await createThread({
         lectureId,
-        title: t('Lecture discussion', 'Discuție lecție', 'Συζήτηση μαθήματος'),
+        title: t(
+          'Lecture discussion',
+          'Discuție lecție',
+          'Συζήτηση μαθήματος',
+          'Diskussion zur Lektion',
+          'Discussion sur la leçon',
+          'Discussione sulla lezione',
+          'مناقشة المحاضرة'
+        ),
         body,
       });
       if (!res.error && res.threadId) {
@@ -126,7 +146,15 @@ export function LectureDiscussion({ lectureId }: { lectureId: string }) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <MessagesSquare className="h-4 w-4 text-teal-500" />
-          {t('Discussion', 'Discuție', 'Συζήτηση')}
+          {t(
+            'Discussion',
+            'Discuție',
+            'Συζήτηση',
+            'Diskussion',
+            'Discussion',
+            'Discussione',
+            'المناقشة'
+          )}
           {thread && thread.posts.length > 0 && (
             <span className="text-xs font-normal text-muted-foreground">
               ({thread.posts.length})
@@ -136,7 +164,17 @@ export function LectureDiscussion({ lectureId }: { lectureId: string }) {
       </CardHeader>
       <CardContent className="space-y-4">
         {loading ? (
-          <p className="text-sm text-muted-foreground">{t('Loading…', 'Se încarcă…', 'Φόρτωση…')}</p>
+          <p className="text-sm text-muted-foreground">
+            {t(
+              'Loading…',
+              'Se încarcă…',
+              'Φόρτωση…',
+              'Wird geladen…',
+              'Chargement…',
+              'Caricamento…',
+              'جارٍ التحميل…'
+            )}
+          </p>
         ) : (
           <>
             {thread && thread.posts.length > 0 ? (
@@ -164,7 +202,11 @@ export function LectureDiscussion({ lectureId }: { lectureId: string }) {
                 {t(
                   'No discussion yet — start the conversation about this lecture.',
                   'Încă nu există discuții — începe conversația despre această lecție.',
-                  'Καμία συζήτηση ακόμη — ξεκινήστε τη συζήτηση για αυτό το μάθημα.'
+                  'Καμία συζήτηση ακόμη — ξεκινήστε τη συζήτηση για αυτό το μάθημα.',
+                  'Noch keine Diskussion — starte das Gespräch über diese Lektion.',
+                  'Pas encore de discussion — lancez la conversation sur cette leçon.',
+                  'Nessuna discussione ancora — avvia la conversazione su questa lezione.',
+                  'لا توجد مناقشة بعد — ابدأ الحديث حول هذه المحاضرة.'
                 )}
               </p>
             )}
@@ -174,7 +216,11 @@ export function LectureDiscussion({ lectureId }: { lectureId: string }) {
                 {t(
                   'You are currently muted and cannot post.',
                   'Ești în prezent redus la tăcere și nu poți posta.',
-                  'Είστε προσωρινά σε σίγαση και δεν μπορείτε να αναρτήσετε.'
+                  'Είστε προσωρινά σε σίγαση και δεν μπορείτε να αναρτήσετε.',
+                  'Du bist derzeit stummgeschaltet und kannst nicht posten.',
+                  'Vous êtes actuellement en sourdine et ne pouvez pas publier.',
+                  'Al momento sei silenziato e non puoi pubblicare.',
+                  'أنت مكتوم حاليًا ولا يمكنك النشر.'
                 )}
               </p>
             ) : (
@@ -184,20 +230,52 @@ export function LectureDiscussion({ lectureId }: { lectureId: string }) {
                   maxLength={10000}
                   rows={3}
                   onChange={(e) => setBody(e.target.value)}
-                  placeholder={t('Ask or share something…', 'Întreabă sau împărtășește ceva…', 'Ρωτήστε ή μοιραστείτε κάτι…')}
+                  placeholder={t(
+                    'Ask or share something…',
+                    'Întreabă sau împărtășește ceva…',
+                    'Ρωτήστε ή μοιραστείτε κάτι…',
+                    'Frage etwas oder teile etwas…',
+                    'Posez une question ou partagez quelque chose…',
+                    'Fai una domanda o condividi qualcosa…',
+                    'اطرح سؤالاً أو شارك شيئًا…'
+                  )}
                 />
                 <div className="flex items-center gap-3">
                   <Button size="sm" onClick={handlePost} disabled={submitting || !body.trim()}>
                     {submitting
-                      ? t('Posting…', 'Se postează…', 'Ανάρτηση…')
-                      : t('Post', 'Postează', 'Ανάρτηση')}
+                      ? t(
+                          'Posting…',
+                          'Se postează…',
+                          'Ανάρτηση…',
+                          'Wird gepostet…',
+                          'Publication…',
+                          'Pubblicazione…',
+                          'جارٍ النشر…'
+                        )
+                      : t(
+                          'Post',
+                          'Postează',
+                          'Ανάρτηση',
+                          'Posten',
+                          'Publier',
+                          'Pubblica',
+                          'نشر'
+                        )}
                   </Button>
                   {threadId && (
                     <Link
                       href={`/community/thread/${threadId}`}
                       className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
                     >
-                      {t('View full thread', 'Vezi discuția completă', 'Πλήρης συζήτηση')}
+                      {t(
+                        'View full thread',
+                        'Vezi discuția completă',
+                        'Πλήρης συζήτηση',
+                        'Vollständigen Thread ansehen',
+                        'Voir le fil complet',
+                        'Visualizza discussione completa',
+                        'عرض الموضوع كاملاً'
+                      )}
                       <ExternalLink className="h-3 w-3" />
                     </Link>
                   )}

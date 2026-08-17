@@ -7,6 +7,10 @@ interface ADDLogoProps {
   variant?: 'full' | 'mark' | 'academy';
   className?: string;
   size?: 'sm' | 'md' | 'lg';
+  /** Hide the "by ADD Individual Solutions" subtitle below the `sm` breakpoint — the
+   * uppercase, wide-tracking mono text is often wider than the wordmark itself and
+   * is the first thing worth dropping when horizontal space is tight (e.g. header). */
+  hideSubtitleOnMobile?: boolean;
 }
 
 const SIZES = {
@@ -24,7 +28,7 @@ const SIZES = {
  * - `full`    — logo image at full width
  * - `academy` — logo image + "Academica" branded text (default)
  */
-export function ADDLogo({ variant = 'academy', className, size = 'md' }: ADDLogoProps) {
+export function ADDLogo({ variant = 'academy', className, size = 'md', hideSubtitleOnMobile = false }: ADDLogoProps) {
   const s = SIZES[size];
 
   if (variant === 'mark') {
@@ -64,10 +68,10 @@ export function ADDLogo({ variant = 'academy', className, size = 'md' }: ADDLogo
         className="rounded-md object-contain"
         priority
       />
-      <span className="flex flex-col leading-none">
+      <span className="flex min-w-0 flex-col leading-none">
         <span
           className={cn(
-            'font-heading font-bold tracking-wide text-secondary',
+            'truncate font-heading font-bold tracking-wide text-secondary',
             s.text
           )}
         >
@@ -75,8 +79,9 @@ export function ADDLogo({ variant = 'academy', className, size = 'md' }: ADDLogo
         </span>
         <span
           className={cn(
-            'font-mono uppercase tracking-widest text-current opacity-50',
-            s.subtitle
+            'truncate font-mono uppercase tracking-widest text-current opacity-50',
+            s.subtitle,
+            hideSubtitleOnMobile && 'hidden sm:block'
           )}
         >
           by ADD Individual Solutions

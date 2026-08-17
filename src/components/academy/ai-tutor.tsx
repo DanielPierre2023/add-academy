@@ -51,6 +51,26 @@ const SUGGESTIONS: Record<Language, string[]> = {
     'Βοήθησέ με να διορθώσω τον κώδικά μου',
     'Πώς φτιάχνω έναν tokenizer;',
   ],
+  de: [
+    'Was ist der Attention-Mechanismus?',
+    'Hilf mir, meinen Code zu debuggen',
+    'Wie baue ich einen Tokenizer?',
+  ],
+  fr: [
+    "Qu'est-ce que le mécanisme d'attention ?",
+    'Aide-moi à déboguer mon code',
+    'Comment construire un tokenizer ?',
+  ],
+  it: [
+    "Cos'è il meccanismo di attenzione?",
+    'Aiutami a fare il debug del mio codice',
+    'Come costruisco un tokenizer?',
+  ],
+  ar: [
+    'ما هي آلية الانتباه؟',
+    'ساعدني في تصحيح الأخطاء في الشيفرة الخاصة بي',
+    'كيف أبني أداة تجزئة (tokenizer)؟',
+  ],
 };
 
 /**
@@ -74,6 +94,30 @@ function suggestionsForLecture(lectureId: string | undefined, language: Language
         `Εξήγησε απλά την κύρια ιδέα του «${title}»`,
         'Κόλλησα — βοήθησέ με να διορθώσω τον κώδικα',
         'Έλεγξέ με: κατάλαβα σωστά αυτό το μάθημα;',
+      ];
+    case 'de':
+      return [
+        `Erkläre die Hauptidee von „${title}“ einfach`,
+        'Ich hänge fest — hilf mir, meinen Code zu debuggen',
+        'Kurzer Check: habe ich diese Lektion richtig verstanden?',
+      ];
+    case 'fr':
+      return [
+        `Explique simplement l'idée principale de « ${title} »`,
+        'Je suis bloqué — aide-moi à déboguer mon code',
+        'Petite vérification : ai-je bien compris cette leçon ?',
+      ];
+    case 'it':
+      return [
+        `Spiega in modo semplice l'idea principale di "${title}"`,
+        'Sono bloccato — aiutami a fare il debug del mio codice',
+        'Verifica rapida: ho capito bene questa lezione?',
+      ];
+    case 'ar':
+      return [
+        `اشرح ببساطة الفكرة الرئيسية لـ"${title}"`,
+        'أنا عالق — ساعدني في تصحيح الأخطاء في الشيفرة الخاصة بي',
+        'تحقق سريع: هل فهمت هذه المحاضرة بشكل صحيح؟',
       ];
     default:
       return [
@@ -583,10 +627,10 @@ export function AITutor() {
   );
 
   const lectureLabel =
-    language === 'ro' ? 'Lecția' : language === 'el' ? 'Μάθημα' : 'Lecture';
+    language === 'ro' ? 'Lecția' : language === 'el' ? 'Μάθημα' : language === 'de' ? 'Lektion' : language === 'fr' ? 'Leçon' : language === 'it' ? 'Lezione' : language === 'ar' ? 'المحاضرة' : 'Lecture';
 
   const tutorButtonLabel =
-    language === 'ro' ? 'Tutor AI' : language === 'el' ? 'AI Καθηγητής' : 'AI Tutor';
+    language === 'ro' ? 'Tutor AI' : language === 'el' ? 'AI Καθηγητής' : language === 'de' ? 'KI-Tutor' : language === 'fr' ? 'Tuteur IA' : language === 'it' ? 'Tutor IA' : language === 'ar' ? 'المعلم الذكي' : 'AI Tutor';
 
   const tutorButtonTooltip =
     language === 'ro'

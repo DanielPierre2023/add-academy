@@ -36,8 +36,10 @@ export function BugReportButton() {
 
   // W4.1 — this helper previously took only (en, ro), so EVERY Greek user
   // silently saw English. Greek is now required, not optional.
-  const t = (en: string, ro: string, el: string) =>
-    language === 'ro' ? ro : language === 'el' ? el : en;
+  const t = (en: string, ro: string, el: string, de?: string, fr?: string, it?: string, ar?: string) => {
+    const map: Record<string, string> = { en, ro, el, de: de ?? en, fr: fr ?? en, it: it ?? en, ar: ar ?? en };
+    return map[language] ?? en;
+  };
 
   const handleSubmit = async () => {
     if (!title.trim() || !user) return;
@@ -78,7 +80,7 @@ export function BugReportButton() {
       <button
         onClick={() => setOpen(true)}
         className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-        title={t('Report a Bug', 'Raportează o Problemă', 'Αναφορά Σφάλματος')}
+        title={t('Report a Bug', 'Raportează o Problemă', 'Αναφορά Σφάλματος', 'Fehler melden', 'Signaler un bug', 'Segnala un bug', 'الإبلاغ عن خطأ')}
       >
         <Bug className="h-5 w-5" />
       </button>
@@ -106,27 +108,27 @@ export function BugReportButton() {
               <div className="py-8 text-center">
                 <CheckCircle2 className="mx-auto h-12 w-12 text-green-500" />
                 <h3 className="mt-3 font-heading text-lg font-bold text-foreground">
-                  {t('Thank you!', 'Mulțumim!', 'Ευχαριστούμε!')}
+                  {t('Thank you!', 'Mulțumim!', 'Ευχαριστούμε!', 'Danke!', 'Merci !', 'Grazie!', 'شكرًا لك!')}
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {t('Your report has been submitted. We\'ll look into it.', 'Raportul tău a fost trimis. Vom analiza problema.', 'Η αναφορά σας υποβλήθηκε. Θα την εξετάσουμε.')}
+                  {t('Your report has been submitted. We\'ll look into it.', 'Raportul tău a fost trimis. Vom analiza problema.', 'Η αναφορά σας υποβλήθηκε. Θα την εξετάσουμε.', 'Ihr Bericht wurde übermittelt. Wir werden uns damit befassen.', 'Votre signalement a été envoyé. Nous allons l\'examiner.', 'La tua segnalazione è stata inviata. La esamineremo.', 'تم إرسال تقريرك. سننظر فيه.')}
                 </p>
               </div>
             ) : (
               <>
                 <h3 className="font-heading text-lg font-bold text-foreground flex items-center gap-2">
                   <Bug className="h-5 w-5 text-primary" />
-                  {t('Report an Issue', 'Raportează o Problemă', 'Αναφορά Προβλήματος')}
+                  {t('Report an Issue', 'Raportează o Problemă', 'Αναφορά Προβλήματος', 'Problem melden', 'Signaler un problème', 'Segnala un problema', 'الإبلاغ عن مشكلة')}
                 </h3>
                 <p className="mt-0.5 text-xs text-muted-foreground">
-                  {t('Help us improve ADD Academica by reporting bugs or issues.', 'Ajută-ne să îmbunătățim ADD Academica raportând probleme.', 'Βοηθήστε μας να βελτιώσουμε το ADD Academica αναφέροντας σφάλματα ή προβλήματα.')}
+                  {t('Help us improve ADD Academica by reporting bugs or issues.', 'Ajută-ne să îmbunătățim ADD Academica raportând probleme.', 'Βοηθήστε μας να βελτιώσουμε το ADD Academica αναφέροντας σφάλματα ή προβλήματα.', 'Helfen Sie uns, ADD Academica zu verbessern, indem Sie Fehler oder Probleme melden.', 'Aidez-nous à améliorer ADD Academica en signalant des bugs ou des problèmes.', 'Aiutaci a migliorare ADD Academica segnalando bug o problemi.', 'ساعدنا في تحسين ADD Academica من خلال الإبلاغ عن الأخطاء أو المشكلات.')}
                 </p>
 
                 <div className="mt-4 space-y-3">
                   {/* Category */}
                   <div>
                     <label className="text-xs font-medium text-foreground">
-                      {t('Category', 'Categorie', 'Κατηγορία')}
+                      {t('Category', 'Categorie', 'Κατηγορία', 'Kategorie', 'Catégorie', 'Categoria', 'الفئة')}
                     </label>
                     <div className="mt-1 flex flex-wrap gap-1.5">
                       {CATEGORIES.map((cat) => (
@@ -150,7 +152,7 @@ export function BugReportButton() {
                   {/* Priority */}
                   <div>
                     <label className="text-xs font-medium text-foreground">
-                      {t('Priority', 'Prioritate', 'Προτεραιότητα')}
+                      {t('Priority', 'Prioritate', 'Προτεραιότητα', 'Priorität', 'Priorité', 'Priorità', 'الأولوية')}
                     </label>
                     <div className="mt-1 flex gap-1.5">
                       {PRIORITIES.map((p) => (
@@ -173,14 +175,14 @@ export function BugReportButton() {
                   {/* Title */}
                   <div>
                     <label className="text-xs font-medium text-foreground" htmlFor="report-title">
-                      {t('Title *', 'Titlu *', 'Τίτλος *')}
+                      {t('Title *', 'Titlu *', 'Τίτλος *', 'Titel *', 'Titre *', 'Titolo *', 'العنوان *')}
                     </label>
                     <input
                       id="report-title"
                       type="text"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
-                      placeholder={t('Brief summary of the issue...', 'Rezumat scurt al problemei...', 'Σύντομη περιγραφή του προβλήματος...')}
+                      placeholder={t('Brief summary of the issue...', 'Rezumat scurt al problemei...', 'Σύντομη περιγραφή του προβλήματος...', 'Kurze Zusammenfassung des Problems...', 'Résumé bref du problème...', 'Breve riepilogo del problema...', 'ملخص موجز للمشكلة...')}
                       className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"
                     />
                   </div>
@@ -188,13 +190,13 @@ export function BugReportButton() {
                   {/* Description */}
                   <div>
                     <label className="text-xs font-medium text-foreground" htmlFor="report-desc">
-                      {t('Description', 'Descriere', 'Περιγραφή')}
+                      {t('Description', 'Descriere', 'Περιγραφή', 'Beschreibung', 'Description', 'Descrizione', 'الوصف')}
                     </label>
                     <textarea
                       id="report-desc"
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      placeholder={t('What happened? What did you expect? Steps to reproduce...', 'Ce s-a întâmplat? Ce te așteptai? Pașii pentru a reproduce...', 'Τι συνέβη; Τι περιμένατε; Βήματα αναπαραγωγής...')}
+                      placeholder={t('What happened? What did you expect? Steps to reproduce...', 'Ce s-a întâmplat? Ce te așteptai? Pașii pentru a reproduce...', 'Τι συνέβη; Τι περιμένατε; Βήματα αναπαραγωγής...', 'Was ist passiert? Was haben Sie erwartet? Schritte zur Reproduktion...', 'Que s\'est-il passé ? À quoi vous attendiez-vous ? Étapes pour reproduire...', 'Cosa è successo? Cosa ti aspettavi? Passaggi per riprodurre...', 'ماذا حدث؟ ماذا كنت تتوقع؟ خطوات إعادة الإنتاج...')}
                       rows={4}
                       className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 resize-none"
                     />
@@ -209,7 +211,7 @@ export function BugReportButton() {
                 {/* Submit */}
                 <div className="mt-4 flex justify-end gap-2">
                   <Button variant="outline" size="sm" onClick={() => setOpen(false)}>
-                    {t('Cancel', 'Anulează', 'Άκυρο')}
+                    {t('Cancel', 'Anulează', 'Άκυρο', 'Abbrechen', 'Annuler', 'Annulla', 'إلغاء')}
                   </Button>
                   <Button
                     size="sm"
@@ -221,7 +223,7 @@ export function BugReportButton() {
                     ) : (
                       <Send className="h-3.5 w-3.5" />
                     )}
-                    {t('Submit Report', 'Trimite Raport', 'Υποβολή Αναφοράς')}
+                    {t('Submit Report', 'Trimite Raport', 'Υποβολή Αναφοράς', 'Bericht senden', 'Envoyer le rapport', 'Invia segnalazione', 'إرسال التقرير')}
                   </Button>
                 </div>
               </>

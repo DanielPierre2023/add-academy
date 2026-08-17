@@ -56,12 +56,9 @@ interface QuizQuestion {
   isMulti: boolean;
 }
 
-interface QuizData {
+interface QuizData extends Partial<Record<Language, { questions: QuizQuestion[] }>> {
   lectureId: string;
   en: { questions: QuizQuestion[] };
-  ro: { questions: QuizQuestion[] };
-  el: { questions: QuizQuestion[] };
-  [key: string]: unknown;
 }
 
 interface LectureViewerProps {

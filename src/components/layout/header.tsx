@@ -1,12 +1,14 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { Sun, Moon, Menu, User, LogOut, Settings, CreditCard } from 'lucide-react';
+import { Sun, Moon, Menu, User, LogOut, Settings, CreditCard, Globe, ChevronDown } from 'lucide-react';
 
 import { useAcademyStore } from '@/lib/store/academy-store';
 import { useAuth } from '@/lib/auth/auth-context';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import type { Language } from '@/types';
 
 import { Button } from '@/components/ui/button';
@@ -15,30 +17,76 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
 import { ADDLogo } from '@/components/brand/add-logo';
 import { AnnouncementBell } from '@/components/academy/announcements';
 
-const LANGUAGES: { code: Language; label: string }[] = [
-  { code: 'en', label: 'EN' },
-  { code: 'ro', label: 'RO' },
-  { code: 'el', label: 'EL' },
+const LANGUAGES: { code: Language; label: string; name: string }[] = [
+  { code: 'en', label: 'EN', name: 'English' },
+  { code: 'ro', label: 'RO', name: 'Română' },
+  { code: 'el', label: 'EL', name: 'Ελληνικά' },
+  { code: 'de', label: 'DE', name: 'Deutsch' },
+  { code: 'fr', label: 'FR', name: 'Français' },
+  { code: 'it', label: 'IT', name: 'Italiano' },
+  { code: 'ar', label: 'AR', name: 'العربية' },
 ];
 
+const menuPopupClass =
+  'min-w-40 border border-white/10 bg-primary text-primary-foreground shadow-xl';
+const menuItemClass =
+  'flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-xs hover:bg-white/10 focus:bg-white/10 data-highlighted:bg-white/10 transition-colors';
+
+function LanguageSwitcher() {
+  const { language, setLanguage } = useAcademyStore();
+  const current = LANGUAGES.find((l) => l.code === language) ?? LANGUAGES[0];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        className="flex items-center gap-1 rounded-full border border-white/20 px-2 sm:px-2.5 py-1 text-xs font-bold text-primary-foreground/80 hover:bg-white/10 hover:text-primary-foreground transition-colors"
+        aria-label="Change language"
+      >
+        <Globe className="h-3.5 w-3.5" />
+        <span>{current.label}</span>
+        <ChevronDown className="h-3 w-3 opacity-60" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" sideOffset={8} className={cn(menuPopupClass, 'p-1')}>
+        {LANGUAGES.map(({ code, label, name }) => (
+          <DropdownMenuItem
+            key={code}
+            onClick={() => setLanguage(code)}
+            className={cn(menuItemClass, 'justify-between', language === code && 'bg-white/10')}
+          >
+            <span>{name}</span>
+            <span className="text-primary-foreground/50 text-[10px]">{label}</span>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 export function Header() {
-  const { language, setLanguage, getCompletionPercentage, setSidebarOpen, sidebarOpen } =
+  const { language, getCompletionPercentage, setSidebarOpen, sidebarOpen } =
     useAcademyStore();
   const { theme, setTheme } = useTheme();
   const { user, isOrgUser, signOut } = useAuth();
+  const router = useRouter();
   const completion = getCompletionPercentage();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-primary text-primary-foreground">
-      <div className="flex h-14 items-center justify-between px-4 lg:px-6">
+      <div className="flex h-14 items-center justify-between gap-2 px-3 sm:px-4 lg:px-6">
         {/* Left: Sidebar toggle (mobile) + Logo */}
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="rounded-md p-1.5 text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground lg:hidden"
+            className="shrink-0 rounded-md p-1.5 text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground lg:hidden"
             aria-label="Toggle sidebar"
           >
             <Menu className="h-5 w-5" />
@@ -46,9 +94,9 @@ export function Header() {
 
           <Link
             href="/"
-            className="flex items-center gap-2 hover:opacity-90 transition-opacity"
+            className="flex min-w-0 items-center gap-2 hover:opacity-90 transition-opacity"
           >
-            <ADDLogo variant="academy" size="sm" />
+            <ADDLogo variant="academy" size="sm" hideSubtitleOnMobile />
           </Link>
         </div>
 
@@ -68,12 +116,12 @@ export function Header() {
         </div>
 
         {/* Right: User + Theme + Language */}
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           {/* Auth section */}
           {user ? (
-            <div className="relative group">
-              <button className="flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-xs hover:bg-white/10 transition-colors">
-                <User className="h-3.5 w-3.5" />
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1.5 rounded-full border border-white/20 px-2 sm:px-3 py-1 text-xs hover:bg-white/10 transition-colors">
+                <User className="h-3.5 w-3.5 shrink-0" />
                 <span className="hidden sm:inline max-w-[120px] truncate">
                   {user.displayName || user.email}
                 </span>
@@ -82,42 +130,33 @@ export function Header() {
                     ORG
                   </span>
                 )}
-              </button>
-              {/* Dropdown */}
-              <div className="absolute right-0 top-full hidden w-48 pt-1 group-hover:block">
-              <div className="rounded-lg border border-white/10 bg-primary p-1 shadow-xl">
-                <Link
-                  href="/dashboard"
-                  className="flex items-center gap-2 rounded-md px-3 py-2 text-xs hover:bg-white/10 transition-colors"
-                >
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" sideOffset={8} className={cn(menuPopupClass, 'w-48 p-1')}>
+                <DropdownMenuItem onClick={() => router.push('/dashboard')} className={menuItemClass}>
                   <Settings className="h-3.5 w-3.5" />
-                  {language === 'ro' ? 'Panou de control' : language === 'el' ? 'Πίνακας ελέγχου' : 'Dashboard'}
-                </Link>
+                  {t('nav_dashboard', language)}
+                </DropdownMenuItem>
                 {!isOrgUser && (
-                  <Link
-                    href="/pricing"
-                    className="flex items-center gap-2 rounded-md px-3 py-2 text-xs hover:bg-white/10 transition-colors"
-                  >
+                  <DropdownMenuItem onClick={() => router.push('/pricing')} className={menuItemClass}>
                     <CreditCard className="h-3.5 w-3.5" />
-                    {language === 'ro' ? 'Abonament' : language === 'el' ? 'Συνδρομή' : 'Subscription'}
-                  </Link>
+                    {t('nav_subscription', language)}
+                  </DropdownMenuItem>
                 )}
-                <button
+                <DropdownMenuItem
                   onClick={() => signOut()}
-                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-xs text-red-300 hover:bg-white/10 transition-colors"
+                  className={cn(menuItemClass, 'text-red-300')}
                 >
                   <LogOut className="h-3.5 w-3.5" />
-                  {language === 'ro' ? 'Deconectare' : language === 'el' ? 'Αποσύνδεση' : 'Sign out'}
-                </button>
-              </div>
-              </div>
-            </div>
+                  {t('auth_sign_out', language)}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <Link
               href="/login"
-              className="rounded-full border border-secondary bg-secondary/10 px-4 py-1 text-xs font-semibold text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all"
+              className="rounded-full border border-secondary bg-secondary/10 px-3 sm:px-4 py-1 text-xs font-semibold text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all"
             >
-              {language === 'ro' ? 'Autentificare' : language === 'el' ? 'Σύνδεση' : 'Sign in'}
+              {t('nav_login', language)}
             </Link>
           )}
 
@@ -133,7 +172,7 @@ export function Header() {
                   size="icon"
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                   aria-label="Toggle theme"
-                  className="h-8 w-8 text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground"
+                  className="h-8 w-8 shrink-0 text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground"
                 />
               }
             >
@@ -143,23 +182,8 @@ export function Header() {
             <TooltipContent>Toggle theme</TooltipContent>
           </Tooltip>
 
-          {/* Language pills */}
-          <div className="flex items-center rounded-full border border-white/20 p-0.5">
-            {LANGUAGES.map(({ code, label }) => (
-              <button
-                key={code}
-                onClick={() => setLanguage(code)}
-                className={cn(
-                  'rounded-full px-2.5 py-0.5 text-xs font-bold transition-all',
-                  language === code
-                    ? 'bg-secondary text-secondary-foreground shadow-sm'
-                    : 'text-primary-foreground/60 hover:text-primary-foreground'
-                )}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+          {/* Language switcher (dropdown - scales to any number of languages without overflow) */}
+          <LanguageSwitcher />
         </div>
       </div>
     </header>

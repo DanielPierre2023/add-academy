@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import {
@@ -50,14 +50,14 @@ function findStageForLecture(lectureId: string): number {
 
 /** Stage section label mapping for the sidebar */
 const STAGE_SECTIONS: Record<number, Record<string, string>> = {
-  0: { en: 'GETTING STARTED', ro: 'INTRODUCERE', el: 'ΕΙΣΑΓΩΓΗ' },
-  1: { en: 'STAGE 1: LLM FUNDAMENTALS', ro: 'ETAPA 1: FUNDAMENTELE LLM', el: 'ΣΤΑΔΙΟ 1: ΘΕΜΕΛΙΑ LLM' },
-  2: { en: 'STAGE 2: TOKENIZATION & DATA', ro: 'ETAPA 2: DATE & TOKENIZARE', el: 'ΣΤΑΔΙΟ 2: TOKENIZATION' },
-  3: { en: 'STAGE 3: ATTENTION MECHANISM', ro: 'ETAPA 3: MECANISMUL DE ATENȚIE', el: 'ΣΤΑΔΙΟ 3: ΜΗΧΑΝΙΣΜΟΣ ΠΡΟΣΟΧΗΣ' },
-  4: { en: 'STAGE 4: TRANSFORMER ARCH.', ro: 'ETAPA 4: ARHITECTURA TRANSFORMER', el: 'ΣΤΑΔΙΟ 4: ΑΡΧΙΤΕΚΤΟΝΙΚΗ' },
-  5: { en: 'STAGE 5: PRETRAINING', ro: 'ETAPA 5: PRE-ANTRENAMENT', el: 'ΣΤΑΔΙΟ 5: ΠΡΟΕΚΠΑΙΔΕΥΣΗ' },
-  6: { en: 'STAGE 6: FINE-TUNING & DEPLOY', ro: 'ETAPA 6: AJUSTARE & DEPLOYMENT', el: 'ΣΤΑΔΙΟ 6: ΜΙΚΡΟΡΥΘΜΙΣΗ' },
-  7: { en: 'STAGE 7: GENAI SAAS', ro: 'ETAPA 7: GENAI SAAS', el: 'ΣΤΑΔΙΟ 7: GENAI SAAS' },
+  0: { en: 'GETTING STARTED', ro: 'INTRODUCERE', el: 'ΕΙΣΑΓΩΓΗ', de: 'ERSTE SCHRITTE', fr: 'POUR COMMENCER', it: 'PER INIZIARE', ar: 'البداية' },
+  1: { en: 'STAGE 1: LLM FUNDAMENTALS', ro: 'ETAPA 1: FUNDAMENTELE LLM', el: 'ΣΤΑΔΙΟ 1: ΘΕΜΕΛΙΑ LLM', de: 'STUFE 1: LLM-GRUNDLAGEN', fr: 'ÉTAPE 1 : FONDAMENTAUX DES LLM', it: 'FASE 1: FONDAMENTI DEGLI LLM', ar: 'المرحلة 1: أساسيات النماذج اللغوية الكبيرة' },
+  2: { en: 'STAGE 2: TOKENIZATION & DATA', ro: 'ETAPA 2: DATE & TOKENIZARE', el: 'ΣΤΑΔΙΟ 2: TOKENIZATION', de: 'STUFE 2: TOKENISIERUNG & DATEN', fr: 'ÉTAPE 2 : TOKENISATION ET DONNÉES', it: 'FASE 2: TOKENIZZAZIONE E DATI', ar: 'المرحلة 2: الترميز والبيانات' },
+  3: { en: 'STAGE 3: ATTENTION MECHANISM', ro: 'ETAPA 3: MECANISMUL DE ATENȚIE', el: 'ΣΤΑΔΙΟ 3: ΜΗΧΑΝΙΣΜΟΣ ΠΡΟΣΟΧΗΣ', de: 'STUFE 3: AUFMERKSAMKEITSMECHANISMUS', fr: "ÉTAPE 3 : MÉCANISME D'ATTENTION", it: 'FASE 3: MECCANISMO DI ATTENZIONE', ar: 'المرحلة 3: آلية الانتباه' },
+  4: { en: 'STAGE 4: TRANSFORMER ARCH.', ro: 'ETAPA 4: ARHITECTURA TRANSFORMER', el: 'ΣΤΑΔΙΟ 4: ΑΡΧΙΤΕΚΤΟΝΙΚΗ', de: 'STUFE 4: TRANSFORMER-ARCHITEKTUR', fr: 'ÉTAPE 4 : ARCHITECTURE TRANSFORMER', it: 'FASE 4: ARCHITETTURA TRANSFORMER', ar: 'المرحلة 4: بنية المحوّل (ترانسفورمر)' },
+  5: { en: 'STAGE 5: PRETRAINING', ro: 'ETAPA 5: PRE-ANTRENAMENT', el: 'ΣΤΑΔΙΟ 5: ΠΡΟΕΚΠΑΙΔΕΥΣΗ', de: 'STUFE 5: VORTRAINING', fr: 'ÉTAPE 5 : PRÉ-ENTRAÎNEMENT', it: 'FASE 5: PRE-ADDESTRAMENTO', ar: 'المرحلة 5: التدريب المسبق' },
+  6: { en: 'STAGE 6: FINE-TUNING & DEPLOY', ro: 'ETAPA 6: AJUSTARE & DEPLOYMENT', el: 'ΣΤΑΔΙΟ 6: ΜΙΚΡΟΡΥΘΜΙΣΗ', de: 'STUFE 6: FEINABSTIMMUNG & BEREITSTELLUNG', fr: 'ÉTAPE 6 : AJUSTEMENT ET DÉPLOIEMENT', it: 'FASE 6: FINE-TUNING E DEPLOY', ar: 'المرحلة 6: الضبط الدقيق والنشر' },
+  7: { en: 'STAGE 7: GENAI SAAS', ro: 'ETAPA 7: GENAI SAAS', el: 'ΣΤΑΔΙΟ 7: GENAI SAAS', de: 'STUFE 7: GENAI SAAS', fr: 'ÉTAPE 7 : GENAI SAAS', it: 'FASE 7: GENAI SAAS', ar: 'المرحلة 7: GenAI SaaS' },
 };
 
 export function CourseSidebar() {
@@ -71,6 +71,19 @@ export function CourseSidebar() {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [courseMapOpen, setCourseMapOpen] = useState(true);
+
+  // The store's `sidebarOpen` defaults to true so the sidebar is always
+  // visible on desktop (where it's pinned via `lg:translate-x-0` regardless
+  // of this flag). Below the `lg` breakpoint the sidebar renders as a
+  // full-height overlay drawer instead, so that same default-true value used
+  // to open it — and its backdrop — on top of the page on first mobile load.
+  // Collapse it once, on mount, if we're below that breakpoint.
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setSidebarOpen(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const lectureIndex = useMemo(() => getLectureIndex(), []);
   const lectureMap = useMemo(() => {
@@ -209,7 +222,7 @@ export function CourseSidebar() {
                 >
                   <Star className="h-3.5 w-3.5 text-sidebar-primary" />
                   <span>
-                    {language === 'ro' ? 'Pagina Cursului' : language === 'el' ? 'Σελίδα Μαθήματος' : 'Course Page'}
+                    {language === 'ro' ? 'Pagina Cursului' : language === 'el' ? 'Σελίδα Μαθήματος' : language === 'de' ? 'Kursseite' : language === 'fr' ? 'Page du cours' : language === 'it' ? 'Pagina del corso' : language === 'ar' ? 'صفحة الدورة' : 'Course Page'}
                   </span>
                 </Link>
 
@@ -220,7 +233,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <LayoutDashboard className="h-3.5 w-3.5 text-primary" />
-                    <span>{language === 'ro' ? 'Panou de control' : language === 'el' ? 'Πίνακας Ελέγχου' : 'Dashboard'}</span>
+                    <span>{language === 'ro' ? 'Panou de control' : language === 'el' ? 'Πίνακας Ελέγχου' : language === 'de' ? 'Übersicht' : language === 'fr' ? 'Tableau de bord' : language === 'it' ? 'Pannello di controllo' : language === 'ar' ? 'لوحة التحكم' : 'Dashboard'}</span>
                   </Link>
                 )}
 
@@ -231,7 +244,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <BarChart3 className="h-3.5 w-3.5 text-cyan-500" />
-                    <span>{language === 'ro' ? 'Progres' : language === 'el' ? 'Πρόοδος' : 'Progress'}</span>
+                    <span>{language === 'ro' ? 'Progres' : language === 'el' ? 'Πρόοδος' : language === 'de' ? 'Fortschritt' : language === 'fr' ? 'Progression' : language === 'it' ? 'Progressi' : language === 'ar' ? 'التقدم' : 'Progress'}</span>
                   </Link>
                 )}
 
@@ -242,7 +255,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <Repeat className="h-3.5 w-3.5 text-violet-500" />
-                    <span>{language === 'ro' ? 'Recapitulare' : language === 'el' ? 'Επανάληψη' : 'Review'}</span>
+                    <span>{language === 'ro' ? 'Recapitulare' : language === 'el' ? 'Επανάληψη' : language === 'de' ? 'Wiederholung' : language === 'fr' ? 'Révision' : language === 'it' ? 'Ripasso' : language === 'ar' ? 'المراجعة' : 'Review'}</span>
                   </Link>
                 )}
 
@@ -253,7 +266,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <Award className="h-3.5 w-3.5 text-yellow-500" />
-                    <span>{language === 'ro' ? 'Realizări' : language === 'el' ? 'Επιτεύγματα' : 'Achievements'}</span>
+                    <span>{language === 'ro' ? 'Realizări' : language === 'el' ? 'Επιτεύγματα' : language === 'de' ? 'Erfolge' : language === 'fr' ? 'Réussites' : language === 'it' ? 'Traguardi' : language === 'ar' ? 'الإنجازات' : 'Achievements'}</span>
                   </Link>
                 )}
 
@@ -264,7 +277,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <Bookmark className="h-3.5 w-3.5 text-pink-500" />
-                    <span>{language === 'ro' ? 'Marcaje' : language === 'el' ? 'Σελιδοδείκτες' : 'Bookmarks'}</span>
+                    <span>{language === 'ro' ? 'Marcaje' : language === 'el' ? 'Σελιδοδείκτες' : language === 'de' ? 'Lesezeichen' : language === 'fr' ? 'Signets' : language === 'it' ? 'Segnalibri' : language === 'ar' ? 'الإشارات المرجعية' : 'Bookmarks'}</span>
                   </Link>
                 )}
 
@@ -275,7 +288,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <MessagesSquare className="h-3.5 w-3.5 text-teal-500" />
-                    <span>{language === 'ro' ? 'Comunitate' : language === 'el' ? 'Κοινότητα' : 'Community'}</span>
+                    <span>{language === 'ro' ? 'Comunitate' : language === 'el' ? 'Κοινότητα' : language === 'de' ? 'Gemeinschaft' : language === 'fr' ? 'Communauté' : language === 'it' ? 'Comunità' : language === 'ar' ? 'المجتمع' : 'Community'}</span>
                   </Link>
                 )}
 
@@ -286,7 +299,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <Shield className="h-3.5 w-3.5 text-teal-600" />
-                    <span>{language === 'ro' ? 'Moderare' : language === 'el' ? 'Εποπτεία' : 'Moderation'}</span>
+                    <span>{language === 'ro' ? 'Moderare' : language === 'el' ? 'Εποπτεία' : language === 'de' ? 'Moderation' : language === 'fr' ? 'Modération' : language === 'it' ? 'Moderazione' : language === 'ar' ? 'الإشراف' : 'Moderation'}</span>
                   </Link>
                 )}
 
@@ -297,7 +310,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <Download className="h-3.5 w-3.5 text-amber-500" />
-                    <span>{language === 'ro' ? 'Descărcări' : language === 'el' ? 'Λήψεις' : 'Downloads'}</span>
+                    <span>{language === 'ro' ? 'Descărcări' : language === 'el' ? 'Λήψεις' : language === 'de' ? 'Downloads' : language === 'fr' ? 'Téléchargements' : language === 'it' ? 'Download' : language === 'ar' ? 'التنزيلات' : 'Downloads'}</span>
                   </Link>
                 )}
 
@@ -308,7 +321,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <CreditCard className="h-3.5 w-3.5 text-secondary" />
-                    <span>{language === 'ro' ? 'Abonamente' : language === 'el' ? 'Συνδρομές' : 'Pricing'}</span>
+                    <span>{language === 'ro' ? 'Abonamente' : language === 'el' ? 'Συνδρομές' : language === 'de' ? 'Preise' : language === 'fr' ? 'Tarifs' : language === 'it' ? 'Prezzi' : language === 'ar' ? 'الأسعار' : 'Pricing'}</span>
                   </Link>
                 )}
 
@@ -319,7 +332,7 @@ export function CourseSidebar() {
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
                   >
                     <Shield className="h-3.5 w-3.5 text-green-500" />
-                    <span>{language === 'ro' ? 'Admin' : 'Admin'}</span>
+                    <span>{language === 'ro' ? 'Admin' : language === 'el' ? 'Admin' : language === 'de' ? 'Admin' : language === 'fr' ? 'Admin' : language === 'it' ? 'Admin' : language === 'ar' ? 'الإدارة' : 'Admin'}</span>
                   </Link>
                 )}
 
