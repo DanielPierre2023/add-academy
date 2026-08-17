@@ -117,7 +117,7 @@ async function isAuthenticatedForStage(stageNumber: number): Promise<boolean> {
 function stripQuizAnswers(quiz: any): any {
   if (!quiz) return null;
   const stripped = { ...quiz };
-  for (const lang of ['en', 'ro', 'el']) {
+  for (const lang of ['en', 'ro', 'el', 'de', 'fr', 'it', 'ar']) {
     if (stripped[lang]?.questions && Array.isArray(stripped[lang].questions)) {
       stripped[lang] = {
         ...stripped[lang],
@@ -141,7 +141,7 @@ function createContentTeaser(content: any): any {
   if (!content) return null;
   const teaser = { ...content };
 
-  for (const lang of ['en', 'ro', 'el']) {
+  for (const lang of ['en', 'ro', 'el', 'de', 'fr', 'it', 'ar']) {
     const html = teaser[lang];
     if (typeof html !== 'string') continue;
 
@@ -211,7 +211,7 @@ export default async function LecturePage({ params }: { params: Promise<{ id: st
       '@id': `${lectureUrl}#lecture`,
       name: lectureTitle,
       url: lectureUrl,
-      inLanguage: ['en', 'ro', 'el'],
+      inLanguage: ['en', 'ro', 'el', 'de', 'fr', 'it', 'ar'],
       learningResourceType: 'Lecture',
       educationalLevel: stageLabel,
       isPartOf: { '@id': `${BASE_URL}/#course` },

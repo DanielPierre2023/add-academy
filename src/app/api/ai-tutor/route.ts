@@ -8,7 +8,7 @@ const aiTutorSchema = z.object({
   message: z.string().min(1).max(4000),
   mode: z.enum(['explain', 'debug', 'build']).default('explain'),
   lectureId: z.string().max(50).optional(),
-  language: z.enum(['en', 'ro', 'el']).default('en'),
+  language: z.enum(['en', 'ro', 'el', 'de', 'fr', 'it', 'ar']).default('en'),
   history: z.array(z.object({
     role: z.enum(['user', 'assistant']),
     content: z.string().max(8000),
@@ -20,6 +20,10 @@ const LANGUAGE_NAMES: Record<string, string> = {
   en: 'English',
   ro: 'Romanian',
   el: 'Greek',
+  de: 'German',
+  fr: 'French',
+  it: 'Italian',
+  ar: 'Arabic',
 };
 
 // ─── Shared preamble: injected into EVERY mode ──────────────────────────────

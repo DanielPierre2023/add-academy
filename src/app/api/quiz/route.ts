@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 const QuizSubmissionSchema = z.object({
   lectureId: z.string().min(1).max(20),
-  language: z.enum(['en', 'ro', 'el']),
+  language: z.enum(['en', 'ro', 'el', 'de', 'fr', 'it', 'ar']),
   answers: z.record(
     z.string(), // question index as string
     z.array(z.number().int().min(0).max(10))

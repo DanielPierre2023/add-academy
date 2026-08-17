@@ -43,25 +43,42 @@ export const SAAS_PRODUCTS = [
 export const SUBSCRIPTION_PLANS: PricingPlan[] = [
   {
     id: 'all-access-monthly',
-    name: { en: 'All-Access Monthly', ro: 'Acces Complet Lunar', el: 'Πλήρης Πρόσβαση Μηνιαία' },
+    name: {
+      en: 'All-Access Monthly', ro: 'Acces Complet Lunar', el: 'Πλήρης Πρόσβαση Μηνιαία',
+      de: 'All-Access Monatlich', fr: 'Accès complet mensuel', it: 'Accesso completo mensile', ar: 'الوصول الكامل الشهري',
+    },
     description: {
       en: 'Everything: the full LLM course, all GenAI SaaS tools, and every future course. Cancel anytime.',
       ro: 'Totul: cursul LLM complet, toate uneltele GenAI SaaS și fiecare curs viitor. Anulează oricând.',
       el: 'Τα πάντα: το πλήρες μάθημα LLM, όλα τα εργαλεία GenAI SaaS και κάθε μελλοντικό μάθημα. Ακύρωση οποτεδήποτε.',
+      de: 'Alles: der komplette LLM-Kurs, alle GenAI-SaaS-Tools und jeder zukünftige Kurs. Jederzeit kündbar.',
+      fr: 'Tout : le cours LLM complet, tous les outils GenAI SaaS et chaque futur cours. Annulez à tout moment.',
+      it: 'Tutto: il corso LLM completo, tutti gli strumenti GenAI SaaS e ogni corso futuro. Annulla in qualsiasi momento.',
+      ar: 'كل شيء: الدورة الكاملة للنماذج اللغوية، وجميع أدوات GenAI SaaS، وكل دورة مستقبلية. يمكن الإلغاء في أي وقت.',
     },
     type: 'subscription',
     price: 12,
     interval: 'month',
     includes: { everything: true },
-    badge: { en: 'Most Flexible', ro: 'Cel Mai Flexibil', el: 'Πιο Ευέλικτο' },
+    badge: {
+      en: 'Most Flexible', ro: 'Cel Mai Flexibil', el: 'Πιο Ευέλικτο',
+      de: 'Am Flexibelsten', fr: 'Le plus flexible', it: 'Il più flessibile', ar: 'الأكثر مرونة',
+    },
   },
   {
     id: 'all-access-annual',
-    name: { en: 'All-Access Annual', ro: 'Acces Complet Anual', el: 'Πλήρης Πρόσβαση Ετήσια' },
+    name: {
+      en: 'All-Access Annual', ro: 'Acces Complet Anual', el: 'Πλήρης Πρόσβαση Ετήσια',
+      de: 'All-Access Jährlich', fr: 'Accès complet annuel', it: 'Accesso completo annuale', ar: 'الوصول الكامل السنوي',
+    },
     description: {
       en: 'Everything, billed yearly — get 2 months free versus paying monthly. Cancel anytime.',
       ro: 'Totul, facturat anual — primești 2 luni gratis față de plata lunară. Anulează oricând.',
       el: 'Τα πάντα, ετήσια χρέωση — 2 μήνες δωρεάν σε σχέση με τη μηνιαία. Ακύρωση οποτεδήποτε.',
+      de: 'Alles, jährlich abgerechnet — spare 2 Monate im Vergleich zur monatlichen Zahlung. Jederzeit kündbar.',
+      fr: 'Tout, facturé annuellement — obtenez 2 mois gratuits par rapport au paiement mensuel. Annulez à tout moment.',
+      it: 'Tutto, fatturato annualmente — ottieni 2 mesi gratis rispetto al pagamento mensile. Annulla in qualsiasi momento.',
+      ar: 'كل شيء، بفوترة سنوية — احصل على شهرين مجانًا مقارنة بالدفع الشهري. يمكن الإلغاء في أي وقت.',
     },
     type: 'subscription',
     price: 99,
@@ -69,7 +86,10 @@ export const SUBSCRIPTION_PLANS: PricingPlan[] = [
     originalPrice: 144,
     includes: { everything: true },
     popular: true,
-    badge: { en: 'Best Value · 2 Months Free', ro: 'Cea Mai Bună Valoare · 2 Luni Gratis', el: 'Καλύτερη Αξία · 2 Μήνες Δωρεάν' },
+    badge: {
+      en: 'Best Value · 2 Months Free', ro: 'Cea Mai Bună Valoare · 2 Luni Gratis', el: 'Καλύτερη Αξία · 2 Μήνες Δωρεάν',
+      de: 'Bester Wert · 2 Monate gratis', fr: 'Meilleure valeur · 2 mois gratuits', it: 'Miglior valore · 2 mesi gratis', ar: 'أفضل قيمة · شهران مجانًا',
+    },
   },
 ];
 
@@ -79,8 +99,8 @@ export const STAGE_PLANS: PricingPlan[] = [];
 
 export const SAAS_PLANS: PricingPlan[] = SAAS_PRODUCTS.map((product) => ({
   id: `saas-${product.id}`,
-  name: { en: product.name, ro: product.name, el: product.name },
-  description: { en: product.description, ro: product.description, el: product.description },
+  name: { en: product.name, ro: product.name, el: product.name, de: product.name, fr: product.name, it: product.name, ar: product.name },
+  description: { en: product.description, ro: product.description, el: product.description, de: product.description, fr: product.description, it: product.description, ar: product.description },
   type: 'saas' as const,
   price: 14,
   includes: { products: [product.id] },

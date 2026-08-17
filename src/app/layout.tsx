@@ -127,7 +127,7 @@ export default function RootLayout({
       url: SITE_URL,
       name: 'ADD Academica',
       publisher: { '@id': `${SITE_URL}/#organization` },
-      inLanguage: ['en', 'ro', 'el'],
+      inLanguage: ['en', 'ro', 'el', 'de', 'fr', 'it', 'ar'],
     },
     {
       '@context': 'https://schema.org',
@@ -138,7 +138,7 @@ export default function RootLayout({
         'An interactive course that takes you from zero to building large language models from scratch — transformers, attention, tokenization, training, and deployment, with hands-on code in every lecture.',
       url: SITE_URL,
       provider: { '@id': `${SITE_URL}/#organization` },
-      inLanguage: ['en', 'ro', 'el'],
+      inLanguage: ['en', 'ro', 'el', 'de', 'fr', 'it', 'ar'],
       teaches: [
         'Transformers', 'Attention mechanism', 'Tokenization',
         'Neural network training', 'Fine-tuning', 'LLM deployment',
