@@ -245,5 +245,329 @@
         "isMulti": false
       }
     ]
+  },
+  "de": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Der Kurs verwendet eine Analogie zum Autobau für seine drei Phasen. Wenn Phase 1 das Studieren des Handbuchs ist und Phase 2 das Bauen des Autos aus Einzelteilen, wofür steht dann Phase 3 (Finetuning & Evaluation)?",
+        "options": [
+          "Einfach ein brandneues, fertiges Auto direkt vom Autohaus kaufen",
+          "Das gesamte Auto komplett verschrotten und den Bau danach wieder von null beginnen",
+          "Das Auto für einen Zweck (Rennen oder Familie) individualisieren und es probefahren",
+          "Ein zweites, anderes Handbuch über einen völlig anderen Fahrzeugtyp lesen"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Phase 3 nimmt das funktionierende Modell aus Phase 2 und spezialisiert es: Klassifikations-Finetuning passt es an das Kategorisieren von Text an (wie ein auf Geschwindigkeit getrimmtes Rennauto), Instruktions-Finetuning passt es an Konversation an (wie ein auf Komfort optimierter Familien-SUV), und die Evaluation ist die Probefahrt, die die Leistung überprüft. Das Modell fängt nicht von vorne an &mdash; es baut auf seinem vortrainierten Wissen auf.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Warum bringt Ihnen der Kurs bei, einen zeichenbasierten Tokenizer zu bauen, bevor Sie BPE (Byte Pair Encoding) implementieren?",
+        "options": [
+          "Weil zeichenbasierte Tokenizer BPE in praktisch allen Fällen einfach überlegen sind",
+          "Er ist einfacher, sodass Sie die Grundlagen (Text zu Zahlen und zurück) verstehen, bevor Sie sich BPE zuwenden",
+          "Weil BPE inzwischen völlig veraltet ist und in der Praxis so gut wie niemand es mehr verwendet",
+          "Weil Sie BPE buchstäblich nicht implementieren können, ohne zuerst einen zeichenbasierten Tokenizer zu bauen"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Der pädagogische Ansatz ist progressiv: Ein zeichenbasierter Tokenizer, bei dem jedes Zeichen zu einem Token wird (H=72, e=101 usw.), ist die einfachstmögliche Implementierung. Er vermittelt das Kernkonzept &mdash; Text in Zahlen umzuwandeln und zurück &mdash; ohne die Komplexität des Subword-Mergings. Sobald Sie dieses Fundament verstanden haben, ergibt der iterative Paar-Merging-Prozess des BPE-Algorithmus viel mehr Sinn. Das ist Teil der Philosophie des Kurses: zuerst konzeptionelles Verständnis, dann Komplexität.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Beim „Sliding-Window\"-Ansatz zur Erstellung von Trainingsdaten: Gegeben ist der tokenisierte Text [17, 482, 95, 221, 63] und eine Kontextlänge von 3. Welches Input-Target-Paar würde das Modell daraus lernen?",
+        "options": [
+          "Input: [17, 482, 95] → Target: [17, 482, 95] (eine exakte Kopie)",
+          "Input: [17, 482, 95] → Target: [482, 95, 221]",
+          "Input: [17] → Target: [482, 95, 221, 63]",
+          "Input: [63, 221, 95] → Target: [482, 17]"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Das Sliding Window erzeugt Input-Target-Paare, bei denen das Target der um eine Position verschobene Input ist. Gegeben die Input-Tokens [17, 482, 95] muss das Modell an jeder Position das nächste Token vorhersagen: nach 17 wird 482 vorhergesagt, nach [17, 482] wird 95 vorhergesagt, nach [17, 482, 95] wird 221 vorhergesagt. Die Target-Sequenz ist also [482, 95, 221] &mdash; jedes Element ist das nächste Token, das auf das entsprechende Präfix des Inputs folgen sollte.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Warum benötigt ein Transformer sowohl Token-Embeddings ALS AUCH Positions-Embeddings? Wählen Sie alle zutreffenden Antworten.",
+        "options": [
+          "Token-Embeddings erfassen, was ein Wort bedeutet (seine Semantik), aber nicht, wo es erscheint",
+          "Ohne Positionen behandelt das Modell „dog bites man\" und „man bites dog\" als identisch",
+          "Positions-Embeddings sind rein dekorativ und erfüllen überhaupt keinen echten funktionalen Zweck",
+          "Zusammen ermöglichen sie dem Modell, sowohl die Bedeutung als auch die Position jedes Tokens zu kennen"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Im Gegensatz zu RNNs, die Tokens sequenziell verarbeiten (und dadurch die Position von Natur aus kennen), verarbeiten Transformer alle Tokens gleichzeitig. Token-Embeddings liefern die semantische Bedeutung (was das Wort ist), aber zwei identische Sequenzen mit unterschiedlicher Wortreihenfolge würden ohne Positionsinformation dieselben Attention-Muster erzeugen. Positions-Embeddings fügen das „Wo\" hinzu &mdash; sie teilen dem Modell mit, dass Token A an Position 1 und Token B an Position 3 steht. Zusammen weiß das Modell sowohl, was jedes Token bedeutet, als auch, wo es in der Sequenz steht.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Nach Abschluss von Phase 2 können Sie die offiziellen GPT-2-Gewichte von OpenAI in Ihre Modellarchitektur laden. Was beweist das, wenn Ihr Modell dieselben Ausgaben produziert wie das echte GPT-2?",
+        "options": [
+          "Dass Sie nun irgendwie ein strikt schnelleres und besseres Modell haben als das, das OpenAI tatsächlich gebaut hat",
+          "Ihre Architektur ist korrekt &mdash; Ihr Code entspricht strukturell genau dem GPT-2 von OpenAI",
+          "Dass Sie erfolgreich ein brandneues Modell vollständig von Grund auf selbst trainiert haben",
+          "Dass die offiziell veröffentlichten Gewichte von GPT-2 fehlerhaft sind und eindeutig von Ihnen repariert werden müssen"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Das Laden der offiziellen Gewichte von OpenAI in Ihr Modell ist die ultimative Validierung Ihrer Implementierung. Wenn Ihr Code die echten GPT-2-Parameter übernehmen und für dieselben Eingaben identische Ausgaben produzieren kann, beweist das, dass Ihre Transformer-Blöcke, der Attention-Mechanismus, die Feedforward-Netzwerke, die Layer-Normalisierung und die Embeddings alle architektonisch korrekt sind. Es bedeutet nicht, dass Sie ein neues Modell trainiert haben &mdash; Sie verwenden die trainierten Gewichte von OpenAI &mdash; aber es bestätigt, dass Ihr Code eine originalgetreue Reproduktion der GPT-2-Architektur ist.",
+        "isMulti": false
+      }
+    ]
+  },
+  "fr": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Le cours utilise une analogie de construction automobile pour ses trois étapes. Si l'Étape 1 consiste à étudier le manuel et l'Étape 2 à construire la voiture à partir de pièces, à quoi correspond l'Étape 3 (Finetuning et Évaluation) ?",
+        "options": [
+          "Simplement acheter une voiture neuve et entièrement finie directement chez un concessionnaire",
+          "Mettre la voiture entière à la casse puis recommencer sa construction depuis zéro",
+          "Personnaliser la voiture pour un usage (course ou famille) et l'essayer sur route",
+          "Lire un second manuel, différent, portant sur un type de véhicule totalement sans rapport"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "L'Étape 3 prend le modèle fonctionnel issu de l'Étape 2 et le spécialise : le finetuning de classification l'adapte pour catégoriser du texte (comme une voiture de course réglée pour la vitesse), le finetuning par instructions l'adapte pour la conversation (comme un SUV familial optimisé pour le confort), et l'évaluation est l'essai sur route qui vérifie la performance. Le modèle ne repart pas de zéro — il s'appuie sur ses connaissances pré-entraînées.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Pourquoi le cours vous enseigne-t-il à construire un tokenizer au niveau des caractères avant d'implémenter le BPE (Byte Pair Encoding) ?",
+        "options": [
+          "Parce que les tokenizers au niveau des caractères sont tout simplement supérieurs au BPE dans presque tous les cas",
+          "C'est plus simple, ce qui permet d'assimiler les fondamentaux (texte vers nombres et inversement) avant d'aborder le BPE",
+          "Parce que le BPE est aujourd'hui complètement dépassé et que pratiquement plus personne ne l'utilise en pratique",
+          "Parce qu'il est littéralement impossible d'implémenter le BPE sans d'abord construire un tokenizer au niveau des caractères"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "L'approche pédagogique est progressive : un tokenizer au niveau des caractères, où chaque caractère devient un token (H=72, e=101, etc.), est l'implémentation la plus simple possible. Il enseigne le concept central — convertir du texte en nombres et inversement — sans la complexité de la fusion de subwords. Une fois cette base comprise, le processus itératif de fusion de paires du BPE devient beaucoup plus clair. Cela fait partie de la philosophie du cours : la compréhension conceptuelle d'abord, puis la complexité.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Dans l'approche de la « fenêtre glissante » pour créer les données d'entraînement, étant donné le texte tokenisé [17, 482, 95, 221, 63] et une longueur de contexte de 3, quelle paire entrée-cible le modèle apprendrait-il ?",
+        "options": [
+          "Entrée : [17, 482, 95] → Cible : [17, 482, 95] (une copie exacte)",
+          "Entrée : [17, 482, 95] → Cible : [482, 95, 221]",
+          "Entrée : [17] → Cible : [482, 95, 221, 63]",
+          "Entrée : [63, 221, 95] → Cible : [482, 17]"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "La fenêtre glissante crée des paires entrée-cible où la cible est l'entrée décalée d'une position. Étant donné les tokens d'entrée [17, 482, 95], le modèle doit prédire le token suivant à chaque position : après 17 prédire 482, après [17, 482] prédire 95, après [17, 482, 95] prédire 221. La séquence cible est donc [482, 95, 221] — chaque élément est le token suivant qui devrait suivre le préfixe correspondant de l'entrée.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Pourquoi un Transformer a-t-il besoin à la fois de token embeddings ET d'embeddings positionnels ? Sélectionnez toutes les réponses applicables.",
+        "options": [
+          "Les token embeddings capturent ce que signifie un mot (sa sémantique), mais pas où il apparaît",
+          "Sans les positions, le modèle traite « le chien mord l'homme » et « l'homme mord le chien » de manière identique",
+          "Les embeddings positionnels sont purement décoratifs et n'ont absolument aucune utilité fonctionnelle réelle",
+          "Ensemble, ils permettent au modèle de connaître à la fois le sens et la position de chaque token"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Contrairement aux RNN qui traitent les tokens séquentiellement (et connaissent donc intrinsèquement la position), les Transformers traitent tous les tokens simultanément. Les token embeddings fournissent le sens sémantique (ce qu'est le mot), mais deux séquences identiques avec un ordre de mots différent produiraient les mêmes motifs d'attention sans information positionnelle. Les embeddings positionnels ajoutent le « où » — en indiquant au modèle que le token A est à la position 1 et le token B à la position 3. Ensemble, le modèle connaît à la fois le sens de chaque token et sa place dans la séquence.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Après avoir terminé l'Étape 2, vous pouvez charger les poids officiels de GPT-2 d'OpenAI dans l'architecture de votre modèle. Que prouve le fait que votre modèle produise les mêmes sorties que le vrai GPT-2 ?",
+        "options": [
+          "Que vous disposez désormais, d'une manière ou d'une autre, d'un modèle strictement plus rapide et meilleur que celui réellement construit par OpenAI",
+          "Que votre architecture est correcte — votre code correspond structurellement, exactement, à celui du GPT-2 d'OpenAI",
+          "Que vous avez entraîné avec succès un tout nouveau modèle entièrement à partir de zéro, par vous-même",
+          "Que les poids officiels publiés de GPT-2 sont défectueux et doivent manifestement être corrigés par vous"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Charger les poids officiels d'OpenAI dans votre modèle constitue la validation ultime de votre implémentation. Si votre code peut accepter les paramètres réels de GPT-2 et produire des sorties identiques pour les mêmes entrées, cela prouve que vos blocs Transformer, votre mécanisme d'attention, vos réseaux feedforward, votre layer normalization et vos embeddings sont tous architecturalement corrects. Cela ne signifie pas que vous avez entraîné un nouveau modèle — vous utilisez les poids entraînés d'OpenAI — mais cela confirme que votre code est une reproduction fidèle de l'architecture GPT-2.",
+        "isMulti": false
+      }
+    ]
+  },
+  "it": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Il corso usa un'analogia con la costruzione di un'auto per le sue tre fasi. Se la Fase 1 è studiare il manuale e la Fase 2 è costruire l'auto a partire dai pezzi, a cosa corrisponde la Fase 3 (Finetuning e Valutazione)?",
+        "options": [
+          "Semplicemente comprare un'auto nuova di zecca, completamente finita, direttamente dallo showroom di un concessionario",
+          "Rottamare completamente tutta l'auto e ricominciare la costruzione da zero",
+          "Personalizzare l'auto per uno scopo (corsa o famiglia) e collaudarla su strada",
+          "Leggere un secondo manuale, diverso, su un tipo di veicolo completamente non correlato"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "La Fase 3 prende il modello funzionante della Fase 2 e lo specializza: il finetuning per la classificazione lo adatta per categorizzare il testo (come un'auto da corsa messa a punto per la velocità), il finetuning per istruzioni lo adatta per la conversazione (come un SUV familiare ottimizzato per il comfort), e la valutazione è il collaudo che verifica le prestazioni. Il modello non ricomincia da zero: costruisce sulla sua conoscenza pre-addestrata.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Perché il corso ti insegna a costruire un tokenizer a livello di carattere prima di implementare BPE (Byte Pair Encoding)?",
+        "options": [
+          "Perché i tokenizer a livello di carattere sono semplicemente superiori a BPE in praticamente tutti i casi",
+          "È più semplice, quindi afferri i fondamentali (testo in numeri e viceversa) prima di affrontare BPE",
+          "Perché BPE è ormai completamente superato e praticamente nessuno lo usa più nella pratica",
+          "Perché letteralmente non puoi implementare BPE senza prima costruire un tokenizer a livello di carattere"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "L'approccio pedagogico è progressivo: un tokenizer a livello di carattere in cui ogni carattere diventa un token (H=72, e=101, ecc.) è l'implementazione più semplice possibile. Insegna il concetto fondamentale — convertire il testo in numeri e viceversa — senza la complessità dell'unione di subword. Una volta compresa questa base, il processo iterativo di unione delle coppie dell'algoritmo BPE ha molto più senso. Questo fa parte della filosofia del corso: prima la comprensione concettuale, poi la complessità.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Nell'approccio a 'sliding window' per creare i dati di addestramento, dato il testo tokenizzato [17, 482, 95, 221, 63] e una lunghezza di contesto di 3, quale coppia input-target apprenderebbe il modello?",
+        "options": [
+          "Input: [17, 482, 95] → Target: [17, 482, 95] (una copia esatta)",
+          "Input: [17, 482, 95] → Target: [482, 95, 221]",
+          "Input: [17] → Target: [482, 95, 221, 63]",
+          "Input: [63, 221, 95] → Target: [482, 17]"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "La sliding window crea coppie input-target in cui il target è l'input spostato di una posizione. Dati i token di input [17, 482, 95], il modello deve prevedere il token successivo a ogni posizione: dopo 17 prevede 482, dopo [17, 482] prevede 95, dopo [17, 482, 95] prevede 221. Quindi la sequenza target è [482, 95, 221] — ogni elemento è il token successivo che dovrebbe seguire il corrispondente prefisso dell'input.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Perché un Transformer ha bisogno sia dei token embedding SIA dei positional embedding? Seleziona tutte le opzioni corrette.",
+        "options": [
+          "I token embedding catturano cosa significa una parola (la sua semantica), ma non dove compare",
+          "Senza le posizioni, il modello tratta 'il cane morde l'uomo' e 'l'uomo morde il cane' come identici",
+          "I positional embedding sono puramente decorativi e non hanno assolutamente alcuno scopo funzionale reale",
+          "Insieme permettono al modello di conoscere sia il significato sia la posizione di ogni token"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "A differenza delle RNN, che elaborano i token in modo sequenziale (e quindi conoscono intrinsecamente la posizione), i Transformer elaborano tutti i token simultaneamente. I token embedding forniscono il significato semantico (cos'è la parola), ma due sequenze identiche con ordini di parole diversi produrrebbero gli stessi pattern di attention senza informazioni posizionali. I positional embedding aggiungono il 'dove' — indicando al modello che il token A si trova in posizione 1 e il token B in posizione 3. Insieme, il modello sa sia cosa significa ogni token sia dove si trova nella sequenza.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Dopo aver completato la Fase 2, puoi caricare i pesi ufficiali di GPT-2 di OpenAI nella tua architettura del modello. Cosa dimostra questo se il tuo modello produce gli stessi output del vero GPT-2?",
+        "options": [
+          "Che ora hai in qualche modo un modello strettamente più veloce e migliore di quello effettivamente costruito da OpenAI",
+          "La tua architettura è corretta — il tuo codice corrisponde strutturalmente esattamente a quello del GPT-2 di OpenAI",
+          "Che hai addestrato con successo un modello completamente nuovo, interamente da zero, per conto tuo",
+          "Che i pesi ufficiali pubblicati di GPT-2 sono difettosi e devono chiaramente essere corretti da te"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Caricare i pesi ufficiali di OpenAI nel tuo modello è la validazione definitiva della tua implementazione. Se il tuo codice riesce ad accettare i parametri reali di GPT-2 e a produrre output identici per gli stessi input, ciò dimostra che i tuoi blocchi Transformer, il meccanismo di attention, le reti feedforward, la layer normalization e gli embedding sono tutti architetturalmente corretti. Non significa che tu abbia addestrato un nuovo modello — stai usando i pesi addestrati di OpenAI — ma conferma che il tuo codice è una riproduzione fedele dell'architettura di GPT-2.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ar": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "تستخدم الدورة تشبيه بناء السيارة لمراحلها الثلاث. إذا كانت المرحلة 1 هي دراسة الدليل والمرحلة 2 هي بناء السيارة من القطع، فماذا تقابل المرحلة 3 (الضبط الدقيق والتقييم)؟",
+        "options": [
+          "شراء سيارة جديدة تمامًا وجاهزة بالكامل مباشرة من صالة عرض وكيل السيارات",
+          "التخلص من السيارة بأكملها ثم البدء في بنائها من جديد من الصفر",
+          "تخصيص السيارة لغرض معين (سباق أو عائلة) واختبارها بالقيادة",
+          "قراءة دليل آخر مختلف تمامًا عن نوع مركبة لا علاقة له بالأول"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "تأخذ المرحلة 3 النموذج العامل من المرحلة 2 وتخصصه: يكيّفه الضبط الدقيق للتصنيف لتصنيف النصوص إلى فئات (مثل سيارة سباق مضبوطة على السرعة)، ويكيّفه الضبط الدقيق للتعليمات للمحادثة (مثل سيارة عائلية مُحسَّنة للراحة)، والتقييم هو اختبار القيادة الذي يتحقق من الأداء. النموذج لا يبدأ من جديد — بل يبني على معرفته المكتسبة مسبقًا.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "لماذا تعلّمك الدورة بناء أداة ترميز على مستوى الحرف قبل تطبيق BPE (ترميز أزواج البايت)؟",
+        "options": [
+          "لأن أدوات الترميز على مستوى الحرف أفضل ببساطة من BPE في جميع الحالات تقريبًا",
+          "لأنها أبسط، مما يساعدك على استيعاب الأساسيات (تحويل النص إلى أرقام والعكس) قبل التعامل مع BPE",
+          "لأن BPE أصبحت الآن قديمة تمامًا ولا يستخدمها أحد تقريبًا في الواقع العملي بعد الآن",
+          "لأنك لا تستطيع حرفيًا تطبيق BPE دون أن تبني أولًا أداة ترميز على مستوى الحرف"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "النهج التربوي تدريجي: أداة الترميز على مستوى الحرف حيث يصبح كل حرف رمزًا واحدًا (H=72، e=101، إلخ) هي أبسط تطبيق ممكن. تعلّمك المفهوم الأساسي — تحويل النص إلى أرقام والعكس — دون تعقيد دمج الكلمات الفرعية. وبمجرد أن تفهم هذا الأساس، تصبح عملية دمج الأزواج التكرارية في خوارزمية BPE أكثر منطقية بكثير. هذا جزء من فلسفة الدورة: الفهم المفاهيمي أولًا، ثم التعقيد.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "في أسلوب \"النافذة المنزلقة\" لإنشاء بيانات التدريب، وبمعلومية النص المُرمَّز [17, 482, 95, 221, 63] وطول سياق يساوي 3، ما زوج المدخل-الهدف الذي سيتعلم منه النموذج؟",
+        "options": [
+          "المدخل: [17, 482, 95] ← الهدف: [17, 482, 95] (نسخة مطابقة تمامًا)",
+          "المدخل: [17, 482, 95] ← الهدف: [482, 95, 221]",
+          "المدخل: [17] ← الهدف: [482, 95, 221, 63]",
+          "المدخل: [63, 221, 95] ← الهدف: [482, 17]"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "تُنشئ النافذة المنزلقة أزواج مدخل-هدف حيث يكون الهدف هو المدخل مُزاحًا بموضع واحد. بمعلومية رموز المدخل [17, 482, 95]، يجب على النموذج توقع الرمز التالي عند كل موضع: بعد 17 يتوقع 482، وبعد [17, 482] يتوقع 95، وبعد [17, 482, 95] يتوقع 221. لذا فإن تسلسل الهدف هو [482, 95, 221] — كل عنصر هو الرمز التالي الذي يجب أن يتبع البادئة المقابلة له من المدخل.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "لماذا يحتاج نموذج Transformer إلى كل من تضمينات الرموز وتضمينات المواضع معًا؟ اختر جميع الإجابات الصحيحة.",
+        "options": [
+          "تضمينات الرموز تلتقط معنى الكلمة (دلالتها)، لكن ليس موضعها",
+          "بدون المواضع، يتعامل النموذج مع \"الكلب يعض الرجل\" و\"الرجل يعض الكلب\" باعتبارهما متطابقتين",
+          "التضمينات الموضعية زخرفية بحتة ولا تخدم أي غرض وظيفي حقيقي على الإطلاق",
+          "معًا، تتيح للنموذج معرفة معنى كل رمز وموضعه في آن واحد"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "على عكس الشبكات العصبية المتكررة (RNN) التي تعالج الرموز بالتسلسل (وبالتالي تعرف الموضع بطبيعتها)، تعالج نماذج Transformer جميع الرموز في آنٍ واحد. توفر تضمينات الرموز المعنى الدلالي (ما هي الكلمة)، لكن تسلسلين متطابقين بترتيب كلمات مختلف سينتجان نفس أنماط الانتباه دون معلومات موضعية. تضيف التضمينات الموضعية \"أين\" — فتخبر النموذج بأن الرمز A في الموضع 1 والرمز B في الموضع 3. ومعًا، يعرف النموذج معنى كل رمز وموضعه في التسلسل.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "بعد إكمال المرحلة 2، يمكنك تحميل أوزان GPT-2 الرسمية من OpenAI في معمارية نموذجك. ماذا يثبت هذا إذا أنتج نموذجك نفس مخرجات GPT-2 الحقيقي؟",
+        "options": [
+          "أنك أصبحت بطريقة ما تمتلك نموذجًا أسرع وأفضل بشكل قاطع من النموذج الذي بنته OpenAI فعليًا",
+          "أن معماريتك صحيحة — كودك يطابق GPT-2 من OpenAI هيكليًا تمامًا",
+          "أنك دربت بنجاح نموذجًا جديدًا تمامًا من الصفر بمفردك",
+          "أن أوزان GPT-2 الرسمية المنشورة معطوبة ومن الواضح أنها تحتاج إلى إصلاح من قبلك"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "تحميل أوزان OpenAI الرسمية في نموذجك هو التحقق النهائي من صحة تطبيقك. إذا كان بإمكان كودك قبول معاملات GPT-2 الحقيقية وإنتاج مخرجات مطابقة لنفس المدخلات، فهذا يثبت أن كتل Transformer، وآلية الانتباه، وشبكات التغذية الأمامية، وتسوية الطبقات، والتضمينات لديك كلها صحيحة من الناحية المعمارية. لا يعني هذا أنك دربت نموذجًا جديدًا — فأنت تستخدم أوزان OpenAI المدرَّبة — لكنه يؤكد أن كودك إعادة إنتاج أمينة لمعمارية GPT-2.",
+        "isMulti": false
+      }
+    ]
   }
 }

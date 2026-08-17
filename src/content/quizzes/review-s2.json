@@ -271,5 +271,352 @@
         "reviewReference": "Διάλεξη 2: Βασικά στοιχεία LLM"
       }
     ]
+  },
+  "de": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Du hast Stage 2 zur Tokenization abgeschlossen. Prüfen wir, wie gut du dich an die Grundlagen aus Stage 1 erinnerst. Was ist die primäre Rolle der Transformer-Architektur in modernen LLMs?",
+        "options": [
+          "Sie speichert den gesamten Trainingskorpus in stark komprimierter Form, damit er zur Inferenzzeit schnell abgerufen werden kann",
+          "Sie nutzt Self-Attention und Feed-Forward-Schichten, um parallele Berechnung und Modellierung über weite Distanzen zu ermöglichen",
+          "Sie wandelt Eingabetext in Audiosignale zur Spracherkennung um",
+          "Sie macht GPUs überflüssig, indem sie effizient auf gewöhnlichen CPUs läuft"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Wie in Lektion 4 behandelt, nutzt die Transformer-Architektur (eingeführt in 'Attention Is All You Need') Self-Attention-Mechanismen, um alle Token parallel zu verarbeiten und dabei weitreichende Abhängigkeiten weit effektiver zu erfassen als frühere sequenzielle Architekturen wie RNNs.",
+        "isMulti": false,
+        "reviewReference": "Lecture 4: What Are Transformers?"
+      },
+      {
+        "index": 1,
+        "text": "Erinnerung an Stage 1: Was ist der Unterschied zwischen Pretraining und Finetuning eines LLM?",
+        "options": [
+          "Pretraining verwendet immer sorgfältig von Hand gelabelte Daten, während Finetuning ausschließlich auf ungelabelten Rohtextkorpora beruht",
+          "Pretraining lernt allgemeine Sprache aus großen ungelabelten Korpora; Finetuning passt das Modell an spezifische Aufgaben an",
+          "Pretraining und Finetuning sind eigentlich derselbe Prozess unter zwei verschiedenen Namen",
+          "Finetuning findet vor dem Pretraining statt, um die Modellarchitektur vorzubereiten"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Wie in Lektion 3 besprochen, ist Pretraining die erste Phase, in der das Modell aus riesigen Textmengen allgemeine Sprachmuster lernt (Vorhersage des nächsten Tokens). Finetuning ist die anschließende Phase, in der dieses allgemeine Wissen für spezifische Aufgaben wie Klassifikation, Instruction Following oder domänenspezifische Anwendungen spezialisiert wird.",
+        "isMulti": false,
+        "reviewReference": "Lecture 3: Pretraining LLMs vs Finetuning LLMs"
+      },
+      {
+        "index": 2,
+        "text": "Aus Lektion 5 zu GPT-3: Warum galt GPT-3 als Durchbruch im Few-Shot Learning?",
+        "options": [
+          "Weil es zu dieser Zeit das mit Abstand kleinste je gebaute Modell war",
+          "Weil es Aufgaben anhand weniger Prompt-Beispiele ausführen konnte, ohne Gradienten-Updates",
+          "Weil es das allererste Sprachmodell war, das sich für die gesamte Textverarbeitung auf Convolutional-Schichten stützte",
+          "Weil es immer nur mit genau drei In-Context-Beispielen funktionieren konnte"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Die Größe von GPT-3 (175 Mrd. Parameter) ermöglichte bemerkenswerte Few-Shot- und Zero-Shot-Fähigkeiten. Indem einfach ein paar Beispiele im Prompt bereitgestellt wurden (In-Context Learning), konnte das Modell Aufgaben ausführen, für die es nie explizit trainiert worden war, ohne dass Gewichte aktualisiert wurden.",
+        "isMulti": false,
+        "reviewReference": "Lecture 5: How Does GPT-3 Really Work?"
+      },
+      {
+        "index": 3,
+        "text": "Rückblick auf Stage 1: In der im Kurs durchgängig verwendeten Autobau-Analogie — wofür stehen die drei Hauptphasen? Wähle alle richtigen Antworten aus.",
+        "options": [
+          "Stage 1 (Fundamentals) = Das Autohandbuch studieren, um zu verstehen, wie Autos funktionieren",
+          "Stage 2 (Building) = Das Auto aus Teilen zusammenbauen (Architektur, Tokenizer, Daten)",
+          "Stage 3 (Finetuning) = Das Auto für einen bestimmten Zweck anpassen und probefahren",
+          "Stage 1 (Fundamentals) = Einfach ein fertig zusammengebautes Auto direkt bei einem örtlichen Autohaus kaufen"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Der Kurs nutzt eine dreistufige Autobau-Analogie: Zuerst studierst du das Handbuch (verstehst die LLM-Theorie), dann baust du das Auto aus Teilen zusammen (implementierst die Architektur), und schließlich passt du es an und fährst Probe (Finetuning und Evaluation für spezifische Aufgaben).",
+        "isMulti": true,
+        "reviewReference": "Lecture 6: Stages of Building an LLM from Scratch"
+      },
+      {
+        "index": 4,
+        "text": "Aus deinem Stage-1-Wissen: Was sagt ein LLM bei der Textgenerierung tatsächlich vorher?",
+        "options": [
+          "Die gesamte Antwort auf einmal, erzeugt als ein einziger vollständiger Ausgabeblock",
+          "Das nächste Token (Wortbaustein), eines nach dem anderen, ausgehend von allen vorherigen Token",
+          "Zufällige Wörterbuchwörter, gewichtet nach ihrer Gesamthäufigkeit",
+          "Vollständige Sätze, direkt aus den Trainingsdaten ausgewählt"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Wie in Lektion 2 und 5 behandelt, sind LLMs autoregressive Modelle, die Text Token für Token generieren. Bei jedem Schritt nimmt das Modell alle vorherigen Token als Eingabe und erzeugt eine Wahrscheinlichkeitsverteilung über das Vokabular für das nächste Token. Diese Vorhersage des nächsten Tokens ist der grundlegende Mechanismus hinter jeder LLM-Textgenerierung.",
+        "isMulti": false,
+        "reviewReference": "Lecture 2: LLM Basics"
+      }
+    ]
+  },
+  "fr": {
+    "id": "quiz-review-s2-fr",
+    "title": "Quiz de révision Étape 1",
+    "description": "Testez ce dont vous vous souvenez des concepts de l'Étape 1 (Fondamentaux des LLM) avant de passer à l'Étape 3.",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Vous avez terminé l'Étape 2 sur la Tokenisation. Vérifions ce que vous avez retenu des fondamentaux de l'Étape 1. Quel est le rôle principal de l'architecture Transformer dans les LLM modernes ?",
+        "options": [
+          "Elle stocke l'intégralité du corpus d'entraînement dans un format fortement compressé afin de pouvoir le récupérer rapidement à l'inférence",
+          "Elle utilise l'auto-attention et des couches feed-forward pour permettre un calcul parallèle et une modélisation à longue portée",
+          "Elle convertit le texte d'entrée en signaux audio utilisés pour la reconnaissance vocale",
+          "Elle supprime le besoin de GPU en s'exécutant efficacement sur des CPU ordinaires"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Comme vu dans le Cours 4, l'architecture Transformer (introduite dans « Attention Is All You Need ») utilise des mécanismes d'auto-attention pour traiter tous les tokens en parallèle, capturant les dépendances à longue portée bien plus efficacement que les architectures séquentielles précédentes comme les RNN.",
+        "isMulti": false,
+        "reviewReference": "Cours 4 : Que sont les Transformers ?"
+      },
+      {
+        "index": 1,
+        "text": "Rappel de l'Étape 1 : quelle est la différence entre le pré-entraînement et le finetuning d'un LLM ?",
+        "options": [
+          "Le pré-entraînement utilise toujours des données étiquetées manuellement avec soin, tandis que le finetuning repose entièrement sur des corpus de texte brut non étiquetés",
+          "Le pré-entraînement apprend le langage général à partir de vastes corpus non étiquetés ; le finetuning l'adapte à des tâches spécifiques",
+          "Le pré-entraînement et le finetuning sont en réalité le même processus sous deux noms différents",
+          "Le finetuning a lieu avant le pré-entraînement afin de préparer l'architecture du modèle"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Comme expliqué dans le Cours 3, le pré-entraînement est la première phase durant laquelle le modèle apprend des schémas linguistiques généraux à partir d'énormes quantités de texte (prédiction du prochain token). Le finetuning est la phase suivante, où cette connaissance générale est spécialisée pour des tâches spécifiques telles que la classification, le suivi d'instructions ou des applications propres à un domaine.",
+        "isMulti": false,
+        "reviewReference": "Cours 3 : Pré-entraînement vs Finetuning des LLM"
+      },
+      {
+        "index": 2,
+        "text": "D'après le Cours 5 sur GPT-3 : pourquoi GPT-3 a-t-il été considéré comme une avancée majeure en apprentissage few-shot ?",
+        "options": [
+          "Parce qu'il était de loin le plus petit modèle jamais construit à l'époque",
+          "Parce qu'il pouvait effectuer des tâches à partir de quelques exemples dans le prompt, sans aucune mise à jour de gradient",
+          "Parce qu'il était le tout premier modèle de langage à reposer sur des couches convolutives pour tout le traitement du texte",
+          "Parce qu'il ne pouvait fonctionner qu'avec exactement trois exemples en contexte"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "L'échelle de GPT-3 (175 milliards de paramètres) a permis des capacités remarquables en few-shot et en zero-shot. En fournissant simplement quelques exemples dans le prompt (apprentissage en contexte), le modèle pouvait effectuer des tâches pour lesquelles il n'avait jamais été explicitement entraîné, sans mettre à jour aucun poids.",
+        "isMulti": false,
+        "reviewReference": "Cours 5 : Comment fonctionne vraiment GPT-3 ?"
+      },
+      {
+        "index": 3,
+        "text": "Retour sur l'Étape 1 : dans l'analogie de la construction automobile utilisée tout au long du cours, que représentent les trois étapes principales ? Sélectionnez toutes les réponses correctes.",
+        "options": [
+          "Étape 1 (Fondamentaux) = Étudier le manuel de la voiture pour comprendre son fonctionnement",
+          "Étape 2 (Construction) = Assembler la voiture à partir des pièces (architecture, tokenizer, données)",
+          "Étape 3 (Finetuning) = Personnaliser la voiture pour un usage donné et l'essayer sur route",
+          "Étape 1 (Fondamentaux) = Simplement acheter une voiture entièrement assemblée directement chez un concessionnaire local"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Le cours utilise une analogie automobile en trois étapes : on étudie d'abord le manuel (comprendre la théorie des LLM), puis on construit la voiture à partir des pièces (implémenter l'architecture), et enfin on la personnalise et on l'essaie sur route (finetuning et évaluation pour des tâches spécifiques).",
+        "isMulti": true,
+        "reviewReference": "Cours 6 : Les étapes de la construction d'un LLM à partir de zéro"
+      },
+      {
+        "index": 4,
+        "text": "D'après vos connaissances de l'Étape 1 : que prédit réellement un LLM pendant la génération de texte ?",
+        "options": [
+          "L'intégralité de la réponse d'un seul coup, produite comme un seul bloc de sortie complet",
+          "Le prochain token (fragment de mot), un par un, à partir de tous les tokens précédents",
+          "Des mots aléatoires du dictionnaire, pondérés selon leur fréquence globale",
+          "Des phrases complètes sélectionnées directement dans ses données d'entraînement"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Comme vu dans les Cours 2 et 5, les LLM sont des modèles autorégressifs qui génèrent le texte un token à la fois. À chaque étape, le modèle prend tous les tokens précédents en entrée et produit une distribution de probabilité sur le vocabulaire pour le prochain token. Cette prédiction du prochain token est le mécanisme fondamental derrière toute génération de texte par un LLM.",
+        "isMulti": false,
+        "reviewReference": "Cours 2 : Les bases des LLM"
+      }
+    ]
+  },
+  "it": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Hai completato la Fase 2 sulla Tokenizzazione. Verifichiamo quanto ricordi delle basi della Fase 1. Qual è il ruolo principale dell'architettura Transformer nei moderni LLM?",
+        "options": [
+          "Memorizza l'intero corpus di addestramento in un formato altamente compresso in modo da poterlo recuperare rapidamente al momento dell'inferenza",
+          "Utilizza il self-attention e strati feed-forward per consentire il calcolo parallelo e la modellazione a lungo raggio",
+          "Converte il testo di input in segnali audio utilizzati per il riconoscimento vocale",
+          "Elimina la necessità di GPU eseguendo il modello in modo efficiente su normali CPU"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Come trattato nella Lezione 4, l'architettura Transformer (introdotta in 'Attention Is All You Need') utilizza meccanismi di self-attention per elaborare tutti i token in parallelo, catturando le dipendenze a lungo raggio in modo molto più efficace rispetto alle precedenti architetture sequenziali come le RNN.",
+        "isMulti": false,
+        "reviewReference": "Lezione 4: Cosa Sono i Transformer?"
+      },
+      {
+        "index": 1,
+        "text": "Ricorda dalla Fase 1: qual è la differenza tra pretraining e finetuning di un LLM?",
+        "options": [
+          "Il pretraining utilizza sempre dati etichettati manualmente con cura, mentre il finetuning si basa interamente su corpus di testo grezzo non etichettato",
+          "Il pretraining apprende il linguaggio generale da ampi corpus non etichettati; il finetuning lo adatta a compiti specifici",
+          "Il pretraining e il finetuning sono in realtà lo stesso processo con due nomi diversi",
+          "Il finetuning avviene prima del pretraining per preparare l'architettura del modello"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Come discusso nella Lezione 3, il pretraining è la prima fase in cui il modello apprende gli schemi generali del linguaggio da enormi quantità di testo (previsione del token successivo). Il finetuning è la fase successiva in cui questa conoscenza generale viene specializzata per compiti specifici come la classificazione, il seguire istruzioni o applicazioni specifiche di un dominio.",
+        "isMulti": false,
+        "reviewReference": "Lezione 3: Pretraining degli LLM vs Finetuning degli LLM"
+      },
+      {
+        "index": 2,
+        "text": "Dalla Lezione 5 su GPT-3: perché GPT-3 è stato considerato una svolta nel few-shot learning?",
+        "options": [
+          "Perché era di gran lunga il modello più piccolo mai costruito fino a quel momento",
+          "Perché poteva svolgere compiti a partire da pochi esempi nel prompt, senza aggiornamenti dei gradienti",
+          "Perché era il primissimo modello linguistico a basarsi su strati convoluzionali per tutta l'elaborazione del testo",
+          "Perché poteva funzionare solo ed esclusivamente con esattamente tre esempi nel contesto"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "La scala di GPT-3 (175 miliardi di parametri) ha permesso notevoli capacità di few-shot e zero-shot learning. Fornendo semplicemente alcuni esempi nel prompt (in-context learning), il modello poteva svolgere compiti per cui non era mai stato addestrato esplicitamente, senza aggiornare alcun peso.",
+        "isMulti": false,
+        "reviewReference": "Lezione 5: Come Funziona Davvero GPT-3?"
+      },
+      {
+        "index": 3,
+        "text": "Ripensando alla Fase 1: nell'analogia della costruzione di un'automobile usata durante tutto il corso, cosa rappresentano le tre fasi principali? Seleziona tutte le risposte corrette.",
+        "options": [
+          "Fase 1 (Fondamenti) = Studiare il manuale dell'auto per capire come funzionano le auto",
+          "Fase 2 (Costruzione) = Assemblare l'auto a partire dai componenti (architettura, tokenizer, dati)",
+          "Fase 3 (Finetuning) = Personalizzare l'auto per uno scopo specifico e collaudarla su strada",
+          "Fase 1 (Fondamenti) = Semplicemente acquistare un'auto già completamente assemblata direttamente da un concessionario locale"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Il corso utilizza un'analogia in tre fasi con un'automobile: prima studi il manuale (comprendi la teoria degli LLM), poi costruisci l'auto a partire dai componenti (implementi l'architettura), e infine la personalizzi e la collaudi su strada (finetuning e valutazione per compiti specifici).",
+        "isMulti": true,
+        "reviewReference": "Lezione 6: Le Fasi della Costruzione di un LLM da Zero"
+      },
+      {
+        "index": 4,
+        "text": "Dalle tue conoscenze della Fase 1: cosa predice effettivamente un LLM durante la generazione del testo?",
+        "options": [
+          "L'intera risposta tutta in una volta, prodotta insieme come un unico blocco di output completo",
+          "Il token successivo (frammento di parola), uno alla volta, a partire da tutti i token precedenti",
+          "Parole casuali del dizionario, ponderate in base alla loro frequenza complessiva",
+          "Frasi complete selezionate direttamente dai dati di addestramento"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Come trattato nelle Lezioni 2 e 5, gli LLM sono modelli autoregressivi che generano testo un token alla volta. A ogni passo, il modello prende tutti i token precedenti come input e produce una distribuzione di probabilità sul vocabolario per il token successivo. Questa previsione del token successivo è il meccanismo fondamentale alla base di tutta la generazione di testo degli LLM.",
+        "isMulti": false,
+        "reviewReference": "Lezione 2: Nozioni di Base sugli LLM"
+      }
+    ]
+  },
+  "ar": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "لقد أكملت المرحلة 2 حول التقطيع إلى وحدات (Tokenization). لنتحقق من مدى تذكرك لأساسيات المرحلة 1. ما هو الدور الأساسي لمعمارية المحوّل (Transformer) في نماذج اللغة الكبيرة (LLMs) الحديثة؟",
+        "options": [
+          "تخزّن مجموعة بيانات التدريب بأكملها بصيغة مضغوطة للغاية بحيث يمكن استرجاعها بسرعة أثناء الاستدلال",
+          "تستخدم الانتباه الذاتي (self-attention) وطبقات التغذية الأمامية (feed-forward) لتمكين الحوسبة المتوازية ونمذجة الاعتماديات بعيدة المدى",
+          "تحوّل النص المُدخل إلى إشارات صوتية تُستخدم في التعرف على الكلام",
+          "تلغي الحاجة إلى وحدات معالجة الرسومات (GPU) من خلال العمل بكفاءة على وحدات المعالجة المركزية (CPU) العادية"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "كما ورد في المحاضرة 4، تستخدم معمارية المحوّل (Transformer) - التي قُدّمت في ورقة 'Attention Is All You Need' - آليات الانتباه الذاتي لمعالجة جميع الرموز (tokens) بالتوازي، مما يلتقط الاعتماديات بعيدة المدى بفعالية أكبر بكثير من المعماريات التسلسلية السابقة مثل الشبكات العصبية المتكررة (RNNs).",
+        "isMulti": false,
+        "reviewReference": "المحاضرة 4: ما هي المحوّلات (Transformers)؟"
+      },
+      {
+        "index": 1,
+        "text": "تذكّر من المرحلة 1: ما الفرق بين التدريب المسبق (pretraining) والضبط الدقيق (finetuning) لنموذج لغوي كبير؟",
+        "options": [
+          "يستخدم التدريب المسبق دائمًا بيانات مُصنَّفة يدويًا بعناية، بينما يعتمد الضبط الدقيق كليًا على نصوص خام غير مُصنَّفة",
+          "يتعلّم التدريب المسبق اللغة العامة من مجموعات نصية ضخمة غير مُصنَّفة؛ ويقوم الضبط الدقيق بتكييفه لمهام محددة",
+          "التدريب المسبق والضبط الدقيق هما في الواقع نفس العملية تحت اسمين مختلفين",
+          "يحدث الضبط الدقيق قبل التدريب المسبق من أجل تجهيز معمارية النموذج"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "كما نوقش في المحاضرة 3، التدريب المسبق هو المرحلة الأولى التي يتعلّم فيها النموذج أنماط اللغة العامة من كميات هائلة من النصوص (التنبؤ بالرمز التالي). أما الضبط الدقيق فهو المرحلة اللاحقة التي تُخصَّص فيها هذه المعرفة العامة لمهام محددة مثل التصنيف، أو اتباع التعليمات، أو التطبيقات الخاصة بمجال معين.",
+        "isMulti": false,
+        "reviewReference": "المحاضرة 3: التدريب المسبق مقابل الضبط الدقيق لنماذج اللغة الكبيرة"
+      },
+      {
+        "index": 2,
+        "text": "من المحاضرة 5 حول GPT-3: لماذا اعتُبر GPT-3 اختراقًا في التعلّم من أمثلة قليلة (few-shot learning)؟",
+        "options": [
+          "لأنه كان بلا منازع أصغر نموذج تم بناؤه في ذلك الوقت",
+          "لأنه استطاع أداء مهام انطلاقًا من أمثلة قليلة في المحث (prompt)، دون أي تحديثات للتدرجات (gradients)",
+          "لأنه كان أول نموذج لغوي على الإطلاق يعتمد على الطبقات الالتفافية (convolutional) في معالجة كل النصوص",
+          "لأنه لم يكن قادرًا على العمل إلا بثلاثة أمثلة سياقية بالضبط"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "مكّن حجم GPT-3 (175 مليار معلمة) من قدرات لافتة في التعلّم من أمثلة قليلة ومن دون أمثلة (zero-shot). فبمجرد تقديم بضعة أمثلة داخل المحث (التعلّم السياقي)، استطاع النموذج أداء مهام لم يُدرَّب عليها صراحةً من قبل، دون تحديث أي أوزان.",
+        "isMulti": false,
+        "reviewReference": "المحاضرة 5: كيف يعمل GPT-3 فعليًا؟"
+      },
+      {
+        "index": 3,
+        "text": "بالعودة إلى المرحلة 1: في تشبيه بناء السيارة المستخدم طوال الدورة، ماذا تمثّل المراحل الثلاث الرئيسية؟ اختر جميع الإجابات الصحيحة.",
+        "options": [
+          "المرحلة 1 (الأساسيات) = دراسة دليل السيارة لفهم كيفية عمل السيارات",
+          "المرحلة 2 (البناء) = تجميع السيارة من الأجزاء (المعمارية، المُقطِّع (tokenizer)، البيانات)",
+          "المرحلة 3 (الضبط الدقيق) = تخصيص السيارة لغرض معين واختبار قيادتها",
+          "المرحلة 1 (الأساسيات) = مجرد شراء سيارة جاهزة التجميع مباشرة من صالة عرض وكيل محلي"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "تستخدم الدورة تشبيهًا بثلاث مراحل لبناء سيارة: أولًا تدرس الدليل (فهم نظرية نماذج اللغة الكبيرة)، ثم تبني السيارة من أجزائها (تنفيذ المعمارية)، وأخيرًا تخصّصها وتختبر قيادتها (الضبط الدقيق والتقييم لمهام محددة).",
+        "isMulti": true,
+        "reviewReference": "المحاضرة 6: مراحل بناء نموذج لغوي كبير من الصفر"
+      },
+      {
+        "index": 4,
+        "text": "بالاستناد إلى معرفتك من المرحلة 1: ما الذي يتنبأ به نموذج اللغة الكبير فعليًا أثناء توليد النص؟",
+        "options": [
+          "الاستجابة بأكملها دفعة واحدة، تُنتَج معًا ككتلة إخراج واحدة كاملة",
+          "الرمز (token) التالي (جزء من كلمة)، واحدًا تلو الآخر، بناءً على جميع الرموز السابقة",
+          "كلمات عشوائية من القاموس، مرجّحة بحسب تكرارها العام",
+          "جملًا كاملة مُنتقاة مباشرة من بيانات تدريبه"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "كما ورد في المحاضرتين 2 و5، نماذج اللغة الكبيرة هي نماذج ذاتية الانحدار (autoregressive) تولّد النص رمزًا (token) واحدًا في كل مرة. في كل خطوة، يأخذ النموذج جميع الرموز السابقة كمُدخل وينتج توزيعًا احتماليًا على المفردات للرمز التالي. هذا التنبؤ بالرمز التالي هو الآلية الأساسية وراء كل عملية توليد نص في نماذج اللغة الكبيرة.",
+        "isMulti": false,
+        "reviewReference": "المحاضرة 2: أساسيات نماذج اللغة الكبيرة"
+      }
+    ]
   }
 }

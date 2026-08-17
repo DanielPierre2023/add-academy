@@ -245,5 +245,329 @@
         "isMulti": false
       }
     ]
+  },
+  "de": {
+    "questions": [
+      {
+        "index": 0,
+        "isMulti": false,
+        "text": "Was ist die empfohlene Methode, um dein Mini GPT-2-Modell als Webdienst bereitzustellen?",
+        "options": [
+          "Das Python-Skript direkt ausführen und einfach die Terminal-Ausgabe manuell teilen",
+          "Einen FastAPI-Server erstellen, der REST-Endpunkte bereitstellt (/generate, /chat, /health)",
+          "Die trainierten Modellgewichte auf eine rein statische Website hochladen",
+          "Nur Pyodide verwenden, das im Browser des Nutzers läuft"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "FastAPI bietet asynchrone REST-Endpunkte, automatische API-Dokumentation (Swagger), Anfragevalidierung mit Pydantic und CORS-Unterstützung — alles, was nötig ist, um ein LLM als produktiven Webdienst bereitzustellen."
+      },
+      {
+        "index": 1,
+        "isMulti": true,
+        "text": "Welche Dateitypen kann die Klasse DocumentLoader für eigene Trainingsdaten verarbeiten? Wähle alle zutreffenden Antworten aus.",
+        "options": [
+          ".txt (reine Textdateien)",
+          ".md (Markdown-formatierte Dateien)",
+          ".pdf (PDF-Dokumente)",
+          ".exe (kompilierte ausführbare Binärdateien)"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Der DocumentLoader verarbeitet .txt (direktes Lesen), .md (Entfernen der Markdown-Syntax) und .pdf (mit PyPDF2 oder pdfplumber). Ausführbare Dateien sind keine Textdokumente und können nicht als Trainingsdaten verwendet werden."
+      },
+      {
+        "index": 2,
+        "isMulti": false,
+        "text": "Was ist der Hauptvorteil einer einheitlichen LLM-Provider-Schnittstelle (Unified LLM Provider)?",
+        "options": [
+          "Sie lässt das zugrunde liegende Modell beim Pretraining wesentlich schneller trainieren",
+          "Man kann mit nur einer Konfigurationsvariable zwischen dem eigenen Modell und kommerziellen APIs wechseln",
+          "Sie reduziert automatisch die Gesamtgröße des trainierten Modells",
+          "Sie macht API-Schlüssel vollständig überflüssig"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Eine einheitliche Provider-Schnittstelle erlaubt es, durch das Ändern einer einzigen Umgebungsvariable zwischen dem eigenen Modell (kostenlos, privat) und kommerziellen APIs (höhere Qualität) zu wechseln. Das gibt Flexibilität, ohne den Anwendungscode zu ändern."
+      },
+      {
+        "index": 3,
+        "isMulti": false,
+        "text": "Welche öffentlichen Datensätze werden häufig für das Pretraining von LLMs verwendet?",
+        "options": [
+          "Common Crawl, The Pile, RedPajama",
+          "MNIST, CIFAR-10, Fashion-MNIST, ImageNet",
+          "MovieLens, Last.fm, Netflix Prize",
+          "COCO, Pascal VOC, ADE20K"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Common Crawl (Web-Text), The Pile (kuratiert aus mehreren Quellen) und RedPajama (offene Reproduktion der LLaMA-Daten) sind große Textkorpora, die für das Pretraining von LLMs verwendet werden. Die anderen Optionen dienen der Bildklassifikation, Empfehlungssystemen bzw. der Objekterkennung."
+      },
+      {
+        "index": 4,
+        "isMulti": false,
+        "text": "Warum könntest du sowohl dein eigenes LLM ALS AUCH eine kommerzielle API verwenden wollen?",
+        "options": [
+          "Es gibt wirklich keinen guten Grund, diese beiden Ansätze jemals zusammen zu verwenden",
+          "Dein eigenes Modell ist kostenlos und privat, aber begrenzt; kommerzielle APIs kosten, schneiden aber besser ab",
+          "Kommerzielle APIs sind im Grunde immer schneller als ein lokales Modell",
+          "Dein eigenes Modell ist völlig unfähig, überhaupt Text zu generieren"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Dein eigenes Mini GPT-2 läuft kostenlos und hält Daten privat (großartig für sensible Inhalte), aber ein Modell mit 7 Millionen Parametern kann nicht mit der Qualität von GPT-4 mithalten. Ein hybrider Ansatz nutzt das eigene Modell für einfache Aufgaben und kommerzielle APIs für komplexe, um Kosten und Qualität auszubalancieren."
+      }
+    ]
+  },
+  "fr": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Quelle est la méthode recommandée pour exposer votre modèle Mini GPT-2 en tant que service web ?",
+        "options": [
+          "Exécuter le script Python directement et partager manuellement le texte affiché dans le terminal",
+          "Créer un serveur FastAPI exposant des endpoints REST (/generate, /chat, /health)",
+          "Téléverser les poids du modèle entraîné sur un site purement statique",
+          "Utiliser uniquement Pyodide exécuté dans le navigateur de l'utilisateur"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "FastAPI fournit des endpoints REST asynchrones, une documentation API automatique (Swagger), une validation des requêtes avec Pydantic, et un support CORS — tout ce qui est nécessaire pour servir un LLM en tant que service web de production.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Quels types de fichiers la classe DocumentLoader peut-elle traiter pour des données d'entraînement personnalisées ? Sélectionnez toutes les réponses applicables.",
+        "options": [
+          ".txt (fichiers texte brut)",
+          ".md (fichiers au format Markdown)",
+          ".pdf (documents PDF)",
+          ".exe (fichiers binaires exécutables compilés)"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Le DocumentLoader gère les fichiers .txt (lecture directe), .md (suppression de la syntaxe Markdown) et .pdf (à l'aide de PyPDF2 ou pdfplumber). Les fichiers exécutables ne sont pas des documents texte et ne peuvent pas être utilisés comme données d'entraînement.",
+        "isMulti": true
+      },
+      {
+        "index": 2,
+        "text": "Quel est le principal avantage d'une interface de fournisseur LLM unifiée (Unified LLM Provider) ?",
+        "options": [
+          "Elle rend l'entraînement du modèle sous-jacent nettement plus rapide pendant le pré-entraînement",
+          "Elle permet de basculer entre votre propre modèle et des API commerciales avec une seule variable de configuration",
+          "Elle réduit automatiquement la taille globale du modèle entraîné",
+          "Elle élimine complètement le besoin de clés API"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Une interface de fournisseur unifiée vous permet de basculer entre votre propre modèle (gratuit, privé) et des API commerciales (meilleure qualité) en changeant une seule variable d'environnement. Cela offre de la flexibilité sans modifier le code de l'application.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Quels jeux de données publics sont couramment utilisés pour le pré-entraînement des LLM ?",
+        "options": [
+          "Common Crawl, The Pile, RedPajama",
+          "MNIST, CIFAR-10, Fashion-MNIST, ImageNet",
+          "MovieLens, Last.fm, Netflix Prize",
+          "COCO, Pascal VOC, ADE20K"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Common Crawl (texte web), The Pile (multi-sources organisé) et RedPajama (reproduction ouverte des données de LLaMA) sont de vastes corpus de texte utilisés pour le pré-entraînement des LLM. Les autres options concernent respectivement la classification d'images, les systèmes de recommandation et la détection d'objets.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Pourquoi pourriez-vous vouloir utiliser À LA FOIS votre propre LLM et une API commerciale ?",
+        "options": [
+          "Il n'y a vraiment aucune bonne raison d'utiliser ces deux approches ensemble",
+          "Le vôtre est gratuit et privé mais limité ; les API commerciales coûtent de l'argent mais obtiennent de meilleurs résultats",
+          "Les API commerciales sont pratiquement toujours plus rapides qu'un modèle local",
+          "Votre propre modèle est totalement incapable de générer du texte"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Votre propre Mini GPT-2 est gratuit à exécuter et garde les données privées (idéal pour le contenu sensible), mais un modèle de 7 millions de paramètres ne peut pas égaler la qualité de GPT-4. Une approche hybride utilise votre propre modèle pour les tâches simples et des API commerciales pour les tâches complexes, équilibrant coût et qualité.",
+        "isMulti": false
+      }
+    ]
+  },
+  "it": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Qual è il modo consigliato per esporre il tuo modello Mini GPT-2 come servizio web?",
+        "options": [
+          "Eseguire direttamente lo script Python e condividere manualmente il testo di output del terminale",
+          "Creare un server FastAPI che espone endpoint REST (/generate, /chat, /health)",
+          "Caricare i pesi del modello addestrato su un sito puramente statico",
+          "Usare solo Pyodide eseguito all'interno del browser dell'utente"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "FastAPI offre endpoint REST asincroni, documentazione API automatica (Swagger), validazione delle richieste con Pydantic e supporto CORS — tutto ciò che serve per servire un LLM come servizio web di produzione.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Quali tipi di file può elaborare la classe DocumentLoader per i dati di addestramento personalizzati? Seleziona tutte le opzioni corrette.",
+        "options": [
+          ".txt (file di testo semplice)",
+          ".md (file in formato Markdown)",
+          ".pdf (documenti PDF)",
+          ".exe (file binari eseguibili compilati)"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Il DocumentLoader gestisce .txt (lettura diretta), .md (rimozione della sintassi markdown) e .pdf (usando PyPDF2 o pdfplumber). I file eseguibili non sono documenti di testo e non possono essere usati come dati di addestramento.",
+        "isMulti": true
+      },
+      {
+        "index": 2,
+        "text": "Qual è il vantaggio principale di un'interfaccia unificata per il provider LLM?",
+        "options": [
+          "Fa sì che il modello di base si addestri sostanzialmente più velocemente durante il pre-addestramento",
+          "Permette di passare dal proprio modello alle API commerciali con una variabile di configurazione",
+          "Riduce automaticamente le dimensioni complessive del modello addestrato",
+          "Elimina completamente qualsiasi necessità di chiavi API"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Un'interfaccia unificata per il provider ti permette di passare dal tuo modello (gratuito, privato) alle API commerciali (qualità superiore) cambiando una singola variabile d'ambiente. Questo offre flessibilità senza modificare il codice dell'applicazione.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Quali dataset pubblici sono comunemente usati per il pre-addestramento degli LLM?",
+        "options": [
+          "Common Crawl, The Pile, RedPajama",
+          "MNIST, CIFAR-10, Fashion-MNIST, ImageNet",
+          "MovieLens, Last.fm, Netflix Prize",
+          "COCO, Pascal VOC, ADE20K"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Common Crawl (testo web), The Pile (multi-sorgente curato) e RedPajama (riproduzione aperta dei dati LLaMA) sono grandi corpus testuali usati per il pre-addestramento degli LLM. Le altre opzioni riguardano rispettivamente la classificazione di immagini, i sistemi di raccomandazione e il rilevamento di oggetti.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Perché potresti voler usare SIA il tuo modello proprio SIA un'API commerciale?",
+        "options": [
+          "Non c'è davvero mai una buona ragione per usare insieme entrambi questi approcci",
+          "Il tuo è gratuito e privato ma limitato; le API commerciali costano ma ottengono risultati migliori",
+          "Le API commerciali sono praticamente sempre più veloci di un modello locale",
+          "Il tuo modello proprio non è assolutamente in grado di generare alcun testo"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Il tuo Mini GPT-2 è gratuito da eseguire e mantiene i dati privati (ottimo per contenuti sensibili), ma un modello da 7M di parametri non può eguagliare la qualità di GPT-4. Un approccio ibrido usa il modello proprio per compiti semplici e le API commerciali per quelli complessi, bilanciando costo e qualità.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ar": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "ما هي الطريقة الموصى بها لعرض نموذج Mini GPT-2 الخاص بك كخدمة ويب؟",
+        "options": [
+          "تشغيل نص Python البرمجي مباشرة ومشاركة نص مخرجات الطرفية يدويًا فقط",
+          "إنشاء خادم FastAPI يعرض نقاط نهاية REST (/generate، /chat، /health)",
+          "رفع أوزان النموذج المدرَّب على موقع ويب ثابت بحت",
+          "استخدام Pyodide فقط الذي يعمل داخل متصفح المستخدم"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "يوفر FastAPI نقاط نهاية REST غير متزامنة، وتوثيقًا تلقائيًا لواجهة البرمجة (Swagger)، والتحقق من صحة الطلبات باستخدام Pydantic، ودعم CORS — كل ما يلزم لتقديم نموذج لغوي كبير كخدمة ويب إنتاجية.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "أي أنواع الملفات يمكن لفئة DocumentLoader معالجتها من أجل بيانات تدريب مخصصة؟ اختر كل ما ينطبق.",
+        "options": [
+          ".txt (ملفات نصية عادية)",
+          ".md (ملفات بتنسيق Markdown)",
+          ".pdf (مستندات PDF)",
+          ".exe (ملفات ثنائية تنفيذية مُصرَّفة)"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "تتعامل فئة DocumentLoader مع .txt (قراءة مباشرة)، و.md (إزالة صياغة Markdown)، و.pdf (باستخدام PyPDF2 أو pdfplumber). الملفات التنفيذية ليست مستندات نصية ولا يمكن استخدامها كبيانات تدريب.",
+        "isMulti": true
+      },
+      {
+        "index": 2,
+        "text": "ما هي الميزة الرئيسية لواجهة موفِّر نموذج لغوي كبير موحّدة (Unified LLM Provider)؟",
+        "options": [
+          "تجعل النموذج الأساسي يتدرب أسرع بكثير أثناء التدريب المسبق",
+          "التبديل بين نموذجك الخاص وواجهات برمجة التطبيقات التجارية بمتغير إعداد واحد",
+          "تقلل تلقائيًا من الحجم الإجمالي للنموذج المدرَّب",
+          "تلغي تمامًا الحاجة إلى مفاتيح API"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "تتيح لك واجهة الموفِّر الموحّدة التبديل بين نموذجك الخاص (مجاني وخاص) وواجهات برمجة التطبيقات التجارية (جودة أعلى) بتغيير متغير بيئة واحد فقط. يمنحك هذا مرونة دون تغيير كود التطبيق.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "ما مجموعات البيانات العامة الشائعة الاستخدام في التدريب المسبق للنماذج اللغوية الكبيرة؟",
+        "options": [
+          "Common Crawl، وThe Pile، وRedPajama",
+          "MNIST، وCIFAR-10، وFashion-MNIST، وImageNet",
+          "MovieLens، وLast.fm، وNetflix Prize",
+          "COCO، وPascal VOC، وADE20K"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "تُعد Common Crawl (نص ويب)، وThe Pile (منسّقة من مصادر متعددة)، وRedPajama (إعادة إنتاج مفتوحة لبيانات LLaMA) من مجموعات النصوص الكبيرة المستخدمة في التدريب المسبق للنماذج اللغوية الكبيرة. أما الخيارات الأخرى فهي لتصنيف الصور، وأنظمة التوصية، واكتشاف الأجسام على التوالي.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "لماذا قد ترغب في استخدام نموذجك اللغوي الكبير الخاص وواجهة برمجة تطبيقات تجارية معًا؟",
+        "options": [
+          "لا يوجد فعلاً أي سبب وجيه لاستخدام كلا النهجين معًا على الإطلاق",
+          "نموذجك مجاني وخاص لكنه محدود؛ أما واجهات البرمجة التجارية فتكلّف مالاً لكنها تحقق نتائج أفضل",
+          "واجهات برمجة التطبيقات التجارية دائمًا تقريبًا أسرع من النموذج المحلي",
+          "نموذجك الخاص غير قادر إطلاقًا على توليد أي نص"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "نموذج Mini GPT-2 الخاص بك مجاني التشغيل ويحافظ على خصوصية البيانات (ممتاز للمحتوى الحساس)، لكن نموذجًا بسبعة ملايين معامل لا يمكنه مضاهاة جودة GPT-4. يستخدم النهج الهجين النموذج الخاص للمهام البسيطة وواجهات البرمجة التجارية للمهام المعقدة، موازنًا بين التكلفة والجودة.",
+        "isMulti": false
+      }
+    ]
   }
 }

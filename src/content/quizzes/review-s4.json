@@ -369,5 +369,480 @@
         "reviewReference": "Διαλέξεις 13-14: Μηχανισμός Self-Attention"
       }
     ]
+  },
+  "de": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Aus Stufe 2 (Tokenisierung): Warum verwenden moderne LLMs Subword-Tokenisierung (BPE) statt Zeichen- oder Wort-Tokenisierung?",
+        "options": [
+          "BPE trainiert erheblich schneller als sowohl zeichen- als auch wortbasierte Tokenizer, da deutlich weniger Merge-Operationen nötig sind, um das gesamte Vokabular aus einem rohen Textkorpus zusammenzustellen",
+          "Es balanciert Vokabulargröße und Sequenzlänge: häufige Wörter bleiben einzelne Token, während seltene Wörter in wiederverwendbare Subword-Einheiten aufgeteilt werden",
+          "BPE wurde speziell für LLMs entwickelt und kann schlicht auf keine andere Aufgabe angewendet werden",
+          "BPE ergibt kürzere Sequenzen als die Zeichenebene, benötigt aber ein größeres Vokabular als die Wortebene, was es zu einem schwachen Kompromiss macht"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Wie in den Lektionen 7-8 behandelt, erzeugt zeichenbasierte Tokenisierung sehr lange Sequenzen (jedes Zeichen = 1 Token), während wortbasierte Tokenisierung ein riesiges Vokabular hat und unbekannte Wörter nicht verarbeiten kann. BPE findet den optimalen Punkt: häufige Wörter wie 'the' werden zu einzelnen Token, während seltene Wörter in wiederverwendbare Subword-Einheiten wie 'token' + 'ization' zerlegt werden.",
+        "isMulti": false,
+        "reviewReference": "Lektionen 7-8: Tokenisierung"
+      },
+      {
+        "index": 1,
+        "text": "Aus Stufe 2: Was ist der Zweck des Sliding-Window-Ansatzes bei der Erstellung von Trainingsdaten für ein LLM?",
+        "options": [
+          "Er mischt den gesamten Text im gesamten Korpus zufällig, sodass das Modell niemals einfach die Reihenfolge einer langen Sequenz auswendig lernen kann, die es während des Trainings zufällig sieht",
+          "Er erzeugt überlappende Eingabe-Ziel-Paare, bei denen das Ziel die um eins verschobene Eingabe ist, was Next-Token-Vorhersage lehrt",
+          "Er komprimiert den tokenisierten Text, um den Speicherbedarf des Trainingskorpus zu reduzieren",
+          "Er entfernt doppelte Sätze aus dem Trainingskorpus, bevor das Batching stattfindet"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Wie in Lektion 9 behandelt, bewegt sich das Sliding Window durch tokenisierten Text und erzeugt (Eingabe, Ziel)-Paare. Für die Eingabe [A, B, C] ist das Ziel [B, C, D] &mdash; um eins verschoben. Das lehrt das Modell, dass nach den Token A, B, C das nächste Token D sein sollte. Das Fenster gleitet weiter und erzeugt so aus einem einzigen Text viele solcher Trainingsbeispiele.",
+        "isMulti": false,
+        "reviewReference": "Lektion 9: Eingabe-Ziel-Paare & DataLoader"
+      },
+      {
+        "index": 2,
+        "text": "Aus Stufe 3 (Attention): Warum müssen die Attention-Scores vor der Anwendung von Softmax durch die Quadratwurzel der Key-Dimension (sqrt(d_k)) geteilt werden?",
+        "options": [
+          "Um die gesamte Attention-Berechnung während des Trainings auf moderner paralleler GPU-Hardware merklich schneller zu machen",
+          "Um den Speicherverbrauch der Attention-Schicht während der Backpropagation und über den gesamten Trainingslauf bei sehr großen Datenbatches zu reduzieren",
+          "Um zu verhindern, dass Skalarprodukte in hohen Dimensionen zu groß werden, was Softmax nahezu One-Hot machen und verschwindende Gradienten verursachen würde",
+          "Um die endgültigen Ausgabewerte so zu normalisieren, dass sie immer zwischen 0 und 1 liegen"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Wie in Lektion 13 erklärt, neigen Skalarprodukte dazu, in ihrer Größenordnung zu wachsen, wenn die Key-Dimension d_k groß ist. Ohne Skalierung würde Softmax nahezu die gesamte Wahrscheinlichkeit einer einzigen Position zuweisen, wodurch die Attention übermäßig 'scharf' würde. Die Division durch sqrt(d_k) hält die Scores in einem Bereich, in dem Softmax eine sinnvolle Verteilung erzeugt, sodass das Modell mehreren relevanten Positionen Aufmerksamkeit schenken kann.",
+        "isMulti": false,
+        "reviewReference": "Lektion 13: Attention-Intuition & Skalarprodukt-Bewertung"
+      },
+      {
+        "index": 3,
+        "text": "Aus Stufe 3: Was ist der Zweck der kausalen Maske (Causal Mask) in Self-Attention für Sprachmodelle? Wähle alle richtigen Antworten aus.",
+        "options": [
+          "Sie hindert das Modell daran, während des Trainings auf zukünftige Token zu achten, und erzwingt so die autoregressive Eigenschaft",
+          "Sie stellt sicher, dass die Vorhersage an Position t nur von den Positionen 0 bis t abhängt, niemals von t+1 oder später",
+          "Sie beschleunigt die Inferenz, indem sie die Anzahl der Attention-Berechnungen reduziert, die das Modell bei jedem einzelnen Decodierungsschritt durchführen muss, und spart so Rechenleistung",
+          "Sie wird implementiert, indem zukünftige Positionen vor dem Softmax auf minus unendlich gesetzt werden, wodurch ihre Gewichte null werden"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Wie in Lektion 15 behandelt, ist die kausale (oder maskierte) Attention essenziell für autoregressive Sprachmodelle. Ohne sie könnte das Modell 'schummeln', indem es bei der Vorhersage des nächsten Tokens die Antwort bereits sieht. Die Maske setzt die Einträge oberhalb der Diagonalen vor dem Softmax auf -unendlich, sodass diese Positionen ein Attention-Gewicht von null erhalten. Dies beschleunigt die Inferenz nicht &mdash; es ist eine Korrektheitsanforderung.",
+        "isMulti": true,
+        "reviewReference": "Lektion 15: Kausale (maskierte) Self-Attention"
+      },
+      {
+        "index": 4,
+        "text": "Aus Stufe 3: Warum verwendet Multi-Head-Attention mehrere Attention-Heads statt eines einzelnen großen Attention-Heads?",
+        "options": [
+          "Die Verwendung mehrerer kleinerer Heads verbraucht insgesamt merklich weniger Speicher, als ein einzelner sehr großer Attention-Head in der Praxis jemals benötigen würde",
+          "Jeder Head achtet auf unterschiedliche Beziehungstypen (syntaktisch, semantisch, positionsbezogen), was bei gleichen Kosten reichhaltigere Repräsentationen liefert",
+          "Mehrere Heads werden von der PyTorch-API schlicht verlangt, erfüllen aber keinen echten theoretischen Zweck",
+          "Ein einzelner großer Head wäre auf modernen GPUs einfach viel zu langsam zu trainieren"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Wie in Lektion 16 behandelt, teilt Multi-Head-Attention die Embedding-Dimension in mehrere Heads mit jeweils kleinerer Dimensionalität auf. Jeder Head lernt unabhängig unterschiedliche Attention-Muster &mdash; einer könnte sich auf syntaktische Struktur konzentrieren, ein anderer auf semantische Ähnlichkeit, ein weiterer auf positionale Nähe. Die Ausgaben werden verkettet und projiziert, wodurch dem Modell mehrere 'Repräsentations-Unterräume' zur Verfügung stehen.",
+        "isMulti": false,
+        "reviewReference": "Lektion 16: Multi-Head-Attention"
+      },
+      {
+        "index": 5,
+        "text": "Aus Stufe 2: Warum benötigt ein Transformer sowohl Token-Embeddings ALS AUCH Positions-Embeddings?",
+        "options": [
+          "Token-Embeddings sind in der Praxis völlig optional, sodass letztlich nur die Positions-Embeddings für die endgültige Ausgabe eines trainierten Modells eine Rolle spielen",
+          "Token-Embeddings erfassen, was ein Token bedeutet; Positions-Embeddings erfassen, wo es auftritt, und unterscheiden so 'Hund beißt Mann' von 'Mann beißt Hund'",
+          "Beide Embedding-Arten sind rein dekorativ und können entfernt werden, ohne die Leistung zu beeinträchtigen",
+          "Positions-Embeddings werden nur für Sprachen benötigt, die von rechts nach links gelesen werden"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Wie in den Lektionen 10-11 behandelt, verarbeiten Transformer alle Token parallel (anders als RNNs, die sequenziell arbeiten). Token-Embeddings liefern die semantische Bedeutung (was), aber ohne Positions-Embeddings hat das Modell keinerlei Vorstellung von der Wortreihenfolge. Die beiden werden addiert, sodass jede Token-Repräsentation sowohl ihre Identität als auch ihre Position in der Sequenz kodiert.",
+        "isMulti": false,
+        "reviewReference": "Lektionen 10-11: Token- & Positions-Embeddings"
+      },
+      {
+        "index": 6,
+        "text": "Verbindung der Stufen 1-3: Welche Rollen haben Query- (Q), Key- (K) und Value- (V) Matrizen im Self-Attention-Mechanismus?",
+        "options": [
+          "Q enthält die Fragen, K enthält die Antworten, und V enthält die berechneten Attention-Scores für jedes einzelne Token-Paar in der Sequenz",
+          "Q ist 'wonach suche ich', K ist 'was enthalte ich', V ist 'was ich liefere, wenn ich ausgewählt werde'; die Skalarprodukte von Q und K gewichten V",
+          "Q, K und V sind allesamt identische Kopien der Eingabe, die nur zur Redundanz innerhalb der Schicht beibehalten werden",
+          "Q und K werden für die Kodierung verwendet, während V für die Dekodierung verwendet wird, sodass sie in unterschiedlichen Phasen arbeiten"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Wie in den Lektionen 13-14 Schritt für Schritt aufgebaut, wird jedes Token in drei Vektoren projiziert: Q (welche Information suche ich?), K (welche Information biete ich an?) und V (was ist mein tatsächlicher Inhalt?). Der Attention-Score zwischen zwei Token ist das Skalarprodukt aus dem Q des einen und dem K des anderen. Hohe Scores bedeuten, dass die Query zum Key 'passt'. Diese Scores (nach Softmax) gewichten die V-Vektoren, um die Ausgabe zu erzeugen.",
+        "isMulti": false,
+        "reviewReference": "Lektionen 13-14: Self-Attention-Mechanismus"
+      }
+    ]
+  },
+  "fr": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "De l'Étape 2 (Tokenisation) : Pourquoi les LLM modernes utilisent-ils la tokenisation en sous-mots (BPE) plutôt qu'une tokenisation au niveau des caractères ou des mots ?",
+        "options": [
+          "BPE s'entraîne considérablement plus vite que les tokenizers au niveau des caractères et des mots, car il nécessite beaucoup moins d'opérations de fusion pour assembler son vocabulaire complet à partir d'un corpus de texte brut",
+          "Il équilibre la taille du vocabulaire et la longueur des séquences : les mots fréquents restent des tokens uniques tandis que les mots rares se divisent en morceaux de sous-mots réutilisables",
+          "BPE a été conçu spécifiquement pour les LLM et ne peut tout simplement pas être appliqué à une autre tâche",
+          "BPE produit des séquences plus courtes que le niveau caractère mais nécessite un vocabulaire plus grand que le niveau mot, ce qui en fait un compromis faible"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Comme vu dans les Leçons 7-8, la tokenisation au niveau des caractères produit des séquences très longues (chaque caractère = 1 token), tandis que la tokenisation au niveau des mots a un vocabulaire énorme et ne peut pas gérer les mots inconnus. BPE trouve le juste milieu : les mots fréquents comme « le » deviennent des tokens uniques, tandis que les mots rares sont décomposés en morceaux de sous-mots réutilisables comme « token » + « isation ».",
+        "isMulti": false,
+        "reviewReference": "Leçons 7-8 : Tokenisation"
+      },
+      {
+        "index": 1,
+        "text": "De l'Étape 2 : Quel est le but de l'approche par fenêtre glissante (sliding window) lors de la création des données d'entraînement pour un LLM ?",
+        "options": [
+          "Elle mélange aléatoirement tout le texte de l'ensemble du corpus afin que le modèle ne puisse jamais simplement mémoriser l'ordre d'une longue séquence qu'il rencontre pendant l'entraînement",
+          "Elle crée des paires entrée-cible qui se chevauchent, où la cible est l'entrée décalée d'une position, ce qui enseigne la prédiction du token suivant",
+          "Elle compresse le texte tokenisé afin de réduire l'espace de stockage requis par le corpus d'entraînement",
+          "Elle supprime les phrases dupliquées du corpus d'entraînement avant tout regroupement en lots"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Vu dans la Leçon 9, la fenêtre glissante parcourt le texte tokenisé en créant des paires (entrée, cible). Pour l'entrée [A, B, C], la cible est [B, C, D] — décalée d'une position. Cela enseigne au modèle qu'après avoir vu les tokens A, B, C, le token suivant devrait être D. La fenêtre avance pour créer de nombreux exemples d'entraînement de ce type à partir d'un seul texte.",
+        "isMulti": false,
+        "reviewReference": "Leçon 9 : Paires entrée-cible & DataLoader"
+      },
+      {
+        "index": 2,
+        "text": "De l'Étape 3 (Attention) : Pourquoi les scores d'attention doivent-ils être divisés par la racine carrée de la dimension des clés (sqrt(d_k)) avant d'appliquer softmax ?",
+        "options": [
+          "Pour rendre le calcul global de l'attention nettement plus rapide sur le matériel GPU parallèle moderne pendant l'entraînement",
+          "Pour réduire la quantité de mémoire que la couche d'attention finit par consommer tout au long de la rétropropagation et sur l'ensemble de l'entraînement pour de très grands lots de données",
+          "Pour empêcher les produits scalaires de devenir trop grands en haute dimension, ce qui rendrait softmax presque one-hot et provoquerait des gradients qui s'évanouissent",
+          "Pour normaliser les valeurs de sortie finales afin qu'elles se situent toujours entre 0 et 1"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Comme expliqué dans la Leçon 13, lorsque la dimension des clés d_k est grande, les produits scalaires ont tendance à croître en magnitude. Sans mise à l'échelle, softmax attribuerait presque toute la probabilité à une seule position, rendant l'attention trop « pointue ». Diviser par sqrt(d_k) maintient les scores dans une plage où softmax produit une distribution utile, permettant au modèle de porter attention à plusieurs positions pertinentes.",
+        "isMulti": false,
+        "reviewReference": "Leçon 13 : Intuition de l'attention & scoring par produit scalaire"
+      },
+      {
+        "index": 3,
+        "text": "De l'Étape 3 : Quel est le but du masque causal dans l'auto-attention pour les modèles de langage ? Sélectionnez toutes les réponses correctes.",
+        "options": [
+          "Il empêche le modèle de porter attention aux tokens futurs pendant l'entraînement, imposant la propriété autorégressive",
+          "Il garantit que la prédiction à la position t ne dépend que des positions 0 à t, jamais de t+1 ou au-delà",
+          "Il accélère l'inférence en réduisant le nombre de calculs d'attention que le modèle doit effectuer à chaque étape de décodage, économisant du calcul",
+          "Il est mis en œuvre en fixant les positions futures à moins l'infini avant softmax, rendant leurs poids nuls"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Vu dans la Leçon 15, l'attention causale (ou masquée) est essentielle pour les modèles de langage autorégressifs. Sans elle, le modèle pourrait « tricher » en regardant la réponse lors de la prédiction du token suivant. Le masque fixe les entrées triangulaires supérieures à -infini avant softmax, garantissant que ces positions reçoivent un poids d'attention nul. Cela n'accélère pas l'inférence — c'est une exigence de correction.",
+        "isMulti": true,
+        "reviewReference": "Leçon 15 : Auto-attention causale (masquée)"
+      },
+      {
+        "index": 4,
+        "text": "De l'Étape 3 : Pourquoi l'attention multi-têtes utilise-t-elle plusieurs têtes d'attention plutôt qu'une seule grande tête d'attention ?",
+        "options": [
+          "Utiliser plusieurs petites têtes consomme nettement moins de mémoire au total qu'une seule très grande tête d'attention n'en nécessiterait jamais en pratique",
+          "Chaque tête porte attention à un type de relation différent (syntaxique, sémantique, positionnelle), offrant des représentations plus riches au même coût",
+          "Plusieurs têtes sont simplement requises par l'API PyTorch mais ne servent aucun véritable objectif théorique",
+          "Une seule grande tête serait tout simplement bien trop lente à entraîner sur les GPU modernes"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Comme vu dans la Leçon 16, l'attention multi-têtes divise la dimension d'embedding en plusieurs têtes, chacune avec une dimensionnalité plus petite. Chaque tête apprend indépendamment des schémas d'attention différents — l'une peut se concentrer sur la structure syntaxique, une autre sur la similarité sémantique, une autre sur la proximité positionnelle. Les sorties sont concaténées puis projetées, offrant au modèle plusieurs « sous-espaces de représentation » avec lesquels travailler.",
+        "isMulti": false,
+        "reviewReference": "Leçon 16 : Attention multi-têtes"
+      },
+      {
+        "index": 5,
+        "text": "De l'Étape 2 : Pourquoi un Transformer a-t-il besoin à la fois d'embeddings de tokens ET d'embeddings positionnels ?",
+        "options": [
+          "Les embeddings de tokens sont entièrement optionnels en pratique, donc en fin de compte seuls les embeddings positionnels comptent réellement pour la sortie finale que produit un modèle entraîné",
+          "Les embeddings de tokens capturent ce qu'un token signifie ; les embeddings positionnels capturent où il apparaît, distinguant « le chien mord l'homme » de « l'homme mord le chien »",
+          "Les deux types d'embeddings sont purement décoratifs et peuvent être supprimés sans affecter la performance",
+          "Les embeddings positionnels ne sont nécessaires que pour les langues qui se lisent de droite à gauche"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Vu dans les Leçons 10-11, les Transformers traitent tous les tokens en parallèle (contrairement aux RNN qui traitent séquentiellement). Les embeddings de tokens fournissent le sens sémantique (quoi), mais sans embeddings positionnels, le modèle n'a aucune notion de l'ordre des mots. Les deux sont additionnés afin que chaque représentation de token encode à la fois son identité et sa position dans la séquence.",
+        "isMulti": false,
+        "reviewReference": "Leçons 10-11 : Embeddings de tokens & positionnels"
+      },
+      {
+        "index": 6,
+        "text": "En reliant les Étapes 1-3 : dans le mécanisme d'auto-attention, quels sont les rôles des matrices Query (Q), Key (K) et Value (V) ?",
+        "options": [
+          "Q contient les questions, K contient les réponses, et V contient les scores d'attention calculés pour chaque paire de tokens de la séquence",
+          "Q est « ce que je recherche », K est « ce que je contiens », V est « ce que je fournis si je suis sélectionné » ; les produits scalaires entre Q et K pondèrent V",
+          "Q, K et V sont tous des copies identiques de l'entrée, conservées uniquement par redondance au sein de la couche",
+          "Q et K sont utilisés pour l'encodage tandis que V est utilisé pour le décodage, ils fonctionnent donc dans des phases différentes"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Comme construit étape par étape dans les Leçons 13-14, chaque token est projeté en trois vecteurs : Q (quelle information est-ce que je recherche ?), K (quelle information est-ce que j'offre ?), et V (quel est mon contenu réel ?). Le score d'attention entre deux tokens est le produit scalaire du Q de l'un avec le K de l'autre. Des scores élevés signifient que la Query « correspond » à la Key. Ces scores (après softmax) pondèrent les vecteurs V pour produire la sortie.",
+        "isMulti": false,
+        "reviewReference": "Leçons 13-14 : Mécanisme d'auto-attention"
+      }
+    ]
+  },
+  "it": {
+    "id": "quiz-review-s4-it",
+    "title": "Quiz di Ripasso Fasi 1-3",
+    "description": "Metti alla prova il tuo ricordo dei concetti delle Fasi 1-3 (Fondamenti, Tokenizzazione e Attention) prima di passare alla Fase 5.",
+    "questions": [
+      {
+        "index": 0,
+        "text": "Dalla Fase 2 (Tokenizzazione): Perché gli LLM moderni usano la tokenizzazione a livello di subword (BPE) invece della tokenizzazione a livello di carattere o di parola?",
+        "options": [
+          "BPE si addestra considerevolmente più velocemente sia della tokenizzazione a livello di carattere che di quella a livello di parola, poiché richiede molte meno operazioni di merge per assemblare l'intero vocabolario a partire da un corpus di testo grezzo",
+          "Bilancia la dimensione del vocabolario e la lunghezza della sequenza: le parole frequenti restano token singoli, mentre le parole rare si suddividono in pezzi di subword riutilizzabili",
+          "BPE è stato progettato specificamente per gli LLM e semplicemente non può essere applicato a nessun altro compito",
+          "BPE produce sequenze più corte rispetto al livello di carattere ma richiede un vocabolario più grande rispetto al livello di parola, risultando un compromesso debole"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Come trattato nelle Lezioni 7-8, la tokenizzazione a livello di carattere produce sequenze molto lunghe (ogni carattere = 1 token), mentre la tokenizzazione a livello di parola ha un vocabolario enorme e non riesce a gestire parole mai viste. BPE trova il punto di equilibrio: parole frequenti come \"the\" diventano token singoli, mentre le parole rare vengono scomposte in pezzi di subword riutilizzabili come \"token\" + \"ization\".",
+        "isMulti": false,
+        "reviewReference": "Lezioni 7-8: Tokenizzazione"
+      },
+      {
+        "index": 1,
+        "text": "Dalla Fase 2: Qual è lo scopo dell'approccio sliding window nella creazione dei dati di addestramento per un LLM?",
+        "options": [
+          "Mescola casualmente tutto il testo dell'intero corpus in modo che il modello non possa mai limitarsi a memorizzare l'ordine di una lunga sequenza che capita di vedere durante l'addestramento",
+          "Crea coppie input-target sovrapposte in cui il target è l'input spostato di una posizione, insegnando la predizione del token successivo",
+          "Comprime il testo tokenizzato per ridurre lo spazio di archiviazione richiesto dal corpus di addestramento",
+          "Rimuove le frasi duplicate dal corpus di addestramento prima che avvenga qualsiasi suddivisione in batch"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Trattato nella Lezione 9, la sliding window si muove attraverso il testo tokenizzato creando coppie (input, target). Per l'input [A, B, C], il target è [B, C, D] — spostato di una posizione. Questo insegna al modello che dopo aver visto i token A, B, C, il token successivo dovrebbe essere D. La finestra scorre in avanti per creare molti esempi di addestramento di questo tipo a partire da un singolo testo.",
+        "isMulti": false,
+        "reviewReference": "Lezione 9: Coppie Input-Target & DataLoader"
+      },
+      {
+        "index": 2,
+        "text": "Dalla Fase 3 (Attention): Perché i punteggi di attenzione devono essere divisi per la radice quadrata della dimensione delle chiavi (sqrt(d_k)) prima di applicare la softmax?",
+        "options": [
+          "Per far eseguire il calcolo complessivo dell'attention in modo notevolmente più veloce sull'hardware GPU parallelo moderno durante l'addestramento",
+          "Per ridurre la quantità di memoria che il layer di attention finisce per consumare durante la backpropagation e nell'intero ciclo di addestramento su batch di dati molto grandi",
+          "Per evitare che i prodotti scalari crescano troppo in dimensioni elevate, cosa che renderebbe la softmax quasi one-hot e causerebbe gradienti che svaniscono",
+          "Per normalizzare i valori finali di output in modo che siano sempre compresi tra 0 e 1"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Come spiegato nella Lezione 13, quando la dimensione delle chiavi d_k è grande, i prodotti scalari tendono a crescere in magnitudine. Senza il ridimensionamento, la softmax assegnerebbe quasi tutta la probabilità a una sola posizione, rendendo l'attention eccessivamente \"netta\". Dividere per sqrt(d_k) mantiene i punteggi in un intervallo in cui la softmax produce una distribuzione utile, permettendo al modello di considerare più posizioni rilevanti.",
+        "isMulti": false,
+        "reviewReference": "Lezione 13: Intuizione dell'Attention & Punteggio con Prodotto Scalare"
+      },
+      {
+        "index": 3,
+        "text": "Dalla Fase 3: Qual è lo scopo della causal mask nella self-attention per i modelli linguistici? Seleziona tutte le risposte corrette.",
+        "options": [
+          "Impedisce al modello di considerare i token futuri durante l'addestramento, imponendo la proprietà autoregressiva",
+          "Assicura che la predizione alla posizione t dipenda solo dalle posizioni da 0 a t, mai da t+1 o successive",
+          "Velocizza l'inferenza riducendo il numero di calcoli di attention che il modello deve eseguire a ogni singolo passo di decodifica, risparmiando calcolo",
+          "Viene implementata impostando le posizioni future a meno infinito prima della softmax, rendendo nulli i loro pesi"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Trattato nella Lezione 15, la causal (o masked) attention è essenziale per i modelli linguistici autoregressivi. Senza di essa, il modello potrebbe \"barare\" guardando la risposta mentre predice il token successivo. La mask imposta a meno infinito gli elementi triangolari superiori prima della softmax, assicurando che quelle posizioni ricevano un peso di attention pari a zero. Questo non velocizza l'inferenza — è un requisito di correttezza.",
+        "isMulti": true,
+        "reviewReference": "Lezione 15: Self-Attention Causale (Mascherata)"
+      },
+      {
+        "index": 4,
+        "text": "Dalla Fase 3: Perché la multi-head attention utilizza più teste di attention invece di un'unica testa di grandi dimensioni?",
+        "options": [
+          "Usare diverse teste più piccole consuma complessivamente notevolmente meno memoria di quanta ne richiederebbe mai in pratica un'unica testa di attention molto grande",
+          "Ogni testa considera tipi di relazione diversi (sintattici, semantici, posizionali), fornendo rappresentazioni più ricche allo stesso costo",
+          "Più teste sono semplicemente richieste dall'API di PyTorch ma non hanno alcuno scopo teorico reale",
+          "Un'unica testa di grandi dimensioni sarebbe semplicemente troppo lenta da addestrare sulle GPU moderne"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Come trattato nella Lezione 16, la multi-head attention suddivide la dimensione dell'embedding in più teste, ciascuna con dimensionalità minore. Ogni testa apprende in modo indipendente pattern di attention diversi — una potrebbe concentrarsi sulla struttura sintattica, un'altra sulla similarità semantica, un'altra ancora sulla prossimità posizionale. Gli output vengono concatenati e proiettati, fornendo al modello più \"sottospazi di rappresentazione\" con cui lavorare.",
+        "isMulti": false,
+        "reviewReference": "Lezione 16: Multi-Head Attention"
+      },
+      {
+        "index": 5,
+        "text": "Dalla Fase 2: Perché un Transformer ha bisogno sia dei token embedding SIA dei positional embedding?",
+        "options": [
+          "I token embedding sono del tutto opzionali in pratica, quindi alla fine contano davvero solo i positional embedding per l'output finale prodotto da un modello addestrato",
+          "I token embedding catturano il significato di un token; i positional embedding catturano dove appare, distinguendo \"il cane morde l'uomo\" da \"l'uomo morde il cane\"",
+          "Entrambi i tipi di embedding sono puramente decorativi e possono essere rimossi senza influire sulle prestazioni",
+          "I positional embedding servono solo per le lingue che si leggono da destra a sinistra"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Trattato nelle Lezioni 10-11, i Transformer elaborano tutti i token in parallelo (a differenza delle RNN che li elaborano in sequenza). I token embedding forniscono il significato semantico (cosa), ma senza i positional embedding il modello non avrebbe alcuna nozione dell'ordine delle parole. I due vengono sommati in modo che ogni rappresentazione di token codifichi sia la propria identità sia la propria posizione nella sequenza.",
+        "isMulti": false,
+        "reviewReference": "Lezioni 10-11: Token Embedding & Positional Embedding"
+      },
+      {
+        "index": 6,
+        "text": "Collegando le Fasi 1-3: nel meccanismo di self-attention, quali sono i ruoli delle matrici Query (Q), Key (K) e Value (V)?",
+        "options": [
+          "Q contiene le domande, K contiene le risposte e V contiene i punteggi di attention calcolati per ogni singola coppia di token nella sequenza",
+          "Q è \"cosa sto cercando\", K è \"cosa contengo\", V è \"cosa fornisco se selezionato\"; i prodotti scalari tra Q e K pesano V",
+          "Q, K e V sono tutte copie identiche dell'input, mantenute solo per ridondanza all'interno del layer",
+          "Q e K vengono usati per l'encoding mentre V viene usato per il decoding, quindi operano in fasi diverse"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Come costruito passo dopo passo nelle Lezioni 13-14, ogni token viene proiettato in tre vettori: Q (quale informazione sto cercando?), K (quale informazione offro?) e V (qual è il mio contenuto effettivo?). Il punteggio di attention tra due token è il prodotto scalare tra la Q di uno e la K dell'altro. Punteggi alti significano che la Query \"corrisponde\" alla Key. Questi punteggi (dopo la softmax) pesano i vettori V per produrre l'output.",
+        "isMulti": false,
+        "reviewReference": "Lezioni 13-14: Meccanismo di Self-Attention"
+      }
+    ]
+  },
+  "ar": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "من المرحلة 2 (الترميز): لماذا تستخدم نماذج اللغة الكبيرة الحديثة الترميز بالوحدات الفرعية (BPE) بدلاً من الترميز على مستوى الحرف أو الكلمة؟",
+        "options": [
+          "يتدرب BPE بسرعة أكبر بكثير من كل من مرمّزات مستوى الحرف ومستوى الكلمة، لأنه يحتاج إلى عمليات دمج أقل بكثير لبناء مفرداته الكاملة من مجموعة نصوص خام",
+          "إنه يوازن بين حجم المفردات وطول التسلسل: تبقى الكلمات المتكررة رموزاً مفردة بينما تنقسم الكلمات النادرة إلى قطع فرعية قابلة لإعادة الاستخدام",
+          "تم تصميم BPE خصيصاً لنماذج اللغة الكبيرة ولا يمكن ببساطة تطبيقه على أي مهمة أخرى",
+          "ينتج BPE تسلسلات أقصر من مستوى الحرف لكنه يحتاج إلى مفردات أكبر من مستوى الكلمة، مما يجعله حلاً وسطاً ضعيفاً"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "كما ورد في المحاضرتين 7-8، ينتج الترميز على مستوى الحرف تسلسلات طويلة جداً (كل حرف = رمز واحد)، بينما يمتلك الترميز على مستوى الكلمة مفردات ضخمة ولا يستطيع التعامل مع الكلمات غير المرئية. يجد BPE النقطة المثلى: تصبح الكلمات المتكررة مثل 'the' رموزاً مفردة، بينما تُفكَّك الكلمات النادرة إلى قطع فرعية قابلة لإعادة الاستخدام مثل 'token' + 'ization'.",
+        "isMulti": false,
+        "reviewReference": "المحاضرتان 7-8: الترميز"
+      },
+      {
+        "index": 1,
+        "text": "من المرحلة 2: ما الغرض من نهج النافذة المنزلقة عند إنشاء بيانات التدريب لنموذج لغة كبير؟",
+        "options": [
+          "يقوم بخلط كل النص عشوائياً عبر المجموعة النصية بأكملها بحيث لا يستطيع النموذج أبداً مجرد حفظ ترتيب أي تسلسل طويل يصادفه أثناء التدريب",
+          "ينشئ أزواج مدخل-هدف متداخلة حيث يكون الهدف هو المدخل مُزاحاً برمز واحد، مما يعلّم النموذج التنبؤ بالرمز التالي",
+          "يضغط النص المرمّز من أجل تقليل مساحة التخزين التي تتطلبها مجموعة التدريب",
+          "يزيل الجمل المكررة من مجموعة التدريب قبل حدوث أي تجميع في دفعات"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "كما ورد في المحاضرة 9، تتحرك النافذة المنزلقة عبر النص المرمّز لإنشاء أزواج (مدخل، هدف). بالنسبة للمدخل [A, B, C]، يكون الهدف [B, C, D] — مُزاحاً برمز واحد. هذا يعلّم النموذج أنه بعد رؤية الرموز A وB وC، يجب أن يكون الرمز التالي D. تتحرك النافذة للأمام لإنشاء أمثلة تدريب عديدة من نص واحد.",
+        "isMulti": false,
+        "reviewReference": "المحاضرة 9: أزواج المدخل-الهدف ومحمّل البيانات"
+      },
+      {
+        "index": 2,
+        "text": "من المرحلة 3 (الانتباه): لماذا يجب قسمة درجات الانتباه على الجذر التربيعي لبُعد المفتاح (sqrt(d_k)) قبل تطبيق دالة softmax؟",
+        "options": [
+          "لجعل حساب الانتباه بشكل عام يعمل بشكل أسرع بشكل ملحوظ على أجهزة GPU المتوازية الحديثة أثناء التدريب",
+          "لتقليل كمية الذاكرة التي تستهلكها طبقة الانتباه طوال عملية الانتشار الخلفي وعبر عملية التدريب بأكملها على دفعات كبيرة جداً من البيانات",
+          "لمنع حاصل الضرب النقطي من النمو بشكل كبير جداً في الأبعاد العالية، مما قد يجعل softmax شبه أحادي الاتجاه ويسبب تلاشي التدرجات",
+          "لتطبيع القيم النهائية للمخرجات بحيث تقع دائماً بين 0 و1"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "كما هو موضح في المحاضرة 13، عندما يكون بُعد المفتاح d_k كبيراً، تميل حواصل الضرب النقطي إلى النمو في المقدار. بدون تحجيم، ستُخصص softmax كل الاحتمال تقريباً لموضع واحد، مما يجعل الانتباه 'حاداً' بشكل مفرط. القسمة على sqrt(d_k) تُبقي الدرجات في نطاق تنتج فيه softmax توزيعاً مفيداً، مما يسمح للنموذج بالانتباه إلى مواضع متعددة ذات صلة.",
+        "isMulti": false,
+        "reviewReference": "المحاضرة 13: حدس الانتباه وتسجيل حاصل الضرب النقطي"
+      },
+      {
+        "index": 3,
+        "text": "من المرحلة 3: ما الغرض من القناع السببي (causal mask) في الانتباه الذاتي لنماذج اللغة؟ اختر جميع الإجابات الصحيحة.",
+        "options": [
+          "يمنع النموذج من الانتباه إلى الرموز المستقبلية أثناء التدريب، مما يفرض الخاصية التلقائية الارتداد (autoregressive)",
+          "يضمن أن التنبؤ عند الموضع t يعتمد فقط على المواضع من 0 حتى t، وليس أبداً على t+1 أو ما بعده",
+          "يُسرّع الاستدلال عن طريق تقليل عدد حسابات الانتباه التي يجب على النموذج إجراؤها في كل خطوة فك ترميز، مما يوفر الحوسبة",
+          "يُنفَّذ بضبط المواضع المستقبلية على سالب اللانهاية قبل softmax، مما يجعل أوزانها صفراً"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "كما ورد في المحاضرة 15، يُعد الانتباه السببي (أو المقنَّع) ضرورياً لنماذج اللغة التلقائية الارتداد. بدونه، يمكن للنموذج أن 'يغش' بالنظر إلى الإجابة عند التنبؤ بالرمز التالي. يضبط القناع المدخلات المثلثية العلوية على سالب اللانهاية قبل softmax، مما يضمن أن تلك المواضع تتلقى وزن انتباه صفري. هذا لا يُسرّع الاستدلال — إنه متطلب صحة.",
+        "isMulti": true,
+        "reviewReference": "المحاضرة 15: الانتباه الذاتي السببي (المقنَّع)"
+      },
+      {
+        "index": 4,
+        "text": "من المرحلة 3: لماذا يستخدم الانتباه متعدد الرؤوس رؤوس انتباه متعددة بدلاً من رأس انتباه واحد كبير؟",
+        "options": [
+          "استخدام عدة رؤوس أصغر يستهلك ذاكرة أقل بشكل ملحوظ إجمالاً مما قد يتطلبه رأس انتباه واحد كبير جداً في الممارسة العملية",
+          "كل رأس ينتبه إلى نوع مختلف من العلاقات (نحوية، دلالية، موضعية)، مما يمنح تمثيلات أغنى بنفس التكلفة",
+          "الرؤوس المتعددة مطلوبة ببساطة بواسطة واجهة برمجة تطبيقات PyTorch لكنها لا تخدم أي غرض نظري حقيقي",
+          "رأس واحد كبير سيكون ببساطة بطيئاً جداً للتدريب على وحدات GPU الحديثة"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "كما ورد في المحاضرة 16، يقسّم الانتباه متعدد الرؤوس بُعد التضمين إلى رؤوس متعددة، كل منها بأبعاد أصغر. يتعلم كل رأس بشكل مستقل أنماط انتباه مختلفة — قد يركز أحدها على البنية النحوية، وآخر على التشابه الدلالي، وآخر على القرب الموضعي. يتم دمج المخرجات وإسقاطها، مما يمنح النموذج 'فضاءات تمثيل فرعية' متعددة للعمل بها.",
+        "isMulti": false,
+        "reviewReference": "المحاضرة 16: الانتباه متعدد الرؤوس"
+      },
+      {
+        "index": 5,
+        "text": "من المرحلة 2: لماذا يحتاج المحوّل (Transformer) إلى تضمينات الرموز وتضمينات المواضع معاً؟",
+        "options": [
+          "تضمينات الرموز اختيارية تماماً في الممارسة العملية، لذا في النهاية تضمينات المواضع فقط هي المهمة حقاً للمخرجات النهائية التي ينتجها نموذج مُدرَّب",
+          "تضمينات الرموز تلتقط معنى الرمز؛ تضمينات المواضع تلتقط مكان ظهوره، مما يميز بين 'الكلب يعض الرجل' و'الرجل يعض الكلب'",
+          "كلا نوعي التضمين زخرفيان بحتاً ويمكن إزالتهما دون التأثير على الأداء",
+          "تُحتاج تضمينات المواضع فقط للغات التي تُقرأ من اليمين إلى اليسار"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "كما ورد في المحاضرتين 10-11، تعالج المحوّلات كل الرموز بالتوازي (على عكس الشبكات المتكررة RNN التي تعالجها تسلسلياً). توفر تضمينات الرموز المعنى الدلالي (ماذا)، لكن بدون تضمينات المواضع، لا يملك النموذج أي مفهوم عن ترتيب الكلمات. يُضاف النوعان معاً بحيث يشفّر كل تمثيل رمز هويته وموضعه في التسلسل معاً.",
+        "isMulti": false,
+        "reviewReference": "المحاضرتان 10-11: تضمينات الرموز والمواضع"
+      },
+      {
+        "index": 6,
+        "text": "بربط المراحل 1-3: في آلية الانتباه الذاتي، ما هي أدوار مصفوفات الاستعلام (Q) والمفتاح (K) والقيمة (V)؟",
+        "options": [
+          "تحمل Q الأسئلة، وتحمل K الإجابات، وتحمل V درجات الانتباه المحسوبة لكل زوج رموز في التسلسل",
+          "Q هي 'ما الذي أبحث عنه'، K هي 'ما الذي أحتويه'، V هي 'ما الذي أقدمه إذا تم اختياري'؛ حواصل الضرب النقطي بين Q وK ترجّح V",
+          "Q وK وV كلها نسخ متطابقة من المدخل، تُحفظ فقط للتكرار داخل الطبقة",
+          "تُستخدم Q وK للترميز بينما تُستخدم V لفك الترميز، لذا تعملان في مرحلتين مختلفتين"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "كما بُني خطوة بخطوة في المحاضرتين 13-14، يُسقَط كل رمز في ثلاثة متجهات: Q (ما المعلومات التي أبحث عنها؟)، وK (ما المعلومات التي أقدمها؟)، وV (ما محتواي الفعلي؟). درجة الانتباه بين رمزين هي حاصل الضرب النقطي بين Q لأحدهما وK للآخر. الدرجات العالية تعني أن الاستعلام 'يطابق' المفتاح. هذه الدرجات (بعد softmax) ترجّح متجهات V لإنتاج المخرج.",
+        "isMulti": false,
+        "reviewReference": "المحاضرتان 13-14: آلية الانتباه الذاتي"
+      }
+    ]
   }
 }

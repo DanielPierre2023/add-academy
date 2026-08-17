@@ -245,5 +245,329 @@
         "isMulti": false
       }
     ]
+  },
+  "de": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Was macht den Backward Pass von LayerNorm komplexer als eine einfache elementweise Operation?",
+        "options": [
+          "Er erfordert das Invertieren einer großen dichten Gewichtsmatrix bei jedem Backward-Schritt",
+          "Die Normalisierung koppelt alle Elemente über den gemeinsamen Mittelwert und die gemeinsame Varianz",
+          "Er benötigt Ableitungen zweiter Ordnung",
+          "LayerNorm hat keine lernbaren Parameter"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "LayerNorm normalisiert mithilfe des Mittelwerts und der Varianz, die über alle Elemente berechnet werden, sodass die Ableitung jedes Ausgabeelements von ALLEN Eingabeelementen abhängt, nicht nur vom entsprechenden.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Wie lautet die Ableitung der GELU-Approximation (tanh-Version) bei x = 0?",
+        "options": [
+          "0",
+          "0.5",
+          "1.0",
+          "Undefiniert"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "GELU(0) = 0 und GELU'(0) = 0.5. Die tanh-Approximation liefert denselben Wert. Das unterscheidet GELU von ReLU (deren Ableitung bei x=0 null ist) und erlaubt es Gradienten, auch durch Eingaben nahe null zu fließen.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Welche Komponenten erfordern bei der Backpropagation durch kausale Self-Attention besondere Sorgfalt? Wählen Sie alle zutreffenden Antworten.",
+        "options": [
+          "Die Softmax-Funktion mit ihrer vollständigen zeilenweisen Jacobi-Matrix",
+          "Die kausale Maske, die zukünftige Positionen auf null setzt",
+          "Der konstante Skalierungsfaktor 1/sqrt(d_k), der von allen die sorgfältigste Behandlung benötigt",
+          "Die linearen QKV-Projektionen"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Softmax hat eine nicht-diagonale Jacobi-Matrix (jede Ausgabe hängt von allen Eingaben ab). Die kausale Maske setzt die Gradienten für zukünftige Positionen auf null. Bei den QKV-Projektionen müssen die Gradienten aus allen Heads akkumuliert werden. Der Skalierungsfaktor ist eine einfache Konstante, die trivial durchgereicht wird.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Wie beeinflussen Residualverbindungen den Gradientenfluss während der Backpropagation?",
+        "options": [
+          "Sie blockieren den rückwärtigen Gradientenfluss durch das Netz",
+          "Sie verdoppeln die Gradientengröße bei jeder Schicht",
+          "Sie teilen den Gradienten in einen Schichtpfad und einen Identitäts-Shortcut auf",
+          "Sie beseitigen das Problem der verschwindenden Gradienten bei sehr tiefen Netzen vollständig"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "An einer Residualverbindung y = x + F(x) teilt sich der Gradient auf: dL/dx = dL/dy + dL/dy * dF/dx. Der Identitätspfad (dL/dy) sorgt dafür, dass Gradienten immer fließen können, was das Problem der verschwindenden Gradienten abmildert (aber nicht vollständig beseitigt).",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Was ist der Zweck der numerischen Gradientenprüfung bei der Implementierung von Backpropagation?",
+        "options": [
+          "Sie beschleunigt das Training, indem alle Gradienten im Voraus berechnet werden",
+          "Sie überprüft analytische Gradienten anhand von Schätzungen mittels finiter Differenzen",
+          "Sie ersetzt die Notwendigkeit von Herleitungen mit der Kettenregel",
+          "Sie reduziert den Speicherverbrauch während des Trainings"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Die numerische Gradientenprüfung berechnet (f(x+e) - f(x-e)) / 2e für jeden Parameter und vergleicht das Ergebnis mit dem analytischen Gradienten. Stimmen sie überein (relativer Fehler < 1e-5), ist die Implementierung des Backward Pass korrekt. Sie ist für das Training zu langsam, aber unverzichtbar zum Debuggen.",
+        "isMulti": false
+      }
+    ]
+  },
+  "fr": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Qu'est-ce qui rend le backward pass de LayerNorm plus complexe qu'une simple opération élément par élément ?",
+        "options": [
+          "Il nécessite d'inverser une grande matrice de poids dense à chaque étape backward",
+          "La normalisation couple tous les éléments via la moyenne et la variance partagées",
+          "Il nécessite des dérivées du second ordre",
+          "LayerNorm n'a pas de paramètres apprenables"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "LayerNorm normalise en utilisant la moyenne et la variance calculées sur tous les éléments, donc la dérivée de chaque élément de sortie dépend de TOUS les éléments d'entrée, pas seulement de l'élément correspondant.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Quelle est la dérivée de l'approximation de GELU (version tanh) en x = 0 ?",
+        "options": [
+          "0",
+          "0.5",
+          "1.0",
+          "Indéfinie"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "GELU(0) = 0 et GELU'(0) = 0.5. L'approximation par tanh donne la même valeur. Cela distingue GELU de ReLU (dont la dérivée vaut 0 en x=0) et permet aux gradients de circuler à travers des entrées nulles.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Quels composants nécessitent une attention particulière lors de la rétropropagation à travers le causal self-attention ? Sélectionnez toutes les réponses applicables.",
+        "options": [
+          "La fonction softmax avec son Jacobien complet ligne par ligne",
+          "Le masque causal qui met à zéro les positions futures",
+          "Le facteur d'échelle constant 1/sqrt(d_k), qui nécessite le traitement le plus minutieux de tous",
+          "Les projections linéaires QKV"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Softmax a un Jacobien non diagonal (chaque sortie dépend de toutes les entrées). Le masque causal met à zéro les gradients des positions futures. Les projections QKV nécessitent d'accumuler les gradients de toutes les têtes. Le facteur d'échelle est une simple constante qui se propage trivialement.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "Comment les connexions résiduelles affectent-elles la circulation du gradient pendant la rétropropagation ?",
+        "options": [
+          "Elles bloquent la circulation des gradients à travers le réseau",
+          "Elles doublent l'amplitude du gradient à chaque couche",
+          "Elles divisent le gradient en un chemin via la couche et un raccourci identité",
+          "Elles éliminent complètement le problème de disparition du gradient pour les réseaux très profonds"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "Au niveau d'une connexion résiduelle y = x + F(x), le gradient se divise : dL/dx = dL/dy + dL/dy * dF/dx. Le chemin identité (dL/dy) garantit que les gradients peuvent toujours circuler, atténuant (sans l'éliminer) le problème de disparition du gradient.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Quel est l'objectif de la vérification numérique des gradients dans l'implémentation de la rétropropagation ?",
+        "options": [
+          "Elle accélère l'entraînement en précalculant tous les gradients à l'avance",
+          "Elle vérifie les gradients analytiques à l'aide d'estimations par différences finies",
+          "Elle remplace le besoin de dérivations par la règle de la chaîne",
+          "Elle réduit l'utilisation de la mémoire pendant l'entraînement"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "La vérification numérique des gradients calcule (f(x+e) - f(x-e)) / 2e pour chaque paramètre et le compare au gradient analytique. S'ils correspondent (erreur relative < 1e-5), l'implémentation du backward pass est correcte. C'est trop lent pour l'entraînement mais essentiel pour le débogage.",
+        "isMulti": false
+      }
+    ]
+  },
+  "it": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Cosa rende il backward pass di LayerNorm più complesso di una semplice operazione elemento per elemento?",
+        "options": [
+          "Richiede l'inversione di una grande matrice di pesi densa a ogni passo del backward",
+          "La normalizzazione accoppia tutti gli elementi tramite la media e la varianza condivise",
+          "Richiede derivate del secondo ordine",
+          "LayerNorm non ha parametri apprendibili"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "LayerNorm normalizza usando la media e la varianza calcolate su tutti gli elementi, quindi la derivata di qualsiasi elemento di output dipende da TUTTI gli elementi di input, non solo da quello corrispondente.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Qual è la derivata dell'approssimazione di GELU (versione con tanh) in x = 0?",
+        "options": [
+          "0",
+          "0.5",
+          "1.0",
+          "Indefinita"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "GELU(0) = 0 e GELU'(0) = 0.5. L'approssimazione con tanh dà lo stesso valore. Questo rende GELU diversa da ReLU (che ha derivata 0 in x=0) e permette ai gradienti di fluire attraverso input pari a zero.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Quali componenti richiedono un'attenzione particolare durante la backpropagation attraverso la causal self-attention? Seleziona tutte le risposte corrette.",
+        "options": [
+          "La funzione softmax con il suo Jacobiano completo riga per riga",
+          "La maschera causale che azzera le posizioni future",
+          "Il fattore di scala costante 1/sqrt(d_k), che richiede la gestione più attenta di tutte",
+          "Le proiezioni lineari QKV"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "La softmax ha uno Jacobiano non diagonale (ogni output dipende da tutti gli input). La maschera causale azzera i gradienti per le posizioni future. Le proiezioni QKV richiedono gradienti accumulati da tutte le head. Il fattore di scala è una semplice costante che passa in modo banale.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "In che modo le connessioni residue influenzano il flusso del gradiente durante la backpropagation?",
+        "options": [
+          "Bloccano il flusso all'indietro dei gradienti attraverso la rete",
+          "Raddoppiano la magnitudine del gradiente a ogni layer",
+          "Dividono il gradiente in un percorso attraverso il layer e una scorciatoia identità",
+          "Eliminano completamente il problema del vanishing gradient per reti molto profonde"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "In una connessione residua y = x + F(x), il gradiente si divide: dL/dx = dL/dy + dL/dy * dF/dx. Il percorso identità (dL/dy) garantisce che i gradienti possano sempre fluire, mitigando (ma non eliminando) il vanishing gradient.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "Qual è lo scopo del controllo numerico dei gradienti nell'implementazione della backpropagation?",
+        "options": [
+          "Rende l'addestramento più veloce precalcolando tutti i gradienti in anticipo",
+          "Verifica i gradienti analitici tramite stime alle differenze finite",
+          "Sostituisce la necessità delle derivazioni con la regola della catena",
+          "Riduce l'uso di memoria durante l'addestramento"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Il controllo numerico dei gradienti calcola (f(x+e) - f(x-e)) / 2e per ciascun parametro e lo confronta con il gradiente analitico. Se corrispondono (errore relativo < 1e-5), l'implementazione del backward pass è corretta. È troppo lento per l'addestramento ma essenziale per il debug.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ar": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "ما الذي يجعل backward pass الخاص بـ LayerNorm أكثر تعقيداً من عملية بسيطة تُطبَّق على كل عنصر على حدة؟",
+        "options": [
+          "يتطلب عكس مصفوفة أوزان كثيفة كبيرة في كل خطوة من خطوات backward",
+          "يربط التطبيع (normalization) بين جميع العناصر عبر المتوسط والتباين المشتركين",
+          "يحتاج إلى مشتقات من الرتبة الثانية",
+          "لا يمتلك LayerNorm أي معاملات قابلة للتعلّم"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "يُطبّع LayerNorm باستخدام المتوسط والتباين المحسوبين عبر جميع العناصر، لذا تعتمد مشتقة أي عنصر من المخرجات على جميع عناصر المدخل، وليس فقط على العنصر المقابل له.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "ما هي مشتقة تقريب GELU (نسخة tanh) عند x = 0؟",
+        "options": [
+          "0",
+          "0.5",
+          "1.0",
+          "غير معرّفة"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "GELU(0) = 0 وGELU'(0) = 0.5. يعطي تقريب tanh القيمة نفسها. هذا يجعل GELU مختلفة عن ReLU (التي تكون مشتقتها 0 عند x=0) ويسمح للتدرّجات بالتدفّق عبر المدخلات الصفرية.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "ما هي المكوّنات التي تتطلّب عناية خاصة أثناء الانتشار العكسي عبر Causal Self-Attention؟ اختر كل ما ينطبق.",
+        "options": [
+          "دالة softmax بمصفوفة جاكوبي الكاملة الخاصة بها لكل صف",
+          "القناع السببي (causal mask) الذي يصفّر المواضع المستقبلية",
+          "عامل التحجيم الثابت 1/sqrt(d_k)، الذي يحتاج إلى أكبر قدر من العناية بين كل هذه المكوّنات",
+          "إسقاطات QKV الخطية"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "تمتلك softmax مصفوفة جاكوبي غير قطرية (كل مخرج يعتمد على جميع المدخلات). يصفّر القناع السببي التدرّجات الخاصة بالمواضع المستقبلية. تحتاج إسقاطات QKV إلى تراكم التدرّجات من جميع الرؤوس. أما عامل التحجيم فهو ثابت بسيط يمر عبره التدرّج بشكل بسيط.",
+        "isMulti": true
+      },
+      {
+        "index": 3,
+        "text": "كيف تؤثّر الوصلات المتبقية (residual connections) على تدفّق التدرّجات أثناء الانتشار العكسي؟",
+        "options": [
+          "تمنع التدرّجات من التدفّق إلى الخلف عبر الشبكة",
+          "تضاعف مقدار التدرّج في كل طبقة",
+          "تقسّم التدرّج إلى مسار عبر الطبقة ومسار مختصر للهوية (identity shortcut)",
+          "تُلغي تماماً مشكلة تلاشي التدرّج بالنسبة للشبكات العميقة جداً"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "عند وصلة متبقية y = x + F(x)، ينقسم التدرّج: dL/dx = dL/dy + dL/dy * dF/dx. يضمن مسار الهوية (dL/dy) أن التدرّجات يمكنها التدفّق دائماً، مما يخفّف (لكن لا يُلغي) مشكلة تلاشي التدرّج.",
+        "isMulti": false
+      },
+      {
+        "index": 4,
+        "text": "ما الغرض من التحقق العددي من التدرّجات (numerical gradient checking) عند تنفيذ الانتشار العكسي؟",
+        "options": [
+          "يجعل التدريب أسرع من خلال حساب كل التدرّجات مسبقاً",
+          "يتحقق من التدرّجات التحليلية عبر تقديرات الفروق المنتهية (finite-difference)",
+          "يُغني عن الحاجة إلى اشتقاقات قاعدة السلسلة",
+          "يقلّل من استهلاك الذاكرة أثناء التدريب"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "يحسب التحقق العددي من التدرّجات (f(x+e) - f(x-e)) / 2e لكل معامل ويقارنه بالتدرّج التحليلي. إذا تطابقا (خطأ نسبي أقل من 1e-5)، يكون تنفيذ backward pass صحيحاً. هذه الطريقة بطيئة جداً بالنسبة للتدريب لكنها أساسية لتصحيح الأخطاء.",
+        "isMulti": false
+      }
+    ]
   }
 }

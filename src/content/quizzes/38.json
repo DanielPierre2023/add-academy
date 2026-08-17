@@ -242,5 +242,325 @@
         "isMulti": false
       }
     ]
+  },
+  "de": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Was misst MMLU primär bei einem Sprachmodell?",
+        "options": [
+          "Die reine Textgenerierungsgeschwindigkeit, gemessen in Ausgabe-Tokens pro Sekunde",
+          "Die Fähigkeit des Modells, zwischen Sprachen zu übersetzen",
+          "Multitask-Wissen über 57 akademische Fachgebiete",
+          "Den Perplexitätswert auf einem zurückgehaltenen (held-out) Korpus"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "MMLU (Massive Multitask Language Understanding) testet ein Modell in 57 Fachgebieten, die von STEM bis zu den Geisteswissenschaften reichen, und misst breites Wissen sowie Denkvermögen.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Was ist Benchmark-Kontamination?",
+        "options": [
+          "Das Ausführen eines Benchmarks auf Hardware, die für die Aufgabe viel zu langsam ist",
+          "Wenn Benchmark-Testdaten in den Trainingsdatensatz des Modells gelangen",
+          "Die Verwendung viel zu vieler unterschiedlicher Benchmarks zur Bewertung eines einzelnen Modells gleichzeitig",
+          "Das Mischen unterschiedlicher Modellarchitekturen in einem Vergleich"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "Benchmark-Kontamination tritt auf, wenn Testbeispiele in die Trainingsdaten gelangen, sodass das Modell Antworten auswendig lernen kann, statt wirklich zu schlussfolgern, was künstlich hohe Scores erzeugt.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Was bewertet HellaSwag?",
+        "options": [
+          "Die Fähigkeit, mehrstufige mathematische Probleme zu lösen",
+          "Die Genauigkeit der Codegenerierung bei Programmieraufgaben",
+          "Das faktische Abrufen von Informationen aus Wikipedia",
+          "Alltagslogik (Commonsense Reasoning) durch Satzvervollständigung"
+        ],
+        "correct": [
+          3
+        ],
+        "explanation": "HellaSwag testet Commonsense-Inferenz in natürlicher Sprache, indem Modelle die plausibelste Fortsetzung eines Szenarios aus gegnerisch (adversarial) konstruierten Optionen auswählen müssen.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Welche der folgenden sind gültige Evaluationsmetriken für Sprachmodelle? Wählen Sie alle zutreffenden Antworten aus",
+        "options": [
+          "Perplexität auf einem zurückgehaltenen (held-out) Testset",
+          "Die Gesamtzahl der Parameter im Modell",
+          "Few-Shot-Genauigkeit bei nachgelagerten (downstream) Aufgaben",
+          "Trainingsrechenleistung, gemessen in FLOPs"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "Perplexität misst, wie gut das Modell ungesehenen Text vorhersagt, und Few-Shot-Genauigkeit misst die Aufgabenleistung mit minimalen Beispielen. Parameteranzahl und FLOPs beschreiben das Modell, nicht seine Qualität.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Warum ist es riskant, Modelle allein anhand eines einzigen Benchmarks zu vergleichen?",
+        "options": [
+          "Ein Modell kann auf diesen spezifischen Benchmark overfitten, ohne zu generalisieren",
+          "Benchmarks liefern immer exakt identische Scores für jedes einzelne Modell",
+          "Einzelne Benchmarks laufen schneller und sind deshalb ungenauer",
+          "Es ist unmöglich, denselben Benchmark zweimal auszuführen"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Ein einzelner Benchmark erfasst nur einen Ausschnitt der Fähigkeiten. Modelle können darauf optimiert werden, bei einem Test zu glänzen, während sie anderswo schlechter abschneiden, weshalb eine Evaluation mit mehreren Benchmarks ein vollständigeres Bild liefert.",
+        "isMulti": false
+      }
+    ]
+  },
+  "fr": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Que mesure principalement MMLU dans un modèle de langage ?",
+        "options": [
+          "La vitesse brute de génération de texte mesurée en tokens de sortie par seconde",
+          "La capacité du modèle à traduire entre les langues",
+          "Les connaissances multitâches sur 57 matières académiques",
+          "Le score de perplexité sur un corpus réservé"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "MMLU (Massive Multitask Language Understanding) teste un modèle sur 57 matières allant des sciences (STEM) aux sciences humaines, mesurant des connaissances étendues et une capacité de raisonnement.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Qu'est-ce que la contamination d'un benchmark ?",
+        "options": [
+          "Exécuter un benchmark sur un matériel bien trop lent pour la tâche",
+          "Le fait que les données de test d'un benchmark s'infiltrent dans l'ensemble d'entraînement du modèle",
+          "Utiliser bien trop de benchmarks différents pour évaluer un seul modèle à la fois",
+          "Mélanger différentes architectures de modèles dans une même comparaison"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "La contamination d'un benchmark se produit lorsque des exemples de test s'infiltrent dans les données d'entraînement, permettant au modèle de mémoriser les réponses plutôt que de raisonner réellement, ce qui produit des scores artificiellement élevés.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Qu'évalue HellaSwag ?",
+        "options": [
+          "La capacité à résoudre des problèmes mathématiques à plusieurs étapes",
+          "La précision de la génération de code sur des tâches de programmation",
+          "Le rappel factuel d'informations issues de Wikipédia",
+          "Le raisonnement de sens commun via la complétion de phrases"
+        ],
+        "correct": [
+          3
+        ],
+        "explanation": "HellaSwag teste l'inférence de sens commun en langage naturel en demandant aux modèles de choisir la continuation la plus plausible d'un scénario parmi des options construites de manière adversariale.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Lesquelles des propositions suivantes sont des métriques d'évaluation valides pour les modèles de langage ?Sélectionnez toutes les réponses applicables",
+        "options": [
+          "La perplexité sur un ensemble de test réservé",
+          "Le nombre total de paramètres du modèle",
+          "La précision en few-shot sur des tâches en aval",
+          "Le calcul d'entraînement mesuré en FLOPs"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "La perplexité mesure la capacité du modèle à prédire un texte non vu, et la précision en few-shot mesure la performance sur une tâche avec un minimum d'exemples. Le nombre de paramètres et les FLOPs décrivent le modèle, pas sa qualité.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Pourquoi est-il risqué de comparer des modèles en se basant sur un seul benchmark ?",
+        "options": [
+          "Un modèle peut surapprendre ce benchmark spécifique sans généraliser",
+          "Les benchmarks produisent toujours des scores exactement identiques pour chaque modèle",
+          "Les benchmarks uniques s'exécutent plus vite, ce qui les rend moins précis",
+          "Il est impossible d'exécuter le même benchmark deux fois"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Un seul benchmark ne capture qu'une tranche des capacités du modèle. Les modèles peuvent être ajustés pour exceller sur un test tout en étant moins performants ailleurs, c'est pourquoi une évaluation multi-benchmarks donne une image plus complète.",
+        "isMulti": false
+      }
+    ]
+  },
+  "it": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "Cosa misura principalmente MMLU in un modello linguistico?",
+        "options": [
+          "La velocità grezza di generazione del testo misurata in token di output al secondo",
+          "La capacità del modello di tradurre tra lingue",
+          "La conoscenza multitasking su 57 materie accademiche",
+          "Il punteggio di perplexity su un corpus held-out"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "MMLU (Massive Multitask Language Understanding) testa un modello su 57 materie che spaziano dalle STEM alle discipline umanistiche, misurando la conoscenza generale e la capacità di ragionamento.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "Cos'è la contaminazione dei benchmark?",
+        "options": [
+          "Eseguire un benchmark su hardware troppo lento per il compito",
+          "Quando i dati di test del benchmark filtrano nel training set del modello",
+          "Usare troppi benchmark diversi per valutare un singolo modello contemporaneamente",
+          "Mescolare architetture di modello diverse in un unico confronto"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "La contaminazione dei benchmark si verifica quando gli esempi di test filtrano nei dati di addestramento, permettendo al modello di memorizzare le risposte invece di ragionare realmente, producendo punteggi artificialmente elevati.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "Cosa valuta HellaSwag?",
+        "options": [
+          "La capacità di risolvere problemi matematici a più passaggi",
+          "L'accuratezza della generazione di codice su compiti di programmazione",
+          "Il richiamo fattuale di informazioni da Wikipedia",
+          "Il ragionamento di senso comune tramite completamento di frasi"
+        ],
+        "correct": [
+          3
+        ],
+        "explanation": "HellaSwag testa l'inferenza di senso comune in linguaggio naturale chiedendo ai modelli di scegliere la continuazione più plausibile di uno scenario tra opzioni costruite in modo avversariale.",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "Quali delle seguenti sono metriche di valutazione valide per i modelli linguistici?Selezionare tutte quelle applicabili",
+        "options": [
+          "Perplexity su un test set held-out",
+          "Il numero totale di parametri del modello",
+          "L'accuratezza few-shot su compiti a valle",
+          "Il compute di addestramento misurato in FLOP"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "La perplexity misura quanto bene il modello predice testo non visto, e l'accuratezza few-shot misura le prestazioni su un compito con un numero minimo di esempi. Il numero di parametri e i FLOP descrivono il modello, non la sua qualità.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "Perché è rischioso confrontare i modelli usando un unico benchmark?",
+        "options": [
+          "Un modello potrebbe fare overfitting su quello specifico benchmark senza generalizzare",
+          "I benchmark producono sempre punteggi esattamente identici per ogni singolo modello",
+          "I benchmark singoli vengono eseguiti più velocemente, quindi sono meno accurati",
+          "È impossibile eseguire lo stesso benchmark due volte"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "Un singolo benchmark cattura solo una porzione della capacità del modello. I modelli possono essere ottimizzati per eccellere in un test pur avendo prestazioni inferiori altrove, quindi una valutazione multi-benchmark offre un quadro più completo.",
+        "isMulti": false
+      }
+    ]
+  },
+  "ar": {
+    "questions": [
+      {
+        "index": 0,
+        "text": "ماذا يقيس MMLU بشكل أساسي في نموذج اللغة؟",
+        "options": [
+          "سرعة توليد النص الخام مقاسة بعدد الرموز (Tokens) الناتجة في الثانية",
+          "قدرة النموذج على الترجمة بين اللغات",
+          "المعرفة متعددة المهام عبر 57 مادة أكاديمية",
+          "درجة الحيرة (Perplexity) على مجموعة بيانات محجوزة (Held-out)"
+        ],
+        "correct": [
+          2
+        ],
+        "explanation": "يختبر MMLU (فهم اللغة متعدد المهام الضخم) النموذج عبر 57 مادة تتراوح بين العلوم (STEM) والعلوم الإنسانية، لقياس المعرفة الواسعة والقدرة على الاستدلال.",
+        "isMulti": false
+      },
+      {
+        "index": 1,
+        "text": "ما هو تلوث معايير القياس (Benchmark Contamination)؟",
+        "options": [
+          "تشغيل معيار قياس على عتاد بطيء جدًا بالنسبة للمهمة",
+          "عندما تتسرب بيانات اختبار معيار القياس إلى مجموعة بيانات تدريب النموذج",
+          "استخدام عدد كبير جدًا من معايير القياس المختلفة لتقييم نموذج واحد في آنٍ واحد",
+          "مزج معماريات نماذج مختلفة في مقارنة واحدة"
+        ],
+        "correct": [
+          1
+        ],
+        "explanation": "يحدث تلوث معايير القياس عندما تتسرب أمثلة الاختبار إلى بيانات التدريب، مما يسمح للنموذج بحفظ الإجابات عن ظهر قلب بدلاً من الاستدلال الحقيقي، فتنتج درجات مرتفعة بشكل مصطنع.",
+        "isMulti": false
+      },
+      {
+        "index": 2,
+        "text": "ماذا يقيّم HellaSwag؟",
+        "options": [
+          "القدرة على حل مسائل رياضية متعددة الخطوات",
+          "دقة توليد الكود في المهام البرمجية",
+          "الاسترجاع الواقعي للمعلومات من ويكيبيديا",
+          "الاستدلال المنطقي السليم عبر إكمال الجمل"
+        ],
+        "correct": [
+          3
+        ],
+        "explanation": "يختبر HellaSwag الاستدلال اللغوي الطبيعي القائم على المنطق السليم من خلال مطالبة النماذج باختيار الاستمرار الأكثر منطقية لسيناريو معين من بين خيارات مُصمَّمة بطريقة خصومية (Adversarial).",
+        "isMulti": false
+      },
+      {
+        "index": 3,
+        "text": "أي مما يلي يُعد مقاييس تقييم صالحة لنماذج اللغة؟ اختر كل ما ينطبق",
+        "options": [
+          "الحيرة (Perplexity) على مجموعة اختبار محجوزة",
+          "العدد الإجمالي للمعاملات (Parameters) في النموذج",
+          "الدقة بأسلوب Few-shot على مهام تطبيقية لاحقة",
+          "حجم الحوسبة التدريبية مقاسًا بوحدات FLOPs"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "explanation": "تقيس الحيرة (Perplexity) مدى جودة تنبؤ النموذج بنص لم يسبق له رؤيته، وتقيس الدقة بأسلوب Few-shot الأداء على المهام بعدد ضئيل من الأمثلة. أما عدد المعاملات وقيمة FLOPs فتصف حجم النموذج، لا جودته.",
+        "isMulti": true
+      },
+      {
+        "index": 4,
+        "text": "لماذا يُعد من الخطر مقارنة النماذج باستخدام معيار قياس واحد فقط؟",
+        "options": [
+          "قد يبالغ النموذج في التلاؤم (Overfit) مع ذلك المعيار المحدد دون أن يتعمم أداؤه",
+          "تُنتج معايير القياس دائمًا درجات متطابقة تمامًا لكل نموذج على حدة",
+          "معايير القياس المفردة تعمل بشكل أسرع ولذلك تكون أقل دقة",
+          "من المستحيل تشغيل نفس معيار القياس مرتين"
+        ],
+        "correct": [
+          0
+        ],
+        "explanation": "يلتقط معيار القياس الواحد شريحة واحدة فقط من القدرات. يمكن ضبط النماذج للتفوق في اختبار واحد مع ضعف الأداء في اختبارات أخرى، لذا يمنح التقييم متعدد المعايير صورة أشمل.",
+        "isMulti": false
+      }
+    ]
   }
 }
