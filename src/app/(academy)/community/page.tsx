@@ -25,8 +25,10 @@ export default function CommunityPage() {
   const [recent, setRecent] = useState<ForumThreadSummary[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const t = (en: string, ro: string, el: string) =>
-    language === 'ro' ? ro : language === 'el' ? el : en;
+  const t = (en: string, ro: string, el: string, de?: string, fr?: string, it?: string, ar?: string) => {
+    const map: Record<string, string> = { en, ro, el, de: de ?? en, fr: fr ?? en, it: it ?? en, ar: ar ?? en };
+    return map[language] ?? en;
+  };
 
   useEffect(() => {
     if (!user) return;
@@ -52,13 +54,17 @@ export default function CommunityPage() {
       <div className="text-center">
         <MessagesSquare className="mx-auto h-16 w-16 text-secondary mb-4" />
         <h1 className="text-3xl font-bold font-heading mb-2">
-          {t('Community', 'Comunitate', 'Κοινότητα')}
+          {t('Community', 'Comunitate', 'Κοινότητα', 'Community', 'Communauté', 'Comunità', 'المجتمع')}
         </h1>
         <p className="text-muted-foreground">
           {t(
             'Ask questions, share what you built, and help fellow learners.',
             'Pune întrebări, arată ce ai construit și ajută-i pe ceilalți cursanți.',
-            'Κάντε ερωτήσεις, μοιραστείτε τι φτιάξατε και βοηθήστε συμμαθητές.'
+            'Κάντε ερωτήσεις, μοιραστείτε τι φτιάξατε και βοηθήστε συμμαθητές.',
+            'Stellen Sie Fragen, teilen Sie, was Sie gebaut haben, und helfen Sie anderen Lernenden.',
+            'Posez des questions, partagez ce que vous avez créé et aidez vos camarades apprenants.',
+            'Fai domande, condividi ciò che hai creato e aiuta gli altri studenti.',
+            'اطرح الأسئلة، وشارك ما قمت ببنائه، وساعد المتعلمين الآخرين.'
           )}
         </p>
       </div>
@@ -71,7 +77,11 @@ export default function CommunityPage() {
               {t(
                 'Sign in to join the discussion.',
                 'Autentifică-te pentru a te alătura discuției.',
-                'Συνδεθείτε για να συμμετάσχετε στη συζήτηση.'
+                'Συνδεθείτε για να συμμετάσχετε στη συζήτηση.',
+                'Melden Sie sich an, um an der Diskussion teilzunehmen.',
+                'Connectez-vous pour rejoindre la discussion.',
+                'Accedi per partecipare alla discussione.',
+                'سجّل الدخول للانضمام إلى النقاش.'
               )}
             </p>
           </CardContent>
@@ -84,11 +94,11 @@ export default function CommunityPage() {
           <div>
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-lg font-semibold">
-                {t('Categories', 'Categorii', 'Κατηγορίες')}
+                {t('Categories', 'Categorii', 'Κατηγορίες', 'Kategorien', 'Catégories', 'Categorie', 'الفئات')}
               </h2>
             </div>
             {loading ? (
-              <p className="text-sm text-muted-foreground">{t('Loading…', 'Se încarcă…', 'Φόρτωση…')}</p>
+              <p className="text-sm text-muted-foreground">{t('Loading…', 'Se încarcă…', 'Φόρτωση…', 'Wird geladen…', 'Chargement…', 'Caricamento…', 'جارٍ التحميل…')}</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {categories.map((c) => (
@@ -117,13 +127,13 @@ export default function CommunityPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">
                 <MessagesSquare className="h-4 w-4 text-primary" />
-                {t('Recent discussions', 'Discuții recente', 'Πρόσφατες συζητήσεις')}
+                {t('Recent discussions', 'Discuții recente', 'Πρόσφατες συζητήσεις', 'Aktuelle Diskussionen', 'Discussions récentes', 'Discussioni recenti', 'أحدث النقاشات')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               {recent.length === 0 ? (
                 <p className="py-4 text-center text-sm text-muted-foreground">
-                  {t('No discussions yet.', 'Încă nu există discuții.', 'Δεν υπάρχουν συζητήσεις ακόμη.')}
+                  {t('No discussions yet.', 'Încă nu există discuții.', 'Δεν υπάρχουν συζητήσεις ακόμη.', 'Noch keine Diskussionen.', 'Aucune discussion pour le moment.', 'Nessuna discussione ancora.', 'لا توجد نقاشات بعد.')}
                 </p>
               ) : (
                 <ul className="divide-y divide-border/60">
@@ -142,7 +152,7 @@ export default function CommunityPage() {
                           <span className="text-xs text-muted-foreground">
                             {th.authorName} · {relativeTime(th.lastPostAt, language)} ·{' '}
                             {th.postCount}{' '}
-                            {t('posts', 'postări', 'αναρτήσεις')}
+                            {t('posts', 'postări', 'αναρτήσεις', 'Beiträge', 'publications', 'post', 'منشورات')}
                           </span>
                         </div>
                         <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
@@ -159,7 +169,7 @@ export default function CommunityPage() {
             <Link href={`/community/category/${categories[0]?.slug ?? 'general'}`}>
               <Button className="gap-2">
                 <Plus className="h-4 w-4" />
-                {t('New thread', 'Discuție nouă', 'Νέα συζήτηση')}
+                {t('New thread', 'Discuție nouă', 'Νέα συζήτηση', 'Neuer Thread', 'Nouveau sujet', 'Nuova discussione', 'موضوع جديد')}
               </Button>
             </Link>
           </div>

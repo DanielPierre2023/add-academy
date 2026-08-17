@@ -90,17 +90,33 @@ export default function HomePage() {
       bg: 'bg-gradient-to-br from-blue-500/20 to-indigo-500/10',
       borderColor: 'border-blue-500/20',
       glowColor: 'rgba(59, 130, 246, 0.25)',
-      title: language === 'ro' ? 'Teoria LLM' : language === 'el' ? 'Θεωρία LLM' : 'LLM Theory',
+      title: language === 'ro' ? 'Teoria LLM' : language === 'el' ? 'Θεωρία LLM' : language === 'de' ? 'LLM-Theorie' : language === 'fr' ? 'Théorie des LLM' : language === 'it' ? 'Teoria degli LLM' : language === 'ar' ? 'نظرية النماذج اللغوية' : 'LLM Theory',
       desc: language === 'ro'
         ? 'Înțelege transformerele, mecanismele de atenție, embedding-urile și matematica din spatele modelelor de limbaj moderne.'
         : language === 'el'
           ? 'Κατανοήστε τους transformers, τους μηχανισμούς προσοχής, τα embeddings και τα μαθηματικά πίσω από τα σύγχρονα γλωσσικά μοντέλα.'
-          : 'Understand transformers, attention mechanisms, embeddings and the math behind modern language models.',
+          : language === 'de'
+            ? 'Verstehe Transformer, Attention-Mechanismen, Embeddings und die Mathematik hinter modernen Sprachmodellen.'
+            : language === 'fr'
+              ? 'Comprenez les transformers, les mécanismes d\'attention, les embeddings et les mathématiques qui sous-tendent les modèles de langage modernes.'
+              : language === 'it'
+                ? 'Comprendi i transformer, i meccanismi di attenzione, gli embedding e la matematica alla base dei moderni modelli linguistici.'
+                : language === 'ar'
+                  ? 'افهم المحولات (Transformers) وآليات الانتباه والتضمينات (Embeddings) والرياضيات وراء نماذج اللغة الحديثة.'
+                  : 'Understand transformers, attention mechanisms, embeddings and the math behind modern language models.',
       highlights: language === 'ro'
         ? ['Transformers', 'Atenție', 'Embeddings']
         : language === 'el'
           ? ['Transformers', 'Προσοχή', 'Embeddings']
-          : ['Transformers', 'Attention', 'Embeddings'],
+          : language === 'de'
+            ? ['Transformer', 'Attention', 'Embeddings']
+            : language === 'fr'
+              ? ['Transformers', 'Attention', 'Embeddings']
+              : language === 'it'
+                ? ['Transformer', 'Attenzione', 'Embeddings']
+                : language === 'ar'
+                  ? ['المحولات', 'الانتباه', 'التضمينات']
+                  : ['Transformers', 'Attention', 'Embeddings'],
     },
     {
       icon: Code2,
@@ -108,12 +124,20 @@ export default function HomePage() {
       bg: 'bg-gradient-to-br from-amber-500/20 to-orange-500/10',
       borderColor: 'border-amber-500/20',
       glowColor: 'rgba(212, 160, 23, 0.3)',
-      title: language === 'ro' ? 'Cod Practic' : language === 'el' ? 'Πρακτικός Κώδικας' : 'Hands-On Code',
+      title: language === 'ro' ? 'Cod Practic' : language === 'el' ? 'Πρακτικός Κώδικας' : language === 'de' ? 'Praktischer Code' : language === 'fr' ? 'Code Pratique' : language === 'it' ? 'Codice Pratico' : language === 'ar' ? 'برمجة عملية' : 'Hands-On Code',
       desc: language === 'ro'
         ? 'Construiește fiecare componentă de la zero în Python — tokenizere, straturi de atenție, blocuri transformer și întreaga arhitectură GPT-2.'
         : language === 'el'
           ? 'Κατασκευάστε κάθε component από το μηδέν σε Python — tokenizers, στρώματα προσοχής, transformer blocks και ολόκληρη την αρχιτεκτονική GPT-2.'
-          : 'Build every component from scratch in Python — tokenizers, attention layers, transformer blocks and the full GPT-2 architecture.',
+          : language === 'de'
+            ? 'Baue jede Komponente von Grund auf in Python — Tokenizer, Attention-Layer, Transformer-Blöcke und die komplette GPT-2-Architektur.'
+            : language === 'fr'
+              ? 'Construisez chaque composant à partir de zéro en Python — tokenizers, couches d\'attention, blocs transformer et l\'architecture GPT-2 complète.'
+              : language === 'it'
+                ? 'Costruisci ogni componente da zero in Python — tokenizer, livelli di attenzione, blocchi transformer e l\'intera architettura GPT-2.'
+                : language === 'ar'
+                  ? 'ابنِ كل مكوّن من الصفر بلغة Python — أدوات التجزئة، وطبقات الانتباه، وكتل المحولات، وبنية GPT-2 الكاملة.'
+                  : 'Build every component from scratch in Python — tokenizers, attention layers, transformer blocks and the full GPT-2 architecture.',
       highlights: ['Python', 'GPT-2', 'Tokenizers'],
     },
     {
@@ -122,43 +146,59 @@ export default function HomePage() {
       bg: 'bg-gradient-to-br from-emerald-500/20 to-green-500/10',
       borderColor: 'border-emerald-500/20',
       glowColor: 'rgba(16, 185, 129, 0.25)',
-      title: language === 'ro' ? 'Antrenare & Implementare' : language === 'el' ? 'Εκπαίδευση & Ανάπτυξη' : 'Training & Deployment',
+      title: language === 'ro' ? 'Antrenare & Implementare' : language === 'el' ? 'Εκπαίδευση & Ανάπτυξη' : language === 'de' ? 'Training & Bereitstellung' : language === 'fr' ? 'Entraînement & Déploiement' : language === 'it' ? 'Addestramento & Distribuzione' : language === 'ar' ? 'التدريب والنشر' : 'Training & Deployment',
       desc: language === 'ro'
         ? 'Pre-antrenează pe seturi de date reale, implementează scalarea temperaturii, eșantionarea top-k și încarcă întreaga arhitectură GPT-2.'
         : language === 'el'
           ? 'Προεκπαιδεύστε σε πραγματικά datasets, υλοποιήστε temperature scaling, top-k sampling και φορτώστε ολόκληρη την αρχιτεκτονική GPT-2.'
-          : 'Pretrain on real datasets, implement temperature scaling, top-k sampling and load the full GPT-2 architecture.',
+          : language === 'de'
+            ? 'Trainiere auf echten Datensätzen vor, implementiere Temperature Scaling, Top-k-Sampling und lade die vollständige GPT-2-Architektur.'
+            : language === 'fr'
+              ? 'Pré-entraînez sur des jeux de données réels, implémentez le temperature scaling, le top-k sampling et chargez l\'architecture GPT-2 complète.'
+              : language === 'it'
+                ? 'Pre-addestra su dataset reali, implementa il temperature scaling, il top-k sampling e carica l\'intera architettura GPT-2.'
+                : language === 'ar'
+                  ? 'درّب النموذج مسبقًا على مجموعات بيانات حقيقية، وطبّق قياس الحرارة (temperature scaling) وأخذ العينات top-k، وحمّل بنية GPT-2 كاملة.'
+                  : 'Pretrain on real datasets, implement temperature scaling, top-k sampling and load the full GPT-2 architecture.',
       highlights: language === 'ro'
         ? ['Pre-antrenare', 'Top-k', 'Deployment']
         : language === 'el'
           ? ['Προεκπαίδευση', 'Top-k', 'Deployment']
-          : ['Pretraining', 'Top-k', 'Deployment'],
+          : language === 'de'
+            ? ['Vortraining', 'Top-k', 'Bereitstellung']
+            : language === 'fr'
+              ? ['Pré-entraînement', 'Top-k', 'Déploiement']
+              : language === 'it'
+                ? ['Pre-addestramento', 'Top-k', 'Distribuzione']
+                : language === 'ar'
+                  ? ['التدريب المسبق', 'Top-k', 'النشر']
+                  : ['Pretraining', 'Top-k', 'Deployment'],
     },
   ];
 
   const journeySteps = [
     {
       num: '01',
-      title: language === 'ro' ? 'Fundamentele' : language === 'el' ? 'Θεμέλια' : 'Foundations',
-      desc: language === 'ro' ? 'Înțelege cum funcționează LLM-urile' : language === 'el' ? 'Κατανοήστε πώς λειτουργούν τα LLMs' : 'Understand how LLMs work',
+      title: language === 'ro' ? 'Fundamentele' : language === 'el' ? 'Θεμέλια' : language === 'de' ? 'Grundlagen' : language === 'fr' ? 'Fondamentaux' : language === 'it' ? 'Fondamenti' : language === 'ar' ? 'الأساسيات' : 'Foundations',
+      desc: language === 'ro' ? 'Înțelege cum funcționează LLM-urile' : language === 'el' ? 'Κατανοήστε πώς λειτουργούν τα LLMs' : language === 'de' ? 'Verstehe, wie LLMs funktionieren' : language === 'fr' ? 'Comprenez le fonctionnement des LLM' : language === 'it' ? 'Comprendi come funzionano gli LLM' : language === 'ar' ? 'افهم كيف تعمل النماذج اللغوية' : 'Understand how LLMs work',
       icon: BookOpen,
     },
     {
       num: '02',
-      title: language === 'ro' ? 'Construiește' : language === 'el' ? 'Κατασκευή' : 'Build',
-      desc: language === 'ro' ? 'Codează GPT-2 de la zero' : language === 'el' ? 'Κωδικοποιήστε GPT-2 από το μηδέν' : 'Code GPT-2 from scratch',
+      title: language === 'ro' ? 'Construiește' : language === 'el' ? 'Κατασκευή' : language === 'de' ? 'Bauen' : language === 'fr' ? 'Construire' : language === 'it' ? 'Costruire' : language === 'ar' ? 'البناء' : 'Build',
+      desc: language === 'ro' ? 'Codează GPT-2 de la zero' : language === 'el' ? 'Κωδικοποιήστε GPT-2 από το μηδέν' : language === 'de' ? 'Programmiere GPT-2 von Grund auf' : language === 'fr' ? 'Codez GPT-2 à partir de zéro' : language === 'it' ? 'Programma GPT-2 da zero' : language === 'ar' ? 'برمج GPT-2 من الصفر' : 'Code GPT-2 from scratch',
       icon: Code2,
     },
     {
       num: '03',
-      title: language === 'ro' ? 'Antrenează' : language === 'el' ? 'Εκπαίδευση' : 'Train',
-      desc: language === 'ro' ? 'Pre-antrenare pe date reale' : language === 'el' ? 'Προεκπαίδευση σε πραγματικά δεδομένα' : 'Pretrain on real data',
+      title: language === 'ro' ? 'Antrenează' : language === 'el' ? 'Εκπαίδευση' : language === 'de' ? 'Trainieren' : language === 'fr' ? 'Entraîner' : language === 'it' ? 'Addestrare' : language === 'ar' ? 'التدريب' : 'Train',
+      desc: language === 'ro' ? 'Pre-antrenare pe date reale' : language === 'el' ? 'Προεκπαίδευση σε πραγματικά δεδομένα' : language === 'de' ? 'Vortraining mit echten Daten' : language === 'fr' ? 'Pré-entraînement sur des données réelles' : language === 'it' ? 'Pre-addestramento su dati reali' : language === 'ar' ? 'التدريب المسبق على بيانات حقيقية' : 'Pretrain on real data',
       icon: Cpu,
     },
     {
       num: '04',
-      title: language === 'ro' ? 'Livrează' : language === 'el' ? 'Παράδοση' : 'Ship',
-      desc: language === 'ro' ? 'Produse SaaS gata de producție' : language === 'el' ? 'Έτοιμα SaaS προϊόντα' : 'Production-ready SaaS products',
+      title: language === 'ro' ? 'Livrează' : language === 'el' ? 'Παράδοση' : language === 'de' ? 'Ausliefern' : language === 'fr' ? 'Déployer' : language === 'it' ? 'Distribuire' : language === 'ar' ? 'الإطلاق' : 'Ship',
+      desc: language === 'ro' ? 'Produse SaaS gata de producție' : language === 'el' ? 'Έτοιμα SaaS προϊόντα' : language === 'de' ? 'Produktionsreife SaaS-Produkte' : language === 'fr' ? 'Produits SaaS prêts pour la production' : language === 'it' ? 'Prodotti SaaS pronti per la produzione' : language === 'ar' ? 'منتجات SaaS جاهزة للإنتاج' : 'Production-ready SaaS products',
       icon: Layers,
     },
   ];
@@ -190,7 +230,7 @@ export default function HomePage() {
               <motion.div variants={heroTitle}>
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-primary-foreground/80 backdrop-blur-sm mb-6">
                   <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                  {language === 'ro' ? 'Cursuri interactive cu Python' : language === 'el' ? 'Διαδραστικά μαθήματα με Python' : 'Interactive courses with live Python'}
+                  {language === 'ro' ? 'Cursuri interactive cu Python' : language === 'el' ? 'Διαδραστικά μαθήματα με Python' : language === 'de' ? 'Interaktive Kurse mit Live-Python' : language === 'fr' ? 'Cours interactifs avec Python en direct' : language === 'it' ? 'Corsi interattivi con Python dal vivo' : language === 'ar' ? 'دورات تفاعلية مع بايثون مباشر' : 'Interactive courses with live Python'}
                 </span>
               </motion.div>
 
@@ -223,7 +263,7 @@ export default function HomePage() {
                   href="/lectures/1"
                   className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-medium text-primary-foreground/80 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-primary-foreground"
                 >
-                  {language === 'ro' ? 'Explorează cursul' : language === 'el' ? 'Εξερευνήστε' : 'Explore curriculum'}
+                  {language === 'ro' ? 'Explorează cursul' : language === 'el' ? 'Εξερευνήστε' : language === 'de' ? 'Lehrplan entdecken' : language === 'fr' ? 'Explorer le programme' : language === 'it' ? 'Esplora il programma' : language === 'ar' ? 'استكشف المنهج' : 'Explore curriculum'}
                 </Link>
               </motion.div>
             </div>
@@ -310,13 +350,13 @@ export default function HomePage() {
       <ScrollReveal>
         <div className="border-y border-border/50 bg-muted/30 px-6 py-6 text-center">
           <p className="text-xs uppercase tracking-widest text-muted-foreground/60 mb-4">
-            {language === 'ro' ? 'Construit de' : language === 'el' ? 'Κατασκευασμένο από' : 'Built by'}
+            {language === 'ro' ? 'Construit de' : language === 'el' ? 'Κατασκευασμένο από' : language === 'de' ? 'Entwickelt von' : language === 'fr' ? 'Conçu par' : language === 'it' ? 'Realizzato da' : language === 'ar' ? 'بُني بواسطة' : 'Built by'}
           </p>
           <div className="flex items-center justify-center gap-8 opacity-60">
             <span className="font-heading text-lg font-bold text-foreground/70">ADD Individual Solutions</span>
             <span className="hidden sm:inline text-muted-foreground/40">|</span>
             <span className="hidden sm:inline text-sm text-muted-foreground/50">
-              {language === 'ro' ? 'Consultant AI din Cipru' : language === 'el' ? 'Σύμβουλοι AI από την Κύπρο' : 'AI Consultants from Cyprus'}
+              {language === 'ro' ? 'Consultant AI din Cipru' : language === 'el' ? 'Σύμβουλοι AI από την Κύπρο' : language === 'de' ? 'KI-Berater aus Zypern' : language === 'fr' ? 'Consultants IA de Chypre' : language === 'it' ? 'Consulenti IA da Cipro' : language === 'ar' ? 'مستشارو الذكاء الاصطناعي من قبرص' : 'AI Consultants from Cyprus'}
             </span>
           </div>
         </div>
@@ -329,10 +369,10 @@ export default function HomePage() {
         <ScrollReveal>
           <div className="text-center mb-12">
             <p className="text-xs uppercase tracking-widest text-secondary font-semibold mb-3">
-              {language === 'ro' ? 'Curriculum' : language === 'el' ? 'Πρόγραμμα Σπουδών' : 'Curriculum'}
+              {language === 'ro' ? 'Curriculum' : language === 'el' ? 'Πρόγραμμα Σπουδών' : language === 'de' ? 'Lehrplan' : language === 'fr' ? 'Programme' : language === 'it' ? 'Programma' : language === 'ar' ? 'المنهج الدراسي' : 'Curriculum'}
             </p>
             <h2 className="text-3xl font-bold font-heading sm:text-4xl">
-              {language === 'ro' ? 'Ce Vei Învăța' : language === 'el' ? 'Τι Θα Μάθετε' : "What You'll Learn"}
+              {language === 'ro' ? 'Ce Vei Învăța' : language === 'el' ? 'Τι Θα Μάθετε' : language === 'de' ? 'Was du lernen wirst' : language === 'fr' ? 'Ce que vous apprendrez' : language === 'it' ? 'Cosa Imparerai' : language === 'ar' ? 'ماذا ستتعلم' : "What You'll Learn"}
             </h2>
           </div>
         </ScrollReveal>
@@ -371,10 +411,10 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="text-center mb-14">
               <p className="text-xs uppercase tracking-widest text-secondary font-semibold mb-3">
-                {language === 'ro' ? 'Parcursul tău' : language === 'el' ? 'Η πορεία σας' : 'Your journey'}
+                {language === 'ro' ? 'Parcursul tău' : language === 'el' ? 'Η πορεία σας' : language === 'de' ? 'Deine Reise' : language === 'fr' ? 'Votre parcours' : language === 'it' ? 'Il tuo percorso' : language === 'ar' ? 'رحلتك' : 'Your journey'}
               </p>
               <h2 className="text-3xl font-bold font-heading sm:text-4xl">
-                {language === 'ro' ? 'De la Teorie la Producție' : language === 'el' ? 'Από τη Θεωρία στην Παραγωγή' : 'From Theory to Production'}
+                {language === 'ro' ? 'De la Teorie la Producție' : language === 'el' ? 'Από τη Θεωρία στην Παραγωγή' : language === 'de' ? 'Von der Theorie zur Produktion' : language === 'fr' ? 'De la Théorie à la Production' : language === 'it' ? 'Dalla Teoria alla Produzione' : language === 'ar' ? 'من النظرية إلى الإنتاج' : 'From Theory to Production'}
               </h2>
             </div>
           </ScrollReveal>
@@ -419,14 +459,30 @@ export default function HomePage() {
                   ? 'Descarcă produse gata de deployment'
                   : language === 'el'
                     ? 'Κατεβάστε έτοιμα προϊόντα ανάπτυξης'
-                    : 'Download deployment-ready products'}
+                    : language === 'de'
+                      ? 'Lade produktionsreife Produkte herunter'
+                      : language === 'fr'
+                        ? 'Téléchargez des produits prêts au déploiement'
+                        : language === 'it'
+                          ? 'Scarica prodotti pronti per il deployment'
+                          : language === 'ar'
+                            ? 'حمّل منتجات جاهزة للنشر'
+                            : 'Download deployment-ready products'}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {language === 'ro'
                   ? 'Finalizează cel puțin 80% dintr-un curs pentru a debloca NeuralForge LLM sau produsele GenAI SaaS ca ZIP-uri gata de deployment.'
                   : language === 'el'
                     ? 'Ολοκληρώστε τουλάχιστον 80% ενός μαθήματος για να ξεκλειδώσετε το NeuralForge LLM ή τα GenAI SaaS ως ZIP αρχεία έτοιμα για ανάπτυξη.'
-                    : 'Complete at least 80% of a course to unlock the NeuralForge LLM or GenAI SaaS products as deployment-ready ZIP downloads.'}
+                    : language === 'de'
+                      ? 'Schließe mindestens 80 % eines Kurses ab, um NeuralForge LLM oder die GenAI-SaaS-Produkte als produktionsreife ZIP-Downloads freizuschalten.'
+                      : language === 'fr'
+                        ? 'Terminez au moins 80 % d\'un cours pour débloquer NeuralForge LLM ou les produits GenAI SaaS sous forme de téléchargements ZIP prêts au déploiement.'
+                        : language === 'it'
+                          ? 'Completa almeno l\'80% di un corso per sbloccare NeuralForge LLM o i prodotti GenAI SaaS come download ZIP pronti per il deployment.'
+                          : language === 'ar'
+                            ? 'أكمل 80% على الأقل من دورة لفتح NeuralForge LLM أو منتجات GenAI SaaS كملفات ZIP جاهزة للنشر.'
+                            : 'Complete at least 80% of a course to unlock the NeuralForge LLM or GenAI SaaS products as deployment-ready ZIP downloads.'}
               </p>
               <div className="mt-3 flex flex-wrap gap-3">
                 <span className="inline-flex items-center gap-1.5 text-xs text-secondary font-medium">
@@ -439,7 +495,7 @@ export default function HomePage() {
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs text-secondary font-medium">
                   <CheckCircle2 className="h-3.5 w-3.5" />
-                  {language === 'ro' ? 'Certificate' : language === 'el' ? 'Πιστοποιητικά' : 'Certificates'}
+                  {language === 'ro' ? 'Certificate' : language === 'el' ? 'Πιστοποιητικά' : language === 'de' ? 'Zertifikate' : language === 'fr' ? 'Certificats' : language === 'it' ? 'Certificati' : language === 'ar' ? 'الشهادات' : 'Certificates'}
                 </span>
               </div>
             </div>
@@ -489,7 +545,7 @@ export default function HomePage() {
               <div>
                 <h2 className="text-2xl font-bold font-heading">{t('course_map', language)}</h2>
                 <p className="text-sm text-muted-foreground">
-                  {language === 'ro' ? 'Toate etapele cursului' : language === 'el' ? 'Όλα τα στάδια' : 'All course stages'}
+                  {language === 'ro' ? 'Toate etapele cursului' : language === 'el' ? 'Όλα τα στάδια' : language === 'de' ? 'Alle Kursetappen' : language === 'fr' ? 'Toutes les étapes du cours' : language === 'it' ? 'Tutte le fasi del corso' : language === 'ar' ? 'جميع مراحل الدورة' : 'All course stages'}
                 </p>
               </div>
             </div>
@@ -570,14 +626,22 @@ export default function HomePage() {
           <div className="relative">
             <Award className="mx-auto h-10 w-10 text-secondary mb-4" />
             <h2 className="text-2xl font-bold font-heading mb-3 sm:text-3xl">
-              {language === 'ro' ? 'Începe să construiești astăzi' : language === 'el' ? 'Ξεκινήστε σήμερα' : 'Start building today'}
+              {language === 'ro' ? 'Începe să construiești astăzi' : language === 'el' ? 'Ξεκινήστε σήμερα' : language === 'de' ? 'Beginne noch heute zu bauen' : language === 'fr' ? 'Commencez à construire aujourd\'hui' : language === 'it' ? 'Inizia a costruire oggi' : language === 'ar' ? 'ابدأ البناء اليوم' : 'Start building today'}
             </h2>
             <p className="text-primary-foreground/60 mb-6 max-w-lg mx-auto">
               {language === 'ro'
                 ? 'Etapele 0 și 1 sunt gratuite. Nici măcar cont nu ai nevoie.'
                 : language === 'el'
                   ? 'Τα Στάδια 0 & 1 είναι δωρεάν. Δεν χρειάζεται λογαριασμός.'
-                  : 'Stages 0 & 1 are free forever. No account required.'}
+                  : language === 'de'
+                    ? 'Etappen 0 & 1 sind für immer kostenlos. Kein Konto erforderlich.'
+                    : language === 'fr'
+                      ? 'Les étapes 0 et 1 sont gratuites pour toujours. Aucun compte requis.'
+                      : language === 'it'
+                        ? 'Le fasi 0 e 1 sono gratuite per sempre. Nessun account richiesto.'
+                        : language === 'ar'
+                          ? 'المرحلتان 0 و1 مجانيتان إلى الأبد. لا حاجة لحساب.'
+                          : 'Stages 0 & 1 are free forever. No account required.'}
             </p>
             <Link
               href={nextLecture ? `/lectures/${nextLecture.id}` : '/lectures/1'}

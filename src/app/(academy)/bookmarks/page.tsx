@@ -33,6 +33,38 @@ const TEXT: Record<Language, { title: string; subtitle: string; empty: string; e
     browse: 'Περιήγηση μαθημάτων',
     remove: 'Αφαίρεση σελιδοδείκτη',
   },
+  de: {
+    title: 'Lesezeichen',
+    subtitle: 'Lektionen, die du zum späteren Lesen gespeichert hast',
+    empty: 'Noch keine Lesezeichen',
+    emptyHint: 'Tippe auf das Lesezeichen-Symbol bei einer Lektion, um sie hier zu speichern.',
+    browse: 'Lektionen durchsuchen',
+    remove: 'Lesezeichen entfernen',
+  },
+  fr: {
+    title: 'Favoris',
+    subtitle: 'Leçons que vous avez enregistrées pour y revenir',
+    empty: 'Aucun favori pour le moment',
+    emptyHint: "Appuyez sur l'icône de favori sur une leçon pour l'enregistrer ici.",
+    browse: 'Parcourir les leçons',
+    remove: 'Retirer le favori',
+  },
+  it: {
+    title: 'Preferiti',
+    subtitle: 'Lezioni che hai salvato per rivederle',
+    empty: 'Ancora nessun preferito',
+    emptyHint: "Tocca l'icona dei preferiti su una lezione per salvarla qui.",
+    browse: 'Sfoglia le lezioni',
+    remove: 'Rimuovi dai preferiti',
+  },
+  ar: {
+    title: 'الإشارات المرجعية',
+    subtitle: 'المحاضرات التي حفظتها للعودة إليها',
+    empty: 'لا توجد إشارات مرجعية بعد',
+    emptyHint: 'اضغط على أيقونة الإشارة المرجعية في أي محاضرة لحفظها هنا.',
+    browse: 'تصفح المحاضرات',
+    remove: 'إزالة الإشارة المرجعية',
+  },
 };
 
 export default function BookmarksPage() {

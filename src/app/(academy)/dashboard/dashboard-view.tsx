@@ -80,8 +80,14 @@ export default function DashboardView() {
 
   // W4.1 — `el` was optional, so 18 of 21 strings fell back to English for
   // Greek users. It is now required.
-  const t = (en: string, ro: string, el: string) =>
-    language === 'ro' ? ro : language === 'el' ? el : en;
+  const t = (en: string, ro: string, el: string, de: string, fr: string, it: string, ar: string) =>
+    language === 'ro' ? ro :
+    language === 'el' ? el :
+    language === 'de' ? de :
+    language === 'fr' ? fr :
+    language === 'it' ? it :
+    language === 'ar' ? ar :
+    en;
 
   const daysLeft = useMemo(() => {
     if (!user?.subscription?.periodEnd) return null;
@@ -99,16 +105,32 @@ export default function DashboardView() {
           </div>
         </div>
         <h2 className="mt-6 font-heading text-2xl font-bold text-foreground">
-          {t('Sign in to view your dashboard', 'Autentifică-te pentru a vedea panoul de control', 'Συνδεθείτε για να δείτε τον πίνακά σας')}
+          {t(
+            'Sign in to view your dashboard',
+            'Autentifică-te pentru a vedea panoul de control',
+            'Συνδεθείτε για να δείτε τον πίνακά σας',
+            'Melde dich an, um dein Dashboard zu sehen',
+            'Connectez-vous pour voir votre tableau de bord',
+            'Accedi per visualizzare la tua dashboard',
+            'سجّل الدخول لعرض لوحة التحكم الخاصة بك'
+          )}
         </h2>
         <p className="mt-2 text-sm text-muted-foreground max-w-sm">
-          {t('Track your progress, manage your subscription, and access premium content.', 'Urmărește-ți progresul, gestionează abonamentul și accesează conținut premium.', 'Παρακολουθήστε την πρόοδό σας, διαχειριστείτε τη συνδρομή σας και αποκτήστε πρόσβαση σε premium περιεχόμενο.')}
+          {t(
+            'Track your progress, manage your subscription, and access premium content.',
+            'Urmărește-ți progresul, gestionează abonamentul și accesează conținut premium.',
+            'Παρακολουθήστε την πρόοδό σας, διαχειριστείτε τη συνδρομή σας και αποκτήστε πρόσβαση σε premium περιεχόμενο.',
+            'Verfolge deinen Fortschritt, verwalte dein Abonnement und greife auf Premium-Inhalte zu.',
+            'Suivez votre progression, gérez votre abonnement et accédez au contenu premium.',
+            'Monitora i tuoi progressi, gestisci il tuo abbonamento e accedi ai contenuti premium.',
+            'تابع تقدّمك، وأدر اشتراكك، واحصل على وصول إلى المحتوى المميز.'
+          )}
         </p>
         <Link
           href="/login"
           className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
         >
-          {t('Sign in', 'Autentificare', 'Σύνδεση')}
+          {t('Sign in', 'Autentificare', 'Σύνδεση', 'Anmelden', 'Se connecter', 'Accedi', 'تسجيل الدخول')}
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
@@ -157,7 +179,7 @@ export default function DashboardView() {
               {isOrgUser && (
                 <span className="inline-flex items-center gap-1.5 rounded-lg bg-secondary/10 px-2.5 py-1 text-xs font-medium text-secondary">
                   <Building2 className="h-3 w-3" />
-                  {t('Organization', 'Organizație', 'Οργανισμός')}
+                  {t('Organization', 'Organizație', 'Οργανισμός', 'Organisation', 'Organisation', 'Organizzazione', 'المؤسسة')}
                   {isAdmin && (
                     <span className="ml-0.5 rounded bg-secondary px-1.5 py-0.5 text-[9px] font-bold text-secondary-foreground">
                       Admin
@@ -177,7 +199,7 @@ export default function DashboardView() {
         <div className="mt-5">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="text-muted-foreground font-medium">
-              {t('Level', 'Nivel', 'Επίπεδο')} {level}
+              {t('Level', 'Nivel', 'Επίπεδο', 'Stufe', 'Niveau', 'Livello', 'المستوى')} {level}
             </span>
             <span className="text-muted-foreground">
               {xpProgress.current} / {xpProgress.needed} XP
@@ -204,15 +226,15 @@ export default function DashboardView() {
             card.key === 'progress' ? `${completion}%` :
             stats.perfectQuizzes;
           const statLabel =
-            card.key === 'level' ? t('Level', 'Nivel', 'Επίπεδο') :
-            card.key === 'streak' ? t('Day Streak', 'Serie de zile', 'Σερί Ημερών') :
-            card.key === 'progress' ? t('Completed', 'Completat', 'Ολοκληρωμένα') :
-            t('Perfect Quizzes', 'Quiz-uri perfecte', 'Τέλεια Κουίζ');
+            card.key === 'level' ? t('Level', 'Nivel', 'Επίπεδο', 'Stufe', 'Niveau', 'Livello', 'المستوى') :
+            card.key === 'streak' ? t('Day Streak', 'Serie de zile', 'Σερί Ημερών', 'Tage-Serie', 'Série de jours', 'Serie di giorni', 'سلسلة أيام') :
+            card.key === 'progress' ? t('Completed', 'Completat', 'Ολοκληρωμένα', 'Abgeschlossen', 'Terminé', 'Completato', 'مكتمل') :
+            t('Perfect Quizzes', 'Quiz-uri perfecte', 'Τέλεια Κουίζ', 'Perfekte Quiz', 'Quiz parfaits', 'Quiz perfetti', 'اختبارات كاملة العلامة');
           const statSub =
             card.key === 'level' ? `${stats.xp} XP` :
-            card.key === 'streak' ? t('consecutive days', 'zile consecutive', 'συνεχόμενες ημέρες') :
-            card.key === 'progress' ? `${stats.lecturesCompleted} / ${getLectureIndex().totalLectures} ${t('lectures', 'lecții', 'μαθήματα')}` :
-            t('flawless scores', 'scoruri perfecte', 'άψογες βαθμολογίες');
+            card.key === 'streak' ? t('consecutive days', 'zile consecutive', 'συνεχόμενες ημέρες', 'aufeinanderfolgende Tage', 'jours consécutifs', 'giorni consecutivi', 'أيام متتالية') :
+            card.key === 'progress' ? `${stats.lecturesCompleted} / ${getLectureIndex().totalLectures} ${t('lectures', 'lecții', 'μαθήματα', 'Vorlesungen', 'cours', 'lezioni', 'محاضرات')}` :
+            t('flawless scores', 'scoruri perfecte', 'άψογες βαθμολογίες', 'fehlerfreie Ergebnisse', 'scores parfaits', 'punteggi perfetti', 'نتائج مثالية');
 
           return (
             <motion.div
@@ -291,26 +313,42 @@ export default function DashboardView() {
           </div>
           <div>
             <p className="text-sm font-semibold text-foreground">
-              {t('Deployment Downloads', 'Descărcări de deployment', 'Λήψεις ανάπτυξης')}
+              {t(
+                'Deployment Downloads',
+                'Descărcări de deployment',
+                'Λήψεις ανάπτυξης',
+                'Deployment-Downloads',
+                'Téléchargements de déploiement',
+                'Download di distribuzione',
+                'تنزيلات النشر'
+              )}
             </p>
             <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
               {completion >= 80
                 ? t(
                     'You\'ve reached the 80% threshold! Check your downloads page.',
                     'Ai atins pragul de 80%! Verifică pagina de descărcări.',
-                    'Φτάσατε το όριο 80%! Ελέγξτε τις λήψεις σας.'
+                    'Φτάσατε το όριο 80%! Ελέγξτε τις λήψεις σας.',
+                    'Du hast die 80 %-Schwelle erreicht! Sieh dir deine Downloads-Seite an.',
+                    'Vous avez atteint le seuil de 80 % ! Consultez votre page de téléchargements.',
+                    'Hai raggiunto la soglia dell\'80%! Controlla la tua pagina dei download.',
+                    'لقد وصلت إلى نسبة 80%! تحقق من صفحة التنزيلات الخاصة بك.'
                   )
                 : t(
                     `Complete at least 80% of a course to unlock ZIP downloads. Your progress: ${completion}%.`,
                     `Finalizează cel puțin 80% din curs pentru a debloca descărcările ZIP. Progresul tău: ${completion}%.`,
-                    `Ολοκληρώστε τουλάχιστον 80% για λήψεις ZIP. Πρόοδος: ${completion}%.`
+                    `Ολοκληρώστε τουλάχιστον 80% για λήψεις ZIP. Πρόοδος: ${completion}%.`,
+                    `Schließe mindestens 80 % eines Kurses ab, um ZIP-Downloads freizuschalten. Dein Fortschritt: ${completion}%.`,
+                    `Terminez au moins 80 % d'un cours pour débloquer les téléchargements ZIP. Votre progression : ${completion}%.`,
+                    `Completa almeno l'80% di un corso per sbloccare i download ZIP. I tuoi progressi: ${completion}%.`,
+                    `أكمل 80% على الأقل من الدورة لفتح تنزيلات ZIP. تقدّمك: ${completion}%.`
                   )}
             </p>
             <Link
               href="/downloads"
               className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-amber-500/10 px-3 py-1.5 text-sm font-medium text-amber-600 hover:bg-amber-500/20 transition-colors dark:text-amber-400"
             >
-              {t('Downloads page', 'Pagina descărcări', 'Σελίδα λήψεων')}
+              {t('Downloads page', 'Pagina descărcări', 'Σελίδα λήψεων', 'Downloads-Seite', 'Page de téléchargements', 'Pagina dei download', 'صفحة التنزيلات')}
               <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
@@ -331,7 +369,7 @@ export default function DashboardView() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
                 <CreditCard className="h-4 w-4 text-primary" />
               </div>
-              {t('Subscription', 'Abonament', 'Συνδρομή')}
+              {t('Subscription', 'Abonament', 'Συνδρομή', 'Abonnement', 'Abonnement', 'Abbonamento', 'الاشتراك')}
             </h2>
           </div>
 
@@ -346,7 +384,7 @@ export default function DashboardView() {
                   {daysLeft !== null && (
                     <span className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock className="h-4 w-4" />
-                      {daysLeft} {t('days remaining', 'zile rămase', 'ημέρες απομένουν')}
+                      {daysLeft} {t('days remaining', 'zile rămase', 'ημέρες απομένουν', 'Tage verbleibend', 'jours restants', 'giorni rimanenti', 'أيام متبقية')}
                     </span>
                   )}
                 </div>
@@ -355,7 +393,7 @@ export default function DashboardView() {
                 <div>
                   <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    {t('Unlocked access:', 'Acces deblocat:', 'Ξεκλειδωμένη πρόσβαση:')}
+                    {t('Unlocked access:', 'Acces deblocat:', 'Ξεκλειδωμένη πρόσβαση:', 'Freigeschalteter Zugriff:', 'Accès débloqué :', 'Accesso sbloccato:', 'الوصول المفتوح:')}
                   </h4>
                   <div className="grid gap-2 sm:grid-cols-2">
                     {[2, 3, 4, 5, 6].map((stage) => (
@@ -402,20 +440,28 @@ export default function DashboardView() {
                   href="/pricing"
                   className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                 >
-                  {t('Change plan', 'Schimbă planul', 'Αλλαγή πλάνου')}
+                  {t('Change plan', 'Schimbă planul', 'Αλλαγή πλάνου', 'Plan ändern', 'Changer de forfait', 'Cambia piano', 'تغيير الخطة')}
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             ) : (
               <div className="space-y-4">
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  {t('You have free access to Stages 0 & 1. Subscribe to unlock more content and deployment-ready downloads.', 'Ai acces gratuit la Etapele 0 și 1. Abonează-te pentru a debloca mai mult conținut și descărcări.', 'Έχετε δωρεάν πρόσβαση στα Στάδια 0 και 1. Εγγραφείτε για να ξεκλειδώσετε περισσότερο περιεχόμενο και έτοιμα προς ανάπτυξη αρχεία.')}
+                  {t(
+                    'You have free access to Stages 0 & 1. Subscribe to unlock more content and deployment-ready downloads.',
+                    'Ai acces gratuit la Etapele 0 și 1. Abonează-te pentru a debloca mai mult conținut și descărcări.',
+                    'Έχετε δωρεάν πρόσβαση στα Στάδια 0 και 1. Εγγραφείτε για να ξεκλειδώσετε περισσότερο περιεχόμενο και έτοιμα προς ανάπτυξη αρχεία.',
+                    'Du hast kostenlosen Zugriff auf die Stufen 0 und 1. Abonniere, um weitere Inhalte und einsatzbereite Downloads freizuschalten.',
+                    "Vous avez un accès gratuit aux étapes 0 et 1. Abonnez-vous pour débloquer plus de contenu et des téléchargements prêts au déploiement.",
+                    'Hai accesso gratuito alle fasi 0 e 1. Abbonati per sbloccare più contenuti e download pronti per il deployment.',
+                    'لديك وصول مجاني إلى المرحلتين 0 و1. اشترك لفتح المزيد من المحتوى وتنزيلات جاهزة للنشر.'
+                  )}
                 </p>
                 <Link
                   href="/pricing"
                   className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-secondary to-secondary/90 px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-md shadow-secondary/20 hover:shadow-lg hover:shadow-secondary/30 transition-all"
                 >
-                  {t('View plans', 'Vezi planurile', 'Δείτε τα πλάνα')}
+                  {t('View plans', 'Vezi planurile', 'Δείτε τα πλάνα', 'Pläne ansehen', 'Voir les forfaits', 'Visualizza i piani', 'عرض الخطط')}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -439,16 +485,32 @@ export default function DashboardView() {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-secondary/10">
                 <Building2 className="h-5 w-5 text-secondary" />
               </div>
-              {t('Organization Admin', 'Administrare organizație', 'Διαχειριστής Οργανισμού')}
+              {t(
+                'Organization Admin',
+                'Administrare organizație',
+                'Διαχειριστής Οργανισμού',
+                'Organisationsverwaltung',
+                "Administration de l'organisation",
+                'Amministrazione organizzazione',
+                'إدارة المؤسسة'
+              )}
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              {t('Manage organization members, invite codes, and settings.', 'Gestionează membrii organizației, coduri de invitare și setări.', 'Διαχειριστείτε μέλη, κωδικούς πρόσκλησης και ρυθμίσεις του οργανισμού.')}
+              {t(
+                'Manage organization members, invite codes, and settings.',
+                'Gestionează membrii organizației, coduri de invitare și setări.',
+                'Διαχειριστείτε μέλη, κωδικούς πρόσκλησης και ρυθμίσεις του οργανισμού.',
+                'Verwalte Organisationsmitglieder, Einladungscodes und Einstellungen.',
+                "Gérez les membres de l'organisation, les codes d'invitation et les paramètres.",
+                "Gestisci i membri dell'organizzazione, i codici di invito e le impostazioni.",
+                'أدر أعضاء المؤسسة ورموز الدعوة والإعدادات.'
+              )}
             </p>
             <Link
               href="/admin"
               className="mt-4 inline-flex items-center gap-2 rounded-xl bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground hover:bg-secondary/90 shadow-md shadow-secondary/20 transition-all"
             >
-              {t('Admin Panel', 'Panou de administrare', 'Πίνακας Διαχείρισης')}
+              {t('Admin Panel', 'Panou de administrare', 'Πίνακας Διαχείρισης', 'Admin-Bereich', "Panneau d'administration", 'Pannello di amministrazione', 'لوحة الإدارة')}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

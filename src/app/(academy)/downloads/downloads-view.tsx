@@ -152,9 +152,112 @@ export default function DownloadsView() {
       courseProgress: 'Πρόοδος μαθήματος',
       lectures: 'μαθήματα',
     },
+    de: {
+      title: 'Downloads',
+      subtitle: 'Ihre einsatzbereiten Produkte und Abschlusszertifikate',
+      thresholdNote: `Schließen Sie mindestens ${DOWNLOAD_THRESHOLD}% eines Kurses ab, um den Download freizuschalten.`,
+      signInPrompt: 'Melden Sie sich an, um auf Ihre Downloads zuzugreifen',
+      signIn: 'Anmelden',
+      llmSection: 'NeuralForge LLM',
+      saasSection: 'GenAI SaaS-Produkte',
+      certificates: 'Abschlusszertifikate',
+      download: 'ZIP herunterladen',
+      downloadCert: 'Zertifikat herunterladen',
+      generating: 'Wird erstellt...',
+      locked: 'Gesperrt',
+      unlocked: 'Bereit',
+      notAvailable: 'Demnächst verfügbar',
+      notAvailableDesc: 'Das Deployment-Paket wird vorbereitet. Schauen Sie bald wieder vorbei.',
+      subscriptionRequired: 'Abonnement erforderlich',
+      completionRequired: `Schließen Sie mindestens ${DOWNLOAD_THRESHOLD}% ab, um freizuschalten`,
+      orgAccess: 'Voller Zugriff über Ihre Organisation',
+      whatsInside: 'Was ist enthalten',
+      fileSize: 'Dateigröße',
+      viewPlans: 'Pläne ansehen',
+      courseProgress: 'Kursfortschritt',
+      lectures: 'Lektionen',
+    },
+    fr: {
+      title: 'Téléchargements',
+      subtitle: 'Vos produits prêts au déploiement et vos certificats de réussite',
+      thresholdNote: `Complétez au moins ${DOWNLOAD_THRESHOLD}% d'un cours pour débloquer son téléchargement.`,
+      signInPrompt: 'Connectez-vous pour accéder à vos téléchargements',
+      signIn: 'Se connecter',
+      llmSection: 'NeuralForge LLM',
+      saasSection: 'Produits GenAI SaaS',
+      certificates: 'Certificats de réussite',
+      download: 'Télécharger le ZIP',
+      downloadCert: 'Télécharger le certificat',
+      generating: 'Génération en cours...',
+      locked: 'Verrouillé',
+      unlocked: 'Disponible',
+      notAvailable: 'Bientôt disponible',
+      notAvailableDesc: 'Le package de déploiement est en cours de préparation. Revenez bientôt.',
+      subscriptionRequired: 'Abonnement requis',
+      completionRequired: `Complétez au moins ${DOWNLOAD_THRESHOLD}% pour débloquer`,
+      orgAccess: 'Accès complet via votre organisation',
+      whatsInside: 'Contenu du package',
+      fileSize: 'Taille du fichier',
+      viewPlans: 'Voir les forfaits',
+      courseProgress: 'Progression du cours',
+      lectures: 'leçons',
+    },
+    it: {
+      title: 'Download',
+      subtitle: 'I tuoi prodotti pronti per il deployment e i certificati di completamento',
+      thresholdNote: `Completa almeno il ${DOWNLOAD_THRESHOLD}% di un corso per sbloccare il download.`,
+      signInPrompt: 'Accedi per visualizzare i tuoi download',
+      signIn: 'Accedi',
+      llmSection: 'NeuralForge LLM',
+      saasSection: 'Prodotti GenAI SaaS',
+      certificates: 'Certificati di completamento',
+      download: 'Scarica ZIP',
+      downloadCert: 'Scarica certificato',
+      generating: 'Generazione in corso...',
+      locked: 'Bloccato',
+      unlocked: 'Pronto',
+      notAvailable: 'Prossimamente',
+      notAvailableDesc: 'Il pacchetto di deployment è in preparazione. Torna a controllare presto.',
+      subscriptionRequired: 'Abbonamento richiesto',
+      completionRequired: `Completa almeno il ${DOWNLOAD_THRESHOLD}% per sbloccare`,
+      orgAccess: 'Accesso completo tramite la tua organizzazione',
+      whatsInside: 'Cosa contiene',
+      fileSize: 'Dimensione file',
+      viewPlans: 'Visualizza piani',
+      courseProgress: 'Avanzamento del corso',
+      lectures: 'lezioni',
+    },
+    ar: {
+      title: 'التنزيلات',
+      subtitle: 'منتجاتك الجاهزة للنشر وشهادات إتمام الدورة',
+      thresholdNote: `أكمل ${DOWNLOAD_THRESHOLD}% على الأقل من الدورة لفتح التنزيل.`,
+      signInPrompt: 'سجّل الدخول للوصول إلى تنزيلاتك',
+      signIn: 'تسجيل الدخول',
+      llmSection: 'NeuralForge LLM',
+      saasSection: 'منتجات GenAI SaaS',
+      certificates: 'شهادات إتمام الدورة',
+      download: 'تنزيل ملف ZIP',
+      downloadCert: 'تنزيل الشهادة',
+      generating: 'جارٍ الإنشاء...',
+      locked: 'مقفل',
+      unlocked: 'جاهز',
+      notAvailable: 'قريبًا',
+      notAvailableDesc: 'يتم حاليًا إعداد حزمة النشر. يرجى المراجعة قريبًا.',
+      subscriptionRequired: 'يلزم الاشتراك',
+      completionRequired: `أكمل ${DOWNLOAD_THRESHOLD}% على الأقل لفتح القفل`,
+      orgAccess: 'وصول كامل عبر مؤسستك',
+      whatsInside: 'محتويات الحزمة',
+      fileSize: 'حجم الملف',
+      viewPlans: 'عرض الخطط',
+      courseProgress: 'تقدم الدورة',
+      lectures: 'محاضرات',
+    },
   };
 
-  const txt = texts[language] || texts.en;
+  // Cast: `texts` only has translated copy for a subset of Language members so far
+  // (de/fr/it/ar fall back to English below) — same graceful-fallback pattern used
+  // for lecture content throughout the app.
+  const txt = (texts as Record<string, typeof texts.en>)[language] || texts.en;
 
   function hasPaidLLM(): boolean {
     if (isOrgUser) return true;
@@ -501,7 +604,7 @@ export default function DownloadsView() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-heading font-bold text-sm text-foreground">
-                      {language === 'ro' ? 'Certificat Curs LLM' : language === 'el' ? 'Πιστοποιητικό Μαθήματος LLM' : 'LLM Course Certificate'}
+                      {language === 'ro' ? 'Certificat Curs LLM' : language === 'el' ? 'Πιστοποιητικό Μαθήματος LLM' : language === 'de' ? 'LLM-Kurszertifikat' : language === 'fr' ? 'Certificat du cours LLM' : language === 'it' ? 'Certificato del corso LLM' : language === 'ar' ? 'شهادة دورة LLM' : 'LLM Course Certificate'}
                     </h3>
                     <p className="text-xs text-muted-foreground mt-0.5">
                       {llmProgress.percentage}% — {llmProgress.completed}/{llmProgress.total} {txt.lectures}
@@ -566,7 +669,7 @@ export default function DownloadsView() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-heading font-bold text-sm text-foreground">
-                          {language === 'ro' ? 'Certificat GenAI SaaS' : language === 'el' ? 'Πιστοποιητικό GenAI SaaS' : 'GenAI SaaS Certificate'}
+                          {language === 'ro' ? 'Certificat GenAI SaaS' : language === 'el' ? 'Πιστοποιητικό GenAI SaaS' : language === 'de' ? 'GenAI-SaaS-Zertifikat' : language === 'fr' ? 'Certificat GenAI SaaS' : language === 'it' ? 'Certificato GenAI SaaS' : language === 'ar' ? 'شهادة GenAI SaaS' : 'GenAI SaaS Certificate'}
                         </h3>
                         <p className="text-xs text-muted-foreground mt-0.5">
                           {saasProgress.percentage}% — {saasProgress.completed}/{saasProgress.total} {txt.lectures}

@@ -88,9 +88,72 @@ export default function ProgressPage() {
       quizPerformance: 'Απόδοση Quiz',
       days: 'μέρες',
     },
+    de: {
+      title: 'Fortschrittsbericht',
+      subtitle: 'Ihre gesamte Lernreise auf einen Blick',
+      export: 'Als PDF exportieren',
+      overview: 'Übersicht',
+      lecturesCompleted: 'Abgeschlossene Lektionen',
+      totalTime: 'Gesamte Lernzeit',
+      quizAverage: 'Quiz-Durchschnitt',
+      currentLevel: 'Aktuelles Level',
+      currentStreak: 'Aktuelle Serie',
+      xpEarned: 'Erhaltene XP',
+      stageBreakdown: 'Aufschlüsselung nach Phasen',
+      quizPerformance: 'Quiz-Leistung',
+      days: 'Tage',
+    },
+    fr: {
+      title: 'Rapport de Progression',
+      subtitle: "Votre parcours d'apprentissage complet en un coup d'œil",
+      export: 'Exporter en PDF',
+      overview: "Vue d'ensemble",
+      lecturesCompleted: 'Leçons Terminées',
+      totalTime: "Temps d'Étude Total",
+      quizAverage: 'Moyenne des Quiz',
+      currentLevel: 'Niveau Actuel',
+      currentStreak: 'Série Actuelle',
+      xpEarned: 'XP Gagnés',
+      stageBreakdown: 'Détail par Étape',
+      quizPerformance: 'Performance aux Quiz',
+      days: 'jours',
+    },
+    it: {
+      title: 'Report sui Progressi',
+      subtitle: 'Il tuo percorso di apprendimento completo a colpo d\'occhio',
+      export: 'Esporta come PDF',
+      overview: 'Panoramica',
+      lecturesCompleted: 'Lezioni Completate',
+      totalTime: 'Tempo Totale di Studio',
+      quizAverage: 'Media Quiz',
+      currentLevel: 'Livello Attuale',
+      currentStreak: 'Serie Attuale',
+      xpEarned: 'XP Guadagnati',
+      stageBreakdown: 'Dettaglio per Fase',
+      quizPerformance: 'Prestazioni Quiz',
+      days: 'giorni',
+    },
+    ar: {
+      title: 'تقرير التقدم',
+      subtitle: 'رحلتك التعليمية الكاملة في لمحة',
+      export: 'تصدير كملف PDF',
+      overview: 'نظرة عامة',
+      lecturesCompleted: 'المحاضرات المكتملة',
+      totalTime: 'إجمالي وقت الدراسة',
+      quizAverage: 'متوسط الاختبارات',
+      currentLevel: 'المستوى الحالي',
+      currentStreak: 'سلسلة الأيام الحالية',
+      xpEarned: 'نقاط الخبرة المكتسبة',
+      stageBreakdown: 'تفصيل المراحل',
+      quizPerformance: 'أداء الاختبارات',
+      days: 'أيام',
+    },
   };
 
-  const txt = texts[language] || texts.en;
+  // Cast: this page's copy is translated for a subset of Language members —
+  // de/fr/it/ar fall back to English, matching the graceful-fallback pattern
+  // used for lecture content elsewhere.
+  const txt = (texts as Record<string, typeof texts.en>)[language] || texts.en;
 
   const quizValues = Object.values(quizScores);
   const quizAvg = quizValues.length > 0

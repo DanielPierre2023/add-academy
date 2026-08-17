@@ -32,6 +32,34 @@ const TEXT: Record<Language, { title: string; subtitle: string; unlocked: string
     locked: 'Κλειδωμένο',
     count: (n, total) => `${n} από ${total} ξεκλειδωμένα`,
   },
+  de: {
+    title: 'Erfolge',
+    subtitle: 'Abzeichen, die du auf deinem Weg durch den Kurs verdienst',
+    unlocked: 'Freigeschaltet',
+    locked: 'Gesperrt',
+    count: (n, total) => `${n} von ${total} freigeschaltet`,
+  },
+  fr: {
+    title: 'Succès',
+    subtitle: 'Badges que vous gagnez en progressant dans le cours',
+    unlocked: 'Débloqué',
+    locked: 'Verrouillé',
+    count: (n, total) => `${n} sur ${total} débloqués`,
+  },
+  it: {
+    title: 'Obiettivi',
+    subtitle: 'Distintivi che ottieni progredendo nel corso',
+    unlocked: 'Sbloccato',
+    locked: 'Bloccato',
+    count: (n, total) => `${n} su ${total} sbloccati`,
+  },
+  ar: {
+    title: 'الإنجازات',
+    subtitle: 'شارات تكسبها أثناء تقدمك في الدورة',
+    unlocked: 'مفتوح',
+    locked: 'مقفل',
+    count: (n, total) => `${n} من ${total} مفتوح`,
+  },
 };
 
 export default function AchievementsPage() {

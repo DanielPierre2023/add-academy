@@ -46,8 +46,10 @@ export default function CommunityCategoryPage() {
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
-  const t = (en: string, ro: string, el: string) =>
-    language === 'ro' ? ro : language === 'el' ? el : en;
+  const t = (en: string, ro: string, el: string, de?: string, fr?: string, it?: string, ar?: string) => {
+    const map: Record<string, string> = { en, ro, el, de: de ?? en, fr: fr ?? en, it: it ?? en, ar: ar ?? en };
+    return map[language] ?? en;
+  };
 
   const load = useCallback(async () => {
     const [cats, list, mute] = await Promise.all([
@@ -90,10 +92,34 @@ export default function CommunityCategoryPage() {
     if (res.error || !res.threadId) {
       setFormError(
         res.error === 'invalid_title'
-          ? t('Enter a title (1–200 chars).', 'Introdu un titlu (1–200 caractere).', 'Εισάγετε τίτλο (1–200 χαρ.).')
+          ? t(
+              'Enter a title (1–200 chars).',
+              'Introdu un titlu (1–200 caractere).',
+              'Εισάγετε τίτλο (1–200 χαρ.).',
+              'Gib einen Titel ein (1–200 Zeichen).',
+              'Saisissez un titre (1 à 200 caractères).',
+              'Inserisci un titolo (1–200 caratteri).',
+              'أدخل عنوانًا (1–200 حرف).'
+            )
           : res.error === 'invalid_body'
-            ? t('Enter a message.', 'Introdu un mesaj.', 'Εισάγετε μήνυμα.')
-            : t('Could not create thread.', 'Nu s-a putut crea discuția.', 'Αδυναμία δημιουργίας συζήτησης.')
+            ? t(
+                'Enter a message.',
+                'Introdu un mesaj.',
+                'Εισάγετε μήνυμα.',
+                'Gib eine Nachricht ein.',
+                'Saisissez un message.',
+                'Inserisci un messaggio.',
+                'أدخل رسالة.'
+              )
+            : t(
+                'Could not create thread.',
+                'Nu s-a putut crea discuția.',
+                'Αδυναμία δημιουργίας συζήτησης.',
+                'Thema konnte nicht erstellt werden.',
+                'Impossible de créer le sujet.',
+                'Impossibile creare la discussione.',
+                'تعذّر إنشاء الموضوع.'
+              )
       );
       return;
     }
@@ -110,12 +136,12 @@ export default function CommunityCategoryPage() {
         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
       >
         <ChevronLeft className="h-4 w-4" />
-        {t('Community', 'Comunitate', 'Κοινότητα')}
+        {t('Community', 'Comunitate', 'Κοινότητα', 'Gemeinschaft', 'Communauté', 'Comunità', 'المجتمع')}
       </Link>
 
       <div>
         <h1 className="text-2xl font-bold font-heading">
-          {category ? categoryName(category, language) : t('Category', 'Categorie', 'Κατηγορία')}
+          {category ? categoryName(category, language) : t('Category', 'Categorie', 'Κατηγορία', 'Kategorie', 'Catégorie', 'Categoria', 'الفئة')}
         </h1>
         {category && (
           <p className="text-muted-foreground text-sm mt-1">{categoryDesc(category, language)}</p>
@@ -125,7 +151,15 @@ export default function CommunityCategoryPage() {
       {!user && (
         <Card>
           <CardContent className="pt-6 text-center text-sm text-muted-foreground">
-            {t('Sign in to view and post.', 'Autentifică-te pentru a vedea și posta.', 'Συνδεθείτε για προβολή και ανάρτηση.')}
+            {t(
+              'Sign in to view and post.',
+              'Autentifică-te pentru a vedea și posta.',
+              'Συνδεθείτε για προβολή και ανάρτηση.',
+              'Melde dich an, um zu sehen und zu posten.',
+              'Connectez-vous pour voir et publier.',
+              'Accedi per visualizzare e pubblicare.',
+              'سجّل الدخول للعرض والنشر.'
+            )}
           </CardContent>
         </Card>
       )}
@@ -139,20 +173,32 @@ export default function CommunityCategoryPage() {
                 {t(
                   'You are currently muted and cannot start new threads.',
                   'Ești în prezent redus la tăcere și nu poți începe discuții noi.',
-                  'Είστε προσωρινά σε σίγαση και δεν μπορείτε να ξεκινήσετε νέες συζητήσεις.'
+                  'Είστε προσωρινά σε σίγαση και δεν μπορείτε να ξεκινήσετε νέες συζητήσεις.',
+                  'Du bist derzeit stummgeschaltet und kannst keine neuen Themen erstellen.',
+                  'Vous êtes actuellement en sourdine et ne pouvez pas créer de nouveaux sujets.',
+                  'Al momento sei silenziato e non puoi avviare nuove discussioni.',
+                  'أنت مكتوم الصوت حاليًا ولا يمكنك بدء مواضيع جديدة.'
                 )}
               </CardContent>
             </Card>
           ) : !showForm ? (
             <Button onClick={() => setShowForm(true)} className="gap-2">
               <Plus className="h-4 w-4" />
-              {t('New thread', 'Discuție nouă', 'Νέα συζήτηση')}
+              {t('New thread', 'Discuție nouă', 'Νέα συζήτηση', 'Neues Thema', 'Nouveau sujet', 'Nuova discussione', 'موضوع جديد')}
             </Button>
           ) : (
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {t('Start a new thread', 'Începe o discuție nouă', 'Ξεκινήστε νέα συζήτηση')}
+                  {t(
+                    'Start a new thread',
+                    'Începe o discuție nouă',
+                    'Ξεκινήστε νέα συζήτηση',
+                    'Neues Thema starten',
+                    'Démarrer un nouveau sujet',
+                    'Avvia una nuova discussione',
+                    'ابدأ موضوعًا جديدًا'
+                  )}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -160,21 +206,29 @@ export default function CommunityCategoryPage() {
                   value={title}
                   maxLength={200}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder={t('Title', 'Titlu', 'Τίτλος')}
+                  placeholder={t('Title', 'Titlu', 'Τίτλος', 'Titel', 'Titre', 'Titolo', 'العنوان')}
                 />
                 <Textarea
                   value={body}
                   maxLength={10000}
                   onChange={(e) => setBody(e.target.value)}
-                  placeholder={t('Write your message…', 'Scrie mesajul tău…', 'Γράψτε το μήνυμά σας…')}
+                  placeholder={t(
+                    'Write your message…',
+                    'Scrie mesajul tău…',
+                    'Γράψτε το μήνυμά σας…',
+                    'Schreibe deine Nachricht…',
+                    'Écrivez votre message…',
+                    'Scrivi il tuo messaggio…',
+                    'اكتب رسالتك…'
+                  )}
                   rows={5}
                 />
                 {formError && <p className="text-sm text-destructive">{formError}</p>}
                 <div className="flex gap-2">
                   <Button onClick={handleCreate} disabled={submitting} size="sm">
                     {submitting
-                      ? t('Posting…', 'Se postează…', 'Ανάρτηση…')
-                      : t('Post', 'Postează', 'Ανάρτηση')}
+                      ? t('Posting…', 'Se postează…', 'Ανάρτηση…', 'Wird gepostet…', 'Publication…', 'Pubblicazione…', 'جارٍ النشر…')
+                      : t('Post', 'Postează', 'Ανάρτηση', 'Posten', 'Publier', 'Pubblica', 'نشر')}
                   </Button>
                   <Button
                     onClick={() => setShowForm(false)}
@@ -182,7 +236,7 @@ export default function CommunityCategoryPage() {
                     size="sm"
                     disabled={submitting}
                   >
-                    {t('Cancel', 'Anulează', 'Ακύρωση')}
+                    {t('Cancel', 'Anulează', 'Ακύρωση', 'Abbrechen', 'Annuler', 'Annulla', 'إلغاء')}
                   </Button>
                 </div>
               </CardContent>
@@ -194,15 +248,25 @@ export default function CommunityCategoryPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">
                 <MessagesSquare className="h-4 w-4 text-primary" />
-                {t('Threads', 'Discuții', 'Συζητήσεις')}
+                {t('Threads', 'Discuții', 'Συζητήσεις', 'Themen', 'Sujets', 'Discussioni', 'المواضيع')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               {loading ? (
-                <p className="text-sm text-muted-foreground">{t('Loading…', 'Se încarcă…', 'Φόρτωση…')}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t('Loading…', 'Se încarcă…', 'Φόρτωση…', 'Wird geladen…', 'Chargement…', 'Caricamento…', 'جارٍ التحميل…')}
+                </p>
               ) : threads.length === 0 ? (
                 <p className="py-4 text-center text-sm text-muted-foreground">
-                  {t('No threads yet — be the first!', 'Încă nu există discuții — fii primul!', 'Καμία συζήτηση ακόμη — γίνετε ο πρώτος!')}
+                  {t(
+                    'No threads yet — be the first!',
+                    'Încă nu există discuții — fii primul!',
+                    'Καμία συζήτηση ακόμη — γίνετε ο πρώτος!',
+                    'Noch keine Themen — sei der Erste!',
+                    "Aucun sujet pour l'instant — soyez le premier !",
+                    'Nessuna discussione ancora — sii il primo!',
+                    'لا توجد مواضيع بعد — كن الأول!'
+                  )}
                 </p>
               ) : (
                 <ul className="divide-y divide-border/60">
@@ -217,20 +281,20 @@ export default function CommunityCategoryPage() {
                             {th.pinned && (
                               <Badge variant="secondary" className="gap-1 text-[10px]">
                                 <Pin className="h-3 w-3" />
-                                {t('Pinned', 'Fixat', 'Καρφιτσωμένο')}
+                                {t('Pinned', 'Fixat', 'Καρφιτσωμένο', 'Angeheftet', 'Épinglé', 'In evidenza', 'مثبّت')}
                               </Badge>
                             )}
                             {th.locked && (
                               <Badge variant="outline" className="gap-1 text-[10px]">
                                 <Lock className="h-3 w-3" />
-                                {t('Locked', 'Blocat', 'Κλειδωμένο')}
+                                {t('Locked', 'Blocat', 'Κλειδωμένο', 'Gesperrt', 'Verrouillé', 'Bloccato', 'مقفل')}
                               </Badge>
                             )}
                             <span className="truncate">{th.title}</span>
                           </span>
                           <span className="text-xs text-muted-foreground">
                             {th.authorName} · {relativeTime(th.lastPostAt, language)} · {th.postCount}{' '}
-                            {t('posts', 'postări', 'αναρτήσεις')}
+                            {t('posts', 'postări', 'αναρτήσεις', 'Beiträge', 'messages', 'post', 'مشاركات')}
                           </span>
                         </div>
                         <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />

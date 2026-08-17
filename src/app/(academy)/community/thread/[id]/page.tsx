@@ -52,8 +52,10 @@ export default function CommunityThreadPage() {
   const [reportReason, setReportReason] = useState('');
   const [reportDone, setReportDone] = useState<string | null>(null);
 
-  const t = (en: string, ro: string, el: string) =>
-    language === 'ro' ? ro : language === 'el' ? el : en;
+  const t = (en: string, ro: string, el: string, de?: string, fr?: string, it?: string, ar?: string) => {
+    const map: Record<string, string> = { en, ro, el, de: de ?? en, fr: fr ?? en, it: it ?? en, ar: ar ?? en };
+    return map[language] ?? en;
+  };
 
   const load = useCallback(async () => {
     const [res, mute] = await Promise.all([getThread(threadId), getMyForumMute()]);
@@ -150,7 +152,15 @@ export default function CommunityThreadPage() {
       <div className="space-y-6 pb-16">
         <Card>
           <CardContent className="pt-6 text-center text-sm text-muted-foreground">
-            {t('Sign in to view this thread.', 'Autentifică-te pentru a vedea această discuție.', 'Συνδεθείτε για να δείτε αυτή τη συζήτηση.')}
+            {t(
+              'Sign in to view this thread.',
+              'Autentifică-te pentru a vedea această discuție.',
+              'Συνδεθείτε για να δείτε αυτή τη συζήτηση.',
+              'Melde dich an, um diesen Thread anzuzeigen.',
+              'Connectez-vous pour voir ce sujet.',
+              'Accedi per visualizzare questa discussione.',
+              'سجّل الدخول لعرض هذا الموضوع.'
+            )}
           </CardContent>
         </Card>
       </div>
@@ -158,7 +168,11 @@ export default function CommunityThreadPage() {
   }
 
   if (loading) {
-    return <p className="text-sm text-muted-foreground py-8">{t('Loading…', 'Se încarcă…', 'Φόρτωση…')}</p>;
+    return (
+      <p className="text-sm text-muted-foreground py-8">
+        {t('Loading…', 'Se încarcă…', 'Φόρτωση…', 'Wird geladen…', 'Chargement…', 'Caricamento…', 'جارٍ التحميل…')}
+      </p>
+    );
   }
 
   if (notFound || !thread) {
@@ -166,11 +180,19 @@ export default function CommunityThreadPage() {
       <div className="space-y-6 pb-16">
         <Link href="/community" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
           <ChevronLeft className="h-4 w-4" />
-          {t('Community', 'Comunitate', 'Κοινότητα')}
+          {t('Community', 'Comunitate', 'Κοινότητα', 'Community', 'Communauté', 'Community', 'المجتمع')}
         </Link>
         <Card>
           <CardContent className="pt-6 text-center text-sm text-muted-foreground">
-            {t('Thread not found.', 'Discuția nu a fost găsită.', 'Η συζήτηση δεν βρέθηκε.')}
+            {t(
+              'Thread not found.',
+              'Discuția nu a fost găsită.',
+              'Η συζήτηση δεν βρέθηκε.',
+              'Thread nicht gefunden.',
+              'Sujet introuvable.',
+              'Discussione non trovata.',
+              'الموضوع غير موجود.'
+            )}
           </CardContent>
         </Card>
       </div>
@@ -186,7 +208,7 @@ export default function CommunityThreadPage() {
         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
       >
         <ChevronLeft className="h-4 w-4" />
-        {t('Community', 'Comunitate', 'Κοινότητα')}
+        {t('Community', 'Comunitate', 'Κοινότητα', 'Community', 'Communauté', 'Community', 'المجتمع')}
       </Link>
 
       <div>
@@ -194,19 +216,19 @@ export default function CommunityThreadPage() {
           {thread.pinned && (
             <Badge variant="secondary" className="gap-1 text-[10px]">
               <Pin className="h-3 w-3" />
-              {t('Pinned', 'Fixat', 'Καρφιτσωμένο')}
+              {t('Pinned', 'Fixat', 'Καρφιτσωμένο', 'Angeheftet', 'Épinglé', 'In evidenza', 'مثبّت')}
             </Badge>
           )}
           {thread.locked && (
             <Badge variant="outline" className="gap-1 text-[10px]">
               <Lock className="h-3 w-3" />
-              {t('Locked', 'Blocat', 'Κλειδωμένο')}
+              {t('Locked', 'Blocat', 'Κλειδωμένο', 'Gesperrt', 'Verrouillé', 'Bloccato', 'مغلق')}
             </Badge>
           )}
           {thread.hidden && (
             <Badge variant="destructive" className="gap-1 text-[10px]">
               <EyeOff className="h-3 w-3" />
-              {t('Hidden', 'Ascuns', 'Κρυφό')}
+              {t('Hidden', 'Ascuns', 'Κρυφό', 'Ausgeblendet', 'Masqué', 'Nascosto', 'مخفي')}
             </Badge>
           )}
           <span>{thread.title}</span>
@@ -226,17 +248,19 @@ export default function CommunityThreadPage() {
                   <span className="font-medium text-foreground">{post.authorName}</span>
                   {idx === 0 && (
                     <Badge variant="outline" className="ml-2 text-[10px]">
-                      {t('OP', 'Autor', 'Συντάκτης')}
+                      {t('OP', 'Autor', 'Συντάκτης', 'Autor', 'Auteur', 'Autore', 'صاحب الموضوع')}
                     </Badge>
                   )}
                   <span className="ml-2">{relativeTime(post.createdAt, language)}</span>
                   {post.edited && (
-                    <span className="ml-1 italic">({t('edited', 'editat', 'επεξεργασμένο')})</span>
+                    <span className="ml-1 italic">
+                      ({t('edited', 'editat', 'επεξεργασμένο', 'bearbeitet', 'modifié', 'modificato', 'معدّل')})
+                    </span>
                   )}
                   {post.hidden && (
                     <Badge variant="destructive" className="ml-2 gap-1 text-[10px]">
                       <EyeOff className="h-3 w-3" />
-                      {t('Hidden', 'Ascuns', 'Κρυφό')}
+                      {t('Hidden', 'Ascuns', 'Κρυφό', 'Ausgeblendet', 'Masqué', 'Nascosto', 'مخفي')}
                     </Badge>
                   )}
                 </div>
@@ -252,10 +276,10 @@ export default function CommunityThreadPage() {
                   />
                   <div className="flex gap-2">
                     <Button size="sm" onClick={() => saveEdit(post.id)}>
-                      {t('Save', 'Salvează', 'Αποθήκευση')}
+                      {t('Save', 'Salvează', 'Αποθήκευση', 'Speichern', 'Enregistrer', 'Salva', 'حفظ')}
                     </Button>
                     <Button size="sm" variant="outline" onClick={() => setEditingId(null)}>
-                      {t('Cancel', 'Anulează', 'Ακύρωση')}
+                      {t('Cancel', 'Anulează', 'Ακύρωση', 'Abbrechen', 'Annuler', 'Annulla', 'إلغاء')}
                     </Button>
                   </div>
                 </div>
@@ -280,14 +304,22 @@ export default function CommunityThreadPage() {
                 {post.isMine && !post.hidden && editingId !== post.id && (
                   <Button size="sm" variant="ghost" className="h-8 gap-1" onClick={() => startEdit(post)}>
                     <Pencil className="h-3.5 w-3.5" />
-                    {t('Edit', 'Editează', 'Επεξεργασία')}
+                    {t('Edit', 'Editează', 'Επεξεργασία', 'Bearbeiten', 'Modifier', 'Modifica', 'تعديل')}
                   </Button>
                 )}
 
                 {!post.isMine && (
                   reportDone === post.id ? (
                     <span className="text-xs text-muted-foreground">
-                      {t('Reported — thank you.', 'Raportat — mulțumim.', 'Αναφέρθηκε — ευχαριστούμε.')}
+                      {t(
+                        'Reported — thank you.',
+                        'Raportat — mulțumim.',
+                        'Αναφέρθηκε — ευχαριστούμε.',
+                        'Gemeldet — danke.',
+                        'Signalé — merci.',
+                        'Segnalato — grazie.',
+                        'تم الإبلاغ — شكرًا لك.'
+                      )}
                     </span>
                   ) : reportingId === post.id ? (
                     <span className="flex items-center gap-2">
@@ -295,20 +327,28 @@ export default function CommunityThreadPage() {
                         value={reportReason}
                         maxLength={500}
                         onChange={(e) => setReportReason(e.target.value)}
-                        placeholder={t('Reason (optional)', 'Motiv (opțional)', 'Λόγος (προαιρετικό)')}
+                        placeholder={t(
+                          'Reason (optional)',
+                          'Motiv (opțional)',
+                          'Λόγος (προαιρετικό)',
+                          'Grund (optional)',
+                          'Motif (facultatif)',
+                          'Motivo (facoltativo)',
+                          'السبب (اختياري)'
+                        )}
                         className="rounded-md border border-border bg-background px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-primary"
                       />
                       <Button size="sm" className="h-7" onClick={() => submitReport(post.id)}>
-                        {t('Send', 'Trimite', 'Αποστολή')}
+                        {t('Send', 'Trimite', 'Αποστολή', 'Senden', 'Envoyer', 'Invia', 'إرسال')}
                       </Button>
                       <Button size="sm" variant="ghost" className="h-7" onClick={() => setReportingId(null)}>
-                        {t('Cancel', 'Anulează', 'Ακύρωση')}
+                        {t('Cancel', 'Anulează', 'Ακύρωση', 'Abbrechen', 'Annuler', 'Annulla', 'إلغاء')}
                       </Button>
                     </span>
                   ) : (
                     <Button size="sm" variant="ghost" className="h-8 gap-1" onClick={() => setReportingId(post.id)}>
                       <Flag className="h-3.5 w-3.5" />
-                      {t('Report', 'Raportează', 'Αναφορά')}
+                      {t('Report', 'Raportează', 'Αναφορά', 'Melden', 'Signaler', 'Segnala', 'الإبلاغ')}
                     </Button>
                   )
                 )}
@@ -321,7 +361,9 @@ export default function CommunityThreadPage() {
       {/* Reply box */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">{t('Reply', 'Răspunde', 'Απάντηση')}</CardTitle>
+          <CardTitle className="text-base">
+            {t('Reply', 'Răspunde', 'Απάντηση', 'Antwort', 'Répondre', 'Rispondi', 'الرد')}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           {thread.locked ? (
@@ -329,7 +371,11 @@ export default function CommunityThreadPage() {
               {t(
                 'This thread is locked. No new replies can be added.',
                 'Această discuție este blocată. Nu se pot adăuga răspunsuri noi.',
-                'Αυτή η συζήτηση είναι κλειδωμένη. Δεν επιτρέπονται νέες απαντήσεις.'
+                'Αυτή η συζήτηση είναι κλειδωμένη. Δεν επιτρέπονται νέες απαντήσεις.',
+                'Dieser Thread ist gesperrt. Es können keine neuen Antworten hinzugefügt werden.',
+                'Ce sujet est verrouillé. Aucune nouvelle réponse ne peut être ajoutée.',
+                'Questa discussione è bloccata. Non è possibile aggiungere nuove risposte.',
+                'هذا الموضوع مغلق. لا يمكن إضافة ردود جديدة.'
               )}
             </p>
           ) : muted ? (
@@ -337,7 +383,11 @@ export default function CommunityThreadPage() {
               {t(
                 'You are currently muted and cannot reply.',
                 'Ești în prezent redus la tăcere și nu poți răspunde.',
-                'Είστε προσωρινά σε σίγαση και δεν μπορείτε να απαντήσετε.'
+                'Είστε προσωρινά σε σίγαση και δεν μπορείτε να απαντήσετε.',
+                'Du bist derzeit stummgeschaltet und kannst nicht antworten.',
+                'Vous êtes actuellement en sourdine et ne pouvez pas répondre.',
+                'Al momento sei stato silenziato e non puoi rispondere.',
+                'أنت مكتوم حاليًا ولا يمكنك الرد.'
               )}
             </p>
           ) : (
@@ -347,13 +397,37 @@ export default function CommunityThreadPage() {
                 maxLength={10000}
                 rows={4}
                 onChange={(e) => setReply(e.target.value)}
-                placeholder={t('Write a reply…', 'Scrie un răspuns…', 'Γράψτε μια απάντηση…')}
+                placeholder={t(
+                  'Write a reply…',
+                  'Scrie un răspuns…',
+                  'Γράψτε μια απάντηση…',
+                  'Antwort schreiben…',
+                  'Écrire une réponse…',
+                  'Scrivi una risposta…',
+                  'اكتب ردًا…'
+                )}
                 disabled={!canReply}
               />
               <Button onClick={handleReply} disabled={submitting || !reply.trim()} size="sm">
                 {submitting
-                  ? t('Posting…', 'Se postează…', 'Ανάρτηση…')
-                  : t('Post reply', 'Postează răspunsul', 'Ανάρτηση απάντησης')}
+                  ? t(
+                      'Posting…',
+                      'Se postează…',
+                      'Ανάρτηση…',
+                      'Wird gepostet…',
+                      'Publication…',
+                      'Pubblicazione…',
+                      'جارٍ النشر…'
+                    )
+                  : t(
+                      'Post reply',
+                      'Postează răspunsul',
+                      'Ανάρτηση απάντησης',
+                      'Antwort posten',
+                      'Publier la réponse',
+                      'Pubblica risposta',
+                      'نشر الرد'
+                    )}
               </Button>
             </div>
           )}

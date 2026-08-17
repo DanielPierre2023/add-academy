@@ -183,8 +183,28 @@ export default function AdminDashboard() {
   const platformAdmin = isPlatformAdmin(user?.schoolId, isAdmin);
 
   const t = useCallback(
-    (en: string, ro: string, el: string) =>
-      language === 'ro' ? ro : language === 'el' ? el : en,
+    (
+      en: string,
+      ro: string,
+      el: string,
+      de: string = en,
+      fr: string = en,
+      it: string = en,
+      ar: string = en
+    ) =>
+      language === 'ro'
+        ? ro
+        : language === 'el'
+        ? el
+        : language === 'de'
+        ? de
+        : language === 'fr'
+        ? fr
+        : language === 'it'
+        ? it
+        : language === 'ar'
+        ? ar
+        : en,
     [language]
   );
 
@@ -588,10 +608,10 @@ export default function AdminDashboard() {
       <div className="py-12 text-center">
         <Shield className="mx-auto h-12 w-12 text-muted-foreground" />
         <h2 className="mt-4 font-heading text-xl font-bold text-foreground">
-          {t('Admin access required', 'Acces restricționat', 'Απαιτείται πρόσβαση διαχειριστή')}
+          {t('Admin access required', 'Acces restricționat', 'Απαιτείται πρόσβαση διαχειριστή', 'Administratorzugriff erforderlich', 'Accès administrateur requis', 'Accesso amministratore richiesto', 'مطلوب صلاحية وصول المسؤول')}
         </h2>
         <p className="mt-2 text-muted-foreground">
-          {t('Only admins can access this page.', 'Doar administratorii pot accesa această pagină.', 'Μόνο οι διαχειριστές έχουν πρόσβαση σε αυτή τη σελίδα.')}
+          {t('Only admins can access this page.', 'Doar administratorii pot accesa această pagină.', 'Μόνο οι διαχειριστές έχουν πρόσβαση σε αυτή τη σελίδα.', 'Nur Administratoren können auf diese Seite zugreifen.', 'Seuls les administrateurs peuvent accéder à cette page.', 'Solo gli amministratori possono accedere a questa pagina.', 'يمكن للمسؤولين فقط الوصول إلى هذه الصفحة.')}
         </p>
       </div>
     );
@@ -601,7 +621,7 @@ export default function AdminDashboard() {
     return (
       <div className="flex flex-col items-center justify-center py-16 gap-3">
         <RefreshCw className="h-8 w-8 animate-spin text-primary" />
-        <p className="text-sm text-muted-foreground">{t('Loading cockpit...', 'Se încarcă...', 'Φόρτωση πίνακα ελέγχου...')}</p>
+        <p className="text-sm text-muted-foreground">{t('Loading cockpit...', 'Se încarcă...', 'Φόρτωση πίνακα ελέγχου...', 'Cockpit wird geladen...', 'Chargement du cockpit...', 'Caricamento del pannello...', 'جارٍ تحميل لوحة التحكم...')}</p>
       </div>
     );
   }
@@ -746,7 +766,7 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <StatCard
           icon={Users}
-          label={t('Total Students', 'Total Studenți', 'Σύνολο μαθητών')}
+          label={t('Total Students', 'Total Studenți', 'Σύνολο μαθητών', 'Studenten gesamt', 'Total des étudiants', 'Totale studenti', 'إجمالي الطلاب')}
           value={totalStudents}
           subValue={`${recentStudents.length} this week`}
           trend={recentStudents.length > 0 ? 'up' : 'neutral'}
@@ -754,14 +774,14 @@ export default function AdminDashboard() {
         />
         <StatCard
           icon={Building2}
-          label={t('Organizations', 'Organizații', 'Οργανισμοί')}
+          label={t('Organizations', 'Organizații', 'Οργανισμοί', 'Organisationen', 'Organisations', 'Organizzazioni', 'المؤسسات')}
           value={schools.length}
           subValue={`${schools.filter((s) => s.verified).length} verified`}
           color="text-secondary"
         />
         <StatCard
           icon={CreditCard}
-          label={t('Active Subs', 'Abonamente Active', 'Ενεργές συνδρομές')}
+          label={t('Active Subs', 'Abonamente Active', 'Ενεργές συνδρομές', 'Aktive Abos', 'Abonnements actifs', 'Abbonamenti attivi', 'الاشتراكات النشطة')}
           value={activeSubscriptions}
           subValue={`${canceledSubscriptions} canceled`}
           trend={activeSubscriptions > canceledSubscriptions ? 'up' : 'down'}
@@ -770,7 +790,7 @@ export default function AdminDashboard() {
         />
         <StatCard
           icon={DollarSign}
-          label={t('Est. Monthly Rev.', 'Venit Lunar Est.', 'Εκτ. μηνιαία έσοδα')}
+          label={t('Est. Monthly Rev.', 'Venit Lunar Est.', 'Εκτ. μηνιαία έσοδα', 'Gesch. Monatsumsatz', 'Rev. mensuel est.', 'Ricavo mensile stimato', 'الإيراد الشهري المقدر')}
           value={formatEuro(revenue.mrr)}
           subValue={`${formatEuro(revenue.perCycle)} / quarter · ${formatCount(revenue.payingCount)} paying`}
           color="text-violet-500"
@@ -781,27 +801,27 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <StatCard
           icon={Activity}
-          label={t('Active Today', 'Activi Azi', 'Ενεργοί σήμερα')}
+          label={t('Active Today', 'Activi Azi', 'Ενεργοί σήμερα', 'Heute aktiv', 'Actifs aujourd\'hui', 'Attivi oggi', 'نشط اليوم')}
           value={activeToday.length}
           subValue={`${Math.round((activeToday.length / Math.max(1, totalStudents)) * 100)}% of total`}
           color="text-green-500"
         />
         <StatCard
           icon={UserCheck}
-          label={t('In Organizations', 'În Organizații', 'Σε οργανισμούς')}
+          label={t('In Organizations', 'În Organizații', 'Σε οργανισμούς', 'In Organisationen', 'Dans des organisations', 'In organizzazioni', 'ضمن المؤسسات')}
           value={orgStudents}
           subValue={`${freeStudents} individual`}
         />
         <StatCard
           icon={BarChart3}
-          label={t('Seats Used', 'Locuri Utilizate', 'Θέσεις σε χρήση')}
+          label={t('Seats Used', 'Locuri Utilizate', 'Θέσεις σε χρήση', 'Genutzte Plätze', 'Places utilisées', 'Posti utilizzati', 'المقاعد المستخدمة')}
           value={`${usedSeats}/${totalSeats}`}
           subValue={totalSeats > 0 ? `${Math.round((usedSeats / totalSeats) * 100)}% capacity` : 'No seats'}
           color="text-amber-500"
         />
         <StatCard
           icon={BookOpen}
-          label={t('Active Courses', 'Cursuri Active', 'Ενεργά μαθήματα')}
+          label={t('Active Courses', 'Cursuri Active', 'Ενεργά μαθήματα', 'Aktive Kurse', 'Cours actifs', 'Corsi attivi', 'الدورات النشطة')}
           value={courses.filter((c) => c.is_active).length}
           subValue={`${courses.length} total`}
           color="text-blue-500"
@@ -812,32 +832,32 @@ export default function AdminDashboard() {
       <div className="rounded-xl border border-border bg-card p-4">
         <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
           <Settings2 className="h-4 w-4 text-amber-500" />
-          {t('Quick Actions', 'Acțiuni Rapide', 'Γρήγορες ενέργειες')}
+          {t('Quick Actions', 'Acțiuni Rapide', 'Γρήγορες ενέργειες', 'Schnellaktionen', 'Actions rapides', 'Azioni rapide', 'إجراءات سريعة')}
         </h3>
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" size="sm" onClick={() => setEmailDialogOpen(true)}>
             <Mail className="h-3.5 w-3.5" />
-            {t('Send Email', 'Trimite Email', 'Αποστολή email')}
+            {t('Send Email', 'Trimite Email', 'Αποστολή email', 'E-Mail senden', 'Envoyer un e-mail', 'Invia email', 'إرسال بريد إلكتروني')}
           </Button>
           <Button variant="outline" size="sm" onClick={() => setNewOrgDialogOpen(true)}>
             <Building2 className="h-3.5 w-3.5" />
-            {t('New Organization', 'Organizație Nouă', 'Νέος οργανισμός')}
+            {t('New Organization', 'Organizație Nouă', 'Νέος οργανισμός', 'Neue Organisation', 'Nouvelle organisation', 'Nuova organizzazione', 'مؤسسة جديدة')}
           </Button>
           <Button variant="outline" size="sm" onClick={() => setAnnouncementDialogOpen(true)}>
             <Megaphone className="h-3.5 w-3.5" />
-            {t('Announcement', 'Anunț', 'Ανακοίνωση')}
+            {t('Announcement', 'Anunț', 'Ανακοίνωση', 'Ankündigung', 'Annonce', 'Annuncio', 'إعلان')}
           </Button>
           <Button variant="outline" size="sm" onClick={() => setActiveTab('students')}>
             <Users className="h-3.5 w-3.5" />
-            {t('Manage Students', 'Gestionează Studenți', 'Διαχείριση μαθητών')}
+            {t('Manage Students', 'Gestionează Studenți', 'Διαχείριση μαθητών', 'Studenten verwalten', 'Gérer les étudiants', 'Gestisci studenti', 'إدارة الطلاب')}
           </Button>
           <Button variant="outline" size="sm" onClick={() => setActiveTab('subscriptions')}>
             <CreditCard className="h-3.5 w-3.5" />
-            {t('Subscriptions', 'Abonamente', 'Συνδρομές')}
+            {t('Subscriptions', 'Abonamente', 'Συνδρομές', 'Abonnements', 'Abonnements', 'Abbonamenti', 'الاشتراكات')}
           </Button>
           <Button variant="outline" size="sm" onClick={fetchData}>
             <RefreshCw className="h-3.5 w-3.5" />
-            {t('Refresh Data', 'Reîncarcă Date', 'Ανανέωση δεδομένων')}
+            {t('Refresh Data', 'Reîncarcă Date', 'Ανανέωση δεδομένων', 'Daten aktualisieren', 'Actualiser les données', 'Aggiorna dati', 'تحديث البيانات')}
           </Button>
         </div>
       </div>
@@ -846,10 +866,10 @@ export default function AdminDashboard() {
       <div className="rounded-xl border border-border bg-card p-4">
         <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
           <UserPlus className="h-4 w-4 text-green-500" />
-          {t('Recent Registrations', 'Înregistrări Recente', 'Πρόσφατες εγγραφές')} ({recentStudents.length})
+          {t('Recent Registrations', 'Înregistrări Recente', 'Πρόσφατες εγγραφές', 'Neueste Anmeldungen', 'Inscriptions récentes', 'Iscrizioni recenti', 'التسجيلات الأخيرة')} ({recentStudents.length})
         </h3>
         {recentStudents.length === 0 ? (
-          <p className="text-xs text-muted-foreground py-2">{t('No new students this week.', 'Niciun student nou săptămâna aceasta.', 'Κανένας νέος μαθητής αυτή την εβδομάδα.')}</p>
+          <p className="text-xs text-muted-foreground py-2">{t('No new students this week.', 'Niciun student nou săptămâna aceasta.', 'Κανένας νέος μαθητής αυτή την εβδομάδα.', 'Keine neuen Studenten diese Woche.', 'Aucun nouvel étudiant cette semaine.', 'Nessun nuovo studente questa settimana.', 'لا يوجد طلاب جدد هذا الأسبوع.')}</p>
         ) : (
           <div className="divide-y divide-border">
             {recentStudents.slice(0, 5).map((member) => (
@@ -860,7 +880,15 @@ export default function AdminDashboard() {
                 onClick={() => setActiveTab('students')}
                 className="w-full py-2 text-xs text-primary hover:underline"
               >
-                {t(`View all ${recentStudents.length} new students →`, `Vezi toți ${recentStudents.length} studenți noi →`, `Προβολή όλων των ${recentStudents.length} νέων μαθητών →`)}
+                {t(
+                  `View all ${recentStudents.length} new students →`,
+                  `Vezi toți ${recentStudents.length} studenți noi →`,
+                  `Προβολή όλων των ${recentStudents.length} νέων μαθητών →`,
+                  `Alle ${recentStudents.length} neuen Studenten anzeigen →`,
+                  `Voir les ${recentStudents.length} nouveaux étudiants →`,
+                  `Vedi tutti i ${recentStudents.length} nuovi studenti →`,
+                  `عرض جميع الطلاب الجدد البالغ عددهم ${recentStudents.length} ←`
+                )}
               </button>
             )}
           </div>
@@ -872,7 +900,7 @@ export default function AdminDashboard() {
         <div className="rounded-xl border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
             <Building2 className="h-4 w-4 text-secondary" />
-            {t('Organizations', 'Organizații', 'Οργανισμοί')}
+            {t('Organizations', 'Organizații', 'Οργανισμοί', 'Organisationen', 'Organisations', 'Organizzazioni', 'المؤسسات')}
           </h3>
           <div className="space-y-2">
             {schools.map((school) => {
@@ -912,7 +940,7 @@ export default function AdminDashboard() {
                       {members.length}/{school.max_students}
                     </div>
                     <div className="text-[10px] text-muted-foreground">
-                      {utilization}% {t('capacity', 'capacitate', 'χωρητικότητα')}
+                      {utilization}% {t('capacity', 'capacitate', 'χωρητικότητα', 'Kapazität', 'capacité', 'capacità', 'السعة')}
                     </div>
                   </div>
                 </div>
@@ -934,7 +962,7 @@ export default function AdminDashboard() {
           <SearchBar
             value={studentSearch}
             onChange={changeStudentSearch}
-            placeholder={t('Search students by name or email...', 'Caută studenți...', 'Αναζήτηση μαθητών με όνομα ή email...')}
+            placeholder={t('Search students by name or email...', 'Caută studenți...', 'Αναζήτηση μαθητών με όνομα ή email...', 'Studenten nach Name oder E-Mail suchen...', 'Rechercher des étudiants par nom ou e-mail...', 'Cerca studenti per nome o email...', 'ابحث عن الطلاب بالاسم أو البريد الإلكتروني...')}
           />
         </div>
         <div className="flex gap-1.5">
@@ -949,7 +977,7 @@ export default function AdminDashboard() {
                   : 'bg-muted text-muted-foreground hover:text-foreground'
               )}
             >
-              {f === 'all' ? t('All', 'Toți', 'Όλοι') : f === 'free' ? 'Free' : f === 'paid' ? 'Paid' : 'Org'}
+              {f === 'all' ? t('All', 'Toți', 'Όλοι', 'Alle', 'Tous', 'Tutti', 'الكل') : f === 'free' ? 'Free' : f === 'paid' ? 'Paid' : 'Org'}
               <span className="ml-1 opacity-60">
                 ({f === 'all'
                   ? totalStudents
@@ -967,7 +995,15 @@ export default function AdminDashboard() {
       {/* Student count */}
       <div className="flex items-center justify-between">
         <p className="text-xs text-muted-foreground">
-          {t(`Showing ${filteredStudents.length} of ${totalStudents} students`, `Se afișează ${filteredStudents.length} din ${totalStudents} studenți`, `Εμφάνιση ${filteredStudents.length} από ${totalStudents} μαθητές`)}
+          {t(
+            `Showing ${filteredStudents.length} of ${totalStudents} students`,
+            `Se afișează ${filteredStudents.length} din ${totalStudents} studenți`,
+            `Εμφάνιση ${filteredStudents.length} από ${totalStudents} μαθητές`,
+            `Anzeige von ${filteredStudents.length} von ${totalStudents} Studenten`,
+            `Affichage de ${filteredStudents.length} sur ${totalStudents} étudiants`,
+            `Visualizzazione di ${filteredStudents.length} su ${totalStudents} studenti`,
+            `عرض ${filteredStudents.length} من أصل ${totalStudents} طالبًا`
+          )}
         </p>
         <div className="flex gap-1.5">
           <Button
@@ -1004,11 +1040,11 @@ export default function AdminDashboard() {
             }
           >
             <Download className="h-3.5 w-3.5" />
-            {t('Export CSV', 'Export CSV', 'Εξαγωγή CSV')}
+            {t('Export CSV', 'Export CSV', 'Εξαγωγή CSV', 'CSV exportieren', 'Exporter en CSV', 'Esporta CSV', 'تصدير CSV')}
           </Button>
           <Button variant="outline" size="sm" onClick={() => setEmailDialogOpen(true)}>
             <Mail className="h-3.5 w-3.5" />
-            {t('Email All', 'Email tuturor', 'Email σε όλους')}
+            {t('Email All', 'Email tuturor', 'Email σε όλους', 'Alle per E-Mail benachrichtigen', 'E-mail à tous', 'Invia email a tutti', 'إرسال بريد إلكتروني للجميع')}
           </Button>
         </div>
       </div>
@@ -1018,7 +1054,7 @@ export default function AdminDashboard() {
         {filteredStudents.length === 0 ? (
           <div className="p-8 text-center">
             <Users className="mx-auto h-8 w-8 text-muted-foreground/50" />
-            <p className="mt-2 text-sm text-muted-foreground">{t('No students found.', 'Niciun student găsit.', 'Δεν βρέθηκαν μαθητές.')}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{t('No students found.', 'Niciun student găsit.', 'Δεν βρέθηκαν μαθητές.', 'Keine Studenten gefunden.', 'Aucun étudiant trouvé.', 'Nessuno studente trovato.', 'لم يتم العثور على طلاب.')}</p>
           </div>
         ) : (
           filteredStudents.slice((studentPage - 1) * ADMIN_PAGE_SIZE, studentPage * ADMIN_PAGE_SIZE).map((member) => (
@@ -1031,14 +1067,22 @@ export default function AdminDashboard() {
       {filteredStudents.length > ADMIN_PAGE_SIZE && (
         <div className="flex items-center justify-between pt-1">
           <p className="text-xs text-muted-foreground">
-            {t(`Page ${studentPage} of ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`, `Pagina ${studentPage} din ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`, `Σελίδα ${studentPage} από ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`)}
+            {t(
+              `Page ${studentPage} of ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`,
+              `Pagina ${studentPage} din ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`,
+              `Σελίδα ${studentPage} από ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`,
+              `Seite ${studentPage} von ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`,
+              `Page ${studentPage} sur ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`,
+              `Pagina ${studentPage} di ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`,
+              `الصفحة ${studentPage} من ${Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)}`
+            )}
           </p>
           <div className="flex gap-1.5">
             <Button variant="outline" size="sm" disabled={studentPage <= 1} onClick={() => setStudentPage((p) => Math.max(1, p - 1))}>
-              {t('Previous', 'Anterior', 'Προηγούμενο')}
+              {t('Previous', 'Anterior', 'Προηγούμενο', 'Zurück', 'Précédent', 'Precedente', 'السابق')}
             </Button>
             <Button variant="outline" size="sm" disabled={studentPage >= Math.ceil(filteredStudents.length / ADMIN_PAGE_SIZE)} onClick={() => setStudentPage((p) => p + 1)}>
-              {t('Next', 'Următor', 'Επόμενο')}
+              {t('Next', 'Următor', 'Επόμενο', 'Weiter', 'Suivant', 'Successivo', 'التالي')}
             </Button>
           </div>
         </div>
@@ -1055,13 +1099,13 @@ export default function AdminDashboard() {
           <SearchBar
             value={orgSearch}
             onChange={setOrgSearch}
-            placeholder={t('Search organizations...', 'Caută organizații...', 'Αναζήτηση οργανισμών...')}
+            placeholder={t('Search organizations...', 'Caută organizații...', 'Αναζήτηση οργανισμών...', 'Organisationen suchen...', 'Rechercher des organisations...', 'Cerca organizzazioni...', 'ابحث عن المؤسسات...')}
           />
         </div>
         {platformAdmin && (
           <Button size="sm" onClick={() => setNewOrgDialogOpen(true)}>
             <Plus className="h-3.5 w-3.5" />
-            {t('New Organization', 'Organizație Nouă', 'Νέος οργανισμός')}
+            {t('New Organization', 'Organizație Nouă', 'Νέος οργανισμός', 'Neue Organisation', 'Nouvelle organisation', 'Nuova organizzazione', 'مؤسسة جديدة')}
           </Button>
         )}
       </div>
@@ -1069,7 +1113,7 @@ export default function AdminDashboard() {
       {schools.filter((s) => !orgSearch || s.name.toLowerCase().includes(orgSearch.toLowerCase()) || s.contact_email.toLowerCase().includes(orgSearch.toLowerCase())).length === 0 ? (
         <div className="rounded-xl border border-dashed border-border bg-card/50 p-8 text-center">
           <Building2 className="mx-auto h-10 w-10 text-muted-foreground/50" />
-          <p className="mt-3 text-sm text-muted-foreground">{t('No organizations found.', 'Nu există organizații.', 'Δεν βρέθηκαν οργανισμοί.')}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{t('No organizations found.', 'Nu există organizații.', 'Δεν βρέθηκαν οργανισμοί.', 'Keine Organisationen gefunden.', 'Aucune organisation trouvée.', 'Nessuna organizzazione trovata.', 'لم يتم العثور على مؤسسات.')}</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -1107,7 +1151,9 @@ export default function AdminDashboard() {
                             school.verified ? 'bg-green-500/10 text-green-500' : 'bg-amber-500/10 text-amber-500'
                           )}
                         >
-                          {school.verified ? t('Verified', 'Verificat', 'Επαληθευμένο') : t('Pending', 'În așteptare', 'Σε αναμονή')}
+                          {school.verified
+                            ? t('Verified', 'Verificat', 'Επαληθευμένο', 'Verifiziert', 'Vérifié', 'Verificato', 'موثّق')
+                            : t('Pending', 'În așteptare', 'Σε αναμονή', 'Ausstehend', 'En attente', 'In attesa', 'قيد الانتظار')}
                         </span>
                       </div>
                       <div className="text-xs text-muted-foreground mt-0.5 flex items-center gap-2 flex-wrap">
@@ -1282,7 +1328,7 @@ export default function AdminDashboard() {
           <SearchBar
             value={subSearch}
             onChange={changeSubSearch}
-            placeholder={t('Search by student or tier...', 'Caută după student sau plan...', 'Αναζήτηση ανά μαθητή ή πλάνο...')}
+            placeholder={t('Search by student or tier...', 'Caută după student sau plan...', 'Αναζήτηση ανά μαθητή ή πλάνο...', 'Nach Student oder Stufe suchen...', 'Rechercher par étudiant ou palier...', 'Cerca per studente o livello...', 'ابحث حسب الطالب أو الفئة...')}
           />
         </div>
         <div className="flex gap-1.5">
@@ -1342,7 +1388,7 @@ export default function AdminDashboard() {
           }
         >
           <Download className="h-3.5 w-3.5" />
-          {t('Export CSV', 'Export CSV', 'Εξαγωγή CSV')}
+          {t('Export CSV', 'Export CSV', 'Εξαγωγή CSV', 'CSV exportieren', 'Exporter en CSV', 'Esporta CSV', 'تصدير CSV')}
         </Button>
       </div>
 
@@ -1443,14 +1489,22 @@ export default function AdminDashboard() {
       {filteredSubscriptions.length > ADMIN_PAGE_SIZE && (
         <div className="flex items-center justify-between pt-1">
           <p className="text-xs text-muted-foreground">
-            {t(`Page ${subPage} of ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`, `Pagina ${subPage} din ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`, `Σελίδα ${subPage} από ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`)}
+            {t(
+              `Page ${subPage} of ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`,
+              `Pagina ${subPage} din ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`,
+              `Σελίδα ${subPage} από ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`,
+              `Seite ${subPage} von ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`,
+              `Page ${subPage} sur ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`,
+              `Pagina ${subPage} di ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`,
+              `الصفحة ${subPage} من ${Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)}`
+            )}
           </p>
           <div className="flex gap-1.5">
             <Button variant="outline" size="sm" disabled={subPage <= 1} onClick={() => setSubPage((p) => Math.max(1, p - 1))}>
-              {t('Previous', 'Anterior', 'Προηγούμενο')}
+              {t('Previous', 'Anterior', 'Προηγούμενο', 'Zurück', 'Précédent', 'Precedente', 'السابق')}
             </Button>
             <Button variant="outline" size="sm" disabled={subPage >= Math.ceil(filteredSubscriptions.length / ADMIN_PAGE_SIZE)} onClick={() => setSubPage((p) => p + 1)}>
-              {t('Next', 'Următor', 'Επόμενο')}
+              {t('Next', 'Următor', 'Επόμενο', 'Weiter', 'Suivant', 'Successivo', 'التالي')}
             </Button>
           </div>
         </div>
@@ -1460,7 +1514,7 @@ export default function AdminDashboard() {
       <div className="rounded-xl border border-border bg-card p-4">
         <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
           <Tag className="h-4 w-4 text-primary" />
-          {t('Pricing Plans Reference', 'Referință Planuri', 'Αναφορά πλάνων τιμολόγησης')}
+          {t('Pricing Plans Reference', 'Referință Planuri', 'Αναφορά πλάνων τιμολόγησης', 'Preisplan-Referenz', 'Référence des plans tarifaires', 'Riferimento piani tariffari', 'مرجع خطط التسعير')}
         </h3>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {ALL_PLANS.map((plan) => (
@@ -1490,7 +1544,7 @@ export default function AdminDashboard() {
       <div className="rounded-xl border border-border bg-card p-4">
         <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
           <BookOpen className="h-4 w-4 text-blue-500" />
-          {t('Courses', 'Cursuri', 'Μαθήματα')}
+          {t('Courses', 'Cursuri', 'Μαθήματα', 'Kurse', 'Cours', 'Corsi', 'الدورات')}
         </h3>
         {courses.length === 0 ? (
           <p className="text-xs text-muted-foreground">No courses found in database.</p>
@@ -1535,13 +1589,17 @@ export default function AdminDashboard() {
       <div className="rounded-xl border border-border bg-card p-4">
         <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
           <Lock className="h-4 w-4 text-amber-500" />
-          {t('Stage Access Control', 'Control Acces Etape', 'Έλεγχος πρόσβασης σταδίων')}
+          {t('Stage Access Control', 'Control Acces Etape', 'Έλεγχος πρόσβασης σταδίων', 'Zugriffskontrolle für Stufen', 'Contrôle d\'accès aux étapes', 'Controllo accesso alle fasi', 'التحكم في الوصول إلى المراحل')}
         </h3>
         <p className="text-xs text-muted-foreground mb-3">
           {t(
             'Grant or revoke individual stage access for any student. Stages 0-1 are always free.',
             'Acordă sau revocă accesul la etape individuale. Etapele 0-1 sunt gratuite.',
-            'Παραχωρήστε ή ανακαλέστε την πρόσβαση σε μεμονωμένα στάδια για οποιονδήποτε μαθητή. Τα στάδια 0-1 είναι πάντα δωρεάν.'
+            'Παραχωρήστε ή ανακαλέστε την πρόσβαση σε μεμονωμένα στάδια για οποιονδήποτε μαθητή. Τα στάδια 0-1 είναι πάντα δωρεάν.',
+            'Gewähren oder entziehen Sie einzelnen Studenten den Zugriff auf bestimmte Stufen. Stufen 0-1 sind immer kostenlos.',
+            'Accordez ou révoquez l\'accès à des étapes individuelles pour n\'importe quel étudiant. Les étapes 0-1 sont toujours gratuites.',
+            'Concedi o revoca l\'accesso a singole fasi per qualsiasi studente. Le fasi 0-1 sono sempre gratuite.',
+            'امنح أو ألغِ وصول أي طالب إلى مراحل فردية. المرحلتان 0-1 مجانيتان دائمًا.'
           )}
         </p>
         <div className="space-y-2">
@@ -1671,7 +1729,7 @@ export default function AdminDashboard() {
         <div className="rounded-xl border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
             <Send className="h-4 w-4 text-primary" />
-            {t('Quick Send', 'Trimite Rapid', 'Γρήγορη αποστολή')}
+            {t('Quick Send', 'Trimite Rapid', 'Γρήγορη αποστολή', 'Schnell senden', 'Envoi rapide', 'Invio rapido', 'إرسال سريع')}
           </h3>
           <div className="flex flex-wrap gap-2">
             <Button
@@ -1686,7 +1744,7 @@ export default function AdminDashboard() {
               }}
             >
               <Users className="h-3.5 w-3.5" />
-              {t('Email All Students', 'Email Toți Studenții', 'Email σε όλους τους μαθητές')}
+              {t('Email All Students', 'Email Toți Studenții', 'Email σε όλους τους μαθητές', 'E-Mail an alle Studenten', 'E-mail à tous les étudiants', 'Email a tutti gli studenti', 'إرسال بريد إلكتروني لجميع الطلاب')}
             </Button>
             {schools.map((school) => (
               <Button
@@ -1711,7 +1769,7 @@ export default function AdminDashboard() {
               onClick={() => setAnnouncementDialogOpen(true)}
             >
               <Megaphone className="h-3.5 w-3.5" />
-              {t('New Announcement', 'Anunț Nou', 'Νέα ανακοίνωση')}
+              {t('New Announcement', 'Anunț Nou', 'Νέα ανακοίνωση', 'Neue Ankündigung', 'Nouvelle annonce', 'Nuovo annuncio', 'إعلان جديد')}
             </Button>
           </div>
         </div>
@@ -1720,7 +1778,7 @@ export default function AdminDashboard() {
         <div className="rounded-xl border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
             <Mail className="h-4 w-4 text-blue-500" />
-            {t('Email Templates', 'Șabloane Email', 'Πρότυπα email')}
+            {t('Email Templates', 'Șabloane Email', 'Πρότυπα email', 'E-Mail-Vorlagen', 'Modèles d\'e-mail', 'Modelli email', 'قوالب البريد الإلكتروني')}
           </h3>
           <div className="space-y-2">
             {emailTemplates.map((tmpl) => (
@@ -1754,7 +1812,7 @@ export default function AdminDashboard() {
         <div className="rounded-xl border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
             <UserPlus className="h-4 w-4 text-green-500" />
-            {t('Invitation Generator', 'Generator Invitații', 'Δημιουργία προσκλήσεων')}
+            {t('Invitation Generator', 'Generator Invitații', 'Δημιουργία προσκλήσεων', 'Einladungsgenerator', 'Générateur d\'invitations', 'Generatore di inviti', 'مولّد الدعوات')}
           </h3>
           <p className="text-xs text-muted-foreground mb-3">
             Generate invite links for organizations. Each organization has a unique invite code.
@@ -1795,7 +1853,7 @@ export default function AdminDashboard() {
         <div className="rounded-xl border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
             <Megaphone className="h-4 w-4 text-purple-500" />
-            {t('Published Announcements', 'Anunțuri Publicate', 'Δημοσιευμένες ανακοινώσεις')}
+            {t('Published Announcements', 'Anunțuri Publicate', 'Δημοσιευμένες ανακοινώσεις', 'Veröffentlichte Ankündigungen', 'Annonces publiées', 'Annunci pubblicati', 'الإعلانات المنشورة')}
             {announcements.length > 0 && (
               <span className="rounded-full bg-purple-500/10 px-2 py-0.5 text-[10px] font-bold text-purple-500">
                 {announcements.length}
@@ -1803,7 +1861,7 @@ export default function AdminDashboard() {
             )}
           </h3>
           {announcements.length === 0 ? (
-            <p className="text-xs text-muted-foreground">{t('No announcements published yet.', 'Niciun anunț publicat încă.', 'Δεν έχουν δημοσιευτεί ανακοινώσεις ακόμη.')}</p>
+            <p className="text-xs text-muted-foreground">{t('No announcements published yet.', 'Niciun anunț publicat încă.', 'Δεν έχουν δημοσιευτεί ανακοινώσεις ακόμη.', 'Noch keine Ankündigungen veröffentlicht.', 'Aucune annonce publiée pour l\'instant.', 'Nessun annuncio pubblicato ancora.', 'لم يتم نشر أي إعلانات بعد.')}</p>
           ) : (
             <div className="space-y-2">
               {announcements.map((ann) => (
@@ -1943,20 +2001,20 @@ export default function AdminDashboard() {
 
         {/* Charts */}
         <div className="grid sm:grid-cols-2 gap-4">
-          <BarChart data={studentsByTier} label={t('Students by Tier', 'Studenți pe Plan', 'Μαθητές ανά πλάνο')} />
-          <BarChart data={subsByTier} label={t('Active Subscriptions by Tier', 'Abonamente Active pe Plan', 'Ενεργές συνδρομές ανά πλάνο')} />
-          <BarChart data={studentsByLang} label={t('Students by Language', 'Studenți pe Limbă', 'Μαθητές ανά γλώσσα')} />
-          <BarChart data={orgsByCountry} label={t('Organizations by Country', 'Organizații pe Țară', 'Οργανισμοί ανά χώρα')} />
+          <BarChart data={studentsByTier} label={t('Students by Tier', 'Studenți pe Plan', 'Μαθητές ανά πλάνο', 'Studenten nach Stufe', 'Étudiants par palier', 'Studenti per livello', 'الطلاب حسب الفئة')} />
+          <BarChart data={subsByTier} label={t('Active Subscriptions by Tier', 'Abonamente Active pe Plan', 'Ενεργές συνδρομές ανά πλάνο', 'Aktive Abos nach Stufe', 'Abonnements actifs par palier', 'Abbonamenti attivi per livello', 'الاشتراكات النشطة حسب الفئة')} />
+          <BarChart data={studentsByLang} label={t('Students by Language', 'Studenți pe Limbă', 'Μαθητές ανά γλώσσα', 'Studenten nach Sprache', 'Étudiants par langue', 'Studenti per lingua', 'الطلاب حسب اللغة')} />
+          <BarChart data={orgsByCountry} label={t('Organizations by Country', 'Organizații pe Țară', 'Οργανισμοί ανά χώρα', 'Organisationen nach Land', 'Organisations par pays', 'Organizzazioni per paese', 'المؤسسات حسب الدولة')} />
         </div>
 
         {/* Registration timeline */}
-        <BarChart data={studentsByMonth} label={t('Registrations by Month', 'Înregistrări pe Lună', 'Εγγραφές ανά μήνα')} />
+        <BarChart data={studentsByMonth} label={t('Registrations by Month', 'Înregistrări pe Lună', 'Εγγραφές ανά μήνα', 'Anmeldungen nach Monat', 'Inscriptions par mois', 'Iscrizioni per mese', 'التسجيلات حسب الشهر')} />
 
         {/* Top organizations by size */}
         {schools.length > 0 && (
           <div className="rounded-xl border border-border bg-card p-4">
             <h4 className="text-xs font-semibold text-foreground mb-3">
-              {t('Organizations by Size', 'Organizații după Dimensiune', 'Οργανισμοί ανά μέγεθος')}
+              {t('Organizations by Size', 'Organizații după Dimensiune', 'Οργανισμοί ανά μέγεθος', 'Organisationen nach Größe', 'Organisations par taille', 'Organizzazioni per dimensione', 'المؤسسات حسب الحجم')}
             </h4>
             <div className="space-y-2">
               {[...schools]
@@ -2041,7 +2099,7 @@ export default function AdminDashboard() {
           <SearchBar
             value={reportSearch}
             onChange={setReportSearch}
-            placeholder={t('Search reports...', 'Caută rapoarte...', 'Αναζήτηση αναφορών...')}
+            placeholder={t('Search reports...', 'Caută rapoarte...', 'Αναζήτηση αναφορών...', 'Berichte suchen...', 'Rechercher des rapports...', 'Cerca segnalazioni...', 'ابحث عن التقارير...')}
           />
         </div>
         <div className="flex gap-1.5 flex-wrap">
@@ -2068,8 +2126,24 @@ export default function AdminDashboard() {
           <Bug className="mx-auto h-10 w-10 text-muted-foreground/50" />
           <p className="mt-3 text-sm text-muted-foreground">
             {reports.length === 0
-              ? t('No reports yet. Users can submit reports using the bug button.', 'Niciun raport încă.', 'Δεν υπάρχουν αναφορές ακόμη. Οι χρήστες μπορούν να υποβάλουν αναφορές με το κουμπί σφάλματος.')
-              : t('No reports match your filters.', 'Niciun raport nu corespunde filtrelor.', 'Καμία αναφορά δεν ταιριάζει με τα φίλτρα σας.')}
+              ? t(
+                  'No reports yet. Users can submit reports using the bug button.',
+                  'Niciun raport încă.',
+                  'Δεν υπάρχουν αναφορές ακόμη. Οι χρήστες μπορούν να υποβάλουν αναφορές με το κουμπί σφάλματος.',
+                  'Noch keine Berichte. Nutzer können über die Fehler-Schaltfläche Berichte einreichen.',
+                  'Aucun rapport pour l\'instant. Les utilisateurs peuvent en soumettre via le bouton de signalement.',
+                  'Nessuna segnalazione ancora. Gli utenti possono inviare segnalazioni tramite il pulsante bug.',
+                  'لا توجد تقارير بعد. يمكن للمستخدمين إرسال التقارير باستخدام زر الإبلاغ عن الأخطاء.'
+                )
+              : t(
+                  'No reports match your filters.',
+                  'Niciun raport nu corespunde filtrelor.',
+                  'Καμία αναφορά δεν ταιριάζει με τα φίλτρα σας.',
+                  'Keine Berichte entsprechen Ihren Filtern.',
+                  'Aucun rapport ne correspond à vos filtres.',
+                  'Nessuna segnalazione corrisponde ai filtri.',
+                  'لا توجد تقارير تطابق عوامل التصفية الخاصة بك.'
+                )}
           </p>
         </div>
       ) : (
@@ -2132,7 +2206,7 @@ export default function AdminDashboard() {
                         <textarea
                           value={replyText}
                           onChange={(e) => setReplyText(e.target.value)}
-                          placeholder={t('Write your response...', 'Scrie răspunsul tău...', 'Γράψτε την απάντησή σας...')}
+                          placeholder={t('Write your response...', 'Scrie răspunsul tău...', 'Γράψτε την απάντησή σας...', 'Schreiben Sie Ihre Antwort...', 'Rédigez votre réponse...', 'Scrivi la tua risposta...', 'اكتب ردك...')}
                           rows={3}
                           className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 resize-none"
                           autoFocus
@@ -2223,10 +2297,10 @@ export default function AdminDashboard() {
         <DialogHeader>
           <DialogTitle>
             {emailType === 'all'
-              ? t('Email All Students', 'Email Toți Studenții', 'Email σε όλους τους μαθητές')
+              ? t('Email All Students', 'Email Toți Studenții', 'Email σε όλους τους μαθητές', 'E-Mail an alle Studenten', 'E-mail à tous les étudiants', 'Email a tutti gli studenti', 'إرسال بريد إلكتروني لجميع الطلاب')
               : emailType === 'org'
-              ? t('Email Organization', 'Email Organizație', 'Email οργανισμού')
-              : t('Send Email', 'Trimite Email', 'Αποστολή email')}
+              ? t('Email Organization', 'Email Organizație', 'Email οργανισμού', 'E-Mail an Organisation', 'E-mail à l\'organisation', 'Email all\'organizzazione', 'إرسال بريد إلكتروني إلى المؤسسة')
+              : t('Send Email', 'Trimite Email', 'Αποστολή email', 'E-Mail senden', 'Envoyer un e-mail', 'Invia email', 'إرسال بريد إلكتروني')}
           </DialogTitle>
           <DialogDescription>
             {emailType === 'all'
@@ -2286,13 +2360,27 @@ export default function AdminDashboard() {
                   body: emailBody,
                 });
                 if (res.error && res.sent === 0) {
-                  setEmailResult(t('Failed to send: ', 'Trimitere eșuată: ', 'Αποτυχία αποστολής: ') + res.error);
+                  setEmailResult(
+                    t(
+                      'Failed to send: ',
+                      'Trimitere eșuată: ',
+                      'Αποτυχία αποστολής: ',
+                      'Senden fehlgeschlagen: ',
+                      'Échec de l\'envoi : ',
+                      'Invio non riuscito: ',
+                      'فشل الإرسال: '
+                    ) + res.error
+                  );
                 } else {
                   setEmailResult(
                     t(
                       `Sent to ${res.sent} recipient(s).`,
                       `Trimis către ${res.sent} destinatar(i).`,
-                      `Στάλθηκε σε ${res.sent} παραλήπτη(ες).`
+                      `Στάλθηκε σε ${res.sent} παραλήπτη(ες).`,
+                      `An ${res.sent} Empfänger gesendet.`,
+                      `Envoyé à ${res.sent} destinataire(s).`,
+                      `Inviato a ${res.sent} destinatario/i.`,
+                      `تم الإرسال إلى ${res.sent} من المستلمين.`
                     ) + (res.error ? ` (${res.error})` : '')
                   );
                   setEmailSubject('');
@@ -2301,8 +2389,15 @@ export default function AdminDashboard() {
                 }
               } catch (err) {
                 setEmailResult(
-                  t('Failed to send: ', 'Trimitere eșuată: ', 'Αποτυχία αποστολής: ') +
-                    (err instanceof Error ? err.message : String(err))
+                  t(
+                    'Failed to send: ',
+                    'Trimitere eșuată: ',
+                    'Αποτυχία αποστολής: ',
+                    'Senden fehlgeschlagen: ',
+                    'Échec de l\'envoi : ',
+                    'Invio non riuscito: ',
+                    'فشل الإرسال: '
+                  ) + (err instanceof Error ? err.message : String(err))
                 );
               } finally {
                 setEmailSending(false);
@@ -2311,8 +2406,8 @@ export default function AdminDashboard() {
           >
             <Send className="h-3.5 w-3.5" />
             {emailSending
-              ? t('Sending…', 'Se trimite…', 'Αποστολή…')
-              : t('Send', 'Trimite', 'Αποστολή')}
+              ? t('Sending…', 'Se trimite…', 'Αποστολή…', 'Wird gesendet…', 'Envoi en cours…', 'Invio in corso…', 'جارٍ الإرسال…')
+              : t('Send', 'Trimite', 'Αποστολή', 'Senden', 'Envoyer', 'Invia', 'إرسال')}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -2326,7 +2421,7 @@ export default function AdminDashboard() {
       <Dialog open={discountDialogOpen} onOpenChange={setDiscountDialogOpen}>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle>{t('Manage Discount', 'Gestionează Reducere', 'Διαχείριση έκπτωσης')}</DialogTitle>
+            <DialogTitle>{t('Manage Discount', 'Gestionează Reducere', 'Διαχείριση έκπτωσης', 'Rabatt verwalten', 'Gérer la remise', 'Gestisci sconto', 'إدارة الخصم')}</DialogTitle>
             <DialogDescription>
               {student ? `Discount for ${memberName(student)}` : 'Set discount percentage.'}
             </DialogDescription>
@@ -2380,14 +2475,14 @@ export default function AdminDashboard() {
   const AnnouncementDialog = () => {
     const priorities = [
       { value: 'normal' as const, label: 'Normal', color: 'bg-blue-500/10 text-blue-500' },
-      { value: 'important' as const, label: t('Important', 'Important', 'Σημαντικό'), color: 'bg-amber-500/10 text-amber-500' },
-      { value: 'urgent' as const, label: t('Urgent', 'Urgent', 'Επείγον'), color: 'bg-red-500/10 text-red-500' },
+      { value: 'important' as const, label: t('Important', 'Important', 'Σημαντικό', 'Wichtig', 'Important', 'Importante', 'مهم'), color: 'bg-amber-500/10 text-amber-500' },
+      { value: 'urgent' as const, label: t('Urgent', 'Urgent', 'Επείγον', 'Dringend', 'Urgent', 'Urgente', 'عاجل'), color: 'bg-red-500/10 text-red-500' },
     ];
     const targets = [
-      { value: 'all' as const, label: t('All Students', 'Toți Studenții', 'Όλοι οι μαθητές') },
-      { value: 'free' as const, label: t('Free Users', 'Utilizatori Gratis', 'Δωρεάν χρήστες') },
-      { value: 'paid' as const, label: t('Paid Users', 'Utilizatori Plătiți', 'Πληρωμένοι χρήστες') },
-      { value: 'org' as const, label: t('Org Users', 'Utilizatori Org', 'Χρήστες οργανισμού') },
+      { value: 'all' as const, label: t('All Students', 'Toți Studenții', 'Όλοι οι μαθητές', 'Alle Studenten', 'Tous les étudiants', 'Tutti gli studenti', 'جميع الطلاب') },
+      { value: 'free' as const, label: t('Free Users', 'Utilizatori Gratis', 'Δωρεάν χρήστες', 'Kostenlose Nutzer', 'Utilisateurs gratuits', 'Utenti gratuiti', 'المستخدمون المجانيون') },
+      { value: 'paid' as const, label: t('Paid Users', 'Utilizatori Plătiți', 'Πληρωμένοι χρήστες', 'Zahlende Nutzer', 'Utilisateurs payants', 'Utenti a pagamento', 'المستخدمون المدفوعون') },
+      { value: 'org' as const, label: t('Org Users', 'Utilizatori Org', 'Χρήστες οργανισμού', 'Organisationsnutzer', 'Utilisateurs de l\'organisation', 'Utenti dell\'organizzazione', 'مستخدمو المؤسسة') },
     ];
 
     const handlePublish = async () => {
@@ -2417,33 +2512,41 @@ export default function AdminDashboard() {
       <Dialog open={announcementDialogOpen} onOpenChange={setAnnouncementDialogOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>{t('New Announcement', 'Anunț Nou', 'Νέα ανακοίνωση')}</DialogTitle>
+            <DialogTitle>{t('New Announcement', 'Anunț Nou', 'Νέα ανακοίνωση', 'Neue Ankündigung', 'Nouvelle annonce', 'Nuovo annuncio', 'إعلان جديد')}</DialogTitle>
             <DialogDescription>
-              {t('Publish an announcement visible to students in the academy.', 'Publică un anunț vizibil studenților în academie.', 'Δημοσιεύστε μια ανακοίνωση ορατή στους μαθητές της ακαδημίας.')}
+              {t(
+                'Publish an announcement visible to students in the academy.',
+                'Publică un anunț vizibil studenților în academie.',
+                'Δημοσιεύστε μια ανακοίνωση ορατή στους μαθητές της ακαδημίας.',
+                'Veröffentlichen Sie eine für Studenten der Akademie sichtbare Ankündigung.',
+                'Publiez une annonce visible par les étudiants de l\'académie.',
+                'Pubblica un annuncio visibile agli studenti dell\'accademia.',
+                'انشر إعلانًا يظهر للطلاب في الأكاديمية.'
+              )}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-3 py-2">
             <div>
-              <Label htmlFor="announcement-title">{t('Title', 'Titlu', 'Τίτλος')}</Label>
+              <Label htmlFor="announcement-title">{t('Title', 'Titlu', 'Τίτλος', 'Titel', 'Titre', 'Titolo', 'العنوان')}</Label>
               <Input
                 id="announcement-title"
                 value={announcementTitle}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAnnouncementTitle(e.target.value)}
-                placeholder={t('Announcement title...', 'Titlul anunțului...', 'Τίτλος ανακοίνωσης...')}
+                placeholder={t('Announcement title...', 'Titlul anunțului...', 'Τίτλος ανακοίνωσης...', 'Ankündigungstitel...', 'Titre de l\'annonce...', 'Titolo dell\'annuncio...', 'عنوان الإعلان...')}
               />
             </div>
             <div>
-              <Label htmlFor="announcement-body">{t('Message', 'Mesaj', 'Μήνυμα')}</Label>
+              <Label htmlFor="announcement-body">{t('Message', 'Mesaj', 'Μήνυμα', 'Nachricht', 'Message', 'Messaggio', 'الرسالة')}</Label>
               <Textarea
                 id="announcement-body"
                 value={announcementBody}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAnnouncementBody(e.target.value)}
-                placeholder={t('Write your announcement...', 'Scrie anunțul...', 'Γράψτε την ανακοίνωσή σας...')}
+                placeholder={t('Write your announcement...', 'Scrie anunțul...', 'Γράψτε την ανακοίνωσή σας...', 'Schreiben Sie Ihre Ankündigung...', 'Rédigez votre annonce...', 'Scrivi il tuo annuncio...', 'اكتب إعلانك...')}
                 rows={6}
               />
             </div>
             <div>
-              <Label>{t('Priority', 'Prioritate', 'Προτεραιότητα')}</Label>
+              <Label>{t('Priority', 'Prioritate', 'Προτεραιότητα', 'Priorität', 'Priorité', 'Priorità', 'الأولوية')}</Label>
               <div className="mt-1 flex gap-1.5">
                 {priorities.map((p) => (
                   <button
@@ -2462,7 +2565,7 @@ export default function AdminDashboard() {
               </div>
             </div>
             <div>
-              <Label>{t('Target Audience', 'Audiență', 'Κοινό-στόχος')}</Label>
+              <Label>{t('Target Audience', 'Audiență', 'Κοινό-στόχος', 'Zielgruppe', 'Public cible', 'Pubblico target', 'الجمهور المستهدف')}</Label>
               <div className="mt-1 flex flex-wrap gap-1.5">
                 {targets.map((tgt) => (
                   <button
@@ -2482,7 +2585,7 @@ export default function AdminDashboard() {
             </div>
           </div>
           <DialogFooter>
-            <DialogClose render={<Button variant="outline" />}>{t('Cancel', 'Anulează', 'Ακύρωση')}</DialogClose>
+            <DialogClose render={<Button variant="outline" />}>{t('Cancel', 'Anulează', 'Ακύρωση', 'Abbrechen', 'Annuler', 'Annulla', 'إلغاء')}</DialogClose>
             <Button
               onClick={handlePublish}
               disabled={!announcementTitle.trim() || !announcementBody.trim() || announcementPublishing}
@@ -2492,7 +2595,7 @@ export default function AdminDashboard() {
               ) : (
                 <Megaphone className="h-3.5 w-3.5" />
               )}
-              {t('Publish', 'Publică', 'Δημοσίευση')}
+              {t('Publish', 'Publică', 'Δημοσίευση', 'Veröffentlichen', 'Publier', 'Pubblica', 'نشر')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -2504,9 +2607,17 @@ export default function AdminDashboard() {
     <Dialog open={newOrgDialogOpen} onOpenChange={setNewOrgDialogOpen}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>{t('Create Organization', 'Creează Organizație', 'Δημιουργία οργανισμού')}</DialogTitle>
+          <DialogTitle>{t('Create Organization', 'Creează Organizație', 'Δημιουργία οργανισμού', 'Organisation erstellen', 'Créer une organisation', 'Crea organizzazione', 'إنشاء مؤسسة')}</DialogTitle>
           <DialogDescription>
-            {t('Add a new organization to the platform.', 'Adaugă o organizație nouă pe platformă.', 'Προσθέστε έναν νέο οργανισμό στην πλατφόρμα.')}
+            {t(
+              'Add a new organization to the platform.',
+              'Adaugă o organizație nouă pe platformă.',
+              'Προσθέστε έναν νέο οργανισμό στην πλατφόρμα.',
+              'Fügen Sie der Plattform eine neue Organisation hinzu.',
+              'Ajoutez une nouvelle organisation à la plateforme.',
+              'Aggiungi una nuova organizzazione alla piattaforma.',
+              'أضف مؤسسة جديدة إلى المنصة.'
+            )}
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-3 py-2">
@@ -2599,7 +2710,7 @@ export default function AdminDashboard() {
           <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
           <Button onClick={createOrganization}>
             <Plus className="h-3.5 w-3.5" />
-            {t('Create', 'Creează', 'Δημιουργία')}
+            {t('Create', 'Creează', 'Δημιουργία', 'Erstellen', 'Créer', 'Crea', 'إنشاء')}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -2616,20 +2727,36 @@ export default function AdminDashboard() {
           <h1 className="font-heading text-2xl font-bold text-foreground flex items-center gap-2">
             <Shield className="h-6 w-6 text-secondary" />
             {platformAdmin
-              ? t('Admin Cockpit', 'Cockpit Admin', 'Πίνακας διαχειριστή')
-              : t('Organization Dashboard', 'Tablou Organizație', 'Πίνακας οργανισμού')}
+              ? t('Admin Cockpit', 'Cockpit Admin', 'Πίνακας διαχειριστή', 'Admin-Cockpit', 'Cockpit administrateur', 'Cockpit amministratore', 'لوحة تحكم المسؤول')
+              : t('Organization Dashboard', 'Tablou Organizație', 'Πίνακας οργανισμού', 'Organisations-Dashboard', 'Tableau de bord de l\'organisation', 'Dashboard dell\'organizzazione', 'لوحة تحكم المؤسسة')}
           </h1>
           <p className="mt-0.5 text-sm text-muted-foreground">
             {platformAdmin
-              ? t('Complete platform management at your fingertips', 'Gestionare completă a platformei', 'Πλήρης διαχείριση της πλατφόρμας στα χέρια σας')
-              : t('Manage your organization', 'Gestionează organizația ta', 'Διαχειριστείτε τον οργανισμό σας')}
+              ? t(
+                  'Complete platform management at your fingertips',
+                  'Gestionare completă a platformei',
+                  'Πλήρης διαχείριση της πλατφόρμας στα χέρια σας',
+                  'Vollständige Plattformverwaltung auf einen Blick',
+                  'La gestion complète de la plateforme à portée de main',
+                  'Gestione completa della piattaforma a portata di mano',
+                  'إدارة كاملة للمنصة في متناول يدك'
+                )
+              : t(
+                  'Manage your organization',
+                  'Gestionează organizația ta',
+                  'Διαχειριστείτε τον οργανισμό σας',
+                  'Verwalten Sie Ihre Organisation',
+                  'Gérez votre organisation',
+                  'Gestisci la tua organizzazione',
+                  'إدارة مؤسستك'
+                )}
           </p>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={fetchData}
             className="rounded-lg border border-border p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-            title={t('Refresh', 'Reîncarcă', 'Ανανέωση')}
+            title={t('Refresh', 'Reîncarcă', 'Ανανέωση', 'Aktualisieren', 'Actualiser', 'Aggiorna', 'تحديث')}
           >
             <RefreshCw className="h-4 w-4" />
           </button>
@@ -2641,35 +2768,35 @@ export default function AdminDashboard() {
         <TabsList variant="line" className="w-full justify-start overflow-x-auto">
           <TabsTrigger value="overview">
             <BarChart3 className="h-3.5 w-3.5" />
-            {t('Overview', 'Prezentare', 'Επισκόπηση')}
+            {t('Overview', 'Prezentare', 'Επισκόπηση', 'Übersicht', 'Aperçu', 'Panoramica', 'نظرة عامة')}
           </TabsTrigger>
           <TabsTrigger value="students">
             <Users className="h-3.5 w-3.5" />
-            {t('Students', 'Studenți', 'Μαθητές')}
+            {t('Students', 'Studenți', 'Μαθητές', 'Studenten', 'Étudiants', 'Studenti', 'الطلاب')}
           </TabsTrigger>
           <TabsTrigger value="organizations">
             <Building2 className="h-3.5 w-3.5" />
-            {t('Organizations', 'Organizații', 'Οργανισμοί')}
+            {t('Organizations', 'Organizații', 'Οργανισμοί', 'Organisationen', 'Organisations', 'Organizzazioni', 'المؤسسات')}
           </TabsTrigger>
           <TabsTrigger value="subscriptions">
             <CreditCard className="h-3.5 w-3.5" />
-            {t('Subscriptions', 'Abonamente', 'Συνδρομές')}
+            {t('Subscriptions', 'Abonamente', 'Συνδρομές', 'Abonnements', 'Abonnements', 'Abbonamenti', 'الاشتراكات')}
           </TabsTrigger>
           <TabsTrigger value="courses">
             <BookOpen className="h-3.5 w-3.5" />
-            {t('Courses', 'Cursuri', 'Μαθήματα')}
+            {t('Courses', 'Cursuri', 'Μαθήματα', 'Kurse', 'Cours', 'Corsi', 'الدورات')}
           </TabsTrigger>
           <TabsTrigger value="communications">
             <Mail className="h-3.5 w-3.5" />
-            {t('Comms', 'Comunicări', 'Επικοινωνίες')}
+            {t('Comms', 'Comunicări', 'Επικοινωνίες', 'Kommunikation', 'Communications', 'Comunicazioni', 'الاتصالات')}
           </TabsTrigger>
           <TabsTrigger value="analytics">
             <TrendingUp className="h-3.5 w-3.5" />
-            {t('Analytics', 'Analiză', 'Αναλυτικά')}
+            {t('Analytics', 'Analiză', 'Αναλυτικά', 'Analytik', 'Analytique', 'Analisi', 'التحليلات')}
           </TabsTrigger>
           <TabsTrigger value="reports">
             <Bug className="h-3.5 w-3.5" />
-            {t('Reports', 'Rapoarte', 'Αναφορές')}
+            {t('Reports', 'Rapoarte', 'Αναφορές', 'Berichte', 'Rapports', 'Segnalazioni', 'التقارير')}
             {openReports > 0 && (
               <span className="ml-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white">
                 {openReports}

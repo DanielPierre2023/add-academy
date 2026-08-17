@@ -7,16 +7,20 @@ export function relativeTime(iso: string, lang: Language): string {
   if (Number.isNaN(then)) return '';
   const secs = Math.max(0, Math.floor((Date.now() - then) / 1000));
 
-  const units: Array<[number, string, string, string]> = [
-    [60, 's', 's', 'δ'],
-    [3600, 'm', 'm', 'λ'],
-    [86400, 'h', 'h', 'ω'],
-    [2592000, 'd', 'z', 'μ'],
-    [31536000, 'mo', 'lună', 'μήν'],
+  // [threshold, en, ro, el, de, fr, it, ar]
+  const units: Array<[number, string, string, string, string, string, string, string]> = [
+    [60, 's', 's', 'δ', 's', 's', 's', 'ث'],
+    [3600, 'm', 'm', 'λ', 'min', 'min', 'min', 'د'],
+    [86400, 'h', 'h', 'ω', 'Std', 'h', 'h', 'س'],
+    [2592000, 'd', 'z', 'μ', 'T', 'j', 'g', 'ي'],
+    [31536000, 'mo', 'lună', 'μήν', 'Mon', 'mois', 'mese', 'ش'],
   ];
 
-  const now = { en: 'just now', ro: 'chiar acum', el: 'μόλις τώρα' };
-  if (secs < 45) return now[lang] ?? now.en;
+  const now = {
+    en: 'just now', ro: 'chiar acum', el: 'μόλις τώρα',
+    de: 'gerade eben', fr: "à l'instant", it: 'proprio ora', ar: 'الآن',
+  };
+  if (secs < 45) return (now as Record<string, string>)[lang] ?? now.en;
 
   let value = secs;
   let suffixIdx = 0;
@@ -31,11 +35,20 @@ export function relativeTime(iso: string, lang: Language): string {
   }
   value = Math.floor(secs / divisor);
   const unit = units[Math.min(suffixIdx, units.length - 1)];
-  const label = lang === 'ro' ? unit[2] : lang === 'el' ? unit[3] : unit[1];
+  const labelByLang: Record<Language, string> = {
+    en: unit[1], ro: unit[2], el: unit[3], de: unit[4], fr: unit[5], it: unit[6], ar: unit[7],
+  };
+  const label = labelByLang[lang] ?? unit[1];
 
-  if (lang === 'ro') return `acum ${value}${label}`;
-  if (lang === 'el') return `πριν ${value}${label}`;
-  return `${value}${label} ago`;
+  switch (lang) {
+    case 'ro': return `acum ${value}${label}`;
+    case 'el': return `πριν ${value}${label}`;
+    case 'de': return `vor ${value}${label}`;
+    case 'fr': return `il y a ${value}${label}`;
+    case 'it': return `${value}${label} fa`;
+    case 'ar': return `منذ ${value}${label}`;
+    default: return `${value}${label} ago`;
+  }
 }
 
 export function categoryName(c: ForumCategory, lang: Language): string {
