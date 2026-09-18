@@ -16,6 +16,7 @@ import {
   Star,
   Map,
   LayoutDashboard,
+  User,
   CreditCard,
   Shield,
   Download,
@@ -234,6 +235,17 @@ export function CourseSidebar() {
                   >
                     <LayoutDashboard className="h-3.5 w-3.5 text-primary" />
                     <span>{language === 'ro' ? 'Panou de control' : language === 'el' ? 'Πίνακας Ελέγχου' : language === 'de' ? 'Übersicht' : language === 'fr' ? 'Tableau de bord' : language === 'it' ? 'Pannello di controllo' : language === 'ar' ? 'لوحة التحكم' : 'Dashboard'}</span>
+                  </Link>
+                )}
+
+                {user && (
+                  <Link
+                    href="/account"
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+                  >
+                    <User className="h-3.5 w-3.5 text-amber-500" />
+                    <span>{language === 'ro' ? 'Contul meu' : language === 'el' ? 'Λογαριασμός' : language === 'de' ? 'Konto' : language === 'fr' ? 'Compte' : language === 'it' ? 'Account' : language === 'ar' ? 'الحساب' : 'Account'}</span>
                   </Link>
                 )}
 

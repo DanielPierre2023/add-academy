@@ -136,6 +136,10 @@ export function Header() {
                   <Settings className="h-3.5 w-3.5" />
                   {t('nav_dashboard', language)}
                 </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push('/account')} className={menuItemClass}>
+                  <User className="h-3.5 w-3.5" />
+                  {language === 'ro' ? 'Contul meu' : language === 'el' ? 'Λογαριασμός' : language === 'de' ? 'Konto' : language === 'fr' ? 'Compte' : language === 'it' ? 'Account' : language === 'ar' ? 'الحساب' : 'Account'}
+                </DropdownMenuItem>
                 {!isOrgUser && (
                   <DropdownMenuItem onClick={() => router.push('/pricing')} className={menuItemClass}>
                     <CreditCard className="h-3.5 w-3.5" />
