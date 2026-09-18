@@ -159,6 +159,19 @@ export default function AccountView() {
   const [invoicesError, setInvoicesError] = useState<string | null>(null);
   const [portalLoading, setPortalLoading] = useState(false);
 
+  // --- Real subscription state (drives the My Subscription card + cancel) ---
+  const [subscription, setSubscription] = useState<{
+    subscribed: boolean;
+    tier: string | null;
+    status: string | null;
+    cancelAtPeriodEnd: boolean;
+    currentPeriodEnd: string | null;
+    isStripe: boolean;
+  } | null>(null);
+  const [cancelLoading, setCancelLoading] = useState(false);
+  const [cancelError, setCancelError] = useState<string | null>(null);
+  const [confirmingCancel, setConfirmingCancel] = useState(false);
+
   // --- Billing notifications (refund / dispute / failed payment) ---
   const [notifications, setNotifications] = useState<AccountNotification[]>([]);
 
@@ -182,6 +195,25 @@ export default function AccountView() {
         if (!cancelled) setInvoicesError(t('Could not load your billing history.', 'Nu am putut încărca istoricul tău de facturare.', 'Δεν ήταν δυνατή η φόρτωση του ιστορικού χρεώσεών σας.', 'Deine Rechnungshistorie konnte nicht geladen werden.', 'Impossible de charger votre historique de facturation.', 'Impossibile caricare la cronologia di fatturazione.', 'تعذر تحميل سجل الفوترة الخاص بك.'));
       } finally {
         if (!cancelled) setInvoicesLoading(false);
+      }
+    };
+
+    void load();
+    return () => { cancelled = true; };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+
+    const load = async () => {
+      try {
+        const res = await fetch('/api/billing/subscription');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!cancelled) setSubscription(data);
+      } catch {
+        /* non-fatal — card falls back to "Not subscribed" */
       }
     };
 
@@ -234,6 +266,31 @@ export default function AccountView() {
       setPortalLoading(false);
     }
   }, []);
+  const updateSubscriptionCancel = useCallback(async (resume: boolean) => {
+    setCancelLoading(true);
+    setCancelError(null);
+    try {
+      const res = await fetch('/api/billing/cancel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ resume }),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        setSubscription((prev) =>
+          prev ? { ...prev, cancelAtPeriodEnd: Boolean(data.cancelAtPeriodEnd) } : prev
+        );
+        setConfirmingCancel(false);
+      } else {
+        setCancelError(data.error || t('Could not update your subscription. Please try again.', 'Nu am putut actualiza abonamentul tău. Te rugăm să încerci din nou.', 'Δεν ήταν δυνατή η ενημέρωση της συνδρομής σας. Δοκιμάστε ξανά.', 'Dein Abonnement konnte nicht aktualisiert werden. Bitte versuche es erneut.', 'Impossible de mettre à jour votre abonnement. Veuillez réessayer.', 'Impossibile aggiornare il tuo abbonamento. Riprova.', 'تعذر تحديث اشتراكك. يرجى المحاولة مرة أخرى.'));
+      }
+    } catch {
+      setCancelError(t('Could not update your subscription. Please try again.', 'Nu am putut actualiza abonamentul tău. Te rugăm să încerci din nou.', 'Δεν ήταν δυνατή η ενημέρωση της συνδρομής σας. Δοκιμάστε ξανά.', 'Dein Abonnement konnte nicht aktualisiert werden. Bitte versuche es erneut.', 'Impossible de mettre à jour votre abonnement. Veuillez réessayer.', 'Impossibile aggiornare il tuo abbonamento. Riprova.', 'تعذر تحديث اشتراكك. يرجى المحاولة مرة أخرى.'));
+    } finally {
+      setCancelLoading(false);
+    }
+  }, []);
+
   const [billing, setBilling] = useState<'monthly' | 'annual'>('annual');
 
   if (loading) {
@@ -456,17 +513,107 @@ export default function AccountView() {
                     <p className="text-xs text-muted-foreground">{t('Everything unlocked — €12/mo or €99/yr', 'Totul deblocat — €12/lună sau €99/an', 'Όλα ξεκλειδωμένα — €12/μήνα ή €99/έτος', 'Alles freigeschaltet — €12/Monat oder €99/Jahr', 'Tout débloqué — €12/mois ou €99/an', 'Tutto sbloccato — €12/mese o €99/anno', 'كل شيء متاح — €12/شهريًا أو €99/سنويًا')}</p>
                   </div>
                 </div>
-                <span className="text-xs text-muted-foreground">{t('Not subscribed', 'Neabonat', 'Χωρίς συνδρομή', 'Nicht abonniert', 'Non abonné', 'Non abbonato', 'غير مشترك')}</span>
+                {subscription?.subscribed ? (
+                  subscription.cancelAtPeriodEnd ? (
+                    <Badge className="bg-amber-500/20 text-amber-700 dark:text-amber-400 border-0">
+                      <Clock className="mr-1 h-3 w-3" /> {t('Ending', 'Se încheie', 'Λήγει', 'Endet', 'Prend fin', 'In scadenza', 'ينتهي')}
+                    </Badge>
+                  ) : (
+                    <Badge className="bg-green-500/20 text-green-700 dark:text-green-400 border-0">
+                      <Check className="mr-1 h-3 w-3" /> {t('Active', 'Activ', 'Ενεργό', 'Aktiv', 'Actif', 'Attivo', 'نشط')}
+                    </Badge>
+                  )
+                ) : (
+                  <span className="text-xs text-muted-foreground">{t('Not subscribed', 'Neabonat', 'Χωρίς συνδρομή', 'Nicht abonniert', 'Non abonné', 'Non abbonato', 'غير مشترك')}</span>
+                )}
               </div>
             </div>
 
-            <Button
-              className="mt-4 w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold"
-              onClick={() => setActiveTab('courses')}
-            >
-              <ArrowUpRight className="mr-2 h-4 w-4" />
-              {t('View subscription plans', 'Vezi planurile de abonament', 'Δείτε τα πλάνα συνδρομής', 'Abonnementpläne ansehen', 'Voir les formules d’abonnement', 'Visualizza i piani di abbonamento', 'عرض خطط الاشتراك')}
-            </Button>
+            {subscription?.subscribed ? (
+              <div className="mt-4 space-y-3">
+                {subscription.cancelAtPeriodEnd && (
+                  <div className="flex items-start gap-2 rounded-lg bg-amber-50 p-3 text-xs text-amber-800 dark:bg-amber-950/30 dark:text-amber-300">
+                    <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                    <span>
+                      {t('Your subscription is set to cancel', 'Abonamentul tău este programat să se anuleze', 'Η συνδρομή σας έχει προγραμματιστεί να ακυρωθεί', 'Dein Abonnement wird gekündigt', 'Votre abonnement sera résilié', 'Il tuo abbonamento verrà annullato', 'اشتراكك مجدول للإلغاء')}
+                      {subscription.currentPeriodEnd
+                        ? ` — ${t('access until', 'acces până la', 'πρόσβαση έως', 'Zugang bis', 'accès jusqu’au', 'accesso fino al', 'الوصول حتى')} ${new Date(subscription.currentPeriodEnd).toLocaleDateString()}.`
+                        : '.'}
+                    </span>
+                  </div>
+                )}
+
+                {cancelError && (
+                  <p className="text-xs text-red-600 dark:text-red-400">{cancelError}</p>
+                )}
+
+                {subscription.isStripe &&
+                  (subscription.cancelAtPeriodEnd ? (
+                    <Button
+                      variant="outline"
+                      className="w-full gap-1.5"
+                      onClick={() => updateSubscriptionCancel(true)}
+                      disabled={cancelLoading}
+                    >
+                      {cancelLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4" />}
+                      {t('Resume subscription', 'Reia abonamentul', 'Συνέχιση συνδρομής', 'Abonnement fortsetzen', 'Reprendre l’abonnement', 'Riprendi abbonamento', 'استئناف الاشتراك')}
+                    </Button>
+                  ) : confirmingCancel ? (
+                    <div className="space-y-2 rounded-lg border border-red-200 p-3 dark:border-red-900/50">
+                      <p className="text-xs text-muted-foreground">
+                        {t('You’ll keep full access until the end of your current billing period. Cancel your subscription?', 'Vei păstra accesul complet până la sfârșitul perioadei curente de facturare. Anulezi abonamentul?', 'Θα διατηρήσετε πλήρη πρόσβαση έως το τέλος της τρέχουσας περιόδου χρέωσης. Ακύρωση συνδρομής;', 'Du behältst vollen Zugang bis zum Ende deines aktuellen Abrechnungszeitraums. Abonnement kündigen?', 'Vous conserverez un accès complet jusqu’à la fin de votre période de facturation actuelle. Résilier l’abonnement ?', 'Manterrai l’accesso completo fino alla fine del periodo di fatturazione corrente. Annullare l’abbonamento?', 'ستحتفظ بالوصول الكامل حتى نهاية فترة الفوترة الحالية. إلغاء الاشتراك؟')}
+                      </p>
+                      <div className="flex gap-2">
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          className="flex-1 gap-1.5"
+                          onClick={() => updateSubscriptionCancel(false)}
+                          disabled={cancelLoading}
+                        >
+                          {cancelLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}
+                          {t('Yes, cancel', 'Da, anulează', 'Ναι, ακύρωση', 'Ja, kündigen', 'Oui, résilier', 'Sì, annulla', 'نعم، إلغاء')}
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="flex-1"
+                          onClick={() => setConfirmingCancel(false)}
+                          disabled={cancelLoading}
+                        >
+                          {t('Keep it', 'Păstrează-l', 'Διατήρηση', 'Behalten', 'Le garder', 'Mantienilo', 'الاحتفاظ به')}
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <Button
+                      variant="outline"
+                      className="w-full text-red-600 hover:text-red-700 dark:text-red-400"
+                      onClick={() => { setCancelError(null); setConfirmingCancel(true); }}
+                    >
+                      {t('Cancel subscription', 'Anulează abonamentul', 'Ακύρωση συνδρομής', 'Abonnement kündigen', 'Résilier l’abonnement', 'Annulla abbonamento', 'إلغاء الاشتراك')}
+                    </Button>
+                  ))}
+
+                <Button
+                  variant="ghost"
+                  className="w-full gap-1.5 text-xs text-muted-foreground"
+                  onClick={openBillingPortal}
+                  disabled={portalLoading}
+                >
+                  {portalLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <CreditCard className="h-3.5 w-3.5" />}
+                  {t('Manage billing & invoices', 'Gestionează facturarea și facturile', 'Διαχείριση χρεώσεων & τιμολογίων', 'Abrechnung & Rechnungen verwalten', 'Gérer la facturation et les factures', 'Gestisci fatturazione e fatture', 'إدارة الفوترة والفواتير')}
+                </Button>
+              </div>
+            ) : (
+              <Button
+                className="mt-4 w-full bg-[hsl(38_80%_55%)] text-[hsl(240_95%_10%)] hover:bg-[hsl(38_80%_48%)] font-semibold"
+                onClick={() => setActiveTab('courses')}
+              >
+                <ArrowUpRight className="mr-2 h-4 w-4" />
+                {t('View subscription plans', 'Vezi planurile de abonament', 'Δείτε τα πλάνα συνδρομής', 'Abonnementpläne ansehen', 'Voir les formules d’abonnement', 'Visualizza i piani di abbonamento', 'عرض خطط الاشتراك')}
+              </Button>
+            )}
           </div>
 
           {/* Quick actions */}
